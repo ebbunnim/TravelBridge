@@ -28,7 +28,8 @@ import {
   QCarousel,
   QCarouselControl,
   QCarouselSlide,
-  QImg
+  QImg,
+  QScrollArea
 } from "quasar";
 
 Vue.use(Quasar, {
@@ -58,7 +59,8 @@ Vue.use(Quasar, {
     QCarousel,
     QCarouselControl,
     QCarouselSlide,
-    QImg
+    QImg,
+    QScrollArea
   },
   directives: {},
   plugins: {}

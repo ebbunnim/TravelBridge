@@ -88,17 +88,12 @@
 
 <script>
 export default {
-<<<<<<< HEAD
-  name: "home",
-  components: {}
-=======
   data() {
     return {
       slideOne: "first",
       slideTwo: 1
     };
   }
->>>>>>> main-vue
 };
 </script>
 <style >

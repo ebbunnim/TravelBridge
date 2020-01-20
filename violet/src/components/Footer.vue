@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-footer class="footer bg-white text-grey border">
+    <div class="footer bg-white text-grey border">
       <div class="footer">
         <div class="row">
           <div class="card">
@@ -35,7 +35,7 @@
           </div>
         </div>
       </div>
-    </q-footer>
+    </div>
   </div>
 </template>
 

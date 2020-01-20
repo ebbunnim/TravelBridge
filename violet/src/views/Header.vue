@@ -1,6 +1,6 @@
 <template>
-  <q-layout view="hHh lpR fFf">
-    <q-header elevated class="bg-primary text-white" height-hint="98">
+  <q-layout view="lHh lpR lff" style="min-height: 90px;">
+    <q-header elevated class="bg-primary text-white">
       <q-toolbar align="center">
         <q-btn dense flat round icon="menu" @click="left = !left" />
         <q-toolbar-title>title</q-toolbar-title>
