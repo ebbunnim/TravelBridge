@@ -1,19 +1,20 @@
 <template>
   <q-layout>
-    <q-page-container>
-      <router-view />
-    </q-page-container>
+    <navbar></navbar>
+    <router-view />
     <bot></bot>
   </q-layout>
 </template>
 
 <script>
+import navbar from "./views/Header.vue";
 import bot from "./components/Footer.vue";
 
 export default {
   name: "MyLayout",
   components: {
-    bot
+    bot,
+    navbar
   },
   data() {
     return {

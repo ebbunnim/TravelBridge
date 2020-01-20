@@ -1,9 +1,9 @@
-import Vue from 'vue'
+import Vue from "vue";
 
-import './styles/quasar.sass'
-import '@quasar/extras/material-icons/material-icons.css'
+import "./styles/quasar.sass";
+import "@quasar/extras/material-icons/material-icons.css";
 import {
-  Quasar, 
+  Quasar,
   QLayout,
   QHeader,
   QDrawer,
@@ -20,7 +20,12 @@ import {
   QFooter,
   QCard,
   QCardSection,
-} from 'quasar'
+  QSeparator,
+  QRouteTab,
+  QTabs,
+  QSpace,
+  QExpansionItem
+} from "quasar";
 
 Vue.use(Quasar, {
   config: {},
@@ -41,9 +46,12 @@ Vue.use(Quasar, {
     QFooter,
     QCard,
     QCardSection,
+    QSeparator,
+    QRouteTab,
+    QTabs,
+    QSpace,
+    QExpansionItem
   },
-  directives: {
-  },
-  plugins: {
-  }
- })
+  directives: {},
+  plugins: {}
+});
