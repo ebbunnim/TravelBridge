@@ -1,9 +1,9 @@
-import Vue from 'vue'
+import Vue from "vue";
 
-import './styles/quasar.sass'
-import '@quasar/extras/material-icons/material-icons.css'
+import "./styles/quasar.sass";
+import "@quasar/extras/material-icons/material-icons.css";
 import {
-  Quasar, 
+  Quasar,
   QLayout,
   QHeader,
   QDrawer,
@@ -17,7 +17,11 @@ import {
   QItem,
   QItemSection,
   QItemLabel,
-} from 'quasar'
+  QCarousel,
+  QCarouselControl,
+  QCarouselSlide,
+  QImg
+} from "quasar";
 
 Vue.use(Quasar, {
   config: {},
@@ -35,9 +39,11 @@ Vue.use(Quasar, {
     QItem,
     QItemSection,
     QItemLabel,
+    QCarousel,
+    QCarouselControl,
+    QCarouselSlide,
+    QImg
   },
-  directives: {
-  },
-  plugins: {
-  }
- })
+  directives: {},
+  plugins: {}
+});
