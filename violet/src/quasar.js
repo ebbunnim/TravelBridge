@@ -24,7 +24,11 @@ import {
   QRouteTab,
   QTabs,
   QSpace,
-  QExpansionItem
+  QExpansionItem,
+  QCarousel,
+  QCarouselControl,
+  QCarouselSlide,
+  QImg
 } from "quasar";
 
 Vue.use(Quasar, {
@@ -50,7 +54,11 @@ Vue.use(Quasar, {
     QRouteTab,
     QTabs,
     QSpace,
-    QExpansionItem
+    QExpansionItem,
+    QCarousel,
+    QCarouselControl,
+    QCarouselSlide,
+    QImg
   },
   directives: {},
   plugins: {}
