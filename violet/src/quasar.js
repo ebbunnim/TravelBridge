@@ -17,6 +17,9 @@ import {
   QItem,
   QItemSection,
   QItemLabel,
+  QFooter,
+  QCard,
+  QCardSection,
 } from 'quasar'
 
 Vue.use(Quasar, {
@@ -35,6 +38,9 @@ Vue.use(Quasar, {
     QItem,
     QItemSection,
     QItemLabel,
+    QFooter,
+    QCard,
+    QCardSection,
   },
   directives: {
   },
