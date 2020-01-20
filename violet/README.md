@@ -1,24 +1,12 @@
-# violet
+# 4반 2조 Violet조
 
-## Project setup
-```
-npm install
-```
+## 목차
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+1. [팀원 소개](#팀원-소개)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## 팀원 소개
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- `팀장` 김수민
+- 김준목
+- 정구헌
+- 신지영
