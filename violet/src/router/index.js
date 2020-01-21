@@ -53,6 +53,12 @@ const routes = [
     path: "/about/project",
     name: "project",
     component: AboutProject
+  },
+  // 로그인 페이지
+  {
+    path: "/login",
+    name: "login",
+    component: Login
   }
 ];
 

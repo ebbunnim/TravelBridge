@@ -1,36 +1,37 @@
 <template>
-  <div>
-    <div class="bg-white text-grey footer border">
-      <!-- footer, border class -->
-      <div class="footer">
+  <div class="bg-white text-grey footer border">
+    <!-- footer, border class -->
+    <div class="footer">
+      <div class="row">
         <div class="card">
           <!-- card class -->
           <div class="q-pa-md" style="max-width: 350px">
             <p class="text-h6 text-bold">About Us</p>
-            <q-list dense class="rounded-borders">
+
+            <q-list dense bordered padding class="rounded-borders">
               <q-item v-for="(menu, index) in aboutUsMenus" :key="index" :to="menu.path">
                 <q-item-section>{{ menu.label }}</q-item-section>
               </q-item>
             </q-list>
           </div>
         </div>
-
         <div class="card">
           <div class="q-pa-md" style="max-width: 350px">
             <p class="text-h6 text-bold">Customer Service</p>
-            <q-list dense class="rounded-borders">
-              <q-item v-for="(menu, index) in CSmenus" :key="index" :to="menu.path">
+
+            <q-list dense bordered padding class="rounded-borders">
+              <q-item v-for="(menu, index) in CSmenus" :key="index" clickable :to="menu.path">
                 <q-item-section>{{ menu.label }}</q-item-section>
               </q-item>
             </q-list>
           </div>
         </div>
-
         <div class="card">
           <div class="q-pa-md" style="max-width: 350px">
             <p class="text-h6 text-bold">Site Map</p>
-            <q-list dense class="rounded-borders">
-              <q-item v-for="(menu, index) in siteMapMenus" :key="index" :to="menu.path">
+
+            <q-list dense bordered padding class="rounded-borders">
+              <q-item v-for="(menu, index) in siteMapMenus" :key="index" clickable :to="menu.path">
                 <q-item-section>{{ menu.label }}</q-item-section>
               </q-item>
             </q-list>
@@ -48,13 +49,13 @@ export default {
     return {
       leftDrawerOpen: false,
       aboutUsMenus: [
-        { label: "Contact Us", path: "/temporary" }, // 추후에 이메일 modal 연결 
+        { label: "Contact Us", path: "/temporary" }, // 추후에 이메일 modal 연결
         { label: "About Team", path: "/about/team" },
         { label: "About Project", path: "/about/project" }
       ],
       CSmenus: [
         { label: "FAQ", path: "/faq" },
-        { label: "Q&N", path: "/qna" }
+        { label: "Q&A", path: "/qna" }
       ],
       siteMapMenus: [
         { label: "Home", path: "/" },

@@ -1,6 +1,12 @@
 <template>
-  <div class="about">
+  <div>
     <h1>About Team</h1>
-    <p>팀 소개 페이지</p>
   </div>
 </template>
+
+<script>
+export default {};
+</script>
+
+<style>
+</style>
