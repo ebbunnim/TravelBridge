@@ -4,8 +4,10 @@ import Home from "../views/Home.vue";
 import Main1 from "../views/Main1.vue";
 import Main2 from "../views/Main2.vue";
 import Sub from "../views/Sub.vue";
-import About from "../views/About.vue";
-
+import FAQ from "../views/FAQ.vue";
+import QNA from "../views/QNA.vue";
+import AboutTeam from "../views/AboutTeam.vue";
+import AboutProject from "../views/AboutProject.vue";
 
 Vue.use(VueRouter);
 
@@ -31,11 +33,26 @@ const routes = [
     name: "sub",
     component: Sub
   },
-  // Q&N, FAQ 
+  // Footer - Q&N, FAQ, About Us 라우팅
   {
-    path: "/about",
-    name: "about",
-    component: About
+    path: "/faq",
+    name: "faq",
+    component: FAQ
+  },
+  {
+    path: "/qna",
+    name: "qna",
+    component: QNA
+  },
+  {
+    path: "/about/team",
+    name: "team",
+    component: AboutTeam
+  },
+  {
+    path: "/about/project",
+    name: "project",
+    component: AboutProject
   }
 ];
 

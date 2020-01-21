@@ -1,37 +1,52 @@
 <template>
   <div>
-    <div class="footer bg-white text-grey border">
+    <div class="bg-white text-grey footer border">
+      <!-- footer, border class -->
       <div class="footer">
         <div class="row">
           <div class="card">
-            <p class="text-h6 text-bold">Customer Service</p>
-            <p>
-              <router-link class="link" to="/">Q&A</router-link>
-            </p>
-            <p class="subtitle">
-              <router-link class="link" to="/">FAQ</router-link>
-            </p>
+            <!-- card class -->
+            <div class="q-pa-md" style="max-width: 350px">
+              <p class="text-h6 text-bold">About Us</p>
+
+              <q-list dense bordered padding class="rounded-borders">
+                <q-item v-for="(menu, index) in aboutUsMenus" :key="index" :to="menu.path">
+                  <q-item-section>{{ menu.label }}</q-item-section>
+                </q-item>
+              </q-list>
+            </div>
           </div>
           <div class="card">
-            <p class="text-h6 text-bold">About Team</p>
-            <p>
-              <router-link class="link" to="/">About project</router-link>
-            </p>
-            <p>
-              <router-link class="link" to="/">About members</router-link>
-            </p>
+            <div class="q-pa-md" style="max-width: 350px">
+              <p class="text-h6 text-bold">Customer Service</p>
+
+              <q-list dense bordered padding class="rounded-borders">
+                <q-item
+                  v-for="(menu, index) in CSmenus"
+                  :key="index"
+                  clickable
+                  :to="menu.path"
+                >
+                  <q-item-section>{{ menu.label }}</q-item-section>
+                </q-item>
+              </q-list>
+            </div>
           </div>
           <div class="card">
-            <p class="text-h6 text-bold">About Team</p>
-            <p>
-              <router-link class="link" to="/">About project</router-link>
-            </p>
-            <p>
-              <router-link class="link" to="/">About members</router-link>
-            </p>
-            <p>
-              <router-link class="link" to="/">About project</router-link>
-            </p>
+            <div class="q-pa-md" style="max-width: 350px">
+              <p class="text-h6 text-bold">About Us</p>
+
+              <q-list dense bordered padding class="rounded-borders">
+                <q-item
+                  v-for="(menu, index) in siteMapMenus"
+                  :key="index"
+                  clickable
+                  :to="menu.path"
+                >
+                  <q-item-section>{{ menu.label }}</q-item-section>
+                </q-item>
+              </q-list>
+            </div>
           </div>
         </div>
       </div>
@@ -44,18 +59,28 @@ export default {
   name: "MyLayout",
   data() {
     return {
-      leftDrawerOpen: false
+      leftDrawerOpen: false,
+      aboutUsMenus: [
+        { label: "Contact Us", path: "/" },
+        { label: "About Team", path: "/about/team" },
+        { label: "About Project", path: "/about/project" }
+      ],
+      CSmenus: [
+        { label: "FAQ", path: "/faq" },
+        { label: "Q&N", path: "/qna" }
+      ],
+      siteMapMenus: [
+        { label: "Home", path: "/" },
+        { label: "메인기능 1", path: "/page1" },
+        { label: "메인기능 2", path: "/page2" },
+        { label: "서브기능", path: "/page3" }
+      ]
     };
   }
 };
 </script>
 
 <style>
-.link {
-  text-decoration: none;
-  color: #9e9e9e;
-}
-
 .footer {
   margin-left: 0;
   margin-right: 0;
@@ -70,10 +95,6 @@ export default {
   border-top-width: thin;
   border-top-color: grey;
 }
-.footer-title {
-  font-size: 100px;
-}
-
 .card {
   padding-left: 2%;
   display: inline-block;
