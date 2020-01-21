@@ -5,12 +5,11 @@ import Home from "../views/Home.vue";
 import Main1 from "../views/Main1.vue";
 import Main2 from "../views/Main2.vue";
 import Sub from "../views/Sub.vue";
-import FAQ from "../views/FAQ.vue";
-
 import AboutTeam from "../views/AboutTeam.vue";
 import AboutProject from "../views/AboutProject.vue";
 
 import Qna from "../views/Qna.vue";
+import Faq from "../views/Faq.vue";
 
 Vue.use(VueRouter);
 
@@ -40,7 +39,7 @@ const routes = [
   {
     path: "/faq",
     name: "faq",
-    component: FAQ
+    component: Faq
   },
   {
     path: "/qna",
