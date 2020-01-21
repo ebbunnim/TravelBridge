@@ -140,7 +140,6 @@ export default {
 .pic {
   position: relative;
   overflow: hidden;
-
   display: inline-block;
   -webkit-animation: anima 2s;
   -moz-animation: anima 2s;
@@ -201,7 +200,6 @@ a:hover,
   -moz-touch-callout: none;
   -o-touch-callout: none;
   -ms-touch-callout: none;
-
   -webkit-tap-highlight-color: transparent;
   -moz-tap-highlight-color: transparent;
   -o-tap-highlight-color: transparent;

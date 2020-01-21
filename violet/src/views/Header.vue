@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh lpR lff" style="min-height: 90px;">
-    <q-header elevated class="bg-primary text-white">
+    <q-header elevated class="bg-primary text-white" height-hint="98">
       <q-toolbar align="center">
         <q-btn dense flat round icon="menu" @click="left = !left" />
         <q-toolbar-title>title</q-toolbar-title>
@@ -26,7 +26,7 @@
       </q-tabs>
     </q-header>
 
-    <q-drawer v-model="left" side="left" overlay bordered>
+    <q-drawer v-model="left" side="left" overlay elevated behavior="mobile">
       <q-scroll-area class="fit">
         <q-list v-for="(menuItem, index) in menuList" :key="index">
           <q-item v-if="menuItem.btn" clickable>
