@@ -9,7 +9,7 @@
           <q-btn>로그아웃</q-btn>
         </div>
         <div v-else>
-          <q-btn>로그인</q-btn>
+          <q-btn to='/login'>로그인</q-btn>
         </div>
       </q-toolbar>
 
@@ -17,9 +17,9 @@
         <q-space />
         <q-route-tab to="/" label="홈" />
         <q-space />
-        <q-route-tab to="/page2" label="메인기능 1번" />
+        <q-route-tab to="/page1" label="메인기능 1번" />
         <q-space />
-        <q-route-tab to="/page3" label="메인기능 2번" />
+        <q-route-tab to="/page2" label="메인기능 2번" />
         <q-space />
         <q-route-tab to="/page3" label="서브기능" />
         <q-space />
@@ -29,7 +29,7 @@
     <q-drawer v-model="left" side="left" overlay elevated behavior="mobile">
       <q-scroll-area class="fit">
         <q-list v-for="(menuItem, index) in menuList" :key="index">
-          <q-item v-if="menuItem.btn" clickable>
+          <q-item v-if="menuItem.btn" clickable :to="menuItem.path"> 
             <q-item-section avatar>
               <q-icon :name="menuItem.icon" />
             </q-item-section>
@@ -46,6 +46,7 @@
             :label="menuItem.label"
             caption="5 unread emails"
             :content-inset-level="0.5"
+            :to="menuItem.path"
           >
             <q-list v-for="(menuListSub,index) in menuListSub[index]" :key="index">
               <q-item clickable>
@@ -70,10 +71,10 @@ export default {
     return {
       left: false,
       menuList: [
-        { label: "홈", icon: "home", separator: "true", btn: "true" },
-        { label: "메인기능 1번", icon: "bookmark", separator: "true" },
-        { label: "메인기능 2번", icon: "card_travel", separator: "true" },
-        { label: "서브기능", icon: "extension", separator: "true" },
+        { label: "홈", icon: "home", separator: "true", btn: "true", path: "/" },
+        { label: "메인기능 1번", icon: "bookmark", separator: "true", path: "/page1" },
+        { label: "메인기능 2번", icon: "card_travel", separator: "true", path: "/page2" },
+        { label: "서브기능", icon: "extension", separator: "true", path: "/page3" },
         { label: "고객센터", icon: "dashboard", separator: "true" }
       ],
       menuListSub: [
