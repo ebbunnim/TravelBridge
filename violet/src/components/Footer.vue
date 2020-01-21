@@ -21,12 +21,7 @@
               <p class="text-h6 text-bold">Customer Service</p>
 
               <q-list dense bordered padding class="rounded-borders">
-                <q-item
-                  v-for="(menu, index) in CSmenus"
-                  :key="index"
-                  clickable
-                  :to="menu.path"
-                >
+                <q-item v-for="(menu, index) in CSmenus" :key="index" clickable :to="menu.path">
                   <q-item-section>{{ menu.label }}</q-item-section>
                 </q-item>
               </q-list>
