@@ -16,7 +16,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     // 홈, 메인기능 1번, 메인기능 2번, 서브기능
-    path: "/",
+    path: "/home",
     name: "home",
     component: Home
   },
@@ -55,6 +55,12 @@ const routes = [
     path: "/about/project",
     name: "project",
     component: AboutProject
+  },
+  // 로그인 페이지
+  {
+    path: "/login",
+    name: "login",
+    component: Login
   }
 ];
 
