@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import navbar from "./views/Header.vue";
+import navbar from "./components/Header.vue";
 import bot from "./components/Footer.vue";
 
 export default {
