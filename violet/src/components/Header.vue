@@ -15,7 +15,7 @@
 
       <q-tabs align="center">
         <q-space />
-        <q-route-tab to="/p" label="홈" />
+        <q-route-tab to="/" label="홈" />
         <q-space />
         <q-route-tab to="/page2" label="메인기능 1번" />
         <q-space />
