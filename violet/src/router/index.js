@@ -8,6 +8,7 @@ import FAQ from "../views/FAQ.vue";
 import QNA from "../views/QNA.vue";
 import AboutTeam from "../views/AboutTeam.vue";
 import AboutProject from "../views/AboutProject.vue";
+import Login from "../views/Login.vue"
 
 Vue.use(VueRouter);
 
@@ -53,6 +54,12 @@ const routes = [
     path: "/about/project",
     name: "project",
     component: AboutProject
+  },
+  // 로그인 페이지
+  {
+    path: "/login",
+    name: "login",
+    component: Login
   }
 ];
 

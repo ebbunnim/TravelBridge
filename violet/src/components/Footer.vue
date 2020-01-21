@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="bg-white text-grey footer border">
       <!-- footer, border class -->
       <div class="footer">
@@ -34,7 +33,7 @@
           </div>
           <div class="card">
             <div class="q-pa-md" style="max-width: 350px">
-              <p class="text-h6 text-bold">About Us</p>
+              <p class="text-h6 text-bold">Site Map</p>
 
               <q-list dense bordered padding class="rounded-borders">
                 <q-item
@@ -51,7 +50,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -67,7 +65,7 @@ export default {
       ],
       CSmenus: [
         { label: "FAQ", path: "/faq" },
-        { label: "Q&N", path: "/qna" }
+        { label: "Q&A", path: "/qna" }
       ],
       siteMapMenus: [
         { label: "Home", path: "/" },

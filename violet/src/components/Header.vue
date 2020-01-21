@@ -9,7 +9,7 @@
           <q-btn>로그아웃</q-btn>
         </div>
         <div v-else>
-          <q-btn>로그인</q-btn>
+          <q-btn to='/login'>로그인</q-btn>
         </div>
       </q-toolbar>
 
@@ -17,9 +17,9 @@
         <q-space />
         <q-route-tab to="/" label="홈" />
         <q-space />
-        <q-route-tab to="/page2" label="메인기능 1번" />
+        <q-route-tab to="/page1" label="메인기능 1번" />
         <q-space />
-        <q-route-tab to="/page3" label="메인기능 2번" />
+        <q-route-tab to="/page2" label="메인기능 2번" />
         <q-space />
         <q-route-tab to="/page3" label="서브기능" />
         <q-space />
