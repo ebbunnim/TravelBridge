@@ -32,6 +32,7 @@ import {
   QScrollArea,
   QField,
   QInput,
+  QForm,
 } from "quasar";
 
 Vue.use(Quasar, {
@@ -65,6 +66,7 @@ Vue.use(Quasar, {
     QScrollArea,
     QField,
     QInput,
+    QForm,
   },
   directives: {},
   plugins: {}
