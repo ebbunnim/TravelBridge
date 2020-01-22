@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Main1 from "../views/Main1.vue";
 import Main2 from "../views/Main2.vue";
 import Sub from "../views/Sub.vue";
+
 import AboutTeam from "../views/AboutTeam.vue";
 import AboutProject from "../views/AboutProject.vue";
 import Login from "../views/Login.vue";
@@ -16,7 +17,6 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    // 홈, 메인기능 1번, 메인기능 2번, 서브기능
     path: "/",
     name: "home",
     component: Home
@@ -36,7 +36,6 @@ const routes = [
     name: "sub",
     component: Sub
   },
-  // Footer - Q&N, FAQ, About Us 라우팅
   {
     path: "/faq",
     name: "faq",

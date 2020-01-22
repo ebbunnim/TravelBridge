@@ -1,22 +1,15 @@
 <template>
   <div>
     <q-carousel arrows animated swipeable autoplay infinite v-model="slideOne" height="600px">
-      <q-carousel-slide name="first" img-src="https://cdn.quasar.dev/img/mountains.jpg">
+      <q-carousel-slide
+        v-for="(mainCard,index) in MainCard"
+        :key="index"
+        :name="index"
+        :img-src="mainCard.img"
+      >
         <div class="absolute-bottom custom-caption">
-          <div class="text-h2">First stop</div>
-          <div class="text-subtitle1">Mountains</div>
-        </div>
-      </q-carousel-slide>
-      <q-carousel-slide name="second" img-src="https://cdn.quasar.dev/img/parallax1.jpg">
-        <div class="absolute-bottom custom-caption">
-          <div class="text-h2">Second stop</div>
-          <div class="text-subtitle1">Famous City</div>
-        </div>
-      </q-carousel-slide>
-      <q-carousel-slide name="third" img-src="https://cdn.quasar.dev/img/parallax2.jpg">
-        <div class="absolute-bottom custom-caption">
-          <div class="text-h2">Third stop</div>
-          <div class="text-subtitle1">Famous Bridge</div>
+          <div class="text-h2">{{mainCard.title}}</div>
+          <div class="text-subtitle1">{{mainCard.sub}}</div>
         </div>
       </q-carousel-slide>
     </q-carousel>
@@ -37,49 +30,24 @@
       height="400px"
       class="bg-white text-black shadow-1 rounded-borders no-shadow"
     >
-      <q-carousel-slide :name="1" class="column no-wrap">
+      <q-carousel-slide
+        v-for="(subCard,index) in SubCard"
+        :key="index"
+        :name="index"
+        class="column no-wrap"
+      >
         <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
-          <q-img class="col-4 full-height pic" src="https://cdn.quasar.dev/img/material.png">
+          <q-img
+            v-for="(subContent,index) in subCard"
+            :key="index"
+            class="col-4 full-height pic"
+            :src="subContent.img"
+          >
             <span class="pic-caption bottom-to-top">
-              <h1 class="pic-title">Bottom to Top</h1>
-              <p>Hi, this is a simple example =D</p>
+              <h1 class="pic-title">{{subContent.title}}</h1>
+              <p>{{subContent.sub}}</p>
             </span>
           </q-img>
-          <q-img class="col-4 full-height pic" src="https://cdn.quasar.dev/img/material.png">
-            <span class="pic-caption bottom-to-top">
-              <h1 class="pic-title">Bottom to Top</h1>
-              <p>Hi, this is a simple example =D</p>
-            </span>
-          </q-img>
-          <q-img class="col-4 full-height" src="https://cdn.quasar.dev/img/parallax1.jpg">
-            <div class="absolute-bottom custom-caption">
-              <div class="text-h2">First stop</div>
-              <div class="text-subtitle1">Mountains</div>
-            </div>
-          </q-img>
-        </div>
-      </q-carousel-slide>
-      <q-carousel-slide :name="2" class="column no-wrap">
-        <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
-          <q-img class="col-6 full-height pic" src="https://cdn.quasar.dev/img/cat.jpg">
-            <span class="pic-caption bottom-to-top">
-              <h1 class="pic-title">Bottom to Top</h1>
-              <p>Hi, this is a simple example =D</p>
-            </span>
-          </q-img>
-          <q-img class="col-6 full-height" src="https://cdn.quasar.dev/img/quasar.jpg" />
-        </div>
-      </q-carousel-slide>
-      <q-carousel-slide :name="3" class="column no-wrap">
-        <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
-          <q-img class="col-6 full-height" src="https://cdn.quasar.dev/img/cat.jpg" />
-          <q-img class="col-6 full-height" src="https://cdn.quasar.dev/img/linux-avatar.png" />
-        </div>
-      </q-carousel-slide>
-      <q-carousel-slide :name="4" class="column no-wrap">
-        <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
-          <q-img class="col-6 full-height" src="https://cdn.quasar.dev/img/material.png" />
-          <q-img class="col-6 full-height" src="https://cdn.quasar.dev/img/donuts.png" />
         </div>
       </q-carousel-slide>
     </q-carousel>
@@ -90,8 +58,78 @@
 export default {
   data() {
     return {
-      slideOne: "first",
-      slideTwo: 1
+      MainCard: [
+        {
+          img: "https://cdn.quasar.dev/img/mountains.jpg",
+          title: "First stop",
+          sub: "Mountains"
+        },
+        {
+          img: "https://cdn.quasar.dev/img/parallax1.jpg",
+          title: "second stop",
+          sub: "Mountains"
+        },
+        {
+          img: "https://cdn.quasar.dev/img/donuts.png",
+          title: "thrid stop",
+          sub: "Mountains"
+        }
+      ],
+      SubCard: [
+        [
+          {
+            img: "https://cdn.quasar.dev/img/donuts.png",
+            title: "thrid stop",
+            sub: "Mountains"
+          },
+          {
+            img: "https://cdn.quasar.dev/img/donuts.png",
+            title: "thrid stop",
+            sub: "Mountains"
+          },
+          {
+            img: "https://cdn.quasar.dev/img/donuts.png",
+            title: "thrid stop",
+            sub: "Mountains"
+          }
+        ],
+        [
+          {
+            img: "https://cdn.quasar.dev/img/donuts.png",
+            title: "thrid stop",
+            sub: "Mountains"
+          },
+          {
+            img: "https://cdn.quasar.dev/img/donuts.png",
+            title: "thrid stop",
+            sub: "Mountains"
+          },
+          {
+            img: "https://cdn.quasar.dev/img/donuts.png",
+            title: "thrid stop",
+            sub: "Mountains"
+          }
+        ],
+        [
+          {
+            img: "https://cdn.quasar.dev/img/donuts.png",
+            title: "thrid stop",
+            sub: "Mountains"
+          },
+          {
+            img: "https://cdn.quasar.dev/img/donuts.png",
+            title: "thrid stop",
+            sub: "Mountains"
+          },
+          {
+            img: "https://cdn.quasar.dev/img/donuts.png",
+            title: "thrid stop",
+            sub: "Mountains"
+          }
+        ]
+      ],
+      slideOne: 0,
+      slideTwo: 0
     };
   }
 };
