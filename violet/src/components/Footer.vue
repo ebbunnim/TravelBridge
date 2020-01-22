@@ -19,20 +19,11 @@
           <div class="q-pa-md" style="max-width: 350px">
             <p class="text-h6 text-bold">Customer Service</p>
 
-<<<<<<< HEAD
-              <q-list dense bordered padding class="rounded-borders">
-                <q-item v-for="(menu, index) in CSmenus" :key="index" clickable :to="menu.path">
-                  <q-item-section>{{ menu.label }}</q-item-section>
-                </q-item>
-              </q-list>
-            </div>
-=======
             <q-list dense bordered padding class="rounded-borders">
               <q-item v-for="(menu, index) in CSmenus" :key="index" clickable :to="menu.path">
                 <q-item-section>{{ menu.label }}</q-item-section>
               </q-item>
             </q-list>
->>>>>>> 6574db251cb1e3c07ba1fce5bfb32523c8b43146
           </div>
         </div>
         <div class="card">
