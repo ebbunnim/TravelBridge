@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-
 import Home from "../views/Home.vue";
 import Main1 from "../views/Main1.vue";
 import Main2 from "../views/Main2.vue";
@@ -11,6 +10,8 @@ import AboutProject from "../views/AboutProject.vue";
 import Login from "../views/Login.vue";
 import Qna from "../views/Qna.vue";
 import Faq from "../views/Faq.vue";
+import PasswordFind from "../views/PasswordFind.vue";
+import SignUp from "../views/SignUp.vue";
 
 Vue.use(VueRouter);
 
@@ -60,6 +61,18 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login
+  },
+  // 비밀번호 찾기 페이지
+  {
+    path: "/passwordfind",
+    name: "passwordfind",
+    component: PasswordFind
+  },
+  // signup 페이지
+  {
+    path: "/signup",
+    name: "signup",
+    component: SignUp
   }
 ];
 
