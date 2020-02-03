@@ -5,7 +5,13 @@
       <div class="q-gutter-y-md column" max-width="450px">
         <q-form>
           <!-- email input -->
-          <q-input filled v-model="id" type="text" prefix="ID : " class="q-pa-md display: block">
+          <q-input
+            filled
+            v-model="id"
+            type="text"
+            class="q-pa-md display: block"
+            placeholder="아이디를 입력하세요"
+          >
             <template v-slot:prepend>
               <q-icon name="perm_identity" />
             </template>
@@ -16,7 +22,7 @@
             v-model="password"
             :type="isPwd ? 'password' : 'text'"
             hint="Password with toggle"
-            prefix="Password : "
+            placeholder="패스워드를 입력하세요"
             class="q-pa-md display: block"
           >
             <template v-slot:prepend>
@@ -29,6 +35,7 @@
           </q-input>
           <!-- submit btn -->
           <div class="q-pt-lg">
+            <q-btn label="LOGIN" type="submit" color="primary" flat class="inline-block" />
             <q-btn
               label="SIGN UP"
               color="primary"
@@ -36,7 +43,6 @@
               class="q-ml-sm display: inline"
               to="/signup"
             ></q-btn>
-            <q-btn label="LOGIN" type="submit" color="primary" flat />
             <q-btn
               label="FIND PASSWORD"
               type="reset"
