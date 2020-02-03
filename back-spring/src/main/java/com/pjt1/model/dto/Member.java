@@ -12,6 +12,11 @@ import lombok.Setter;
 import lombok.ToString;
 //회원 테이블
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+//회원 테이블
+import lombok.ToString;
 
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -43,6 +48,5 @@ public class Member implements Serializable {
     @Getter private boolean mem_del_check		;//boolean DEFAULT FALSE 			# 삭제 여부
 	
 
-	
     
 }
