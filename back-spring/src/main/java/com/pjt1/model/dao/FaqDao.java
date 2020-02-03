@@ -9,9 +9,9 @@ import com.pjt1.model.dto.Faq;
 
 @Mapper
 public interface FaqDao {
-	public Faq search(int no);
+	public Faq search(int faq_no);
 	public List<Faq> searchAll();
 	public void insert(Faq Faq);
 	public void update(Faq Faq);
-	public void delete(int no);
+	public void delete(int faq_no);
 }

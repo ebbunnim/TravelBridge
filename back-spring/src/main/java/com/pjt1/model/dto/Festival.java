@@ -18,7 +18,7 @@ import lombok.ToString;
 public class Festival implements Serializable{
 	private static final long serialVersionUID = 9144830003212943493L;
 	@Getter private int fval_no 			;//int NOT NULL KEY AUTO_INCREMENT,
-    @Getter @Setter private int clm_no 				;//int NOT NULL,
+    @Getter @Setter @NonNull private int clm_no 				;//int NOT NULL,
     @Getter @Setter @NonNull private String fval_name 		;//varchar(200) NOT NULL,
     @Getter @Setter @NonNull private String fval_address 	;//varchar(500) NOT NULL,
     @Getter @Setter private String fval_img 		;//varchar(500),

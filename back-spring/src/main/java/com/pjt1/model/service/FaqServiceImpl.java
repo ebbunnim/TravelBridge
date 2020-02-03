@@ -5,39 +5,40 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.SneakyThrows;
+
 import com.pjt1.model.dto.Faq;
 @Service
 public class FaqServiceImpl implements FaqService {
 
 	@Autowired
 	private FaqService repo;
-	@Override
-	public Faq search(int no) {
-		// TODO Auto-generated method stub
-		return null;
+
+	@SneakyThrows(Exception.class)
+	public Faq search(int faq_no) {
+		return repo.search(faq_no);
+
 	}
 
-	@Override
+	@SneakyThrows(Exception.class)
 	public List<Faq> searchAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.searchAll();
 	}
 
-	@Override
+	@SneakyThrows(Exception.class)
 	public void insert(Faq Faq) {
-		// TODO Auto-generated method stub
+		repo.insert(Faq);
 
 	}
 
-	@Override
+	@SneakyThrows(Exception.class)
 	public void update(Faq Faq) {
-		// TODO Auto-generated method stub
-
+		repo.update(Faq);
 	}
 
-	@Override
-	public void delete(int no) {
-		// TODO Auto-generated method stub
+	@SneakyThrows(Exception.class)
+	public void delete(int faq_no) {
+		repo.delete(faq_no);
 
 	}
 

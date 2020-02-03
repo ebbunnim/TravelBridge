@@ -49,31 +49,31 @@ public class CityLayerMidController{
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
     @ApiOperation("전체 CityLayerMid 목록을 조회하는 기능")
-    @GetMapping("/CityLayerMid")
+    @GetMapping("/CityLayerMid/searchAll")
     public ResponseEntity<Map<String, Object>> searchAll() {
         List<CityLayerMid> list = service.searchAll();
         return handleSuccess(list);
     }
     @ApiOperation("no에 따른 CityLayerMid 정보 조회하는 기능")
-    @GetMapping("/CityLayerMid/{no}")
+    @GetMapping("/CityLayerMid/search/{no}")
     public ResponseEntity<Map<String, Object>> search(int no) {
         CityLayerMid CitiyLayerMid = service.search(no);
         return handleSuccess(CitiyLayerMid);
     }
-    @PostMapping("/CityLayerMid")
+    @PostMapping("/CityLayerMid/insert")
     @ApiOperation("CityLayerMid 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody CityLayerMid CitiyLayerMid) {
         service.insert(CitiyLayerMid);
         return handleSuccess("");
     }
 	 @ApiOperation("CityLayerMid 정보 삭제")
-    @DeleteMapping("/CityLayerMid/{no}")
+    @DeleteMapping("/CityLayerMid/delete/{no}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
         service.delete(no);
         return handleSuccess("삭제 완료");
     }
 	 @ApiOperation("CityLayerMid 정보 수정")
-    @PutMapping("/CityLayerMid")
+    @PutMapping("/CityLayerMid/update")
     public ResponseEntity<Map<String, Object>> update(@RequestBody CityLayerMid CitiyLayerMid) {
         service.update(CitiyLayerMid);
         return handleSuccess("수정 완료");

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.SneakyThrows;
+
 import com.pjt1.model.dto.Festival;
 
 @Service
@@ -13,34 +15,31 @@ public class FestivalServiceImpl implements FestivalService {
 	@Autowired
 	private FestivalService repo;
 	
-	@Override
-	public Festival search(int no) {
-		// TODO Auto-generated method stub
-		return null;
+	@SneakyThrows(Exception.class)
+	public Festival search(int fval_no) {
+		return repo.search(fval_no);
 	}
 
-	@Override
+	@SneakyThrows(Exception.class)
 	public List<Festival> searchAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.searchAll();
+
 	}
 
-	@Override
+	@SneakyThrows(Exception.class)
 	public void insert(Festival Festival) {
-		// TODO Auto-generated method stub
+		repo.insert(Festival);
 
 	}
 
-	@Override
+	@SneakyThrows(Exception.class)
 	public void update(Festival Festival) {
-		// TODO Auto-generated method stub
+		repo.update(Festival);
 
 	}
 
-	@Override
-	public void delete(int no) {
-		// TODO Auto-generated method stub
-
+	@SneakyThrows(Exception.class)
+	public void delete(int fval_no) {
+		repo.delete(fval_no);
 	}
-
 }
