@@ -2,22 +2,6 @@ package com.pjt1.demo.model.dto;
 
 import java.io.Serializable;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-//회원 테이블
-
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-//회원 테이블
-import lombok.ToString;
-
 public class Member implements Serializable {
 
 	private static final long serialVersionUID = 8244898444448265876L;

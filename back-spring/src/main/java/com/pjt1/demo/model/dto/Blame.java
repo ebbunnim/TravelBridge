@@ -2,15 +2,6 @@ package com.pjt1.demo.model.dto;
 
 import java.io.Serializable;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
 public class Blame implements Serializable {
 	private static final long serialVersionUID = 2909089837996493001L;
 	private int blame_no					;//int PRIMARY KEY AUTO_INCREMENT,	#신고 관리번호	기본키,자동증가

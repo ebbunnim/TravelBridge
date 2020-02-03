@@ -7,6 +7,6 @@
    	<delete id="delete" 	parameterType="int"> </delete>
    	<update id="update"		parameterType="board"></update>
    	<select id="search"		parameterType="int" resultType="board"> </select>
-   	<select id="searchAll"	resultType="board"> </select>
+   	<select id="searchAll"	resultType="board">SELECT * FROM BOARD </select>
 </mapper>
 

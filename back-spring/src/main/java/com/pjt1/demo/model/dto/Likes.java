@@ -2,16 +2,6 @@ package com.pjt1.demo.model.dto;
 
 import java.io.Serializable;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-//좋아요 테이블
-
 public class Likes implements Serializable {
 	private static final long serialVersionUID = -4853668322449016469L;
 	

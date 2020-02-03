@@ -5,13 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pjt1.demo.model.dao.LikesDao;
 import com.pjt1.demo.model.dto.Likes;
 
 @Service
 public class LikesServiceImpl implements LikesService {
 
 	@Autowired 
-	private LikesService repo;
+	private LikesDao repo;
 	
 	@Override
 	public Likes search(int no) {

@@ -5,14 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pjt1.demo.model.dao.CommentDao;
 import com.pjt1.demo.model.dto.Comment;
-
-import lombok.SneakyThrows;
 @Service
 public class CommentServiceImpl implements CommentService {
 
 	@Autowired
-	private CommentService repo;
+	private CommentDao repo;
 
 	public Comment search(int cmt_no) {
 		try {

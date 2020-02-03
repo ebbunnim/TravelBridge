@@ -2,16 +2,6 @@ package com.pjt1.demo.model.dto;
 
 import java.io.Serializable;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-// FAQ 테이블
-
 public class Faq implements Serializable {
 	private static final long serialVersionUID = 1214365622536623852L;
 	private int faq_no								;//int PRIMARY KEY AUTO_INCREMENT,			# 자주하는 질문 관리번호	기본키, 자동증가

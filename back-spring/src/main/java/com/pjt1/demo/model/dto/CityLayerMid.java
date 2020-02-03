@@ -1,15 +1,6 @@
 package com.pjt1.demo.model.dto;
 
 import java.io.Serializable;
-
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 public class CityLayerMid implements Serializable {
 	private static final long serialVersionUID = -632952727324054590L;
 	

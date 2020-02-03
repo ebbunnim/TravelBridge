@@ -5,13 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pjt1.demo.model.dao.FilesDao;
 import com.pjt1.demo.model.dto.Files;
 
 @Service
 public class FilesServiceImpl implements FilesService {
 	
 	@Autowired 
-	private FilesService repo;
+	private FilesDao repo;
 	@Override
 	public Files search(int files_no ) {
 		// TODO Auto-generated method stub

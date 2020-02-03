@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lombok.SneakyThrows;
+import com.pjt1.demo.model.dao.FestivalDao;
 import com.pjt1.demo.model.dto.Festival;
 
 
@@ -13,7 +13,7 @@ import com.pjt1.demo.model.dto.Festival;
 public class FestivalServiceImpl implements FestivalService {
 	
 	@Autowired
-	private FestivalService repo;
+	private FestivalDao repo;
 	
 	public Festival search(int fval_no) {
 		try {

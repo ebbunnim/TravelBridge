@@ -1,10 +1,6 @@
 package com.pjt1.demo.model.dto;
 
 import java.io.Serializable;
-
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
 /* 게시물 테이블
 # 후기와 일정에 대한 게시물 테이블
 # 후기는 다양한 이미지와 긴 글을 작성할 수 있고, 코스를 추가할 수 있다.

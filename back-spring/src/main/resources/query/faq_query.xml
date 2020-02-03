@@ -23,10 +23,10 @@
 		faq_del_check = #{faq_del_check:BOOLEAN}
 	</update>
    	<select id="search"		parameterType="int" resultType="faq">
-		select * from faq fq where faq_no=#{faq_no:INTEGER} and faq_del_check=false   
+		select * from faq where faq_no=#{faq_no:INTEGER} and faq_del_check=false   
 	</select>
    	<select id="searchAll"	resultType="faq">
-		select * from faq fq where faq_del_check=false
+		select * from faq where faq_del_check=false
 	</select>
 </mapper>
 

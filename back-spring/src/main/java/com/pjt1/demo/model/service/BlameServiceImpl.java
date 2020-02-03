@@ -1,20 +1,19 @@
 package com.pjt1.demo.model.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pjt1.demo.model.dao.BlameDao;
 import com.pjt1.demo.model.dto.Blame;
 
-import lombok.SneakyThrows;
 
 @Service
 public class BlameServiceImpl implements BlameService {
 
 	@Autowired
-	private BlameService repo;
+	private BlameDao repo;
 
 	public Blame search(int blame_no) {
 		try {
@@ -55,7 +54,6 @@ public class BlameServiceImpl implements BlameService {
 		
 	}
 
-	@SneakyThrows(Exception.class)
 	public void delete(int blame_no) {
 		try {
 			repo.delete(blame_no);

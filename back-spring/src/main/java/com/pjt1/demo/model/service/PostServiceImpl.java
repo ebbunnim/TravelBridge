@@ -5,13 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pjt1.demo.model.dao.PostDao;
 import com.pjt1.demo.model.dto.Post;
 
 @Service
 public class PostServiceImpl implements PostService {
 
 	@Autowired
-	private PostService repo;
+	private PostDao repo;
 	
 	@Override
 	public Post search(int no) {

@@ -5,13 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pjt1.demo.model.dao.MemberDao;
 import com.pjt1.demo.model.dto.Member;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
-	private MemberService repo;
+	private MemberDao repo;
 	@Override
 	public Member search(int no) {
 		// TODO Auto-generated method stub

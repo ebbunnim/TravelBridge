@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pjt1.demo.model.dao.CityLayerBottomDao;
 import com.pjt1.demo.model.dto.CityLayerBottom;
 
-import lombok.SneakyThrows;
 
 
 @Service
 public class CityLayerBottomServiceImpl implements CityLayerBottomService {
 
 	@Autowired
-	private CityLayerBottomService repo;
+	private CityLayerBottomDao repo;
 	
 	public CityLayerBottom search(int city_layer_bottom_no) {
 		try {

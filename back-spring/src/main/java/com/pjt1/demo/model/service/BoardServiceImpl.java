@@ -5,15 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pjt1.demo.model.dao.BoardDao;
 import com.pjt1.demo.model.dto.Board;
 
-import lombok.SneakyThrows;
-
+ 
 @Service
 public class BoardServiceImpl implements BoardService {
 
 	@Autowired
-	private BoardService repo;
+	private BoardDao repo;
 	
 	public Board search(int board_no) {
 		try {
