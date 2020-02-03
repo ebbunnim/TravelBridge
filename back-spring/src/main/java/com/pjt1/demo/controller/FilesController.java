@@ -50,31 +50,31 @@ public class FilesController{
     }
     
     @ApiOperation("전체 Files 목록을 조회하는 기능")
-    @GetMapping("/Files")
+    @GetMapping("/Files/searchAll")
     public ResponseEntity<Map<String, Object>> searchAll() {
         List<Files> list = service.searchAll();
         return handleSuccess(list);
     }
     @ApiOperation("no에 따른 Files 정보 조회하는 기능")
-    @GetMapping("/Files/{no}")
+    @GetMapping("/Files/search/{no}")
     public ResponseEntity<Map<String, Object>> search(int no) {
         Files Files = service.search(no);
         return handleSuccess(Files);
     }
-    @PostMapping("/Files")
+    @PostMapping("/Files/insert")
     @ApiOperation("Files 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Files Files) {
         service.insert(Files);
         return handleSuccess("");
     }
 	 @ApiOperation("Files 정보 삭제")
-    @DeleteMapping("/Files/{no}")
+    @DeleteMapping("/Files/delete/{no}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
         service.delete(no);
         return handleSuccess("삭제 완료");
     }
 	 @ApiOperation("Files 정보 수정")
-    @PutMapping("/Files")
+    @PutMapping("/Files/update")
     public ResponseEntity<Map<String, Object>> update(@RequestBody Files Files) {
         service.update(Files);
         return handleSuccess("수정 완료");

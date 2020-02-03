@@ -49,31 +49,31 @@ public class MemberController{
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
      @ApiOperation("전체 Member 목록을 조회하는 기능")
-     @GetMapping("/Member")
+     @GetMapping("/Member/searchAll")
      public ResponseEntity<Map<String, Object>> searchAll() {
          List<Member> list = service.searchAll();
          return handleSuccess(list);
      }
      @ApiOperation("no에 따른 Member 정보 조회하는 기능")
-     @GetMapping("/Member/{no}")
+     @GetMapping("/Member/search/{no}")
      public ResponseEntity<Map<String, Object>> search(int no) {
          Member member = service.search(no);
          return handleSuccess(member);
      }
-     @PostMapping("/Member")
+     @PostMapping("/Member/insert")
      @ApiOperation("Member 정보 등록")
      public ResponseEntity<Map<String, Object>> insert(@RequestBody Member member) {
          service.insert(member);
          return handleSuccess("");
      }
 	 @ApiOperation("Member 정보 삭제")
-     @DeleteMapping("/Member/{no}")
+     @DeleteMapping("/Member/delete/{no}")
      public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
          service.delete(no);
          return handleSuccess("삭제 완료");
      }
 	 @ApiOperation("Member 정보 수정")
-     @PutMapping("/Member")
+     @PutMapping("/Member/update")
      public ResponseEntity<Map<String, Object>> update(@RequestBody Member member) {
          service.update(member);
          return handleSuccess("수정 완료");

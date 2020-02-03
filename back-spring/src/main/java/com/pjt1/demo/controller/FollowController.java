@@ -50,31 +50,31 @@ public class FollowController{
     }
     
     @ApiOperation("전체 Follow 목록을 조회하는 기능")
-    @GetMapping("/Follow")
+    @GetMapping("/Follow/searchAll")
     public ResponseEntity<Map<String, Object>> searchAll() {
         List<Follow> list = service.searchAll();
         return handleSuccess(list);
     }
     @ApiOperation("no에 따른 Follow 정보 조회하는 기능")
-    @GetMapping("/Follow/{no}")
+    @GetMapping("/Follow/search/{no}")
     public ResponseEntity<Map<String, Object>> search(int no) {
         Follow Follow = service.search(no);
         return handleSuccess(Follow);
     }
-    @PostMapping("/Follow")
+    @PostMapping("/Follow/insert")
     @ApiOperation("Follow 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Follow Follow) {
         service.insert(Follow);
         return handleSuccess("");
     }
 	 @ApiOperation("Follow 정보 삭제")
-    @DeleteMapping("/Follow/{no}")
+    @DeleteMapping("/Follow/delete/{no}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
         service.delete(no);
         return handleSuccess("삭제 완료");
     }
 	 @ApiOperation("Follow 정보 수정")
-    @PutMapping("/Follow")
+    @PutMapping("/Follow/update")
     public ResponseEntity<Map<String, Object>> update(@RequestBody Follow Follow) {
         service.update(Follow);
         return handleSuccess("수정 완료");

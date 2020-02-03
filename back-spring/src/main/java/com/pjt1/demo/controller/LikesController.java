@@ -49,31 +49,31 @@ public class LikesController{
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
     @ApiOperation("전체 Likes 목록을 조회하는 기능")
-    @GetMapping("/Likes")
+    @GetMapping("/Likes/searchAll")
     public ResponseEntity<Map<String, Object>> searchAll() {
         List<Likes> list = service.searchAll();
         return handleSuccess(list);
     }
     @ApiOperation("no에 따른 Likes 정보 조회하는 기능")
-    @GetMapping("/Likes/{no}")
+    @GetMapping("/Likes/search/{no}")
     public ResponseEntity<Map<String, Object>> search(int no) {
         Likes Likes = service.search(no);
         return handleSuccess(Likes);
     }
-    @PostMapping("/Likes")
+    @PostMapping("/Likes/insert")
     @ApiOperation("Likes 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Likes Likes) {
         service.insert(Likes);
         return handleSuccess("");
     }
 	 @ApiOperation("Likes 정보 삭제")
-    @DeleteMapping("/Likes/{no}")
+    @DeleteMapping("/Likes/delete/{no}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
         service.delete(no);
         return handleSuccess("삭제 완료");
     }
 	 @ApiOperation("Likes 정보 수정")
-    @PutMapping("/Likes")
+    @PutMapping("/Likes/update")
     public ResponseEntity<Map<String, Object>> update(@RequestBody Likes Likes) {
         service.update(Likes);
         return handleSuccess("수정 완료");

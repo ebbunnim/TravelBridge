@@ -49,31 +49,31 @@ public class FestivalController{
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
     @ApiOperation("전체 Festival 목록을 조회하는 기능")
-    @GetMapping("/Festival")
+    @GetMapping("/Festival/searchAll")
     public ResponseEntity<Map<String, Object>> searchAll() {
         List<Festival> list = service.searchAll();
         return handleSuccess(list);
     }
     @ApiOperation("no에 따른 Festival 정보 조회하는 기능")
-    @GetMapping("/Festival/{no}")
-    public ResponseEntity<Map<String, Object>> search(int no) {
-        Festival Festival = service.search(no);
+    @GetMapping("/Festival/search/{fval_no}")
+    public ResponseEntity<Map<String, Object>> search(int fval_no) {
+        Festival Festival = service.search(fval_no);
         return handleSuccess(Festival);
     }
-    @PostMapping("/Festival")
+    @PostMapping("/Festival/insert")
     @ApiOperation("Festival 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Festival Festival) {
         service.insert(Festival);
         return handleSuccess("");
     }
 	 @ApiOperation("Festival 정보 삭제")
-    @DeleteMapping("/Festival/{no}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
-        service.delete(no);
+    @DeleteMapping("/Festival/delete/{fval_no}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable int fval_no) {
+        service.delete(fval_no);
         return handleSuccess("삭제 완료");
     }
 	 @ApiOperation("Festival 정보 수정")
-    @PutMapping("/Festival")
+    @PutMapping("/Festival/update")
     public ResponseEntity<Map<String, Object>> update(@RequestBody Festival Festival) {
         service.update(Festival);
         return handleSuccess("수정 완료");
