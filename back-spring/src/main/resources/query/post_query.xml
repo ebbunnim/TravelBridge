@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.pjt1.model.dao.PostDao" >
+ 
+  	<insert id="insert"		parameterType="post"></insert> 
+   	<delete id="delete" 	parameterType="int"> </delete>
+   	<update id="update"		parameterType="post"></update>
+   	<select id="search"		parameterType="int" resultType="post"> </select>
+   	<select id="searchAll"	resultType="post"> </select>
+</mapper>
+
