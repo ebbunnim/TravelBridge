@@ -2,7 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 
 <mapper namespace="com.pjt1.model.dao.BlameDao" >
-	<insert id="insert"		parameterType="blame"></insert> 
+	<insert id="insert"		parameterType="blame">
+		
+	</insert> 
    	<delete id="delete" 	parameterType="int"> </delete>
    	<update id="update"		parameterType="blame"></update>
    	<select id="search"		parameterType="int" resultType="blame"> </select>

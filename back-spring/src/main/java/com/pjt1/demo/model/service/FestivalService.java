@@ -1,0 +1,13 @@
+package com.pjt1.demo.model.service;
+
+import java.util.List;
+
+import com.pjt1.demo.model.dto.Festival;
+
+public interface FestivalService {
+	public Festival search(int no);
+	public List<Festival> searchAll();
+	public void insert(Festival Festival);
+	public void update(Festival Festival);
+	public void delete(int no);
+}

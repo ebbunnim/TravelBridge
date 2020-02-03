@@ -3,10 +3,51 @@
 
 <mapper namespace="com.pjt1.model.dao.FaqDao" >
 
-  	<insert id="insert"		parameterType="faq"></insert> 
-   	<delete id="delete" 	parameterType="int"> </delete>
-   	<update id="update"		parameterType="faq"></update>
-   	<select id="search"		parameterType="int" resultType="faq"> </select>
-   	<select id="searchAll"	resultType="faq"> </select>
+  	<insert id="insert"		parameterType="faq">
+  	INSERT INTO FAQ
+	  	(faq_category, 
+	  	faq_title, 
+	  	faq_content, 
+	  	faq_answer) 
+  	VALUES 
+		(#{faq_category:VARCHAR},
+		#{faq_title:VARCHAR},
+		#{faq_content:VARCHAR},
+		#{faq_answer});
+  	</insert> 
+  	
+   	<delete id="delete" 	parameterType="int"> 
+   	UPDATE FAQ
+	SET
+		faq_regtime = CURRENT_TIMESTAMP(),
+		faq_del_check = true
+	WHERE faq_no = #{faq_no:INTEGER} AND faq_del_check = false;
+   	</delete>
+   	
+   	<update id="update"		parameterType="faq">
+   	UPDATE FAQ
+	SET
+		faq_category = #{faq_category:VARCHAR},
+		faq_title = #{faq_title:VARCHAR},
+		faq_content = #{faq_content:VARCHAR},
+		faq_answer = #{faq_content:VARCHAR},
+		faq_hits = #{faq_hits:INTEGER},
+		faq_regtime = CURRENT_TIMESTAMP(),
+		faq_del_check = #{faq_del_check:BOOLEAN}
+	WHERE faq_no = #{faq_no:INTEGER} AND faq_del_check = false;
+   	</update>
+   	
+   	<select id="search"		parameterType="int" resultType="faq"> 
+   	SELECT * 
+	FROM FAQ
+	WHERE faq_no = #{faq_no:INTEGER} and faq_del_check = false;
+   	</select>
+   	
+   	<select id="searchAll"	resultType="faq"> 
+	SELECT * 
+	FROM FAQ
+	WHERE faq_del_check = false;
+   	</select>
+   	
 </mapper>
 
