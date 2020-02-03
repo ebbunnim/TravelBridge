@@ -55,7 +55,7 @@ public class FaqController{
         return handleSuccess(list);
     }
     @ApiOperation("no에 따른 Faq 정보 조회하는 기능")
-    @GetMapping("/Faq/search/{no}")
+    @GetMapping("/Faq/search/{faq_no}")
     public ResponseEntity<Map<String, Object>> search(@PathVariable int faq_no) {
         Faq Faq = service.search(faq_no);
         return handleSuccess(Faq);
@@ -67,7 +67,7 @@ public class FaqController{
         return handleSuccess("");
     }
 	 @ApiOperation("Faq 정보 삭제")
-    @DeleteMapping("/Faq/delete/{no}")
+    @DeleteMapping("/Faq/delete/{faq_no}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable int faq_no) {
         service.delete(faq_no);
         return handleSuccess("삭제 완료");
