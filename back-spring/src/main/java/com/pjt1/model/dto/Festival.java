@@ -11,12 +11,13 @@ public class Festival implements Serializable{
     private String fval_img 		;//varchar(500),
     private String fval_content	 	;//varchar(3000) NOT NULL,
     private String fval_tag 		;//varchar(500),
-    private String fval_startday 	;//date,
-    private String fval_endday 		;//date,
+    private String fval_start_day 	;//date,
+    private String fval_end_day 		;//date,
     private int fval_fee 			;//int DEFAULT 0,
-    private String fval_mapImg 		;//varchar(500),
+    private String fval_map_img 		;//varchar(500),
     private String fval_homepage 	;//varchar(300),
-    private String fval_host 		;//varchar(200),
+	private String fval_host 		;//varchar(200),
+	private boolean fval_del_check  ;//fval_del_check boolean DEFAULT FALSE, # 축제 삭제 여부
 //    FOREIGN KEY(clm_no) REFERENCES CITY_LAYER_MID(clm_no)
     public Festival() {
     	super();
@@ -31,9 +32,9 @@ public class Festival implements Serializable{
     	this.fval_img = fval_img;
     	this.fval_content = fval_content;
     	this.fval_tag = fval_tag;
-    	this.fval_startday = fval_startday;
-    	this.fval_endday = fval_endday;
-    	this.fval_mapImg = fval_mapImg;
+    	this.fval_start_day = fval_startday;
+    	this.fval_end_day = fval_endday;
+    	this.fval_map_img = fval_mapImg;
     	this.fval_homepage = fval_homepage;
     	this.fval_host = fval_host;
     }
@@ -48,10 +49,10 @@ public class Festival implements Serializable{
     	this.fval_img = fval_img;
     	this.fval_content = fval_content;
     	this.fval_tag = fval_tag;
-    	this.fval_startday = fval_startday;
-    	this.fval_endday = fval_endday;
+    	this.fval_start_day = fval_startday;
+    	this.fval_end_day = fval_endday;
     	this.fval_fee = fval_fee;
-    	this.fval_mapImg = fval_mapImg;
+    	this.fval_map_img = fval_mapImg;
     	this.fval_homepage = fval_homepage;
     	this.fval_host = fval_host;
     }
@@ -59,8 +60,8 @@ public class Festival implements Serializable{
     public String toString() {
     	return "Festival [fval_no=" + fval_no + ", clm_no=" + clm_no + ", fval_name=" + fval_name + ", fval_address="
     			+ fval_address + ", fval_img=" + fval_img + ", fval_content=" + fval_content + ", fval_tag=" + fval_tag
-    			+ ", fval_startday=" + fval_startday + ", fval_endday=" + fval_endday + ", fval_fee=" + fval_fee
-    			+ ", fval_mapImg=" + fval_mapImg + ", fval_homepage=" + fval_homepage + ", fval_host=" + fval_host
+    			+ ", fval_startday=" + fval_start_day + ", fval_endday=" + fval_end_day + ", fval_fee=" + fval_fee
+    			+ ", fval_mapImg=" + fval_map_img + ", fval_homepage=" + fval_homepage + ", fval_host=" + fval_host
     			+ "]";
     }
     
@@ -107,16 +108,16 @@ public class Festival implements Serializable{
 		this.fval_tag = fval_tag;
 	}
 	public String getFval_startday() {
-		return fval_startday;
+		return fval_start_day;
 	}
 	public void setFval_startday(String fval_startday) {
-		this.fval_startday = fval_startday;
+		this.fval_start_day = fval_startday;
 	}
 	public String getFval_endday() {
-		return fval_endday;
+		return fval_end_day;
 	}
 	public void setFval_endday(String fval_endday) {
-		this.fval_endday = fval_endday;
+		this.fval_end_day = fval_endday;
 	}
 	public int getFval_fee() {
 		return fval_fee;
@@ -125,10 +126,10 @@ public class Festival implements Serializable{
 		this.fval_fee = fval_fee;
 	}
 	public String getFval_mapImg() {
-		return fval_mapImg;
+		return fval_map_img;
 	}
 	public void setFval_mapImg(String fval_mapImg) {
-		this.fval_mapImg = fval_mapImg;
+		this.fval_map_img = fval_mapImg;
 	}
 	public String getFval_homepage() {
 		return fval_homepage;

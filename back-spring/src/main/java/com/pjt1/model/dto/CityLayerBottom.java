@@ -15,7 +15,9 @@ public class CityLayerBottom implements Serializable {
     private String clb_subtitle ;//varchar(200),
     private String clb_fun 		;//varchar(200),
     private String clb_spot 	;//varchar(500),
-//	FOREIGN KEY(clm_no) REFERENCES CITY_LAYER_MID(clm_no)
+    private boolean clb_del_check;//clb_del_check boolean DEFAULT FALSE,	# 소도시 삭제 여부
+
+	//	FOREIGN KEY(clm_no) REFERENCES CITY_LAYER_MID(clm_no)
     
     public CityLayerBottom() {
     	super();

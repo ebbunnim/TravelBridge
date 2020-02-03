@@ -11,6 +11,7 @@ public class Files implements Serializable {
 	private String files_name		;//varchar(200) NOT NULL,
 	private boolean files_thumbnail ;//boolean,
 	private String files_url 		;//varchar(500) NOT NULL, #PATHw
+	private Boolean files_del_check ;//DEFAULT FAlSE, 			# 파일 삭제 여부
 //	FOREIGN KEY(post_no) REFERENCES POST(post_no)
 	
 	public Files() {

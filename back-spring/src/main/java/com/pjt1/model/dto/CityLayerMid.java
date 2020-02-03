@@ -13,7 +13,9 @@ public class CityLayerMid implements Serializable {
     private int clm_type 		;//int NOT NULL,
     private String clm_character;//varchar(500),
     private String clm_subtitle ;//varchar(200),
-//    FOREIGN KEY(clt_no) REFERENCES CITY_LAYER_TOP(clt_no)
+    private boolean clm_del_check;//clm_del_check boolean DEFAULT FALSE,			# 중도시 삭제여부
+
+	//    FOREIGN KEY(clt_no) REFERENCES CITY_LAYER_TOP(clt_no)
     
     public CityLayerMid() {
     	super();
