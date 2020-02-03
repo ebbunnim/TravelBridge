@@ -2,14 +2,25 @@ package com.pjt1.model.dto;
 
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 /* 게시물 테이블
 # 후기와 일정에 대한 게시물 테이블
 # 후기는 다양한 이미지와 긴 글을 작성할 수 있고, 코스를 추가할 수 있다.
 # 일정은 시작일과 종료일을 정해서 간단한 메모 형태로 작성할 수 있다.
 */
+
+@NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
+@ToString(exclude="serialVersionUID")
+@EqualsAndHashCode
 public class Post implements Serializable {
 	private static final long serialVersionUID = -3681429445670649187L;
 	@Getter private int post_no				;//int PRIMARY KEY AUTO_INCREMENT,	# 게시글 관리번호	기본키, 자동증가

@@ -1,12 +1,22 @@
 package com.pjt1.model.dto;
 
 import java.io.Serializable;
-import java.util.Objects;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 // Q&A 테이블
+
+@NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
+@ToString(exclude="serialVersionUID")
+@EqualsAndHashCode
 public class Qna implements Serializable {
 
 	private static final long serialVersionUID = -2029554586934457509L;
