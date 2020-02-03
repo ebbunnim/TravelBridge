@@ -1,28 +1,59 @@
 <template>
   <div class="text-center">
-    <!-- <h3>Login</h3> -->
-    <div class="q-pa-md display: inline-block">
-      <div class="q-gutter-y-md column" max-width="450px">
-        <q-form>
-          <!-- email input -->
-          <q-input filled v-model="id" type="text" prefix="ID : " class="q-pa-md display: block">
-            <template v-slot:prepend>
-              <q-icon name="perm_identity" />
-            </template>
-          </q-input>
-          <!-- submit btn -->
-          <div class="q-pt-lg">
-            <q-btn label="RESET PASSWORD" type="submit" color="primary" flat />
-          </div>
-        </q-form>
+    <h3>Password Reset</h3>
+    <p>Forgot your password? Enter your email in the form below and we'll send you instructions for creating a new one.</p>
+
+    <div class="bg">
+      <div class="q-pa-md q-ma-md display: inline">
+        <div class="column">
+          <q-form>
+            <!-- email input -->
+            <q-input
+              filled
+              v-model="email"
+              type="text"
+              placeholder="이메일 주소를 입력하세요."
+              class="q-pa-md"
+              :rules="[
+              val => val.includes('@') || '이메일 형식에 맞게 입력하세요'
+              ]"
+              lazy-rules
+            >
+              <template v-slot:prepend>
+                <q-icon name="email" />
+              </template>
+            </q-input>
+
+            <!-- submit btn -->
+            <div class="q-pt-lg">
+              <q-btn label="SEND" type="submit" color="primary" flat />
+            </div>
+          </q-form>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      email: null
+    };
+  },
+  methods: {
+    reset() {
+      this.$refs.input.resetValidation();
+    }
+  }
+};
 </script>
 
 <style>
+.bg {
+  margin-left: 30%;
+  margin-right: 30%;
+  width: 40%;
+}
 </style>
