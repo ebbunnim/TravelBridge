@@ -13,7 +13,7 @@
 	</insert> 
 
    	<delete id="delete" 	parameterType="int">
-	   update faq set faq_del_check=true where faq_no=#{faq_no} and faq_del_check=false
+	   update faq set faq_del_check=true and faq_regtime=CURRENT_TIMESTAMP() where faq_no=#{faq_no} and faq_del_check=false
 	</delete>
    	<update id="update"		parameterType="faq">
 		update faq set

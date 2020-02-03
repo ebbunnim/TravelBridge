@@ -3,7 +3,8 @@
       "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-		<typeAlias type="com.pjt1.model.dto.Blame"          	alias="blame" />
+  		<typeAlias type="com.pjt1.demo.model.dto.Faq"            	alias="faq" />
+		<!-- <typeAlias type= "com.pjt1.model.dto.Blame"          	alias="blame" />
 		<typeAlias type="com.pjt1.model.dto.Board"          	alias="board" />
 		<typeAlias type="com.pjt1.model.dto.CityLayerBottom"  	alias="citylayerbottom" />
 		<typeAlias type="com.pjt1.model.dto.CityLayerMid"  		alias="citylayermid" />
@@ -16,11 +17,12 @@
 		<typeAlias type="com.pjt1.model.dto.Likes"           	alias="likes" />
 		<typeAlias type="com.pjt1.model.dto.Member"         	alias="member" />
 		<typeAlias type="com.pjt1.model.dto.Post"           	alias="post" />
-		<typeAlias type="com.pjt1.model.dto.Qna"           		alias="qna" />
+		<typeAlias type="com.pjt1.model.dto.Qna"           		alias="qna" /> -->
   </typeAliases>
   
   <mappers>
-  		<mapper resource="query/blame_query.xml" />
+  		<mapper resource="query/faq_query.xml" />
+  		<!-- <mapper resource="query/blame_query.xml" />
   		<mapper resource="query/board_query.xml" />
   		<mapper resource="query/citylayerbottom_query.xml" />
   		<mapper resource="query/citylayermid_query.xml" />
@@ -33,6 +35,6 @@
   		<mapper resource="query/likes_query.xml" />
   		<mapper resource="query/member_query.xml" />
   		<mapper resource="query/post_query.xml" />
-  		<mapper resource="query/qna_query.xml" />
+  		<mapper resource="query/qna_query.xml" /> -->
   </mappers>
 </configuration>
