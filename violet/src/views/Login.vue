@@ -56,17 +56,13 @@
 export default {
   data() {
     return {
-      password: "",
-      isPwd: true,
-
       id: "",
-      search: "",
-      tel: "",
-      url: "",
-      time: "",
-      date: ""
+      password: "",
+
+      isPwd: true
     };
-  }
+  },
+  methods: {}
 };
 </script>
 
