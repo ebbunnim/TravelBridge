@@ -1,12 +1,22 @@
 package com.pjt1.model.dto;
 
 import java.io.Serializable;
-import java.util.Objects;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 //좋아요 테이블
+
+@NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
+@ToString(exclude="serialVersionUID")
+@EqualsAndHashCode
 public class Likes implements Serializable {
 	private static final long serialVersionUID = -4853668322449016469L;
 	
