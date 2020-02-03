@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	
+
+<mapper namespace="com.pjt1.model.dao.CityLayerTopDao" >
+
+  	<insert id="insert"		parameterType="citylayertop"></insert> 
+   	<delete id="delete" 	parameterType="int"> </delete>
+   	<update id="update"		parameterType="citylayertop"></update>
+   	<select id="search"		parameterType="int" resultType="citylayertop"> </select>
+   	<select id="searchAll"	resultType="citylayertop"> </select>
+</mapper>
+
