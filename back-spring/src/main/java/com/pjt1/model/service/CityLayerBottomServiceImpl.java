@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.pjt1.model.dto.CityLayerBottom;
 
+import lombok.SneakyThrows;
+
 
 @Service
 public class CityLayerBottomServiceImpl implements CityLayerBottomService {
@@ -14,34 +16,29 @@ public class CityLayerBottomServiceImpl implements CityLayerBottomService {
 	@Autowired
 	private CityLayerBottomService repo;
 	
-	@Override
-	public CityLayerBottom search(int no) {
-		// TODO Auto-generated method stub
-		return null;
+	@SneakyThrows(Exception.class)
+	public CityLayerBottom search(int city_layer_bottom_no) {
+		return repo.search(city_layer_bottom_no);
 	}
 
-	@Override
+	@SneakyThrows(Exception.class)
 	public List<CityLayerBottom> searchAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.searchAll();
 	}
 
-	@Override
+	@SneakyThrows(Exception.class)
 	public void insert(CityLayerBottom CityLayerBottom) {
-		// TODO Auto-generated method stub
-
+		repo.insert(CityLayerBottom);
 	}
 
-	@Override
+	@SneakyThrows(Exception.class)
 	public void update(CityLayerBottom CityLayerBottom) {
-		// TODO Auto-generated method stub
-
+		repo.update(CityLayerBottom);
 	}
 
-	@Override
-	public void delete(int no) {
-		// TODO Auto-generated method stub
-
+	@SneakyThrows(Exception.class)
+	public void delete(int city_layer_bottom_no) {
+		repo.delete(city_layer_bottom_no);
 	}
 
 }

@@ -6,39 +6,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pjt1.model.dto.Comment;
+
+import lombok.SneakyThrows;
 @Service
 public class CommentServiceImpl implements CommentService {
 
 	@Autowired
 	private CommentService repo;
-	@Override
-	public Comment search(int no) {
-		// TODO Auto-generated method stub
-		return null;
+	@SneakyThrows(Exception.class)
+	public Comment search(int cmt_no) {
+		return repo.search(cmt_no);
 	}
 
-	@Override
+	@SneakyThrows(Exception.class)
 	public List<Comment> searchAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.searchAll();
 	}
 
-	@Override
+	@SneakyThrows(Exception.class)
 	public void insert(Comment Comment) {
-		// TODO Auto-generated method stub
-
+		repo.insert(Comment);
 	}
 
-	@Override
+	@SneakyThrows(Exception.class)
 	public void update(Comment Comment) {
-		// TODO Auto-generated method stub
-
+		repo.update(Comment);
 	}
 
-	@Override
-	public void delete(int no) {
-		// TODO Auto-generated method stub
-
+	@SneakyThrows(Exception.class)
+	public void delete(int cmt_no) {
+		repo.delete(cmt_no);
 	}
 
 }

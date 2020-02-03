@@ -9,9 +9,9 @@ import com.pjt1.model.dto.Blame;
 
 @Mapper
 public interface BlameDao {
-	public Blame search(int no);
+	public Blame search(int blame_no);
 	public List<Blame> searchAll();
 	public void insert(Blame Blame);
 	public void update(Blame Blame);
-	public void delete(int no);
+	public void delete(int blame_no);
 }

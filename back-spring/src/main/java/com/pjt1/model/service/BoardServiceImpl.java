@@ -7,40 +7,37 @@ import org.springframework.stereotype.Service;
 
 import com.pjt1.model.dto.Board;
 
+import lombok.SneakyThrows;
+
 @Service
 public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private BoardService repo;
 	
-	@Override
-	public Board search(int no) {
-		// TODO Auto-generated method stub
-		return null;
+	@SneakyThrows(Exception.class)
+	public Board search(int board_no) {
+		return repo.search(board_no);
 	}
 
-	@Override
+	@SneakyThrows(Exception.class)
 	public List<Board> searchAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.searchAll();
 	}
 
-	@Override
+	@SneakyThrows(Exception.class)
 	public void insert(Board Board) {
-		// TODO Auto-generated method stub
-
+		repo.insert(Board);
 	}
 
-	@Override
+	@SneakyThrows(Exception.class)
 	public void update(Board Board) {
-		// TODO Auto-generated method stub
-
+		repo.update(Board);
 	}
 
-	@Override
-	public void delete(int no) {
-		// TODO Auto-generated method stub
-
+	@SneakyThrows(Exception.class)
+	public void delete(int board_no) {
+		repo.delete(board_no);
 	}
 
 }

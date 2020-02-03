@@ -7,40 +7,37 @@ import org.springframework.stereotype.Service;
 
 import com.pjt1.model.dto.CityLayerTop;
 
+import lombok.SneakyThrows;
+
 @Service
 public class CityLayerTopServiceImpl implements CityLayerTopService {
 
 	@Autowired
 	private CityLayerTopService repo;
 	
-	@Override
-	public CityLayerTop search(int no) {
-		// TODO Auto-generated method stub
-		return null;
+	@SneakyThrows(Exception.class)
+	public CityLayerTop search(int city_layer_top_no) {
+		return repo.search(city_layer_top_no);
 	}
 
-	@Override
+	@SneakyThrows(Exception.class)
 	public List<CityLayerTop> searchAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.searchAll();
 	}
 
-	@Override
+	@SneakyThrows(Exception.class)
 	public void insert(CityLayerTop CityLayerTop) {
-		// TODO Auto-generated method stub
-
+		repo.insert(CityLayerTop);
 	}
 
-	@Override
+	@SneakyThrows(Exception.class)
 	public void update(CityLayerTop CityLayerTop) {
-		// TODO Auto-generated method stub
-
+		repo.update(CityLayerTop);
 	}
 
-	@Override
-	public void delete(int no) {
-		// TODO Auto-generated method stub
-
+	@SneakyThrows(Exception.class)
+	public void delete(int city_layer_top_no) {
+		repo.delete(city_layer_top_no);
 	}
 
 }

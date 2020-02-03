@@ -7,9 +7,9 @@ import com.pjt1.model.dto.Comment;
 
 public interface CommentService {
 	
-	public Comment search(int no);
+	public Comment search(int cmt_no);
 	public List<Comment> searchAll();
 	public void insert(Comment Comment);
 	public void update(Comment Comment);
-	public void delete(int no);
+	public void delete(int cmt_no);
 }
