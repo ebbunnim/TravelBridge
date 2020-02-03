@@ -13,29 +13,50 @@ public class FaqServiceImpl implements FaqService {
 
 	@Autowired
 	private FaqService repo;
-	@SneakyThrows(Exception.class)
+
 	public Faq search(int faq_no) {
-		return repo.search(faq_no);
+		try {
+			return repo.search(faq_no);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	@SneakyThrows(Exception.class)
 	public List<Faq> searchAll() {
-		return repo.searchAll();
+		try {
+			return repo.searchAll();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	@SneakyThrows(Exception.class)
 	public void insert(Faq Faq) {
-		repo.insert(Faq);
+		try {
+			repo.insert(Faq);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
-	@SneakyThrows(Exception.class)
 	public void update(Faq Faq) {
-		repo.update(Faq);
+		try {
+			repo.update(Faq);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public void delete(int faq_no) {
-		repo.delete(faq_no);
+		try {
+			repo.delete(faq_no);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

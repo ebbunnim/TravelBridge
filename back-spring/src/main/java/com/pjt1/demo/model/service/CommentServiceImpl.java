@@ -13,29 +13,51 @@ public class CommentServiceImpl implements CommentService {
 
 	@Autowired
 	private CommentService repo;
-	@SneakyThrows(Exception.class)
+
 	public Comment search(int cmt_no) {
-		return repo.search(cmt_no);
+		try {
+			return repo.search(cmt_no);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public List<Comment> searchAll() {
-		return repo.searchAll();
+		try {
+			return repo.searchAll();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public void insert(Comment Comment) {
-		repo.insert(Comment);
+		try {
+			repo.insert(Comment);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public void update(Comment Comment) {
-		repo.update(Comment);
+		try {
+			repo.update(Comment);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	@SneakyThrows(Exception.class)
 	public void delete(int cmt_no) {
-		repo.delete(cmt_no);
+		try {
+			repo.delete(cmt_no);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

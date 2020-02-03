@@ -16,29 +16,53 @@ public class BlameServiceImpl implements BlameService {
 	@Autowired
 	private BlameService repo;
 
-	@SneakyThrows(Exception.class)
 	public Blame search(int blame_no) {
-		return repo.search(blame_no);
+		try {
+			return repo.search(blame_no);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	@SneakyThrows(Exception.class)
 	public List<Blame> searchAll() {
-		return repo.searchAll();
+		try {
+			return repo.searchAll();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;	
 	}
 
-	@SneakyThrows(Exception.class)
 	public void insert(Blame Blame) {
-		repo.insert(Blame);
+		try {
+			repo.insert(Blame);
+		} 
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public void update(Blame Blame) {
-		repo.update(Blame);
+		try {
+			repo.update(Blame);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		
 	}
 
 	@SneakyThrows(Exception.class)
 	public void delete(int blame_no) {
-		repo.delete(blame_no);
+		try {
+			repo.delete(blame_no);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

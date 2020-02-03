@@ -15,29 +15,50 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardService repo;
 	
-	@SneakyThrows(Exception.class)
 	public Board search(int board_no) {
-		return repo.search(board_no);
+		try {
+			return repo.search(board_no);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public List<Board> searchAll() {
-		return repo.searchAll();
+		try {
+			return repo.searchAll();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public void insert(Board Board) {
-		repo.insert(Board);
+		try {
+			repo.insert(Board);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public void update(Board Board) {
-		repo.update(Board);
+		try {
+			repo.update(Board);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}	
 	}
 
-	@SneakyThrows(Exception.class)
 	public void delete(int board_no) {
-		repo.delete(board_no);
+		try {
+			repo.delete(board_no);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}	
+		
 	}
 
 }

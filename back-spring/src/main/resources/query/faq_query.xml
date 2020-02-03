@@ -5,10 +5,10 @@
 
   	<insert id="insert"		parameterType="faq">
 		insert into faq
-		(faq_title, faq_content, faq_answer, faq_hits, faq_del_check )
+		(faq_category, faq_title, faq_content, faq_answer, faq_hits, faq_del_check )
 		values (
-			#{faq_title:VARCHAR}, #{faq_content:VARCHAR}, #{faq_answer:VARCHAR},
-			#{faq_hits:INTEGER}, #{faq_del_check:BOOLEAN}
+			#{faq_category:VARCHAR}, #{faq_title:VARCHAR}, #{faq_content:VARCHAR}, 
+			#{faq_answer:VARCHAR},#{faq_hits:INTEGER}, #{faq_del_check:BOOLEAN}
 		)
 	</insert> 
 
@@ -17,6 +17,7 @@
 	</delete>
    	<update id="update"		parameterType="faq">
 		update faq set
+		faq_category = #{faq_category:VARCHAR},
 		faq_title=#{faq_title:VARCHAR}, faq_content=#{faq_content:VARCHAR},
 		faq_answer= #{faq_answer:VARCHAR}, faq_hits=#{faq_hits:INTEGER}, 
 		faq_del_check = #{faq_del_check:BOOLEAN}

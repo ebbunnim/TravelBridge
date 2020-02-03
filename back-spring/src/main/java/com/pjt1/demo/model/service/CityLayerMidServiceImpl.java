@@ -15,29 +15,51 @@ public class CityLayerMidServiceImpl implements CityLayerMidService {
 	@Autowired
 	private CityLayerMidService repo;
 	
-	@SneakyThrows(Exception.class)
 	public CityLayerMid search(int city_layer_mid_no) {
-		return repo.search(city_layer_mid_no);
+		try {
+			return repo.search(city_layer_mid_no);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;	
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public List<CityLayerMid> searchAll() {
-		return repo.searchAll();
+		try {
+			return repo.searchAll();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public void insert(CityLayerMid CityLayerMid) {
-		repo.insert(CityLayerMid);
+		try {
+			repo.insert(CityLayerMid);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public void update(CityLayerMid CityLayerMid) {
-		repo.update(CityLayerMid);
+		try {
+			repo.update(CityLayerMid);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public void delete(int city_layer_mid_no) {
-		repo.delete(city_layer_mid_no);
+		try {
+			repo.delete(city_layer_mid_no);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

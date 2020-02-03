@@ -15,29 +15,50 @@ public class CityLayerTopServiceImpl implements CityLayerTopService {
 	@Autowired
 	private CityLayerTopService repo;
 	
-	@SneakyThrows(Exception.class)
 	public CityLayerTop search(int city_layer_top_no) {
-		return repo.search(city_layer_top_no);
+		try {
+			return repo.search(city_layer_top_no);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public List<CityLayerTop> searchAll() {
-		return repo.searchAll();
+		try {
+			return repo.searchAll();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public void insert(CityLayerTop CityLayerTop) {
-		repo.insert(CityLayerTop);
+		try {
+			repo.insert(CityLayerTop);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public void update(CityLayerTop CityLayerTop) {
-		repo.update(CityLayerTop);
+		try {
+			repo.update(CityLayerTop);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public void delete(int city_layer_top_no) {
-		repo.delete(city_layer_top_no);
+		try {
+			repo.delete(city_layer_top_no);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

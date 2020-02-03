@@ -56,8 +56,8 @@ public class FaqController{
     }
     @ApiOperation("no에 따른 Faq 정보 조회하는 기능")
     @GetMapping("/Faq/search/{no}")
-    public ResponseEntity<Map<String, Object>> search(@PathVariable int no) {
-        Faq Faq = service.search(no);
+    public ResponseEntity<Map<String, Object>> search(@PathVariable int faq_no) {
+        Faq Faq = service.search(faq_no);
         return handleSuccess(Faq);
     }
     @ApiOperation("Faq 정보 등록")
@@ -68,8 +68,8 @@ public class FaqController{
     }
 	 @ApiOperation("Faq 정보 삭제")
     @DeleteMapping("/Faq/delete/{no}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
-        service.delete(no);
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable int faq_no) {
+        service.delete(faq_no);
         return handleSuccess("삭제 완료");
     }
 	@ApiOperation("Faq 정보 수정")

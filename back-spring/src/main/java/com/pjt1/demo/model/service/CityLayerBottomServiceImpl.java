@@ -16,29 +16,52 @@ public class CityLayerBottomServiceImpl implements CityLayerBottomService {
 	@Autowired
 	private CityLayerBottomService repo;
 	
-	@SneakyThrows(Exception.class)
 	public CityLayerBottom search(int city_layer_bottom_no) {
-		return repo.search(city_layer_bottom_no);
+		try {
+			return repo.search(city_layer_bottom_no);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}	
+		return null;
+
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public List<CityLayerBottom> searchAll() {
-		return repo.searchAll();
+		try {
+			return repo.searchAll();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}	
+		return null;
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public void insert(CityLayerBottom CityLayerBottom) {
-		repo.insert(CityLayerBottom);
+		try {
+			repo.insert(CityLayerBottom);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}	
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public void update(CityLayerBottom CityLayerBottom) {
-		repo.update(CityLayerBottom);
+		try {
+			repo.update(CityLayerBottom);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}	
+		
 	}
 
-	@SneakyThrows(Exception.class)
 	public void delete(int city_layer_bottom_no) {
-		repo.delete(city_layer_bottom_no);
+		try {
+			repo.delete(city_layer_bottom_no);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}	
+		
 	}
 
 }
