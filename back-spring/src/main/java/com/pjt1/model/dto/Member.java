@@ -23,65 +23,6 @@ public class Member implements Serializable {
 	private String mem_regtime			;//datetime DEFAULT NOW(),			# 가입 시간
     private String mem_interest			;//varchar(400),						# 관심 카테고리들
     private boolean mem_del_check		;//boolean DEFAULT FALSE				# 삭제여부
-    
-    
-	public Member() {
-		super();
-	}
-	
-	public Member(String mem_id, String mem_email, String mem_password, String mem_phone, String mem_name, int mem_sex,
-			String mem_birth, String mem_address, boolean mem_admin, boolean mem_receive_email, int mem_following,
-			int mem_followed, String mem_interest) {
-		super();
-		this.mem_id = mem_id;
-		this.mem_email = mem_email;
-		this.mem_password = mem_password;
-		this.mem_phone = mem_phone;
-		this.mem_name = mem_name;
-		this.mem_sex = mem_sex;
-		this.mem_birth = mem_birth;
-		this.mem_address = mem_address;
-		this.mem_admin = mem_admin;
-		this.mem_receive_email = mem_receive_email;
-		this.mem_following = mem_following;
-		this.mem_followed = mem_followed;
-		this.mem_interest = mem_interest;
-	}
-
-	public Member(int mem_no, String mem_id, String mem_email, String mem_password, String mem_phone, String mem_name,
-			int mem_sex, String mem_birth, String mem_address, boolean mem_admin, boolean mem_receive_email,
-			int mem_following, int mem_followed, String mem_lastlogin, String mem_regtime, String mem_interest,
-			boolean mem_del_check) {
-		super();
-		this.mem_no = mem_no;
-		this.mem_id = mem_id;
-		this.mem_email = mem_email;
-		this.mem_password = mem_password;
-		this.mem_phone = mem_phone;
-		this.mem_name = mem_name;
-		this.mem_sex = mem_sex;
-		this.mem_birth = mem_birth;
-		this.mem_address = mem_address;
-		this.mem_admin = mem_admin;
-		this.mem_receive_email = mem_receive_email;
-		this.mem_following = mem_following;
-		this.mem_followed = mem_followed;
-		this.mem_lastlogin = mem_lastlogin;
-		this.mem_regtime = mem_regtime;
-		this.mem_interest = mem_interest;
-		this.mem_del_check = mem_del_check;
-	}
-
-	@Override
-	public String toString() {
-		return "Member [mem_no=" + mem_no + ", mem_id=" + mem_id + ", mem_email=" + mem_email + ", mem_password="
-				+ mem_password + ", mem_phone=" + mem_phone + ", mem_name=" + mem_name + ", mem_sex=" + mem_sex
-				+ ", mem_birth=" + mem_birth + ", mem_address=" + mem_address + ", mem_admin=" + mem_admin
-				+ ", mem_receive_email=" + mem_receive_email + ", mem_following=" + mem_following + ", mem_followed="
-				+ mem_followed + ", mem_lastlogin=" + mem_lastlogin + ", mem_regtime=" + mem_regtime + ", mem_interest="
-				+ mem_interest + ", mem_del_check=" + mem_del_check + "]";
-	}
-
 	public int getMem_no() {
 		return mem_no;
 	}
@@ -184,6 +125,50 @@ public class Member implements Serializable {
 	public void setMem_del_check(boolean mem_del_check) {
 		this.mem_del_check = mem_del_check;
 	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
+	public Member() {
+		super();
+	}
+	
+	
+	public Member(int mem_no, String mem_id, String mem_email, String mem_password, String mem_phone, String mem_name,
+			int mem_sex, String mem_birth, String mem_address, boolean mem_admin, boolean mem_receive_email,
+			int mem_following, int mem_followed, String mem_lastlogin, String mem_regtime, String mem_interest,
+			boolean mem_del_check) {
+		super();
+		this.mem_no = mem_no;
+		this.mem_id = mem_id;
+		this.mem_email = mem_email;
+		this.mem_password = mem_password;
+		this.mem_phone = mem_phone;
+		this.mem_name = mem_name;
+		this.mem_sex = mem_sex;
+		this.mem_birth = mem_birth;
+		this.mem_address = mem_address;
+		this.mem_admin = mem_admin;
+		this.mem_receive_email = mem_receive_email;
+		this.mem_following = mem_following;
+		this.mem_followed = mem_followed;
+		this.mem_lastlogin = mem_lastlogin;
+		this.mem_regtime = mem_regtime;
+		this.mem_interest = mem_interest;
+		this.mem_del_check = mem_del_check;
+	}
+	@Override
+	public String toString() {
+		return "Member [mem_no=" + mem_no + ", mem_id=" + mem_id + ", mem_email=" + mem_email + ", mem_password="
+				+ mem_password + ", mem_phone=" + mem_phone + ", mem_name=" + mem_name + ", mem_sex=" + mem_sex
+				+ ", mem_birth=" + mem_birth + ", mem_address=" + mem_address + ", mem_admin=" + mem_admin
+				+ ", mem_receive_email=" + mem_receive_email + ", mem_following=" + mem_following + ", mem_followed="
+				+ mem_followed + ", mem_lastlogin=" + mem_lastlogin + ", mem_regtime=" + mem_regtime + ", mem_interest="
+				+ mem_interest + ", mem_del_check=" + mem_del_check + "]";
+	}
+    
+    
 
 
 }
