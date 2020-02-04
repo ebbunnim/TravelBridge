@@ -1,12 +1,13 @@
 <template>
   <div class="text-center">
     <p class="text-h4 q-pt-lg q-mt-lg">로그인</p>
-    <div class="q-pa-md row">
-      <div class="q-gutter-y-md column">
+    <div class="row q-pa-md justify-center">
+      <div class="col-4 col-8 col-xs-12 text-center">
         <q-form>
           <!-- email input -->
           <q-input
             filled
+            :rules="emailRules"
             v-model="email"
             type="text"
             class="q-pa-md display: block"
@@ -33,33 +34,44 @@
               />
             </template>
           </q-input>
-          <!-- submit btn -->
-          <div class="q-pt-lg">
-            <q-btn
-              label="LOGIN"
-              type="submit"
-              color="primary"
-              flat
-              class="inline-block"
-            />
-            <q-btn
-              label="SIGN UP"
-              color="primary"
-              flat
-              class="q-ml-sm display: inline"
-              to="/signup"
-            ></q-btn>
-            <q-btn
-              label="FIND PASSWORD"
-              type="reset"
-              color="primary"
-              flat
-              class="q-ml-sm"
-              to="/passwordfind"
-            />
+          <div class="col-2 text-center">
+            <div class="q-pt-lg">
+              <q-btn
+                color="primary"
+                size="large"
+                width="100%"
+                label="로그인"
+                type="submit"
+                class="inline-block q-mr-md"
+              />
+              <q-btn
+                size="large"
+                outline
+                color="primary"
+                width="100%"
+                label="회원가입"
+                class="display: inline q-ml-md"
+                to="/signup"
+              ></q-btn>
+            </div>
           </div>
+
+          <!-- submit btn -->
         </q-form>
       </div>
+    </div>
+    <div class="row q-pa-md justify-center">
+      <p>비밀번호가 기억나지 않는다면?</p>
+      <!-- <q-btn
+        label="비밀번호 찾기"
+        size="small"
+        type="reset"
+        color="primary"
+        flat
+        to="/passwordfind"
+        class="q-ma-xs q-pa-xs"
+      /> -->
+      <p class="q-ml-sm q-mr-none"><a href="/passwordfind">비밀번호 찾기</a> 를 이용하세요</p>
     </div>
   </div>
 </template>
@@ -68,9 +80,18 @@
 export default {
   data() {
     return {
-      id: "",
+      email: "",
       password: "",
-      isPwd: true
+      isPwd: true,
+
+      // input rules
+      rules: {
+        required: value => !!value || "Password is required."
+      },
+      emailRules: [
+        v => !!v || "E-mail is required",
+        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+      ]
     };
   },
   methods: {}
