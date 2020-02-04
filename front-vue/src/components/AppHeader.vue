@@ -1,40 +1,53 @@
 <template>
-  <q-layout view="lHh lpR lff" style="min-height: 90px;">
-    <q-header elevated class="bg-primary text-white" height-hint="98">
+  <q-layout view="lHh lpR lff" style="min-height: 50px;">
+    <q-header class="bg-white" style="height: 68px;">
       <q-toolbar align="center">
-        <q-btn dense flat round icon="menu" @click="left = !left" />
-        <q-toolbar-title>title</q-toolbar-title>
-        <div v-if="false">
-          <q-btn>내 정보</q-btn>
-          <q-btn>로그아웃</q-btn>
+        <!-- mobile 에서만 햄버거 버튼 노출 -->
+        <!-- <q-btn dense flat round icon="menu" @click="left = !left" class="col-4"/> -->
+
+        <div class="col-4">
+          <q-btn class="text-black q-pa-md" flat to="/" label="HOME"></q-btn>
+          <q-btn
+            class="text-black q-pa-md"
+            flat
+            to="/page1"
+            label="트래블 카드"
+          ></q-btn>
+          <q-btn
+            class="text-black q-pa-md"
+            flat
+            to="/page2"
+            label="트래블 픽"
+          ></q-btn>
+          <q-btn
+            class="text-black q-pa-md"
+            flat
+            to="/page3"
+            label="SUB기능"
+          ></q-btn>
         </div>
-        <div v-else>
-          <q-btn to='/login'>로그인</q-btn>
+        <q-toolbar-title class="col-4 text-black">트래블브릿지</q-toolbar-title>
+        <div class="col-4" v-if="false">
+          <q-btn size="sm" class="text-grey q-pa-md" flat>내 정보</q-btn>
+          <q-btn size="sm" class="text-grey q-pa-md" flat>로그아웃</q-btn>
+        </div>
+        <div v-else class="col-4" align="right">
+          <q-btn size="md" class="text-grey darken--2 q-pa-md" flat to="/login"
+            >로그인</q-btn
+          >
         </div>
       </q-toolbar>
-
-      <q-tabs align="center">
-        <q-space />
-        <q-route-tab to="/" label="홈" />
-        <q-space />
-        <q-route-tab to="/page1" label="메인기능 1번" />
-        <q-space />
-        <q-route-tab to="/page2" label="메인기능 2번" />
-        <q-space />
-        <q-route-tab to="/page3" label="서브기능" />
-        <q-space />
-      </q-tabs>
     </q-header>
 
     <q-drawer v-model="left" side="left" overlay elevated behavior="mobile">
       <q-scroll-area class="fit">
         <q-list v-for="(menuItem, index) in menuList" :key="index">
-          <q-item v-if="menuItem.btn" clickable :to="menuItem.path"> 
+          <q-item v-if="menuItem.btn" clickable :to="menuItem.path">
             <q-item-section avatar>
               <q-icon :name="menuItem.icon" />
             </q-item-section>
             <q-item-section>
-              <q-item-label>{{menuItem.label}}</q-item-label>
+              <q-item-label>{{ menuItem.label }}</q-item-label>
               <q-item-label caption>quasar.dev</q-item-label>
             </q-item-section>
           </q-item>
@@ -48,7 +61,10 @@
             :content-inset-level="0.5"
             :to="menuItem.path"
           >
-            <q-list v-for="(menuListSub,index) in menuListSub[index]" :key="index">
+            <q-list
+              v-for="(menuListSub, index) in menuListSub[index]"
+              :key="index"
+            >
               <q-item clickable>
                 <q-item-section>
                   <q-item-label>{{ menuListSub.label }}</q-item-label>
@@ -71,10 +87,31 @@ export default {
     return {
       left: false,
       menuList: [
-        { label: "홈", icon: "home", separator: "true", btn: "true", path: "/" },
-        { label: "메인기능 1번", icon: "bookmark", separator: "true", path: "/page1" },
-        { label: "메인기능 2번", icon: "card_travel", separator: "true", path: "/page2" },
-        { label: "서브기능", icon: "extension", separator: "true", path: "/page3" },
+        {
+          label: "홈",
+          icon: "home",
+          separator: "true",
+          btn: "true",
+          path: "/"
+        },
+        {
+          label: "메인기능 1번",
+          icon: "bookmark",
+          separator: "true",
+          path: "/page1"
+        },
+        {
+          label: "메인기능 2번",
+          icon: "card_travel",
+          separator: "true",
+          path: "/page2"
+        },
+        {
+          label: "서브기능",
+          icon: "extension",
+          separator: "true",
+          path: "/page3"
+        },
         { label: "고객센터", icon: "dashboard", separator: "true" }
       ],
       menuListSub: [
@@ -90,4 +127,8 @@ export default {
 </script>
 
 <style>
+.hright {
+  display: flex;
+  justify-content: flex-end;
+}
 </style>
