@@ -4,10 +4,45 @@
 
 <mapper namespace="com.pjt1.model.dao.CityLayerTopDao" >
 
-  	<insert id="insert"		parameterType="citylayertop"></insert> 
-   	<delete id="delete" 	parameterType="int"> </delete>
-   	<update id="update"		parameterType="citylayertop"></update>
-   	<select id="search"		parameterType="int" resultType="citylayertop"> </select>
-   	<select id="searchAll"	resultType="citylayertop"> </select>
+  	<insert id="insert"		parameterType="citylayertop">
+		INSERT INTO 
+		citylayertop
+		(clt_name, clt_address,
+		clt_img, clt_content, clt_type) 
+		VALUES 
+		#{clt_name:VARCHAR},
+		#{clt_address:VARCHAR},
+		#{clt_img:VARCHAR},
+		#{clt_content:VARCHAR},
+		#{clt_type:INTEGER},
+		)
+	</insert> 
+   	<delete id="delete" 	parameterType="int">
+		UPDATE citylayertop
+		SET 
+		clt_del_check = true
+		WHERE clt_no = #{clt_no:INTEGER} and clt_del_check = false	
+	</delete>
+   	<update id="update"		parameterType="citylayertop">
+		UPDATE citylayermid
+		SET
+		clt_name = #{clt_name:VARCHAR},
+		clt_address = #{clt_address:VARCHAR},
+		clt_img = #{clt_img:VARCHAR},
+		clt_content = #{clt_content:VARCHAR},
+		clt_type = #{clt_type:INTEGER},
+		clt_del_check = #{clt_del_check:BOOLEAN}
+		WHERE clt_no = #{clt_no:INTEGER}      
+	</update>
+   	<select id="search"		parameterType="int" resultType="citylayertop"> 
+		SELECT * 
+		FROM citylayertop
+		WHERE clt_no = #{clt_no:INTEGER} AND clt_del_check = false      	
+	</select>
+   	<select id="searchAll"	resultType="citylayertop"> 
+		SELECT * 
+		FROM citylayertop
+		WHERE clt_del_check = false     
+	</select>
 </mapper>
 

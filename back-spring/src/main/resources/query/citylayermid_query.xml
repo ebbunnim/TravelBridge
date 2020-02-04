@@ -4,10 +4,52 @@
 
 <mapper namespace="com.pjt1.model.dao.CityLayerMidDao" >
 
-  	<insert id="insert"		parameterType="citylayermid"></insert> 
-   	<delete id="delete" 	parameterType="int"> </delete>
-   	<update id="update"		parameterType="citylayermid"></update>
-   	<select id="search"		parameterType="int" resultType="citylayermid"> </select>
-   	<select id="searchAll"	resultType="citylayermid"> </select>
+  	<insert id="insert"		parameterType="citylayermid">
+		INSERT INTO 
+		citylayermid
+		(clt_no, clm_name, clm_address,
+		clm_img, clm_content, clm_type,
+		clm_character, clm_subtitle) 
+		VALUES 
+		(#{clt_no:INTEGER},
+		#{clm_name:VARCHAR},
+		#{clm_address:VARCHAR},
+		#{clm_img:VARCHAR},
+		#{clm_content:VARCHAR},
+		#{clm_type:INTEGER},
+		#{clm_character:VARCHAR},
+		#{clm_subtitle:VARCHAR}
+		)   	  
+	</insert> 
+   	<delete id="delete" 	parameterType="int"> 
+		UPDATE citylayermid
+		SET 
+		clm_del_check = true
+		WHERE clm_no = #{clm_no:INTEGER} and clm_del_check = false	
+	</delete>
+   	<update id="update"		parameterType="citylayermid">
+		UPDATE citylayermid
+		SET
+		clt_no = #{clt_no:INTEGER},
+		clm_name = #{clm_name:VARCHAR},
+		clm_address = #{clm_address:VARCHAR},
+		clm_img = #{clm_img:VARCHAR},
+		clm_content = #{clm_content:VARCHAR},
+		clm_type = #{clm_type:INTEGER},
+		clm_character = #{clm_character:VARCHAR},
+		clm_subtitle = #{clm_subtitle:VARCHAR},
+		clm_del_check = #{clm_del_check:BOOLEAN}
+		WHERE clm_no = #{clm_no:INTEGER}      
+	</update>
+   	<select id="search"		parameterType="int" resultType="citylayermid"> 
+		SELECT * 
+		FROM citylayermid 
+		WHERE clm_no = #{clm_no:INTEGER} AND clm_del_check = false      	
+	</select>
+   	<select id="searchAll"	resultType="citylayermid"> 
+		SELECT * 
+		FROM citylayermid
+		WHERE clm_del_check = false     
+	</select>
 </mapper>
 
