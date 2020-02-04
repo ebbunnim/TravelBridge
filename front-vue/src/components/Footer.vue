@@ -51,7 +51,7 @@ export default {
       aboutUsMenus: [
         { label: "Contact Us", path: "/temporary" }, // 추후에 이메일 modal 연결
         { label: "About Team", path: "/about/team" },
-        { label: "About Project", path: "/about/project" }
+        { label: "About Service", path: "/about/service" }
       ],
       CSmenus: [
         { label: "FAQ", path: "/faq" },

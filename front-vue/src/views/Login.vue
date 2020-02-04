@@ -1,16 +1,16 @@
 <template>
   <div class="text-center">
-    <h3>Login</h3>
-    <div class="q-pa-md display: inline-block">
-      <div class="q-gutter-y-md column" max-width="450px">
+    <p class="text-h4 q-pt-lg q-mt-lg">로그인</p>
+    <div class="q-pa-md row">
+      <div class="q-gutter-y-md column">
         <q-form>
           <!-- email input -->
           <q-input
             filled
-            v-model="id"
+            v-model="email"
             type="text"
             class="q-pa-md display: block"
-            placeholder="아이디를 입력하세요"
+            placeholder="이메일을 입력하세요"
           >
             <template v-slot:prepend>
               <q-icon name="perm_identity" />
@@ -35,7 +35,13 @@
           </q-input>
           <!-- submit btn -->
           <div class="q-pt-lg">
-            <q-btn label="LOGIN" type="submit" color="primary" flat class="inline-block" />
+            <q-btn
+              label="LOGIN"
+              type="submit"
+              color="primary"
+              flat
+              class="inline-block"
+            />
             <q-btn
               label="SIGN UP"
               color="primary"
@@ -64,7 +70,6 @@ export default {
     return {
       id: "",
       password: "",
-
       isPwd: true
     };
   },
@@ -72,5 +77,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
