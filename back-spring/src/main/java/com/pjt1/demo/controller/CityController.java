@@ -17,18 +17,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pjt1.demo.model.dto.CityLayerMid;
-import com.pjt1.demo.model.service.CityLayerMidService;
+import com.pjt1.demo.model.dto.City;
+import com.pjt1.demo.model.service.CityService;
 
 import io.swagger.annotations.ApiOperation;
 
+
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
-public class CityLayerMidController {
-
+public class CityController{
+	
     @Autowired
-    private CityLayerMidService service;
-
+    private CityService service;
+    
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
         return handleFail(e.getMessage(), HttpStatus.OK); // 전송에는 지장 없음
@@ -47,39 +48,34 @@ public class CityLayerMidController {
         resultMap.put("data", data);
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
-
-    @ApiOperation("전체 CityLayerMid 목록을 조회하는 기능")
-    @GetMapping("/CityLayerMid/searchAll")
+    @ApiOperation("전체 City 목록을 조회하는 기능")
+    @GetMapping("/City")
     public ResponseEntity<Map<String, Object>> searchAll() {
-        List<CityLayerMid> list = service.searchAll();
+        List<City> list = service.searchAll();
         return handleSuccess(list);
     }
-
-    @ApiOperation("no에 따른 CityLayerMid 정보 조회하는 기능")
-    @GetMapping("/CityLayerMid/search/{clm_no}")
-    public ResponseEntity<Map<String, Object>> search(int clm_no) {
-        CityLayerMid CitiyLayerMid = service.search(clm_no);
-        return handleSuccess(CitiyLayerMid);
+    @ApiOperation("no에 따른 City 정보 조회하는 기능")
+    @GetMapping("/City/{no}")
+    public ResponseEntity<Map<String, Object>> search(int no) {
+        City City = service.search(no);
+        return handleSuccess(City);
     }
-
-    @PostMapping("/CityLayerMid/insert")
-    @ApiOperation("CityLayerMid 정보 등록")
-    public ResponseEntity<Map<String, Object>> insert(@RequestBody CityLayerMid CitiyLayerMid) {
-        service.insert(CitiyLayerMid);
+    @PostMapping("/City")
+    @ApiOperation("City 정보 등록")
+    public ResponseEntity<Map<String, Object>> insert(@RequestBody City City) {
+        service.insert(City);
         return handleSuccess("");
     }
-
-    @ApiOperation("CityLayerMid 정보 삭제")
-    @DeleteMapping("/CityLayerMid/delete/{clm_no}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable int clm_no) {
-        service.delete(clm_no);
+	 @ApiOperation("City 정보 삭제")
+    @DeleteMapping("/City/{no}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
+        service.delete(no);
         return handleSuccess("삭제 완료");
     }
-
-    @ApiOperation("CityLayerMid 정보 수정")
-    @PutMapping("/CityLayerMid/update")
-    public ResponseEntity<Map<String, Object>> update(@RequestBody CityLayerMid CitiyLayerMid) {
-        service.update(CitiyLayerMid);
+	 @ApiOperation("City 정보 수정")
+    @PutMapping("/City")
+    public ResponseEntity<Map<String, Object>> update(@RequestBody City City) {
+        service.update(City);
         return handleSuccess("수정 완료");
     }
 }

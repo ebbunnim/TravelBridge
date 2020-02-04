@@ -14,6 +14,21 @@ DROP TABLE BOARD;
 DROP TABLE FOLLOW;
 DROP TABLE MEMBERS;
 
+SELECT * FROM FESTIVAL;
+
+SELECT * FROM HOTPLACE;
+SELECT * FROM CITY;
+SELECT * FROM FILES;
+SELECT * FROM QNA;
+SELECT * FROM FAQ;
+SELECT * FROM LIKES;
+SELECT * FROM COMMENT;
+SELECT * FROM COURSE;
+SELECT * FROM POST;
+SELECT * FROM BOARD;
+SELECT * FROM FOLLOW;
+SELECT * FROM MEMBERS;
+
 # MEMBER 테이블
 CREATE TABLE MEMBERS (
 	mem_no				int	PRIMARY KEY AUTO_INCREMENT,	# 회원 관리번호
@@ -106,6 +121,9 @@ CREATE TABLE COMMENT (
 # 게시판의 게시물 또는 댓글에 좋아요를 클릭할 수 있다.
 # 좋아요 개수는 각각 조회
 
+
+drop table likes;
+
 CREATE TABLE LIKES (
 	like_no				int PRIMARY KEY AUTO_INCREMENT,	# 좋아요 관리번호	기본키, 자동증가
     board_no			int NOT NULL,					# 게시판 위치 
@@ -113,12 +131,10 @@ CREATE TABLE LIKES (
     cmt_check			boolean not null,				# 댓글 여부 (게시물이면 false, 댓글이면 true)
 	cmt_no				int	default 0,					# 댓글 번호 (댓글이면 해당 번호 삽입)
 	liker_mem_no		int NOT NULL,					# 좋아요 한 회원	외래키
-	liking_mem_no		int NOT NULL,					# 좋아요 당한 회원	외래키
     like_del_check		boolean DEFAULT FALSE,			# 삭제 여부			
     FOREIGN KEY(board_no) REFERENCES BOARD(board_no), 
 	FOREIGN KEY(post_no) REFERENCES POST(post_no),
-    FOREIGN KEY(liker_mem_no) REFERENCES MEMBERS(mem_no),
-    FOREIGN KEY(liking_mem_no) REFERENCES MEMBERS(mem_no)
+    FOREIGN KEY(liker_mem_no) REFERENCES MEMBERS(mem_no)
 );
 
 # FAQ 테이블
@@ -209,18 +225,4 @@ show table status;
 
 show tables;
 
-DESC board;
-DESC city_layer_bottom;
-DESC city_layer_mid;
-DESC city_layer_top;
-DESC comment;
-DESC course;
-DESC faq;
-DESC festival;
-DESC files;
-DESC follow;
-DESC likes;
-DESC member;
-DESC post;
-DESC qna;
 

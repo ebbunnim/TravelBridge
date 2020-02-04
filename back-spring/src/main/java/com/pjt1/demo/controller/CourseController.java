@@ -17,18 +17,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pjt1.demo.model.dto.CityLayerBottom;
-import com.pjt1.demo.model.service.CityLayerBottomService;
+import com.pjt1.demo.model.dto.Course;
+import com.pjt1.demo.model.service.CourseService;
 
 import io.swagger.annotations.ApiOperation;
 
+
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
-public class CityLayerBottomController {
-
+public class CourseController{
+	
     @Autowired
-    private CityLayerBottomService service;
-
+    private CourseService service;
+    
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
         return handleFail(e.getMessage(), HttpStatus.OK); // 전송에는 지장 없음
@@ -47,39 +48,34 @@ public class CityLayerBottomController {
         resultMap.put("data", data);
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
-
-    @ApiOperation("전체 CityLayerBottom 목록을 조회하는 기능")
-    @GetMapping("/CityLayerBottom")
+    @ApiOperation("전체 Course 목록을 조회하는 기능")
+    @GetMapping("/Course")
     public ResponseEntity<Map<String, Object>> searchAll() {
-        List<CityLayerBottom> list = service.searchAll();
+        List<Course> list = service.searchAll();
         return handleSuccess(list);
     }
-
-    @ApiOperation("no에 따른 CityLayerBottom 정보 조회하는 기능")
-    @GetMapping("/CityLayerBottom/{clb_no}")
-    public ResponseEntity<Map<String, Object>> search(int clb_no) {
-        CityLayerBottom CityLayerBottom = service.search(clb_no);
-        return handleSuccess(CityLayerBottom);
+    @ApiOperation("no에 따른 Course 정보 조회하는 기능")
+    @GetMapping("/Course/{no}")
+    public ResponseEntity<Map<String, Object>> search(int no) {
+        Course Course = service.search(no);
+        return handleSuccess(Course);
     }
-
-    @PostMapping("/CityLayerBottom")
-    @ApiOperation("CityLayerBottom 정보 등록")
-    public ResponseEntity<Map<String, Object>> insert(@RequestBody CityLayerBottom CityLayerBottom) {
-        service.insert(CityLayerBottom);
+    @PostMapping("/Course")
+    @ApiOperation("Course 정보 등록")
+    public ResponseEntity<Map<String, Object>> insert(@RequestBody Course Course) {
+        service.insert(Course);
         return handleSuccess("");
     }
-
-    @ApiOperation("CityLayerBottom 정보 삭제")
-    @DeleteMapping("/CityLayerBottom/{clb_no}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable int clb_no) {
-        service.delete(clb_no);
+	 @ApiOperation("Course 정보 삭제")
+    @DeleteMapping("/Course/{no}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
+        service.delete(no);
         return handleSuccess("삭제 완료");
     }
-
-    @ApiOperation("CityLayerBottom 정보 수정")
-    @PutMapping("/CityLayerBottom")
-    public ResponseEntity<Map<String, Object>> update(@RequestBody CityLayerBottom CityLayerBottom) {
-        service.update(CityLayerBottom);
+	 @ApiOperation("Course 정보 수정")
+    @PutMapping("/Course")
+    public ResponseEntity<Map<String, Object>> update(@RequestBody Course Course) {
+        service.update(Course);
         return handleSuccess("수정 완료");
     }
 }

@@ -4,7 +4,7 @@
 <mapper namespace="com.pjt1.demo.model.dao.FollowDao" >
  
   	<insert id="insert"		parameterType="follow">
-		insert into follow
+		INSERT INTO follow
 		(follower_no, following_no, follow_del_check)
 		values (
 			#{follower_no:INTEGER},
@@ -14,17 +14,21 @@
 	</insert> 
    	<delete id="delete" 	parameterType="int"> </delete>
    	<update id="update"		parameterType="follow">
-		update follow set
+		UPDATE follow SET
 		follower_no=#{follower_no:INTEGER},
 		following_no=#{following_no:INTEGER},
 		follow_del_check=#{follow_del_check:BOOLEAN}
-		where follow_no= #{follow_no:INTEGER}
+		WHERE follow_no= #{follow_no:INTEGER}
 	</update>
    	<select id="search"		parameterType="int" resultType="follow">
-		select * from follow where follow_no=#{follow_no:INTEGER} and follow_del_check=false   
+		SELECT * 
+		FROM follow 
+		WHERE follow_no=#{follow_no:INTEGER} 
+		AND follow_del_check=false   
 	</select>
    	<select id="searchAll"	resultType="follow">
-		select * from follow where follow_del_check=false
+		SELECT * FROM follow 
+		WHERE follow_del_check=false
 	</select>
 </mapper>
 

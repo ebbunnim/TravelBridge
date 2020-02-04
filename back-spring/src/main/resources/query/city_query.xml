@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	
+
+<mapper namespace="com.pjt1.demo.model.dao.CityDao" >
+
+  	<insert id="insert"		parameterType="city">
+		INSERT INTO 
+		city
+		(city_name, city_is_overseas,
+		city_address, city_img) 
+		VALUES 
+		#{city_name:VARCHAR},
+		#{city_is_overseas:BOOLEAN},
+		#{city_address:VARCHAR},
+		#{city_img:VARCHAR}
+		)
+	</insert> 
+   	<delete id="delete" 	parameterType="int">
+		UPDATE city
+		SET 
+		city_del_check = true
+		WHERE city_no = #{city_no:INTEGER} 
+		AND city_del_check = false	
+	</delete>
+   	<update id="update"		parameterType="city">
+		UPDATE city
+		SET
+		city_name = #{city_name:VARCHAR},
+		city_is_overseas = #{city_is_overseas:BOOLEAN},
+		city_address = #{city_address:VARCHAR},
+		city_img = #{city_img:VARCHAR},
+		city_del_check = #{city_del_check:BOOLEAN}
+		WHERE city_no = #{city_no:INTEGER}      
+	</update>
+   	<select id="search"		parameterType="int" resultType="city"> 
+		SELECT * 
+		FROM city
+		WHERE city_no = #{city_no:INTEGER} 
+		AND city_del_check = false      	
+	</select>
+   	<select id="searchAll"	resultType="city"> 
+		SELECT * 
+		FROM city
+		WHERE city_del_check = false     
+	</select>
+</mapper>
+

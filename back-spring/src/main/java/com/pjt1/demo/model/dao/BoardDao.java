@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.pjt1.demo.model.dto.Board;
 
+
 @Mapper
 public interface BoardDao {
 	public Board search(int board_no);
