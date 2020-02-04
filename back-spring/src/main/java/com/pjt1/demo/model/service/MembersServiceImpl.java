@@ -17,7 +17,7 @@ public class MembersServiceImpl implements MembersService {
 	@Override
 	public Members search(int mem_no) {
 		try {
-			return search(mem_no);
+			return repo.search(mem_no);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -27,7 +27,7 @@ public class MembersServiceImpl implements MembersService {
 	@Override
 	public List<Members> searchAll() {
 		try {
-			return searchAll();
+			return repo.searchAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
