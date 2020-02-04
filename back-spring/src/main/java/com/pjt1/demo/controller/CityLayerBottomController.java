@@ -22,14 +22,13 @@ import com.pjt1.demo.model.service.CityLayerBottomService;
 
 import io.swagger.annotations.ApiOperation;
 
-
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
-public class CityLayerBottomController{
-	
+public class CityLayerBottomController {
+
     @Autowired
     private CityLayerBottomService service;
-    
+
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
         return handleFail(e.getMessage(), HttpStatus.OK); // 전송에는 지장 없음
@@ -48,31 +47,36 @@ public class CityLayerBottomController{
         resultMap.put("data", data);
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
+
     @ApiOperation("전체 CityLayerBottom 목록을 조회하는 기능")
     @GetMapping("/CityLayerBottom")
     public ResponseEntity<Map<String, Object>> searchAll() {
         List<CityLayerBottom> list = service.searchAll();
         return handleSuccess(list);
     }
+
     @ApiOperation("no에 따른 CityLayerBottom 정보 조회하는 기능")
-    @GetMapping("/CityLayerBottom/{no}")
-    public ResponseEntity<Map<String, Object>> search(int no) {
-        CityLayerBottom CityLayerBottom = service.search(no);
+    @GetMapping("/CityLayerBottom/{clb_no}")
+    public ResponseEntity<Map<String, Object>> search(int clb_no) {
+        CityLayerBottom CityLayerBottom = service.search(clb_no);
         return handleSuccess(CityLayerBottom);
     }
+
     @PostMapping("/CityLayerBottom")
     @ApiOperation("CityLayerBottom 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody CityLayerBottom CityLayerBottom) {
         service.insert(CityLayerBottom);
         return handleSuccess("");
     }
-	 @ApiOperation("CityLayerBottom 정보 삭제")
-    @DeleteMapping("/CityLayerBottom/{no}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
-        service.delete(no);
+
+    @ApiOperation("CityLayerBottom 정보 삭제")
+    @DeleteMapping("/CityLayerBottom/{clb_no}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable int clb_no) {
+        service.delete(clb_no);
         return handleSuccess("삭제 완료");
     }
-	 @ApiOperation("CityLayerBottom 정보 수정")
+
+    @ApiOperation("CityLayerBottom 정보 수정")
     @PutMapping("/CityLayerBottom")
     public ResponseEntity<Map<String, Object>> update(@RequestBody CityLayerBottom CityLayerBottom) {
         service.update(CityLayerBottom);

@@ -22,14 +22,13 @@ import com.pjt1.demo.model.service.QnaService;
 
 import io.swagger.annotations.ApiOperation;
 
-
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
-public class QnaController{
-	
+public class QnaController {
+
     @Autowired
     private QnaService service;
-    
+
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
         return handleFail(e.getMessage(), HttpStatus.OK); // 전송에는 지장 없음
@@ -48,32 +47,36 @@ public class QnaController{
         resultMap.put("data", data);
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
-    
+
     @ApiOperation("전체 Qna 목록을 조회하는 기능")
     @GetMapping("/Qna/searchAll")
     public ResponseEntity<Map<String, Object>> searchAll() {
         List<Qna> list = service.searchAll();
         return handleSuccess(list);
     }
+
     @ApiOperation("no에 따른 Qna 정보 조회하는 기능")
-    @GetMapping("/Qna/search/{no}")
-    public ResponseEntity<Map<String, Object>> search(int no) {
-        Qna Qna = service.search(no);
+    @GetMapping("/Qna/search/{qna_no}")
+    public ResponseEntity<Map<String, Object>> search(int qna_no) {
+        Qna Qna = service.search(qna_no);
         return handleSuccess(Qna);
     }
+
     @PostMapping("/Qna/insert")
     @ApiOperation("Qna 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Qna Qna) {
         service.insert(Qna);
         return handleSuccess("");
     }
-	 @ApiOperation("Qna 정보 삭제")
-    @DeleteMapping("/Qna/delete/{no}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
-        service.delete(no);
+
+    @ApiOperation("Qna 정보 삭제")
+    @DeleteMapping("/Qna/delete/{qna_no}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable int qna_no) {
+        service.delete(qna_no);
         return handleSuccess("삭제 완료");
     }
-	 @ApiOperation("Qna 정보 수정")
+
+    @ApiOperation("Qna 정보 수정")
     @PutMapping("/Qna/update")
     public ResponseEntity<Map<String, Object>> update(@RequestBody Qna Qna) {
         service.update(Qna);

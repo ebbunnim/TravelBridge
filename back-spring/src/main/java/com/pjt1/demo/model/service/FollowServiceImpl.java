@@ -7,37 +7,59 @@ import org.springframework.stereotype.Service;
 
 import com.pjt1.demo.model.dao.FollowDao;
 import com.pjt1.demo.model.dto.Follow;
+
 @Service
 public class FollowServiceImpl implements FollowService {
 	@Autowired
 	private FollowDao repo;
+
 	@Override
-	public Follow search(int no) {
-		// TODO Auto-generated method stub
+	public Follow search(int follow_no) {
+		try {
+			return repo.search(follow_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+			;
+		}
 		return null;
 	}
 
 	@Override
 	public List<Follow> searchAll() {
-		// TODO Auto-generated method stub
+		try {
+			return repo.searchAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
 	public void insert(Follow Follow) {
-		// TODO Auto-generated method stub
+		try {
+			repo.insert(Follow);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	@Override
 	public void update(Follow Follow) {
-		// TODO Auto-generated method stub
-
+		try {
+			repo.update(Follow);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void delete(int no) {
-		// TODO Auto-generated method stub
+	public void delete(int follow_no) {
+		try {
+			repo.delete(follow_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 

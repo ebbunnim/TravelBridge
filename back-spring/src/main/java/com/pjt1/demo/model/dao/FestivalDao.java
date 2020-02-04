@@ -4,10 +4,17 @@ import java.util.List;
 
 import com.pjt1.demo.model.dto.Festival;
 
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
 public interface FestivalDao {
 	public Festival search(int fval_no);
+
 	public List<Festival> searchAll();
+
 	public void insert(Festival Festival);
+
 	public void update(Festival Festival);
+
 	public void delete(int fval_no);
 }

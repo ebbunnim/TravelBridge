@@ -1,21 +1,21 @@
 package com.pjt1.demo.model.dto;
 
 import java.io.Serializable;
+
 public class CityLayerMid implements Serializable {
 	private static final long serialVersionUID = -632952727324054590L;
-	
-	private int clm_no 								;//int NOT NULL KEY AUTO_INCREMENT,
-    private int clt_no 					;//int NOT NULL,
-    private String clm_name 		;//varchar(200) NOT NULL,
-    private String clm_address 	;//varchar(500) NOT NULL,
-    private String clm_img 					;//varchar(500),
-    private String clm_content 	;//varchar(3000) NOT NULL,
-    private int clm_type 			;//int NOT NULL,
-    private String clm_character	;//varchar(500),
-    private String clm_subtitle 	;//varchar(200),
-    private boolean clm_del_check			;//clm_del_check boolean DEFAULT FALSE,			# 중도시 삭제여부
-    
-    
+
+	private int clm_no;// int NOT NULL KEY AUTO_INCREMENT,
+	private int clt_no;// int NOT NULL,
+	private String clm_name;// varchar(200) NOT NULL,
+	private String clm_address;// varchar(500) NOT NULL,
+	private String clm_img;// varchar(500),
+	private String clm_content;// varchar(3000) NOT NULL,
+	private int clm_type;// int NOT NULL,
+	private String clm_character;// varchar(500),
+	private String clm_subtitle;// varchar(200),
+	private boolean clm_del_check;// clm_del_check boolean DEFAULT FALSE, # 중도시 삭제여부
+
 	public CityLayerMid() {
 		super();
 	}
@@ -50,9 +50,9 @@ public class CityLayerMid implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CityLayerMid [clm_no=" + clm_no + ", clt_no=" + clt_no + ", clm_name=" + clm_name + ", clm_address="
-				+ clm_address + ", clm_img=" + clm_img + ", clm_content=" + clm_content + ", clm_type=" + clm_type
-				+ ", clm_character=" + clm_character + ", clm_subtitle=" + clm_subtitle + ", clm_del_check="
+		return "CityLayerMid [clm_no=" + clm_no + ", clt_no=" + clt_no + ",clm_name=" + clm_name + ", clm_address="
+				+ clm_address + ", clm_img=" + clm_img + ", clm_content=" + clm_content + ",clm_type=" + clm_type
+				+ ", clm_character=" + clm_character + ", clm_subtitle=" + clm_subtitle + ",clm_del_check="
 				+ clm_del_check + "]";
 	}
 
@@ -131,6 +131,5 @@ public class CityLayerMid implements Serializable {
 	public int getClm_no() {
 		return clm_no;
 	}
-    
-    
+
 }

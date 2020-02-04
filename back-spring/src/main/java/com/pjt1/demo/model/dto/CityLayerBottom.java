@@ -4,23 +4,24 @@ import java.io.Serializable;
 
 public class CityLayerBottom implements Serializable {
 	private static final long serialVersionUID = -852712683676470564L;
-	private int clb_no 								;//int NOT NULL KEY AUTO_INCREMENT,
-    private int clm_no 					;//int NOT NULL,
-    private String clb_name 		;//varchar(200) NOT NULL,
-    private String clb_address		 ;//varchar(500) NOT NULL,
-	private String clb_img					;//varchar(500),
-    private String clb_content 	;//varchar(3000) NOT NULL,
-    private String clb_tag 		;//varchar(500),
-    private String clb_character	;//varchar(500),
-    private String clb_subtitle 	;//varchar(200),
-    private String clb_fun 		;//varchar(200),
-    private String clb_spot 		;//varchar(500),
-    private boolean clb_del_check			;//clb_del_check boolean DEFAULT FALSE,	# 소도시 삭제 여부
-	//	FOREIGN KEY(clm_no) REFERENCES CITY_LAYER_MID(clm_no)
+	private int clb_no;// int NOT NULL KEY AUTO_INCREMENT,
+	private int clm_no;// int NOT NULL,
+	private String clb_name;// varchar(200) NOT NULL,
+	private String clb_address;// varchar(500) NOT NULL,
+	private String clb_img;// varchar(500),
+	private String clb_content;// varchar(3000) NOT NULL,
+	private String clb_tag;// varchar(500),
+	private String clb_character;// varchar(500),
+	private String clb_subtitle;// varchar(200),
+	private String clb_fun;// varchar(200),
+	private String clb_spot;// varchar(500),
+	private boolean clb_del_check;// clb_del_check boolean DEFAULT FALSE, # 소도시 삭제 여부
+
+	// FOREIGN KEY(clm_no) REFERENCES CITY_LAYER_MID(clm_no)
 	public CityLayerBottom() {
 		super();
 	}
-	
+
 	public CityLayerBottom(int clm_no, String clb_name, String clb_address, String clb_img, String clb_content,
 			String clb_tag, String clb_character, String clb_subtitle, String clb_fun, String clb_spot) {
 		super();
@@ -56,11 +57,11 @@ public class CityLayerBottom implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CityLayerBottom [clb_no=" + clb_no + ", clm_no=" + clm_no + ", clb_name=" + clb_name + ", clb_address="
-				+ clb_address + ", clb_img=" + clb_img + ", clb_content=" + clb_content + ", clb_tag=" + clb_tag
-				+ ", clb_character=" + clb_character + ", clb_subtitle=" + clb_subtitle + ", clb_fun=" + clb_fun
+		return "CityLayerBottom [clb_no=" + clb_no + ", clm_no=" + clm_no + ",clb_name=" + clb_name + ", clb_address="
+				+ clb_address + ", clb_img=" + clb_img + ", clb_content=" + clb_content + ",clb_tag=" + clb_tag
+				+ ", clb_character=" + clb_character + ", clb_subtitle=" + clb_subtitle + ",clb_fun=" + clb_fun
 				+ ", clb_spot=" + clb_spot + ", clb_del_check=" + clb_del_check + "]";
-	}
+	};
 
 	public int getClm_no() {
 		return clm_no;
@@ -153,5 +154,5 @@ public class CityLayerBottom implements Serializable {
 	public int getClb_no() {
 		return clb_no;
 	}
-    
+
 }

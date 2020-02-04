@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.pjt1.demo.model.dao.MembersDao" >
+    <insert id="insert"		parameterType="members">
+	insert into members
+	(mem_id, mem_email, mem_password, mem_phone, mem_name, mem_sex,
+	mem_birth, mem_address, mem_grant, mem_receive_email, mem_interest,
+	mem_token, mem_login_type) 
+	values (
+	#{mem_id:VARCHAR}, #{mem_email:VARCHAR}, #{mem_password:VARCHAR},
+	#{mem_phone:VARCHAR}, #{mem_name:VARCHAR},#{mem_sex:INTEGER}, #{mem_birth:VARCHAR},
+	#{mem_address:VARCHAR}, #{mem_grant:INTEGER}, #{mem_receive_email:BOOLEAN}, #{mem_interest:VARCHAR},
+	#{mem_token:VARCHAR}, #{mem_login_type:VARCHAR}
+	)
+	</insert> 
+   	<delete id="delete" 	parameterType="int"> </delete>
+   	<update id="update"		parameterType="members">
+		update members set
+		mem_id=#{mem_id:VARCHAR}, mem_email=#{mem_email:VARCHAR}, mem_password=#{mem_password:VARCHAR}, 
+		mem_phone=#{mem_phone:VARCHAR},mem_name=#{mem_name:VARCHAR}, mem_sex=#{mem_sex:INTEGER}, mem_birth=#{mem_birth:VARCHAR}, 
+		mem_address=#{mem_address:VARCHAR}, mem_grant= #{mem_grant:INTEGER}, mem_receive_email=#{mem_receive_email:BOOLEAN}, mem_interest=#{mem_interest:VARCHAR},
+		mem_token=#{mem_token:VARCHAR}, mem_login_type=#{mem_login_type:VARCHAR}
+		where mem_no = #{mem_no}
+	</update>
+   	<select id="search"		parameterType="int" resultType="members">
+		select * from members where mem_no=#{mem_no:INTEGER} and mem_del_check=false   
+	</select>
+   	<select id="searchAll"	resultType="members">
+		select * from members where mem_del_check=false
+	</select>
+</mapper>
+

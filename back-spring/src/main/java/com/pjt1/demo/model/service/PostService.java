@@ -4,11 +4,14 @@ import java.util.List;
 
 import com.pjt1.demo.model.dto.Post;
 
-
 public interface PostService {
-	public Post search(int no);
+	public Post search(int post_no);
+
 	public List<Post> searchAll();
+
 	public void insert(Post Post);
+
 	public void update(Post Post);
-	public void delete(int no);
+
+	public void delete(int post_no);
 }

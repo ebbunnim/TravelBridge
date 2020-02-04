@@ -13,34 +13,55 @@ public class PostServiceImpl implements PostService {
 
 	@Autowired
 	private PostDao repo;
-	
+
 	@Override
-	public Post search(int no) {
-		// TODO Auto-generated method stub
+	public Post search(int post_no) {
+		try {
+			return repo.search(post_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+			;
+		}
 		return null;
 	}
 
 	@Override
 	public List<Post> searchAll() {
-		// TODO Auto-generated method stub
+		try {
+			return repo.searchAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+			;
+		}
 		return null;
 	}
 
 	@Override
 	public void insert(Post Post) {
-		// TODO Auto-generated method stub
+		try {
+			repo.insert(Post);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	@Override
 	public void update(Post Post) {
-		// TODO Auto-generated method stub
-
+		try {
+			repo.update(Post);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void delete(int no) {
-		// TODO Auto-generated method stub
+	public void delete(int post_no) {
+		try {
+			repo.delete(post_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 

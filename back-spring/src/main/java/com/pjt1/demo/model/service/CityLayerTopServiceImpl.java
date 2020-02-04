@@ -13,49 +13,49 @@ public class CityLayerTopServiceImpl implements CityLayerTopService {
 
 	@Autowired
 	private CityLayerTopDao repo;
-	
-	public CityLayerTop search(int city_layer_top_no) {
+
+	public CityLayerTop search(int clt_no) {
 		try {
-			return repo.search(city_layer_top_no);
-		} catch(Exception e) {
+			return repo.search(clt_no);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
-		
+
 	}
 
 	public List<CityLayerTop> searchAll() {
 		try {
 			return repo.searchAll();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
-		
+
 	}
 
 	public void insert(CityLayerTop CityLayerTop) {
 		try {
 			repo.insert(CityLayerTop);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	public void update(CityLayerTop CityLayerTop) {
 		try {
 			repo.update(CityLayerTop);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
-	public void delete(int city_layer_top_no) {
+	public void delete(int clt_no) {
 		try {
-			repo.delete(city_layer_top_no);
-		} catch(Exception e) {
+			repo.delete(clt_no);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

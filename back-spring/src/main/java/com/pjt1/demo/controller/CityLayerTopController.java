@@ -22,14 +22,13 @@ import com.pjt1.demo.model.service.CityLayerTopService;
 
 import io.swagger.annotations.ApiOperation;
 
-
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
-public class CityLayerTopController{
-	
+public class CityLayerTopController {
+
     @Autowired
     private CityLayerTopService service;
-    
+
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
         return handleFail(e.getMessage(), HttpStatus.OK); // 전송에는 지장 없음
@@ -48,32 +47,36 @@ public class CityLayerTopController{
         resultMap.put("data", data);
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
-    
+
     @ApiOperation("전체 CityLayerTop 목록을 조회하는 기능")
     @GetMapping("/CityLayerTop")
     public ResponseEntity<Map<String, Object>> searchAll() {
         List<CityLayerTop> list = service.searchAll();
         return handleSuccess(list);
     }
+
     @ApiOperation("no에 따른 CityLayerTop 정보 조회하는 기능")
-    @GetMapping("/CityLayerTop/{no}")
-    public ResponseEntity<Map<String, Object>> search(int no) {
-        CityLayerTop CityLayerTop = service.search(no);
+    @GetMapping("/CityLayerTop/{clt_no}")
+    public ResponseEntity<Map<String, Object>> search(int clt_no) {
+        CityLayerTop CityLayerTop = service.search(clt_no);
         return handleSuccess(CityLayerTop);
     }
+
     @PostMapping("/CityLayerTop")
     @ApiOperation("CityLayerTop 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody CityLayerTop CityLayerTop) {
         service.insert(CityLayerTop);
         return handleSuccess("");
     }
-	 @ApiOperation("CityLayerTop 정보 삭제")
-    @DeleteMapping("/CityLayerTop/{no}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
-        service.delete(no);
+
+    @ApiOperation("CityLayerTop 정보 삭제")
+    @DeleteMapping("/CityLayerTop/{clt_no}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable int clt_no) {
+        service.delete(clt_no);
         return handleSuccess("삭제 완료");
     }
-	 @ApiOperation("CityLayerTop 정보 수정")
+
+    @ApiOperation("CityLayerTop 정보 수정")
     @PutMapping("/CityLayerTop")
     public ResponseEntity<Map<String, Object>> update(@RequestBody CityLayerTop CityLayerTop) {
         service.update(CityLayerTop);

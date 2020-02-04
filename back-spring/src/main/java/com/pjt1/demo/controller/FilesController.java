@@ -22,14 +22,13 @@ import com.pjt1.demo.model.service.FilesService;
 
 import io.swagger.annotations.ApiOperation;
 
-
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
-public class FilesController{
-	
+public class FilesController {
+
     @Autowired
     private FilesService service;
-    
+
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
         return handleFail(e.getMessage(), HttpStatus.OK); // 전송에는 지장 없음
@@ -48,32 +47,36 @@ public class FilesController{
         resultMap.put("data", data);
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
-    
+
     @ApiOperation("전체 Files 목록을 조회하는 기능")
     @GetMapping("/Files/searchAll")
     public ResponseEntity<Map<String, Object>> searchAll() {
         List<Files> list = service.searchAll();
         return handleSuccess(list);
     }
+
     @ApiOperation("no에 따른 Files 정보 조회하는 기능")
-    @GetMapping("/Files/search/{no}")
-    public ResponseEntity<Map<String, Object>> search(int no) {
-        Files Files = service.search(no);
+    @GetMapping("/Files/search/{files_no}")
+    public ResponseEntity<Map<String, Object>> search(int files_no) {
+        Files Files = service.search(files_no);
         return handleSuccess(Files);
     }
+
     @PostMapping("/Files/insert")
     @ApiOperation("Files 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Files Files) {
         service.insert(Files);
         return handleSuccess("");
     }
-	 @ApiOperation("Files 정보 삭제")
-    @DeleteMapping("/Files/delete/{no}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
-        service.delete(no);
+
+    @ApiOperation("Files 정보 삭제")
+    @DeleteMapping("/Files/delete/{files_no}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable int files_no) {
+        service.delete(files_no);
         return handleSuccess("삭제 완료");
     }
-	 @ApiOperation("Files 정보 수정")
+
+    @ApiOperation("Files 정보 수정")
     @PutMapping("/Files/update")
     public ResponseEntity<Map<String, Object>> update(@RequestBody Files Files) {
         service.update(Files);

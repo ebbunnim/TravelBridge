@@ -7,40 +7,59 @@ import org.springframework.stereotype.Service;
 
 import com.pjt1.demo.model.dao.QnaDao;
 import com.pjt1.demo.model.dto.Qna;
+
 @Service
 public class QnaServiceImpl implements QnaService {
 
 	@Autowired
 	private QnaDao repo;
-	
+
 	@Override
-	public Qna search(int no) {
-		// TODO Auto-generated method stub
+	public Qna search(int qna_no) {
+		try {
+			return repo.search(qna_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
 	public List<Qna> searchAll() {
-		// TODO Auto-generated method stub
+		try {
+			return repo.searchAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
 	public void insert(Qna Qna) {
-		// TODO Auto-generated method stub
+		try {
+			repo.insert(Qna);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	@Override
 	public void update(Qna Qna) {
-		// TODO Auto-generated method stub
+		try {
+			repo.update(Qna);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	@Override
-	public void delete(int no) {
-		// TODO Auto-generated method stub
-
+	public void delete(int qna_no) {
+		try {
+			repo.delete(qna_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-
 }

@@ -22,14 +22,13 @@ import com.pjt1.demo.model.service.FollowService;
 
 import io.swagger.annotations.ApiOperation;
 
-
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
-public class FollowController{
-	
+public class FollowController {
+
     @Autowired
     private FollowService service;
-    
+
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
         return handleFail(e.getMessage(), HttpStatus.OK); // 전송에는 지장 없음
@@ -48,32 +47,36 @@ public class FollowController{
         resultMap.put("data", data);
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
-    
+
     @ApiOperation("전체 Follow 목록을 조회하는 기능")
     @GetMapping("/Follow/searchAll")
     public ResponseEntity<Map<String, Object>> searchAll() {
         List<Follow> list = service.searchAll();
         return handleSuccess(list);
     }
+
     @ApiOperation("no에 따른 Follow 정보 조회하는 기능")
-    @GetMapping("/Follow/search/{no}")
-    public ResponseEntity<Map<String, Object>> search(int no) {
-        Follow Follow = service.search(no);
+    @GetMapping("/Follow/search/{follow_no}")
+    public ResponseEntity<Map<String, Object>> search(int follow_no) {
+        Follow Follow = service.search(follow_no);
         return handleSuccess(Follow);
     }
+
     @PostMapping("/Follow/insert")
     @ApiOperation("Follow 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Follow Follow) {
         service.insert(Follow);
         return handleSuccess("");
     }
-	 @ApiOperation("Follow 정보 삭제")
-    @DeleteMapping("/Follow/delete/{no}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
-        service.delete(no);
+
+    @ApiOperation("Follow 정보 삭제")
+    @DeleteMapping("/Follow/delete/{follow_no}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable int follow_no) {
+        service.delete(follow_no);
         return handleSuccess("삭제 완료");
     }
-	 @ApiOperation("Follow 정보 수정")
+
+    @ApiOperation("Follow 정보 수정")
     @PutMapping("/Follow/update")
     public ResponseEntity<Map<String, Object>> update(@RequestBody Follow Follow) {
         service.update(Follow);

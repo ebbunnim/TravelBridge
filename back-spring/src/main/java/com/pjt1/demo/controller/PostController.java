@@ -22,14 +22,13 @@ import com.pjt1.demo.model.service.PostService;
 
 import io.swagger.annotations.ApiOperation;
 
-
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
-public class PostController{
-	
+public class PostController {
+
     @Autowired
     private PostService service;
-    
+
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
         return handleFail(e.getMessage(), HttpStatus.OK); // 전송에는 지장 없음
@@ -48,31 +47,36 @@ public class PostController{
         resultMap.put("data", data);
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
+
     @ApiOperation("전체 Post 목록을 조회하는 기능")
     @GetMapping("/Post/searchAll")
     public ResponseEntity<Map<String, Object>> searchAll() {
         List<Post> list = service.searchAll();
         return handleSuccess(list);
     }
+
     @ApiOperation("no에 따른 Post 정보 조회하는 기능")
-    @GetMapping("/Post/search/{no}")
-    public ResponseEntity<Map<String, Object>> search(int no) {
-        Post Post = service.search(no);
+    @GetMapping("/Post/search/{post_no}")
+    public ResponseEntity<Map<String, Object>> search(int post_no) {
+        Post Post = service.search(post_no);
         return handleSuccess(Post);
     }
+
     @PostMapping("/Post/insert")
     @ApiOperation("Post 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Post Post) {
         service.insert(Post);
         return handleSuccess("");
     }
-	 @ApiOperation("Post 정보 삭제")
-    @DeleteMapping("/Post/delete/{no}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
-        service.delete(no);
+
+    @ApiOperation("Post 정보 삭제")
+    @DeleteMapping("/Post/delete/{post_no}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable int post_no) {
+        service.delete(post_no);
         return handleSuccess("삭제 완료");
     }
-	 @ApiOperation("Post 정보 수정")
+
+    @ApiOperation("Post 정보 수정")
     @PutMapping("/Post/update")
     public ResponseEntity<Map<String, Object>> update(@RequestBody Post Post) {
         service.update(Post);

@@ -8,60 +8,57 @@ import org.springframework.stereotype.Service;
 import com.pjt1.demo.model.dao.CityLayerBottomDao;
 import com.pjt1.demo.model.dto.CityLayerBottom;
 
-
-
 @Service
 public class CityLayerBottomServiceImpl implements CityLayerBottomService {
 
 	@Autowired
 	private CityLayerBottomDao repo;
-	
-	public CityLayerBottom search(int city_layer_bottom_no) {
+
+	public CityLayerBottom search(int clb_no) {
 		try {
-			return repo.search(city_layer_bottom_no);
-		} catch(Exception e) {
+			return repo.search(clb_no);
+		} catch (Exception e) {
 			e.printStackTrace();
-		}	
+		}
 		return null;
 
-		
 	}
 
 	public List<CityLayerBottom> searchAll() {
 		try {
 			return repo.searchAll();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}	
+		}
 		return null;
-		
+
 	}
 
 	public void insert(CityLayerBottom CityLayerBottom) {
 		try {
 			repo.insert(CityLayerBottom);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}	
-		
+		}
+
 	}
 
 	public void update(CityLayerBottom CityLayerBottom) {
 		try {
 			repo.update(CityLayerBottom);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}	
-		
+		}
+
 	}
 
-	public void delete(int city_layer_bottom_no) {
+	public void delete(int clb_no) {
 		try {
-			repo.delete(city_layer_bottom_no);
-		} catch(Exception e) {
+			repo.delete(clb_no);
+		} catch (Exception e) {
 			e.printStackTrace();
-		}	
-		
+		}
+
 	}
 
 }

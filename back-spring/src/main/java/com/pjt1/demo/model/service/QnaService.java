@@ -4,11 +4,14 @@ import java.util.List;
 
 import com.pjt1.demo.model.dto.Qna;
 
-
 public interface QnaService {
-	public Qna search(int no);
+	public Qna search(int qna_no);
+
 	public List<Qna> searchAll();
+
 	public void insert(Qna Qna);
+
 	public void update(Qna Qna);
-	public void delete(int no);
+
+	public void delete(int qna_no);
 }

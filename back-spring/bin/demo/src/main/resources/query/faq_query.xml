@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.example.demo.model.dao.FaqDao" >
+
+  	<insert id="insert"		parameterType="faq">
+		insert into faq
+		(faq_category, faq_title, faq_content, faq_answer, faq_hits, faq_del_check )
+		values (
+			#{faq_category:VARCHAR}, #{faq_title:VARCHAR}, #{faq_content:VARCHAR}, 
+			#{faq_answer:VARCHAR},#{faq_hits:INTEGER}, #{faq_del_check:BOOLEAN}
+		)
+	</insert> 
+
+   	<delete id="delete" 	parameterType="int">
+	   update faq set faq_del_check=true and faq_regtime=CURRENT_TIMESTAMP() where faq_no=#{faq_no} and faq_del_check=false
+	</delete>
+   	<update id="update"		parameterType="faq">
+		update faq set
+		faq_category = #{faq_category:VARCHAR},
+		faq_title=#{faq_title:VARCHAR}, faq_content=#{faq_content:VARCHAR},
+		faq_answer= #{faq_answer:VARCHAR}, faq_hits=#{faq_hits:INTEGER}, 
+		faq_del_check = #{faq_del_check:BOOLEAN}
+	</update>
+   	<select id="search"		parameterType="int" resultType="faq">
+		select * from faq where faq_no=#{faq_no:INTEGER} and faq_del_check=false   
+	</select>
+   	<select id="searchAll"	resultType="faq">
+		select * from faq where faq_del_check=false
+	</select>
+</mapper>
+
