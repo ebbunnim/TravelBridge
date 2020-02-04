@@ -19,7 +19,13 @@
 		#{mem_interest:VARCHAR}, #{mem_token:VARCHAR}, #{mem_login_type:VARCHAR}
 		)
 	</insert> 
-   	<delete id="delete" 	parameterType="int"> </delete>
+   	<delete id="delete" 	parameterType="int">
+	   UPDATE MEMBERS
+	   SET 
+	   mem_regtime = CURRENT_TIMESTAMP(), 
+	   mem_del_check = true
+	   WHERE mem_no = #{mem_no} AND mem_del_check = false
+	</delete>
    	<update id="update"		parameterType="members">
 		UPDATE members SET
 		mem_id=#{mem_id:VARCHAR}, mem_email=#{mem_email:VARCHAR}, 
@@ -42,5 +48,12 @@
 		FROM members 
 		WHERE mem_del_check = false
 	</select> 
+		select * from members where mem_del_check=false
+	</select>
+
+	<select id="searchMemberByEmail" parameterType="String" resultType="Members">
+		select * from members where mem_email = #{mem_email:VARCHAR} and mem_del_check=false
+	</select>
+	
 </mapper>
 
