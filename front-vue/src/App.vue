@@ -1,20 +1,20 @@
 <template>
   <q-layout>
-    <navbar></navbar>
+    <AppHeader></AppHeader>
     <router-view />
-    <bot></bot>
+    <AppFooter></AppFooter>
   </q-layout>
 </template>
 
 <script>
-import navbar from "./components/Header.vue";
-import bot from "./components/Footer.vue";
+import AppHeader from "./components/AppHeader.vue";
+import AppFooter from "./components/AppFooter.vue";
 
 export default {
   name: "MyLayout",
   components: {
-    bot,
-    navbar
+    AppFooter,
+    AppHeader
   },
   data() {
     return {

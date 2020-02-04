@@ -1,4 +1,4 @@
-import Api from "./services/Api";
+import Api from "../../services/Api";
 import userService from "../../services/UserService";
 const state = {
   isSignUp: false,

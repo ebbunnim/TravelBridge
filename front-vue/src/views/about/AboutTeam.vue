@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     getImgUrl(img) {
-      return require("../assets/" + img);
+      return require("../../assets/" + img);
     }
   }
 };
@@ -64,7 +64,7 @@ export default {
 
 <style  scoped>
 .back {
-  background-image: url(../assets/teambg.jpg);
+  /* background-image: url(../assets/teambg.jpg); */
   background-size: 100%;
 }
 </style>
