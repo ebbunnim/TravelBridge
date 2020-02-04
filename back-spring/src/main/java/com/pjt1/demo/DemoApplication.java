@@ -27,7 +27,7 @@ public class DemoApplication implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		System.out.println("addInterceptors를 거치는지 확인 ====================");
 		registry.addInterceptor(jwtInterceptor).addPathPatterns("/api/**")
-				.excludePathPatterns(Arrays.asList("/user/**"));
+				.excludePathPatterns(Arrays.asList("/Members/**"));
 		// 여기서 예외처리하는 곳이 더욱 크면 될 수 있나?
 		// login하기 전에 수행할 수 있는 기능들(login, 회원가입, 비밀번호 찾기 등)은 인터셉터를 거치면 안되므로
 		// excludePathPatterns에 선언해야
