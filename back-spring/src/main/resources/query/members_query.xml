@@ -48,8 +48,6 @@
 		FROM members 
 		WHERE mem_del_check = false
 	</select> 
-		select * from members where mem_del_check=false
-	</select>
 
 	<select id="searchMemberByEmail" parameterType="String" resultType="Members">
 		select * from members where mem_email = #{mem_email:VARCHAR} and mem_del_check=false
