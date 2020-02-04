@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	
+
+<mapper namespace="com.pjt1.demo.model.dao.CourseDao" >
+
+  	<insert id="insert"		parameterType="course">
+		INSERT INTO 
+		course
+		(post_no, course_spot) 
+		VALUES 
+		#{post_no:INTEGER},
+		#{cmt_spot:VARCHAR}
+		)
+	</insert> 
+   	<delete id="delete" 	parameterType="int">
+		UPDATE course
+		SET 
+		course_del_check = true
+		WHERE course_no = #{course_no:INTEGER} and course_del_check = false	
+	</delete>
+   	<update id="update"		parameterType="course">
+		UPDATE course
+		SET
+		post_no = #{post_no:INTEGER},
+		course_spot = #{course_content:VARCHAR},
+		course_del_check = #{course_del_check:BOOLEAN}
+		WHERE course_no = #{course_no:INTEGER}      
+	</update>
+   	<select id="search"		parameterType="int" resultType="course"> 
+		SELECT * 
+		FROM course
+		WHERE course_no = #{course_no:INTEGER} 
+		AND course_del_check = false      	
+	</select>
+   	<select id="searchAll"	resultType="course"> 
+		SELECT * 
+		FROM course
+		WHERE course_del_check = false     
+	</select>
+</mapper>
+
