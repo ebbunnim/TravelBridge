@@ -1,12 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 
-<mapper namespace="com.pjt1.demo.model.dao.BlameDao" >
-	<insert id="insert"	parameterType="blame">
+<mapper namespace="com.pjt1.model.dao.BlameDao" >
+	<insert id="insert"		parameterType="blame">
+		INSERT INTO 
+		blame (mem_no, target_mem_no) 
+		VALUES (#{mem_no:INTEGER}, #{target_mem_no:INTEGER})
 	</insert> 
-   	<delete id="delete" 	parameterType="int"> </delete>
-   	<update id="update"		parameterType="blame"></update>
-   	<select id="search"		parameterType="int" resultType="blame"> </select>
-   	<select id="searchAll"	resultType="blame"> </select> 
+   	<delete id="delete" 	parameterType="int">
+		UPDATE blame 
+		SET 
+		blame_time = CURRENT_TIMESTAMP(),
+		blame_del_check = true
+		WHERE blame_no = #{blame_no:INTEGER} and blame_del_check = false
+	</delete>
+   	<update id="update"		parameterType="blame">
+		UPDATE blame
+		SET
+		mem_no = #{mem_no:INTEGER},
+		target_mem_no = #{target_mem_no:INTEGER}, 
+		blame_time = CURRENT_TIMESTAMP(),
+		blame_del_check = #{blame_del_check:BOOLEAN}
+		WHERE blame_no = #{blame_no:INTEGER}
+	</update>
+   	<select id="search"		parameterType="int" resultType="blame">
+		SELECT * 
+		FROM blame 
+		WHERE blame_no=#{blame_no:INTEGER} AND blame_del_check=false      
+	</select>
+   	<select id="searchAll"	resultType="blame"> 
+		SELECT * 
+		FROM blame
+		WHERE blame_del_check = false   
+	</select> 
 </mapper>
 

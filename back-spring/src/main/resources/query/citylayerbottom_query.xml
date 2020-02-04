@@ -2,11 +2,58 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 	
 
-<mapper namespace="com.pjt1.demo.model.dao.CityLayerBottomDao" >
-  	<insert id="insert"		parameterType="citylayerbottom"></insert> 
-   	<delete id="delete" 	parameterType="int"> </delete>
-   	<update id="update"		parameterType="citylayerbottom"></update>
-   	<select id="search"		parameterType="int" resultType="citylayerbottom"> </select>
-   	<select id="searchAll"	resultType="citylayerbottom"> </select>
+<mapper namespace="com.pjt1.model.dao.CityLayerBottomDao" >
+
+  	<insert id="insert"		parameterType="citylayerbottom">
+		INSERT INTO 
+		citylayerbottom 
+		(clm_no, clb_name, clb_address,
+		clb_img, clb_content, clb_tag,
+		clb_character, clb_subtitle,
+		clb_fun, clb_spot) 
+		VALUES 
+		(#{clm_no:INTEGER},
+		#{clb_name:VARCHAR},
+		#{clb_address:VARCHAR},
+		#{clb_img:VARCHAR},
+		#{clb_content:VARCHAR},
+		#{clb_tag:VARCHAR},
+		#{clb_character:VARCHAR},
+		#{clb_subtitle:VARCHAR},
+		#{clb_fun:VARCHAR},
+		#{clb_spot:VARCHAR})   
+	</insert> 
+   	<delete id="delete" 	parameterType="int">
+		UPDATE citylayerbottom
+		SET 
+		clb_del_check = true
+		WHERE clb_no = #{clb_no:INTEGER} and clb_del_check = false
+	</delete>
+   	<update id="update"		parameterType="citylayerbottom">
+		UPDATE citylayerbottom
+		SET
+		clm_no = #{clm_no:INTEGER},
+		clb_name = #{clb_name:VARCHAR},
+		clb_address = #{clb_address:VARCHAR},
+		clb_img = #{clb_img:VARCHAR},
+		clb_content = #{clb_content:VARCHAR},
+		clb_tag = #{clb_tag:VARCHAR},
+		clb_character = #{clb_character:VARCHAR},
+		clb_subtitle = #{clb_subtitle:VARCHAR},
+		clb_fun = #{clb_fun:VARCHAR},
+		clb_spot = #{clb_spot:VARCHAR},
+		clb_del_check = #{clb_del_check:BOOLEAN}
+		WHERE clb_no = #{clb_no:INTEGER}      
+	</update>
+   	<select id="search"		parameterType="int" resultType="citylayerbottom"> 
+		SELECT * 
+		FROM citylayerbottom 
+		WHERE clb_no = #{clb_no:INTEGER} AND clb_del_check = false      
+	</select>
+   	<select id="searchAll"	resultType="citylayerbottom"> 
+		SELECT * 
+		FROM citylayerbottom
+		WHERE clb_del_check = false     
+	</select>
 </mapper>
 
