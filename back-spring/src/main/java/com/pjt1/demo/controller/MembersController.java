@@ -104,34 +104,31 @@ public class MembersController {
         if (checkMembers != null) {
             return handleFail("이미 존재하는 이메일입니다.", HttpStatus.BAD_REQUEST);
         }
-
-        // 이메일이 로그인 아이디임
-        String pw = members.getMem_password();
-        members.setMem_password(encrypt(pw));
+        // pw 컬럼 버림
         service.insert(members);
         return handleSuccess("Member 등록 성공");
     }
 
-    // 암호화
-    public static String encrypt(String base) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(base.getBytes("UTF-8"));
-            StringBuffer hexString = new StringBuffer();
+    // 암호화 - 필요없음
+    // public static String encrypt(String base) {
+    //     try {
+    //         MessageDigest digest = MessageDigest.getInstance("SHA-256");
+    //         byte[] hash = digest.digest(base.getBytes("UTF-8"));
+    //         StringBuffer hexString = new StringBuffer();
 
-            for (int i = 0; i < hash.length; i++) {
-                String hex = Integer.toHexString(0xff & hash[i]);
-                if (hex.length() == 1)
-                    hexString.append('0');
-                hexString.append(hex);
-            }
-            // 출력
-            return hexString.toString();
+    //         for (int i = 0; i < hash.length; i++) {
+    //             String hex = Integer.toHexString(0xff & hash[i]);
+    //             if (hex.length() == 1)
+    //                 hexString.append('0');
+    //             hexString.append(hex);
+    //         }
+    //         // 출력
+    //         return hexString.toString();
 
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
-    };
+    //     } catch (Exception ex) {
+    //         throw new RuntimeException(ex);
+    //     }
+    // };
 
     // 이메일 형식 검증
     public static boolean isValidEmail(String email) {
@@ -157,8 +154,6 @@ public class MembersController {
     @ApiOperation("Member 정보 수정")
     @PutMapping("/Members/update")
     public ResponseEntity<Map<String, Object>> update(@RequestBody Members members) {
-        String pw = members.getMem_password();
-        members.setMem_password(encrypt(pw));
         service.update(members);
         return handleSuccess("User 정보 수정 완료");
     }
@@ -186,37 +181,35 @@ public class MembersController {
     public ResponseEntity<Map<String, Object>> loginMembers(@RequestBody Members members, HttpServletResponse res) {
         // String id = user.getUser_id();
         String email = members.getMem_email();
-        String pw = members.getMem_password();
-        System.out.println(email + pw);
+        // String pw = members.getMem_password();
+        // System.out.println(email + pw);
         Members checkMembers = service.searchMemberByEmail(email);
         System.out.println("#######DEBUG === checkUser == ####");
         System.out.println(checkMembers);
         if (checkMembers != null) {
-            String check_password_inDB = checkMembers.getMem_password();
-            String check_password_inMembers = encrypt(pw);
-            if (check_password_inDB.equals(check_password_inMembers)) {
-                System.out.println("#######start make token#######");
+            // String check_password_inDB = checkMembers.getMem_password();
+            // String check_password_inMembers = encrypt(pw);
+            // if (check_password_inDB.equals(check_password_inMembers)) {
+            System.out.println("#######start make token#######");
 
-                Map<String, Object> resultMap = new HashMap<>();
-                HttpStatus status = null;
-                String token = jwtService.create(checkMembers);
-                System.out.println(token);
+            Map<String, Object> resultMap = new HashMap<>();
+            HttpStatus status = null;
+            String token = jwtService.create(checkMembers);
+            System.out.println(token);
 
-                // 토큰 정보를 request 헤더로 보내고 나머지는 Map에 담는다.
-                res.setHeader("jwt-auth-token", token);
-                // resultMap.put("jwt-auth-token", token);
-                resultMap.put("data", checkMembers);
-                resultMap.put("status", true);
-                status = HttpStatus.ACCEPTED;
-                // jwt 토큰 생성하고 성공하면 success data에 넣어서 보낸다.e
+            // 토큰 정보를 request 헤더로 보내고 나머지는 Map에 담는다.
+            res.setHeader("jwt-auth-token", token);
+            // resultMap.put("jwt-auth-token", token);
+            resultMap.put("data", checkMembers);
+            resultMap.put("status", true);
+            status = HttpStatus.ACCEPTED;
+            // jwt 토큰 생성하고 성공하면 success data에 넣어서 보낸다.e
 
-                return new ResponseEntity<Map<String, Object>>(resultMap, status);
+            return new ResponseEntity<Map<String, Object>>(resultMap, status);
 
             } else {
-                return handleFail("비밀번호가 틀렸습니다.", HttpStatus.BAD_REQUEST);
-            }
-        } else
-            return handleFail("존재하지 않는 회원입니다.", HttpStatus.NOT_FOUND);
+                return handleFail("존재하지 않는 회원입니다.", HttpStatus.NOT_FOUND);
+            } 
     }
 
     // // 굳이 필요한가? 안필요하면 버리기
