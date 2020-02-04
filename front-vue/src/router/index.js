@@ -6,7 +6,7 @@ import Main2 from "../views/Main2.vue";
 import Sub from "../views/Sub.vue";
 
 import AboutTeam from "../views/AboutTeam.vue";
-import AboutProject from "../views/AboutProject.vue";
+import AboutService from "../views/AboutService.vue";
 import Login from "../views/Login.vue";
 import Qna from "../views/Qna.vue";
 import Faq from "../views/Faq.vue";
@@ -52,9 +52,9 @@ const routes = [
     component: AboutTeam
   },
   {
-    path: "/about/project",
-    name: "project",
-    component: AboutProject
+    path: "/about/service",
+    name: "service",
+    component: AboutService
   },
   // 로그인 페이지
   {
