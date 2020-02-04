@@ -4,30 +4,41 @@
 <mapper namespace="com.pjt1.demo.model.dao.LikesDao" >
   
    	<insert id="insert"		parameterType="likes">
-		insert into likes
-		(board_no, post_no, cmt_check, cmt_no,
-		liker_mem_no, liking_mem_no, like_del_check)
-		values (
-		#{board_no:INTEGER}, #{post_no:INTEGER}, #{cmt_check:BOOLEAN},
-		#{cmt_no:INTEGER}, #{liker_mem_no:INTEGER}, #{liking_mem_no:INTEGER},
-		#{like_del_check:BOOLEAN}
+		INSERT INTO likes
+		(board_no, post_no, 
+		cmt_check, cmt_no,
+		liker_mem_no, like_del_check)
+		VALUES (
+		#{board_no:INTEGER}, #{post_no:INTEGER}, 
+		#{cmt_check:BOOLEAN}, #{cmt_no:INTEGER}, 
+		#{liker_mem_no:INTEGER}, #{like_del_check:BOOLEAN}
 		)
 	</insert> 
    	<delete id="delete" 	parameterType="int">
-		update likes set like_del_check=true where like_no=#{like_no} and like_del_check=false
+		UPDATE likes 
+		SET like_del_check = true 
+		WHERE like_no=#{like_no} 
+		AND like_del_check = false
 	</delete>
    	<update id="update"		parameterType="likes">
-		update likes set
-		board_no=#{board_no:INTEGER}, post_no=#{post_no:INTEGER}, cmt_check=#{cmt_check:BOOLEAN}, 
-		cmt_no=#{cmt_no:INTEGER}, liker_mem_no=#{liker_mem_no:INTEGER}, liking_mem_no=#{liking_mem_no:INTEGER}, 
+		UPDATE likes 
+		SET
+		board_no=#{board_no:INTEGER}, post_no=#{post_no:INTEGER}, 
+		cmt_check=#{cmt_check:BOOLEAN}, cmt_no=#{cmt_no:INTEGER}, 
+		liker_mem_no=#{liker_mem_no:INTEGER}, 
 		like_del_check=#{like_del_check:BOOLEAN}
-		where like_no=#{like_no:INTEGER}
+		WHERE like_no=#{like_no:INTEGER}
 	</update>
    	<select id="search"		parameterType="int" resultType="likes">
-		select * from likes where like_no=#{like_no:INTEGER} and like_del_check=false   
+		SELECT * 
+		FROM likes 
+		WHERE like_no=#{like_no:INTEGER} 
+		AND like_del_check=false   
 	</select>
    	<select id="searchAll"	resultType="likes">
-		select * from likes where like_del_check=false
+		SELECT * 
+		FROM likes 
+		WHERE like_del_check=false
 	</select>
 </mapper>
 

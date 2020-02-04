@@ -19,8 +19,14 @@
 - 나머지는 각각 삭제
 
 ## 2. 테이블 수정
- - Blame 테이블 제거
- - Course 테이블 추가
+ - Blame 테이블 제거 o
+ - Course 테이블 추가 o
+ - CityLayerXXX 테이블들 city + hotplace 테이블로 변환 o
+ - Files 테이블 수정 o 
+   - post_no 필드 제거 
+   - path_type, path_no 필드 추가
+ - Q&A 테이블 수정 o
+   - qna_reply 필드 추가 // 답변 1개만 달리도록 처리
 
 ## 3. 데이터 수집 장소 정의 
 
@@ -61,6 +67,12 @@
  - 카테고리는 주관적으로 5개 어디에 포함되는지 (중복 포함 가능)
 
 ## 4. FAQ / Q&A (구헌)
+
+ - qna도 카테고리로 범주화 
+ - hits 필드는 둘 다 제거 
+ - faq는 question / answer  
+   qna는 title / content/ answer + category 형태로 데이터 입력 
+ - 1대1 문의 형태라서 secret 필드 제거 
 
 
 ## 5. LOGIN (지영)
