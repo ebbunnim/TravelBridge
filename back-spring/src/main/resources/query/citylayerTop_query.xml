@@ -24,7 +24,7 @@
 		WHERE clt_no = #{clt_no:INTEGER} and clt_del_check = false	
 	</delete>
    	<update id="update"		parameterType="citylayertop">
-		UPDATE citylayermid
+		UPDATE citylayertop
 		SET
 		clt_name = #{clt_name:VARCHAR},
 		clt_address = #{clt_address:VARCHAR},
