@@ -14,6 +14,21 @@ DROP TABLE BOARD;
 DROP TABLE FOLLOW;
 DROP TABLE MEMBERS;
 
+SELECT * FROM FESTIVAL;
+
+SELECT * FROM HOTPLACE;
+SELECT * FROM CITY;
+SELECT * FROM FILES;
+SELECT * FROM QNA;
+SELECT * FROM FAQ;
+SELECT * FROM LIKES;
+SELECT * FROM COMMENT;
+SELECT * FROM COURSE;
+SELECT * FROM POST;
+SELECT * FROM BOARD;
+SELECT * FROM FOLLOW;
+SELECT * FROM MEMBERS;
+
 # MEMBER 테이블
 CREATE TABLE MEMBERS (
 	mem_no				int	PRIMARY KEY AUTO_INCREMENT,	# 회원 관리번호
@@ -106,6 +121,9 @@ CREATE TABLE COMMENT (
 # 게시판의 게시물 또는 댓글에 좋아요를 클릭할 수 있다.
 # 좋아요 개수는 각각 조회
 
+
+drop table likes;
+
 CREATE TABLE LIKES (
 	like_no				int PRIMARY KEY AUTO_INCREMENT,	# 좋아요 관리번호	기본키, 자동증가
     board_no			int NOT NULL,					# 게시판 위치 
@@ -113,12 +131,10 @@ CREATE TABLE LIKES (
     cmt_check			boolean not null,				# 댓글 여부 (게시물이면 false, 댓글이면 true)
 	cmt_no				int	default 0,					# 댓글 번호 (댓글이면 해당 번호 삽입)
 	liker_mem_no		int NOT NULL,					# 좋아요 한 회원	외래키
-	liking_mem_no		int NOT NULL,					# 좋아요 당한 회원	외래키
     like_del_check		boolean DEFAULT FALSE,			# 삭제 여부			
     FOREIGN KEY(board_no) REFERENCES BOARD(board_no), 
 	FOREIGN KEY(post_no) REFERENCES POST(post_no),
-    FOREIGN KEY(liker_mem_no) REFERENCES MEMBERS(mem_no),
-    FOREIGN KEY(liking_mem_no) REFERENCES MEMBERS(mem_no)
+    FOREIGN KEY(liker_mem_no) REFERENCES MEMBERS(mem_no)
 );
 
 # FAQ 테이블
@@ -126,28 +142,24 @@ CREATE TABLE LIKES (
 CREATE TABLE FAQ (
 	faq_no		int PRIMARY KEY AUTO_INCREMENT,		# 자주하는 질문 관리번호	기본키, 자동증가
     faq_category varchar(200),						# 질문 카테고리
-	faq_title	varchar(200),						# 질문 제목	
-	faq_content	varchar(3000),						# 질문 내용	
+	faq_question varchar(200),						# 질문 제목
 	faq_answer	varchar(3000),						# 답변 내용	
-	faq_hits	int DEFAULT 0,						# 조회 수	
 	faq_regtime	datetime DEFAULT NOW(),				# 등록 시간	
     faq_del_check boolean DEFAULT FALSE				# FAQ 삭제 여부
 );
-
 # Q&A 테이블
 # 회원들은 질문사항을 남길 수 있다.
 CREATE TABLE QNA (
 	qna_no			int PRIMARY KEY AUTO_INCREMENT,	# Q&A 관리번호	기본키, 자동증가
 	mem_no			int NOT NULL,					# 질문한 회원 번호	외래키
+    qna_category	varchar(200),					# Q&A 카테고리
 	qna_title		varchar(200),					# Q&A 질문 제목	
 	qna_content		varchar(3000),					# Q&A 질문 내용	
-    qna_reply		varchar(3000),					# Q&A 답변 내용
-	qna_hits		int DEFAULT 0,					# 조회수	
+    qna_answer		varchar(3000),					# Q&A 답변 내용
 	qna_regtime		datetime DEFAULT NOW(),			# 등록 시간	
-	qna_secret		boolean DEFAULT FALSE,			# 비밀 게시글 여부
 	qna_del_check	boolean DEFAULT FALSE,			# Q&A 삭제 여부
     FOREIGN KEY(mem_no) REFERENCES MEMBERS(mem_no)
-);
+); 
 
 create table FILES(
 	files_no int NOT NULL KEY AUTO_INCREMENT,
@@ -202,7 +214,6 @@ create table FESTIVAL(
     FOREIGN KEY(city_no) REFERENCES CITY(city_no)
 ); 
 
-
 SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'PJT1DB';
 SHOW DATABASES;
 SHOW TABLES FROM PJT1DB;
@@ -214,18 +225,5 @@ show table status;
 
 show tables;
 
-DESC board;
-DESC city_layer_bottom;
-DESC city_layer_mid;
-DESC city_layer_top;
-DESC comment;
-DESC course;
-DESC faq;
-DESC festival;
-DESC files;
-DESC follow;
-DESC likes;
-DESC member;
-DESC post;
-DESC qna;
+
 
