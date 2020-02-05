@@ -13,51 +13,51 @@ public class HotPlace implements Serializable  {
 	private int city_no;
     private String hp_name;// varchar(200) NOT NULL,			# 핫플 이름
     private String hp_address;// varchar(200) NOT NULL,		# 핫플 주소 //ex) 서울 강남구
-    private String hp_detail;//_adr varchar(500) NOT NULL,	# 핫플 상세주소
+    private String hp_detail_adr;//_adr varchar(500) NOT NULL,	# 핫플 상세주소
     private String hp_content;// varchar(3000) NOT NULL,		# 핫플 컨텐츠
     private String hp_tag;// varchar(1000) NOT NULL,			# 핫플 태그 (" "로 구분)
     private String hp_homepage;// varchar(500),				# 핫플 홈페이지
     private String hp_holiday;// varchar(200),				# 핫플 휴일
     private String hp_fee;// varchar(500),					# 핫플 요금
-    private String hp_etc;// varchar(2000),					# 핫플 관련 기타사항
+    private String hp_img;// varchar(500),					# 핫플 이미지
     private boolean hp_del_check;// boolean DEFAULT FALSE		# 핫플 삭제 여부
 	public HotPlace() {
 		super();
 	}
-	public HotPlace(int city_no, String hp_name, String hp_address, String hp_detail, String hp_content,
+	public HotPlace(int city_no, String hp_name, String hp_address, String hp_detail_adr, String hp_content,
 			String hp_tag) {
 		super();
 		this.city_no = city_no;
 		this.hp_name = hp_name;
 		this.hp_address = hp_address;
-		this.hp_detail = hp_detail;
+		this.hp_detail_adr = hp_detail_adr;
 		this.hp_content = hp_content;
 		this.hp_tag = hp_tag;
 	}
 	
 	
-	public HotPlace(int hp_no, int city_no, String hp_name, String hp_address, String hp_detail, String hp_content,
-			String hp_tag, String hp_homepage, String hp_holiday, String hp_fee, String hp_etc, boolean hp_del_check) {
+	public HotPlace(int hp_no, int city_no, String hp_name, String hp_address, String hp_detail_adr, String hp_content,
+			String hp_tag, String hp_homepage, String hp_holiday, String hp_fee, String hp_img, boolean hp_del_check) {
 		super();
 		this.hp_no = hp_no;
 		this.city_no = city_no;
 		this.hp_name = hp_name;
 		this.hp_address = hp_address;
-		this.hp_detail = hp_detail;
+		this.hp_detail_adr = hp_detail_adr;
 		this.hp_content = hp_content;
 		this.hp_tag = hp_tag;
 		this.hp_homepage = hp_homepage;
 		this.hp_holiday = hp_holiday;
 		this.hp_fee = hp_fee;
-		this.hp_etc = hp_etc;
+		this.hp_img = hp_img;
 		this.hp_del_check = hp_del_check;
 	}
 	
 	@Override
 	public String toString() {
-		return "HotPlace [hp_no=" + hp_no + ", hp_name=" + hp_name + ", hp_address=" + hp_address + ", hp_detail="
-				+ hp_detail + ", hp_content=" + hp_content + ", hp_tag=" + hp_tag + ", hp_homepage=" + hp_homepage
-				+ ", hp_holiday=" + hp_holiday + ", hp_fee=" + hp_fee + ", hp_etc=" + hp_etc + ", hp_del_check="
+		return "HotPlace [hp_no=" + hp_no + ", hp_name=" + hp_name + ", hp_address=" + hp_address + ", hp_detail_adr="
+				+ hp_detail_adr + ", hp_content=" + hp_content + ", hp_tag=" + hp_tag + ", hp_homepage=" + hp_homepage
+				+ ", hp_holiday=" + hp_holiday + ", hp_fee=" + hp_fee + ", hp_img=" + hp_img + ", hp_del_check="
 				+ hp_del_check + "]";
 	}
 	public String getHp_name() {
@@ -72,11 +72,11 @@ public class HotPlace implements Serializable  {
 	public void setHp_address(String hp_address) {
 		this.hp_address = hp_address;
 	}
-	public String getHp_detail() {
-		return hp_detail;
+	public String getHp_detail_adr() {
+		return hp_detail_adr;
 	}
-	public void setHp_detail(String hp_detail) {
-		this.hp_detail = hp_detail;
+	public void setHp_detail_adr(String hp_detail_adr) {
+		this.hp_detail_adr = hp_detail_adr;
 	}
 	public String getHp_content() {
 		return hp_content;
@@ -108,11 +108,11 @@ public class HotPlace implements Serializable  {
 	public void setHp_fee(String hp_fee) {
 		this.hp_fee = hp_fee;
 	}
-	public String getHp_etc() {
-		return hp_etc;
+	public String getHp_img() {
+		return hp_img;
 	}
-	public void setHp_etc(String hp_etc) {
-		this.hp_etc = hp_etc;
+	public void setHp_img(String hp_img) {
+		this.hp_img = hp_img;
 	}
 	public boolean isHp_del_check() {
 		return hp_del_check;
