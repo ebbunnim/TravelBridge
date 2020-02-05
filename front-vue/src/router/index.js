@@ -75,7 +75,8 @@ const routes = [
   {
     path: "/signup",
     name: "signup",
-    component: SignUp
+    component: SignUp,
+    props: route => ({ query: route.query.q })
   }
 ];
 
