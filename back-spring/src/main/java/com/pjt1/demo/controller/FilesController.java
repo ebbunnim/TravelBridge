@@ -95,15 +95,15 @@ public class FilesController {
         
         // map으로 받아야
         String files_url = request.getParameter("files_url"); // 이미지 소스
-        String path_no = request.getParameter("path_no"); //이미지 등록된 게시물 번호
+        // String path_no = request.getParameter("path_no"); //이미지 등록된 게시물 번호
         
 
         // 이 형식에 맞게 insert files
 
         Files files =  new Files();
         files.setFiles_url(files_url);
-        files.setPath_type(0); // Post이므로 다 0처리
-        files.setPath_no(Integer.parseInt(path_no));
+        // files.setPath_type(0); // Post이므로 다 0처리
+        // files.setPath_no(Integer.parseInt(path_no));
         service.insert(files);
                 
         return handleSuccess(files);
