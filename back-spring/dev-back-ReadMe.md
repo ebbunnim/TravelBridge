@@ -85,7 +85,32 @@
 # 2020 .02.05
 
 ## 1. 데이터 수집
+- FAQ, QNA 테스트용 데이터 생성 o
+- MEMBERS 테스트용 데이터 생성 o
+- CITY, HOTPLACE 데이터 수집
+- BOARD 데이터 생성
+- POST 데이터 생성
+  - post는 더보기 형태로 제공
+- COMMENT 데이터 생성
+
 
 ## 2. 각 테이블별 기능 구현
+- FAQ, Q&A 기능 구현
+- FAQ 
+  - searchAll
+  - search(no)
+  - insert
+  - delete(no)
+  - update
+
+- QNA
+  - searchAll
+  - search(no)
+  - searchForMember(mem_no)
+  - insert
+  - delete(no)
+  - update
+  - answerTheQuestion
+
 
 ## 3. 연관되는 컬럼 삭제 처리

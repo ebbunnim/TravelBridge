@@ -10,6 +10,7 @@ public class HotPlace implements Serializable  {
 	
 	private static final long serialVersionUID = 5443973642661281888L;
 	private int hp_no;// int NOT NULL KEY AUTO_INCREMENT,	# 핫플 관리번호
+	private int city_no;
     private String hp_name;// varchar(200) NOT NULL,			# 핫플 이름
     private String hp_address;// varchar(200) NOT NULL,		# 핫플 주소 //ex) 서울 강남구
     private String hp_detail;//_adr varchar(500) NOT NULL,	# 핫플 상세주소
@@ -23,18 +24,23 @@ public class HotPlace implements Serializable  {
 	public HotPlace() {
 		super();
 	}
-	public HotPlace(String hp_name, String hp_address, String hp_detail, String hp_content, String hp_tag) {
+	public HotPlace(int city_no, String hp_name, String hp_address, String hp_detail, String hp_content,
+			String hp_tag) {
 		super();
+		this.city_no = city_no;
 		this.hp_name = hp_name;
 		this.hp_address = hp_address;
 		this.hp_detail = hp_detail;
 		this.hp_content = hp_content;
 		this.hp_tag = hp_tag;
 	}
-	public HotPlace(int hp_no, String hp_name, String hp_address, String hp_detail, String hp_content, String hp_tag,
-			String hp_homepage, String hp_holiday, String hp_fee, String hp_etc, boolean hp_del_check) {
+	
+	
+	public HotPlace(int hp_no, int city_no, String hp_name, String hp_address, String hp_detail, String hp_content,
+			String hp_tag, String hp_homepage, String hp_holiday, String hp_fee, String hp_etc, boolean hp_del_check) {
 		super();
 		this.hp_no = hp_no;
+		this.city_no = city_no;
 		this.hp_name = hp_name;
 		this.hp_address = hp_address;
 		this.hp_detail = hp_detail;
@@ -46,6 +52,7 @@ public class HotPlace implements Serializable  {
 		this.hp_etc = hp_etc;
 		this.hp_del_check = hp_del_check;
 	}
+	
 	@Override
 	public String toString() {
 		return "HotPlace [hp_no=" + hp_no + ", hp_name=" + hp_name + ", hp_address=" + hp_address + ", hp_detail="
@@ -115,6 +122,12 @@ public class HotPlace implements Serializable  {
 	}
 	public int getHp_no() {
 		return hp_no;
+	}
+	public int getCity_no() {
+		return city_no;
+	}
+	public void setCity_no(int city_no) {
+		this.city_no = city_no;
 	}
     
     
