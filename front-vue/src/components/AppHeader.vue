@@ -7,34 +7,22 @@
 
         <div class="col-4">
           <q-btn class="text-black q-pa-md" flat to="/" label="HOME"></q-btn>
-          <q-btn
-            class="text-black q-pa-md"
-            flat
-            to="/page1"
-            label="트래블 카드"
-          ></q-btn>
-          <q-btn
-            class="text-black q-pa-md"
-            flat
-            to="/page2"
-            label="트래블 픽"
-          ></q-btn>
-          <q-btn
-            class="text-black q-pa-md"
-            flat
-            to="/page3"
-            label="SUB기능"
-          ></q-btn>
+          <q-btn class="text-black q-pa-md" flat to="/page1" label="트래블 카드"></q-btn>
+          <q-btn class="text-black q-pa-md" flat to="/page2" label="트래블 픽"></q-btn>
+          <q-btn class="text-black q-pa-md" flat to="/page3" label="SUB기능"></q-btn>
         </div>
         <q-toolbar-title class="col-4 text-black">트래블브릿지</q-toolbar-title>
-        <div class="col-4" v-if="false">
-          <q-btn size="sm" class="text-grey q-pa-md" flat>내 정보</q-btn>
-          <q-btn size="sm" class="text-grey q-pa-md" flat>로그아웃</q-btn>
+
+        <div
+          v-if=" this.$store.state.user.user.mem_id == null || this.$store.state.user.user.mem_id == undefined"
+          class="col-4"
+          align="right"
+        >
+          <q-btn size="md" class="text-grey darken--2 q-pa-md" flat to="/login">로그인</q-btn>
         </div>
-        <div v-else class="col-4" align="right">
-          <q-btn size="md" class="text-grey darken--2 q-pa-md" flat to="/login"
-            >로그인</q-btn
-          >
+        <div class="col-4" align="right" v-else>
+          <q-btn size="sm" class="text-grey q-pa-md" flat to="/mypage">내 정보</q-btn>
+          <q-btn size="sm" class="text-grey q-pa-md" flat v-on:click="logout">로그아웃</q-btn>
         </div>
       </q-toolbar>
     </q-header>
@@ -61,10 +49,7 @@
             :content-inset-level="0.5"
             :to="menuItem.path"
           >
-            <q-list
-              v-for="(menuListSub, index) in menuListSub[index]"
-              :key="index"
-            >
+            <q-list v-for="(menuListSub, index) in menuListSub[index]" :key="index">
               <q-item clickable>
                 <q-item-section>
                   <q-item-label>{{ menuListSub.label }}</q-item-label>
@@ -122,6 +107,11 @@ export default {
         [{ label: "faq" }, { label: "qna" }, { label: "about we" }]
       ]
     };
+  },
+  methods: {
+    logout() {
+      this.$store.state.user.user = {};
+    }
   }
 };
 </script>

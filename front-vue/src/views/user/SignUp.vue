@@ -3,13 +3,7 @@
     <p class="text-h4 q-pt-lg q-mt-lg">회원가입</p>
     <div class="row q-pa-md justify-center">
       <div class="col-4 col-8 col-xs-12 text-center">
-        <q-input
-          v-model="email"
-          filled
-          type="email"
-          hint="Email"
-          v-bind:readonly="isReadOnly"
-        />
+        <q-input v-model="email" filled type="email" hint="Email" v-bind:readonly="isReadOnly" />
         <q-input
           v-model="password"
           filled
@@ -32,7 +26,7 @@
               size="large"
               width="100%"
               label="회원가입"
-              v-on:click="Signup()"
+              v-on:click="SignUp()"
               class="inline-block q-mr-md"
             />
             <q-btn
@@ -75,20 +69,23 @@ export default {
       v => /.+@.+\..+/.test(v) || "E-mail must be valid"
     ]
   }),
-  mounted: {
-    user() {
-      if (this.props.isSNS != "") {
-        alert("하이");
-        return {};
-      } else {
-        this.isReadOnly = true;
-        return this.$store.state.user;
-      }
-    }
-  },
+  // mounted() {
+  //   user() {
+  //     if (this.props.isSNS != "") {
+  //       alert("하이");
+  //       return {};
+  //     } else {
+  //       this.isReadOnly = true;
+  //       return this.$store.state.user;
+  //     }
+  //   }
+  // },
   methods: {
     SignUp() {
-      alert("hello");
+      this.$store.dispatch("user/postSignUp", {
+        user_email: this.email,
+        pw: this.password
+      });
     },
     cancle() {
       alert("회원가입을 취소 하셨습니다.");
