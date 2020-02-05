@@ -70,4 +70,12 @@ public class QnaServiceImpl implements QnaService {
 			e.printStackTrace();
 		} return null;
 	}
+	
+	public void answerTheQuestion(Qna Qna) {
+		try {
+			repo.answerTheQuestion(Qna);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

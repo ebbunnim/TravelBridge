@@ -24,7 +24,7 @@
 		UPDATE faq 
 		SET
 		faq_category = #{faq_category:VARCHAR},
-		faq_question = #{faq_title:VARCHAR}, 
+		faq_question = #{faq_question:VARCHAR}, 
 		faq_answer = #{faq_answer:VARCHAR}, 
 		faq_regtime = CURRENT_TIMESTAMP(),
 		faq_del_check = #{faq_del_check:BOOLEAN}
@@ -38,6 +38,12 @@
    	<select id="searchAll"	resultType="faq">
 		SELECT * 
 		FROM faq 
+		WHERE faq_del_check = false
+	</select>
+	
+	<select id="getCount" resultType ="int">
+		SELECT COUNT(*)
+		FROM faq
 		WHERE faq_del_check = false
 	</select>
 </mapper>
