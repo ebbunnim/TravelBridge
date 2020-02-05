@@ -85,7 +85,38 @@
 # 2020 .02.05
 
 ## 1. 데이터 수집
+- FAQ, QNA 테스트용 데이터 생성 o
+- MEMBERS 테스트용 데이터 생성 o
+- CITY, HOTPLACE 데이터 수집 o
+- BOARD 데이터 생성
+- POST 데이터 생성
+  - post는 더보기 형태로 제공
+- COMMENT 데이터 생성
+
 
 ## 2. 각 테이블별 기능 구현
+- FAQ, Q&A 기능 구현
+- FAQ o
+  - searchAll
+  - search(no)
+  - insert
+  - delete(no)
+  - update
 
+- QNA o
+  - searchAll
+  - search(no)
+  - searchForMember(mem_no)
+  - insert
+  - delete(no)
+  - update
+  - answerTheQuestion
+
+- CITY & HOTPLACE
+  - json으로 hotplace 정보 insert 시 \n으로 개행처리 해줘야함
+  - hotplace img 1개만 사용하기로 함 (hp_img)  
+    files는 post_no 하나만 취함+
+  - 
 ## 3. 연관되는 컬럼 삭제 처리
+
+ 

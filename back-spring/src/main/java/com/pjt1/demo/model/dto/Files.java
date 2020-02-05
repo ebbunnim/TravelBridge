@@ -7,8 +7,7 @@ public class Files implements Serializable {
 	
 	private static final long serialVersionUID = 5132788879683171995L;
 	private int files_no 			;//int NOT NULL KEY AUTO_INCREMENT,
-	private int path_type 			;//int NOT NULL,
-	private int path_no				;//int NOT NULL,
+	private int post_no				;//int NOT NULL,
 	private String files_name		;//varchar(200) NOT NULL,
 	private boolean files_thumbnail ;//boolean,
 	private String files_url 		;//varchar(500) NOT NULL, #PATH
@@ -17,20 +16,18 @@ public class Files implements Serializable {
 	public Files() {
 		super();
 	}
-	public Files(int path_type, int path_no, String files_name, String files_url, boolean files_thumbnail) {
+	public Files(int post_no, String files_name, String files_url, boolean files_thumbnail) {
 		super();
-		this.path_type = path_type;
-		this.path_no = path_no;
+		this.post_no = post_no;
 		this.files_name = files_name;
 		this.files_thumbnail = files_thumbnail;
 		this.files_url = files_url;
 	}
-	public Files(int files_no, int path_type, int path_no, String files_name, boolean files_thumbnail, String files_url,
+	public Files(int files_no, int post_no, String files_name, boolean files_thumbnail, String files_url,
 			Boolean files_del_check) {
 		super();
 		this.files_no = files_no;
-		this.path_type = path_type;
-		this.path_no = path_no;
+		this.post_no = post_no;
 		this.files_name = files_name;
 		this.files_thumbnail = files_thumbnail;
 		this.files_url = files_url;
@@ -38,21 +35,15 @@ public class Files implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Files [files_no=" + files_no + ", path_type=" + path_type + ", path_no=" + path_no + ", files_name="
+		return "Files [files_no=" + files_no + ", post_no=" + post_no +", files_name="
 				+ files_name + ", files_thumbnail=" + files_thumbnail + ", files_url=" + files_url + ", files_del_check="
 				+ files_del_check + "]";
 	}
-	public int getPath_type() {
-		return path_type;
+	public int getPost_no() {
+		return post_no;
 	}
-	public void setPath_type(int path_type) {
-		this.path_type = path_type;
-	}
-	public int getPath_no() {
-		return path_no;
-	}
-	public void setPath_no(int path_no) {
-		this.path_no = path_no;
+	public void setPost_no(int post_no) {
+		this.post_no = post_no;
 	}
 	public String getFiles_name() {
 		return files_name;

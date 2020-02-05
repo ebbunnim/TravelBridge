@@ -9,7 +9,7 @@
 		city
 		(city_name, city_is_overseas,
 		city_address, city_img) 
-		VALUES 
+		VALUES (
 		#{city_name:VARCHAR},
 		#{city_is_overseas:BOOLEAN},
 		#{city_address:VARCHAR},

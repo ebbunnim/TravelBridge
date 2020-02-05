@@ -58,30 +58,31 @@ public class FaqController{
     @GetMapping("/Faq/search/{faq_no}")
     public ResponseEntity<Map<String, Object>> search(@PathVariable int faq_no) {
         Faq Faq = service.search(faq_no);
-        return handleSuccess(Faq);
+        return (Faq != null) ? handleSuccess(Faq) : handleFail("조회 할 수 없는 FAQ 입니다.", HttpStatus.NOT_FOUND);
     }
     @ApiOperation("Faq 정보 등록")
     @PostMapping("/Faq/insert")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Faq Faq) {
+    	int preCnt = service.getCount(); 
         service.insert(Faq);
-        return handleSuccess("");
+        int afterCnt = service.getCount();
+        return (preCnt != afterCnt) ? handleSuccess("등록 완료") : handleSuccess("등록 실패");
     }
-	 @ApiOperation("Faq 정보 삭제")
+	@ApiOperation("Faq 정보 삭제")
     @DeleteMapping("/Faq/delete/{faq_no}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable int faq_no) {
+		int preCnt = service.getCount(); 
         service.delete(faq_no);
-        return handleSuccess("삭제 완료");
+        int afterCnt = service.getCount();
+        return (preCnt != afterCnt) ? handleSuccess("삭제 완료") : handleSuccess("삭제 실패");
     }
 	@ApiOperation("Faq 정보 수정")
     @PutMapping("/Faq/update")
     public ResponseEntity<Map<String, Object>> update(@RequestBody Faq Faq) {
+		
+		Faq previousFaq = service.search(Faq.getFaq_no());
         service.update(Faq);
-        return handleSuccess("수정 완료");
-    }
-	@ApiOperation("Faq 조회수 증가")
-    @PutMapping("/Faq/updateHitUp/{faq_no}")
-    public ResponseEntity<Map<String, Object>> updateHitUp(@PathVariable int faq_no) {
-        service.updateHitUp(faq_no);
-        return handleSuccess("수정 완료");
+        Faq updatedFaq = service.search(Faq.getFaq_no());
+        return (previousFaq.equals(updatedFaq)) ? handleSuccess("업데이트 완료") : handleFail("업데이트 실패",HttpStatus.BAD_REQUEST);
     }
 }

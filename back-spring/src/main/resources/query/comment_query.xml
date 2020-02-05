@@ -10,7 +10,7 @@
 		(board_no, post_no, 
 		mem_no, cmt_parent, 
 		cmt_secret, cmt_title, cmt_content) 
-		VALUES 
+		VALUES (
 		#{board_no:INTEGER},#{post_no:INTEGER},
 		#{mem_no:INTEGER},	#{cmt_parent:INTEGER},
 		#{cmt_secret:INTEGER}, #{cmt_title:VARCHAR}, #{cmt_content:VARCHAR}
