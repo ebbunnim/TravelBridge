@@ -212,24 +212,26 @@ public class MembersController {
             } 
     }
 
-    // // 굳이 필요한가? 안필요하면 버리기
-    // @ApiOperation("jwtinfo 전달하는 api")
-    // @PostMapping("/api/jwtinfo")
-    // public ResponseEntity<Map<String, Object>> getInfo(HttpServletRequest req, @RequestBody User user) {
-    //     Map<String, Object> resultMap = new HashMap<>();
-    //     HttpStatus status = null;
-    //     try {
-    //         // 토큰에 담긴 정보를 전달한다.
-    //         resultMap.putAll(jwtService.get(req.getHeader("jwt-auth-token")));
-    //         resultMap.put("status", true);
-    //         resultMap.put("request_body", user);
-    //         status = HttpStatus.ACCEPTED;
-    //     } catch (RuntimeException e) {
-    //         resultMap.put("message", e.getMessage());
-    //         status = HttpStatus.INTERNAL_SERVER_ERROR;
-    //     }
-    //     return new ResponseEntity<Map<String, Object>>(resultMap, status);
-    // }
+    // 굳이 필요한가? 안필요하면 버리기
+    @ApiOperation("jwtinfo 전달하는 api")
+    @PostMapping("/api/jwtinfo")
+    public ResponseEntity<Map<String, Object>> getInfo(HttpServletRequest req, @RequestBody Members members) {
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = null;
+        try {
+            // 토큰에 담긴 정보를 전달한다.
+            resultMap.putAll(jwtService.get(req.getHeader("jwt-auth-token")));
+            System.out.println(resultMap);
+            resultMap.put("status", true);
+            //members안나오면 members 꺼내올까?
+            resultMap.put("request_body", members);
+            status = HttpStatus.ACCEPTED;
+        } catch (RuntimeException e) {
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+    }
 
 
 }

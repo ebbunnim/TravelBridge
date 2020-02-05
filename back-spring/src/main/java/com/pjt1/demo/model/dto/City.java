@@ -3,7 +3,7 @@ package com.pjt1.demo.model.dto;
 import java.io.Serializable;
 
 /* 도시 테이블
-# 국내/국외여부, 주소(서울 강남구), 이미지
+# 국내/국외여부, 주소(서울 강남ㅇㅇ구), 이미지
 */
 public class City implements Serializable  {
 	

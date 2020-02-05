@@ -76,6 +76,10 @@
 
 
 ## 5. LOGIN (지영)
+  - 로그인 기능 구현(firebase기반 local login / googlelogin / naverlogin / github login)
+  - selenium을 활용한 크롤링 예정 - 대한민국 구석구석
+  
+- 
 
 
 # 2020 .02.05
