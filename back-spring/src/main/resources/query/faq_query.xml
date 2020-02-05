@@ -15,7 +15,7 @@
 
    	<delete id="delete" 	parameterType="int">
 	   UPDATE faq 
-	   SET 
+	   SET  
 	   faq_regtime = CURRENT_TIMESTAMP(), 
 	   faq_del_check = true
 	   WHERE faq_no = #{faq_no} AND faq_del_check = false
