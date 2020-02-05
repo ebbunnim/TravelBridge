@@ -5,13 +5,11 @@
 
   	<insert id="insert"		parameterType="faq">
 		INSERT INTO faq
-		(faq_category, faq_title, 
-		faq_content, faq_answer, 
-		faq_hits, faq_del_check )
+		(faq_category, faq_question, faq_answer)
 		VALUES (
-			#{faq_category:VARCHAR}, #{faq_title:VARCHAR}, 
-			#{faq_content:VARCHAR}, #{faq_answer:VARCHAR},
-			#{faq_hits:INTEGER}, #{faq_del_check:BOOLEAN}
+			#{faq_category:VARCHAR}, 
+			#{faq_question:VARCHAR}, 
+			#{faq_answer:VARCHAR}
 		)
 	</insert> 
 
@@ -26,10 +24,9 @@
 		UPDATE faq 
 		SET
 		faq_category = #{faq_category:VARCHAR},
-		faq_title = #{faq_title:VARCHAR}, 
-		faq_content =#{faq_content:VARCHAR},
+		faq_question = #{faq_title:VARCHAR}, 
 		faq_answer = #{faq_answer:VARCHAR}, 
-		faq_hits = #{faq_hits:INTEGER}, 
+		faq_regtime = CURRENT_TIMESTAMP(),
 		faq_del_check = #{faq_del_check:BOOLEAN}
 		WHERE faq_no = #{faq_no:INTEGER}
 	</update>

@@ -5,30 +5,52 @@
 <mapper namespace="com.pjt1.demo.model.dao.QnaDao" >
 
  	<insert id="insert"		parameterType="qna">
-		insert into qna
-		(mem_no, qna_title, qna_content, qna_hits, qna_secret, qna_del_check) 
-		values (
-			#{mem_no:INTEGER}, #{qna_title:VARCHAR}, #{qna_content:VARCHAR},
-			#{qna_hits:INTEGER}, #{qna_secret:BOOLEAN}, #{qna_del_check:BOOLEAN}
+		INSERT INTO qna
+		(mem_no, qna_category, qna_title, qna_content, qna_answer) 
+		VALUES (
+			#{mem_no:INTEGER}, 
+			#{qna_category:VARCHAR}, 
+			#{qna_title:VARCHAR}, 
+			#{qna_content:VARCHAR},
+			#{qna_answer:VARCHAR}
 		)
 	</insert> 
 	
    	<delete id="delete" 	parameterType="int">
-		update qna set qna_del_check=true, qna_regtime=CURRENT_TIMESTAMP() where qna_no=#{qna_no} and qna_del_check=false
+		UPDATE qna SET 
+		qna_regtime=CURRENT_TIMESTAMP(),
+		qna_del_check = true 
+		WHERE qna_no=#{qna_no} and qna_del_check=false
 	</delete>
 
    	<update id="update"		parameterType="qna">
-		update qna set 
-		qna_title=#{qna_title:VARCHAR}, qna_content=#{qna_content:VARCHAR},
-		qna_hits=#{qna_hits:INTEGER}, qna_secret=#{qna_secret:BOOLEAN}, qna_del_check=#{qna_del_check:BOOLEAN}
-		where qna_no=#{qna_no}
+		UPDATE qna SET 
+		mem_no=#{mem_no:INTEGER},
+		qna_category=#{qna_category:VARCHAR},
+		qna_title=#{qna_title:VARCHAR}, 
+		qna_content=#{qna_content:VARCHAR},
+		qna_answer=#{qna_answer:VARCHAR},
+		qna_regtime=CURRENT_TIMESTAMP(),
+		qna_del_check=#{qna_del_check:BOOLEAN}
+		WHERE qna_no=#{qna_no}
 	</update>
 
    	<select id="search"		parameterType="int" resultType="qna">
-		select * from qna where qna_no=#{qna_no:INTEGER} and qna_del_check=false   
+		SELECT * 
+		FROM qna 
+		WHERE qna_no=#{qna_no:INTEGER} 
+		AND qna_del_check=false   
+	</select>
+	<select id="searchForMember" parameterType = "int" resultType="qna">
+		SELECT * 
+		FROM qna 
+		WHERE mem_no=#{mem_no:INTEGER} 
+		AND qna_del_check=false
 	</select>
    	<select id="searchAll"	resultType="qna">
-		select * from qna where qna_del_check=false
+		SELECT * 
+		FROM qna 
+		WHERE qna_del_check=false
 	</select>
 
 </mapper>

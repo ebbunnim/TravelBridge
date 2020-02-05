@@ -2,29 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 	
 
-<mapper namespace="com.pjt1.model.dao.CommentDao" >
+<mapper namespace="com.pjt1.demo.model.dao.CommentDao" >
 
   	<insert id="insert"		parameterType="comment">
 		INSERT INTO 
 		comment
-		(board_no, post_no, mem_no,
-		cmt_parent, cmt_secret,
-		cmt_title, cmt_content) 
+		(board_no, post_no, 
+		mem_no, cmt_parent, 
+		cmt_secret, cmt_title, cmt_content) 
 		VALUES 
-		#{board_no:INTEGER},
-		#{post_no:INTEGER},
-		#{mem_no:INTEGER},
-		#{cmt_parent:INTEGER},
-		#{cmt_secret:INTEGER},
-		#{cmt_title:VARCHAR},
-		#{cmt_content:VARCHAR}
+		#{board_no:INTEGER},#{post_no:INTEGER},
+		#{mem_no:INTEGER},	#{cmt_parent:INTEGER},
+		#{cmt_secret:INTEGER}, #{cmt_title:VARCHAR}, #{cmt_content:VARCHAR}
 		)
 	</insert> 
    	<delete id="delete" 	parameterType="int">
 		UPDATE comment
 		SET 
 		cmt_del_check = true
-		WHERE cmt_no = #{cmt_no:INTEGER} and cmt_del_check = false	
+		WHERE cmt_no = #{cmt_no:INTEGER} 
+		AND cmt_del_check = false	
 	</delete>
    	<update id="update"		parameterType="comment">
 		UPDATE comment
@@ -43,7 +40,8 @@
    	<select id="search"		parameterType="int" resultType="comment"> 
 		SELECT * 
 		FROM comment
-		WHERE cmt_no = #{cmt_no:INTEGER} AND cmt_del_check = false      	
+		WHERE cmt_no = #{cmt_no:INTEGER} 
+		AND cmt_del_check = false      	
 	</select>
    	<select id="searchAll"	resultType="comment"> 
 		SELECT * 

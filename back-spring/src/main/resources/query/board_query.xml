@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 
-<mapper namespace="com.pjt1.model.dao.BoardDao" >
+<mapper namespace="com.pjt1.demo.model.dao.BoardDao" >
 
  	<insert id="insert"		parameterType="board">
 		INSERT INTO 
@@ -12,7 +12,8 @@
 		UPDATE board
 		SET 
 		board_del_check = true
-		WHERE board_no = #{board_no:INTEGER} and board_del_check = false
+		WHERE board_no = #{board_no:INTEGER} 
+		AND board_del_check = false
 	</delete>
    	<update id="update"		parameterType="board">
 		UPDATE board
@@ -24,7 +25,8 @@
    	<select id="search"		parameterType="int" resultType="board"> 
 		SELECT * 
 		FROM board 
-		WHERE board_no = #{board_no:INTEGER} AND board_del_check = false      
+		WHERE board_no = #{board_no:INTEGER} 
+		AND board_del_check = false      
 	</select>
    	<select id="searchAll"	resultType="board">
 		SELECT * 

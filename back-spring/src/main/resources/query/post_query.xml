@@ -4,10 +4,17 @@
 <mapper namespace="com.pjt1.demo.model.dao.PostDao" >
  
   	<insert id="insert"		parameterType="post">
-		insert into post
-		(post_type, board_no, mem_no, post_title, post_content, post_category, 
-		post_start_day, post_end_day, post_plan)
-		values(
+		INSERT INTO post
+		(post_type, 
+		board_no, 
+		mem_no, 
+		post_title, 
+		post_content, 
+		post_category, 
+		post_start_day, 
+		post_end_day,
+		post_plan)
+		VALUES(
 			#{post_type:INTEGER}, #{board_no:INTEGER}, #{mem_no:INTEGER},
 			#{post_title:VARCHAR}, #{post_content:VARCHAR}, #{post_category:VARCHAR},
 			#{post_start_day:VARCHAR}, #{post_end_day:VARCHAR}, #{post_plan:VARCHAR}
@@ -19,17 +26,35 @@
 	</delete>
 
    	<update id="update"		parameterType="post">
-		update post set
-		post_type=#{post_type:INTEGER}, board_no=#{board_no:INTEGER}, mem_no=#{mem_no:INTEGER},
-		post_title=#{post_title:VARCHAR}, post_content= #{post_content:VARCHAR}, post_category=#{post_category:VARCHAR},
-		post_start_day=#{post_start_day:VARCHAR}, post_end_day=#{post_end_day:VARCHAR}, post_plan=#{post_plan:VARCHAR}
+		UPDATE post 
+		SET
+		post_type=#{post_type:INTEGER}, 
+		board_no=#{board_no:INTEGER}, 
+		mem_no=#{mem_no:INTEGER},
+		post_title=#{post_title:VARCHAR}, 
+		post_content= #{post_content:VARCHAR}, 
+		post_category=#{post_category:VARCHAR},
+		post_regtime=CURRENT_TIMESTAMP(),
+		post_start_day=#{post_start_day:VARCHAR}, 
+		post_end_day=#{post_end_day:VARCHAR}, 
+		post_plan=#{post_plan:VARCHAR}
 		where post_no=#{post_no}
 	</update>
+	<update id="updatePostHitUp" parameterType="int">
+		UPDATE post
+		SET
+		post_hits = post_hits + 1
+		WHERE post_no=#{post_no}
+	</update>
    	<select id="search"		parameterType="int" resultType="post">
-		select * from post where post_no=#{post_no:INTEGER} and post_del_check=false   
+		SELECT * 
+		FROM post 
+		WHERE 
+		post_no = #{post_no:INTEGER} 
+		AND post_del_check=false   
 	</select>
    	<select id="searchAll"	resultType="post">
-		select * from post where post_del_check=false
+		SELECT * FROM post WHERE post_del_check = false
 	</select>
 </mapper>
 

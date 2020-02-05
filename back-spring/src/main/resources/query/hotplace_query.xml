@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	
+
+<mapper namespace="com.pjt1.demo.model.dao.HotPlaceDao" >
+
+  	<insert id="insert"		parameterType="hotplace">
+		INSERT INTO 
+		hotplace
+		(hp_name, hp_address,
+	    hp_detail_adr,hp_content,
+	    hp_tag , hp_homepage,
+	    hp_holiday, hp_fee,
+	    hp_etc) 
+	    VALUES 
+		#{hp_name:VARCHAR}, #{hp_address:VARCHAR},
+	    #{hp_detail_adr:VARCHAR}, #{hp_content:VARCHAR},
+	    #{hp_tag:VARCHAR}, #{hp_homepage:VARCHAR},
+	    #{hp_holiday:VARCHAR}, #{hp_fee:VARCHAR},
+	    #{hp_etc:VARCHAR}
+		)
+	</insert> 
+   	<delete id="delete" 	parameterType="int">
+		UPDATE hotplace
+		SET 
+		hp_del_check = true
+		WHERE hp_no = #{hp_no:INTEGER} and hp_del_check = false	
+	</delete>
+   	<update id="update"		parameterType="hotplace">
+		UPDATE hotplace
+		SET
+		hp_name			= #{hp_name:VARCHAR},
+    	hp_address		= #{hp_address:VARCHAR},
+	    hp_detail_adr	= #{hp_detail_adr:VARCHAR},
+	    hp_content		= #{hp_content:VARCHAR},
+	    hp_tag 			= #{hp_tag:VARCHAR},
+	    hp_homepage		= #{hp_homepage:VARCHAR},
+	    hp_holiday		= #{hp_holiday:VARCHAR},
+	    hp_fee			= #{hp_fee:VARCHAR},
+	    hp_etc			= #{hp_etc:VARCHAR},
+		hp_del_check = #{hp_del_check:BOOLEAN}
+		WHERE hp_no = #{hp_no:INTEGER}      
+	</update>
+   	<select id="search"		parameterType="int" resultType="hotplace"> 
+		SELECT * 
+		FROM hotplace
+		WHERE hp_no = #{hp_no:INTEGER} AND hp_del_check = false      	
+	</select>
+   	<select id="searchAll"	resultType="hotplace"> 
+		SELECT * 
+		FROM hotplace
+		WHERE hp_del_check = false     
+	</select>
+</mapper>
+

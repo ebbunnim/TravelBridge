@@ -4,26 +4,37 @@
 <mapper namespace="com.pjt1.demo.model.dao.FilesDao" >
 
   	<insert id="insert"		parameterType="files">
-		insert into files
-		(post_no, files_name, files_thumbnail, files_url, files_del_check)
-		values (
-		#{post_no:INTEGER}, #{files_name:VARCHAR}, #{files_thumbnail:BOOLEAN},
-		#{files_url:VARCHAR}, #{files_del_check:BOOLEAN}
+		INSERT INTO files
+		(path_type, path_no, 
+		files_name, files_thumbnail, 
+		files_url)
+		VALUES (
+		#{path_type:INTEGER}, #{path_no:INTEGER},
+		#{files_name:VARCHAR}, false,
+		#{files_url:VARCHAR}}
 		)
 	</insert> 
    	<delete id="delete" 	parameterType="int"> </delete>
 
    	<update id="update"		parameterType="files">
-		update files set
-		post_no=#{post_no:INTEGER}, files_name=#{files_name:VARCHAR}, files_thumbnail=#{files_thumbnail:BOOLEAN},
+		UPDATE files 
+		SET
+		path_type = #{path_no:INTEGER}, path_no=#{path_no:INTEGER}, 
+		files_name=#{files_name:VARCHAR}, files_thumbnail=#{files_thumbnail:BOOLEAN},
 		files_url=#{files_url:VARCHAR}, files_del_check=#{files_del_check:BOOLEAN}
+		WHERE files_no =#{files_no:INTEGER}
 	</update>
 	
    	<select id="search"		parameterType="int" resultType="files">
-		select * from files where files_no=#{files_no:INTEGER} and files_del_check=false   
+		SELECT * 
+		FROM files 
+		WHERE files_no=#{files_no:INTEGER} 
+		AND files_del_check=false   
 	</select>
    	<select id="searchAll"	resultType="files">
-		select * from files where files_del_check=false
+		SELECT * 
+		FROM files 
+		WHERE files_del_check=false
 	</select>
 </mapper>
 

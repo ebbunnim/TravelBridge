@@ -12,4 +12,5 @@ public interface FaqService {
 	public void insert(Faq Faq);
 	public void update(Faq Faq);
 	public void delete(int faq_no);
+	public void updateHitUp(int faq_no);
 }

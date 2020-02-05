@@ -78,4 +78,10 @@ public class FaqController{
         service.update(Faq);
         return handleSuccess("수정 완료");
     }
+	@ApiOperation("Faq 조회수 증가")
+    @PutMapping("/Faq/updateHitUp/{faq_no}")
+    public ResponseEntity<Map<String, Object>> updateHitUp(@PathVariable int faq_no) {
+        service.updateHitUp(faq_no);
+        return handleSuccess("수정 완료");
+    }
 }
