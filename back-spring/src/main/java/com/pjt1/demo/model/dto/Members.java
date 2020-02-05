@@ -9,7 +9,7 @@ public class Members implements Serializable {
 	private int mem_no;// int PRIMARY KEY AUTO_INCREMENT, # 회원 관리번호
 	private String mem_id;// varchar( 50) NOT NULL UNIQUE, # 아이디
 	private String mem_email;// varchar(150) NOT NULL UNIQUE, # 이메일
-	private String mem_password;// varchar(500) NOT NULL , # 패스워드
+	// private String mem_password;// varchar(500) NOT NULL , # 패스워드
 	private String mem_phone;// varchar( 50) NOT NULL UNIQUE, # 핸드폰번호
 	private String mem_name;// varchar( 50), # 이름
 	private int mem_sex;// int, # 성별 0: 남 1:여
@@ -30,13 +30,12 @@ public class Members implements Serializable {
 		super();
 	}
 
-	public Members(String mem_id, String mem_email, String mem_password, String mem_phone, String mem_name, int mem_sex,
+	public Members(String mem_id, String mem_email,  String mem_phone, String mem_name, int mem_sex,
 			String mem_birth, String mem_address, boolean mem_receive_email, String mem_interest, String mem_token,
 			String mem_login_type) {
 		super();
 		this.mem_id = mem_id;
 		this.mem_email = mem_email;
-		this.mem_password = mem_password;
 		this.mem_phone = mem_phone;
 		this.mem_name = mem_name;
 		this.mem_sex = mem_sex;
@@ -48,7 +47,7 @@ public class Members implements Serializable {
 		this.mem_login_type = mem_login_type;
 	}
 
-	public Members(int mem_no, String mem_id, String mem_email, String mem_password, String mem_phone, String mem_name,
+	public Members(int mem_no, String mem_id, String mem_email,String mem_phone, String mem_name,
 			int mem_sex, String mem_birth, String mem_address, int mem_grant, boolean mem_receive_email,
 			int mem_following, int mem_followed, String mem_lastlogin, String mem_regtime, String mem_interest,
 			String mem_token, String mem_login_type, boolean mem_del_check) {
@@ -56,7 +55,6 @@ public class Members implements Serializable {
 		this.mem_no = mem_no;
 		this.mem_id = mem_id;
 		this.mem_email = mem_email;
-		this.mem_password = mem_password;
 		this.mem_phone = mem_phone;
 		this.mem_name = mem_name;
 		this.mem_sex = mem_sex;
@@ -76,8 +74,8 @@ public class Members implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Members [mem_no=" + mem_no + ", mem_id=" + mem_id + ", mem_email=" + mem_email + ", mem_password="
-				+ mem_password + ", mem_phone=" + mem_phone + ", mem_name=" + mem_name + ", mem_sex=" + mem_sex
+		return "Members [mem_no=" + mem_no + ", mem_id=" + mem_id + ", mem_email=" + mem_email + 
+				", mem_phone=" + mem_phone + ", mem_name=" + mem_name + ", mem_sex=" + mem_sex
 				+ ", mem_birth=" + mem_birth + ", mem_address=" + mem_address + ", mem_grant=" + mem_grant
 				+ ", mem_receive_email=" + mem_receive_email + ", mem_following=" + mem_following + ", mem_followed="
 				+ mem_followed + ", mem_lastlogin=" + mem_lastlogin + ", mem_regtime=" + mem_regtime + ", mem_interest="
@@ -99,14 +97,6 @@ public class Members implements Serializable {
 
 	public void setMem_email(String mem_email) {
 		this.mem_email = mem_email;
-	}
-
-	public String getMem_password() {
-		return mem_password;
-	}
-
-	public void setMem_password(String mem_password) {
-		this.mem_password = mem_password;
 	}
 
 	public String getMem_phone() {

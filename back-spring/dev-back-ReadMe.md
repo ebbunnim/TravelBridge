@@ -1,7 +1,7 @@
 
-# TODOLIST 
+# **TODOLIST** 
 
-- 2020.02.04
+# 2020.02.04
 
 
 ## 1. 데이터 삭제 관련 정의
@@ -68,11 +68,20 @@
 
 ## 4. FAQ / Q&A (구헌)
 
- - qna도 카테고리로 범주화 
- - hits 필드는 둘 다 제거 
- - faq는 question / answer  
-   qna는 title / content/ answer + category 형태로 데이터 입력 
- - 1대1 문의 형태라서 secret 필드 제거 
+ - qna도 카테고리로 범주화 o
+ - hits 필드는 둘 다 제거 o
+ - faq는 question / answer o 
+   qna는 title / content/ answer + category 형태로 데이터 입력 o
+ - 1대1 문의 형태라서 secret 필드 제거 o
 
 
 ## 5. LOGIN (지영)
+
+
+# 2020 .02.05
+
+## 1. 데이터 수집
+
+## 2. 각 테이블별 기능 구현
+
+## 3. 연관되는 컬럼 삭제 처리

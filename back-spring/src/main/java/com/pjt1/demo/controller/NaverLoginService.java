@@ -130,6 +130,7 @@ public class NaverLoginService {
       String id = response1.path("id").asText();
       String name = response1.path("name").asText();
       String email = response1.path("email").asText();
+      // 처리되는지 확인
       System.out.println(email);
 
       Members checkSocialMembers = service.searchMemberByEmail(email);
@@ -155,43 +156,32 @@ public class NaverLoginService {
         httpHeaders.setLocation(redirectUri);
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
 
-        // return new ResponseEntity<Map<String, Object>>(resultMap, status);
-
       } else {
         // 새로운 유저면 무조건 0에서 시작
         int grant = 0;
+
+        //  false로 넘기기
+        /// false -> 뷰에서 회원가입 시킴 -> 일반 유저 가입방식과 같음
+
         Members socialUser = new Members();
         socialUser.setMem_email(email);
         socialUser.setMem_id(id);
-        service.insert(socialUser);
+        // service.insert(socialUser);
 
-        System.out.println("#######start make token#######");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = null;
-        String token = jwtService.create(socialUser);
-        System.out.println(token);
-        response.setHeader("jwt-auth-token", token);
         resultMap.put("data", socialUser);
+        resultMap.put("SIGN", false);
         resultMap.put("status", true);
-
-        // URI redirectUri = new URI("http://localhost:8080/?email"++);
-
-        // public ResponseEntity<Object> logintest() throws URISyntaxException {
-        // System.out.println("hello naver -----------------------------------------");
-        // URI redirectUri = new URI("http://localhost:8080");
-        // HttpHeaders httpHeaders = new HttpHeaders();
-        // httpHeaders.setLocation(redirectUri);
-        // return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
-        // }
-
+        System.out.println("=======debug Map data in User=======");
+        System.out.println(resultMap);
+        System.out.println("=======debug Map data in User=======");
         status = HttpStatus.ACCEPTED;
 
         URI redirectUri = new URI("http://localhost:8080?email=" + email + "&grant=" + grant);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(redirectUri);
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
-        // return new ResponseEntity<Map<String, Object>>(resultMap, status);
-
       }
     }
     return null;

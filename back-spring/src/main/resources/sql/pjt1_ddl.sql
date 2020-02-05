@@ -34,7 +34,7 @@ CREATE TABLE MEMBERS (
 	mem_no				int	PRIMARY KEY AUTO_INCREMENT,	# 회원 관리번호
 	mem_id				varchar( 50) NOT NULL UNIQUE,	# 아이디
 	mem_email			varchar(150) NOT NULL UNIQUE,	# 이메일
-	mem_password		varchar(500) NOT NULL ,			# 패스워드
+	# mem_password		varchar(500) NOT NULL ,			# 패스워드
 	mem_phone			varchar( 50) NOT NULL UNIQUE,	# 핸드폰번호
 	mem_name			varchar( 50),					# 이름
 	mem_sex				int,							# 성별 0: 남 1:여
@@ -224,6 +224,5 @@ use pjt1db;
 show table status;
 
 show tables;
-
 
 
