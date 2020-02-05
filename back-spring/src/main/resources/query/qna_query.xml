@@ -35,6 +35,12 @@
 		WHERE qna_no=#{qna_no}
 	</update>
 
+	<update id="answerTheQuestion" parameterType="qna">
+		UPDATE qna SET
+		qna_answer = #{qna_answer:VARCHAR}
+		WHERE qna_no=#{qna_no}
+	</update>
+	 
    	<select id="search"		parameterType="int" resultType="qna">
 		SELECT * 
 		FROM qna 

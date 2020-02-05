@@ -45,6 +45,57 @@ public class Faq implements Serializable {
 	}
 
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((faq_answer == null) ? 0 : faq_answer.hashCode());
+		result = prime * result + ((faq_category == null) ? 0 : faq_category.hashCode());
+		result = prime * result + (faq_del_check ? 1231 : 1237);
+		result = prime * result + faq_no;
+		result = prime * result + ((faq_question == null) ? 0 : faq_question.hashCode());
+		result = prime * result + ((faq_regtime == null) ? 0 : faq_regtime.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Faq other = (Faq) obj;
+		if (faq_answer == null) {
+			if (other.faq_answer != null)
+				return false;
+		} else if (!faq_answer.equals(other.faq_answer))
+			return false;
+		if (faq_category == null) {
+			if (other.faq_category != null)
+				return false;
+		} else if (!faq_category.equals(other.faq_category))
+			return false;
+		if (faq_del_check != other.faq_del_check)
+			return false;
+		if (faq_no != other.faq_no)
+			return false;
+		if (faq_question == null) {
+			if (other.faq_question != null)
+				return false;
+		} else if (!faq_question.equals(other.faq_question))
+			return false;
+		if (faq_regtime == null) {
+			if (other.faq_regtime != null)
+				return false;
+		} else if (!faq_regtime.equals(other.faq_regtime))
+			return false;
+		return true;
+	}
+
+
 	public String getFaq_category() {
 		return faq_category;
 	}

@@ -58,11 +58,11 @@ public class FaqServiceImpl implements FaqService {
 		}
 	}
 
-	public void updateHitUp(int faq_no) {
+	public int getCount() {
 		try {
-			repo.updateHitUp(faq_no);
+			return repo.getCount();
 		} catch(Exception e) {
 			e.printStackTrace();
-		}
+		} return 0;
 	}
 }
