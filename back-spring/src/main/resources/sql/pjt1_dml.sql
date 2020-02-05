@@ -205,17 +205,24 @@ VALUES (
 select * from city;
 select * from hotplace;
 
+# 도시번호 찾기
+SELECT city_no FROM city WHERE city_name = "서울";
+
+# 도시별로 가져오기
 SELECT * 
 FROM hotplace 
-WHERE city_no = 1 
+WHERE city_no = 1 AND hp_del_check = false
 ORDER BY hp_name
 LIMIT 0, 3;
 
-# 태그안에 해당 단어가 있으면 다가져옴
+# 태그별로 가져오기 (태그안에 해당 단어가 있으면 다가져옴)
 SELECT * 
 FROM hotplace
-WHERE hp_tag LIKE concat('%','휴식','%')
+WHERE hp_tag LIKE concat('%','휴식','%') AND hp_del_check = false
 ORDER BY hp_name limit 0, 3;
 
-
-
+# 주소별로 가져오기
+SELECT * 
+FROM hotplace
+WHERE hp_address = TRIM("서울 종로구") AND hp_del_check = false
+ORDER BY hp_name limit 0, 3;

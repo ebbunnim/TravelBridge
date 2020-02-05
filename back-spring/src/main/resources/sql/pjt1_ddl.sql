@@ -34,7 +34,6 @@ CREATE TABLE MEMBERS (
 	mem_no				int	PRIMARY KEY AUTO_INCREMENT,	# 회원 관리번호
 	mem_id				varchar( 50) NOT NULL UNIQUE,	# 아이디
 	mem_email			varchar(150) NOT NULL UNIQUE,	# 이메일
-	# mem_password		varchar(500) NOT NULL ,			# 패스워드
 	mem_phone			varchar( 50) NOT NULL UNIQUE,	# 핸드폰번호
 	mem_name			varchar( 50),					# 이름
 	mem_sex				int,							# 성별 0: 남 1:여
@@ -139,6 +138,7 @@ CREATE TABLE LIKES (
 
 # FAQ 테이블
 # 관리자가 만들어둔 게시글들
+DROP TABLE FAQ;
 CREATE TABLE FAQ (
 	faq_no		int PRIMARY KEY AUTO_INCREMENT,		# 자주하는 질문 관리번호	기본키, 자동증가
     faq_category varchar(200),						# 질문 카테고리
@@ -163,13 +163,14 @@ CREATE TABLE QNA (
 
 create table FILES(
 	files_no int NOT NULL KEY AUTO_INCREMENT,
-    path_type int NOT NULL,				# 0 : POST, 1 : HOTPLACE
-    path_no int NOT NULL,				# 게시물 또는 핫플 번호
+    post_no int NOT NULL,				# 게시물 번호
     files_name varchar(200) NOT NULL,	# 파일 이름
     files_thumbnail boolean, 			# 파일 썸네일 여부
     files_url varchar(500) NOT NULL,
-    files_del_check boolean DEFAULT FALSE
+    files_del_check boolean DEFAULT FALSE,
+    FOREIGN KEY(post_no) REFERENCES POST(post_no)
 );
+
 # 국내/국외여부, 주소(서울 강남구), 이미지 
 create table city(
 	city_no int NOT NULL KEY AUTO_INCREMENT, # 도시 관리번호
@@ -179,11 +180,14 @@ create table city(
     city_img varchar(500),					 # 도시 이미지
     city_del_check boolean DEFAULT FALSE	 # 도시 삭제 여부
 );
-
+select * from city;
 # 이름, 도시번호, 주소, 상세주소, List<이미지>, 
 # 컨텐츠, 태그 + api(지도, 리뷰 등), 상세정보(홈페이지, 휴일, 요금, 기타) //운영시간은 거의 없어서 제외하고 기타로 대체
+select * from hotplace;
+
 create table hotplace(
 	hp_no int NOT NULL KEY AUTO_INCREMENT,	# 핫플 관리번호
+    city_no int NOT NULL,					# 도시 번호
     hp_name varchar(200) NOT NULL,			# 핫플 이름
     hp_address varchar(200) NOT NULL,		# 핫플 주소 //ex) 서울 강남구
     hp_detail_adr varchar(500) NOT NULL,	# 핫플 상세주소
@@ -191,10 +195,13 @@ create table hotplace(
     hp_tag varchar(1000) NOT NULL,			# 핫플 태그 (" "로 구분)
     hp_homepage varchar(500),				# 핫플 홈페이지
     hp_holiday varchar(200),				# 핫플 휴일
-    hp_fee varchar(500),					# 핫플 요금
-    hp_etc varchar(2000),					# 핫플 관련 기타사항
-    hp_del_check boolean DEFAULT FALSE		# 핫플 삭제 여부
+    hp_fee varchar(2000),					# 핫플 요금
+    hp_img varchar(500),					# 핫플 관련 기타사항
+    hp_del_check boolean DEFAULT FALSE,		# 핫플 삭제 여부
+	FOREIGN KEY(city_no) REFERENCES CITY(city_no)
 );
+
+
 # 축제테이블
 create table FESTIVAL(
     fval_no int NOT NULL KEY AUTO_INCREMENT,		# 축제 관리번호
