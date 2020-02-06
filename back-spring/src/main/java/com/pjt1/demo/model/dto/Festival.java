@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Festival implements Serializable{
 	private static final long serialVersionUID = 9144830003212943493L;
 	private int fval_no 			;//int NOT NULL KEY AUTO_INCREMENT,
-    private int clm_no 				;//int NOT NULL,
+    private int city_no 			;//int NOT NULL,
     private String fval_name 		;//varchar(200) NOT NULL,
     private String fval_address 	;//varchar(500) NOT NULL,
     private String fval_img 		;//varchar(500),
@@ -22,19 +22,19 @@ public class Festival implements Serializable{
 	public Festival() {
 		super();
 	}
-	public Festival(int clm_no, String fval_name, String fval_address, String fval_content, String fval_map_img) {
+	public Festival(int city_no, String fval_name, String fval_address, String fval_content, String fval_map_img) {
 		super();
-		this.clm_no = clm_no;
+		this.city_no = city_no;
 		this.fval_name = fval_name;
 		this.fval_address = fval_address;
 		this.fval_content = fval_content;
 		this.fval_map_img = fval_map_img;
 	}
-	public Festival(int clm_no, String fval_name, String fval_address, String fval_img, String fval_content,
+	public Festival(int city_no, String fval_name, String fval_address, String fval_img, String fval_content,
 			String fval_tag, String fval_start_day, String fval_end_day, int fval_fee, String fval_map_img,
 			String fval_homepage, String fval_host) {
 		super();
-		this.clm_no = clm_no;
+		this.city_no = city_no;
 		this.fval_name = fval_name;
 		this.fval_address = fval_address;
 		this.fval_img = fval_img;
@@ -47,12 +47,12 @@ public class Festival implements Serializable{
 		this.fval_homepage = fval_homepage;
 		this.fval_host = fval_host;
 	}
-	public Festival(int fval_no, int clm_no, String fval_name, String fval_address, String fval_img, String fval_content,
+	public Festival(int fval_no, int city_no, String fval_name, String fval_address, String fval_img, String fval_content,
 			String fval_tag, String fval_start_day, String fval_end_day, int fval_fee, String fval_map_img,
 			String fval_homepage, String fval_host, boolean fval_del_check) {
 		super();
 		this.fval_no = fval_no;
-		this.clm_no = clm_no;
+		this.city_no = city_no;
 		this.fval_name = fval_name;
 		this.fval_address = fval_address;
 		this.fval_img = fval_img;
@@ -68,17 +68,17 @@ public class Festival implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Festival [fval_no=" + fval_no + ", clm_no=" + clm_no + ", fval_name=" + fval_name + ", fval_address="
+		return "Festival [fval_no=" + fval_no + ", city_no=" + city_no + ", fval_name=" + fval_name + ", fval_address="
 				+ fval_address + ", fval_img=" + fval_img + ", fval_content=" + fval_content + ", fval_tag=" + fval_tag
 				+ ", fval_start_day=" + fval_start_day + ", fval_end_day=" + fval_end_day + ", fval_fee=" + fval_fee
 				+ ", fval_map_img=" + fval_map_img + ", fval_homepage=" + fval_homepage + ", fval_host=" + fval_host
 				+ ", fval_del_check=" + fval_del_check + "]";
 	}
-	public int getClm_no() {
-		return clm_no;
+	public int getCity_no() {
+		return city_no;
 	}
-	public void setClm_no(int clm_no) {
-		this.clm_no = clm_no;
+	public void setCity_no(int clm_no) {
+		this.city_no = clm_no;
 	}
 	public String getFval_name() {
 		return fval_name;

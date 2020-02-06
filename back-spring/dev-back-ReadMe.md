@@ -1,7 +1,7 @@
 
-# TODOLIST 
+# **TODOLIST** 
 
-- 2020.02.04
+# 2020.02.04
 
 
 ## 1. 데이터 삭제 관련 정의
@@ -68,11 +68,55 @@
 
 ## 4. FAQ / Q&A (구헌)
 
- - qna도 카테고리로 범주화 
- - hits 필드는 둘 다 제거 
- - faq는 question / answer  
-   qna는 title / content/ answer + category 형태로 데이터 입력 
- - 1대1 문의 형태라서 secret 필드 제거 
+ - qna도 카테고리로 범주화 o
+ - hits 필드는 둘 다 제거 o
+ - faq는 question / answer o 
+   qna는 title / content/ answer + category 형태로 데이터 입력 o
+ - 1대1 문의 형태라서 secret 필드 제거 o
 
 
 ## 5. LOGIN (지영)
+  - 로그인 기능 구현(firebase기반 local login / googlelogin / naverlogin / github login)
+  - selenium을 활용한 크롤링 예정 - 대한민국 구석구석
+  
+- 
+
+
+# 2020 .02.05
+
+## 1. 데이터 수집
+- FAQ, QNA 테스트용 데이터 생성 o
+- MEMBERS 테스트용 데이터 생성 o
+- CITY, HOTPLACE 데이터 수집 o
+- BOARD 데이터 생성
+- POST 데이터 생성
+  - post는 더보기 형태로 제공
+- COMMENT 데이터 생성
+
+
+## 2. 각 테이블별 기능 구현
+- FAQ, Q&A 기능 구현
+- FAQ o
+  - searchAll
+  - search(no)
+  - insert
+  - delete(no)
+  - update
+
+- QNA o
+  - searchAll
+  - search(no)
+  - searchForMember(mem_no)
+  - insert
+  - delete(no)
+  - update
+  - answerTheQuestion
+
+- CITY & HOTPLACE
+  - json으로 hotplace 정보 insert 시 \n으로 개행처리 해줘야함
+  - hotplace img 1개만 사용하기로 함 (hp_img)  
+    files는 post_no 하나만 취함+
+  - 
+## 3. 연관되는 컬럼 삭제 처리
+
+ 

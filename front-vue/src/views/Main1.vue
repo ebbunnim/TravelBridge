@@ -1,12 +1,91 @@
 <template>
   <div>
     <h1>메인1</h1>
+    이미지 업로드 테스트
+    <div>
+      <input
+        type="file"
+        @change="uploadImages($event.target.files[0])"
+        accept="image/*"
+      />
+      <button @click="sendImage()">업로드</button>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+// // create table FILES(
+// 	files_no int NOT NULL KEY AUTO_INCREMENT,
+//     path_type int NOT NULL,				# 0 : POST, 1 : HOTPLACE
+//     path_no int NOT NULL,				# 게시물 또는 핫플 번호
+//     files_name varchar(200) NOT NULL,	# 파일 이름
+//     files_thumbnail boolean, 			# 파일 썸네일 여부
+//     files_url varchar(500) NOT NULL,
+//     files_del_check boolean DEFAULT FALSE
+// );
+
+import Api from "@/services/Api";
+import Axios from "axios";
+import Qs from "qs";
+
+export default {
+  data() {
+    return {
+      files_url: ""
+    };
+  },
+  methods: {
+    uploadImages(images) {
+      console.log(images);
+      Axios.post(`https://api.imgur.com/3/image`, images, {
+        headers: {
+          Authorization: "Client-ID 68f9bfe66c24bc5"
+        }
+      }).then(res => {
+        console.log(res.data.data.link);
+        this.files_url = res.data.data.link;
+      });
+
+      //   const promises = Array.from(images).map(image => {
+      //     const formData = new FormData();
+      //     formData.append("image", image);
+      //     console.log("ㅎ");
+      //     for (let key in formData.entries()) {
+      //       console.log(`${key}`);
+      //     }
+
+      //     return Axios.post(
+      //       `https://api.imgur.com/3/upload`,
+      //       formData,
+      //       {
+      // headers: {
+      //   Authorization: "68f9bfe66c24bc5"
+      // }
+      //       }
+      //     );
+      //   });
+      //   return Promise.all(promises);
+    },
+    sendImage() {
+
+    //       post_no int NOT NULL,				# 게시물 번호
+    // files_name varchar(200) NOT NULL,	# 파일 이름
+    // files_thumbnail boolean, 			# 파일 썸네일 여부
+    // files_url varchar(500) NOT NULL,
+      let file = {
+        files_url: '',
+        post_no: 1,
+        files_name: 'ㅎㅎ',
+        files_thumbnail: false
+      }
+      file.files_url = this.files_url
+      console.log('테스트임', file.files_url)
+      Api.post("/Files/Post", file).then(res => {
+        console.log(res.data);
+      });
+    }
+  }
+};
 </script>
 
-<style>
-</style>
+<style></style>
