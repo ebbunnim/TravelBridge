@@ -1,29 +1,29 @@
 import Api from "./Api";
 
 class UserService {
-  signUp(email, password) {
+  async signUp(email) {
     console.log("hello");
-    Api.post("/user/info", {
-      user_email: email,
-      user_pw: password,
-      user_grant: 0
+    return await Api.post("/Members/insert", {
+      mem_email: email,
+      mem_id: "asd",
+      mem_phone: "010-000-0000"
     })
       .then(() => {
         alert("회원가입 성공");
         return true;
       })
       .catch(exp => {
-        alert("회원가입 실패 ") + exp;
+        alert("회원가입 실패 " + exp);
         return false;
       });
   }
 
   LogIn(email) {
     console.log(email);
-    Api.post("/user/login", {
-      user_email: email
+    return Api.post("/Members/login", {
+      mem_email: email
     }).then(response => {
-      alert("로그인 성공" + response);
+      return response.data.data;
     });
   }
 }

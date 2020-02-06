@@ -60,12 +60,12 @@ export default {
     return {
       MainCard: [
         {
-          img: "https://cdn.quasar.dev/img/mountains.jpg",
+          img: require("../assets/bg.jpg"),
           title: "First stop",
           sub: "Mountains"
         },
         {
-          img: "https://cdn.quasar.dev/img/parallax1.jpg",
+          img: require("../assets/main.gif"),
           title: "second stop",
           sub: "Mountains"
         },

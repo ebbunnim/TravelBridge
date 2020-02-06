@@ -15,28 +15,33 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 export default {
-  signUpWithDefault(email, password) {
+  async signUpWithDefault(email, password) {
     console.log(email + " " + password);
-    firebase
+    return await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
+      .then(function(result) {
+        console.log(result);
+        return true;
+      })
       .catch(function(error) {
         console.error("[Normal SignUp Error]", error);
+        return false;
       });
   },
-  loginWithDefault(email, password) {
+  async loginWithDefault(email, password) {
     console.log(email + " " + password);
-    firebase
+    return await firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(function(result) {
-        console.log(result);
-        return result;
+        console.log(result.user);
+        return true;
       })
       .catch(function(error) {
         console.error("[Normal Login Error]", error);
+        return false;
       });
-    console.log("login ok");
   },
   loginWithGoogle() {
     let provider = new firebase.auth.GoogleAuthProvider();
