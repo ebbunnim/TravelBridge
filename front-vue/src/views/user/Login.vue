@@ -117,6 +117,7 @@ export default {
       });
     },
     NaverLogin() {
+      this.$store.dispatch("user/check");
       this.SNSLoginCheck(false);
     },
     GoogleLogin() {

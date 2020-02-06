@@ -9,6 +9,9 @@ const state = {
 };
 
 const actions = {
+  check: () => {
+    UserService.check();
+  },
   postSignUp: (store, payload) => {
     //네이버는 아니야
     var signUpCheck = UserService.signUp(payload.user_email, payload.pw);
