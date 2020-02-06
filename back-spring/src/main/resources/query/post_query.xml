@@ -46,7 +46,7 @@
 		post_hits = post_hits + 1
 		WHERE post_no=#{post_no}
 	</update>
-   	<select id="search"		parameterType="int" resultType="post">
+   	<select id="search"	parameterType="int" resultType="post">
 		SELECT * 
 		FROM post 
 		WHERE 
@@ -56,5 +56,17 @@
    	<select id="searchAll"	resultType="post">
 		SELECT * FROM post WHERE post_del_check = false
 	</select>
+
+	<select id="searchByCategory" parameterType="string" resultType="post">
+		SELECT * FROM post WHERE post_category = #{post_category}
+	</select>
+
+
+
+
+
+
+
+	
 </mapper>
 

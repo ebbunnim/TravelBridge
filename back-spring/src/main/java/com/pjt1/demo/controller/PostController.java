@@ -1,5 +1,7 @@
 package com.pjt1.demo.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,4 +84,13 @@ public class PostController {
         service.update(Post);
         return handleSuccess("수정 완료");
     }
+
+    @ApiOperation("카테고리로 Post 조회")
+    @GetMapping("/Post/search/{category}")
+    public ResponseEntity<Map<String, Object>> searchByCategory(String category) {
+
+        Post Post = service.searchByCategory(category);
+        return handleSuccess(Post);
+    }
+
 }

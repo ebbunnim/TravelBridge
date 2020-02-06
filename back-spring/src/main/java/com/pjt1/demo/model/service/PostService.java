@@ -14,4 +14,7 @@ public interface PostService {
 	public void update(Post Post);
 
 	public void delete(int post_no);
+
+	public Post searchByCategory(String category);
+
 }

@@ -83,9 +83,31 @@
 
 ## 5. LOGIN (지영)
   - 로그인 기능 구현(firebase기반 local login / googlelogin / naverlogin / github login)
-  - selenium을 활용한 크롤링 예정 - 대한민국 구석구석
+
+## 6. FILES UPLOAD(지영)
+  - POST 이미지 파일 업로드 구현
+
+## 7. POST
+  - 추가
+    - search_by_postno o
+    - search_by_category o
+    - search_by_course
+    - insert course 수정 o ('-'기준으로 Split 후 모두 course 각각으로 저장 (post_no 가져가는 것 주의))
+    
+  - 관련 테이블
+    - post, file, comment, course
   
-- 
+  - 세부사항
+  1. 조회수
+  2. 작성시간
+  3. 비밀여부
+
+  - 마지막 추가 기능
+  1. 좋아요
+  2. 팔로우
+  버튼 만들어서 조작하기
+
+  
 
 
 # 2020 .02.05

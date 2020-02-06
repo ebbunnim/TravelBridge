@@ -3,6 +3,10 @@
 	
 
 <mapper namespace="com.pjt1.demo.model.dao.CourseDao" >
+		<!-- public void insert(List<String> spotList); -->
+
+	<!-- public void insert(Course targetCourse); -->
+
 
   	<insert id="insert"		parameterType="course">
 		INSERT INTO 
@@ -10,7 +14,7 @@
 		(post_no, course_spot) 
 		VALUES (
 		#{post_no:INTEGER},
-		#{cmt_spot:VARCHAR}
+		#{course_spot:VARCHAR}
 		)
 	</insert> 
    	<delete id="delete" 	parameterType="int">
@@ -38,5 +42,28 @@
 		FROM course
 		WHERE course_del_check = false     
 	</select>
+
+		<!-- public Post searchByCourse(List<String> courseList); -->
+
+	<!-- <!<select id="searchPostByCourse" parameterType="java.util.List" resultType="com.pjt1.demo.model.dto.Post">
+		SELECT * FROM post 
+		<choose>
+			<when test="courseList.size != 0">
+				where v
+			</when>
+		</choose>
+		
+		
+		WHERE post_category = #{post_category}
+	</select>  -->
+
+		<!-- public Post searchPostByCourse(String course); -->
+	<select id="searchPostByCourse"	 parameterType="string"  resultType="com.pjt1.demo.model.dto.Post"> 
+		SELECT * 
+		FROM course
+		WHERE course_del_check = false and course_spot=#{course_spot} 
+	</select>
+
+	
 </mapper>
 

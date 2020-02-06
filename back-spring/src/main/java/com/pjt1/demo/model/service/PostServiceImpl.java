@@ -43,7 +43,6 @@ public class PostServiceImpl implements PostService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -63,6 +62,16 @@ public class PostServiceImpl implements PostService {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public Post searchByCategory(String category) {
+		try {
+			return repo.searchByCategory(category);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
