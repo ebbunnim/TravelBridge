@@ -12,7 +12,18 @@ class QnaService {
 
   // POST
   insert(qna) {
-    return Api.post("/Qna/insert");
+    // return Api.post("/Qna/insert", {
+    //   mem_no: qna.mem_no,
+    //   qna_title: qna.qna_title,
+    //   qna_content: qna.qna_content,
+    //   qna_answer: qna.qna_answer
+    // })
+    return Api.post("/Qna/insert", qna)
+      .then(Response => {
+        console.log(Response);
+        return Response.data.data;
+      })
+      .catch(exp => console.log("error" + exp));
   }
 
   // Delete
@@ -22,10 +33,22 @@ class QnaService {
 
   // PUT
   update(qna) {
-    return Api.put("/Qna/update");
+    return Api.put("/Qna/update", qna).
+    then(res => {
+      console.log('수정', res);
+      return res.data.data
+    })
   }
 
   answerTheQuestion(qna) {
-    return Api.put("/Qna/answerTheQuestion");
+    return Api.put("/Qna/answerTheQuestion", qna)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(e => {
+      console.log(e)
+    })
   }
 }
+
+export default new QnaService();

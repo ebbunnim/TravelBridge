@@ -64,8 +64,8 @@ export default {
   },
   created() {
     this.getAllFaqs();
-    console.log(this.$store.faqList)
-    this.FaqList = this.$store.faqList 
+    console.log('목록', this.$store.state.faq.faqList)
+    this.FaqList = this.$store.state.faq.faqList
   }
 };
 </script>
