@@ -35,7 +35,8 @@ import {
   QInput,
   QForm,
   QTabPanels,
-  QTabPanel
+  QTabPanel,
+  QChatMessage
 } from "quasar";
 
 Vue.use(Quasar, {
@@ -71,7 +72,8 @@ Vue.use(Quasar, {
     QInput,
     QForm,
     QTabPanels,
-    QTabPanel
+    QTabPanel,
+    QChatMessage
   },
   directives: {},
   plugins: {}

@@ -1,12 +1,9 @@
 import Api from "./Api";
 
-class faqService {
+class FaqService {
   selectAllFaqs() {
-    let temp = Api.get("comment/search").then(result => {
-      return result.data.data;
-    });
-    return temp;
+    return Api.get("/Faq/search/all")
   }
 }
 
-export default new faqService();
+export default new FaqService();

@@ -15,20 +15,20 @@
     <div class="info">
       <p class="text-h5 text-weight-medium">자주 묻는 질문 BEST</p>
       <q-list
-        v-for="(faqList, index) in FaqList"
-        :key="index"
+        v-for="faqList in FaqList"
+        :key="faqList.faq_no"
         bordered
         class="q-my-lg"
       >
         <q-expansion-item
           switch-toggle-side
           expand-separator
-          :label="faqList.label"
+          :label="faqList.faq_question"
         >
           <q-card>
             <q-card-section
               ><i class="fas fa-arrow-circle-right"></i
-              >{{ faqList.body }}</q-card-section
+              >{{ faqList.faq_answer }}</q-card-section
             >
           </q-card>
         </q-expansion-item>
@@ -45,24 +45,27 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-// import
+// import { mapState, mapActions } from "vuex";
+import FaqService from "@/services/FaqService";
 
 export default {
-  methods: {
-    getImgUrl(img) {
-      return require("@/assets/" + img);
-    },
-    ...mapActions(["getFaqList"])
-  },
   data() {
     return {
       FaqList: []
     };
   },
-  mounted() {
-    this.getFaqList();
-    this.FaqList = $store.state.FaqList;
+  methods: {
+    getImgUrl(img) {
+      return require("@/assets/" + img);
+    },
+    getAllFaqs() {
+      this.$store.dispatch("faq/getAllFaqs");
+    }
+  },
+  created() {
+    this.getAllFaqs();
+    console.log(this.$store.faqList)
+    this.FaqList = this.$store.faqList 
   }
 };
 </script>

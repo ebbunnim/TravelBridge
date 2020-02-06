@@ -1,15 +1,28 @@
-import Api from "@/services/faqService";
+import FaqService from "@/services/FaqService";
 
 const state = {
   faqList: []
-}
+};
 
 const actions = {
-  faqService.selectAllFaq()
-}
+  getAllFaqs({ commit }) {
+    console.log("뷰");
+    FaqService.selectAllFaqs().then(response => {
+      console.log(response.data.data);
+      commit("setAllFaqs", response.data.data);
+    });
+  }
+};
+
+const mutations = {
+  setAllFaqs(state, faqs) {
+    state.faqList = faqs;
+  }
+};
 
 export default {
   namespaced: true,
   state,
-  actions,
+  mutations,
+  actions
 };
