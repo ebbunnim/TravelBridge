@@ -90,8 +90,8 @@
 ## 7. POST
   - 추가
     - search_by_postno o
-    - search_by_category o
-    - search_by_course
+    - search_by_category * -> #으로 split처리해서 처리하기
+    - search_by_course * -> -으로 같은 로직, 다른 테이블 참조 되는지 확인해봐야
     - insert course 수정 o ('-'기준으로 Split 후 모두 course 각각으로 저장 (post_no 가져가는 것 주의))
     
   - 관련 테이블
@@ -107,8 +107,11 @@
   2. 팔로우
   버튼 만들어서 조작하기
 
-  
-
+# TestCase 작성 (지영)
+  - interest 받을 때 여러개로 받으면 어떻게 string처리?  
+  - post에는 후기 게시글밖에 존재 안함
+  - course에 대표 지역 설정하는 식으로 해야 (테이블에 추가해야)
+  - comment 부분에 대댓글 부분 어떻게 쿼리문으로 가져올 지 생각봐야(일단 데이터만 넣어놓겠음.) & 댓글 title일단 빼고 넣을 것임
 
 # 2020 .02.05
 

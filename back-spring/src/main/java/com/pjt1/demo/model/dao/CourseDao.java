@@ -20,6 +20,6 @@ public interface CourseDao {
 
 	public void insert(Course targetCourse);
 
-	public Post searchPostByCourse(String course_spot);
+
 
 }
