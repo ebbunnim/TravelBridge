@@ -1,17 +1,20 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+//user
+import Login from "../views/user/Login.vue";
+import PasswordFind from "../views/user/PasswordFind.vue";
+import SignUp from "../views/user/SignUp.vue";
+//main
 import Home from "../views/Home.vue";
 import Main1 from "../views/Main1.vue";
 import Main2 from "../views/Main2.vue";
 import Sub from "../views/Sub.vue";
-
-import AboutTeam from "../views/AboutTeam.vue";
-import AboutProject from "../views/AboutProject.vue";
-import Login from "../views/Login.vue";
+//about
+import AboutTeam from "../views/about/AboutTeam.vue";
+import AboutService from "../views/about/AboutService.vue";
+//faq&qna
 import Qna from "../views/Qna.vue";
 import Faq from "../views/Faq.vue";
-import PasswordFind from "../views/PasswordFind.vue";
-import SignUp from "../views/SignUp.vue";
 
 Vue.use(VueRouter);
 
@@ -52,9 +55,9 @@ const routes = [
     component: AboutTeam
   },
   {
-    path: "/about/project",
-    name: "project",
-    component: AboutProject
+    path: "/about/service",
+    name: "service",
+    component: AboutService
   },
   // 로그인 페이지
   {
@@ -72,7 +75,8 @@ const routes = [
   {
     path: "/signup",
     name: "signup",
-    component: SignUp
+    component: SignUp,
+    props: route => ({ query: route.query.q })
   }
 ];
 
