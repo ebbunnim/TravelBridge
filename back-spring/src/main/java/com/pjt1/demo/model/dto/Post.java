@@ -1,6 +1,7 @@
 package com.pjt1.demo.model.dto;
 
 import java.io.Serializable;
+import java.util.List;
 /* 게시물 테이블
 # 후기와 일정에 대한 게시물 테이블
 # 후기는 다양한 이미지와 긴 글을 작성할 수 있고, 코스를 추가할 수 있다.
@@ -25,6 +26,9 @@ public class Post implements Serializable {
 	private boolean post_del_check	;//boolean DEFAULT FALSE,			# 삭제 여부
 //	FOREIGN KEY(board_no) REFERENCES BOARD(board_no),
 //	FOREIGN KEY(mem_no) REFERENCES MEMBER(mem_no)
+	private List<Comment> commentList;
+	private String writer;
+	
 	public Post() {
 		super();
 	}
@@ -41,9 +45,12 @@ public class Post implements Serializable {
 		this.post_end_day = post_end_day;
 		this.post_plan = post_plan;
 	}
+	
+	
 	public Post(int post_no, int post_type, int board_no, int mem_no, String post_title, String post_content,
 			String post_category, String post_regtime, int post_hits, boolean post_secret, boolean post_notice,
-			String post_start_day, String post_end_day, String post_plan, boolean post_del_check) {
+			String post_start_day, String post_end_day, String post_plan, boolean post_del_check,
+			List<Comment> commentList, String writer) {
 		super();
 		this.post_no = post_no;
 		this.post_type = post_type;
@@ -60,6 +67,8 @@ public class Post implements Serializable {
 		this.post_end_day = post_end_day;
 		this.post_plan = post_plan;
 		this.post_del_check = post_del_check;
+		this.commentList = commentList;
+		this.writer = writer;
 	}
 	@Override
 	public String toString() {
@@ -155,6 +164,18 @@ public class Post implements Serializable {
 	}
 	public int getPost_no() {
 		return post_no;
+	}
+	public List<Comment> getCommentList() {
+		return commentList;
+	}
+	public void setCommentList(List<Comment> commentList) {
+		this.commentList = commentList;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 		
 }

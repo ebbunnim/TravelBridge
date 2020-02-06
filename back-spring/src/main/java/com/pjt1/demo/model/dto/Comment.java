@@ -13,29 +13,30 @@ public class Comment implements Serializable {
 	private String cmt_regtime				;//datetime,						# 댓글 작성 일시	
 	private int cmt_parent			;//int DEFAULT NULL,				# 기본 댓글은 부모가 없고, 대댓글들은 부모 번호 존재 //댓글에 댓글을 다는 버튼이면 해당 댓글번호 넣기
 	private boolean cmt_secret				;//boolean DEFAULT FALSE,			# 비밀 댓글 여부		
-	private String cmt_title				;//varchar(200),					# 댓글 제목	
+//	private String cmt_title				;//varchar(200),					# 댓글 제목	
 	private String cmt_content				;//varchar(3000),					# 댓글 내용	
     private boolean cmt_del_check			;//boolean DEFAULT FALSE,
 //	FOREIGN KEY(post_no) REFERENCES POST(post_no),
 //	FOREIGN KEY(board_no) REFERENCES BOARD(board_no),
 //    FOREIGN KEY(mem_no) REFERENCES MEMBER(mem_no)
+    private String writer;
     
 	public Comment() {
 		super();
 	}
-	public Comment(int board_no, int post_no, int mem_no, int cmt_parent, boolean cmt_secret, String cmt_title,
-			String cmt_content) {
+	
+	public Comment(int board_no, int post_no, int mem_no, int cmt_parent, String cmt_content, String writer) {
 		super();
 		this.board_no = board_no;
 		this.post_no = post_no;
 		this.mem_no = mem_no;
 		this.cmt_parent = cmt_parent;
-		this.cmt_secret = cmt_secret;
-		this.cmt_title = cmt_title;
 		this.cmt_content = cmt_content;
+		this.writer = writer;
 	}
+	
 	public Comment(int cmt_no, int board_no, int post_no, int mem_no, String cmt_regtime, int cmt_parent,
-			boolean cmt_secret, String cmt_title, String cmt_content, boolean cmt_del_check) {
+			boolean cmt_secret, String cmt_content, boolean cmt_del_check, String writer) {
 		super();
 		this.cmt_no = cmt_no;
 		this.board_no = board_no;
@@ -44,17 +45,19 @@ public class Comment implements Serializable {
 		this.cmt_regtime = cmt_regtime;
 		this.cmt_parent = cmt_parent;
 		this.cmt_secret = cmt_secret;
-		this.cmt_title = cmt_title;
 		this.cmt_content = cmt_content;
 		this.cmt_del_check = cmt_del_check;
+		this.writer = writer;
 	}
+
+	
 	@Override
 	public String toString() {
 		return "Comment [cmt_no=" + cmt_no + ", board_no=" + board_no + ", post_no=" + post_no + ", mem_no=" + mem_no
 				+ ", cmt_regtime=" + cmt_regtime + ", cmt_parent=" + cmt_parent + ", cmt_secret=" + cmt_secret
-				+ ", cmt_title=" + cmt_title + ", cmt_content=" + cmt_content + ", cmt_del_check=" + cmt_del_check
-				+ "]";
+				+ ", cmt_content=" + cmt_content + ", cmt_del_check=" + cmt_del_check + ", writer=" + writer + "]";
 	}
+
 	public int getBoard_no() {
 		return board_no;
 	}
@@ -91,12 +94,6 @@ public class Comment implements Serializable {
 	public void setCmt_secret(boolean cmt_secret) {
 		this.cmt_secret = cmt_secret;
 	}
-	public String getCmt_title() {
-		return cmt_title;
-	}
-	public void setCmt_title(String cmt_title) {
-		this.cmt_title = cmt_title;
-	}
 	public String getCmt_content() {
 		return cmt_content;
 	}
@@ -111,6 +108,12 @@ public class Comment implements Serializable {
 	}
 	public int getCmt_no() {
 		return cmt_no;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
     
     
