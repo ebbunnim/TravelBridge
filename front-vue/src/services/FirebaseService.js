@@ -15,15 +15,13 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 export default {
-  signInWithDefault(email, password) {
+  signUpWithDefault(email, password) {
     console.log(email + " " + password);
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log(errorCode + " " + errorMessage);
+        console.error("[Normal SignUp Error]", error);
       });
   },
   loginWithDefault(email, password) {
@@ -33,9 +31,10 @@ export default {
       .signInWithEmailAndPassword(email, password)
       .then(function(result) {
         console.log(result);
+        return result;
       })
       .catch(function(error) {
-        console.log("login error" + error);
+        console.error("[Normal Login Error]", error);
       });
     console.log("login ok");
   },
@@ -46,10 +45,25 @@ export default {
       .signInWithPopup(provider)
       .then(function(result) {
         // let accessToken = result.credential.accessToken;
+        //var user = result.user;
         return result;
       })
       .catch(function(error) {
         console.error("[Google Login Error]", error);
+      });
+  },
+  loginWithGitHub() {
+    var provider = new firebase.auth.GithubAuthProvider();
+    return firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(function(result) {
+        // let accessToken = result.credential.accessToken;
+        // var user = result.user;
+        return result;
+      })
+      .catch(function(error) {
+        console.error("[GitHub Login Error]", error);
       });
   }
 };
