@@ -2,6 +2,7 @@
   <div>
     <h1>메인1</h1>
     이미지 업로드 테스트
+    <img :src="files_url">
     <div>
       <input
         type="file"
@@ -73,14 +74,13 @@ export default {
     // files_thumbnail boolean, 			# 파일 썸네일 여부
     // files_url varchar(500) NOT NULL,
       let file = {
-        files_url: '',
+        files_url: this.files_url,
         post_no: 1,
         files_name: 'ㅎㅎ',
         files_thumbnail: false
       }
-      file.files_url = this.files_url
       console.log('테스트임', file.files_url)
-      Api.post("/Files/Post", file).then(res => {
+      Api.post("/Files/insert", file).then(res => {
         console.log(res.data);
       });
     }
