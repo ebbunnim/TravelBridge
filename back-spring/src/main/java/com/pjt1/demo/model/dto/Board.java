@@ -9,7 +9,7 @@ public class Board implements Serializable {
 	private int board_no							;//int PRIMARY KEY AUTO_INCREMENT,	# 게시판 관리 번호 기본키, 자동증가	
 	private String board_name		;//varchar(200) NOT NULL ,			# 게시판 이름
     private boolean board_del_check			;//boolean DEFAULT FALSE
-    
+    private int mem_no;
        
 	public Board() {
 		super();
@@ -18,13 +18,14 @@ public class Board implements Serializable {
 		super();
 		this.board_name = board_name;
 	}
-	public Board(int board_no, String board_name, boolean board_del_check) {
+	
+	public Board(int board_no, String board_name, boolean board_del_check, int mem_no) {
 		super();
 		this.board_no = board_no;
 		this.board_name = board_name;
 		this.board_del_check = board_del_check;
+		this.setMem_no(mem_no);
 	}
-	
 	@Override
 	public String toString() {
 		return "Board [board_no=" + board_no + ", board_name=" + board_name + ", board_del_check=" + board_del_check
@@ -45,6 +46,12 @@ public class Board implements Serializable {
 	}
 	public int getBoard_no() {
 		return board_no;
+	}
+	public int getMem_no() {
+		return mem_no;
+	}
+	public void setMem_no(int mem_no) {
+		this.mem_no = mem_no;
 	}
     
     
