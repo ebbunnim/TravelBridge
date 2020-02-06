@@ -90,6 +90,7 @@ CREATE TABLE POST (
 	post_category		varchar(300),					# 게시글 카테고리, 태그
 	post_regtime		datetime DEFAULT NOW(),			# 게시글 작성시간	
 	post_hits			int DEFAULT 0,					# 게시글 조회수
+    post_city			varchar(500),					# 지역(해시태그) 달기
     post_plan_start		date,							# 일정 시작날짜
     post_plan_end		date,							# 일정 끝 날짜
     post_plan_title		varchar(200),					# 일정 제목
@@ -99,15 +100,7 @@ CREATE TABLE POST (
 	FOREIGN KEY(mem_no) REFERENCES MEMBERS(mem_no),
     foreign key(writer) references MEMBERS(mem_id)
 );
- # 코스 테이블
- # 후기 게시물에 추가되는 코스로 장소명과 간단한 설명에 대해서 작성 할 수 있고, 한 게시물에 여러개가 추가될 수 있다.
-CREATE TABLE COURSE (
-	course_no			int PRIMARY KEY AUTO_INCREMENT,	# 후기에 갔던 장소들 번호 기본키, 자동증가
-    post_no				int NOT NULL,					# 참조하는 게시물 번호
-    course_spot			varchar(1000),					# 장소명들을 직접 받아서 스트링 형태로 저장 ,로 구분하자. 
-    course_del_check	boolean DEFAULT FALSE,			# 삭제 여부
-    FOREIGN KEY(post_no) REFERENCES POST(post_no) 
-);
+
 DROP TABLE POST;
  # 댓글 테이블
 CREATE TABLE COMMENT (
