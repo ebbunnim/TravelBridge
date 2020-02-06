@@ -99,11 +99,16 @@ public class CourseController {
         return handleSuccess("수정 완료");
     }
 
-    @ApiOperation("여행 spot별 Post 조회")
-    @GetMapping("/Course/{course_spot}")
-    public ResponseEntity<Map<String, Object>> searchPostByCourse(String course_spot) {
-        // Post로 가져오는 것 주의
-        Post Post = service.searchPostByCourse(course_spot);
-        return handleSuccess("post 가져오기 성공");
-    }
+    // @ApiOperation("여행 spot별 Post 조회")
+    // @GetMapping("/Course/{course_spot}")
+    // public ResponseEntity<Map<String, Object>> searchPostByCourse(String course_spot) {
+    //     // string 으로 course_spot이 나옴 
+    //     // 1. course 하나하나 넣어놓음 
+    //     // 2. 코스가 가진 post_no을 모두 가져옴? 
+
+    //     // Post로 가져오는 것 주의
+    //     Post Post = service.searchPostByCourse(course_spot);
+    //     return handleSuccess("post 가져오기 성공");
+    // }
+
 }

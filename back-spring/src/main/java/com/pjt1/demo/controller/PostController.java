@@ -88,7 +88,6 @@ public class PostController {
     @ApiOperation("카테고리로 Post 조회")
     @GetMapping("/Post/search/{category}")
     public ResponseEntity<Map<String, Object>> searchByCategory(String category) {
-
         Post Post = service.searchByCategory(category);
         return handleSuccess(Post);
     }

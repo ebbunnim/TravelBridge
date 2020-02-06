@@ -17,7 +17,7 @@ public interface CourseService {
 
 	public void insert(Course targetCourse);
 
-	public Post searchPostByCourse(String course_spot);
+
 
 	// public Post searchPostByCourse(List<String> courseList);
 }

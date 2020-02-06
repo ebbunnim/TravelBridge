@@ -60,13 +60,15 @@ public class CourseServiceImpl implements CourseService {
 
 	}
 
-	public Post searchPostByCourse(String course_spot) {
-		try {
-			return repo.searchPostByCourse(course_spot);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+	// public Post searchPostByCourse(String course_spot) {
+	// 	try {
+	// 		return repo.searchPostByCourse(course_spot);
+	// 	} catch (Exception e) {
+	// 		e.printStackTrace();
+	// 	}
+	// 	return null;
+	// }
+
+
 
 }

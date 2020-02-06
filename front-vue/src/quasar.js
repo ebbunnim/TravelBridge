@@ -2,6 +2,7 @@ import Vue from "vue";
 
 import "./styles/quasar.sass";
 import "@quasar/extras/material-icons/material-icons.css";
+import "@quasar/extras/fontawesome-v5/fontawesome-v5.css";
 import {
   Quasar,
   QLayout,
@@ -33,6 +34,9 @@ import {
   QField,
   QInput,
   QForm,
+  QTabPanels,
+  QTabPanel,
+  QChatMessage
 } from "quasar";
 
 Vue.use(Quasar, {
@@ -67,6 +71,9 @@ Vue.use(Quasar, {
     QField,
     QInput,
     QForm,
+    QTabPanels,
+    QTabPanel,
+    QChatMessage
   },
   directives: {},
   plugins: {}
