@@ -57,6 +57,9 @@ const actions = {
       })
       .catch(exp => alert("로그인 실패 " + exp));
     //뒤에 우리디비에서 로그인 요청
+  },
+  changeDeafultPw: (store, payLoad) => {
+    fireService.resetPw(payLoad.email);
   }
 };
 

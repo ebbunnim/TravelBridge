@@ -37,12 +37,12 @@ import {
   QTab,
   QTabPanels,
   QTabPanel,
-  QChatMessage,
   QBtnDropdown,
   QMenu,
   ClosePopup,
   QRadio,
-  QCheckbox
+  QCheckbox,
+  QChatMessage
 } from "quasar";
 
 Vue.use(Quasar, {
