@@ -34,14 +34,14 @@ import {
   QField,
   QInput,
   QForm,
-  QChatMessage,
   QTab,
   QTabPanels,
   QTabPanel,
   QChatMessage,
   QBtnDropdown,
   QMenu,
-  ClosePopup
+  ClosePopup,
+  QRadio
 } from "quasar";
 
 Vue.use(Quasar, {
@@ -80,15 +80,13 @@ Vue.use(Quasar, {
     QTab,
     QTabPanels,
     QTabPanel,
-    QChatMessage,
     QBtnDropdown,
-    QMenu
-    
+    QMenu,
+    QRadio
   },
   directives: {
     ClosePopup
   },
   plugins: {},
-  utils: {
-  }
+  utils: {}
 });
