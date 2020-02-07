@@ -44,43 +44,26 @@ export default {
       }).then(res => {
         console.log(res.data.data.link);
         this.files_url = res.data.data.link;
+        console.log(this.files_url)
       });
-
-      //   const promises = Array.from(images).map(image => {
-      //     const formData = new FormData();
-      //     formData.append("image", image);
-      //     console.log("ㅎ");
-      //     for (let key in formData.entries()) {
-      //       console.log(`${key}`);
-      //     }
-
-      //     return Axios.post(
-      //       `https://api.imgur.com/3/upload`,
-      //       formData,
-      //       {
-      // headers: {
-      //   Authorization: "68f9bfe66c24bc5"
-      // }
-      //       }
-      //     );
-      //   });
-      //   return Promise.all(promises);
     },
     sendImage() {
+	// files_no int NOT NULL KEY AUTO_INCREMENT,
+  //   post_no int NOT NULL,				# 게시물 번호
+  //   files_name varchar(200) NOT NULL,	# 파일 이름
+  //   files_thumbnail boolean, 			# 파일 썸네일 여부
+  //   files_url varchar(500) NOT NULL,
+  //   files_del_check boolean DEFAULT FALSE,
+  //   FOREIGN KEY(post_no) REFERENCES POST(post_no)
 
-    //       post_no int NOT NULL,				# 게시물 번호
-    // files_name varchar(200) NOT NULL,	# 파일 이름
-    // files_thumbnail boolean, 			# 파일 썸네일 여부
-    // files_url varchar(500) NOT NULL,
       let file = {
-        files_url: '',
         post_no: 1,
         files_name: 'ㅎㅎ',
-        files_thumbnail: false
+        files_thumbnail: false,
+        files_url: this.files_url,
       }
-      file.files_url = this.files_url
       console.log('테스트임', file.files_url)
-      Api.post("/Files/Post", file).then(res => {
+      Api.post("/Files/post", file).then(res => {
         console.log(res.data);
       });
     }

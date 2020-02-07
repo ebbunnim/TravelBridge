@@ -36,7 +36,10 @@ import {
   QForm,
   QTabPanels,
   QTabPanel,
-  QChatMessage
+  QChatMessage,
+  QBtnDropdown,
+  QMenu,
+  ClosePopup
 } from "quasar";
 
 Vue.use(Quasar, {
@@ -73,8 +76,15 @@ Vue.use(Quasar, {
     QForm,
     QTabPanels,
     QTabPanel,
-    QChatMessage
+    QChatMessage,
+    QBtnDropdown,
+    QMenu
+    
   },
-  directives: {},
-  plugins: {}
+  directives: {
+    ClosePopup
+  },
+  plugins: {},
+  utils: {
+  }
 });
