@@ -1,8 +1,8 @@
 <template>
   <div class="text-center">
-    <p class="text-h4 q-pt-lg q-mt-lg">회원가입</p>
     <div>
-      <div class="row justify-center text-center">
+      <p class="text-h4 q-pt-lg q-mt-lg">회원가입</p>
+      <div class="row justify-center">
         <div class="col-5">
           <div class="row q-my-none justify-even">
             <q-input
@@ -17,7 +17,7 @@
             />
             <q-input
               filled
-              v-model="user.mem_interest"
+              v-model="user.mem_name"
               label="이름을 입력하세요"
               class="q-ma-lg col-5"
               type="string"
@@ -50,7 +50,7 @@
             />
           </div>
           <q-input
-            v-model="user.password"
+            v-model="user.mem_password"
             class="q-ma-lg"
             filled
             label="Password를 입력하세요"
@@ -88,6 +88,19 @@
             <q-radio v-model="user.mem_sex" val="0" label="Male" />
             <q-radio v-model="user.mem_sex" val="1" label="Female" />
           </div>
+
+          <div class="row justify-center q-pt-none">
+            <q-checkbox dense v-model="choice.food" label="음식" />
+            <q-checkbox dense v-model="choice.leisuresport" label="레포츠" />
+            <q-checkbox dense v-model="choice.shopping" label="쇼핑" />
+            <q-checkbox dense v-model="choice.culture" label="문화시설" />
+            <q-checkbox dense v-model="choice.history" label="역사" />
+            <q-checkbox dense v-model="choice.inside" label="실내여행지" />
+            <q-checkbox dense v-model="choice.nature" label="자연" />
+            <q-checkbox dense v-model="choice.tourplace" label="관광지" />
+            <q-checkbox dense v-model="choice.experience" label="체험" />
+          </div>
+
           <q-btn
             color="primary"
             size="large"
@@ -105,32 +118,7 @@
             class=" q-ma-md"
             v-on:click="cancle()"
           ></q-btn>
-
-          <!-- 주소 -->
-          <!-- 나의 관심사?  -->
         </div>
-
-        <!-- <div class="col-2 text-center">
-          <div class="q-pt-lg">
-            <q-btn
-              color="primary"
-              size="large"
-              width="100%"
-              label="회원가입"
-              v-on:click="SignUp()"
-              class="inline-block q-mr-md"
-            />
-            <q-btn
-              size="large"
-              outline
-              color="primary"
-              width="100%"
-              label="취소"
-              class="display: inline q-ml-md"
-              v-on:click="cancle()"
-            ></q-btn>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
@@ -145,16 +133,38 @@ export default {
     }
   },
   data: () => ({
+    choice: {
+      food: false,
+      leisuresport: false,
+      shopping: false,
+      culture: false,
+      history: false,
+      inside: false,
+      nature: false,
+      tourplace: false,
+      experience: false
+    },
+    choiceChange: {
+      food: "#음식",
+      leisuresport: "#레포츠",
+      shopping: "#쇼핑",
+      culture: "#문화시설",
+      history: "#역사",
+      inside: "#실내여행지",
+      nature: "#자연",
+      tourplace: "#관광지",
+      experience: "#체험"
+    },
     isPwd: true,
     user: {
       mem_email: "",
+      mem_name: "",
       password: "",
       mem_id: "",
       mem_phone: "",
-      mem_name: "",
       mem_birth: null,
       mem_sex: null,
-      mem_intertest: null,
+      mem_interest: "",
       mem_address: null
     },
     isReadOnly: false,
@@ -168,22 +178,21 @@ export default {
       v => /.+@.+\..+/.test(v) || "E-mail must be valid"
     ]
   }),
-  // mounted() {
-  //   user() {
-  //     if (this.props.isSNS != "") {
-  //       alert("하이");
-  //       return {};
-  //     } else {
-  //       this.isReadOnly = true;
-  //       return this.$store.state.user;
-  //     }
-  //   }
-  // },
+
   methods: {
     SignUp() {
-      // object 자체를 action 에 넘긴다. 
+      const choice = this.choice;
+      for (let key in choice) {
+        if (choice[key] === true) {
+          this.user.mem_interest += this.choiceChange[key];
+        }
+      }
+      console.log("나와서", this.user.mem_interest);
       this.$store.dispatch("user/postSignUp", this.user);
+      console.log(this.user);
       this.clearUserForm();
+      this.clearChoice();
+      console.log("청소 후", this.user);
     },
     cancle() {
       alert("회원가입을 취소 하셨습니다.");
@@ -198,8 +207,21 @@ export default {
         mem_name: "",
         mem_birth: null,
         mem_sex: null,
-        mem_intertest: null,
+        mem_interest: "",
         mem_address: null
+      };
+    },
+    clearChoice() {
+      this.choice = {
+        food: false,
+        leisuresport: false,
+        shopping: false,
+        culture: false,
+        history: false,
+        inside: false,
+        nature: false,
+        tourplace: false,
+        experience: false
       };
     }
   }

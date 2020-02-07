@@ -1,8 +1,8 @@
 <template>
   <div class="text-center">
     <p class="text-h4 q-pt-lg q-mt-lg">로그인</p>
-    <div class="row q-pa-md justify-center">
-      <div class="col-4 col-8 col-xs-12 text-center">
+    <div class="q-pa-md justify-center">
+      <div class="text-center">
         <q-form>
           <!-- email input -->
           <q-input

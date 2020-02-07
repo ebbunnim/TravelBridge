@@ -1,9 +1,9 @@
 import Api from "./Api";
 
 class UserService {
-  async signUp(member) {
+  async signUp(user) {
     console.log("hello");
-    return await Api.post("/Members/insert", member)
+    return await Api.post("/Members/insert", user)
       .then(() => {
         alert("회원가입 성공");
         return true;

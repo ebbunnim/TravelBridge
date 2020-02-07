@@ -18,7 +18,7 @@ const actions = {
     console.log("signup check" + signUpCheck);
     if (signUpCheck) {
       fireService
-        .signUpWithDefault(payload.user_email, payload.password)
+        .signUpWithDefault(payload.mem_email, payload.mem_password)
         .then(check => {
           if (check) router.push("/login");
           else console.log("실패");

@@ -41,7 +41,8 @@ import {
   QBtnDropdown,
   QMenu,
   ClosePopup,
-  QRadio
+  QRadio,
+  QCheckbox
 } from "quasar";
 
 Vue.use(Quasar, {
@@ -82,7 +83,8 @@ Vue.use(Quasar, {
     QTabPanel,
     QBtnDropdown,
     QMenu,
-    QRadio
+    QRadio,
+    QCheckbox
   },
   directives: {
     ClosePopup
