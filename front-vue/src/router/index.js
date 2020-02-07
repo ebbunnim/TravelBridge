@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 import Login from "../views/user/Login.vue";
 import PasswordFind from "../views/user/PasswordFind.vue";
 import SignUp from "../views/user/SignUp.vue";
+import MyPage from "../views/user/MyPage.vue";
 //main
 import Home from "../views/Home.vue";
 import Main1 from "../views/Main1.vue";
@@ -77,6 +78,12 @@ const routes = [
     name: "signup",
     component: SignUp,
     props: route => ({ query: route.query.q })
+  },
+  // 마이페이지
+  {
+    path: "/mypage",
+    name: "mypage",
+    component: MyPage
   }
 ];
 

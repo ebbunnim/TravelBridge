@@ -119,12 +119,17 @@
         </q-menu>
 
         <q-toolbar-title class="col-4 text-black">트래블브릿지</q-toolbar-title>
-        <div class="col-4" v-if="false">
-          <q-btn size="sm" class="text-grey q-pa-md" flat>내 정보</q-btn>
-          <q-btn size="sm" class="text-grey q-pa-md" flat>로그아웃</q-btn>
-        </div>
-        <div v-else class="col-4" align="right">
+
+        <div
+          v-if=" this.$store.state.user.user.mem_id == null || this.$store.state.user.user.mem_id == undefined"
+          class="col-4"
+          align="right"
+        >
           <q-btn size="md" class="text-grey darken--2 q-pa-md" flat to="/login">로그인</q-btn>
+        </div>
+        <div class="col-4" align="right" v-else>
+          <q-btn size="sm" class="text-grey q-pa-md" flat to="/mypage">내 정보</q-btn>
+          <q-btn size="sm" class="text-grey q-pa-md" flat v-on:click="logout">로그아웃</q-btn>
         </div>
       </q-toolbar>
     </q-header>
@@ -219,6 +224,9 @@ export default {
     };
   },
   methods: {
+    logout() {
+      this.$store.state.user.user = {};
+    },
     debounceFunc: debounce(function() {
       this.checkMenu();
       console.log(this.menu1, this.menu2, this.menu3, this.menu4);

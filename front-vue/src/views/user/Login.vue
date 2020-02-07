@@ -111,9 +111,13 @@ export default {
   },
   methods: {
     DefaultLogin() {
-      this.$store.user.action;
+      this.$store.dispatch("user/postLogIn", {
+        user_email: this.email,
+        user_pw: this.password
+      });
     },
     NaverLogin() {
+      this.$store.dispatch("user/check");
       this.SNSLoginCheck(false);
     },
     GoogleLogin() {
