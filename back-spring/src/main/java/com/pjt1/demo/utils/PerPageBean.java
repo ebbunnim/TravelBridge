@@ -6,7 +6,7 @@ public class PerPageBean {
 	private int page; // 현재 페이지 번호( != 특정 페이지의 첫번째 게시글 번호(이건 getPageStart() 거쳐야 함) )
 	private int perPageNum; // 한 페이지당 보여줄 게시글 개수
 	private int pageStart;
-	
+	private String keyword;
 	public int getPageStart() { // 특정 페이지의 게시글 시작번호, 게시글 시작행 번호 리턴
 		// pageStart를 이렇게 할당해서 sql문에 넣어야 되었음!
 		// paging을 위해서는 swagger에서 page에만 파라미터 넘겨서 확인하기
@@ -46,9 +46,22 @@ public class PerPageBean {
 	public void setPerPageNum(int perPageNum) {
 		this.perPageNum = perPageNum;
 	}
+	
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
 	@Override
 	public String toString() {
-		return "PageBean [page=" + page + ", perPageNum=" + perPageNum + ", pageStart=" + pageStart + "]";
+		return "PerPageBean [page=" + page + ", perPageNum=" + perPageNum + ", pageStart=" + pageStart + ", keyword="
+				+ keyword + "]";
 	}
+	
+	
 	
 }

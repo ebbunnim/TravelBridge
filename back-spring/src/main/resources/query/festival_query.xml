@@ -50,5 +50,84 @@
 		FROM festival 
 		WHERE fval_del_check=false
 	</select>
+		<select id="getCountFestivalAll" resultType = "int">
+		SELECT COUNT(*)
+		FROM festival
+		WHERE fval_del_check=false 
+	</select>
+	<select id="searchPageFestivalAll"  parameterType="hashmap" resultType="hashmap">
+	 <![CDATA[
+        SELECT * 
+        FROM festival 
+        WHERE fval_del_check = FALSE
+        ORDER BY fval_no
+        LIMIT #{pageStart}, #{perPageNum}]]>
+	</select>
+	<select id="searchMoreFestivalAll" parameterType="int" resultType="festival">
+	<![CDATA[
+        SELECT * 
+        FROM festival 
+        WHERE fval_del_check = FALSE 
+        ORDER BY fval_no 
+        LIMIT 0, #{perPageNum}]]>
+	</select>
+	<select id="getCountFestivalByCityName" parameterType = "string" resultType ="int">
+		SELECT COUNT(*) 
+		FROM festival 
+		WHERE city_no = (SELECT city_no 
+						 FROM city 
+						 WHERE city_name = "${cityName}" 
+						 AND city_del_check = FALSE) 
+		AND fval_del_check = FALSE
+	</select>
+	
+	<select id="searchPageFestivalByCityName" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+		SELECT *
+		FROM festival 
+		WHERE city_no = (SELECT city_no 
+						 FROM city 
+						 WHERE city_name = "${keyword}" 
+						 AND city_del_check = FALSE) 
+		AND fval_del_check = FALSE
+		LIMIT #{pageStart}, #{perPageNum}]]>
+	</select>
+	<select id ="searchMoreFestivalByCityName" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+        SELECT * 
+        FROM festival 
+        WHERE fval_del_check = FALSE 
+        AND city_no = (SELECT city_no 
+						 FROM city 
+						 WHERE city_name = "${keyword}" 
+						 AND city_del_check = FALSE) 
+        ORDER BY fval_no 
+        LIMIT 0, #{perPageNum}]]>
+	</select>
+	<select id="getCountFestivalByTag" parameterType="string" resultType="int">
+		SELECT COUNT(*) 
+		FROM festival
+		WHERE fval_tag LIKE concat('%','${keyword}','%') 
+		AND fval_del_check = FALSE
+	</select> 
+    <select id="searchPageFestivalByTag" parameterType="hashmap" resultType="hashmap">
+   		<![CDATA[
+    	SELECT *
+		FROM festival
+		WHERE fval_tag LIKE concat('%','${keyword}','%') 
+		AND fval_del_check = FALSE
+		ORDER BY fval_no
+		LIMIT #{pageStart}, #{perPageNum}]]>
+    </select>
+	<select id="searchMoreFestivalByTag" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+    	SELECT *
+		FROM festival
+		WHERE fval_tag LIKE concat('%','${keyword}','%') 
+		AND fval_del_check = FALSE
+		ORDER BY fval_no
+		LIMIT 0, #{perPageNum}]]>
+	</select>
+	
 </mapper>
 

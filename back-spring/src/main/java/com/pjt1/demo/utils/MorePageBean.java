@@ -4,7 +4,8 @@ package com.pjt1.demo.utils;
 
 public class MorePageBean {
 	private int perPageNum; // 한 페이지당 보여줄 게시글 개수
-
+	private String keyword;
+	
 	public MorePageBean() {
 		this.perPageNum = 3;
 	}
@@ -16,10 +17,17 @@ public class MorePageBean {
 		this.perPageNum = perPageNum;
 	}
 
-	@Override
-	public String toString() {
-		return "morePageBean [perPageNum=" + perPageNum + "]";
+	public String getKeyword() {
+		return keyword;
 	}
 
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	@Override
+	public String toString() {
+		return "MorePageBean [perPageNum=" + perPageNum + ", keyword=" + keyword + "]";
+	}
 	
 }

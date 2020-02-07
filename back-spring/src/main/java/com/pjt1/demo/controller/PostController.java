@@ -146,4 +146,5 @@ public class PostController {
         List<Map<String, Object>> list = service.searchPagePlan(pageBean);
         return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
     }
+    
 }
