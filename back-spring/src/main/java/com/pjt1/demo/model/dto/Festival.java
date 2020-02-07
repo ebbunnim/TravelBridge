@@ -23,6 +23,33 @@ public class Festival implements Serializable {
 	public Festival() {
 		super();
 	}
+	public Festival(int city_no, String fval_name, String fval_address, String fval_content) {
+		super();
+		this.city_no = city_no;
+		this.fval_name = fval_name;
+		this.fval_address = fval_address;
+		this.fval_content = fval_content;
+	}
+	
+	public Festival(int fval_no, int city_no, String fval_name, String fval_address, String fval_detail_adr,
+			String fval_content, String fval_tag, String fval_start_day, String fval_end_day, String fval_homepage,
+			int fval_fee, String fval_img, String fval_host, boolean fval_del_check) {
+		super();
+		this.fval_no = fval_no;
+		this.city_no = city_no;
+		this.fval_name = fval_name;
+		this.fval_address = fval_address;
+		this.fval_detail_adr = fval_detail_adr;
+		this.fval_content = fval_content;
+		this.fval_tag = fval_tag;
+		this.fval_start_day = fval_start_day;
+		this.fval_end_day = fval_end_day;
+		this.fval_homepage = fval_homepage;
+		this.fval_fee = fval_fee;
+		this.fval_img = fval_img;
+		this.fval_host = fval_host;
+		this.fval_del_check = fval_del_check;
+	}
 
 	public String getFval_detail_adr() {
 		return fval_detail_adr;
@@ -32,57 +59,14 @@ public class Festival implements Serializable {
 		this.fval_detail_adr = fval_detail_adr;
 	}
 
-	public Festival(int city_no, String fval_name, String fval_address, String fval_content) {
-		super();
-		this.city_no = city_no;
-		this.fval_name = fval_name;
-		this.fval_address = fval_address;
-		this.fval_content = fval_content;
-	}
-
-	public Festival(int city_no, String fval_name, String fval_address, String fval_img, String fval_content,
-			String fval_tag, String fval_start_day, String fval_end_day, int fval_fee, String fval_homepage,
-			String fval_host) {
-		super();
-		this.city_no = city_no;
-		this.fval_name = fval_name;
-		this.fval_address = fval_address;
-		this.fval_img = fval_img;
-		this.fval_content = fval_content;
-		this.fval_tag = fval_tag;
-		this.fval_start_day = fval_start_day;
-		this.fval_end_day = fval_end_day;
-		this.fval_fee = fval_fee;
-		this.fval_homepage = fval_homepage;
-		this.fval_host = fval_host;
-	}
-
-	public Festival(int fval_no, int city_no, String fval_name, String fval_address, String fval_img,
-			String fval_content, String fval_tag, String fval_start_day, String fval_end_day, int fval_fee,
-			String fval_map_img, String fval_homepage, String fval_host, boolean fval_del_check) {
-		super();
-		this.fval_no = fval_no;
-		this.city_no = city_no;
-		this.fval_name = fval_name;
-		this.fval_address = fval_address;
-		this.fval_img = fval_img;
-		this.fval_content = fval_content;
-		this.fval_tag = fval_tag;
-		this.fval_start_day = fval_start_day;
-		this.fval_end_day = fval_end_day;
-		this.fval_fee = fval_fee;
-		this.fval_homepage = fval_homepage;
-		this.fval_host = fval_host;
-		this.fval_del_check = fval_del_check;
-	}
 
 	@Override
 	public String toString() {
 		return "Festival [fval_no=" + fval_no + ", city_no=" + city_no + ", fval_name=" + fval_name + ", fval_address="
-				+ fval_address + ", fval_img=" + fval_img + ", fval_content=" + fval_content + ", fval_tag=" + fval_tag
-				+ ", fval_start_day=" + fval_start_day + ", fval_end_day=" + fval_end_day + ", fval_fee=" + fval_fee
-				+ ", fval_homepage=" + fval_homepage + ", fval_host=" + fval_host + ", fval_del_check=" + fval_del_check
-				+ "]";
+				+ fval_address + ", fval_detail_adr=" + fval_detail_adr + ", fval_content=" + fval_content
+				+ ", fval_tag=" + fval_tag + ", fval_start_day=" + fval_start_day + ", fval_end_day=" + fval_end_day
+				+ ", fval_homepage=" + fval_homepage + ", fval_fee=" + fval_fee + ", fval_img=" + fval_img
+				+ ", fval_host=" + fval_host + ", fval_del_check=" + fval_del_check + "]";
 	}
 
 	public int getCity_no() {

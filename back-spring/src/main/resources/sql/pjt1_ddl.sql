@@ -93,11 +93,7 @@ CREATE TABLE POST (
 	board_no			int NOT NULL,					# 게시판 번호	외래키
 	mem_no				int NOT NULL,					# 작성자 번호	외래키
 	post_title			varchar(200),					# 게시글 제목	
-<<<<<<< HEAD
-	post_content		varchar(3000),			# 게시글 내용	
-=======
-	post_content		varchar(3000),					# 게시글 내용	
->>>>>>> 9c5ced419281868f451853b5ece3e20a7fe04241
+	post_content		varchar(3000),					# 게시글 내용
 	post_category		varchar(300),					# 게시글 카테고리, 태그
 	post_regtime		datetime DEFAULT NOW(),			# 게시글 작성시간	
 	post_hits			int DEFAULT 0,					# 게시글 조회수

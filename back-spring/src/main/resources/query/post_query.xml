@@ -2,7 +2,67 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 
 <mapper namespace="com.pjt1.demo.model.dao.PostDao" >
- 
+ 	<select id="searchMorePostAll" parameterType="int" resultType="post">
+        <![CDATA[
+        SELECT * 
+        FROM post 
+        WHERE post_del_check = FALSE 
+        ORDER BY post_regtime DESC LIMIT 0, #{perPageNum}]]>
+    </select>
+    <select id="searchMoreReport" parameterType="int" resultType="post">
+        <![CDATA[
+        SELECT * 
+        FROM post 
+        WHERE post_del_check = FALSE and post_type = 0
+        ORDER BY post_regtime DESC LIMIT 0, #{perPageNum}]]>
+    </select>
+    <select id="searchMorePlan" parameterType="int" resultType="post">
+        <![CDATA[
+        SELECT * 
+        FROM post 
+        WHERE post_del_check = FALSE and post_type = 1
+        ORDER BY post_regtime DESC LIMIT 0, #{perPageNum}]]>
+    </select>
+    <select id="searchMorePost" parameterType="int" resultType="post">
+        <![CDATA[
+        SELECT * 
+        FROM post 
+        WHERE post_del_check = FALSE 
+        ORDER BY post_regtime DESC LIMIT 0, #{perPageNum}]]>
+    </select>
+     <select id="getCountPostAll" resultType="int">
+        select count(*) from post where post_del_check =false
+    </select>
+    <select id="searchPagePostAll" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+        select * 
+        from post 
+        where post_del_check = FALSE
+        order by post_regtime
+        limit #{pageStart}, #{perPageNum}]]>
+    </select>
+    <select id="getCountReport" resultType="int">
+        select count(*) from post where post_type = 0 and post_del_check =false
+    </select>
+    <select id="searchPageReport" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+        select * 
+        from post 
+        where post_del_check = FALSE and post_type = 0
+        order by post_regtime
+        limit #{pageStart}, #{perPageNum}]]>
+    </select>
+     <select id="getCountPlan" resultType="int">
+        select count(*) from post where post_type = 1 and post_del_check =false
+    </select>
+    <select id="searchPagePlan" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+        select * 
+        from post 
+        where post_del_check = FALSE and post_type = 1
+        order by post_regtime
+        limit #{pageStart}, #{perPageNum}]]>
+    </select>
   	<insert id="insert"		parameterType="post">
 		INSERT INTO post
 		(post_type, 

@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pjt1.demo.model.dto.Post;
 import com.pjt1.demo.model.service.PostService;
+import com.pjt1.demo.utils.MorePageBean;
+import com.pjt1.demo.utils.MorePageMaker;
+import com.pjt1.demo.utils.PerPageBean;
+import com.pjt1.demo.utils.PerPageMaker;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -84,5 +88,62 @@ public class PostController {
     public ResponseEntity<Map<String, Object>> update(@RequestBody Post Post) {
         service.update(Post);
         return handleSuccess("수정 완료");
+    }
+    @ApiOperation("더보기로 Post 전체 목록 조회")
+    @GetMapping("/Post/search/moreAll/{btnCnt}")
+    public ResponseEntity<Map<String, Object>> searchMorePostAll(MorePageBean pageBean, @PathVariable int btnCnt) {
+        MorePageMaker morePage = new MorePageMaker();
+        int change = 3 * btnCnt;
+        pageBean.setPerPageNum(change);
+        morePage.setMorePageBean(pageBean);
+        List<Map<String, Object>> list = service.searchMorePostAll(pageBean);
+        return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+    }
+    @ApiOperation("더보기로 Post 중 후기(Report) 목록 조회")
+    @GetMapping("/Post/search/moreReport/{btnCnt}")
+    public ResponseEntity<Map<String, Object>> searchMoreReport(MorePageBean pageBean, @PathVariable int btnCnt) {
+        MorePageMaker morePage = new MorePageMaker();
+        int change = 3 * btnCnt;
+        pageBean.setPerPageNum(change);
+        morePage.setMorePageBean(pageBean);
+        List<Map<String, Object>> list = service.searchMoreReport(pageBean);
+        return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+    }
+    @ApiOperation("더보기로 Post 중 일정(Plan) 목록 조회")
+    @GetMapping("/Post/search/morePlan/{btnCnt}")
+    public ResponseEntity<Map<String, Object>> searchMorePlan(MorePageBean pageBean, @PathVariable int btnCnt) {
+        MorePageMaker morePage = new MorePageMaker();
+        int change = 3 * btnCnt;
+        pageBean.setPerPageNum(change);
+        morePage.setMorePageBean(pageBean);
+        List<Map<String, Object>> list = service.searchMorePlan(pageBean);
+        return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+    }
+    @ApiOperation("페이징된 Post 전체 목록 조회")
+    @GetMapping("/Post/search/pageAll")
+    public ResponseEntity<Map<String, Object>> searchPagePostAll(PerPageBean pageBean) {
+        PerPageMaker pageMaker = new PerPageMaker();
+        pageMaker.setPageBean(pageBean);
+        pageMaker.setTotalCnt(service.getCountPostAll());
+        List<Map<String, Object>> list = service.searchPagePostAll(pageBean);
+        return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+    }
+    @ApiOperation("페이징된 Post 중 후기(Report) 목록 조회")
+    @GetMapping("/Post/search/pageReport")
+    public ResponseEntity<Map<String, Object>> searchPageReport(PerPageBean pageBean) {
+        PerPageMaker pageMaker = new PerPageMaker();
+        pageMaker.setPageBean(pageBean);
+        pageMaker.setTotalCnt(service.getCountPostAll());
+        List<Map<String, Object>> list = service.searchPageReport(pageBean);
+        return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+    }
+    @ApiOperation("페이징된 Post 중 일정(Plan) 목록 조회")
+    @GetMapping("/Post/search/pagePlan")
+    public ResponseEntity<Map<String, Object>> searchPagePlan(PerPageBean pageBean) {
+        PerPageMaker pageMaker = new PerPageMaker();
+        pageMaker.setPageBean(pageBean);
+        pageMaker.setTotalCnt(service.getCountPostAll());
+        List<Map<String, Object>> list = service.searchPagePlan(pageBean);
+        return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
     }
 }
