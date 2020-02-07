@@ -1,7 +1,5 @@
 package com.pjt1.demo.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,6 +59,9 @@ public class PostController {
     @GetMapping("/Post/search/{post_no}")
     public ResponseEntity<Map<String, Object>> search(int post_no) {
         Post Post = service.search(post_no);
+        //그러면 여기서 포스트넘 기반으로 comment 호출하는거 하나 하고
+        //멤버 호출하는거 하나한다음에
+        //postPagebean 하나 만들어서 그걸 넘겨주자.
         return handleSuccess(Post);
     }
 
@@ -84,12 +85,4 @@ public class PostController {
         service.update(Post);
         return handleSuccess("수정 완료");
     }
-
-    @ApiOperation("카테고리로 Post 조회")
-    @GetMapping("/Post/search/{category}")
-    public ResponseEntity<Map<String, Object>> searchByCategory(String category) {
-        Post Post = service.searchByCategory(category);
-        return handleSuccess(Post);
-    }
-
 }

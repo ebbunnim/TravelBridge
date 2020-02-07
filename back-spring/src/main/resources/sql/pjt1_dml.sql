@@ -425,8 +425,9 @@ from post p
 left join comment c
 on p.post_no = c.post_no
 left join files f
-on p.post_no = f.post_no
-left join course cs
-on p.post_no = cs.post_no;
+on p.post_no = f.post_no;
 
+SELECT * fROM post;
+SELECT * FROM COMMENT;
+SELECT * FROM FILES;
 
