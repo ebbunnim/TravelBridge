@@ -74,12 +74,13 @@ select following_no from
 members
 left join follow on members.mem_no = follow.follower_no
 where members.mem_no = 1;
+#member가 List로 followerList 있으면 되냐 되겠군a
 
 select * from members 
 	where mem_no in (select following_no 
-					from members
-					left join follow on members.mem_no = follow.follower_no
-					where members.mem_no = 1);
+					from members m
+					left join follow f on m.mem_no = f.follower_no
+					where m.mem_no = 1);
 
 insert into follow(follower_no, following_no) values(1,3);
 select * from follow;
@@ -92,7 +93,11 @@ CREATE TABLE POST (
 	board_no			int NOT NULL,					# 게시판 번호	외래키
 	mem_no				int NOT NULL,					# 작성자 번호	외래키
 	post_title			varchar(200),					# 게시글 제목	
+<<<<<<< HEAD
 	post_content		varchar(3000),			# 게시글 내용	
+=======
+	post_content		varchar(3000),					# 게시글 내용	
+>>>>>>> 9c5ced419281868f451853b5ece3e20a7fe04241
 	post_category		varchar(300),					# 게시글 카테고리, 태그
 	post_regtime		datetime DEFAULT NOW(),			# 게시글 작성시간	
 	post_hits			int DEFAULT 0,					# 게시글 조회수
@@ -108,6 +113,10 @@ CREATE TABLE POST (
 );
 
 DROP TABLE POST;
+DROP TABLE COMMENT;
+DROP TABLE FILES;
+DROP TABLE COURSE;
+DROP TABLE LIKES;
  # 댓글 테이블
 CREATE TABLE COMMENT (
 	cmt_no			int PRIMARY KEY AUTO_INCREMENT,	# 댓글 관리번호	기본키, 자동증가
@@ -128,7 +137,6 @@ CREATE TABLE COMMENT (
 
 
 drop table likes;
-
 CREATE TABLE LIKES (
 	like_no				int PRIMARY KEY AUTO_INCREMENT,	# 좋아요 관리번호	기본키, 자동증가
     post_no				int NOT NUll,					# 게시물 번호
@@ -138,7 +146,9 @@ CREATE TABLE LIKES (
     FOREIGN KEY(liker_mem_no) REFERENCES MEMBERS(mem_no)
 );
 select count(*) from likes where post_no = 1;
-select * from likes where liker_mem_no = 1;
+select * from likes where liker_mem_no = 2;
+select * from likes;
+insert into likes(post_no, liker_mem_no) values (1,1);
 
 # FAQ 테이블
 # 관리자가 만들어둔 게시글들
