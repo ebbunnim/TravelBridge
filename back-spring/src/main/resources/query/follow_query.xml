@@ -5,11 +5,10 @@
  
   	<insert id="insert"		parameterType="follow">
 		INSERT INTO follow
-		(follower_no, following_no, follow_del_check)
+		(follower_no, following_no)
 		values (
 			#{follower_no:INTEGER},
-			#{following_no:INTEGER},
-			#{follow_del_check:BOOLEAN}
+			#{following_no:INTEGER}
 		)
 	</insert> 
    	<delete id="delete" 	parameterType="int"> </delete>

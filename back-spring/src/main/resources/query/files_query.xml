@@ -5,12 +5,10 @@
 
   	<insert id="insert"		parameterType="files">
 		INSERT INTO files
-		(post_no, 
-		files_name, files_thumbnail, 
+		(post_no, mem_no,
 		files_url)
 		VALUES (
-		#{post_no:INTEGER},
-		#{files_name:VARCHAR}, false,
+		#{post_no:INTEGER}, #{mem_no:INTEGER},
 		#{files_url:VARCHAR}}
 		)
 	</insert> 
@@ -19,8 +17,7 @@
    	<update id="update"		parameterType="files">
 		UPDATE files 
 		SET
-		post_no=#{post_no:INTEGER}, 
-		files_name=#{files_name:VARCHAR}, files_thumbnail=#{files_thumbnail:BOOLEAN},
+		post_no=#{post_no:INTEGER}, mem_no=#{mem_no:INTEGER},
 		files_url=#{files_url:VARCHAR}, files_del_check=#{files_del_check:BOOLEAN}
 		WHERE files_no =#{files_no:INTEGER}
 	</update>

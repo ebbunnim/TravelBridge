@@ -63,7 +63,13 @@ CREATE TABLE BOARD (
 	board_no			int PRIMARY KEY AUTO_INCREMENT,	# 게시판 관리 번호 기본키, 자동증가	
 	board_name			varchar(200) NOT NULL ,			# 게시판 이름
     board_del_check		boolean DEFAULT FALSE 
+	
+	
 );
+
+# 물어보기
+# mem_no을 넣은거임?
+
 select following_no from 
 members
 left join follow on members.mem_no = follow.follower_no
@@ -86,7 +92,7 @@ CREATE TABLE POST (
 	board_no			int NOT NULL,					# 게시판 번호	외래키
 	mem_no				int NOT NULL,					# 작성자 번호	외래키
 	post_title			varchar(200),					# 게시글 제목	
-	post_content		varchar(3000) NOT NULL,			# 게시글 내용	
+	post_content		varchar(3000),			# 게시글 내용	
 	post_category		varchar(300),					# 게시글 카테고리, 태그
 	post_regtime		datetime DEFAULT NOW(),			# 게시글 작성시간	
 	post_hits			int DEFAULT 0,					# 게시글 조회수
