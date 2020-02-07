@@ -63,6 +63,14 @@
         order by post_regtime
         limit #{pageStart}, #{perPageNum}]]>
     </select>
+    <select id="getPostLikes" parameterType="int" resultType="int">
+		SELECT COUNT(*) 
+		FROM likes
+		WHERE post_no = #{post_no};
+	</select>
+	<select id="updatePostHits" parameterType="int">
+		UPDATE post SET post_hits = post_hits + 1 WHERE post_no = #{post_no};
+	</select>
   	<insert id="insert"		parameterType="post">
 		INSERT INTO post
 		(post_type, 
