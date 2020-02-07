@@ -7,18 +7,20 @@
   	<insert id="insert"		parameterType="festival">
 		INSERT INTO festival 
 		(city_no, fval_name, 
-		fval_address, fval_img, 
+		fval_address, fval_detail_adr,
 		fval_content, fval_tag, 
 		fval_start_day, fval_end_day, 
-		fval_fee, fval_map_img, 
-		fval_homepage, fval_host, fval_del_check )
+		fval_homepage,
+		fval_fee, fval_img, 
+		fval_host, fval_del_check )
 		values(
 			#{city_no:INTEGER}, #{fval_name:VARCHAR}, 
-			#{fval_address:VARCHAR}, #{fval_img:VARCHAR},
+			#{fval_address:VARCHAR}, #{fval_detail_adr:VARCHAR},
 			#{fval_content:VARCHAR}, #{fval_tag:VARCHAR},
 			#{fval_start_day:VARCHAR}, #{fval_end_day:VARCHAR},
-			#{fval_fee:INTEGER}, #{fval_map_img:VARCHAR}, 
-			#{fval_homepage:VARCHAR}, #{fval_host:VARCHAR}, #{fval_del_check:BOOLEAN}
+			#{fval_homepage:VARCHAR},
+			#{fval_fee:INTEGER}, #{fval_img:VARCHAR}, 
+			#{fval_host:VARCHAR}, #{fval_del_check:BOOLEAN}
 		)	
 	</insert> 
 
@@ -29,11 +31,12 @@
 		UPDATE festival 
 		SET 
 		city_no=#{city_no:INTEGER}, fval_name=#{fval_name:VARCHAR}, 
-		fval_address=#{fval_address:VARCHAR}, fval_img=#{fval_img:VARCHAR},
+		fval_address=#{fval_address:VARCHAR}, fval_detail_adr=#{fval_detail_adr:VARCHAR},
 		fval_content=#{fval_content:VARCHAR}, fval_tag=#{fval_tag:VARCHAR}, 
 		fval_start_day=#{fval_start_day:VARCHAR}, fval_end_day=#{fval_end_day:VARCHAR}, 
-		fval_fee=#{fval_fee:INTEGER}, fval_map_img= #{fval_map_img:VARCHAR}, 
-		fval_homepage = #{fval_homepage:VARCHAR}, fval_host=#{fval_host:VARCHAR}, fval_del_check=#{fval_del_check:BOOLEAN}
+		fval_homepage = #{fval_homepage:VARCHAR},
+		fval_fee=#{fval_fee:INTEGER}, fval_img= #{fval_map_img:VARCHAR}, 
+		fval_host=#{fval_host:VARCHAR}, fval_del_check=#{fval_del_check:BOOLEAN}
 		WHERE fval_no=#{fval_no:INTEGER}
 	</update>
    	<select id="search"		parameterType="int" resultType="festival">

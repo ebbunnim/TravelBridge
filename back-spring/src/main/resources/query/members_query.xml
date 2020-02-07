@@ -8,14 +8,14 @@
 		mem_phone, 
 		mem_name, mem_sex,
 		mem_birth, mem_address, 
-		mem_grant, mem_receive_email, 
+		mem_grant,
 		mem_interest, mem_token, mem_login_type) 
 		VALUES (
 		#{mem_id:VARCHAR}, #{mem_email:VARCHAR}, 
 		#{mem_phone:VARCHAR}, 
 		#{mem_name:VARCHAR},#{mem_sex:INTEGER}, 
 		#{mem_birth:VARCHAR}, #{mem_address:VARCHAR}, 
-		#{mem_grant:INTEGER}, #{mem_receive_email:BOOLEAN}, 
+		#{mem_grant:INTEGER}, 
 		#{mem_interest:VARCHAR}, #{mem_token:VARCHAR}, #{mem_login_type:VARCHAR}
 		)
 	</insert> 
@@ -33,8 +33,10 @@
 		mem_name=#{mem_name:VARCHAR}, mem_sex=#{mem_sex:INTEGER}, 
 		mem_birth=#{mem_birth:VARCHAR}, mem_address=#{mem_address:VARCHAR}, 
 		mem_grant= #{mem_grant:INTEGER}, mem_receive_email=#{mem_receive_email:BOOLEAN}, 
+		mem_following=#{mem_following:INTEGER}, mem_followed=#{mem_followed:INTEGER},
 		mem_lastlogin=CURRENT_TIMESTAMP(), mem_interest=#{mem_interest:VARCHAR}, 
-		mem_token=#{mem_token:VARCHAR}, mem_login_type=#{mem_login_type:VARCHAR}
+		mem_token=#{mem_token:VARCHAR}, mem_login_type=#{mem_login_type:VARCHAR},
+		mem_del_check=#{mem_del_check:BOOLEAN}
 		WHERE mem_no = #{mem_no}
 	</update>
    	<select id="search"		parameterType="int" resultType="members">
@@ -50,7 +52,7 @@
 	</select> 
 
 	<select id="searchMemberByEmail" parameterType="String" resultType="Members">
-		select * from members where mem_email = #{mem_email:VARCHAR} and mem_del_check=false
+		SELECT * FROM members WHERE mem_email=#{mem_email:VARCHAR} and mem_del_check=false
 	</select>
 	
 </mapper>

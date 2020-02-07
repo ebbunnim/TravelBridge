@@ -7,13 +7,13 @@
   	<insert id="insert"		parameterType="comment">
 		INSERT INTO 
 		comment
-		(board_no, post_no, 
-		mem_no, cmt_parent, 
-		cmt_secret, cmt_title, cmt_content) 
+		(post_no, 
+		mem_no, 
+		cmt_content) 
 		VALUES (
-		#{board_no:INTEGER},#{post_no:INTEGER},
-		#{mem_no:INTEGER},	#{cmt_parent:INTEGER},
-		#{cmt_secret:INTEGER}, #{cmt_title:VARCHAR}, #{cmt_content:VARCHAR}
+		#{post_no:INTEGER},
+		#{mem_no:INTEGER},
+		#{cmt_content:VARCHAR}
 		)
 	</insert> 
    	<delete id="delete" 	parameterType="int">
@@ -26,13 +26,9 @@
    	<update id="update"		parameterType="comment">
 		UPDATE comment
 		SET
-		board_no = #{board_no:INTEGER},
 		post_no = #{post_no:INTEGER},
 		mem_no = #{mem_no:INTEGER},
 		cmt_regtime = CURRENT_TIMESTAMP(),
-		cmt_parent = #{cmt_parent:INTEGER},
-		cmt_secret = #{cmt_secret:BOOLEAN},
-		cmt_title = #{cmt_title:VARCHAR},
 		cmt_content = #{cmt_content:VARCHAR},
 		cmt_del_check = #{cmt_del_check:BOOLEAN}
 		WHERE cmt_no = #{cmt_no:INTEGER}      
