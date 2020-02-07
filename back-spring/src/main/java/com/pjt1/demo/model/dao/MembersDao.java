@@ -19,4 +19,5 @@ public interface MembersDao {
 	public void delete(int mem_no);
 
 	public Members searchMemberByEmail(String email);
+	public Members searchMemberLikePost(int mem_no);
 }

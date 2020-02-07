@@ -35,5 +35,6 @@
 		FROM likes 
 		WHERE like_del_check=false
 	</select>
+	
 </mapper>
 
