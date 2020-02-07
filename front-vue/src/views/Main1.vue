@@ -26,7 +26,7 @@
 
 import Api from "@/services/Api";
 import Axios from "axios";
-import Qs from "qs";
+// import Qs from "qs";
 
 export default {
   data() {
@@ -44,25 +44,25 @@ export default {
       }).then(res => {
         console.log(res.data.data.link);
         this.files_url = res.data.data.link;
-        console.log(this.files_url)
+        console.log(this.files_url);
       });
     },
     sendImage() {
-	// files_no int NOT NULL KEY AUTO_INCREMENT,
-  //   post_no int NOT NULL,				# 게시물 번호
-  //   files_name varchar(200) NOT NULL,	# 파일 이름
-  //   files_thumbnail boolean, 			# 파일 썸네일 여부
-  //   files_url varchar(500) NOT NULL,
-  //   files_del_check boolean DEFAULT FALSE,
-  //   FOREIGN KEY(post_no) REFERENCES POST(post_no)
+      // files_no int NOT NULL KEY AUTO_INCREMENT,
+      //   post_no int NOT NULL,				# 게시물 번호
+      //   files_name varchar(200) NOT NULL,	# 파일 이름
+      //   files_thumbnail boolean, 			# 파일 썸네일 여부
+      //   files_url varchar(500) NOT NULL,
+      //   files_del_check boolean DEFAULT FALSE,
+      //   FOREIGN KEY(post_no) REFERENCES POST(post_no)
 
       let file = {
         post_no: 1,
-        files_name: 'ㅎㅎ',
+        files_name: "ㅎㅎ",
         files_thumbnail: false,
-        files_url: this.files_url,
-      }
-      console.log('테스트임', file.files_url)
+        files_url: this.files_url
+      };
+      console.log("테스트임", file.files_url);
       Api.post("/Files/post", file).then(res => {
         console.log(res.data);
       });

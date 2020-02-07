@@ -38,7 +38,6 @@ import {
   QTab,
   QTabPanels,
   QTabPanel,
-  QChatMessage,
   QBtnDropdown,
   QMenu,
   ClosePopup
@@ -83,12 +82,10 @@ Vue.use(Quasar, {
     QChatMessage,
     QBtnDropdown,
     QMenu
-    
   },
   directives: {
     ClosePopup
   },
   plugins: {},
-  utils: {
-  }
+  utils: {}
 });

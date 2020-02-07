@@ -1,4 +1,4 @@
-import firebase from "firebase/app";
+import firebase, { auth } from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 
@@ -69,6 +69,28 @@ export default {
       })
       .catch(function(error) {
         console.error("[GitHub Login Error]", error);
+      });
+  },
+  resetPw(email) {
+    if (email.includes("@naver.com")) {
+      alert("네이버에서 비밀번호를  찾아주세요.");
+      return;
+    } else if (email.includes("@google.com")) {
+      alert("구글에서 비밀번호를 찾아주세요.");
+      return;
+    } else if (email.includes("@github.com")) {
+      alert("깃허브에서 비밀번호를 찾아주세요.");
+      return;
+    }
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(function() {
+        alert("가입한 이메일로 비밀번호 재설정 메일을 발송 하였습니다.");
+      })
+      .catch(function(error) {
+        // An error happened.
+        alert("등록되지 않은 회원입니다." + error);
       });
   }
 };

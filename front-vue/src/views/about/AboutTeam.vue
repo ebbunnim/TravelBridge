@@ -70,6 +70,9 @@ export default {
     getImgUrl(img) {
       return require("../../assets/" + img);
     }
+  },
+  mounted() {
+    Reveal.initialize();
   }
 };
 </script>
