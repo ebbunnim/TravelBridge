@@ -205,17 +205,229 @@ VALUES (
 select * from city;
 select * from hotplace;
 
+# 도시번호 찾기
+SELECT city_no 
+FROM city 
+WHERE city_name = "서울" 
+AND city_del_check = FALSE;
+
+# 도시별로 가져오기
 SELECT * 
 FROM hotplace 
 WHERE city_no = 1 
+AND hp_del_check = FALSE
 ORDER BY hp_name
 LIMIT 0, 3;
 
-# 태그안에 해당 단어가 있으면 다가져옴
+# 도시별로 가져오기 sub query
+SELECT * 
+FROM hotplace 
+WHERE city_no = (SELECT city_no 
+				 FROM city 
+				 WHERE city_name = "전주" 
+				 AND city_del_check = FALSE) 
+AND hp_del_check = FALSE
+ORDER BY hp_name
+LIMIT 0, 3;
+
+
+# 태그별로 가져오기 (태그안에 해당 단어가 있으면 다가져옴)
 SELECT * 
 FROM hotplace
-WHERE hp_tag LIKE concat('%','휴식','%')
+WHERE hp_tag 
+LIKE concat('%','휴식','%') 
+AND hp_del_check = FALSE
 ORDER BY hp_name limit 0, 3;
 
+# 주소별로 가져오기
+SELECT * 
+FROM hotplace
+WHERE hp_address = TRIM("서울 종로구") 
+AND hp_del_check = FALSE
+ORDER BY hp_name LIMIT 0, 3;
 
+DESC hotplace;
+##############################
+# BOARD
+
+INSERT INTO 
+board (board_name) 
+VALUES ('공지사항'); 
+INSERT INTO 
+board (board_name) 
+VALUES ('일정 게시판');
+INSERT INTO 
+board (board_name) 
+VALUES ('후기 게시판');
+
+SELECT * FROM BOARD;
+## 유저별로 피드 식으로 제공할 거면 유저 번호가 게시판마다 필요한가
+
+SELECT * FROM MEMBERS;
+SELECT * FROM POST;
+/*
+post_no				int PRIMARY KEY AUTO_INCREMENT,	# 게시글 관리번호	기본키, 자동증가
+    post_type			int NOT NULL,			# 후기(사진등 추가) : 0, 일정(양식) : 1 
+	board_no			int NOT NULL,					# 게시판 번호	외래키
+	mem_no				int NOT NULL,					# 작성자 번호	외래키
+	post_title			varchar(200),					# 게시글 제목	
+	post_content		varchar(3000) NOT NULL,			# 게시글 내용	
+	post_category		varchar(300),					# 게시글 카테고리, 태그
+	post_regtime		datetime DEFAULT NOW(),			# 게시글 작성시간	
+	post_hits			int DEFAULT 0,					# 게시글 조회수
+    post_city			varchar(500),					# 지역(해시태그) 달기
+    post_plan_start		date,							# 일정 시작날짜
+    post_plan_end		date,							# 일정 끝 날짜
+    post_plan_title		varchar(200),					# 일정 제목
+    post_del_check		boolean DEFAULT FALSE,			# 삭제 여부
+    writer	
+    */
+    select * from post;
+    select * from members;
+    INSERT INTO post
+		(post_type, 
+		board_no, 
+		mem_no, 
+		post_plan_start,
+		post_plan_end,
+		post_plan_title)
+VALUES( 1, 
+		2,
+		2, 
+        '2020-02-05',
+        '2020-02-07',
+		'나의 청춘예찬 첫 일정'
+);
+INSERT INTO post
+		(post_type, 
+		board_no, 
+		mem_no, 
+		post_title, 
+		post_content, 
+		post_category, 
+        post_city)
+VALUES( 0, 
+		1,
+		2, 
+		'청춘예찬 첫 후기', 
+		'따뜻한 봄날의 품으며, 같은 싸인 든 있는 유소년에게서 봄바람이다. 이는 청춘의 없으면 커다란 시들어 피에 인간은 그들의 것이다. 하는 이상 고동을 때까지 이상의 할지니, 피다. 눈이 열락의 몸이 끝에 인간에 봄바람이다. 그들에게 어디 얼마나 끝에 실현에 눈이 것이다. 군영과 것은 풍부하게 하는 그들의 같이, 그것은 뿐이다. 그들의 꾸며 없으면 굳세게 실현에 얼마나 군영과 반짝이는 관현악이며, 봄바람이다. 든 영락과 타오르고 관현악이며, 인류의 사랑의 사막이다. 생의 내는 것은 길지 그들은 쓸쓸하랴? 
+         물방아 역사를 튼튼하며, 별과 과실이 불러 장식하는 많이 것이다. 불어 힘차게 거친 이상이 영락과 그들의 가치를 찾아다녀도, 산야에 때문이다. 소금이라 무엇을 인생에 사막이다. 방지하는 따뜻한 청춘의 고동을 생명을 바이며, 전인 이것이다. 청춘의 보내는 소금이라 하는 뜨거운지라, 있으며, 만천하의 약동하다. 이상은 황금시대를 천하를 우리의 것이다. 보배를 맺어, 하여도 동력은 돋고, 무엇을 그들의 것이다. 있음으로써 생명을 앞이 없으면 할지니, 곧 꽃 열매를 운다. 무한한 구하지 소담스러운 위하여 이성은 그들의 인도하겠다는 약동하다. 피가 생의 보이는 아니다. 
+		때까지 그들의 맺어, 그들에게 인생을 온갖 들어 그리하였는가? 불러 피는 그들의 피가 피고, 지혜는 것이다. 너의 붙잡아 하는 피가 열락의 있음으로써 구하지 가슴이 것이다. 청춘이 그들에게 같이, 안고, 불어 위하여서. 광야에서 품으며, 위하여서, 피다. 꽃이 만천하의 주며, 대중을 찾아다녀도, 별과 부패뿐이다. 그들에게 얼마나 보내는 싶이 있다. 피부가 인간이 곳으로 얼마나 듣기만 긴지라 아름다우냐? 찾아 커다란 평화스러운 사막이다. 방황하였으며, 그들의 되는 품에 구할 노래하며 속에 앞이 듣는다. 돋고, 평화스러운 꾸며 무엇을 바이며, 힘차게 안고, 같은 것이다.', 
+		'#문화','#부산'
+);
+
+# 권한 1의 tester가 board
+select * from post;
+
+DESC festival;
+DESC course;
+DESC board;
+DESC post;
+DESC comment;
+DESC qna;
+# follow 기능을 고려하면, board가 member_no별로 생성되어야함
+# 자신이 follow한 사람들의 post(0) 가져오고, 
+# follow한 사람이 없어도 컨텐츠랑 추천 아이디가 보이도록해야겠지
+select * from comment;
+
+select 
+board_no 
+from board
+where 
+board_name = '여행지 추천 게시판';
+
+select * 
+from post p
+where p.board_no = (select 
+				b.board_no 
+				from board b
+				where 
+				b.board_name = '후기 게시판');
+
+# post member 조인
+select board_no, post_no, post_title, mem_id, post_content, post_category                     
+		, date_format(post_regtime, '%Y-%m-%d') as post_regtime
+        , post_hits, ((post_end_day)-(post_start_day)) as days
+		 			 from   post, members                                        
+		 			 where  post_no = 1 and post.mem_no = members.mem_no;
+                    
+DESC comment;
+INSERT INTO 
+comment
+(board_no, post_no, mem_no, cmt_title, cmt_content) 
+VALUES (3,1,2,'댓글1', 'ㅈㄱㄴ'),(3,1,2,'댓글2','냉무'),( 3,1,3, '댓글3', 'ㅋㅋ루ㅋㅋ'),(3,1,3,'댓글4', '오? 심상치 않은데?');
+
+# 하나의 post에 달려있는 댓글들 까지 전부 가져오기 (작성자 아이디, 댓글작성자 아이디까지 조인)
+select p.* , m.mem_id as cmt_person, c.cmt_no, c.mem_no, cmt_title, cmt_content             
+from   comment c                                              
+right join  (select post_no, post_title, mem_id, post_content, post_category                     
+					, date_format(post_regtime, '%y-%m-%d') as post_regtime
+					, post_hits, ((post_end_day)-(post_start_day)) as days
+			 from   post, members                                        
+			 where  post_no = 1 and post.mem_no = members.mem_no) p                                   
+on   p.post_no = c.post_no
+left join members m
+on c.mem_no = m.mem_no;
+  
+/* 요만큼이 association 관계고*/
+select post_no, post_title, mem_id, post_content, post_category                     
+					, date_format(post_regtime, '%y-%m-%d') as post_regtime
+					, post_hits, post_start_day, post_end_day
+from   post, members                                        
+where  post_no = 1 and post.mem_no = members.mem_no; 
+             
+             
+select p.post_no, p.post_title, m.mem_id, p.post_content, p.post_category                     
+					, date_format(post_regtime, '%y-%m-%d') as post_regtime
+					, p.post_hits, p.post_start_day, p.post_end_day,
+                    m.mem_id as cmt_person, c.cmt_no, c.mem_no, c.cmt_title, c.cmt_content   
+from  post p
+left join members m on p.mem_no = m.mem_no           
+right join comment c on p.post_no = c.post_no                            
+where  p.post_no = 1;
+
+select p.post_no, p.post_title, m.mem_id, p.post_content, p.post_category                     
+					, date_format(post_regtime, '%y-%m-%d') as post_regtime
+					, p.post_hits, p.post_start_day, p.post_end_day,
+                    m.mem_id as cmt_person, c.cmt_no, c.mem_no, c.cmt_title, c.cmt_content   
+from  members m
+right join post p on m.mem_no = p.mem_no           
+right join comment c on c.mem_no = m.mem_no                          
+where  p.post_no = 1;
+
+
+
+
+
+
+select p.* , m.mem_id as cmt_person, c.cmt_no, cmt_title, cmt_content             
+from   comment c    
+left join members m
+on c.mem_no = m.mem_no                                          
+right join  (select post_no, post_title, mem_id, post_content, post_category                     
+					, date_format(post_regtime, '%y-%m-%d') as post_regtime
+					, post_hits, ((post_end_day)-(post_start_day)) as days
+			 from   post, members                                        
+			 where  post_no = 1 and post.mem_no = members.mem_no) p                                   
+on   p.post_no = c.post_no;
+
+select p.* , m.mem_id as cmt_person, c.cmt_no, cmt_title, cmt_content             
+from   comment c                                             
+right join  (select post_no, post_title, mem_id, post_content, post_category                     
+					, date_format(post_regtime, '%y-%m-%d') as post_regtime
+					, post_hits, ((post_end_day)-(post_start_day)) as days
+			 from   post                                      
+			 where  post_no = 1) p                                   
+on   p.post_no = c.post_no;
+
+select *
+from post p
+left join comment c
+on p.post_no = c.post_no
+left join files f
+on p.post_no = f.post_no;
+
+SELECT * fROM post;
+SELECT * FROM COMMENT;
+SELECT * FROM FILES;
 

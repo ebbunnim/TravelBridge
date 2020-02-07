@@ -4,32 +4,95 @@
 <mapper namespace="com.pjt1.demo.model.dao.PostDao" >
  
   	<insert id="insert"		parameterType="post">
-		insert into post
-		(post_type, board_no, mem_no, post_title, post_content, post_category, 
-		post_start_day, post_end_day, post_plan)
-		values(
+		INSERT INTO post
+		(post_type, 
+		board_no, 
+		mem_no, 
+		post_title, 
+		post_content, 
+		post_category, 
+		post_city
+		post_plan_start, 
+		post_plan_end,
+		post_plan_title)
+		VALUES(
 			#{post_type:INTEGER}, #{board_no:INTEGER}, #{mem_no:INTEGER},
-			#{post_title:VARCHAR}, #{post_content:VARCHAR}, #{post_category:VARCHAR},
-			#{post_start_day:VARCHAR}, #{post_end_day:VARCHAR}, #{post_plan:VARCHAR}
+			#{post_title:VARCHAR}, #{post_content:VARCHAR}, #{post_category:VARCHAR}, #{post_city:VARCHAR},
+			#{post_plan_start:VARCHAR}, #{post_plan_end:VARCHAR}, #{post_plan_title:VARCHAR}
 		)
 	</insert> 
-
+	
    	<delete id="delete" 	parameterType="int">
 	   
 	</delete>
 
    	<update id="update"		parameterType="post">
-		update post set
-		post_type=#{post_type:INTEGER}, board_no=#{board_no:INTEGER}, mem_no=#{mem_no:INTEGER},
-		post_title=#{post_title:VARCHAR}, post_content= #{post_content:VARCHAR}, post_category=#{post_category:VARCHAR},
-		post_start_day=#{post_start_day:VARCHAR}, post_end_day=#{post_end_day:VARCHAR}, post_plan=#{post_plan:VARCHAR}
+		UPDATE post 
+		SET
+		post_type=#{post_type:INTEGER}, 
+		board_no=#{board_no:INTEGER}, 
+		mem_no=#{mem_no:INTEGER},
+		post_title=#{post_title:VARCHAR}, 
+		post_content= #{post_content:VARCHAR}, 
+		post_category=#{post_category:VARCHAR},
+		post_regtime=CURRENT_TIMESTAMP(),
+		post_city=#{post_city:VARCHAR},
+		post_plan_start=#{post_plan_start:VARCHAR}, 
+		post_plan_end=#{post_plan_end:VARCHAR}, 
+		post_plan_title=#{post_plan_title:VARCHAR},
+		post_plan=#{post_plan:VARCHAR},
+		post_del_check=#{post_del_check:BOOLEAN}
 		where post_no=#{post_no}
 	</update>
-   	<select id="search"		parameterType="int" resultType="post">
-		select * from post where post_no=#{post_no:INTEGER} and post_del_check=false   
+	<update id="updatePostHitUp" parameterType="int">
+		UPDATE post
+		SET
+		post_hits = post_hits + 1
+		WHERE post_no=#{post_no}
+	</update>
+   	<select id="search"	parameterType="int" resultType="post">
+		SELECT * 
+		FROM post 
+		WHERE 
+		post_no = #{post_no:INTEGER} 
+		AND post_del_check=false   
 	</select>
+	<!-- <resultMap type ="post" id="postMap">
+		<id	column="post_no"	property="post_no"/>
+		<result column="post_"/>
+		<result/>
+		<result/>
+		<result/>
+		<result/>
+		<result/>
+		<collection property="commentList" ofType="comment" ></collection>
+	</resultMap> -->
+	<!-- <select id="searchWithComment" parameterType ="int" resultType="postMap">
+		select p.* , m.mem_id as cmt_person, c.cmt_no, c.mem_no, cmt_title, cmt_content             
+		from   comment c                                              
+		right join  (select post_no, post_title, mem_id, post_content, post_category                     
+							, date_format(post_regtime, '%y-%m-%d') as post_regtime
+							, post_hits, ((post_end_day)-(post_start_day)) as days
+					 from   post, members                                        
+					 where  post_no = #{post_no:INTEGER} and post.mem_no = members.mem_no) p                                   
+		on   p.post_no = c.post_no
+		left join members m
+		on c.mem_no = m.mem_no;
+	</select> -->
    	<select id="searchAll"	resultType="post">
-		select * from post where post_del_check=false
+		SELECT * FROM post WHERE post_del_check = false
 	</select>
+
+	<select id="searchByCategory" parameterType="string" resultType="post">
+		SELECT * FROM post WHERE post_category = #{post_category}
+	</select>
+
+
+
+
+
+
+
+	
 </mapper>
 

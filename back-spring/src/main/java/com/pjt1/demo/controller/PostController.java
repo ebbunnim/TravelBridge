@@ -59,6 +59,9 @@ public class PostController {
     @GetMapping("/Post/search/{post_no}")
     public ResponseEntity<Map<String, Object>> search(int post_no) {
         Post Post = service.search(post_no);
+        //그러면 여기서 포스트넘 기반으로 comment 호출하는거 하나 하고
+        //멤버 호출하는거 하나한다음에
+        //postPagebean 하나 만들어서 그걸 넘겨주자.
         return handleSuccess(Post);
     }
 

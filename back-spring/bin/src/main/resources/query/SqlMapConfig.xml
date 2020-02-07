@@ -3,17 +3,14 @@
       "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-		<typeAlias type= "com.pjt1.demo.model.dto.Blame"          	alias="blame" />
 		<typeAlias type="com.pjt1.demo.model.dto.Board"          	alias="board" />
   		<typeAlias type="com.pjt1.demo.model.dto.Faq"            	alias="faq" />
-		<typeAlias type="com.pjt1.demo.model.dto.CityLayerBottom"  	alias="citylayerbottom" />
-		<typeAlias type="com.pjt1.demo.model.dto.CityLayerMid"  		alias="citylayermid" />
-		<typeAlias type="com.pjt1.demo.model.dto.CityLayerTop"  		alias="citylayertop" />
 		<typeAlias type="com.pjt1.demo.model.dto.Comment"        	alias="comment" />
-		<typeAlias type="com.pjt1.demo.model.dto.Faq"            	alias="faq" />
+		<typeAlias type="com.pjt1.demo.model.dto.City"        		alias="city" />
 		<typeAlias type="com.pjt1.demo.model.dto.Festival"          	alias="festival" />
 		<typeAlias type="com.pjt1.demo.model.dto.Files"         		alias="files" />
 		<typeAlias type="com.pjt1.demo.model.dto.Follow"         	alias="follow" />
+		<typeAlias type="com.pjt1.demo.model.dto.HotPlace"        	alias="hotplace" />
 		<typeAlias type="com.pjt1.demo.model.dto.Likes"           	alias="likes" />
 		<typeAlias type="com.pjt1.demo.model.dto.Members"         	alias="members" />
 		<typeAlias type="com.pjt1.demo.model.dto.Post"           	alias="post" />
@@ -21,17 +18,14 @@
   </typeAliases>
   
   <mappers>
-  		<mapper resource="query/blame_query.xml" />
   		<mapper resource="query/board_query.xml" />
   		<mapper resource="query/faq_query.xml" />
-  		<mapper resource="query/citylayerbottom_query.xml" />
-  		<mapper resource="query/citylayermid_query.xml" />
-  		<mapper resource="query/citylayertop_query.xml" />
   		<mapper resource="query/comment_query.xml" />
-  		<mapper resource="query/faq_query.xml" />
+  		<mapper resource="query/city_query.xml" />
   		<mapper resource="query/festival_query.xml" />
   		<mapper resource="query/files_query.xml" />
   		<mapper resource="query/follow_query.xml" />
+  		<mapper resource="query/hotplace_query.xml" />
   		<mapper resource="query/likes_query.xml" />
   		<mapper resource="query/members_query.xml" />
   		<mapper resource="query/post_query.xml" />

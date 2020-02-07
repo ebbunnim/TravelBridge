@@ -34,7 +34,6 @@ CREATE TABLE MEMBERS (
 	mem_no				int	PRIMARY KEY AUTO_INCREMENT,	# 회원 관리번호
 	mem_id				varchar( 50) NOT NULL UNIQUE,	# 아이디
 	mem_email			varchar(150) NOT NULL UNIQUE,	# 이메일
-	# mem_password		varchar(500) NOT NULL ,			# 패스워드
 	mem_phone			varchar( 50) NOT NULL UNIQUE,	# 핸드폰번호
 	mem_name			varchar( 50),					# 이름
 	mem_sex				int,							# 성별 0: 남 1:여
@@ -60,61 +59,76 @@ CREATE TABLE FOLLOW (
     FOREIGN KEY(follower_no) REFERENCES MEMBERS(mem_no),
     FOREIGN KEY(following_no) REFERENCES MEMBERS(mem_no)
 );
-
-
 CREATE TABLE BOARD (
 	board_no			int PRIMARY KEY AUTO_INCREMENT,	# 게시판 관리 번호 기본키, 자동증가	
 	board_name			varchar(200) NOT NULL ,			# 게시판 이름
-    board_del_check		boolean DEFAULT FALSE
+    board_del_check		boolean DEFAULT FALSE 
+	
+	
 );
+
+# 물어보기
+# mem_no을 넣은거임?
+
+select following_no from 
+members
+left join follow on members.mem_no = follow.follower_no
+where members.mem_no = 1;
+#member가 List로 followerList 있으면 되냐 되겠군a
+
+select * from members 
+	where mem_no in (select following_no 
+					from members m
+					left join follow f on m.mem_no = f.follower_no
+					where m.mem_no = 1);
+
+insert into follow(follower_no, following_no) values(1,3);
+select * from follow;
 # 후기와 일정에 대한 게시물 테이블
 # 후기는 다양한 이미지와 긴 글을 작성할 수 있고, 코스를 추가할 수 있다.
 # 일정은 시작일과 종료일을 정해서 간단한 메모 형태로 작성할 수 있다.
 CREATE TABLE POST (
 	post_no				int PRIMARY KEY AUTO_INCREMENT,	# 게시글 관리번호	기본키, 자동증가
-    post_type			int NOT NULL DEFAULT 0,			# 후기(사진등 추가) : 0, 일정(양식) : 1 
+    post_type			int NOT NULL,			# 후기(사진등 추가) : 0, 일정(양식) : 1 
 	board_no			int NOT NULL,					# 게시판 번호	외래키
 	mem_no				int NOT NULL,					# 작성자 번호	외래키
 	post_title			varchar(200),					# 게시글 제목	
-	post_content		varchar(3000) NOT NULL,			# 게시글 내용	
+<<<<<<< HEAD
+	post_content		varchar(3000),			# 게시글 내용	
+=======
+	post_content		varchar(3000),					# 게시글 내용	
+>>>>>>> 9c5ced419281868f451853b5ece3e20a7fe04241
 	post_category		varchar(300),					# 게시글 카테고리, 태그
 	post_regtime		datetime DEFAULT NOW(),			# 게시글 작성시간	
-	post_hits			int DEFAULT 0,					# 게시글 조회수	
-	post_secret			boolean DEFAULT FALSE,			# 비밀 게시글 여부	
-	post_notice			boolean DEFAULT FALSE,			# 공지사항 여부	
-    post_start_day		date,							# 일정 시작날짜
-    post_end_day		date,							# 일정 끝 날짜
-    post_plan			varchar(300),					# 일정 간단한 메모내용
+	post_hits			int DEFAULT 0,					# 게시글 조회수
+    post_city			varchar(500),					# 지역(해시태그) 달기
+    post_plan_start		date,							# 일정 시작날짜
+    post_plan_end		date,							# 일정 끝 날짜
+    post_plan_title		varchar(200),					# 일정 제목
     post_del_check		boolean DEFAULT FALSE,			# 삭제 여부
+    writer				varchar( 50),					# 작성자
 	FOREIGN KEY(board_no) REFERENCES BOARD(board_no),
-	FOREIGN KEY(mem_no) REFERENCES MEMBERS(mem_no)
-);
- 
- # 코스 테이블
- # 후기 게시물에 추가되는 코스로 장소명과 간단한 설명에 대해서 작성 할 수 있고, 한 게시물에 여러개가 추가될 수 있다.
-CREATE TABLE COURSE (
-	course_no			int PRIMARY KEY AUTO_INCREMENT,	# 후기에 갔던 장소들 번호 기본키, 자동증가
-    post_no				int NOT NULL,					# 참조하는 게시물 번호
-    course_spot			varchar(1000),					# 장소명들을 직접 받아서 스트링 형태로 저장 ,로 구분하자. 
-    course_del_check	boolean DEFAULT FALSE,			# 삭제 여부
-    FOREIGN KEY(post_no) REFERENCES POST(post_no) 
+	FOREIGN KEY(mem_no) REFERENCES MEMBERS(mem_no),
+    foreign key(writer) references MEMBERS(mem_id)
 );
 
+DROP TABLE POST;
+DROP TABLE COMMENT;
+DROP TABLE FILES;
+DROP TABLE COURSE;
+DROP TABLE LIKES;
  # 댓글 테이블
 CREATE TABLE COMMENT (
 	cmt_no			int PRIMARY KEY AUTO_INCREMENT,	# 댓글 관리번호	기본키, 자동증가
-	board_no		int NOT NULL,					# 게시판 번호 외래키
 	post_no			int	NOT NULL, 					# 게시물 번호 외래키
 	mem_no			int NOT NULL,					# 게시글 작성자 번호 외래키
 	cmt_regtime		datetime DEFAULT NOW(),			# 댓글 작성 일시	
-	cmt_parent		int DEFAULT NULL,				# 기본 댓글은 부모가 없고, 대댓글들은 부모 번호 존재 //댓글에 댓글을 다는 버튼이면 해당 댓글번호 넣기
-	cmt_secret		boolean DEFAULT FALSE,			# 비밀 댓글 여부		
-	cmt_title		varchar(200),					# 댓글 제목	
 	cmt_content		varchar(3000),					# 댓글 내용	
     cmt_del_check	boolean DEFAULT FALSE,
+    writer			varchar( 50),
 	FOREIGN KEY(post_no) REFERENCES POST(post_no),
-	FOREIGN KEY(board_no) REFERENCES BOARD(board_no),
-    FOREIGN KEY(mem_no) REFERENCES MEMBERS(mem_no)
+    FOREIGN KEY(mem_no) REFERENCES MEMBERS(mem_no),
+    foreign key(writer) references members(mem_id)
 );
 
 # 좋아요 테이블
@@ -123,22 +137,22 @@ CREATE TABLE COMMENT (
 
 
 drop table likes;
-
 CREATE TABLE LIKES (
 	like_no				int PRIMARY KEY AUTO_INCREMENT,	# 좋아요 관리번호	기본키, 자동증가
-    board_no			int NOT NULL,					# 게시판 위치 
     post_no				int NOT NUll,					# 게시물 번호
-    cmt_check			boolean not null,				# 댓글 여부 (게시물이면 false, 댓글이면 true)
-	cmt_no				int	default 0,					# 댓글 번호 (댓글이면 해당 번호 삽입)
-	liker_mem_no		int NOT NULL,					# 좋아요 한 회원	외래키
-    like_del_check		boolean DEFAULT FALSE,			# 삭제 여부			
-    FOREIGN KEY(board_no) REFERENCES BOARD(board_no), 
+	liker_mem_no		int NOT NULL,					# 좋아요 한 회원 외래키
+    like_del_check		boolean DEFAULT FALSE,			# 삭제 여부
 	FOREIGN KEY(post_no) REFERENCES POST(post_no),
     FOREIGN KEY(liker_mem_no) REFERENCES MEMBERS(mem_no)
 );
+select count(*) from likes where post_no = 1;
+select * from likes where liker_mem_no = 2;
+select * from likes;
+insert into likes(post_no, liker_mem_no) values (1,1);
 
 # FAQ 테이블
 # 관리자가 만들어둔 게시글들
+DROP TABLE FAQ;
 CREATE TABLE FAQ (
 	faq_no		int PRIMARY KEY AUTO_INCREMENT,		# 자주하는 질문 관리번호	기본키, 자동증가
     faq_category varchar(200),						# 질문 카테고리
@@ -163,13 +177,14 @@ CREATE TABLE QNA (
 
 create table FILES(
 	files_no int NOT NULL KEY AUTO_INCREMENT,
-    path_type int NOT NULL,				# 0 : POST, 1 : HOTPLACE
-    path_no int NOT NULL,				# 게시물 또는 핫플 번호
-    files_name varchar(200) NOT NULL,	# 파일 이름
-    files_thumbnail boolean, 			# 파일 썸네일 여부
+    post_no int NOT NULL,				# 게시물 번호
+    mem_no int NOT NULL,
     files_url varchar(500) NOT NULL,
-    files_del_check boolean DEFAULT FALSE
+    files_del_check boolean DEFAULT FALSE,
+    FOREIGN KEY(post_no) REFERENCES POST(post_no),
+    FOREIGN KEY(mem_no) REFERENCES MEMBERS(mem_no)
 );
+
 # 국내/국외여부, 주소(서울 강남구), 이미지 
 create table city(
 	city_no int NOT NULL KEY AUTO_INCREMENT, # 도시 관리번호
@@ -179,11 +194,14 @@ create table city(
     city_img varchar(500),					 # 도시 이미지
     city_del_check boolean DEFAULT FALSE	 # 도시 삭제 여부
 );
-
+select * from city;
 # 이름, 도시번호, 주소, 상세주소, List<이미지>, 
 # 컨텐츠, 태그 + api(지도, 리뷰 등), 상세정보(홈페이지, 휴일, 요금, 기타) //운영시간은 거의 없어서 제외하고 기타로 대체
+select * from hotplace;
+
 create table hotplace(
 	hp_no int NOT NULL KEY AUTO_INCREMENT,	# 핫플 관리번호
+    city_no int NOT NULL,					# 도시 번호
     hp_name varchar(200) NOT NULL,			# 핫플 이름
     hp_address varchar(200) NOT NULL,		# 핫플 주소 //ex) 서울 강남구
     hp_detail_adr varchar(500) NOT NULL,	# 핫플 상세주소
@@ -191,25 +209,28 @@ create table hotplace(
     hp_tag varchar(1000) NOT NULL,			# 핫플 태그 (" "로 구분)
     hp_homepage varchar(500),				# 핫플 홈페이지
     hp_holiday varchar(200),				# 핫플 휴일
-    hp_fee varchar(500),					# 핫플 요금
-    hp_etc varchar(2000),					# 핫플 관련 기타사항
-    hp_del_check boolean DEFAULT FALSE		# 핫플 삭제 여부
+    hp_fee varchar(2000),					# 핫플 요금
+    hp_img varchar(500),					# 핫플 관련 기타사항
+    hp_del_check boolean DEFAULT FALSE,		# 핫플 삭제 여부
+	FOREIGN KEY(city_no) REFERENCES CITY(city_no)
 );
+
+
 # 축제테이블
 create table FESTIVAL(
     fval_no int NOT NULL KEY AUTO_INCREMENT,		# 축제 관리번호
     city_no int NOT NULL,							# 도시 번호
     fval_name varchar(200) NOT NULL,				# 축제 명
     fval_address varchar(500) NOT NULL,				# 축제 주소
-    fval_img varchar(500),							# 축제 이미지
+    fval_detail_adr varchar(500) NOT NULL,			# 축제 상세주소
     fval_content varchar(3000) NOT NULL,			# 축제 컨텐츠
     fval_tag varchar(500),							# 축제 태그
     fval_start_day date,							# 축제 시작일
     fval_end_day date,								# 축제 종료일
-    fval_fee int DEFAULT 0,							# 축제 비용
-    fval_map_img varchar(500),						# 축제 지도이미지
     fval_homepage varchar(300),						# 축제 홈페이지
-    fval_host varchar(200),							# 축제 주최자
+    fval_fee int DEFAULT 0,							# 축제 비용
+	fval_img varchar(500),							# 축제 이미지
+	fval_host varchar(200),							# 축제 주최자
     fval_del_check boolean DEFAULT FALSE,			# 축제 삭제 여부
     FOREIGN KEY(city_no) REFERENCES CITY(city_no)
 ); 
