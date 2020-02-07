@@ -72,7 +72,14 @@ public class MembersController {
         return handleSuccess(members);
     }
 
-
+    @ApiOperation("능")
+    @GetMapping("/Members/searchMemberLikePost/{mem_no}")
+    public ResponseEntity<Map<String, Object>> searchMemberLikePost(int mem_no) {
+    	System.out.println(mem_no);
+        Members members = service.searchMemberLikePost(mem_no);
+        System.out.println(members);
+        return handleSuccess(members);
+    }
 
     
     @ApiOperation("Member 조회(email에 따른)")

@@ -54,6 +54,35 @@
 	<select id="searchMemberByEmail" parameterType="String" resultType="Members">
 		SELECT * FROM members WHERE mem_email=#{mem_email:VARCHAR} and mem_del_check=false
 	</select>
+	<resultMap type="post" id="postMap">
+		<id property="post_no" column="post_no"/>
+		<result property="post_title" column="title"/>
+		<result property="post_category" column="category"/>
+		<result property="post_regtime" column="regtime"/>
+		<result property="post_city" column="city"/>
+		<result property="post_hits" column="hits"/>
+	</resultMap>
 	
+	<resultMap type="likes" id="likesMap">
+		<id property="like_no" column="like_no"/>
+		<result property="liker_mem_no" column="liker_mem_no"/>
+	</resultMap>
+	
+	
+	<resultMap id="likePostMap" type="Members">
+		<id property="mem_id" column="mem_id"/>
+		<collection property="mem_likeList" ofType="Likes" resultMap="likesMap"/>
+		<collection property="mem_likePost" ofType="Post" resultMap="postMap"/>
+	</resultMap>
+	
+	<select id="searchMemberLikePost" parameterType="int" resultMap="likePostMap">
+		select mem_id, like_no, l.post_no, post_title, post_category, post_regtime, post_city, post_hits
+		from members m
+		left join likes l 
+		on m.mem_no = l.liker_mem_no
+		left join post p 
+		on l.post_no = p.post_no
+		where m.mem_no = #{mem_no}; 
+	</select>
 </mapper>
 

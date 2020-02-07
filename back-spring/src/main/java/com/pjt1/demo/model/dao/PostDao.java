@@ -22,7 +22,7 @@ public interface PostDao {
 	public void delete(int post_no);
 
 	public Post searchByCategory(String category);
-	
+	public void updatePostHits(int post_no);
 	public int getCountPostAll();
 	public int getCountReport();
 	public int getCountPlan();

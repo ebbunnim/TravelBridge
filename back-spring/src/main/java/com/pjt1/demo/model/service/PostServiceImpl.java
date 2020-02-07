@@ -66,7 +66,13 @@ public class PostServiceImpl implements PostService {
 		}
 
 	}
-
+	public void updatePostHits(int post_no) {
+		try {
+			repo.updatePostHits(post_no);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public Post searchByCategory(String category) {
 		try {

@@ -181,3 +181,52 @@
 
 ## 4. 미작업 테이블 필수 기능 추출 및 추가
   - 기능 추출중
+
+
+# 2020.02.07
+
+## 0. 현재상황
+  - back   
+    1) 완료
+     - 모든 테이블 기본 CRUD
+     - login
+     - faq / qna , 
+    2) 수정중 
+     - member
+     - board, post, files
+     - city, hotplace, festival
+     - likes, follow, comment
+    3) 테이블 변경사항
+     - course table 제거. 
+     - 세부 필드 변경
+
+## 1. 페이징 처리
+  - 더보기 && 페이지 (morePage / perPage) 추가 o
+  - Post, Hotplace, Festival 페이징 처리 구현 o
+  - 추후 Post 테이블을 plan / report로 분할 시 재수정 필요 o
+  - 태그, 도시명, 주소등으로 필터링 가능 o
+
+## 2. 수정중인 테이블 필수 기능 추가
+  - like vs member
+  - follow vs member
+
+## 3. 연관되는 컬럼 처리
+  - 삭제(구현은 역순으로 할 것)
+    >**1) board 삭제**  
+    > - post 삭제  
+    > comment 삭제  
+    > files 삭제  
+    > likes 삭제    
+
+    >**2) members 삭제**
+    > - post 삭제  
+    > files 삭제  
+    > comment 삭제  
+    > likes 삭제  
+    > - follow 삭제
+    
+
+## 4. 미작업 테이블 필수 기능 추출 및 추가
+  - 기능 추출중
+
+
