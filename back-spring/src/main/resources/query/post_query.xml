@@ -46,23 +46,25 @@
 		post_hits = post_hits + 1
 		WHERE post_no=#{post_no}
 	</update>
-   	<select id="search"	parameterType="int" resultType="post">
+   	<select id="search"		parameterType="int" resultType="post">
 		SELECT * 
 		FROM post 
 		WHERE 
 		post_no = #{post_no:INTEGER} 
 		AND post_del_check=false   
 	</select>
-	<resultMap type ="post" id="postMap">
+	<!-- <resultMap type ="post" id="postMap">
 		<id	column="post_no"	property="post_no"/>
-		<result column="post_"/>
+		<result column="post_title" propet =/>
 		<result/>
 		<result/>
 		<result/>
 		<result/>
 		<result/>
 		<collection property="commentList" ofType="comment" ></collection>
-	</resultMap>
+		<collection property="commentList" ofType="comment" ></collection>
+		<collection property="commentList" ofType="comment" ></collection>
+	</resultMap> -->
 	<select id="searchWithComment" parameterType ="int" resultType="postMap">
 		select p.* , m.mem_id as cmt_person, c.cmt_no, c.mem_no, cmt_title, cmt_content             
 		from   comment c                                              
@@ -78,17 +80,5 @@
    	<select id="searchAll"	resultType="post">
 		SELECT * FROM post WHERE post_del_check = false
 	</select>
-
-	<select id="searchByCategory" parameterType="string" resultType="post">
-		SELECT * FROM post WHERE post_category = #{post_category}
-	</select>
-
-
-
-
-
-
-
-	
 </mapper>
 
