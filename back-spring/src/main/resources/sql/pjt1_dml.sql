@@ -203,8 +203,8 @@ VALUES (
 ""
 );
 select * from city;
-select * from hotplace;
-
+select hp_tag from hotplace;
+select * from board;
 # 도시번호 찾기
 SELECT city_no 
 FROM city 
@@ -219,6 +219,7 @@ AND hp_del_check = FALSE
 ORDER BY hp_name
 LIMIT 0, 3;
 
+select Count(*) from hotplace;
 # 도시별로 가져오기 sub query
 SELECT * 
 FROM hotplace 
@@ -227,25 +228,21 @@ WHERE city_no = (SELECT city_no
 				 WHERE city_name = "전주" 
 				 AND city_del_check = FALSE) 
 AND hp_del_check = FALSE
-ORDER BY hp_name
-LIMIT 0, 3;
+ORDER BY hp_name;
 
 
 # 태그별로 가져오기 (태그안에 해당 단어가 있으면 다가져옴)
 SELECT * 
 FROM hotplace
 WHERE hp_tag 
-LIKE concat('%','휴식','%') 
-AND hp_del_check = FALSE
-ORDER BY hp_name limit 0, 3;
-
+LIKE concat('%','데이트','%') 
+AND hp_del_check = FALSE;
 # 주소별로 가져오기
 SELECT * 
 FROM hotplace
-WHERE hp_address = TRIM("서울 종로구") 
-AND hp_del_check = FALSE
-ORDER BY hp_name LIMIT 0, 3;
-
+WHERE hp_address = TRIM("서울 용산구") 
+AND hp_del_check = FALSE;
+select * from hotplace;
 DESC hotplace;
 ##############################
 # BOARD
@@ -282,6 +279,7 @@ post_no				int PRIMARY KEY AUTO_INCREMENT,	# 게시글 관리번호	기본키, �
     post_del_check		boolean DEFAULT FALSE,			# 삭제 여부
     writer	
     */
+    DROP tABLE post;
     select * from post;
     select * from members;
     INSERT INTO post
@@ -419,7 +417,10 @@ right join  (select post_no, post_title, mem_id, post_content, post_category
 			 from   post                                      
 			 where  post_no = 1) p                                   
 on   p.post_no = c.post_no;
-
+DESC BOARD;
+DESC CITY;
+DESC hotplace;
+DESC POST;
 select *
 from post p
 left join comment c
@@ -427,7 +428,96 @@ on p.post_no = c.post_no
 left join files f
 on p.post_no = f.post_no;
 
+
+
 SELECT * fROM post;
 SELECT * FROM COMMENT;
 SELECT * FROM FILES;
+
+SELECT * FROM members;
+INSERT INTO POST
+(post_type, board_no, mem_no, post_title, post_content, post_category, post_city, post_hits, post_regtime)
+VALUES
+(0, 1,2,"2020 얼음나라 화천산천어축제 제대로 즐기는 TIP","
+겨울 축제는 아이들의 방학 문제로 보통 1월에 집중적으로 열립니다. 
+축제에 참여하는 사람들이 가족단위인 경우가 많다보니 주로 1월에 개최하는 것입니다. 
+1월에 열리는 축제의 주요 테마는 '물고기'입니다. 지방축제가 본격적으로 시작된 1990년대에는 
+겨울축제의 테마로 주로 눈(snow)과 등산을 선택했다면 2000년대 이후에는 단연 어류가 돋보이고 있습니다. 
+얼음나라 화천산천어축제는 세계 4대 겨울 축제의 하나로 이름을 올릴 정도로 큰 성공을 올리고 있는 겨울축제입니다. 
+토종물고기인 산천어 자체에 차별성이 있기도 하고 축제 내부적으로 주민들의 
+참여 및 협조가 잘 되고 있다는 점이 축제가 크게 성공할 수 있었던 길인 것 같습니다. ",
+"#취미#레저","강원도",432,"2020-01-10 10:40:33"),
+( 0, 1, 1, "인천 여행코스 송월동 동화마을 역대 최고 규모의 벽화마을",
+"수십 년 전로 담벼락에 색칠을 하여 동화마을로 변화하였다.가끔 형을 따라서 이곳저곳 몇몇 벽화마을 찾아가 봤지만 인천 송월동 동화마을 만큼 큰 규모를 보지 못했습니다.
+아니 그 반도 안되는 곳들이 대부분인데요 많은 사람들이 이곳을 인천 여행코스 라고 이야기하는 이유를 느낄 수 있었고
+애인이 있었다면 꼭 한 번 데리고 갔을 것 같은 장소로 연인들의 기념사진 촬영하기 딱 적당한 장소였답니다",
+"#인문#교양","인천", 100, "2019-01-02 8:12:22"),
+(0, 1, 2,"그렇게 가보고 싶던 담양, 죽녹원 & 메타세콰이어길에 가다!",
+"게스트하우스에서 나와 311번 버스를 타고 도착한 죽녹원. 
+네이버 지도가 알려준 시간보다 훨씬 빨리 도착했다. 
+어제 먹은 술 해장도 할겸 밥을 먹으려 돌아다니는데 담양하면 하도 
+떡갈비라고 들어서 주변 떡갈비집을 찾아봤다. 
+1인분만 되는 떡갈비집을 다행히도 찾았고 먹었다! 
+죽통밥을 다 먹고 나니 사장님께서 기념으로 가져갈 수 있다며 봉지 드릴까요? 
+하시기에 얼떨결에 받아왔다는 이야기ㅎㅎ 담양국수거리도 바로 앞이라 국수도 먹고 싶었지만 
+혼자 여행의 최대 단점. 여러 가지 다양하게 먹을 수가 없다. 다음에 날 따뜻해지면 다시 갈거니까 그 땐 국수 먹어야징!",
+"#미식#교양","전라남도",87, "2019-12-24 12:00:11"),
+(0, 1, 1,"춘천 애니메이션박물관 + 토이로봇관",
+"춘천갈까 말까 했었는데 춘천시는 미세먼지가 양호하다는 뉴스를 보고
+몇일 지겨웠던 미세먼지 심각에서 잠시나마 벗어나고자 피할려고 강원도로 방향을 틀었다.
+일단 강원도로 오니 공기부터가 일단 다르다. 너무 늦게 출발해서 너무 늦게 도착했더니
+여러군데 들릴 수가 없을 것 같았다.  
+1군데만 들린다면 ...이왕 아이들 때문에 나왔으니 아이 중심으로 가자고 했던 곳이 여기 애니메이션박물관이다.
+생각보다 넓은 규모에 시설이 잘 되어 있어서 좋았다. 
+무엇보다도 봄날씨에 파란하늘이 마음을 더 들 뜨게 한다.
+춘천...사실 그리 먼거리는 아니지만 2시간 정도 ...이래저래 쉬엄쉬엄 오면
+왕복 4~5시간....자주 오기에는 조금 부담스럽긴 하다.
+늦게 도착해서 그냥 애니메이션박물관만 구경만 하는게 더 좋을 법도 했는데 이왕 왔으니 토이로봇관이랑 애니메이션박물관
+두군데 볼 수 있는 티켓을 구매했다. 춘천시민은 절반 가격이니....
+춘천으로 이사와야 겠다. ㅋㅋ",
+"#인문#교양#미식","강원도",2,"2019-01-19 9:10:01"),
+(0, 1, 2,"광주 패밀리랜드 눈썰매장 ! 광주 놀거리",
+"2주전에 남친과 초등학교 이후로 안가본 눈썰매장을 갔어요!
+근데 정말 상당히 재밌더라구요! 사람 많은거 빼구.. 표는 티몬에서 구매했어요!
+놀이기구 5종 , 열차 , 눈썰매장! 까지 해서 한 사람당 16,000원이였던거같아요!
+놀이기구도 많이타고 썰매도 타고싶으신분들은
+그냥 매표소 가서 자유이용권,눈썰매장 이렇게 끊으셔도 될거같아요
+자유이용권,눈썰매장 이렇게 21,000원이세요!
+근데 자유이용권은 반드시 할인카드가 있어야해요!
+저도 자세한 할인카드는 잘 몰라서..ㅎㅎ
+추워서 놀이기구 별로 안탈줄알았는데 재밌더라구요~
+남친님과 후회했어요!
+한번 패밀리랜드 눈썰매장 가보세요~ 괜찮아요! 주차장도 넓구!
+물론 주차비가 별도로 나갑니다. 저희는 1,000원 들었어요! ㅎㅎ
+앞으로 가실 분들은 참고하세요!!! ㅎㅎ 끄읕~",
+"#레저","광주",30,"2020-01-11 01:33:21" );
+
+select * from post;
+select * from city;
+select * from hotplace;
+select * from festival;
+desc festival;
+SELECT COUNT(*) 
+		FROM festival 
+		WHERE city_no = (SELECT city_no 
+						 FROM city 
+						 WHERE city_name = "서울" 
+						 AND city_del_check = FALSE) 
+		AND fval_del_check = FALSE;
+
+insert into festival(city_no, fval_name,fval_address,fval_detail_adr,fval_content,fval_tag)
+values
+(1,"이름1","서울 강남구","서울 강남구 역삼동", "내용","#꿀"), 
+(1,"이름2","서울 강남구","서울 강남구 역삼동", "내용","#꿀"), 
+(1,"이름3","서울 강남구","서울 강남구 역삼동", "내용","#꿀"), 
+(1,"이름4","서울 강남구","서울 강남구 역삼동", "내용","#꿀"), 
+(1,"이름5","서울 강남구","서울 강남구 역삼동", "내용","#꿀"), 
+(1,"이름6","서울 강남구","서울 강남구 역삼동", "내용","#휴"), 
+(1,"이름7","서울 강남구","서울 강남구 역삼동", "내용","#휴"), 
+(1,"이름8","서울 강남구","서울 강남구 역삼동", "내용","#휴"), 
+(1,"이름9","서울 종로구","서울 종로구 명동", "내용","#중"), 
+(1,"이름10","서울 종로구","서울 종로구 명동", "내용","#중"), 
+(1,"이름11","서울 종로구","서울 종로구 명동", "내용","#중"), 
+(1,"이름12","서울 종로구","서울 종로구 명동", "내용","#중");
+
 
