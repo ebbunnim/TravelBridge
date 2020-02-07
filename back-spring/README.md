@@ -1,6 +1,12 @@
 
 # **TODOLIST** 
 
+## **INDEX**
+[2020.02.04](#2020.02.04)  
+[2020.02.05](#2020.02.05)  
+[2020.02.06](#2020.02.06)
+
+
 # 2020.02.04
 
 
@@ -77,10 +83,35 @@
 
 ## 5. LOGIN (지영)
   - 로그인 기능 구현(firebase기반 local login / googlelogin / naverlogin / github login)
-  - selenium을 활용한 크롤링 예정 - 대한민국 구석구석
-  
-- 
 
+## 6. FILES UPLOAD(지영)
+  - POST 이미지 파일 업로드 구현
+
+## 7. POST
+  - 추가
+    - search_by_postno o
+    - search_by_category * -> #으로 split처리해서 처리하기
+    - search_by_course * -> -으로 같은 로직, 다른 테이블 참조 되는지 확인해봐야
+    - insert course 수정 o ('-'기준으로 Split 후 모두 course 각각으로 저장 (post_no 가져가는 것 주의))
+    
+  - 관련 테이블
+    - post, file, comment, course
+  
+  - 세부사항
+  1. 조회수
+  2. 작성시간
+  3. 비밀여부
+
+  - 마지막 추가 기능
+  1. 좋아요
+  2. 팔로우
+  버튼 만들어서 조작하기
+
+# TestCase 작성 (지영)
+  - interest 받을 때 여러개로 받으면 어떻게 string처리?  
+  - post에는 후기 게시글밖에 존재 안함
+  - course에 대표 지역 설정하는 식으로 해야 (테이블에 추가해야)
+  - comment 부분에 대댓글 부분 어떻게 쿼리문으로 가져올 지 생각봐야(일단 데이터만 넣어놓겠음.) & 댓글 title일단 빼고 넣을 것임
 
 # 2020 .02.05
 
@@ -116,7 +147,37 @@
   - json으로 hotplace 정보 insert 시 \n으로 개행처리 해줘야함
   - hotplace img 1개만 사용하기로 함 (hp_img)  
     files는 post_no 하나만 취함+
-  - 
-## 3. 연관되는 컬럼 삭제 처리
+  - search
+    - 도시번호
+    - 도시별
+    - 태그별
+    - 주소별
+
+
+ # 2020.02.06
+
+## 0. 현재상황
+  - back   
+    1) 완료
+     - 모든 테이블 기본 CRUD
+     - faq / qna 
+    2) 수정중 
+     - member, board, post, city, hotplace, files
+    3) 아직
+     - course, festival, likes, follow, comment
 
  
+## 1. 페이징 처리
+  - board, post, comment 데이터 추가
+  - 더보기 && 페이지 (morePage / perPage) 추가
+  
+## 2. 수정중인 테이블 필수 기능 추가
+  - post 상세 검색시 files 및 comment까지 딸려오도록 조인해서 쿼리문 작성  
+    resultMap 사용
+  - 지영이랑 테이블 변경
+
+## 3. 연관되는 컬럼 삭제 처리
+  - 안함
+
+## 4. 미작업 테이블 필수 기능 추출 및 추가
+  - 기능 추출중

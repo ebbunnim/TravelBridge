@@ -71,9 +71,7 @@ export default {
       return require("../../assets/" + img);
     }
   },
-  mounted() {
-    Reveal.initialize();
-  }
+  mounted() {}
 };
 </script>
 

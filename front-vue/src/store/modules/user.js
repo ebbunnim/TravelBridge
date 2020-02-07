@@ -14,11 +14,11 @@ const actions = {
   },
   postSignUp: (store, payload) => {
     //네이버는 아니야
-    var signUpCheck = UserService.signUp(payload.user_email, payload.pw);
+    var signUpCheck = UserService.signUp(payload);
     console.log("signup check" + signUpCheck);
     if (signUpCheck) {
       fireService
-        .signUpWithDefault(payload.user_email, payload.pw)
+        .signUpWithDefault(payload.mem_email, payload.mem_password)
         .then(check => {
           if (check) router.push("/login");
           else console.log("실패");

@@ -203,19 +203,321 @@ VALUES (
 ""
 );
 select * from city;
-select * from hotplace;
+select hp_tag from hotplace;
+select * from board;
+# 도시번호 찾기
+SELECT city_no 
+FROM city 
+WHERE city_name = "서울" 
+AND city_del_check = FALSE;
 
+# 도시별로 가져오기
 SELECT * 
 FROM hotplace 
 WHERE city_no = 1 
+AND hp_del_check = FALSE
 ORDER BY hp_name
 LIMIT 0, 3;
 
-# 태그안에 해당 단어가 있으면 다가져옴
+select Count(*) from hotplace;
+# 도시별로 가져오기 sub query
+SELECT * 
+FROM hotplace 
+WHERE city_no = (SELECT city_no 
+				 FROM city 
+				 WHERE city_name = "전주" 
+				 AND city_del_check = FALSE) 
+AND hp_del_check = FALSE
+ORDER BY hp_name;
+
+
+# 태그별로 가져오기 (태그안에 해당 단어가 있으면 다가져옴)
 SELECT * 
 FROM hotplace
-WHERE hp_tag LIKE concat('%','휴식','%')
-ORDER BY hp_name limit 0, 3;
+WHERE hp_tag 
+LIKE concat('%','데이트','%') 
+AND hp_del_check = FALSE;
+# 주소별로 가져오기
+SELECT * 
+FROM hotplace
+WHERE hp_address = TRIM("서울 용산구") 
+AND hp_del_check = FALSE;
+select * from hotplace;
+DESC hotplace;
+##############################
+# BOARD
 
+INSERT INTO 
+board (board_name) 
+VALUES ('공지사항'); 
+INSERT INTO 
+board (board_name) 
+VALUES ('일정 게시판');
+INSERT INTO 
+board (board_name) 
+VALUES ('후기 게시판');
+
+SELECT * FROM BOARD;
+## 유저별로 피드 식으로 제공할 거면 유저 번호가 게시판마다 필요한가
+
+SELECT * FROM MEMBERS;
+SELECT * FROM POST;
+/*
+post_no				int PRIMARY KEY AUTO_INCREMENT,	# 게시글 관리번호	기본키, 자동증가
+    post_type			int NOT NULL,			# 후기(사진등 추가) : 0, 일정(양식) : 1 
+	board_no			int NOT NULL,					# 게시판 번호	외래키
+	mem_no				int NOT NULL,					# 작성자 번호	외래키
+	post_title			varchar(200),					# 게시글 제목	
+	post_content		varchar(3000) NOT NULL,			# 게시글 내용	
+	post_category		varchar(300),					# 게시글 카테고리, 태그
+	post_regtime		datetime DEFAULT NOW(),			# 게시글 작성시간	
+	post_hits			int DEFAULT 0,					# 게시글 조회수
+    post_city			varchar(500),					# 지역(해시태그) 달기
+    post_plan_start		date,							# 일정 시작날짜
+    post_plan_end		date,							# 일정 끝 날짜
+    post_plan_title		varchar(200),					# 일정 제목
+    post_del_check		boolean DEFAULT FALSE,			# 삭제 여부
+    writer	
+    */
+    DROP tABLE post;
+    select * from post;
+    select * from members;
+    INSERT INTO post
+		(post_type, 
+		board_no, 
+		mem_no, 
+		post_plan_start,
+		post_plan_end,
+		post_plan_title)
+VALUES( 1, 
+		2,
+		2, 
+        '2020-02-05',
+        '2020-02-07',
+		'나의 청춘예찬 첫 일정'
+);
+INSERT INTO post
+		(post_type, 
+		board_no, 
+		mem_no, 
+		post_title, 
+		post_content, 
+		post_category, 
+        post_city)
+VALUES( 0, 
+		1,
+		2, 
+		'청춘예찬 첫 후기', 
+		'따뜻한 봄날의 품으며, 같은 싸인 든 있는 유소년에게서 봄바람이다. 이는 청춘의 없으면 커다란 시들어 피에 인간은 그들의 것이다. 하는 이상 고동을 때까지 이상의 할지니, 피다. 눈이 열락의 몸이 끝에 인간에 봄바람이다. 그들에게 어디 얼마나 끝에 실현에 눈이 것이다. 군영과 것은 풍부하게 하는 그들의 같이, 그것은 뿐이다. 그들의 꾸며 없으면 굳세게 실현에 얼마나 군영과 반짝이는 관현악이며, 봄바람이다. 든 영락과 타오르고 관현악이며, 인류의 사랑의 사막이다. 생의 내는 것은 길지 그들은 쓸쓸하랴? 
+         물방아 역사를 튼튼하며, 별과 과실이 불러 장식하는 많이 것이다. 불어 힘차게 거친 이상이 영락과 그들의 가치를 찾아다녀도, 산야에 때문이다. 소금이라 무엇을 인생에 사막이다. 방지하는 따뜻한 청춘의 고동을 생명을 바이며, 전인 이것이다. 청춘의 보내는 소금이라 하는 뜨거운지라, 있으며, 만천하의 약동하다. 이상은 황금시대를 천하를 우리의 것이다. 보배를 맺어, 하여도 동력은 돋고, 무엇을 그들의 것이다. 있음으로써 생명을 앞이 없으면 할지니, 곧 꽃 열매를 운다. 무한한 구하지 소담스러운 위하여 이성은 그들의 인도하겠다는 약동하다. 피가 생의 보이는 아니다. 
+		때까지 그들의 맺어, 그들에게 인생을 온갖 들어 그리하였는가? 불러 피는 그들의 피가 피고, 지혜는 것이다. 너의 붙잡아 하는 피가 열락의 있음으로써 구하지 가슴이 것이다. 청춘이 그들에게 같이, 안고, 불어 위하여서. 광야에서 품으며, 위하여서, 피다. 꽃이 만천하의 주며, 대중을 찾아다녀도, 별과 부패뿐이다. 그들에게 얼마나 보내는 싶이 있다. 피부가 인간이 곳으로 얼마나 듣기만 긴지라 아름다우냐? 찾아 커다란 평화스러운 사막이다. 방황하였으며, 그들의 되는 품에 구할 노래하며 속에 앞이 듣는다. 돋고, 평화스러운 꾸며 무엇을 바이며, 힘차게 안고, 같은 것이다.', 
+		'#문화','#부산'
+);
+
+# 권한 1의 tester가 board
+select * from post;
+
+DESC festival;
+DESC course;
+DESC board;
+DESC post;
+DESC comment;
+DESC qna;
+# follow 기능을 고려하면, board가 member_no별로 생성되어야함
+# 자신이 follow한 사람들의 post(0) 가져오고, 
+# follow한 사람이 없어도 컨텐츠랑 추천 아이디가 보이도록해야겠지
+select * from comment;
+
+select 
+board_no 
+from board
+where 
+board_name = '여행지 추천 게시판';
+
+select * 
+from post p
+where p.board_no = (select 
+				b.board_no 
+				from board b
+				where 
+				b.board_name = '후기 게시판');
+
+# post member 조인
+select board_no, post_no, post_title, mem_id, post_content, post_category                     
+		, date_format(post_regtime, '%Y-%m-%d') as post_regtime
+        , post_hits, ((post_end_day)-(post_start_day)) as days
+		 			 from   post, members                                        
+		 			 where  post_no = 1 and post.mem_no = members.mem_no;
+                    
+DESC comment;
+INSERT INTO 
+comment
+(board_no, post_no, mem_no, cmt_title, cmt_content) 
+VALUES (3,1,2,'댓글1', 'ㅈㄱㄴ'),(3,1,2,'댓글2','냉무'),( 3,1,3, '댓글3', 'ㅋㅋ루ㅋㅋ'),(3,1,3,'댓글4', '오? 심상치 않은데?');
+
+# 하나의 post에 달려있는 댓글들 까지 전부 가져오기 (작성자 아이디, 댓글작성자 아이디까지 조인)
+select p.* , m.mem_id as cmt_person, c.cmt_no, c.mem_no, cmt_title, cmt_content             
+from   comment c                                              
+right join  (select post_no, post_title, mem_id, post_content, post_category                     
+					, date_format(post_regtime, '%y-%m-%d') as post_regtime
+					, post_hits, ((post_end_day)-(post_start_day)) as days
+			 from   post, members                                        
+			 where  post_no = 1 and post.mem_no = members.mem_no) p                                   
+on   p.post_no = c.post_no
+left join members m
+on c.mem_no = m.mem_no;
+  
+/* 요만큼이 association 관계고*/
+select post_no, post_title, mem_id, post_content, post_category                     
+					, date_format(post_regtime, '%y-%m-%d') as post_regtime
+					, post_hits, post_start_day, post_end_day
+from   post, members                                        
+where  post_no = 1 and post.mem_no = members.mem_no; 
+             
+             
+select p.post_no, p.post_title, m.mem_id, p.post_content, p.post_category                     
+					, date_format(post_regtime, '%y-%m-%d') as post_regtime
+					, p.post_hits, p.post_start_day, p.post_end_day,
+                    m.mem_id as cmt_person, c.cmt_no, c.mem_no, c.cmt_title, c.cmt_content   
+from  post p
+left join members m on p.mem_no = m.mem_no           
+right join comment c on p.post_no = c.post_no                            
+where  p.post_no = 1;
+
+select p.post_no, p.post_title, m.mem_id, p.post_content, p.post_category                     
+					, date_format(post_regtime, '%y-%m-%d') as post_regtime
+					, p.post_hits, p.post_start_day, p.post_end_day,
+                    m.mem_id as cmt_person, c.cmt_no, c.mem_no, c.cmt_title, c.cmt_content   
+from  members m
+right join post p on m.mem_no = p.mem_no           
+right join comment c on c.mem_no = m.mem_no                          
+where  p.post_no = 1;
+
+
+
+
+
+
+select p.* , m.mem_id as cmt_person, c.cmt_no, cmt_title, cmt_content             
+from   comment c    
+left join members m
+on c.mem_no = m.mem_no                                          
+right join  (select post_no, post_title, mem_id, post_content, post_category                     
+					, date_format(post_regtime, '%y-%m-%d') as post_regtime
+					, post_hits, ((post_end_day)-(post_start_day)) as days
+			 from   post, members                                        
+			 where  post_no = 1 and post.mem_no = members.mem_no) p                                   
+on   p.post_no = c.post_no;
+
+select p.* , m.mem_id as cmt_person, c.cmt_no, cmt_title, cmt_content             
+from   comment c                                             
+right join  (select post_no, post_title, mem_id, post_content, post_category                     
+					, date_format(post_regtime, '%y-%m-%d') as post_regtime
+					, post_hits, ((post_end_day)-(post_start_day)) as days
+			 from   post                                      
+			 where  post_no = 1) p                                   
+on   p.post_no = c.post_no;
+DESC BOARD;
+DESC CITY;
+DESC hotplace;
+DESC POST;
+select *
+from post p
+left join comment c
+on p.post_no = c.post_no
+left join files f
+on p.post_no = f.post_no;
+
+
+
+SELECT * fROM post;
+SELECT * FROM COMMENT;
+SELECT * FROM FILES;
+
+SELECT * FROM members;
+INSERT INTO POST
+(post_type, board_no, mem_no, post_title, post_content, post_category, post_city, post_hits, post_regtime)
+VALUES
+(0, 1,2,"2020 얼음나라 화천산천어축제 제대로 즐기는 TIP","
+겨울 축제는 아이들의 방학 문제로 보통 1월에 집중적으로 열립니다. 
+축제에 참여하는 사람들이 가족단위인 경우가 많다보니 주로 1월에 개최하는 것입니다. 
+1월에 열리는 축제의 주요 테마는 '물고기'입니다. 지방축제가 본격적으로 시작된 1990년대에는 
+겨울축제의 테마로 주로 눈(snow)과 등산을 선택했다면 2000년대 이후에는 단연 어류가 돋보이고 있습니다. 
+얼음나라 화천산천어축제는 세계 4대 겨울 축제의 하나로 이름을 올릴 정도로 큰 성공을 올리고 있는 겨울축제입니다. 
+토종물고기인 산천어 자체에 차별성이 있기도 하고 축제 내부적으로 주민들의 
+참여 및 협조가 잘 되고 있다는 점이 축제가 크게 성공할 수 있었던 길인 것 같습니다. ",
+"#취미#레저","강원도",432,"2020-01-10 10:40:33"),
+( 0, 1, 1, "인천 여행코스 송월동 동화마을 역대 최고 규모의 벽화마을",
+"수십 년 전로 담벼락에 색칠을 하여 동화마을로 변화하였다.가끔 형을 따라서 이곳저곳 몇몇 벽화마을 찾아가 봤지만 인천 송월동 동화마을 만큼 큰 규모를 보지 못했습니다.
+아니 그 반도 안되는 곳들이 대부분인데요 많은 사람들이 이곳을 인천 여행코스 라고 이야기하는 이유를 느낄 수 있었고
+애인이 있었다면 꼭 한 번 데리고 갔을 것 같은 장소로 연인들의 기념사진 촬영하기 딱 적당한 장소였답니다",
+"#인문#교양","인천", 100, "2019-01-02 8:12:22"),
+(0, 1, 2,"그렇게 가보고 싶던 담양, 죽녹원 & 메타세콰이어길에 가다!",
+"게스트하우스에서 나와 311번 버스를 타고 도착한 죽녹원. 
+네이버 지도가 알려준 시간보다 훨씬 빨리 도착했다. 
+어제 먹은 술 해장도 할겸 밥을 먹으려 돌아다니는데 담양하면 하도 
+떡갈비라고 들어서 주변 떡갈비집을 찾아봤다. 
+1인분만 되는 떡갈비집을 다행히도 찾았고 먹었다! 
+죽통밥을 다 먹고 나니 사장님께서 기념으로 가져갈 수 있다며 봉지 드릴까요? 
+하시기에 얼떨결에 받아왔다는 이야기ㅎㅎ 담양국수거리도 바로 앞이라 국수도 먹고 싶었지만 
+혼자 여행의 최대 단점. 여러 가지 다양하게 먹을 수가 없다. 다음에 날 따뜻해지면 다시 갈거니까 그 땐 국수 먹어야징!",
+"#미식#교양","전라남도",87, "2019-12-24 12:00:11"),
+(0, 1, 1,"춘천 애니메이션박물관 + 토이로봇관",
+"춘천갈까 말까 했었는데 춘천시는 미세먼지가 양호하다는 뉴스를 보고
+몇일 지겨웠던 미세먼지 심각에서 잠시나마 벗어나고자 피할려고 강원도로 방향을 틀었다.
+일단 강원도로 오니 공기부터가 일단 다르다. 너무 늦게 출발해서 너무 늦게 도착했더니
+여러군데 들릴 수가 없을 것 같았다.  
+1군데만 들린다면 ...이왕 아이들 때문에 나왔으니 아이 중심으로 가자고 했던 곳이 여기 애니메이션박물관이다.
+생각보다 넓은 규모에 시설이 잘 되어 있어서 좋았다. 
+무엇보다도 봄날씨에 파란하늘이 마음을 더 들 뜨게 한다.
+춘천...사실 그리 먼거리는 아니지만 2시간 정도 ...이래저래 쉬엄쉬엄 오면
+왕복 4~5시간....자주 오기에는 조금 부담스럽긴 하다.
+늦게 도착해서 그냥 애니메이션박물관만 구경만 하는게 더 좋을 법도 했는데 이왕 왔으니 토이로봇관이랑 애니메이션박물관
+두군데 볼 수 있는 티켓을 구매했다. 춘천시민은 절반 가격이니....
+춘천으로 이사와야 겠다. ㅋㅋ",
+"#인문#교양#미식","강원도",2,"2019-01-19 9:10:01"),
+(0, 1, 2,"광주 패밀리랜드 눈썰매장 ! 광주 놀거리",
+"2주전에 남친과 초등학교 이후로 안가본 눈썰매장을 갔어요!
+근데 정말 상당히 재밌더라구요! 사람 많은거 빼구.. 표는 티몬에서 구매했어요!
+놀이기구 5종 , 열차 , 눈썰매장! 까지 해서 한 사람당 16,000원이였던거같아요!
+놀이기구도 많이타고 썰매도 타고싶으신분들은
+그냥 매표소 가서 자유이용권,눈썰매장 이렇게 끊으셔도 될거같아요
+자유이용권,눈썰매장 이렇게 21,000원이세요!
+근데 자유이용권은 반드시 할인카드가 있어야해요!
+저도 자세한 할인카드는 잘 몰라서..ㅎㅎ
+추워서 놀이기구 별로 안탈줄알았는데 재밌더라구요~
+남친님과 후회했어요!
+한번 패밀리랜드 눈썰매장 가보세요~ 괜찮아요! 주차장도 넓구!
+물론 주차비가 별도로 나갑니다. 저희는 1,000원 들었어요! ㅎㅎ
+앞으로 가실 분들은 참고하세요!!! ㅎㅎ 끄읕~",
+"#레저","광주",30,"2020-01-11 01:33:21" );
+
+select * from post;
+select * from city;
+select * from hotplace;
+select * from festival;
+desc festival;
+SELECT COUNT(*) 
+		FROM festival 
+		WHERE city_no = (SELECT city_no 
+						 FROM city 
+						 WHERE city_name = "서울" 
+						 AND city_del_check = FALSE) 
+		AND fval_del_check = FALSE;
+
+insert into festival(city_no, fval_name,fval_address,fval_detail_adr,fval_content,fval_tag)
+values
+(1,"이름1","서울 강남구","서울 강남구 역삼동", "내용","#꿀"), 
+(1,"이름2","서울 강남구","서울 강남구 역삼동", "내용","#꿀"), 
+(1,"이름3","서울 강남구","서울 강남구 역삼동", "내용","#꿀"), 
+(1,"이름4","서울 강남구","서울 강남구 역삼동", "내용","#꿀"), 
+(1,"이름5","서울 강남구","서울 강남구 역삼동", "내용","#꿀"), 
+(1,"이름6","서울 강남구","서울 강남구 역삼동", "내용","#휴"), 
+(1,"이름7","서울 강남구","서울 강남구 역삼동", "내용","#휴"), 
+(1,"이름8","서울 강남구","서울 강남구 역삼동", "내용","#휴"), 
+(1,"이름9","서울 종로구","서울 종로구 명동", "내용","#중"), 
+(1,"이름10","서울 종로구","서울 종로구 명동", "내용","#중"), 
+(1,"이름11","서울 종로구","서울 종로구 명동", "내용","#중"), 
+(1,"이름12","서울 종로구","서울 종로구 명동", "내용","#중");
 
 

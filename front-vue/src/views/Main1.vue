@@ -2,6 +2,7 @@
   <div>
     <h1>메인1</h1>
     이미지 업로드 테스트
+    <img :src="files_url" />
     <div>
       <input
         type="file"
@@ -63,7 +64,7 @@ export default {
         files_url: this.files_url
       };
       console.log("테스트임", file.files_url);
-      Api.post("/Files/post", file).then(res => {
+      Api.post("/Files/insert", file).then(res => {
         console.log(res.data);
       });
     }
