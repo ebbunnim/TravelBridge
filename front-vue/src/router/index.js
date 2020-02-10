@@ -32,8 +32,19 @@ const routes = [
   },
   {
     path: "/page2",
-    name: "main2",
-    component: Main2
+    component: Main2,
+    children: [
+      {
+        path: "",
+        component: () => import("@/components/main2/Main2Home.vue")
+      },
+      {
+        path: "pick",
+        component: () => import("@/components/main2/Main2Pick.vue")
+      }
+    ]
+    // name: "main2",
+    // component: Main2
   },
   {
     path: "/page3",
