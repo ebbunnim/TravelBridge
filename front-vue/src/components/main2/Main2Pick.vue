@@ -5,11 +5,16 @@
 </template>
 
 <script>
-export default {
+import CityService from "@/services/CityService";
 
-}
+export default {
+  data() {
+
+  },
+  methods: {
+
+  }
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
