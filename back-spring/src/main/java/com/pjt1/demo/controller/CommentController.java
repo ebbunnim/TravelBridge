@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pjt1.demo.model.dto.Comment;
+import com.pjt1.demo.model.dto.Members;
 import com.pjt1.demo.model.service.CommentService;
+import com.pjt1.demo.model.service.MembersService;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -29,7 +31,8 @@ public class CommentController{
 	
     @Autowired
     private CommentService service;
-    
+    @Autowired
+    private MembersService m_service;
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
         return handleFail(e.getMessage(), HttpStatus.OK); // 전송에는 지장 없음
@@ -63,6 +66,8 @@ public class CommentController{
     @PostMapping("/Comment")
     @ApiOperation("Comment 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Comment Comment) {
+    	Members writer = m_service.search(Comment.getMem_no());
+    	Comment.setWriter(writer.getMem_id());
         service.insert(Comment);
         return handleSuccess("");
     }
