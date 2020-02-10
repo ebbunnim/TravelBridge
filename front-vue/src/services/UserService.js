@@ -1,15 +1,26 @@
 import Api from "./Api";
 
 class UserService {
-  searchAllComment() {
-    let temp = Api.get("comment/search").then(result => {
-      return result.data.data;
-    });
-    return temp;
+  async signUp(user) {
+    console.log("hello");
+    return await Api.post("/Members/insert", user)
+      .then(() => {
+        alert("회원가입 성공");
+        return true;
+      })
+      .catch(exp => {
+        alert("회원가입 실패 " + exp);
+        return false;
+      });
   }
 
-  selectComment(cmt_no) {
-    return Api.get(`comment/${cmt_no}`);
+  LogIn(email) {
+    console.log(email);
+    return Api.post("/Members/login", {
+      mem_email: email
+    }).then(response => {
+      return response.data.data;
+    });
   }
 }
 

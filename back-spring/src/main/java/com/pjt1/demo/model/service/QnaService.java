@@ -14,4 +14,8 @@ public interface QnaService {
 	public void update(Qna Qna);
 
 	public void delete(int qna_no);
+	
+	public List<Qna> searchForMember(int mem_no);
+	
+	public void answerTheQuestion(Qna Qna);
 }

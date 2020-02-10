@@ -3,31 +3,86 @@
 
 <mapper namespace="com.pjt1.demo.model.dao.MembersDao" >
     <insert id="insert"		parameterType="members">
-	insert into members
-	(mem_id, mem_email, mem_password, mem_phone, mem_name, mem_sex,
-	mem_birth, mem_address, mem_grant, mem_receive_email, mem_interest,
-	mem_token, mem_login_type) 
-	values (
-	#{mem_id:VARCHAR}, #{mem_email:VARCHAR}, #{mem_password:VARCHAR},
-	#{mem_phone:VARCHAR}, #{mem_name:VARCHAR},#{mem_sex:INTEGER}, #{mem_birth:VARCHAR},
-	#{mem_address:VARCHAR}, #{mem_grant:INTEGER}, #{mem_receive_email:BOOLEAN}, #{mem_interest:VARCHAR},
-	#{mem_token:VARCHAR}, #{mem_login_type:VARCHAR}
-	)
+		INSERT INTO members
+		(mem_id, mem_email, 
+		mem_phone, 
+		mem_name, mem_sex,
+		mem_birth, mem_address, 
+		mem_grant,
+		mem_interest, mem_token, mem_login_type) 
+		VALUES (
+		#{mem_id:VARCHAR}, #{mem_email:VARCHAR}, 
+		#{mem_phone:VARCHAR}, 
+		#{mem_name:VARCHAR},#{mem_sex:INTEGER}, 
+		#{mem_birth:VARCHAR}, #{mem_address:VARCHAR}, 
+		#{mem_grant:INTEGER}, 
+		#{mem_interest:VARCHAR}, #{mem_token:VARCHAR}, #{mem_login_type:VARCHAR}
+		)
 	</insert> 
-   	<delete id="delete" 	parameterType="int"> </delete>
+   	<delete id="delete" 	parameterType="int">
+	   UPDATE MEMBERS
+	   SET 
+	   mem_regtime = CURRENT_TIMESTAMP(), 
+	   mem_del_check = true
+	   WHERE mem_no = #{mem_no} AND mem_del_check = false
+	</delete>
    	<update id="update"		parameterType="members">
-		update members set
-		mem_id=#{mem_id:VARCHAR}, mem_email=#{mem_email:VARCHAR}, mem_password=#{mem_password:VARCHAR}, 
-		mem_phone=#{mem_phone:VARCHAR},mem_name=#{mem_name:VARCHAR}, mem_sex=#{mem_sex:INTEGER}, mem_birth=#{mem_birth:VARCHAR}, 
-		mem_address=#{mem_address:VARCHAR}, mem_grant= #{mem_grant:INTEGER}, mem_receive_email=#{mem_receive_email:BOOLEAN}, mem_interest=#{mem_interest:VARCHAR},
-		mem_token=#{mem_token:VARCHAR}, mem_login_type=#{mem_login_type:VARCHAR}
-		where mem_no = #{mem_no}
+		UPDATE members SET
+		mem_id=#{mem_id:VARCHAR}, mem_email=#{mem_email:VARCHAR}, 
+		mem_phone=#{mem_phone:VARCHAR},
+		mem_name=#{mem_name:VARCHAR}, mem_sex=#{mem_sex:INTEGER}, 
+		mem_birth=#{mem_birth:VARCHAR}, mem_address=#{mem_address:VARCHAR}, 
+		mem_grant= #{mem_grant:INTEGER}, mem_receive_email=#{mem_receive_email:BOOLEAN}, 
+		mem_following=#{mem_following:INTEGER}, mem_followed=#{mem_followed:INTEGER},
+		mem_lastlogin=CURRENT_TIMESTAMP(), mem_interest=#{mem_interest:VARCHAR}, 
+		mem_token=#{mem_token:VARCHAR}, mem_login_type=#{mem_login_type:VARCHAR},
+		mem_del_check=#{mem_del_check:BOOLEAN}
+		WHERE mem_no = #{mem_no}
 	</update>
    	<select id="search"		parameterType="int" resultType="members">
-		select * from members where mem_no=#{mem_no:INTEGER} and mem_del_check=false   
+		SELECT * 
+		FROM members 
+		WHERE mem_no=#{mem_no:INTEGER} 
+		AND mem_del_check=false   
 	</select>
    	<select id="searchAll"	resultType="members">
-		select * from members where mem_del_check=false
+		SELECT * 
+		FROM members 
+		WHERE mem_del_check = false
+	</select> 
+
+	<select id="searchMemberByEmail" parameterType="String" resultType="Members">
+		SELECT * FROM members WHERE mem_email=#{mem_email:VARCHAR} and mem_del_check=false
+	</select>
+	<resultMap type="post" id="postMap">
+		<id property="post_no" column="post_no"/>
+		<result property="post_title" column="title"/>
+		<result property="post_category" column="category"/>
+		<result property="post_regtime" column="regtime"/>
+		<result property="post_city" column="city"/>
+		<result property="post_hits" column="hits"/>
+	</resultMap>
+	
+	<resultMap type="likes" id="likesMap">
+		<id property="like_no" column="like_no"/>
+		<result property="liker_mem_no" column="liker_mem_no"/>
+	</resultMap>
+	
+	
+	<resultMap id="likePostMap" type="Members">
+		<id property="mem_id" column="mem_id"/>
+		<collection property="mem_likeList" ofType="Likes" resultMap="likesMap"/>
+		<collection property="mem_likePost" ofType="Post" resultMap="postMap"/>
+	</resultMap>
+	
+	<select id="searchMemberLikePost" parameterType="int" resultMap="likePostMap">
+		select mem_id, like_no, l.post_no, post_title, post_category, post_regtime, post_city, post_hits
+		from members m
+		left join likes l 
+		on m.mem_no = l.liker_mem_no
+		left join post p 
+		on l.post_no = p.post_no
+		where m.mem_no = #{mem_no}; 
 	</select>
 </mapper>
 

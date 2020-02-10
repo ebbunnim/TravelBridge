@@ -3,35 +3,47 @@
     <!-- footer, border class -->
     <div class="footer">
       <div class="row">
-        <div class="card">
-          <!-- card class -->
-          <div class="q-pa-md" style="max-width: 350px">
-            <p class="text-h6 text-bold">About Us</p>
-
-            <q-list dense bordered padding class="rounded-borders">
-              <q-item v-for="(menu, index) in aboutUsMenus" :key="index" :to="menu.path">
+        <div class="col-4" style="text-align: center;">
+          <div class="q-pa-md" style="max-height: 150px">
+            <p class="text-subtitle1 text-uppercase">About Us</p>
+            <q-list dense padding>
+              <q-item
+                v-for="(menu, index) in aboutUsMenus"
+                :key="index"
+                :to="menu.path"
+              >
                 <q-item-section>{{ menu.label }}</q-item-section>
               </q-item>
             </q-list>
           </div>
         </div>
-        <div class="card">
-          <div class="q-pa-md" style="max-width: 350px">
-            <p class="text-h6 text-bold">Customer Service</p>
+        <div class="col-4" style="text-align: center;">
+          <div class="q-pa-md" style="max-height: 150px">
+            <p class="text-subtitle1 text-uppercase">Customer Service</p>
 
-            <q-list dense bordered padding class="rounded-borders">
-              <q-item v-for="(menu, index) in CSmenus" :key="index" clickable :to="menu.path">
+            <q-list dense padding>
+              <q-item
+                v-for="(menu, index) in CSmenus"
+                :key="index"
+                clickable
+                :to="menu.path"
+              >
                 <q-item-section>{{ menu.label }}</q-item-section>
               </q-item>
             </q-list>
           </div>
         </div>
-        <div class="card">
-          <div class="q-pa-md" style="max-width: 350px">
-            <p class="text-h6 text-bold">Site Map</p>
+        <div class="col-4" style="text-align: center;">
+          <div class="q-pa-md" style="max-height: 150px;">
+            <p class="text-subtitle1 text-uppercase">Site Map</p>
 
-            <q-list dense bordered padding class="rounded-borders">
-              <q-item v-for="(menu, index) in siteMapMenus" :key="index" clickable :to="menu.path">
+            <q-list dense padding>
+              <q-item
+                v-for="(menu, index) in siteMapMenus"
+                :key="index"
+                clickable
+                :to="menu.path"
+              >
                 <q-item-section>{{ menu.label }}</q-item-section>
               </q-item>
             </q-list>
@@ -49,19 +61,18 @@ export default {
     return {
       leftDrawerOpen: false,
       aboutUsMenus: [
-        { label: "Contact Us", path: "/temporary" }, // 추후에 이메일 modal 연결
         { label: "About Team", path: "/about/team" },
         { label: "About Service", path: "/about/service" }
       ],
       CSmenus: [
-        { label: "FAQ", path: "/faq" },
-        { label: "Q&A", path: "/qna" }
+        { label: "자주 묻는 질문", path: "/faq" },
+        { label: "1:1 문의하기", path: "/qna" }
       ],
       siteMapMenus: [
-        { label: "Home", path: "/" },
-        { label: "메인기능 1", path: "/page1" },
-        { label: "메인기능 2", path: "/page2" },
-        { label: "서브기능", path: "/page3" }
+        { label: "HOME", path: "/" },
+        { label: "메인기능 1", path: "/page1" }, // 이름 수정할 것
+        { label: "메인기능 2", path: "/page2" }, // 이름 수정할 것
+        { label: "서브기능", path: "/page3" } // 이름 수정할 것
       ]
     };
   }
@@ -72,8 +83,8 @@ export default {
 .footer {
   margin-left: 0;
   margin-right: 0;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 2%;
+  padding-right: 2%;
   padding-top: 2%;
   padding-bottom: 3%;
 }
@@ -82,12 +93,5 @@ export default {
   border-top-style: solid;
   border-top-width: thin;
   border-top-color: grey;
-}
-.card {
-  padding-left: 2%;
-  display: inline-block;
-  width: 33%;
-  height: 40%;
-  vertical-align: top;
 }
 </style>

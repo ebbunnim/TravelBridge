@@ -62,4 +62,20 @@ public class QnaServiceImpl implements QnaService {
 			e.printStackTrace();
 		}
 	}
+	
+	public List<Qna> searchForMember(int mem_no){
+		try {
+			return repo.searchForMember(mem_no);
+		}catch(Exception e) {
+			e.printStackTrace();
+		} return null;
+	}
+	
+	public void answerTheQuestion(Qna Qna) {
+		try {
+			repo.answerTheQuestion(Qna);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

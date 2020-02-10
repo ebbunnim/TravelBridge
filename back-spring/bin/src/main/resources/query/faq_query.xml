@@ -3,34 +3,48 @@
 
 <mapper namespace="com.pjt1.demo.model.dao.FaqDao" >
 
-  	<insert id="insert"	parameterType="faq">
-		insert into faq
-		(faq_category, faq_title, faq_content, faq_answer, faq_hits, faq_del_check )
-		values (
-			#{faq_category:VARCHAR}, #{faq_title:VARCHAR}, #{faq_content:VARCHAR}, 
-			#{faq_answer:VARCHAR},#{faq_hits:INTEGER}, #{faq_del_check:BOOLEAN}
+  	<insert id="insert"		parameterType="faq">
+		INSERT INTO faq
+		(faq_category, faq_question, faq_answer)
+		VALUES (
+			#{faq_category:VARCHAR}, 
+			#{faq_question:VARCHAR}, 
+			#{faq_answer:VARCHAR}
 		)
 	</insert> 
 
    	<delete id="delete" 	parameterType="int">
-	   update faq set faq_del_check=true, faq_regtime=CURRENT_TIMESTAMP() where faq_no=#{faq_no} and faq_del_check=false
+	   UPDATE faq 
+	   SET  
+	   faq_regtime = CURRENT_TIMESTAMP(), 
+	   faq_del_check = true
+	   WHERE faq_no = #{faq_no} AND faq_del_check = false
 	</delete>
-
    	<update id="update"		parameterType="faq">
-		update faq set
+		UPDATE faq 
+		SET
 		faq_category = #{faq_category:VARCHAR},
-		faq_title=#{faq_title:VARCHAR}, faq_content=#{faq_content:VARCHAR},
-		faq_answer= #{faq_answer:VARCHAR}, faq_hits=#{faq_hits:INTEGER}, 
+		faq_question = #{faq_question:VARCHAR}, 
+		faq_answer = #{faq_answer:VARCHAR}, 
+		faq_regtime = CURRENT_TIMESTAMP(),
 		faq_del_check = #{faq_del_check:BOOLEAN}
-		where faq_no=#{faq_no:INTEGER}
+		WHERE faq_no = #{faq_no:INTEGER}
 	</update>
-
    	<select id="search"		parameterType="int" resultType="faq">
-		select * from faq where faq_no=#{faq_no:INTEGER} and faq_del_check=false   
+		SELECT * 
+		FROM faq 
+		WHERE faq_no = #{faq_no:INTEGER} AND faq_del_check = false   
+	</select>
+   	<select id="searchAll"	resultType="faq">
+		SELECT * 
+		FROM faq 
+		WHERE faq_del_check = false
 	</select>
 	
-   	<select id="searchAll"	resultType="faq">
-		select * from faq where faq_del_check=false
+	<select id="getCount" resultType ="int">
+		SELECT COUNT(*)
+		FROM faq
+		WHERE faq_del_check = false
 	</select>
 </mapper>
 

@@ -4,28 +4,34 @@
 <mapper namespace="com.pjt1.demo.model.dao.BoardDao" >
 
  	<insert id="insert"		parameterType="board">
-		insert into board
-		(board_name, board_del_check)
-		values (
-			#{board_name:VARCHAR},
-			#{board_del_check:BOOLEAN}
-		)
+		INSERT INTO 
+		board (board_name) 
+		VALUES (#{board_name:VARCHAR}) 
 	</insert> 
-   	<delete id="delete" 	parameterType="int">
-		update board set board_del_check=true where board_no=#{board_no} and board_del_check=false
+   	<delete id="delete" 	parameterType="int"> 
+		UPDATE board
+		SET 
+		board_del_check = true
+		WHERE board_no = #{board_no:INTEGER} 
+		AND board_del_check = false
 	</delete>
-
    	<update id="update"		parameterType="board">
-	   	update board set
-		board_name=#{board_name:VARCHAR}, board_del_check=#{board_del_check:BOOLEAN}
+		UPDATE board
+		SET
+		board_name = #{board_name:VARCHAR},
+		board_del_check = #{board_del_check:BOOLEAN}
+		WHERE board_no = #{board_no:INTEGER}   
 	</update>
-
    	<select id="search"		parameterType="int" resultType="board"> 
-		select * from board where board_no=#{board_no:INTEGER} and board_del_check=false 
-	</select>  
-
+		SELECT * 
+		FROM board 
+		WHERE board_no = #{board_no:INTEGER} 
+		AND board_del_check = false      
+	</select>
    	<select id="searchAll"	resultType="board">
-		select * from board where board_del_check=false
+		SELECT * 
+		FROM board
+		WHERE board_del_check = false      
 	</select>
 </mapper>
 

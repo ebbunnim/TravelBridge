@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -65,6 +67,11 @@ public class FilesController {
     @PostMapping("/Files/insert")
     @ApiOperation("Files 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Files Files) {
+        System.out.println("=====DEBUG====");
+        System.out.println(Files);
+        System.out.println(Files.getFiles_url());
+        System.out.println("=====DEBUG====");
+
         service.insert(Files);
         return handleSuccess("");
     }
@@ -81,5 +88,43 @@ public class FilesController {
     public ResponseEntity<Map<String, Object>> update(@RequestBody Files Files) {
         service.update(Files);
         return handleSuccess("수정 완료");
+    }
+
+    // files_no int NOT NULL KEY AUTO_INCREMENT,
+    // post_no int NOT NULL,				# 게시물 번호
+    // files_name varchar(200) NOT NULL,	# 파일 이름
+    // files_thumbnail boolean, 			# 파일 썸네일 여부
+    // files_url varchar(500) NOT NULL,
+    // files_del_check boolean DEFAULT FALSE,
+    // FOREIGN KEY(post_no) REFERENCES POST(post_no)
+    
+    @ApiOperation("Imgur 형식 이미지 파일 받아오기")
+    @PostMapping("/Files/Post") // 크롤링한 결과는 /Files/
+    public ResponseEntity<Map<String, Object>> getImgurContent (HttpServletRequest request) {
+        
+        System.out.println("=====DEBUG====");
+        // vue에서 받아온 link - image file
+        System.out.println(request);
+        System.out.println("=====DEBUG====");
+
+        
+        // map으로 받아야
+        System.out.println("=====DEBUG URL====");
+
+        String files_url = request.getParameter("files_url"); // 이미지 소스
+        // String path_no = request.getParameter("path_no"); //이미지 등록된 게시물 번호
+        System.out.println("=====DEBUG URL====");
+
+        
+
+        // 이 형식에 맞게 insert files
+
+        Files files =  new Files();
+        files.setFiles_url(files_url);
+        // files.setPath_type(0); // Post이므로 다 0처리
+        // files.setPath_no(Integer.parseInt(path_no));
+        service.insert(files);
+                
+        return handleSuccess(files);
     }
 }

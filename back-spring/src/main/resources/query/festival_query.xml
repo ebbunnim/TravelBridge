@@ -5,15 +5,22 @@
 
 	<!-- fval_no, fval_del_check default로 insert -->
   	<insert id="insert"		parameterType="festival">
-		insert into festival 
-		(clm_no, fval_name, fval_address, fval_img, 
-		fval_content, fval_tag, fval_start_day, fval_end_day, 
-		fval_fee, fval_map_img, fval_homepage, fval_host, fval_del_check )
+		INSERT INTO festival 
+		(city_no, fval_name, 
+		fval_address, fval_detail_adr,
+		fval_content, fval_tag, 
+		fval_start_day, fval_end_day, 
+		fval_homepage,
+		fval_fee, fval_img, 
+		fval_host, fval_del_check )
 		values(
-			#{clm_no:INTEGER}, #{fval_name:VARCHAR}, #{fval_address:VARCHAR}, #{fval_img:VARCHAR},
-			#{fval_content:VARCHAR}, #{fval_tag:VARCHAR},#{fval_start_day:VARCHAR}, #{fval_end_day:VARCHAR},
-			#{fval_fee:INTEGER}, #{fval_map_img:VARCHAR}, #{fval_homepage:VARCHAR}, #{fval_host:VARCHAR},
-			#{fval_del_check:BOOLEAN}
+			#{city_no:INTEGER}, #{fval_name:VARCHAR}, 
+			#{fval_address:VARCHAR}, #{fval_detail_adr:VARCHAR},
+			#{fval_content:VARCHAR}, #{fval_tag:VARCHAR},
+			#{fval_start_day:VARCHAR}, #{fval_end_day:VARCHAR},
+			#{fval_homepage:VARCHAR},
+			#{fval_fee:INTEGER}, #{fval_img:VARCHAR}, 
+			#{fval_host:VARCHAR}, #{fval_del_check:BOOLEAN}
 		)	
 	</insert> 
 
@@ -21,18 +28,106 @@
 		
 	</delete>
    	<update id="update"		parameterType="festival">
-		update festival set 
-		clm_no=#{clm_no:INTEGER}, fval_name=#{fval_name:VARCHAR}, fval_address=#{fval_address:VARCHAR}, fval_img=#{fval_img:VARCHAR},
-		fval_content=#{fval_content:VARCHAR}, fval_tag=#{fval_tag:VARCHAR}, fval_start_day=#{fval_start_day:VARCHAR}, 
-		fval_end_day=#{fval_end_day:VARCHAR}, fval_fee=#{fval_fee:INTEGER}, fval_map_img= #{fval_map_img:VARCHAR}, 
-		fval_homepage = #{fval_homepage:VARCHAR}, fval_host=#{fval_host:VARCHAR}, fval_del_check=#{fval_del_check:BOOLEAN}
-		where fval_no=#{fval_no:INTEGER}
+		UPDATE festival 
+		SET 
+		city_no=#{city_no:INTEGER}, fval_name=#{fval_name:VARCHAR}, 
+		fval_address=#{fval_address:VARCHAR}, fval_detail_adr=#{fval_detail_adr:VARCHAR},
+		fval_content=#{fval_content:VARCHAR}, fval_tag=#{fval_tag:VARCHAR}, 
+		fval_start_day=#{fval_start_day:VARCHAR}, fval_end_day=#{fval_end_day:VARCHAR}, 
+		fval_homepage = #{fval_homepage:VARCHAR},
+		fval_fee=#{fval_fee:INTEGER}, fval_img= #{fval_map_img:VARCHAR}, 
+		fval_host=#{fval_host:VARCHAR}, fval_del_check=#{fval_del_check:BOOLEAN}
+		WHERE fval_no=#{fval_no:INTEGER}
 	</update>
    	<select id="search"		parameterType="int" resultType="festival">
-		select * from festival f where fval_no=#{fval_no:INTEGER} and fval_del_check=false   
+		SELECT * 
+		FROM festival
+		WHERE fval_no=#{fval_no:INTEGER} 
+		AND fval_del_check=false   
 	</select>
    	<select id="searchAll"	resultType="festival">
-		select * from festival f where fval_del_check=false
+		SELECT * 
+		FROM festival 
+		WHERE fval_del_check=false
 	</select>
+		<select id="getCountFestivalAll" resultType = "int">
+		SELECT COUNT(*)
+		FROM festival
+		WHERE fval_del_check=false 
+	</select>
+	<select id="searchPageFestivalAll"  parameterType="hashmap" resultType="hashmap">
+	 <![CDATA[
+        SELECT * 
+        FROM festival 
+        WHERE fval_del_check = FALSE
+        ORDER BY fval_no
+        LIMIT #{pageStart}, #{perPageNum}]]>
+	</select>
+	<select id="searchMoreFestivalAll" parameterType="int" resultType="festival">
+	<![CDATA[
+        SELECT * 
+        FROM festival 
+        WHERE fval_del_check = FALSE 
+        ORDER BY fval_no 
+        LIMIT 0, #{perPageNum}]]>
+	</select>
+	<select id="getCountFestivalByCityName" parameterType = "string" resultType ="int">
+		SELECT COUNT(*) 
+		FROM festival 
+		WHERE city_no = (SELECT city_no 
+						 FROM city 
+						 WHERE city_name = "${cityName}" 
+						 AND city_del_check = FALSE) 
+		AND fval_del_check = FALSE
+	</select>
+	
+	<select id="searchPageFestivalByCityName" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+		SELECT *
+		FROM festival 
+		WHERE city_no = (SELECT city_no 
+						 FROM city 
+						 WHERE city_name = "${keyword}" 
+						 AND city_del_check = FALSE) 
+		AND fval_del_check = FALSE
+		LIMIT #{pageStart}, #{perPageNum}]]>
+	</select>
+	<select id ="searchMoreFestivalByCityName" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+        SELECT * 
+        FROM festival 
+        WHERE fval_del_check = FALSE 
+        AND city_no = (SELECT city_no 
+						 FROM city 
+						 WHERE city_name = "${keyword}" 
+						 AND city_del_check = FALSE) 
+        ORDER BY fval_no 
+        LIMIT 0, #{perPageNum}]]>
+	</select>
+	<select id="getCountFestivalByTag" parameterType="string" resultType="int">
+		SELECT COUNT(*) 
+		FROM festival
+		WHERE fval_tag LIKE concat('%','${keyword}','%') 
+		AND fval_del_check = FALSE
+	</select> 
+    <select id="searchPageFestivalByTag" parameterType="hashmap" resultType="hashmap">
+   		<![CDATA[
+    	SELECT *
+		FROM festival
+		WHERE fval_tag LIKE concat('%','${keyword}','%') 
+		AND fval_del_check = FALSE
+		ORDER BY fval_no
+		LIMIT #{pageStart}, #{perPageNum}]]>
+    </select>
+	<select id="searchMoreFestivalByTag" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+    	SELECT *
+		FROM festival
+		WHERE fval_tag LIKE concat('%','${keyword}','%') 
+		AND fval_del_check = FALSE
+		ORDER BY fval_no
+		LIMIT 0, #{perPageNum}]]>
+	</select>
+	
 </mapper>
 

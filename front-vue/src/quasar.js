@@ -2,6 +2,7 @@ import Vue from "vue";
 
 import "./styles/quasar.sass";
 import "@quasar/extras/material-icons/material-icons.css";
+import "@quasar/extras/fontawesome-v5/fontawesome-v5.css";
 import {
   Quasar,
   QLayout,
@@ -32,7 +33,16 @@ import {
   QScrollArea,
   QField,
   QInput,
-  QForm
+  QForm,
+  QTab,
+  QTabPanels,
+  QTabPanel,
+  QBtnDropdown,
+  QMenu,
+  ClosePopup,
+  QRadio,
+  QCheckbox,
+  QChatMessage
 } from "quasar";
 
 Vue.use(Quasar, {
@@ -66,8 +76,19 @@ Vue.use(Quasar, {
     QScrollArea,
     QField,
     QInput,
-    QForm
+    QForm,
+    QChatMessage,
+    QTab,
+    QTabPanels,
+    QTabPanel,
+    QBtnDropdown,
+    QMenu,
+    QRadio,
+    QCheckbox
   },
-  directives: {},
-  plugins: {}
+  directives: {
+    ClosePopup
+  },
+  plugins: {},
+  utils: {}
 });

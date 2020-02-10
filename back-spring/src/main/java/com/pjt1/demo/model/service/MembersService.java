@@ -14,4 +14,7 @@ public interface MembersService {
 	public void update(Members Members);
 
 	public void delete(int mem_no);
+
+	public Members searchMemberByEmail(String email);
+	public Members searchMemberLikePost(int mem_no);
 }

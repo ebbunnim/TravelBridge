@@ -63,4 +63,23 @@ public class MembersServiceImpl implements MembersService {
 
 	}
 
+	@Override
+	public Members searchMemberByEmail(String email) {
+        try {
+            Members members = repo.searchMemberByEmail(email);
+            return members;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+	
+	public Members searchMemberLikePost(int mem_no) {
+		try {
+			return repo.searchMemberLikePost(mem_no);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+
 }

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <link rel="stylesheet" href="css/reveal.css" />
+    <link rel="stylesheet" href="css/theme/black.css" />
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css" />
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = window.location.search.match(/print-pdf/gi)
+        ? "css/print/pdf.css"
+        : "css/print/paper.css";
+      document.getElementsByTagName("head")[0].appendChild(link);
+    </script>
+    <title>Travel Bridge</title>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+			<h1>Travel Bridge</h1>
+			<h3>Violet</h3>
+			<p>
+				<small>김수민 김준목 신지영 정구헌</small>
+			</p>
+		</section>
+
+		<section>
+			<h2>목차 </h2>
+			<br>
+			<p>- 기획의도</p>
+			<p>- 백 엔드</p>
+			<p>- 프론트 엔드</p>
+			<p>- 추후 예정</p>
+			<p>- Q&A</p>
+		</section>
+
+	
+		<section>
+			<section>
+				<h2>기획 의도</h2>
+			</section>
+			<section>
+				<h2>여행 관련 서비스를 <br>종합적으로 제공하는 플랫폼</h2>
+			</section>
+			<section>
+				<img width="1200" height="500" src="./media/tet.png" >
+			</section>
+			<section>
+				<p class="fragment">1. 여행과 관련된 다양한 서비스를<br> 제공함으로써 사용자 편의성을 제고</p>
+				<p class="fragment">2. 분산된 정보를 사용자의 편의에 따라<br> 가공,제공한 효율적인 여행 정보</p>
+				<p class="fragment">3. 여행에 관심이 있는 사용자 간에 교류 및 정보 공유</p>
+			</section>
+			<section>
+				<img width="1200" height="500" src="./media/how.png" >
+			</section>			
+		</section>
+		<section>
+			<section>
+				<h2>백 엔드</h2>
+			</section>
+			<section>
+				<h2>DB 모델링</h2>
+				<img width="1200" height="500" src="./media/table.PNG" >
+			</section>
+			<section>
+				<h2>DB 모델링</h2>
+				<p class="fragment">이미지 호스팅 IMGUR API를 활용한 파일 관리</p>
+				<p class="fragment">LIKES, FOLLOW 기능 테이블 구조 정교화로 마이페이지 내 선호하는 회원, 게시글 관리</p>
+				<p class="fragment">구글 캘린더 API를 이용한 MVC 모델 설계</p>
+			</section>
+			<section>
+				<h2>RESTFURL MVC 컨트롤러</h2>
+			</section>
+			<section>
+				<h2>Data crowler</h2>
+				<p>Beautiful Soup - xml parse</p>
+				<p>Selenium - web driver</p>
+				<p>requests</p>
+			</section>
+		</section>
+		<section>
+			<section>
+				<h2>프론트 엔드</h2>
+			</section>
+			<section>
+				<h2>Quasar</h2>
+				<a href="http://localhost:8080/">메인 페이지</a>                            
+			</section>
+			<section>
+				<h2>structure</h2>
+			</section>
+		</section>
+		<section>
+			<section>
+				<h2>추후 예정</h2>
+			</section>
+				<section>
+					<p class="fragment">축제정보 에 구글 지도 정보 추가</p>
+					<p class="fragment">여행 도장 깨기 (여행 기록 기능)</p>
+					<p class="fragment">메인 기능에 맞는 front 구현</p>
+				</section>
+		</section>
+		<section>
+			<h2>Q&A</h2>
+		</section>
+      </divro>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        history: true,
+        mouseWheel: true,
+        dependencies: [
+          { src: "plugin/markdown/marked.js" },
+          { src: "plugin/markdown/markdown.js" },
+          { src: "plugin/notes/notes.js", async: true },
+          {
+            src: "plugin/highlight/highlight.js",
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          }
+        ]
+      });
+    </script>
+  </body>
+</html>

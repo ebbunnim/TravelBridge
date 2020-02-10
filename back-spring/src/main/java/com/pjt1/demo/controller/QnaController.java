@@ -62,6 +62,13 @@ public class QnaController {
         return handleSuccess(Qna);
     }
 
+    @ApiOperation("member no에 따른 Qna 정보 조회하는 기능")
+    @GetMapping("/Qna/searchForMember/{mem_no}")
+    public ResponseEntity<Map<String, Object>> searchForMember(int mem_no) {
+        List<Qna> list = service.searchForMember(mem_no);
+        return handleSuccess(list);
+    }
+    
     @PostMapping("/Qna/insert")
     @ApiOperation("Qna 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Qna Qna) {
@@ -76,10 +83,16 @@ public class QnaController {
         return handleSuccess("삭제 완료");
     }
 
-    @ApiOperation("Qna 정보 수정")
+    @ApiOperation("Qna 정보 수정") 
     @PutMapping("/Qna/update")
     public ResponseEntity<Map<String, Object>> update(@RequestBody Qna Qna) {
         service.update(Qna);
         return handleSuccess("수정 완료");
+    }
+    @ApiOperation("Qna 답글 달기") 
+    @PutMapping("/Qna/answerTheQuestion")
+    public ResponseEntity<Map<String, Object>> answerTheQuestion(@RequestBody Qna Qna) {
+        service.answerTheQuestion(Qna);
+        return handleSuccess("답글 달기 완료");
     }
 }

@@ -1,56 +1,68 @@
-import Api from "./services/Api";
-import userService from "../../services/UserService";
+// import userService from "../../services/UserService";
+import fireService from "../../services/FirebaseService";
+import UserService from "../../services/UserService";
+// import naverService from "../../services/NaverService";
+import router from "../../router";
+
 const state = {
-  isSignUp: false,
   user: {}
 };
 
 const actions = {
-  postSignIn: (store, payload) => {
-    console.log("hello");
-    store.state.isSignUp = false;
-    userService.searchAllComment;
-    Api.post("/user/info", {
-      user_email: payload.user_email,
-      user_pw: payload.user_pw,
-      user_id: payload.user_id,
-      user_grant: 0
-    })
-      .then(() => {
-        alert("회원가입 성공");
-        store.state.isSignUp = true;
-      })
-      .catch(exp => alert("회원가입 실패 ") + exp);
+  check: () => {
+    UserService.check();
+  },
+  postSignUp: (store, payload) => {
+    //네이버는 아니야
+    var signUpCheck = UserService.signUp(payload);
+    console.log("signup check" + signUpCheck);
+    if (signUpCheck) {
+      fireService
+        .signUpWithDefault(payload.mem_email, payload.mem_password)
+        .then(check => {
+          if (check) router.push("/login");
+          else console.log("실패");
+        });
+    }
   },
   postLogIn: (store, payLoad) => {
-    console.log("POST_LOGIN");
-    console.log(payLoad.user_email);
-    console.log(payLoad.user_pw);
-    Api.post("/user/login", {
-      user_email: payLoad.user_email,
-      user_pw: payLoad.user_pw
-    })
-      .then(response => {
-        console.log(response.data);
-        store.commit("postLogIn", { user: response.data.data });
-      })
-      .catch(exp => alert("로그인 처리에 실패하였다 .") + exp);
+    fireService
+      .loginWithDefault(payLoad.user_email, payLoad.user_pw)
+      .then(check => {
+        if (check) {
+          UserService.LogIn(payLoad.user_email).then(result => {
+            console.log(result);
+            store.commit("postLogIn", { user: result });
+          });
+          router.push("/");
+        }
+      });
   },
   postGoogleLogIn: (store, payLoad) => {
-    console.log(payLoad.user_email + " " + payLoad.user_id);
-    Api.post("/loginGoogle", {
-      user_email: payLoad.user_email,
-      user_id: payLoad.user_id
-    })
+    fireService
+      .loginWithGoogle(payLoad.user_email, payLoad.user_pw)
       .then(response => {
-        console.log(response.data);
-        store.commit("postGoogleLogIn", {
+        store.commit("postLogIn", {
           user: response.data.data
         });
       })
-      .catch(exp => alert("google login 처리에 실패하였다" + exp));
+      .catch(exp => alert("로그인 실패" + exp));
+    //뒤에 우리디비에서 로그인 요청
+  },
+  postGitHubLogIn: (store, payLoad) => {
+    fireService
+      .loginWithGitHub(payLoad.user_email, payLoad.user_pw)
+      .then(response => {
+        store.commit("postLogIn"), { user: response.data.data };
+      })
+      .catch(exp => alert("로그인 실패 " + exp));
+    //뒤에 우리디비에서 로그인 요청
+  },
+  changeDeafultPw: (store, payLoad) => {
+    fireService.resetPw(payLoad.email);
   }
 };
+
 const mutations = {
   postLogIn(state, payLoad) {
     state.user = payLoad.user;

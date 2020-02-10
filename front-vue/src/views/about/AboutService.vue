@@ -65,7 +65,7 @@
           </div>
         </div>
       </div>
-      <!-- 마지막 시연 화면 -->
+      <!-- 마지막 시연 화면 : 반응형 서비스 - 스마트폰과 데스크탑 사이즈로 각각 구현 -->
       <div class="row" style="height: 700px; background: #f9f9f9">
         <div class="col text-center q-ma-lg q-pl-lg">
           <div class="">
@@ -81,7 +81,7 @@
 export default {
   methods: {
     getImgUrl(img) {
-      return require("../assets/" + img);
+      return require("../../assets/" + img);
     }
   }
 };

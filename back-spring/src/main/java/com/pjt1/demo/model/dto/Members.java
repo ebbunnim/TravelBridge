@@ -1,6 +1,7 @@
 package com.pjt1.demo.model.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Members implements Serializable {
 
@@ -9,7 +10,7 @@ public class Members implements Serializable {
 	private int mem_no;// int PRIMARY KEY AUTO_INCREMENT, # 회원 관리번호
 	private String mem_id;// varchar( 50) NOT NULL UNIQUE, # 아이디
 	private String mem_email;// varchar(150) NOT NULL UNIQUE, # 이메일
-	private String mem_password;// varchar(500) NOT NULL , # 패스워드
+	// private String mem_password;// varchar(500) NOT NULL , # 패스워드
 	private String mem_phone;// varchar( 50) NOT NULL UNIQUE, # 핸드폰번호
 	private String mem_name;// varchar( 50), # 이름
 	private int mem_sex;// int, # 성별 0: 남 1:여
@@ -25,18 +26,19 @@ public class Members implements Serializable {
 	private String mem_token;// varchar(500) # 짧은 로그인처리 토큰 (front에서 자바스크립트 접근제한하는 secure 등 필요)
 	private String mem_login_type;// varchar(10) # 소셜 로그인 종류 (0:기본, 1:구글, 2:네이버, 3:카카오)
 	private boolean mem_del_check;// boolean DEFAULT FALSE # 삭제 여부
-
+	private List<Likes> mem_likeList;
+	private List<Post> mem_likePost;
+	
 	public Members() {
 		super();
 	}
 
-	public Members(String mem_id, String mem_email, String mem_password, String mem_phone, String mem_name, int mem_sex,
+	public Members(String mem_id, String mem_email,  String mem_phone, String mem_name, int mem_sex,
 			String mem_birth, String mem_address, boolean mem_receive_email, String mem_interest, String mem_token,
 			String mem_login_type) {
 		super();
 		this.mem_id = mem_id;
 		this.mem_email = mem_email;
-		this.mem_password = mem_password;
 		this.mem_phone = mem_phone;
 		this.mem_name = mem_name;
 		this.mem_sex = mem_sex;
@@ -48,7 +50,7 @@ public class Members implements Serializable {
 		this.mem_login_type = mem_login_type;
 	}
 
-	public Members(int mem_no, String mem_id, String mem_email, String mem_password, String mem_phone, String mem_name,
+	public Members(int mem_no, String mem_id, String mem_email,String mem_phone, String mem_name,
 			int mem_sex, String mem_birth, String mem_address, int mem_grant, boolean mem_receive_email,
 			int mem_following, int mem_followed, String mem_lastlogin, String mem_regtime, String mem_interest,
 			String mem_token, String mem_login_type, boolean mem_del_check) {
@@ -56,7 +58,6 @@ public class Members implements Serializable {
 		this.mem_no = mem_no;
 		this.mem_id = mem_id;
 		this.mem_email = mem_email;
-		this.mem_password = mem_password;
 		this.mem_phone = mem_phone;
 		this.mem_name = mem_name;
 		this.mem_sex = mem_sex;
@@ -73,16 +74,43 @@ public class Members implements Serializable {
 		this.mem_login_type = mem_login_type;
 		this.mem_del_check = mem_del_check;
 	}
+	
+	public Members(int mem_no, String mem_id, String mem_email, String mem_phone, String mem_name, int mem_sex,
+			String mem_birth, String mem_address, int mem_grant, boolean mem_receive_email, int mem_following,
+			int mem_followed, String mem_lastlogin, String mem_regtime, String mem_interest, String mem_token,
+			String mem_login_type, boolean mem_del_check, List<Likes> mem_likeList, List<Post> mem_likePost) {
+		super();
+		this.mem_no = mem_no;
+		this.mem_id = mem_id;
+		this.mem_email = mem_email;
+		this.mem_phone = mem_phone;
+		this.mem_name = mem_name;
+		this.mem_sex = mem_sex;
+		this.mem_birth = mem_birth;
+		this.mem_address = mem_address;
+		this.mem_grant = mem_grant;
+		this.mem_receive_email = mem_receive_email;
+		this.mem_following = mem_following;
+		this.mem_followed = mem_followed;
+		this.mem_lastlogin = mem_lastlogin;
+		this.mem_regtime = mem_regtime;
+		this.mem_interest = mem_interest;
+		this.mem_token = mem_token;
+		this.mem_login_type = mem_login_type;
+		this.mem_del_check = mem_del_check;
+		this.mem_likeList = mem_likeList;
+		this.mem_likePost = mem_likePost;
+	}
 
 	@Override
 	public String toString() {
-		return "Members [mem_no=" + mem_no + ", mem_id=" + mem_id + ", mem_email=" + mem_email + ", mem_password="
-				+ mem_password + ", mem_phone=" + mem_phone + ", mem_name=" + mem_name + ", mem_sex=" + mem_sex
-				+ ", mem_birth=" + mem_birth + ", mem_address=" + mem_address + ", mem_grant=" + mem_grant
-				+ ", mem_receive_email=" + mem_receive_email + ", mem_following=" + mem_following + ", mem_followed="
-				+ mem_followed + ", mem_lastlogin=" + mem_lastlogin + ", mem_regtime=" + mem_regtime + ", mem_interest="
-				+ mem_interest + ", mem_token=" + mem_token + ", mem_login_type=" + mem_login_type + ", mem_del_check="
-				+ mem_del_check + "]";
+		return "Members [mem_no=" + mem_no + ", mem_id=" + mem_id + ", mem_email=" + mem_email + ", mem_phone="
+				+ mem_phone + ", mem_name=" + mem_name + ", mem_sex=" + mem_sex + ", mem_birth=" + mem_birth
+				+ ", mem_address=" + mem_address + ", mem_grant=" + mem_grant + ", mem_receive_email="
+				+ mem_receive_email + ", mem_following=" + mem_following + ", mem_followed=" + mem_followed
+				+ ", mem_lastlogin=" + mem_lastlogin + ", mem_regtime=" + mem_regtime + ", mem_interest=" + mem_interest
+				+ ", mem_token=" + mem_token + ", mem_login_type=" + mem_login_type + ", mem_del_check=" + mem_del_check
+				+ ", mem_likeList=" + mem_likeList + ", mem_likePost=" + mem_likePost + "]";
 	}
 
 	public String getMem_id() {
@@ -99,14 +127,6 @@ public class Members implements Serializable {
 
 	public void setMem_email(String mem_email) {
 		this.mem_email = mem_email;
-	}
-
-	public String getMem_password() {
-		return mem_password;
-	}
-
-	public void setMem_password(String mem_password) {
-		this.mem_password = mem_password;
 	}
 
 	public String getMem_phone() {
@@ -231,6 +251,22 @@ public class Members implements Serializable {
 
 	public int getMem_no() {
 		return mem_no;
+	}
+
+	public List<Post> getMem_likePost() {
+		return mem_likePost;
+	}
+
+	public void setMem_likePost(List<Post> mem_likePost) {
+		this.mem_likePost = mem_likePost;
+	}
+
+	public List<Likes> getMem_likeList() {
+		return mem_likeList;
+	}
+
+	public void setMem_likeList(List<Likes> mem_likeList) {
+		this.mem_likeList = mem_likeList;
 	}
 
 }
