@@ -1,8 +1,9 @@
 <template>
   <q-layout style="min-height: 50px;">
     <q-header class="bg-white">
-      <q-toolbar v-if="window.width > 676" align="center">
-        <div class="col-4">
+      <!-- <q-toolbar v-if="$breakpoint-md" align="center"> -->
+      <q-toolbar align="center">
+        <div  class="col-4 gt-md">
           <div class="row justify-start">
             <q-btn class="text-black q-mx-sm" flat to="/" label="HOME"></q-btn>
             <q-btn
@@ -36,7 +37,7 @@
         <q-menu
           v-model="menuOn1"
           @mouseleave="menuOn1 = false"
-          class="window-width"
+          class="window-width gt-md"
         >
           <q-list class="window-width q-ma-lg">
             <div class="row">
@@ -86,7 +87,7 @@
         <q-menu
           v-model="menuOn3"
           @mouseleave="menuOn3 = false"
-          class="window-width"
+          class="window-width gt-lg"
         >
           <q-list class="window-width q-ma-lg">
             <div class="row">
@@ -109,34 +110,7 @@
           </q-list>
         </q-menu>
 
-        <q-toolbar-title class="col-4 text-black">
-          <q-btn size="xl" unelevated flat to="/">트래블브릿지</q-btn>
-        </q-toolbar-title>
-
-        <div
-          v-if="
-            this.$store.state.user.user.mem_id == null ||
-              this.$store.state.user.user.mem_id == undefined
-          "
-          class="col-4"
-          align="right"
-        >
-          <q-btn size="md" class="text-grey darken--2 q-pa-md" flat to="/login"
-            >로그인</q-btn
-          >
-        </div>
-        <div class="col-4" align="right">
-          <q-btn size="md" class="text-grey q-py-md" flat to="/mypage"
-            >내 정보</q-btn
-          >
-          <q-btn size="md" class="text-grey q-py-md" flat v-on:click="logout"
-            >로그아웃</q-btn
-          >
-        </div>
-      </q-toolbar>
-      <!-- 햄버거버튼 누르면 drawer open -->
-      <q-toolbar v-if="window.width < 676">
-        <div class>
+       <div class="col-4 lt-lg "  align="left">
           <q-btn
             class="q-py-sm"
             size="large"
@@ -146,12 +120,42 @@
             @click="leftDrawerOpen = !leftDrawerOpen"
           ></q-btn>
         </div>
+
+        <q-toolbar-title class="col-4 text-black">
+          <q-btn unelevated flat to="/">트래블브릿지</q-btn>
+        </q-toolbar-title>
+
+        <div
+          v-if="
+            this.$store.state.user.user.mem_id == null ||
+              this.$store.state.user.user.mem_id == undefined
+          "
+          class="col-4 "
+          align="right"
+        >
+          <q-btn size="md" class="text-grey darken--2 q-pa-md" flat to="/login"
+            >로그인</q-btn
+          >
+        </div>
+        <div class="col-4" align="right" v-else>
+          <q-btn size="md" class="text-grey q-py-md" flat to="/mypage"
+            >내 정보</q-btn
+          >
+          <q-btn size="md" class="text-grey q-py-md" flat v-on:click="logout"
+            >로그아웃</q-btn
+          >
+        </div>
       </q-toolbar>
+      <!-- 햄버거버튼 누르면 drawer open -->
+      <!-- <q-toolbar v-if="window.width < 676"> -->
+      
+       
+  
     </q-header>
 
     <!-- 반응형: 태블릿, 모바일 사이즈일 때 -->
     <!-- <q-drawer v-if="left" overlay side="left" elevated behavior="mobile"> -->
-    <q-drawer v-model="leftDrawerOpen" show-if-above content-class="bg-grey-1">
+    <q-drawer v-model="leftDrawerOpen" show-if-above content-class="bg-grey-1" class="lt-lg">
       <q-scroll-area class="fit">
         <q-list v-for="(menuItem, index) in menuList" :key="index">
           <q-item v-if="menuItem.btn" clickable :to="menuItem.path">
