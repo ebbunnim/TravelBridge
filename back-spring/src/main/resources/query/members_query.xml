@@ -62,13 +62,8 @@
 		<result property="post_hits" column="post_hits"/>
 	</resultMap>
 	
-	<resultMap type="likes" id="likesMap">
-		<result property="liker_mem_no" column="liker_mem_no"/>
-	</resultMap>
-	
 	<resultMap id="likePostMap" type="Members">
 		<id property="mem_id" column="mem_id"/>
-		<collection property="mem_likeList" ofType="Likes" resultMap="likesMap"/>
 		<collection property="mem_likePost" ofType="Post" resultMap="postMap"/>
 	</resultMap>
 	
@@ -87,5 +82,6 @@
 		LEFT JOIN post p ON l.post_no = p.post_no AND p.post_del_check=FALSE
 		WHERE m.mem_no = #{mem_no} AND m.mem_del_check = FALSE; 
 	</select>
+
 </mapper>
 

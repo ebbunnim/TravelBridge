@@ -586,3 +586,43 @@ SELECT
 	LEFT JOIN comment c 
 	ON p.post_no = c.post_no AND cmt_del_check = FALSE
 	WHERE p.post_no = 2 AND p.post_del_check = FALSE;
+    
+    
+    
+select * from follow;
+
+SELECT
+f.follow_no,
+f.follower_no,
+f.following_no,
+m.mem_id,
+m.mem_email,
+m.mem_name
+FROM follow f 
+LEFT JOIN members m ON f.following_no = m.mem_no AND m.mem_del_check = FALSE
+WHERE f.follower_no = 1
+AND f.follow_del_check = FALSE;
+select * from likes;
+
+SELECT 
+a.mem_no, 
+a.mem_id,
+a.mem_email, 
+a.mem_name,
+b.following_no,
+b.mem_id,
+b.mem_email,
+b.mem_name
+FROM members a, (SELECT
+				f.follow_no,
+				f.follower_no,
+				f.following_no,
+				m.mem_id,
+				m.mem_email,
+				m.mem_name
+				FROM follow f 
+				LEFT JOIN members m ON f.following_no = m.mem_no AND m.mem_del_check = FALSE
+				WHERE f.follower_no = 1
+				AND f.follow_del_check = FALSE) b
+WHERE a.mem_no = b.follower_no
+AND a.mem_del_check = FALSE;   

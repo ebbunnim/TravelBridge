@@ -125,28 +125,6 @@
 		post_no = #{post_no:INTEGER} 
 		AND post_del_check=false   
 	</select>
-	<!-- <resultMap type ="post" id="postMap">
-		<id	column="post_no"	property="post_no"/>
-		<result column="post_title" propet =/>
-		<result/>
-		<result/>
-		<result/>
-		<result/>
-		<result/>
-		<collection property="commentList" ofType="comment" ></collection>
-	</resultMap> -->
-	<!-- <select id="searchWithComment" parameterType ="int" resultType="postMap">
-		select p.* , m.mem_id as cmt_person, c.cmt_no, c.mem_no, cmt_title, cmt_content             
-		from   comment c                                              
-		right join  (select post_no, post_title, mem_id, post_content, post_category                     
-							, date_format(post_regtime, '%y-%m-%d') as post_regtime
-							, post_hits, ((post_end_day)-(post_start_day)) as days
-					 from   post, members                                        
-					 where  post_no = #{post_no:INTEGER} and post.mem_no = members.mem_no) p                                   
-		on   p.post_no = c.post_no
-		left join members m
-		on c.mem_no = m.mem_no;
-	</select> -->
 	<resultMap type="Comment" id="cmtMap">
 		<result property = "cmt_regtime" column="cmt_regtime"/>
 		<result property ="cmt_content" column="cmt_content"/>

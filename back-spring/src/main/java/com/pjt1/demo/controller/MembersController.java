@@ -1,6 +1,5 @@
 package com.pjt1.demo.controller;
 
-import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +22,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pjt1.demo.model.dto.Follow;
 import com.pjt1.demo.model.dto.Members;
+import com.pjt1.demo.model.service.FollowService;
 import com.pjt1.demo.model.service.JwtService;
 import com.pjt1.demo.model.service.MembersService;
 
@@ -38,6 +39,8 @@ public class MembersController {
 
     @Autowired
     private MembersService service;
+    @Autowired
+    private FollowService f_service;
 
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
@@ -72,16 +75,22 @@ public class MembersController {
         return handleSuccess(members);
     }
 
-    @ApiOperation("능")
+    @ApiOperation("no에 따른 Member가 좋아하는 포스트 List를 조회하는 기능")
     @GetMapping("/Members/searchMemberLikePost/{mem_no}")
     public ResponseEntity<Map<String, Object>> searchMemberLikePost(int mem_no) {
-    	System.out.println(mem_no);
         Members members = service.searchMemberLikePost(mem_no);
-        System.out.println(members);
+        return handleSuccess(members);
+    }
+    
+    @ApiOperation("no에 따른 Member의 FollowList를 조회하는 기능")
+    @GetMapping("/Members/searchFollowMembers/{mem_no}")
+    public ResponseEntity<Map<String, Object>> searchFollowMembers(int mem_no) {
+    	Members members = service.search(mem_no);
+    	List<Follow> fList = f_service.searchMemberList(mem_no);
+        members.setMem_followList(fList);
         return handleSuccess(members);
     }
 
-    
     @ApiOperation("Member 조회(email에 따른)")
     @GetMapping("/Members/search/email/{mem_email}")
     public ResponseEntity<Map<String, Object>> searchMemberByEmail(@PathVariable String mem_email) {
@@ -89,15 +98,6 @@ public class MembersController {
         return (members == null) ? handleFail("해당 멤버 조회 실패", HttpStatus.NOT_FOUND) : handleSuccess(members);
     }
 
-    
-    // @PostMapping("/Members/insert")
-    // @ApiOperation("Member 정보 등록")
-    // public ResponseEntity<Map<String, Object>> insert(@RequestBody Members members) {
-    //     service.insert(members);
-    //     return handleSuccess("");
-    // }
-
-    
     @ApiOperation("Member 정보 등록")
     @PostMapping("/Members/insert")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Members members) {
@@ -116,27 +116,6 @@ public class MembersController {
         return handleSuccess("Member 등록 성공");
     }
 
-    // 암호화 - 필요없음
-    // public static String encrypt(String base) {
-    //     try {
-    //         MessageDigest digest = MessageDigest.getInstance("SHA-256");
-    //         byte[] hash = digest.digest(base.getBytes("UTF-8"));
-    //         StringBuffer hexString = new StringBuffer();
-
-    //         for (int i = 0; i < hash.length; i++) {
-    //             String hex = Integer.toHexString(0xff & hash[i]);
-    //             if (hex.length() == 1)
-    //                 hexString.append('0');
-    //             hexString.append(hex);
-    //         }
-    //         // 출력
-    //         return hexString.toString();
-
-    //     } catch (Exception ex) {
-    //         throw new RuntimeException(ex);
-    //     }
-    // };
-
     // 이메일 형식 검증
     public static boolean isValidEmail(String email) {
         boolean err = false;
@@ -150,28 +129,12 @@ public class MembersController {
     }
 
 
-    // @ApiOperation("Member 정보 수정")
-    // @PutMapping("/Members/update")
-    // public ResponseEntity<Map<String, Object>> update(@RequestBody Members members) {
-    //     service.update(members);
-    //     return handleSuccess("수정 완료");
-    // }
-
-
     @ApiOperation("Member 정보 수정")
     @PutMapping("/Members/update")
     public ResponseEntity<Map<String, Object>> update(@RequestBody Members members) {
         service.update(members);
         return handleSuccess("User 정보 수정 완료");
     }
-
-    // @ApiOperation("Members 정보 삭제")
-    // @DeleteMapping("/Member/delete/{mem_no}")
-    // public ResponseEntity<Map<String, Object>> delete(@PathVariable int mem_no) {
-    //     service.delete(mem_no);
-    //     return handleSuccess("삭제 완료");
-    // }
-
 
     // email로 삭제로 바꿈
     @ApiOperation("Member 삭제")
