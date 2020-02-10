@@ -4,7 +4,7 @@
       <p class="text-h4 q-pt-lg q-mt-lg">회원가입</p>
       <div class="row justify-center">
         <div class="col-5">
-          <div class="row q-my-none justify-even">
+          <div class="row q-my-none">
             <q-input
               clearable
               clear-icon="close"
@@ -38,16 +38,8 @@
             stack-label
           />
           <div class="row justify-center q-pt-none">
-            <q-radio
-              v-model="user.mem_receive_email"
-              val="true"
-              label="Email 수신에 동의합니다"
-            />
-            <q-radio
-              v-model="user.mem_receive_email"
-              val="false"
-              label="Email 수신에 동의하지 않습니다 "
-            />
+            <q-radio v-model="user.mem_receive_email" val="true" label="Email 수신에 동의합니다" />
+            <q-radio v-model="user.mem_receive_email" val="false" label="Email 수신에 동의하지 않습니다 " />
           </div>
           <q-input
             v-model="user.mem_password"
@@ -83,8 +75,7 @@
               label="생년월일을 입력하세요"
               class="q-ma-lg col-6"
               stack-label
-            >
-            </q-input>
+            ></q-input>
             <q-radio v-model="user.mem_sex" val="0" label="Male" />
             <q-radio v-model="user.mem_sex" val="1" label="Female" />
           </div>
@@ -115,7 +106,7 @@
             color="primary"
             width="100%"
             label="취소"
-            class=" q-ma-md"
+            class="q-ma-md"
             v-on:click="cancle()"
           ></q-btn>
         </div>
