@@ -7,15 +7,21 @@ import SignUp from "../views/user/SignUp.vue";
 import MyPage from "../views/user/MyPage.vue";
 //main
 import Home from "../views/Home.vue";
-import Main1 from "../views/Main1.vue";
 import Main2 from "../views/Main2.vue";
 import Sub from "../views/Sub.vue";
+import Search from "../views/Search.vue";
 //about
 import AboutTeam from "../views/about/AboutTeam.vue";
 import AboutService from "../views/about/AboutService.vue";
 //faq&qna
 import Qna from "../views/Qna.vue";
 import Faq from "../views/Faq.vue";
+
+//main1
+import Main1 from "../views/one/Main1.vue";
+import Main1Search from "../views/one/Main1Search.vue";
+import PostDetail from "../views/one/PostDetail.vue";
+import Main1Main from "../views/one/Main1Main.vue";
 
 Vue.use(VueRouter);
 
@@ -26,9 +32,27 @@ const routes = [
     component: Home
   },
   {
+    path: "/search",
+    name: "search",
+    component: Search
+  },
+  {
     path: "/page1",
     name: "main1",
-    component: Main1
+    component: Main1,
+    children: [
+      // UserHome will be rendered inside User's <router-view>
+      // when /user/:id is matched
+      { path: "", component: Main1Main },
+
+      // UserProfile will be rendered inside User's <router-view>
+      // when /user/:id/profile is matched
+      { path: "main1search", component: Main1Search },
+
+      // UserPosts will be rendered inside User's <router-view>
+      // when /user/:id/posts is matched
+      { path: "postdetail", component: PostDetail }
+    ]
   },
   {
     path: "/page2",

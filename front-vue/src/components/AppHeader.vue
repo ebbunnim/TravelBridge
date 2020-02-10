@@ -38,19 +38,13 @@
           <q-list class="q-ma-lg">
             <div class="row">
               <div class="col-4" style="text-align:center;" v-close-popup>
-                <q-item clickable>11111</q-item>
-                <q-item clickable>11111</q-item>
-                <q-item clickable>11111</q-item>
+                <q-item clickable to="/page1">메인</q-item>
               </div>
               <div class="col-4" style="text-align:center;" v-close-popup>
-                <q-item clickable>11111</q-item>
-                <q-item clickable>11111</q-item>
-                <q-item clickable>11111</q-item>
+                <q-item clickable to="/page1/main1search">검색</q-item>
               </div>
               <div class="col-4" style="text-align:center;" v-close-popup>
-                <q-item clickable>11111</q-item>
-                <q-item clickable>11111</q-item>
-                <q-item clickable>11111</q-item>
+                <q-item clickable to="/page1/postdetail">포스트 디테일</q-item>
               </div>
             </div>
           </q-list>
@@ -110,11 +104,13 @@
           class="col-4"
           align="right"
         >
-          <q-btn size="md" class="text-grey darken--2 q-pa-md" flat to="/login">로그인</q-btn>
+          <q-btn size="md col-5" class="text-grey q-pa-md" flat to="/login">로그인</q-btn>
+          <q-btn size="md col-5" class="text-grey q-pa-md" flat to="/search">검색</q-btn>
         </div>
-        <div class="col-4" align="right">
+        <div class="col-4" align="right" v-else>
           <q-btn size="md" class="text-grey q-py-md" flat to="/mypage">내 정보</q-btn>
           <q-btn size="md" class="text-grey q-py-md" flat v-on:click="logout">로그아웃</q-btn>
+          <q-btn size="md" class="text-grey q-py-md" flat to="/search">검색</q-btn>
         </div>
       </q-toolbar>
       <!-- 햄버거버튼 누르면 drawer open -->
@@ -216,6 +212,12 @@ export default {
           icon: "extension",
           separator: "true",
           path: "/page3"
+        },
+        {
+          label: "검색",
+          icon: "search",
+          separator: "true",
+          path: "/search"
         },
         { label: "고객센터", icon: "dashboard", separator: "true" }
       ],
