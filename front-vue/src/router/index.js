@@ -60,19 +60,19 @@ const routes = [
     children: [
       {
         path: "",
-        component: () => import("@/components/main2/Main2Home.vue")
+        component: () => import("@/components/two/Main2Home.vue")
       },
       {
         path: "pick",
-        component: () => import("@/components/main2/Main2Pick.vue")
+        component: () => import("@/components/two/Main2Pick.vue")
       },
       {
         path: "list",
-        component: () => import("@/components/main2/Main2List.vue")
+        component: () => import("@/components/two/Main2List.vue")
       },
       {
-        path: "search",
-        component: () => import("@/components/main2/Main2Search.vue")
+        path: "main2search",
+        component: () => import("@/components/two/Main2Search.vue")
       }
     ]
   },

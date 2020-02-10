@@ -34,18 +34,22 @@
         1) 단순 dropdown 형태로 수정하거나 
         2) 메뉴 + 이미지 함께 보여주면 좋을 듯-->
 
-        <q-menu square v-model="menuOn1" @mouseleave="menuOn1 = false" class="gt-sm" fit>
-          <q-list class="q-ma-lg">
+        <q-menu
+          square
+          v-model="menuOn1"
+          @mouseleave="menuOn1 = false"
+          class="gt-sm"
+          fit
+        >
+          <q-list class="q-ma-sm">
             <div class="row">
-              <div class="col-4" style="text-align:center;" v-close-popup>
-                <q-item clickable to="/page1">메인</q-item>
-              </div>
-              <div class="col-4" style="text-align:center;" v-close-popup>
-                <q-item clickable to="/page1/main1search">검색</q-item>
-              </div>
-              <div class="col-4" style="text-align:center;" v-close-popup>
-                <q-item clickable to="/page1/postdetail">포스트 디테일</q-item>
-              </div>
+              <q-btn to="/page1" flat class="col-4">메인</q-btn>
+              <q-btn to="/page1/postdetail" flat class="col-4"
+                >포스트 디테일</q-btn
+              >
+              <q-btn to="/page1/main1search" flat class="col-4" icon="search"
+                >검색</q-btn
+              >
             </div>
           </q-list>
         </q-menu>
@@ -61,7 +65,9 @@
               <q-btn to="/page2" flat class="col-3" icon="map"></q-btn>
               <q-btn to="/page2/pick" flat class="col-3">여행지 추천받기</q-btn>
               <q-btn to="/page2/list" flat class="col-3">여행지 톺아보기</q-btn>
-              <q-btn to="/page2/search" flat class="col-3" icon="search">검색</q-btn>
+              <q-btn to="/page2/main2search" flat class="col-3" icon="search"
+                >검색</q-btn
+              >
             </div>
           </q-list>
         </q-menu>
@@ -94,13 +100,23 @@
           class="col-4"
           align="right"
         >
-          <q-btn size="md col-5" class="text-grey q-pa-md" flat to="/login">로그인</q-btn>
-          <q-btn size="md col-5" class="text-grey q-pa-md" flat to="/search">검색</q-btn>
+          <q-btn size="md col-5" class="text-grey q-pa-md" flat to="/login"
+            >로그인</q-btn
+          >
+          <q-btn size="md col-5" class="text-grey q-pa-md" flat to="/search"
+            >검색</q-btn
+          >
         </div>
         <div class="col-4" align="right" v-else>
-          <q-btn size="md" class="text-grey q-py-md" flat to="/mypage">내 정보</q-btn>
-          <q-btn size="md" class="text-grey q-py-md" flat v-on:click="logout">로그아웃</q-btn>
-          <q-btn size="md" class="text-grey q-py-md" flat to="/search">검색</q-btn>
+          <q-btn size="md" class="text-grey q-py-md" flat to="/mypage"
+            >내 정보</q-btn
+          >
+          <q-btn size="md" class="text-grey q-py-md" flat v-on:click="logout"
+            >로그아웃</q-btn
+          >
+          <q-btn size="md" class="text-grey q-py-md" flat to="/search"
+            >검색</q-btn
+          >
         </div>
       </q-toolbar>
       <!-- 햄버거버튼 누르면 drawer open -->

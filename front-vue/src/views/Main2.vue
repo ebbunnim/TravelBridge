@@ -1,6 +1,5 @@
 <template>
-  <q-page-container class="">
-    <h1>router view</h1>
+  <q-page-container>
     <router-view />
   </q-page-container>
 </template>
