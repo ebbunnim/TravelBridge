@@ -7,14 +7,15 @@
   		<typeAlias type="com.pjt1.demo.model.dto.Faq"            	alias="faq" />
 		<typeAlias type="com.pjt1.demo.model.dto.Comment"        	alias="comment" />
 		<typeAlias type="com.pjt1.demo.model.dto.City"        		alias="city" />
-		<typeAlias type="com.pjt1.demo.model.dto.Festival"          	alias="festival" />
-		<typeAlias type="com.pjt1.demo.model.dto.Files"         		alias="files" />
+		<typeAlias type="com.pjt1.demo.model.dto.Festival"          alias="festival" />
+		<typeAlias type="com.pjt1.demo.model.dto.Files"         	alias="files" />
 		<typeAlias type="com.pjt1.demo.model.dto.Follow"         	alias="follow" />
 		<typeAlias type="com.pjt1.demo.model.dto.HotPlace"        	alias="hotplace" />
 		<typeAlias type="com.pjt1.demo.model.dto.Likes"           	alias="likes" />
 		<typeAlias type="com.pjt1.demo.model.dto.Members"         	alias="members" />
 		<typeAlias type="com.pjt1.demo.model.dto.Post"           	alias="post" />
-		<typeAlias type="com.pjt1.demo.model.dto.Qna"           		alias="qna" /> 
+		<typeAlias type="com.pjt1.demo.model.dto.Qna"           	alias="qna" /> 
+		<typeAlias type="com.pjt1.demo.model.dto.Calendar"          alias="calendar" /> 
   </typeAliases>
   
   <mappers>
@@ -30,5 +31,6 @@
   		<mapper resource="query/members_query.xml" />
   		<mapper resource="query/post_query.xml" />
   		<mapper resource="query/qna_query.xml" />
+  		<mapper resource="query/calendar_query.xml" />
   </mappers>
 </configuration>
