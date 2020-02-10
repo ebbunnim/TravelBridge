@@ -4,7 +4,9 @@
 ## **INDEX**
 [2020.02.04](#2020.02.04)  
 [2020.02.05](#2020.02.05)  
-[2020.02.06](#2020.02.06)
+[2020.02.06](#2020.02.06)  
+[2020.02.07](#2020.02.07)  
+[2020.02.10](#2020.02.10)
 
 
 # 2020.02.04
@@ -232,4 +234,33 @@
   - 기능 추출중
 
 
-- 할일은 post+comment+file 쿼리랑 메인
+# 2020.02.10
+
+## 0. 현재상황
+  - back   
+    1) 완료
+     - 모든 테이블 기본 CRUD
+     - login
+     - faq / qna  
+     - post, hotplace, festival 페이징 처리
+     - post(+comment + files)로 상세조회 / member(like + post)로 상세조회
+  
+    2) 수정중 
+     - member
+     - board, post, files
+     - city, hotplace, festival
+     - likes, follow, comment
+     
+    3) 테이블 변경사항
+     - course table 제거. 
+     - 세부 필드 변경
+
+## 1. 쿼리 작성
+
+  - post+comment+file 쿼리 작성
+  - follow + member 쿼리 작성
+
+## 2. 연관 삭제 처리
+
+
+## 3. 메인 기능 추출 및 구현
