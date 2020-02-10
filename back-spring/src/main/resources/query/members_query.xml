@@ -55,19 +55,16 @@
 		SELECT * FROM members WHERE mem_email=#{mem_email:VARCHAR} and mem_del_check=false
 	</select>
 	<resultMap type="post" id="postMap">
-		<id property="post_no" column="post_no"/>
-		<result property="post_title" column="title"/>
-		<result property="post_category" column="category"/>
-		<result property="post_regtime" column="regtime"/>
-		<result property="post_city" column="city"/>
-		<result property="post_hits" column="hits"/>
+		<result property="post_title" column="post_title"/>
+		<result property="post_category" column="post_category"/>
+		<result property="post_regtime" column="post_regtime"/>
+		<result property="post_city" column="post_city"/>
+		<result property="post_hits" column="post_hits"/>
 	</resultMap>
 	
 	<resultMap type="likes" id="likesMap">
-		<id property="like_no" column="like_no"/>
 		<result property="liker_mem_no" column="liker_mem_no"/>
 	</resultMap>
-	
 	
 	<resultMap id="likePostMap" type="Members">
 		<id property="mem_id" column="mem_id"/>
@@ -76,13 +73,19 @@
 	</resultMap>
 	
 	<select id="searchMemberLikePost" parameterType="int" resultMap="likePostMap">
-		select mem_id, like_no, l.post_no, post_title, post_category, post_regtime, post_city, post_hits
-		from members m
-		left join likes l 
-		on m.mem_no = l.liker_mem_no
-		left join post p 
-		on l.post_no = p.post_no
-		where m.mem_no = #{mem_no}; 
+		SELECT 
+		m.mem_id, 
+		l.like_no, 
+		l.post_no, 
+		p.post_title, 
+		p.post_category, 
+		p.post_regtime, 
+		p.post_city, 
+		p.post_hits
+		FROM members m
+		LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE
+		LEFT JOIN post p ON l.post_no = p.post_no AND p.post_del_check=FALSE
+		WHERE m.mem_no = #{mem_no} AND m.mem_del_check = FALSE; 
 	</select>
 </mapper>
 

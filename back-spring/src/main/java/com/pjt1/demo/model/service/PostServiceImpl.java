@@ -158,4 +158,12 @@ public class PostServiceImpl implements PostService {
 		}
 		return 0;
 	}
+	public Post searchWithCmtAndFiles(int post_no) {
+		try {
+			Post pos = repo.searchWithCmtAndFiles(post_no);
+			return pos;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
 }
