@@ -458,6 +458,10 @@ VALUES
     (10, 2),
     (10, 3)
 ;
+
+select * from post;
+select * from members;
+
 SELECT * FROM LIKES;
 
 
@@ -465,12 +469,54 @@ SELECT * FROM LIKES;
 
 
 
+INSERT INTO LIKES
+(post_no, liker_mem_no)
+VALUES
+	(1, 2),
+    (1, 3),
+    (2, 3),
+    (2, 2),
+    (3, 1),
+    (3, 2),
+    (4, 1),
+    (5, 1),
+    (6, 1),
+    (6, 2),
+    (6, 3),
+    (7, 1)
+;
+
+select post_no from post order by post_no desc limit 0, 1;
 
 
+select * from likes;
+
+ 
+select *
+from post
+where post_no in (select post_no from likes l
+					right join members m
+					on m.mem_no = l.liker_mem_no
+					where m.mem_no = 1);
+select * from likes l
+					right join members m
+					on m.mem_no = l.liker_mem_no
+					where m.mem_no = 1;
+                   
+# 좋아하는 포스트들 체크하기     - members 에서 필요한 것 같은데      
+select mem_id, like_no, l.post_no, post_title, post_category, post_regtime, post_hits, post_city
+from members m
+left join likes l on m.mem_no = l.liker_mem_no
+left join post p on l.post_no = p.post_no
+where m.mem_no = 1;
 
 
+# post 별 likes 개수
+SELECT COUNT(*) 
+FROM likes
+WHERE post_no = 1;
 
-
+select * from post;
 
 
 

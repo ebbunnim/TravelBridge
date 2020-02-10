@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <q-img :src="getImgUrl('cutbg.jpg')" style="width: 100%">
+      <q-img :src="getImgUrl('cutbg.jpg')">
         <div class="absolute-center text-center" style="width: 100%">
           <p class="text-h3 text-center">
             <q-icon name="contact_support" />1:1 문의하기
@@ -12,33 +12,35 @@
     </div>
 
     <div class="info" v-if="!submitted">
-      <div class="q-mb-lg">
-        <p class="text-h5 text-weight-medium">1:1 문의하기</p>
-        <q-form class="q-my-lg">
-          <q-input v-model="newQna.qna_title" type="text" label="제목" />
-          <q-input v-model="newQna.qna_content" type="textarea" label="내용" />
-        </q-form>
+      <q-tabs
+        v-model="tab"
+        dense
+        class="text-grey"
+        active-color="primary"
+        indicator-color="primary"
+        align="justify"
+        narrow-indicator
+      >
+        <q-tab name="qna" label="1:1 문의하기" />
+        <q-tab name="past" label="문의내역" />
+      </q-tabs>
 
-        <div class="row justify-center">
-          <q-btn
-            @click="postQna()"
-            align="center"
-            outline
-            color="primary"
-            class="col-4"
-            >1:1 문의하기</q-btn
-          >
-        </div>
+      <q-separator />
 
-        <!-- 관리자에게만 보이게 처리 -->
-        <q-form class="q-my-lg">
-          <q-input
-            v-model="newQna.qna_answer"
-            type="textarea"
-            label="관리자 답변"
-          />
+      <q-tab-panels v-model="tab" animated>
+        <q-tab-panel dark name="qna">
+          <q-form class="q-my-lg">
+            <q-input v-model="newQna.qna_title" type="text" label="제목" />
+            <q-input
+              v-model="newQna.qna_content"
+              type="textarea"
+              label="내용"
+            />
+          </q-form>
+
           <div class="row justify-center">
             <q-btn
+              no-wrap
               @click="postQna()"
               align="center"
               outline
@@ -47,36 +49,56 @@
               >1:1 문의하기</q-btn
             >
           </div>
-        </q-form>
-      </div>
-
-      <div v-for="(q, index) in qnaList" :key="index">
-        <div class="q-pa-none q-ma-none row justify-center">
-          <div style="width: 100%;">
-            <q-chat-message
-              name="질문"
-              avatar="https://cdn.quasar.dev/img/avatar3.jpg"
-              :text="[q.qna_content]"
-              :stamp="q.qna_regtime"
-              sent
-              size="10"
-              class="q-pl-lg"
+          <q-form class="q-my-lg">
+            <q-input
+              v-model="newQna.qna_answer"
+              type="textarea"
+              label="관리자 답변"
             />
-            <q-chat-message
-              class="q-pr-lg"
-              name="관리자 답변"
-              avatar="https://cdn.quasar.dev/img/avatar5.jpg"
-              :text="[q.qna_answer]"
-              size="10"
-              text-color="white"
-              bg-color="brown-3"
-            />
+          </q-form>
+          <div class="row justify-center">
+            <q-btn
+              no-wrap
+              @click="answerQna()"
+              align="center"
+              outline
+              color="primary"
+              class="col-4"
+              >관리자 답변</q-btn
+            >
           </div>
-        </div>
-      </div>
+        </q-tab-panel>
+
+        <q-tab-panel name="past">
+          <div v-for="(q, index) in qnaList" :key="index">
+            <div class="q-pa-none q-ma-none row justify-center">
+              <div style="width: 100%;">
+                <q-chat-message
+                  name="질문"
+                  avatar="https://cdn.quasar.dev/img/avatar3.jpg"
+                  :text="[q.qna_content]"
+                  :stamp="q.qna_regtime"
+                  sent
+                  size="10"
+                  class="q-pl-lg"
+                />
+                <q-chat-message
+                  class="q-pr-lg"
+                  name="관리자 답변"
+                  avatar="https://cdn.quasar.dev/img/avatar5.jpg"
+                  :text="[q.qna_answer]"
+                  size="10"
+                  text-color="white"
+                  bg-color="brown-3"
+                />
+              </div>
+            </div>
+          </div>
+        </q-tab-panel>
+      </q-tab-panels>
     </div>
     <div class="info" v-else>
-      <h4>You submitted successfully!</h4>
+      <h4>1:1 문의가 등록되었습니다.</h4>
       <q-btn @click="clearQna()" to="/" class="col-4" color="primary" outline
         >메인화면으로</q-btn
       >
@@ -86,10 +108,10 @@
 
 <script>
 import QnaService from "@/services/QnaService";
-
 export default {
   data() {
     return {
+      tab: "qna", // tab : qna 와 past 중 선택
       newQna: {
         mem_no: 1, // user 받아오기
         qna_title: "",
@@ -108,7 +130,6 @@ export default {
           qna_regtime: "200205"
         }
       ],
-      tab: "mails",
       submitted: false
     };
   },
@@ -132,16 +153,13 @@ export default {
     },
     answerQna() {
       // 현재 화면에 보여지고 있는 qna 를 qna List 에서 받아온 후... 저장하고
-      // 그것의 qna_answer 필드에 답변을 넣는다. 
-      QnaService.answerTheQuestion()
+      // 그것의 qna_answer 필드에 답변을 넣는다.
+      QnaService.answerTheQuestion();
     }
   },
   created() {
     this.getQna();
   }
-  // updated() {
-  //   this.getQna();
-  // }
 };
 </script>
 

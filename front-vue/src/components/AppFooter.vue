@@ -7,11 +7,7 @@
           <div class="q-pa-md" style="max-height: 150px">
             <p class="text-subtitle1 text-uppercase">About Us</p>
             <q-list dense padding>
-              <q-item
-                v-for="(menu, index) in aboutUsMenus"
-                :key="index"
-                :to="menu.path"
-              >
+              <q-item v-for="(menu, index) in aboutUsMenus" :key="index" :to="menu.path">
                 <q-item-section>{{ menu.label }}</q-item-section>
               </q-item>
             </q-list>
@@ -22,12 +18,7 @@
             <p class="text-subtitle1 text-uppercase">Customer Service</p>
 
             <q-list dense padding>
-              <q-item
-                v-for="(menu, index) in CSmenus"
-                :key="index"
-                clickable
-                :to="menu.path"
-              >
+              <q-item v-for="(menu, index) in CSmenus" :key="index" clickable :to="menu.path">
                 <q-item-section>{{ menu.label }}</q-item-section>
               </q-item>
             </q-list>
@@ -38,12 +29,7 @@
             <p class="text-subtitle1 text-uppercase">Site Map</p>
 
             <q-list dense padding>
-              <q-item
-                v-for="(menu, index) in siteMapMenus"
-                :key="index"
-                clickable
-                :to="menu.path"
-              >
+              <q-item v-for="(menu, index) in siteMapMenus" :key="index" clickable :to="menu.path">
                 <q-item-section>{{ menu.label }}</q-item-section>
               </q-item>
             </q-list>
@@ -56,7 +42,6 @@
 
 <script>
 export default {
-  name: "MyLayout",
   data() {
     return {
       leftDrawerOpen: false,
@@ -65,16 +50,33 @@ export default {
         { label: "About Service", path: "/about/service" }
       ],
       CSmenus: [
-        { label: "자주 묻는 질문", path: "/faq" },
-        { label: "1:1 문의하기", path: "/qna" }
+        { label: "자주 묻는 질문", path: "/faq" }, // 자주 묻는 질문
+        { label: "1:1 문의하기", path: "/qna" } // 1:1 문의하기
       ],
       siteMapMenus: [
         { label: "HOME", path: "/" },
         { label: "메인기능 1", path: "/page1" }, // 이름 수정할 것
         { label: "메인기능 2", path: "/page2" }, // 이름 수정할 것
         { label: "서브기능", path: "/page3" } // 이름 수정할 것
-      ]
+      ],
+      window: {
+        width: 0,
+        height: 0
+      }
     };
+  },
+  methods: {
+    handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
+    }
+  },
+  created() {
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.handleResize);
   }
 };
 </script>
@@ -83,10 +85,6 @@ export default {
 .footer {
   margin-left: 0;
   margin-right: 0;
-  padding-left: 2%;
-  padding-right: 2%;
-  padding-top: 2%;
-  padding-bottom: 3%;
 }
 .border {
   border-block-color: black;
