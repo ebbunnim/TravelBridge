@@ -41,10 +41,16 @@ const routes = [
       {
         path: "pick",
         component: () => import("@/components/main2/Main2Pick.vue")
+      },
+      {
+        path: "list",
+        component: () => import("@/components/main2/Main2List.vue")
+      },
+      {
+        path: "search",
+        component: () => import("@/components/main2/Main2Search.vue")
       }
     ]
-    // name: "main2",
-    // component: Main2
   },
   {
     path: "/page3",
