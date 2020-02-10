@@ -26,10 +26,10 @@
           :label="faqList.faq_question"
         >
           <q-card>
-            <q-card-section
-              ><i class="fas fa-arrow-circle-right"></i
-              >{{ faqList.faq_answer }}</q-card-section
-            >
+            <q-card-section>
+              <i class="fas fa-arrow-circle-right"></i>
+              {{ faqList.faq_answer }}
+            </q-card-section>
           </q-card>
         </q-expansion-item>
         <q-separator />
@@ -37,8 +37,10 @@
     </div>
     <div class="info">
       <p class="text-h5 text-weight-medium">원하는 답변을 찾지 못하셨나요?</p>
-      <div class="row" style="display: flex; justify: center">
-        <q-btn to="/qna" color="purple" class="col-4">1:1 문의하러 가기</q-btn>
+      <div class="row justify-center" style="display: flex">
+        <q-btn no-wrap to="/qna" color="primary" class="col-4" outline
+          >1:1 문의하러 가기</q-btn
+        >
       </div>
     </div>
   </div>
@@ -47,7 +49,6 @@
 <script>
 // import { mapState, mapActions } from "vuex";
 import FaqService from "@/services/FaqService";
-
 export default {
   data() {
     return {
@@ -64,8 +65,7 @@ export default {
   },
   created() {
     this.getAllFaqs();
-    console.log('목록', this.$store.state.faq.faqList)
-    this.FaqList = this.$store.state.faq.faqList
+    this.FaqList = this.$store.state.faq.faqList;
   }
 };
 </script>
