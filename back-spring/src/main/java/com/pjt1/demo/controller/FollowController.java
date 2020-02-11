@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pjt1.demo.model.dto.Follow;
+import com.pjt1.demo.model.dto.Members;
 import com.pjt1.demo.model.service.FollowService;
+import com.pjt1.demo.model.service.MembersService;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -28,6 +30,8 @@ public class FollowController {
 
     @Autowired
     private FollowService service;
+    @Autowired
+    private MembersService m_service;
 
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
@@ -82,4 +86,15 @@ public class FollowController {
         service.update(Follow);
         return handleSuccess("수정 완료");
     }
+    
+    @ApiOperation("no에 따른 Follow 정보 조회하는 기능")
+    @GetMapping("/Follow/search/members/{follow_no}")
+    public ResponseEntity<Map<String, Object>> followMembers(int follow_no) {
+    	int memberNo = m_service.search(follow_no).getMem_no();
+    	List<Follow> follow = null;
+    	if(memberNo != 0) {
+    		follow = service.searchMemberList(memberNo)	;
+    	}
+        return handleSuccess(follow);
+    } //이게 결국은 멤버한테 있어야하는건가
 }

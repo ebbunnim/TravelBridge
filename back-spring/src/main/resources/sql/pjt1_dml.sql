@@ -396,7 +396,17 @@ where  p.post_no = 1;
 
 
 
-
+UPDATE comment set cmt_del_check = true where cmt_no = 4;
+select * from comment;
+#vistir
+insert into comment(post_no,mem_no,cmt_content,writer) values (2,3,'앙아가악ㅇㄴ막미나굽데수ㅐㅂㄷ','visitor');
+select * from post;  
+select * from members;
+select * from files;
+insert into files(post_no,mem_no,files_url) 
+values
+(2,2,'url1'),
+(2,2,'url2');
 
 select p.* , m.mem_id as cmt_person, c.cmt_no, cmt_title, cmt_content             
 from   comment c    
@@ -404,7 +414,7 @@ left join members m
 on c.mem_no = m.mem_no                                          
 right join  (select post_no, post_title, mem_id, post_content, post_category                     
 					, date_format(post_regtime, '%y-%m-%d') as post_regtime
-					, post_hits, ((post_end_day)-(post_start_day)) as days
+					, post_hits, ((post_plan_end)-(post_plan_start)) as days
 			 from   post, members                                        
 			 where  post_no = 1 and post.mem_no = members.mem_no) p                                   
 on   p.post_no = c.post_no;
@@ -521,3 +531,98 @@ values
 (1,"이름12","서울 종로구","서울 종로구 명동", "내용","#중");
 
 
+(SELECT p.post_no, p.mem_no,
+			post_type, board_no, post_title, post_content,
+			post_category, post_regtime, post_hits, post_city,
+			post_plan_start, post_plan_end, post_plan_title,
+			p.writer, post_del_check, c.mem_no as cmt_mem_no, cmt_regtime, cmt_content, c.writer as cmt_writer
+			FROM post p 
+			LEFT JOIN comment c 
+			ON p.post_no = c.post_no AND cmt_del_check = FALSE 
+			GROUP BY c.cmt_no );
+# post + comment + files
+SELECT 
+	p.post_no, 
+	p.mem_no,
+	p.post_type, 
+	p.board_no, 
+	p.post_title, 
+	p.post_content,
+	p.post_category, 
+	p.post_regtime, 
+	p.post_hits, 
+	p.post_city,
+	p.post_plan_start, 
+	p.post_plan_end, 
+	p.post_plan_title,
+	p.writer, 
+	c.mem_no,
+	c.cmt_regtime, 
+	c.cmt_content, 
+	c.writer, 
+	f.files_url
+	FROM post p 
+	LEFT JOIN comment c ON p.post_no = c.post_no AND c.cmt_del_check = FALSE
+	LEFT JOIN files f   ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND f.files_del_check = FALSE
+	WHERE p.post_no =2 AND p.post_del_check = FALSE;
+
+SELECT DISTINCT
+p.post_no,
+post_type, board_no, post_title, post_content,
+post_category, post_regtime, post_hits, post_city,
+post_plan_start, post_plan_end, post_plan_title,
+p.writer, cmt_regtime, cmt_content, c.writer, files_url
+FROM post p, comment c, files f
+WHERE p.post_no = c.post_no AND cmt_del_check = FALSE
+AND p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
+AND p.post_no = 2 AND p.post_del_check = FALSE;
+
+SELECT 
+	post_type, board_no, post_title, post_content,
+	post_category, post_regtime, post_hits, post_city,
+	post_plan_start, post_plan_end, post_plan_title,
+	p.writer, cmt_regtime, cmt_content, c.writer
+	FROM post p 
+	LEFT JOIN comment c 
+	ON p.post_no = c.post_no AND cmt_del_check = FALSE
+	WHERE p.post_no = 2 AND p.post_del_check = FALSE;
+    
+    
+    
+select * from follow;
+
+SELECT
+f.follow_no,
+f.follower_no,
+f.following_no,
+m.mem_id,
+m.mem_email,
+m.mem_name
+FROM follow f 
+LEFT JOIN members m ON f.following_no = m.mem_no AND m.mem_del_check = FALSE
+WHERE f.follower_no = 1
+AND f.follow_del_check = FALSE;
+select * from likes;
+
+SELECT 
+a.mem_no, 
+a.mem_id,
+a.mem_email, 
+a.mem_name,
+b.following_no,
+b.mem_id,
+b.mem_email,
+b.mem_name
+FROM members a, (SELECT
+				f.follow_no,
+				f.follower_no,
+				f.following_no,
+				m.mem_id,
+				m.mem_email,
+				m.mem_name
+				FROM follow f 
+				LEFT JOIN members m ON f.following_no = m.mem_no AND m.mem_del_check = FALSE
+				WHERE f.follower_no = 1
+				AND f.follow_del_check = FALSE) b
+WHERE a.mem_no = b.follower_no
+AND a.mem_del_check = FALSE;   

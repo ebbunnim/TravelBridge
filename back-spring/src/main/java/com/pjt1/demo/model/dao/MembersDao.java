@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.pjt1.demo.model.dto.Follow;
 import com.pjt1.demo.model.dto.Members;
 
 @Mapper
@@ -20,4 +21,5 @@ public interface MembersDao {
 
 	public Members searchMemberByEmail(String email);
 	public Members searchMemberLikePost(int mem_no);
+	public List<Follow> searchFollowMembers(int mem_no);
 }

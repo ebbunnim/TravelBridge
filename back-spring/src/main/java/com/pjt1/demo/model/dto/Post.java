@@ -25,7 +25,8 @@ public class Post implements Serializable {
 	private String post_plan_title;// varchar(300), # 일정 간단한 메모내용
 	private boolean post_del_check;// boolean DEFAULT FALSE, # 삭제 여부
 	private String writer; // # 작성자
-
+	private List<Comment> post_cmtList;
+	private List<Files> post_filesList;
 	// FOREIGN KEY(board_no) REFERENCES BOARD(board_no),
 	// FOREIGN KEY(mem_no) REFERENCES MEMBERS(mem_no)
 	// FOREIGN KEY(writer) REFERENCES MEMBERS(mem_id)
@@ -103,6 +104,30 @@ public class Post implements Serializable {
 		this.post_plan_title = post_plan_title;
 		this.post_del_check = post_del_check;
 		this.writer = writer;
+	}
+
+	public Post(int post_no, int post_type, int board_no, int mem_no, String post_title, String post_content,
+			String post_category, String post_regtime, int post_hits, String post_city, String post_plan_start,
+			String post_plan_end, String post_plan_title, boolean post_del_check, String writer,
+			List<Comment> post_cmtList, List<Files> post_filesList) {
+		super();
+		this.post_no = post_no;
+		this.post_type = post_type;
+		this.board_no = board_no;
+		this.mem_no = mem_no;
+		this.post_title = post_title;
+		this.post_content = post_content;
+		this.post_category = post_category;
+		this.post_regtime = post_regtime;
+		this.post_hits = post_hits;
+		this.post_city = post_city;
+		this.post_plan_start = post_plan_start;
+		this.post_plan_end = post_plan_end;
+		this.post_plan_title = post_plan_title;
+		this.post_del_check = post_del_check;
+		this.writer = writer;
+		this.post_cmtList = post_cmtList;
+		this.post_filesList = post_filesList;
 	}
 
 	@Override
@@ -190,20 +215,28 @@ public class Post implements Serializable {
 		return post_no;
 	}
 
-	// public List<Comment> getCommentList() {
-	// return commentList;
-	// }
-
-	// public void setCommentList(List<Comment> commentList) {
-	// this.commentList = commentList;
-	// }
-
 	public String getWriter() {
 		return writer;
 	}
 
 	public void setWriter(String writer) {
 		this.writer = writer;
+	}
+
+	public List<Comment> getPost_cmtList() {
+		return post_cmtList;
+	}
+
+	public void setPost_cmtList(List<Comment> post_cmtList) {
+		this.post_cmtList = post_cmtList;
+	}
+
+	public List<Files> getPost_filesList() {
+		return post_filesList;
+	}
+
+	public void setPost_filesList(List<Files> post_filesList) {
+		this.post_filesList = post_filesList;
 	}
 
 }
