@@ -34,50 +34,27 @@
         1) 단순 dropdown 형태로 수정하거나 
         2) 메뉴 + 이미지 함께 보여주면 좋을 듯-->
 
-        <q-menu
-          square
-          v-model="menuOn1"
-          @mouseleave="menuOn1 = false"
-          class="gt-sm"
-          fit
-        >
+        <q-menu square v-model="menuOn1" @mouseleave="menuOn1 = false" class="gt-sm" fit>
           <q-list class="q-ma-sm">
             <div class="row">
-              <q-btn to="/page1" flat class="col-4">메인</q-btn>
-              <q-btn to="/page1/postdetail" flat class="col-4"
-                >포스트 디테일</q-btn
-              >
-              <q-btn to="/page1/main1search" flat class="col-4" icon="search"
-                >검색</q-btn
-              >
+              <q-btn to="/page1" flat class="col-3">메인</q-btn>
+              <q-btn to="/page1/write" flat class="col-3">글쓰기</q-btn>
+              <q-btn to="/page1/postdetail" flat class="col-3">포스트 디테일</q-btn>
+              <q-btn to="/page1/main1search" flat class="col-3" icon="search">검색</q-btn>
             </div>
           </q-list>
         </q-menu>
-        <q-menu
-          square
-          v-model="menuOn2"
-          @mouseleave="menuOn2 = false"
-          class="gt-sm"
-          fit
-        >
+        <q-menu square v-model="menuOn2" @mouseleave="menuOn2 = false" class="gt-sm" fit>
           <q-list class="q-ma-sm">
             <div class="row justify-center">
               <q-btn to="/page2" flat class="col-3" icon="map"></q-btn>
               <q-btn to="/page2/pick" flat class="col-3">여행지 추천받기</q-btn>
               <q-btn to="/page2/list" flat class="col-3">여행지 톺아보기</q-btn>
-              <q-btn to="/page2/main2search" flat class="col-3" icon="search"
-                >검색</q-btn
-              >
+              <q-btn to="/page2/main2search" flat class="col-3" icon="search">검색</q-btn>
             </div>
           </q-list>
         </q-menu>
-        <q-menu
-          square
-          v-model="menuOn3"
-          @mouseleave="menuOn3 = false"
-          class="gt-sm"
-          fit
-        >
+        <q-menu square v-model="menuOn3" @mouseleave="menuOn3 = false" class="gt-sm" fit>
           <q-list class="q-ma-sm">
             <div class="row justify-center">
               <q-btn to="/page3" flat class="col-3">서브기능의</q-btn>
@@ -100,36 +77,19 @@
           class="col-4"
           align="right"
         >
-          <q-btn size="md col-5" class="text-grey q-pa-md" flat to="/login"
-            >로그인</q-btn
-          >
-          <q-btn size="md col-5" class="text-grey q-pa-md" flat to="/search"
-            >검색</q-btn
-          >
+          <q-btn size="md col-5" class="text-grey q-pa-md" flat to="/login">로그인</q-btn>
+          <q-btn size="md col-5" class="text-grey q-pa-md" flat to="/search">검색</q-btn>
         </div>
         <div class="col-4" align="right" v-else>
-          <q-btn size="md" class="text-grey q-py-md" flat to="/mypage"
-            >내 정보</q-btn
-          >
-          <q-btn size="md" class="text-grey q-py-md" flat v-on:click="logout"
-            >로그아웃</q-btn
-          >
-          <q-btn size="md" class="text-grey q-py-md" flat to="/search"
-            >검색</q-btn
-          >
+          <q-btn size="md" class="text-grey q-py-md" flat to="/mypage">내 정보</q-btn>
+          <q-btn size="md" class="text-grey q-py-md" flat v-on:click="logout">로그아웃</q-btn>
+          <q-btn size="md" class="text-grey q-py-md" flat to="/search">검색</q-btn>
         </div>
       </q-toolbar>
       <!-- 햄버거버튼 누르면 drawer open -->
       <q-toolbar class="lt-lg" align="center">
         <div class="col-4" align="left">
-          <q-btn
-            class="q-py-sm"
-            size="large"
-            color="grey-7"
-            flat
-            icon="menu"
-            @click="left = !left"
-          ></q-btn>
+          <q-btn class="q-py-sm" size="large" color="grey-7" flat icon="menu" @click="left = !left"></q-btn>
         </div>
 
         <q-toolbar-title class="col-4 text-black">
@@ -144,17 +104,11 @@
           class="col-4"
           align="right"
         >
-          <q-btn size="md" class="text-grey darken--2 q-pa-md" flat to="/login"
-            >로그인</q-btn
-          >
+          <q-btn size="md" class="text-grey darken--2 q-pa-md" flat to="/login">로그인</q-btn>
         </div>
         <div class="col-4" align="right">
-          <q-btn size="md" class="text-grey q-py-md" flat to="/mypage"
-            >내 정보</q-btn
-          >
-          <q-btn size="md" class="text-grey q-py-md" flat v-on:click="logout"
-            >로그아웃</q-btn
-          >
+          <q-btn size="md" class="text-grey q-py-md" flat to="/mypage">내 정보</q-btn>
+          <q-btn size="md" class="text-grey q-py-md" flat v-on:click="logout">로그아웃</q-btn>
         </div>
       </q-toolbar>
     </q-header>
@@ -181,10 +135,7 @@
             :content-inset-level="0.5"
             :to="menuItem.path"
           >
-            <q-list
-              v-for="(menuListSub, index) in menuListSub[index]"
-              :key="index"
-            >
+            <q-list v-for="(menuListSub, index) in menuListSub[index]" :key="index">
               <q-item clickable :to="menuListSub.path">
                 <q-item-section>
                   <q-item-label>{{ menuListSub.label }}</q-item-label>
