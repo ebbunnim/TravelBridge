@@ -60,8 +60,6 @@
               <a href="/passwordfind">비밀번호 찾기</a> 를 이용하세요
             </p>
           </div>
-        </div>
-
           <div class="text-center q-my-md">
             <q-btn
               dark
@@ -86,7 +84,7 @@
               label="깃허브 아이디로 로그인(흑백 반전)"
             />
           </div>
-
+        </div>
       </div>
     </div>
   </div>
