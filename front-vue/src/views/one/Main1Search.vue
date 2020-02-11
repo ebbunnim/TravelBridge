@@ -74,7 +74,7 @@ export default {
           ti.push(i);
         }
       }
-      console.log(titles);
+
       return titles;
     }
   }
