@@ -5,7 +5,6 @@ class FestivalService {
   searchAll() {
     return Api.get("/Festival/searchAll")
       .then(res => {
-        console.log("js다");
         console.log(res.data.data);
         return res.data.data;
       })
