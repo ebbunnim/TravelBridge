@@ -68,7 +68,7 @@
         WHERE fval_del_check = FALSE 
         AND city_no = (SELECT city_no 
 						 FROM city 
-						 WHERE city_name = "${keyword}" 
+						 WHERE city_name = "${word}" 
 						 AND city_del_check = FALSE) 
         ORDER BY fval_no 
         LIMIT 0, #{perPageNum}]]>
@@ -78,7 +78,7 @@
 		<![CDATA[
     	SELECT *
 		FROM festival
-		WHERE fval_tag LIKE concat('%','${keyword}','%') 
+		WHERE fval_tag LIKE concat('%','${word}','%') 
 		AND fval_del_check = FALSE
 		ORDER BY fval_no
 		LIMIT 0, #{perPageNum}]]>
@@ -94,7 +94,32 @@
 			</foreach>
 			</if>
 		ORDER BY fval_no
+		LIMIT 0, #{perPageNum}
 	</select> 
+	<select id ="searchMoreFestival" parameterType="hashmap" resultType="hashmap">
+		SELECT *
+		FROM festival
+		WHERE fval_del_check = FALSE AND
+		<choose>
+			<when test="searchOption == 'all'">
+				(fval_name like concat('%',#{word},'%')
+				OR fval_content like concat('%',#{word},'%')
+				OR fval_tag like concat('%',#{word},'%'))
+			</when> 
+			<when test="searchOption == 'title'">
+				fval_name like concat('%',#{word},'%')
+			</when>
+			<when test="searchOption == 'content'">
+				fval_content like concat('%',#{word},'%')
+			</when>
+			<when test="searchOption == 'tag'">
+				fval_tag like concat('%',#{word},'%')
+			</when>
+		</choose>
+		ORDER BY fval_no
+		LIMIT 0, #{perPageNum}
+	</select> 
+	
 </mapper>
 
 <!-- 

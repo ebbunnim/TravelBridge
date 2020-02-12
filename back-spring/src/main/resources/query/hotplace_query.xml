@@ -108,6 +108,29 @@
 			</if>
 		ORDER BY hp_no
 	</select> 
+	<select id ="searchMoreHotPlace" parameterType="hashmap" resultType="hashmap">
+		SELECT *
+		FROM hotplace
+		WHERE hp_del_check = FALSE AND
+		<choose>
+			<when test="searchOption == 'all'">
+				(hp_name like concat('%',#{word},'%')
+				OR hp_content like concat('%',#{word},'%')
+				OR hp_tag like concat('%',#{word},'%'))
+			</when> 
+			<when test="searchOption == 'title'">
+				hp_name like concat('%',#{word},'%')
+			</when>
+			<when test="searchOption == 'content'">
+				hp_content like concat('%',#{word},'%')
+			</when>
+			<when test="searchOption == 'tag'">
+				hp_tag like concat('%',#{word},'%')
+			</when>
+		</choose>
+		ORDER BY hp_no
+		LIMIT 0, #{perPageNum}
+	</select> 
 </mapper>
 <!-- 
 	<select id="getCountHotPlaceAll" resultType = "int">

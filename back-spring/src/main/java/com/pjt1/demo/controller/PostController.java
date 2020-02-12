@@ -23,8 +23,6 @@ import com.pjt1.demo.model.service.MembersService;
 import com.pjt1.demo.model.service.PostService;
 import com.pjt1.demo.utils.MorePageBean;
 import com.pjt1.demo.utils.MorePageMaker;
-import com.pjt1.demo.utils.PerPageBean;
-import com.pjt1.demo.utils.PerPageMaker;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -101,7 +99,7 @@ public class PostController {
         MorePageMaker morePage = new MorePageMaker();
         int change = pageNum * btnCnt;
         pageBean.setPerPageNum(change);
-        morePage.setMorePageBean(pageBean);
+        morePage.setPageBean(pageBean);
         List<Map<String, Object>> list = service.searchMorePostAll(pageBean);
         return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
     }
@@ -111,7 +109,7 @@ public class PostController {
         MorePageMaker morePage = new MorePageMaker();
         int change = pageNum * btnCnt;
         pageBean.setPerPageNum(change);
-        morePage.setMorePageBean(pageBean);
+        morePage.setPageBean(pageBean);
         List<Map<String, Object>> list = service.searchMoreReport(pageBean);
         return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
     }
@@ -121,7 +119,7 @@ public class PostController {
         MorePageMaker morePage = new MorePageMaker();
         int change = pageNum * btnCnt;
         pageBean.setPerPageNum(change);
-        morePage.setMorePageBean(pageBean);
+        morePage.setPageBean(pageBean);
         List<Map<String, Object>> list = service.searchMorePlan(pageBean);
         return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
     }

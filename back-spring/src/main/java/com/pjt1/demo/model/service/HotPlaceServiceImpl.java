@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.pjt1.demo.model.dao.HotPlaceDao;
 import com.pjt1.demo.model.dto.HotPlace;
 import com.pjt1.demo.utils.MorePageBean;
-import com.pjt1.demo.utils.PerPageBean;
 
 @Service
 public class HotPlaceServiceImpl implements HotPlaceService {
@@ -91,23 +90,9 @@ public class HotPlaceServiceImpl implements HotPlaceService {
 		}return 0;
 	}
 
-	public List<Map<String, Object>> searchPageHotPlaceAll(PerPageBean pageBean){
-		try {
-			return repo.searchPageHotPlaceAll(pageBean);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}return null;
-	}
 	public List<Map<String, Object>> searchMoreHotPlaceAll(MorePageBean pageBean){
 		try {
 			return repo.searchMoreHotPlaceAll(pageBean);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}return null;
-	}
-	public List<Map<String, Object>> searchPageHotPlaceByCityName(PerPageBean pageBean){
-		try {
-			return repo.searchPageHotPlaceByCityName(pageBean);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}return null;
@@ -120,23 +105,9 @@ public class HotPlaceServiceImpl implements HotPlaceService {
 		}return null;
 	}
 
-	public List<Map<String, Object>> searchPageHotPlaceByTag(PerPageBean pageBean){
-		try {
-			return repo.searchPageHotPlaceByTag(pageBean);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}return null;
-	}
 	public List<Map<String, Object>> searchMoreHotPlaceByTag(MorePageBean pageBean){
 		try {
 			return repo.searchMoreHotPlaceByTag(pageBean);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}return null;
-	}
-	public List<Map<String, Object>> searchPageHotPlaceByAddress(PerPageBean pageBean){
-		try {
-			return repo.searchPageHotPlaceByAddress(pageBean);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}return null;
@@ -152,6 +123,13 @@ public class HotPlaceServiceImpl implements HotPlaceService {
 	public List<Map<String, Object>> searchMoreHotPlaceByTheme(MorePageBean pageBean){
 		try {
 			return repo.searchMoreHotPlaceByTheme(pageBean);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+	public List<Map<String, Object>> searchMoreHotPlace(MorePageBean pageBean){
+		try {
+			return repo.searchMoreHotPlace(pageBean);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}return null;

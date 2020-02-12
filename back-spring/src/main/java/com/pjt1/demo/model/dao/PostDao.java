@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.pjt1.demo.model.dto.Post;
 import com.pjt1.demo.utils.MorePageBean;
-import com.pjt1.demo.utils.PerPageBean;
 
 @Mapper
 public interface PostDao {
