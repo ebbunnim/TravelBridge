@@ -32,4 +32,5 @@ public interface PostDao {
 	public List<Map<String, Object>> searchMorePostAll(MorePageBean pageBean);
 	public List<Map<String, Object>> searchMoreReport(MorePageBean pageBean);
 	public List<Map<String, Object>> searchMorePlan(MorePageBean pageBean);
+	public Post searchWithCmtAndFiles(int post_no);
 }

@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pjt1.demo.model.dto.Members;
 import com.pjt1.demo.model.dto.Post;
+import com.pjt1.demo.model.service.MembersService;
 import com.pjt1.demo.model.service.PostService;
 import com.pjt1.demo.utils.MorePageBean;
 import com.pjt1.demo.utils.MorePageMaker;
@@ -32,7 +34,8 @@ public class PostController {
 
     @Autowired
     private PostService service;
-
+    @Autowired
+    private MembersService m_service;
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
         return handleFail(e.getMessage(), HttpStatus.OK); // 전송에는 지장 없음
@@ -69,10 +72,12 @@ public class PostController {
         //postPagebean 하나 만들어서 그걸 넘겨주자.
         return handleSuccess(Post);
     }
-
+    
     @PostMapping("/Post/insert")
     @ApiOperation("Post 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Post Post) {
+        Members writer = m_service.search(Post.getMem_no());
+        Post.setWriter(writer.getMem_id());
         service.insert(Post);
         return handleSuccess("");
     }
@@ -148,4 +153,14 @@ public class PostController {
         return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
     }
     
+    @ApiOperation("no에 따른 Post 정보 조회하는 기능")
+    @GetMapping("/Post/search/WithCmtAndFiles/{post_no}")
+    public ResponseEntity<Map<String, Object>> searchWithCmtAndFiles(int post_no) {
+        Post Post = service.searchWithCmtAndFiles(post_no);
+        service.updatePostHits(post_no);
+        //그러면 여기서 포스트넘 기반으로 comment 호출하는거 하나 하고
+        //멤버 호출하는거 하나한다음에
+        //postPagebean 하나 만들어서 그걸 넘겨주자.
+        return handleSuccess(Post);
+    }
 }

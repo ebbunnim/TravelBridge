@@ -23,6 +23,9 @@ import Main1Search from "../views/one/Main1Search.vue";
 import PostDetail from "../views/one/PostDetail.vue";
 import Main1Main from "../views/one/Main1Main.vue";
 
+//main2
+import Main2Search from "@/components/two/Main2Search.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -38,7 +41,7 @@ const routes = [
   },
   {
     path: "/page1",
-    name: "main1",
+    // name: "main1",
     component: Main1,
     children: [
       // UserHome will be rendered inside User's <router-view>
@@ -72,7 +75,7 @@ const routes = [
       },
       {
         path: "main2search",
-        component: () => import("@/components/two/Main2Search.vue")
+        component: Main2Search
       }
     ]
   },

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.pjt1.demo.model.dao.FollowDao;
 import com.pjt1.demo.model.dto.Follow;
+import com.pjt1.demo.model.dto.Members;
 
 @Service
 public class FollowServiceImpl implements FollowService {
@@ -62,5 +63,13 @@ public class FollowServiceImpl implements FollowService {
 		}
 
 	}
+	
 
+	public List<Follow> searchMemberList(int follower_no){
+		try {
+			return repo.searchMemberList(follower_no);
+		}catch(Exception e) {
+			e.printStackTrace();
+		} return null;
+	}
 }

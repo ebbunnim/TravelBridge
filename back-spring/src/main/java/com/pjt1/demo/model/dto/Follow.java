@@ -1,6 +1,7 @@
 package com.pjt1.demo.model.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Follow implements Serializable {
 
@@ -11,6 +12,7 @@ public class Follow implements Serializable {
 	private boolean follow_del_check 	;// boolean DEFAULT FALSE, # 삭제 여부
 //    FOREIGN KEY(follower_no) REFERENCES MEMBER(mem_no),
 //    FOREIGN KEY(following_no) REFERENCES MEMBER(mem_no)
+	private List<Members> followList;
 	public Follow() {
 		super();
 	}
@@ -25,6 +27,16 @@ public class Follow implements Serializable {
 		this.follower_no = follower_no;
 		this.following_no = following_no;
 		this.follow_del_check = follow_del_check;
+	}
+	
+	public Follow(int follow_no, int follower_no, int following_no, boolean follow_del_check,
+			List<Members> followList) {
+		super();
+		this.follow_no = follow_no;
+		this.follower_no = follower_no;
+		this.following_no = following_no;
+		this.follow_del_check = follow_del_check;
+		this.followList = followList;
 	}
 	@Override
 	public String toString() {
@@ -51,6 +63,12 @@ public class Follow implements Serializable {
 	}
 	public int getFollow_no() {
 		return follow_no;
+	}
+	public List<Members> getFollowList() {
+		return followList;
+	}
+	public void setFollowList(List<Members> followList) {
+		this.followList = followList;
 	}
 		
 

@@ -26,8 +26,8 @@ public class Members implements Serializable {
 	private String mem_token;// varchar(500) # 짧은 로그인처리 토큰 (front에서 자바스크립트 접근제한하는 secure 등 필요)
 	private String mem_login_type;// varchar(10) # 소셜 로그인 종류 (0:기본, 1:구글, 2:네이버, 3:카카오)
 	private boolean mem_del_check;// boolean DEFAULT FALSE # 삭제 여부
-	private List<Likes> mem_likeList;
 	private List<Post> mem_likePost;
+	private List<Follow> mem_followList;
 	
 	public Members() {
 		super();
@@ -50,35 +50,11 @@ public class Members implements Serializable {
 		this.mem_login_type = mem_login_type;
 	}
 
-	public Members(int mem_no, String mem_id, String mem_email,String mem_phone, String mem_name,
-			int mem_sex, String mem_birth, String mem_address, int mem_grant, boolean mem_receive_email,
-			int mem_following, int mem_followed, String mem_lastlogin, String mem_regtime, String mem_interest,
-			String mem_token, String mem_login_type, boolean mem_del_check) {
-		super();
-		this.mem_no = mem_no;
-		this.mem_id = mem_id;
-		this.mem_email = mem_email;
-		this.mem_phone = mem_phone;
-		this.mem_name = mem_name;
-		this.mem_sex = mem_sex;
-		this.mem_birth = mem_birth;
-		this.mem_address = mem_address;
-		this.mem_grant = mem_grant;
-		this.mem_receive_email = mem_receive_email;
-		this.mem_following = mem_following;
-		this.mem_followed = mem_followed;
-		this.mem_lastlogin = mem_lastlogin;
-		this.mem_regtime = mem_regtime;
-		this.mem_interest = mem_interest;
-		this.mem_token = mem_token;
-		this.mem_login_type = mem_login_type;
-		this.mem_del_check = mem_del_check;
-	}
-	
+
 	public Members(int mem_no, String mem_id, String mem_email, String mem_phone, String mem_name, int mem_sex,
 			String mem_birth, String mem_address, int mem_grant, boolean mem_receive_email, int mem_following,
 			int mem_followed, String mem_lastlogin, String mem_regtime, String mem_interest, String mem_token,
-			String mem_login_type, boolean mem_del_check, List<Likes> mem_likeList, List<Post> mem_likePost) {
+			String mem_login_type, boolean mem_del_check, List<Post> mem_likePost, List<Follow> mem_followList) {
 		super();
 		this.mem_no = mem_no;
 		this.mem_id = mem_id;
@@ -98,8 +74,8 @@ public class Members implements Serializable {
 		this.mem_token = mem_token;
 		this.mem_login_type = mem_login_type;
 		this.mem_del_check = mem_del_check;
-		this.mem_likeList = mem_likeList;
 		this.mem_likePost = mem_likePost;
+		this.mem_followList = mem_followList;
 	}
 
 	@Override
@@ -110,7 +86,7 @@ public class Members implements Serializable {
 				+ mem_receive_email + ", mem_following=" + mem_following + ", mem_followed=" + mem_followed
 				+ ", mem_lastlogin=" + mem_lastlogin + ", mem_regtime=" + mem_regtime + ", mem_interest=" + mem_interest
 				+ ", mem_token=" + mem_token + ", mem_login_type=" + mem_login_type + ", mem_del_check=" + mem_del_check
-				+ ", mem_likeList=" + mem_likeList + ", mem_likePost=" + mem_likePost + "]";
+				+ ", mem_likePost=" + mem_likePost + ", mem_followList=" + mem_followList + "]";
 	}
 
 	public String getMem_id() {
@@ -261,12 +237,13 @@ public class Members implements Serializable {
 		this.mem_likePost = mem_likePost;
 	}
 
-	public List<Likes> getMem_likeList() {
-		return mem_likeList;
+
+	public List<Follow> getMem_followList() {
+		return mem_followList;
 	}
 
-	public void setMem_likeList(List<Likes> mem_likeList) {
-		this.mem_likeList = mem_likeList;
+	public void setMem_followList(List<Follow> mem_followList) {
+		this.mem_followList = mem_followList;
 	}
 
 }

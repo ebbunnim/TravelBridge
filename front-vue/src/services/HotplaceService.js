@@ -1,47 +1,90 @@
 import Api from "./Api";
 
 class HotplaceService {
-  // 기본 CRUD
+  // 전체 찾아오기
   searchAll() {
-    return Api.get("/HotPlace");
+    return Api.get("/HotPlace")
+      .then(res => {
+        console.log("js다");
+        console.log(res.data.data);
+        return res.data.data;
+      })
+      .catch(e => console.log(e));
   }
-  search(no) {
-    return Api.get(`/HotPlace/${no}`);
+  // 번호로 찾아오기
+  searchByNo(no) {
+    return Api.get(`/HotPlace/${no}`)
+      .then(res => {
+        return res.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
-  insert(hp) {
-    return Api.post(`/HotPlace`, hp);
-  }
-  delete(no) {
-    return Api.delete(`/HotPlace/${no}`);
-  }
-  update(hp) {
-    return Api.update(`/HotPlace`, hp);
-  }
-  searchMoreHotPlaceAll(btnCnt) {
-    return Api.get(`/HotPlace/search/more/${btnCnt}`);
-  }
-  searchPageHotPlaceAll() {
-    return Api.get(`/HotPlace/search/pageAll`);
-  }
-  searchMoreHotPlaceByCityName(btnCnt, keyword) {
-    return Api.get(`/HotPlace/search/more/cityname/${btnCnt}/${keyword}`);
-  }
-  searchPageHotPlaceByCityName(keyword) {
-    return Api.get(`/HotPlace/search/page/cityname/${keyword}`);
-  }
-  searchMoreHotPlaceByTag(btnCnt, keyword) {
-    return Api.get(`/HotPlace/search/more/tag/${btnCnt}/${keyword}`);
-  }
-  searchPageHotPlaceByTag(keyword) {
-    return Api.get(`/HotPlace/search/page/tag/${keyword}`);
-  }
+  // insert(hp) {
+  //   return Api.post(`/HotPlace`, hp);
+  // }
+  // delete(no) {
+  //   return Api.delete(`/HotPlace/${no}`);
+  // }
+  // update(hp) {
+  //   return Api.update(`/HotPlace`, hp);
+  // }
   //
-  searchMoreHotPlaceByAddress(btnCnt, keyword) {
-    return Api.get(`/HotPlace/search/more/address/${btnCnt}/${keyword}`);
+
+  // 더보기 버튼으로 처리
+  // 전체
+  searchMoreHotPlaceAll(btnCnt) {
+    return Api.get(`/HotPlace/search/more/${btnCnt}`)
+      .then(res => {
+        return res.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
-  searchPageHotPlaceByAddress(keyword) {
-    return Api.get(`/HotPlace/search/page/address/${keyword}`);
+  // 도시 (city table) 로 검색
+  searchMoreHotPlaceByCityName(btnCnt, cityName) {
+    return Api.get(`/HotPlace/search/more/cityname/${btnCnt}/${cityName}`)
+      .then(res => {
+        return res.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
+  // Tag 로 검색
+  searchMoreHotPlaceByTag(btnCnt, tag) {
+    return Api.get(`/HotPlace/search/more/tag/${btnCnt}/${tag}`)
+      .then(res => {
+        return res.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+  // 주소로 검색
+  searchMoreHotPlaceByAddress(btnCnt, address) {
+    return Api.get(`/HotPlace/search/more/address/${btnCnt}/${address}`)
+      .then(res => {
+        return res.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+  // searchPageHotPlaceAll() {
+  //   return Api.get(`/HotPlace/search/pageAll`);
+  // }
+  // searchPageHotPlaceByCityName(keyword) {
+  //   return Api.get(`/HotPlace/search/page/cityname/${keyword}`);
+  // }
+  // searchPageHotPlaceByTag(keyword) {
+  //   return Api.get(`/HotPlace/search/page/tag/${keyword}`);
+  // }
+  // searchPageHotPlaceByAddress(keyword) {
+  //   return Api.get(`/HotPlace/search/page/address/${keyword}`);
+  // }
 }
 
 export default new HotplaceService();

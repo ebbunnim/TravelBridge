@@ -510,14 +510,18 @@ left join likes l on m.mem_no = l.liker_mem_no
 left join post p on l.post_no = p.post_no
 where m.mem_no = 1;
 
-
+select *
+		from members m
+		left join likes l on m.mem_no = l.liker_mem_no
+		where m.mem_no = 1;
+DESC post;
 # post 별 likes 개수
 SELECT COUNT(*) 
 FROM likes
 WHERE post_no = 1;
-
+DESC likes;
 select * from post;
-
+UPDATE post SET post_hits = post_hits + 1 WHERE post_no = 4;
 
 
 
