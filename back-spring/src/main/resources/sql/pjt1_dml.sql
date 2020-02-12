@@ -1128,3 +1128,38 @@ ORDER BY fval_no
 LIMIT 0, 4;
 select * from hotplace;
 desc files;
+
+##########################
+# 연관 DELETE를 위한 추출 쿼리
+# post - like, hotplace - like, festival - like
+# UPDATE LIKES SET like_del_check = TRUE WHERE like_no in (,,,,,,,);
+
+SELECT like_no
+FROM likes
+WHERE like_type = 1 AND post_no = 4 AND like_del_check = FALSE;
+
+SELECT like_no
+FROM likes
+WHERE like_type = 2 AND hotplace_no = 4 AND like_del_check = FALSE;
+
+SELECT like_no
+FROM likes
+WHERE like_type = 3 AND festival_no = 4 AND like_del_check = FALSE;
+
+
+# post - comment, post - files
+#UPDATE COMMENT SET cmt_del_check = TRUE WHERE post_no in (,,,,,,);
+
+SELECT post_no
+FROM comment
+WHERE post_no = 3 AND cmt_del_check = FALSE;
+
+#UPDATE FILES SET files_del_check = TRUE WHERE post_no in (,,,,,,);
+
+SELECT post_no
+FROM files
+WHERE post_no = 2 AND files_del_check = FALSE;
+
+# city - hotplace, city - festival 
+
+# members - follow, members - likes, members - post, members - comment, members - qna
