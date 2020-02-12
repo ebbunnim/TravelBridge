@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-center q-my-xl q-py-xl">
-    <q-card class="col-4 my-card q-ma-md" flat bordered>
+    <q-card class="col-xs-12 col-md-4 my-card q-ma-md" flat bordered>
       <q-card-section>
         <div class="text-h6">비밀번호 찾기</div>
       </q-card-section>
@@ -13,9 +13,7 @@
           type="email"
           placeholder="이메일 주소를 입력하세요"
           class="q-my-sm"
-          :rules="[
-                val => val.includes('@') || '이메일 형식에 맞게 입력하세요'
-              ]"
+          :rules="[val => val.includes('@') || '이메일 형식에 맞게 입력하세요']"
           lazy-rules
         >
           <template v-slot:prepend>
@@ -35,9 +33,11 @@
           label="이메일 전송"
           v-on:click="reset()"
         ></q-btn>
+        <q-separator inset></q-separator>
+        <p class="text-body2 text text-center q-mt-md">
+          <a class="text" href="/login">로그인 페이지로 돌아가기</a>
+        </p>
       </q-card-section>
-
-      <!-- submit btn -->
     </q-card>
   </div>
 </template>
@@ -62,5 +62,18 @@ export default {
   margin-left: 30%;
   margin-right: 30%;
   width: 40%;
+}
+
+.my-card {
+  width: 100%;
+  max-width: 450px;
+}
+
+a {
+  text-decoration: none;
+}
+
+p a {
+  text-decoration: none;
 }
 </style>

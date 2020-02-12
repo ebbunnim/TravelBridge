@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-center q-my-xl q-py-xl">
-    <q-card class="col-4 my-card q-ma-md" flat bordered>
+    <q-card class="col-xs-12 col-md-4 my-card q-ma-md" flat bordered>
       <q-card-section>
         <div class="text-h6">회원가입</div>
       </q-card-section>
@@ -96,7 +96,7 @@
             v-if="item.state"
             @click="
               item.state = !item.state;
-              onSubmit();
+              onThemaChoice();
             "
             >{{ item.name }}</q-btn
           >
@@ -108,11 +108,22 @@
             outline
             @click="
               item.state = !item.state;
-              onSubmit();
+              onThemaChoice();
             "
             >{{ item.name }}</q-btn
           >
         </div>
+      </q-card-section>
+      <q-card-section>
+        <q-btn
+          class="full-width q-mb-sm"
+          size="md"
+          style="height: 50px"
+          color="black"
+          outline
+          label="회원가입"
+          v-on:click="SignUp()"
+        ></q-btn>
       </q-card-section>
     </q-card>
   </div>
@@ -127,9 +138,8 @@ export default {
     }
   },
   data: () => ({
+    currentChoices: "",
     thema: {
-      // 초기 상태를 회원 정보에 따라서 created 할 때 저장해 노해을 것
-      // 그래서 pick 페이지에 들어오는 순간 / 이미 선택한 칸은 눌려있는 상태이다.
       food: { state: false, name: "#맛집 " },
       family: { state: false, name: "#가족 " },
       date: { state: false, name: "#데이트 " },
@@ -139,7 +149,7 @@ export default {
       healing: { state: false, name: "#힐링 " },
       tradition: { state: false, name: "#전통 " }
     },
-    choiceChange: {
+    themaKor: {
       food: "#맛집 ",
       family: "#가족 ",
       date: "#데이트 ",
@@ -151,15 +161,18 @@ export default {
     },
     isPwd: true,
     user: {
+      mem_id: "",
       mem_email: "",
       mem_name: "",
-      password: "",
-      mem_id: "",
       mem_phone: "",
-      mem_birth: null,
       mem_sex: null,
+      mem_birth: null,
+      mem_address: null,
+      mem_grant: 0,
+      mem_receive_email: true,
       mem_interest: "",
-      mem_address: null
+      mem_login_type: 0, // 기본 로그인
+      mem_password: ""
     },
     isReadOnly: false,
     isCheckSns: false,
@@ -175,47 +188,49 @@ export default {
 
   methods: {
     SignUp() {
-      const choice = this.choice;
-      for (let key in choice) {
-        if (choice[key] === true) {
-          this.user.mem_interest += this.choiceChange[key];
-        }
-      }
-      console.log("나와서", this.user.mem_interest);
+      this.user.mem_interest = this.currentChoices;
       this.$store.dispatch("user/postSignUp", this.user);
-      console.log(this.user);
-      this.clearUserForm();
-      this.clearChoice();
-      console.log("청소 후", this.user);
     },
     cancle() {
       alert("회원가입을 취소 하셨습니다.");
       this.$router.push("/login");
     },
+    onThemaChoice() {
+      this.currentChoices = "";
+      const themaChoice = this.thema;
+      for (let key in themaChoice) {
+        if (themaChoice[key].state === true) {
+          this.currentChoices += this.themaKor[key];
+        }
+      }
+      console.log(this.currentChoices);
+    },
     clearUserForm() {
       this.user = {
-        mem_email: "",
-        password: "",
         mem_id: "",
-        mem_phone: "",
+        mem_email: "",
         mem_name: "",
-        mem_birth: null,
+        mem_phone: "",
         mem_sex: null,
+        mem_birth: null,
+        mem_address: null,
+        mem_grant: 0,
+        mem_receive_email: true,
         mem_interest: "",
-        mem_address: null
+        mem_login_type: 0, // 기본 로그인
+        mem_password: ""
       };
     },
     clearChoice() {
-      this.choice = {
-        food: false,
-        leisuresport: false,
-        shopping: false,
-        culture: false,
-        history: false,
-        inside: false,
-        nature: false,
-        tourplace: false,
-        experience: false
+      this.thema = {
+        food: { state: false, name: "#맛집 " },
+        family: { state: false, name: "#가족 " },
+        date: { state: false, name: "#데이트 " },
+        shopping: { state: false, name: "#쇼핑 " },
+        culture: { state: false, name: "#문화 " },
+        indoor: { state: false, name: "#실내 " },
+        healing: { state: false, name: "#힐링 " },
+        tradition: { state: false, name: "#전통 " }
       };
     }
   }
