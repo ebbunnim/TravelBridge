@@ -13,16 +13,45 @@
           </div>
         </q-img>
       </div>
+      {{ cities }}
+      {{ citiesByNum(1) }}
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
+  data() {
+    return {
+      cities: this.$store.state.city.cities // 모듈 접근해야 불러와진다.
+    };
+  },
+  
   methods: {
     getImgUrl(img) {
       return require("../../assets/" + img);
-    }
+    },
+    // searchAllHPs() {
+    //   this.$store.dispatch("hotplace/searchAllHPs");
+    // },
+    // getAllCities() {
+    //   this.$store.dispatch("city/getAllCities");
+    // }
+    ...mapActions({
+      getAllCities: "city/getAllCities"
+    })
+  },
+  created() {
+    this.getAllCities().then(cities => {
+      console.log("크리에이티드");
+      console.log(cities);
+    });
+  },
+  mounted() {
+    // console.log("마운티드");
+    // console.log(this.cities);
   }
 };
 </script>

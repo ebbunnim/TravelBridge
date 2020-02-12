@@ -4,6 +4,7 @@ class CityService {
   searchAll() {
     return Api.get("/City")
       .then(res => {
+        console.log("모든도시");
         console.log(res.data.data);
         return res.data.data;
       })
