@@ -1,8 +1,10 @@
 package com.pjt1.demo.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,8 +23,6 @@ import com.pjt1.demo.model.dto.Festival;
 import com.pjt1.demo.model.service.FestivalService;
 import com.pjt1.demo.utils.MorePageBean;
 import com.pjt1.demo.utils.MorePageMaker;
-import com.pjt1.demo.utils.PerPageBean;
-import com.pjt1.demo.utils.PerPageMaker;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -30,7 +30,9 @@ import io.swagger.annotations.ApiOperation;
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
 public class FestivalController{
-	
+
+	private static final int pageNum = 4;
+	private static StringTokenizer st;
     @Autowired
     private FestivalService service;
     
@@ -82,18 +84,78 @@ public class FestivalController{
         service.update(Festival);
         return handleSuccess("수정 완료");
     }
-	 @ApiOperation("더보기로 Hotplace 전체 목록 조회")
+	 @ApiOperation("더보기로 Festival 전체 목록 조회")
 		@GetMapping("/Festival/search/more/{btnCnt}")
 		public ResponseEntity<Map<String, Object>> searchMoreFestivalAll(MorePageBean pageBean, @PathVariable int btnCnt) {
 			MorePageMaker pageMaker = new MorePageMaker();
-			int change = 3 * btnCnt;
+			int change = pageNum * btnCnt;
 			pageBean.setPerPageNum(change);
-			pageMaker.setMorePageBean(pageBean);
+			pageMaker.setPageBean(pageBean);
 			List<Map<String, Object>> list = service.searchMoreFestivalAll(pageBean);
 			return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
 		}
 
-		@ApiOperation("페이징된 Hotplace 전체 목록 조회")
+		@ApiOperation("더보기로 Festival 도시이름으로 목록 조회")
+		@GetMapping("/Festival/search/more/cityname/{btnCnt}/{word}")
+		public ResponseEntity<Map<String, Object>> searchMoreFestivalByCityName(MorePageBean pageBean,
+				@PathVariable int btnCnt, @PathVariable String word) {
+			MorePageMaker pageMaker = new MorePageMaker();
+			int change = pageNum * btnCnt;
+			pageBean.setWord(word);
+			pageBean.setPerPageNum(change);
+			pageMaker.setPageBean(pageBean);
+			List<Map<String, Object>> list = service.searchMoreFestivalByCityName(pageBean);
+			return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+		}
+
+		@ApiOperation("더보기로 Festival 태그로 목록 조회")
+		@GetMapping("/Festival/search/more/tag/{btnCnt}/{word}")
+		public ResponseEntity<Map<String, Object>> searchMoreFestivalByTag(MorePageBean pageBean, @PathVariable int btnCnt,
+				@PathVariable String word) {
+			MorePageMaker pageMaker = new MorePageMaker();
+			int change = pageNum * btnCnt;
+			pageBean.setWord(word);
+			pageBean.setPerPageNum(change);
+			pageMaker.setPageBean(pageBean);
+			List<Map<String, Object>> list = service.searchMoreFestivalByTag(pageBean);
+			return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+		}
+
+		@ApiOperation("더보기로 Festival 테마로 목록 조회")
+		@GetMapping("/Festival/search/more/theme/{btnCnt}/{keyword}")
+		public ResponseEntity<Map<String, Object>> searchMoreHotPlaceByTheme(MorePageBean pageBean, @PathVariable int btnCnt,
+				@PathVariable String keyword) {
+			MorePageMaker pageMaker = new MorePageMaker();
+			int change = pageNum * btnCnt;
+			List<String> selected_theme = new ArrayList<String>();
+			st = new StringTokenizer(keyword);
+			while(st.hasMoreTokens()) {selected_theme.add(st.nextToken());};
+			
+			pageBean.setPerPageNum(change);
+			pageBean.setFilters(selected_theme);
+			pageMaker.setPageBean(pageBean);
+			
+			List<Map<String, Object>> list = service.searchMoreFestivalByTheme(pageBean);
+			return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+		}
+		@ApiOperation("더보기로 Festival 검색하기 조회 - searchOption은 all/ title / content/ tag중 전달")
+		@GetMapping("/Festival/search/more/{btnCnt}/{searchOption}/{word}")
+		public ResponseEntity<Map<String, Object>> searchMoreFestival(MorePageBean pageBean, @PathVariable int btnCnt,
+				@PathVariable String searchOption, @PathVariable String word) {
+			MorePageMaker pageMaker = new MorePageMaker();
+			int change = pageNum * btnCnt;
+			searchOption = (searchOption == null)?"all":searchOption;
+			word = (word == null || word == " ")?"":word;
+			pageBean.setSearchOption(searchOption);
+			pageBean.setWord(word);
+			pageBean.setPerPageNum(change);
+			pageMaker.setPageBean(pageBean);
+			List<Map<String, Object>> list = service.searchMoreFestival(pageBean);
+			return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+		}
+}
+/*
+		@ApiOperation("페이징된 Festival 전체 목록 조회")
 		@GetMapping("/Festival/search/pageAll")
 		public ResponseEntity<Map<String, Object>> searchPageFestivalAll(PerPageBean pageBean) {
 			PerPageMaker pageMaker = new PerPageMaker();
@@ -103,53 +165,26 @@ public class FestivalController{
 			return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
 		}
 
-		@ApiOperation("더보기로 Hotplace 도시이름으로 목록 조회")
-		@GetMapping("/Festival/search/more/cityname/{btnCnt}/{keyword}")
-		public ResponseEntity<Map<String, Object>> searchMoreFestivalByCityName(MorePageBean pageBean,
-				@PathVariable int btnCnt, @PathVariable String keyword) {
-			MorePageMaker pageMaker = new MorePageMaker();
-			int change = 3 * btnCnt;
-			pageBean.setKeyword(keyword);
-			pageBean.setPerPageNum(change);
-			pageMaker.setMorePageBean(pageBean);
-			List<Map<String, Object>> list = service.searchMoreFestivalByCityName(pageBean);
-			return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
-		}
-
-		@ApiOperation("페이징된 Hotplace 도시이름으로 목록 조회")
-		@GetMapping("/Festival/search/page/cityname/{keyword}")
-		public ResponseEntity<Map<String, Object>> searchPageFestivalByCityName(PerPageBean pageBean,
-				@PathVariable String keyword) {
-			PerPageMaker pageMaker = new PerPageMaker();
-			pageBean.setKeyword(keyword);
-			pageMaker.setPageBean(pageBean);
-			pageMaker.setTotalCnt(service.getCountFestivalByCityName(keyword));
-			List<Map<String, Object>> list = service.searchPageFestivalByCityName(pageBean);
-			return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
-		}
-
-		@ApiOperation("더보기로 Hotplace 태그로 목록 조회")
-		@GetMapping("/Festival/search/more/tag/{btnCnt}/{keyword}")
-		public ResponseEntity<Map<String, Object>> searchMoreFestivalByTag(MorePageBean pageBean, @PathVariable int btnCnt,
-				@PathVariable String keyword) {
-			MorePageMaker pageMaker = new MorePageMaker();
-			int change = 3 * btnCnt;
-			pageBean.setKeyword(keyword);
-			pageBean.setPerPageNum(change);
-			pageMaker.setMorePageBean(pageBean);
-			List<Map<String, Object>> list = service.searchMoreFestivalByTag(pageBean);
-			return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
-		}
-
-		@ApiOperation("페이징된 Hotplace 태그로 목록 조회")
-		@GetMapping("/Festival/search/page/tag/{keyword}")
-		public ResponseEntity<Map<String, Object>> searchPageFestivalByTag(PerPageBean pageBean,
-				@PathVariable String keyword) {
-			PerPageMaker pageMaker = new PerPageMaker();
-			pageBean.setKeyword(keyword);
-			pageMaker.setPageBean(pageBean);
-			pageMaker.setTotalCnt(service.getCountFestivalByTag(keyword));
-			List<Map<String, Object>> list = service.searchPageFestivalByTag(pageBean);
-			return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
-		}
+@ApiOperation("페이징된 Festival 태그로 목록 조회")
+@GetMapping("/Festival/search/page/tag/{keyword}")
+public ResponseEntity<Map<String, Object>> searchPageFestivalByTag(PerPageBean pageBean,
+		@PathVariable String keyword) {
+	PerPageMaker pageMaker = new PerPageMaker();
+	pageBean.setKeyword(keyword);
+	pageMaker.setPageBean(pageBean);
+	pageMaker.setTotalCnt(service.getCountFestivalByTag(keyword));
+	List<Map<String, Object>> list = service.searchPageFestivalByTag(pageBean);
+	return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
 }
+@ApiOperation("페이징된 Festival 도시이름으로 목록 조회")
+@GetMapping("/Festival/search/page/cityname/{keyword}")
+public ResponseEntity<Map<String, Object>> searchPageFestivalByCityName(PerPageBean pageBean,
+		@PathVariable String keyword) {
+	PerPageMaker pageMaker = new PerPageMaker();
+	pageBean.setWord(keyword);
+	pageMaker.setPageBean(pageBean);
+	pageMaker.setTotalCnt(service.getCountFestivalByCityName(keyword));
+	List<Map<String, Object>> list = service.searchPageFestivalByCityName(pageBean);
+	return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+}
+*/

@@ -21,5 +21,7 @@ public interface MembersDao {
 
 	public Members searchMemberByEmail(String email);
 	public Members searchMemberLikePost(int mem_no);
+	public Members searchMemberLikeHotPlace(int mem_no);
+	public Members searchMemberLikeFestival(int mem_no);
 	public List<Follow> searchFollowMembers(int mem_no);
 }

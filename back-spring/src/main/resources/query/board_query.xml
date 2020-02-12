@@ -5,19 +5,20 @@
 
  	<insert id="insert"		parameterType="board">
 		INSERT INTO 
-		board (board_name) 
-		VALUES (#{board_name:VARCHAR}) 
+		board (mem_no, board_name) 
+		VALUES (#{mem_no:INTEGER},#{board_name:VARCHAR}) 
 	</insert> 
-   	<delete id="delete" 	parameterType="int"> 
+ 	<delete id="delete" 	parameterType="int"> 
 		UPDATE board
 		SET 
 		board_del_check = true
 		WHERE board_no = #{board_no:INTEGER} 
-		AND board_del_check = false
-	</delete>
+		AND board_del_check = false 
+	</delete> 
    	<update id="update"		parameterType="board">
 		UPDATE board
 		SET
+		mem_no = #{mem_no:INTEGER},
 		board_name = #{board_name:VARCHAR},
 		board_del_check = #{board_del_check:BOOLEAN}
 		WHERE board_no = #{board_no:INTEGER}   

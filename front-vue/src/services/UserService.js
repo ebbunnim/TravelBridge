@@ -22,6 +22,19 @@ class UserService {
       return response.data.data;
     });
   }
+
+  updateUser(user) {
+    console.log("수정시작");
+    return Api.put("/Members/update", user)
+      .then(res => {
+        console.log('updateservice.js:', res.data.data)
+        return res.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+    
+  }
 }
 
 export default new UserService();

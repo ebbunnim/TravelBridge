@@ -37,10 +37,9 @@
 export default {
   data() {
     return {
+      user: null,
       currentChoices: "",
       thema: {
-        // 초기 상태를 회원 정보에 따라서 created 할 때 저장해 노해을 것
-        // 그래서 pick 페이지에 들어오는 순간 / 이미 선택한 칸은 눌려있는 상태이다.
         food: { state: false, name: "#맛집 " },
         family: { state: false, name: "#가족 " },
         date: { state: false, name: "#데이트 " },
@@ -50,7 +49,6 @@ export default {
         healing: { state: false, name: "#힐링 " },
         tradition: { state: false, name: "#전통 " }
       },
-      //#맛집 #가족 #데이트 #쇼핑 #문화 #실내 #힐링 #전통 split할것임
       themaKor: {
         food: "#맛집 ",
         family: "#가족 ",
@@ -73,7 +71,28 @@ export default {
         }
       }
       console.log(this.currentChoices);
+    },
+    setPastInterest() {
+      if (this.user !== null) {
+        const interest = this.user.mem_interest;
+        let temp = interest.split(" ");
+        for (let key in temp) {
+          // console.log(temp[key])
+          const themaKey = temp[key] + " ";
+          // thema 를 돌면서 name 이 themaKey 와 일치하는 것의 state 를 true 로 고친다.
+          for (let the in this.thema) {
+            if (this.themaKor[the] === themaKey) {
+              this.thema[the].state = true;
+            }
+          }
+        }
+      }
     }
+  },
+  created() {
+    this.user = this.$store.state.user.user;
+    console.log("현재user:", this.user);
+    this.setPastInterest();
   }
 };
 </script>
