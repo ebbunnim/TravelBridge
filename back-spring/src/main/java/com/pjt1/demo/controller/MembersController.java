@@ -24,7 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pjt1.demo.model.dto.Follow;
 import com.pjt1.demo.model.dto.Members;
+import com.pjt1.demo.model.service.FestivalService;
 import com.pjt1.demo.model.service.FollowService;
+import com.pjt1.demo.model.service.HotPlaceService;
 import com.pjt1.demo.model.service.JwtService;
 import com.pjt1.demo.model.service.MembersService;
 
@@ -41,6 +43,11 @@ public class MembersController {
     private MembersService service;
     @Autowired
     private FollowService f_service;
+    
+    @Autowired
+    private HotPlaceService hp_service;
+    @Autowired
+    private FestivalService fval_service;
 
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
@@ -80,6 +87,18 @@ public class MembersController {
     public ResponseEntity<Map<String, Object>> searchMemberLikePost(int mem_no) {
         Members members = service.searchMemberLikePost(mem_no);
         return handleSuccess(members);
+    }
+    @ApiOperation("no에 따른 Member가 좋아하는 핫플레이스 List를 조회하는 기능")
+    @GetMapping("/Members/searchMemberLikeHotPlace/{mem_no}")
+    public ResponseEntity<Map<String, Object>> searchMemberLikeHotPlace(int mem_no) {
+    	Members members = service.searchMemberLikeHotPlace(mem_no);
+    	return handleSuccess(members);
+    }
+    @ApiOperation("no에 따른 Member가 좋아하는 축제 List를 조회하는 기능")
+    @GetMapping("/Members/searchMemberLikeFestival/{mem_no}")
+    public ResponseEntity<Map<String, Object>> searchMemberLikeFestival(int mem_no) {
+    	Members members = service.searchMemberLikeFestival(mem_no);
+    	return handleSuccess(members);
     }
     
     @ApiOperation("no에 따른 Member의 FollowList를 조회하는 기능")
@@ -202,6 +221,5 @@ public class MembersController {
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
-
-
+    //
 }

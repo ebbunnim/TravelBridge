@@ -5,9 +5,9 @@
   
    	<insert id="insert"		parameterType="likes">
 		INSERT INTO likes
-		(post_no, liker_mem_no)
+		(like_type, post_no, hotplace_no, festival_no, liker_mem_no)
 		VALUES (
-		#{post_no:INTEGER}, #{liker_mem_no:INTEGER}
+		#{like_type:INTEGER}, #{post_no:INTEGER}, #{hotplace_no:INTEGER}, #{festival_no:INTEGER}, #{liker_mem_no:INTEGER}
 		)
 	</insert> 
    	<delete id="delete" 	parameterType="int">
@@ -19,7 +19,10 @@
    	<update id="update"		parameterType="likes">
 		UPDATE likes 
 		SET
+		like_type=#{like_type:INTEGER},
 		post_no=#{post_no:INTEGER}, 
+		hotplace_no=#{hotplace_no:INTEGER},
+		festival_no=#{festival_no:INTEGER},
 		liker_mem_no=#{liker_mem_no:INTEGER}, 
 		like_del_check=#{like_del_check:BOOLEAN}
 		WHERE like_no=#{like_no:INTEGER}
