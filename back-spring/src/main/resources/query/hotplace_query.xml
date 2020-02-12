@@ -24,8 +24,8 @@
    	<delete id="delete" 	parameterType="int">
 		UPDATE hotplace
 		SET 
-		hp_del_check = true
-		WHERE hp_no = #{hp_no:INTEGER} and hp_del_check = false	
+		hp_del_check = TRUE
+		WHERE hp_no = #{hp_no:INTEGER} and hp_del_check = FALSE	
 	</delete>
    	<update id="update"		parameterType="hotplace">
 		UPDATE hotplace

@@ -18,9 +18,8 @@
 	
    	<delete id="delete" 	parameterType="int">
 		UPDATE qna SET 
-		qna_regtime=CURRENT_TIMESTAMP(),
-		qna_del_check = true 
-		WHERE qna_no=#{qna_no} and qna_del_check=false
+		qna_del_check = TRUE 
+		WHERE qna_no=#{qna_no} and qna_del_check=FALSE
 	</delete>
 
    	<update id="update"		parameterType="qna">
