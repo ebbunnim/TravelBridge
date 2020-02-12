@@ -33,7 +33,7 @@
 import HotPlaceCard from "@/components/two/HotPlaceCard.vue";
 // api service
 import FestivalService from "@/services/FestivalService";
-import HotPlaceService from "@/services/HotPlaceService";
+import HotPlaceService from "@/services/HotplaceService";
 
 export default {
   components: {
