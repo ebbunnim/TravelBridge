@@ -27,4 +27,5 @@ public interface HotPlaceService {
 	public int getCountHotPlaceByAddress(String keyword);
 	public List<Map<String, Object>> searchPageHotPlaceByAddress(PerPageBean pageBean);
 	public List<Map<String, Object>> searchMoreHotPlaceByAddress(MorePageBean pageBean);
+	public List<Map<String, Object>> searchMoreHotPlaceByTheme(MorePageBean pageBean);
 }

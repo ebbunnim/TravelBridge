@@ -31,4 +31,5 @@ public interface FestivalDao {
 	public int getCountFestivalByTag(String keyword);
 	public List<Map<String, Object>> searchPageFestivalByTag(PerPageBean pageBean);
 	public List<Map<String, Object>> searchMoreFestivalByTag(MorePageBean pageBean);
+	public List<Map<String, Object>> searchMoreFestivalByTheme(MorePageBean pageBean);
 }

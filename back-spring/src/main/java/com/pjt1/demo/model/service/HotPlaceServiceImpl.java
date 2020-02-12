@@ -149,4 +149,11 @@ public class HotPlaceServiceImpl implements HotPlaceService {
 		}return null;
 	}
 
+	public List<Map<String, Object>> searchMoreHotPlaceByTheme(MorePageBean pageBean){
+		try {
+			return repo.searchMoreHotPlaceByTheme(pageBean);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
 }

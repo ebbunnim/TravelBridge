@@ -130,5 +130,13 @@ public class FestivalServiceImpl implements FestivalService {
 			e.printStackTrace();
 		}return null;
 	}
+
+	public List<Map<String, Object>> searchMoreFestivalByTheme(MorePageBean pageBean){
+		try {
+			return repo.searchMoreFestivalByTheme(pageBean);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
 	
 }

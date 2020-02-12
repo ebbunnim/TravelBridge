@@ -16,7 +16,7 @@ public class PerPageBean {
 
 	public PerPageBean() {
 		this.page = 1;
-		this.perPageNum = 3;
+		this.perPageNum = 4;
 	}
 
 	public int getPage() {

@@ -61,10 +61,45 @@
 		<result property="post_city" column="post_city"/>
 		<result property="post_hits" column="post_hits"/>
 	</resultMap>
+	<resultMap type="hotplace" id="hotplaceMap">
+		<result property="hp_name" column="hp_name"/>
+		<result property="hp_theme" column="hp_theme"/>
+		<result property="hp_tag" column="hp_tag"/>
+		<result property="hp_address" column="hp_address"/>
+		<result property="hp_detail_adr" column="hp_detail_adr"/>
+		<result property="hp_content" column="hp_content"/>
+		<result property="hp_homepage" column="hp_homepage"/>
+		<result property="hp_holiday" column="hp_holiday"/>
+		<result property="hp_fee" column="hp_fee"/>
+		<result property="hp_img" column="hp_img"/>
+	</resultMap>
+	<resultMap type="festival" id="festivalMap">
+		<result property="fval_name" column="fval_name"/>
+		<result property="fval_theme" column="fval_theme"/>
+		<result property="fval_tag" column="fval_tag"/>
+		<result property="fval_address" column="fval_address"/>
+		<result property="fval_detail_adr" column="fval_detail_adr"/>
+		<result property="fval_content" column="fval_content"/>
+		<result property="fval_homepage" column="fval_homepage"/>
+		<result property="fval_start_day" column="fval_start_day"/>
+		<result property="fval_end_day" column="fval_end_day"/>
+		<result property="fval_fee" column="fval_fee"/>
+		<result property="fval_host" column="fval_host"/>
+		<result property="fval_img" column="fval_img"/>
+		<result property="fval_ended" column="fval_ended"/>
+	</resultMap>
 	
 	<resultMap id="likePostMap" type="Members">
 		<id property="mem_id" column="mem_id"/>
 		<collection property="mem_likePost" ofType="Post" resultMap="postMap"/>
+	</resultMap>
+	<resultMap id="likeHotPlaceMap" type="Members">
+		<id property="mem_id" column="mem_id"/>
+		<collection property="mem_likeHotPlace" ofType="HotPlace" resultMap="hotplaceMap"/>
+	</resultMap>
+	<resultMap id="likeFestivalMap" type="Members">
+		<id property="mem_id" column="mem_id"/>
+		<collection property="mem_likeFestival" ofType="Festival" resultMap="festivalMap"/>
 	</resultMap>
 	
 	<select id="searchMemberLikePost" parameterType="int" resultMap="likePostMap">
@@ -78,10 +113,52 @@
 		p.post_city, 
 		p.post_hits
 		FROM members m
-		LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE
+		LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 1
 		LEFT JOIN post p ON l.post_no = p.post_no AND p.post_del_check=FALSE
 		WHERE m.mem_no = #{mem_no} AND m.mem_del_check = FALSE; 
 	</select>
-
+	<select id="searchMemberLikeHotPlace" parameterType="int" resultMap="likeHotPlaceMap">
+		SELECT 
+		m.mem_id, 
+		l.like_no, 
+		l.hotplace_no, 
+		h.hp_name, 
+		h.hp_theme, 
+		h.hp_tag, 
+		h.hp_address,
+		h.hp_detail_adr, 
+		h.hp_content,
+		h.hp_homepage,
+		h.hp_holiday,
+		h.hp_fee,
+		h.hp_img
+		FROM members m
+		LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 2
+		LEFT JOIN hotplace h ON l.hotplace_no = h.hp_no AND h.hp_del_check=FALSE
+		WHERE m.mem_no = #{mem_no} AND m.mem_del_check = FALSE;
+	</select>
+	<select id="searchMemberLikeFestival" parameterType="int" resultMap="likeFestivalMap">
+		SELECT 
+		m.mem_id, 
+		l.like_no, 
+		l.festival_no, 
+		f.fval_name, 
+		f.fval_theme, 
+		f.fval_tag, 
+		f.fval_address,
+		f.fval_detail_adr, 
+		f.fval_content,
+		f.fval_homepage,
+		f.fval_start_day,
+		f.fval_end_day,
+		f.fval_fee,
+		f.fval_host,
+		f.fval_img,
+		f.fval_ended
+		FROM members m
+		LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 3
+		LEFT JOIN festival f ON l.festival_no = f.fval_no AND f.fval_del_check=FALSE
+		WHERE m.mem_no = #{mem_no} AND m.mem_del_check = FALSE; 
+	</select>
 </mapper>
 

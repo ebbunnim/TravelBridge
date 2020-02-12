@@ -11,14 +11,14 @@
 	    hp_detail_adr,hp_content,
 	    hp_tag , hp_homepage,
 	    hp_holiday, hp_fee,
-	    hp_img) 
+	    hp_img, hp_theme) 
 	    VALUES (
 	    #{city_no:INTEGER},
 		#{hp_name:VARCHAR}, #{hp_address:VARCHAR},
 	    #{hp_detail_adr:VARCHAR}, #{hp_content:VARCHAR},
 	    #{hp_tag:VARCHAR}, #{hp_homepage:VARCHAR},
 	    #{hp_holiday:VARCHAR}, #{hp_fee:VARCHAR},
-	    #{hp_img:VARCHAR}
+	    #{hp_img:VARCHAR}, #{hp_theme:VARCHAR}
 		)
 	</insert> 
    	<delete id="delete" 	parameterType="int">
@@ -40,6 +40,7 @@
 	    hp_holiday		= #{hp_holiday:VARCHAR},
 	    hp_fee			= #{hp_fee:VARCHAR},
 	    hp_img			= #{hp_img:VARCHAR},
+	    hp_theme		= #{hp_theme:VARCHAR},
 		hp_del_check = #{hp_del_check:BOOLEAN}
 		WHERE hp_no = #{hp_no:INTEGER}      
 	</update>
@@ -53,6 +54,62 @@
 		FROM hotplace
 		WHERE hp_del_check = false     
 	</select>
+
+	<select id="searchMoreHotPlaceAll" parameterType="int" resultType="hotplace">
+	<![CDATA[
+        SELECT * 
+        FROM hotplace 
+        WHERE hp_del_check = FALSE 
+        ORDER BY hp_no 
+        LIMIT 0, #{perPageNum}]]>
+	</select>
+
+	<select id ="searchMoreHotPlaceByCityName" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+        SELECT * 
+        FROM hotplace 
+        WHERE hp_del_check = FALSE 
+        AND city_no = (SELECT city_no 
+						 FROM city 
+						 WHERE city_name = "${keyword}" 
+						 AND city_del_check = FALSE) 
+        ORDER BY hp_no 
+        LIMIT 0, #{perPageNum}]]>
+	</select>
+
+	<select id="searchMoreHotPlaceByTag" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+    	SELECT *
+		FROM hotplace
+		WHERE hp_tag LIKE concat('%','${keyword}','%') 
+		AND hp_del_check = FALSE
+		ORDER BY hp_no
+		LIMIT 0, #{perPageNum}]]>
+	</select>
+	
+	<select id="searchMoreHotPlaceByAddress" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+		SELECT * 
+		FROM hotplace
+		WHERE hp_address = TRIM('${keyword}') 
+		AND hp_del_check = FALSE
+		ORDER BY hp_no
+		LIMIT 0,#{perPageNum}]]>
+	</select>
+	<select id ="searchMoreHotPlaceByTheme" parameterType="hashmap" resultType="hashmap">
+		SELECT *
+		FROM hotplace
+		WHERE hp_del_check = FALSE 
+			<if test="filters.size()!=0">
+			AND
+			<foreach collection="filters" item ="item" index="index" open="(" close=")" separator="or">
+				hp_theme like concat('%',#{item},'%')
+			</foreach>
+			</if>
+		ORDER BY hp_no
+	</select> 
+</mapper>
+<!-- 
 	<select id="getCountHotPlaceAll" resultType = "int">
 		SELECT COUNT(*)
 		FROM hotplace
@@ -65,14 +122,6 @@
         WHERE hp_del_check = FALSE
         ORDER BY hp_no
         LIMIT #{pageStart}, #{perPageNum}]]>
-	</select>
-	<select id="searchMoreHotPlaceAll" parameterType="int" resultType="hotplace">
-	<![CDATA[
-        SELECT * 
-        FROM hotplace 
-        WHERE hp_del_check = FALSE 
-        ORDER BY hp_no 
-        LIMIT 0, #{perPageNum}]]>
 	</select>
 	<select id="getCountHotPlaceByCityName" parameterType = "string" resultType ="int">
 		SELECT COUNT(*) 
@@ -95,18 +144,6 @@
 		AND hp_del_check = FALSE
 		LIMIT #{pageStart}, #{perPageNum}]]>
 	</select>
-	<select id ="searchMoreHotPlaceByCityName" parameterType="hashmap" resultType="hashmap">
-		<![CDATA[
-        SELECT * 
-        FROM hotplace 
-        WHERE hp_del_check = FALSE 
-        AND city_no = (SELECT city_no 
-						 FROM city 
-						 WHERE city_name = "${keyword}" 
-						 AND city_del_check = FALSE) 
-        ORDER BY hp_no 
-        LIMIT 0, #{perPageNum}]]>
-	</select>
 	<select id="getCountHotPlaceByTag" parameterType="string" resultType="int">
 		SELECT COUNT(*) 
 		FROM hotplace
@@ -122,16 +159,7 @@
 		ORDER BY hp_no
 		LIMIT #{pageStart}, #{perPageNum}]]>
     </select>
-	<select id="searchMoreHotPlaceByTag" parameterType="hashmap" resultType="hashmap">
-		<![CDATA[
-    	SELECT *
-		FROM hotplace
-		WHERE hp_tag LIKE concat('%','${keyword}','%') 
-		AND hp_del_check = FALSE
-		ORDER BY hp_no
-		LIMIT 0, #{perPageNum}]]>
-	</select>
-	<select id="getCountHotPlaceByAddress" parameterType="string" resultType="int">
+<select id="getCountHotPlaceByAddress" parameterType="string" resultType="int">
 		SELECT COUNT(*) 
 		FROM hotplace
 		WHERE hp_address = TRIM('${keyword}') 
@@ -146,14 +174,4 @@
 		ORDER BY hp_no
 		LIMIT #{pageStart}, #{perPageNum}]]>
 	</select>
-	<select id="searchMoreHotPlaceByAddress" parameterType="hashmap" resultType="hashmap">
-		<![CDATA[
-		SELECT * 
-		FROM hotplace
-		WHERE hp_address = TRIM('${keyword}') 
-		AND hp_del_check = FALSE
-		ORDER BY hp_no
-		LIMIT 0,#{perPageNum}]]>
-	</select>
-</mapper>
-
+ -->

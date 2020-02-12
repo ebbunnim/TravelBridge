@@ -83,30 +83,7 @@ public class PostServiceImpl implements PostService {
 		return null;
 	}
 
-	public List<Map<String, Object>> searchPagePostAll(PerPageBean pageBean){
-		try {
-			return repo.searchPagePostAll(pageBean);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	public List<Map<String, Object>> searchPageReport(PerPageBean pageBean){
-		try {
-			return repo.searchPageReport(pageBean);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	public List<Map<String, Object>> searchPagePlan(PerPageBean pageBean){
-		try {
-			return repo.searchPagePlan(pageBean);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+	
 	public List<Map<String, Object>> searchMorePostAll(MorePageBean pageBean){
 		try {
 			return repo.searchMorePostAll(pageBean);
@@ -131,33 +108,7 @@ public class PostServiceImpl implements PostService {
 		}
 		return null;
 	}
-	
-	public int getCountPostAll() {
-		try {
-			int res = repo.getCountPostAll();
-			return res;
-		}catch(Exception e) {
-			e.printStackTrace();
-		}return 0;
-	};
-	public int getCountReport() {
-		try {
-			int res = repo.getCountReport();
-			return res;
-		}catch(Exception e) {
-			e.printStackTrace();
-		}return 0;
-	};
 
-	public int getCountPlan() {
-		try {
-			int res = repo.getCountPlan();
-			return res;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
 	public Post searchWithCmtAndFiles(int post_no) {
 		try {
 			Post pos = repo.searchWithCmtAndFiles(post_no);
@@ -167,3 +118,56 @@ public class PostServiceImpl implements PostService {
 		}return null;
 	}
 }
+/*
+
+public int getCountPostAll() {
+	try {
+		int res = repo.getCountPostAll();
+		return res;
+	}catch(Exception e) {
+		e.printStackTrace();
+	}return 0;
+};
+public int getCountReport() {
+	try {
+		int res = repo.getCountReport();
+		return res;
+	}catch(Exception e) {
+		e.printStackTrace();
+	}return 0;
+};
+
+public int getCountPlan() {
+	try {
+		int res = repo.getCountPlan();
+		return res;
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return 0;
+}
+public List<Map<String, Object>> searchPagePostAll(PerPageBean pageBean){
+	try {
+		return repo.searchPagePostAll(pageBean);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return null;
+}
+public List<Map<String, Object>> searchPageReport(PerPageBean pageBean){
+	try {
+		return repo.searchPageReport(pageBean);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return null;
+}
+public List<Map<String, Object>> searchPagePlan(PerPageBean pageBean){
+	try {
+		return repo.searchPagePlan(pageBean);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return null;
+}
+*/

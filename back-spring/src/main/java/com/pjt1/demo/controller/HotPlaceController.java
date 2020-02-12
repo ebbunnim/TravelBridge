@@ -1,8 +1,10 @@
 package com.pjt1.demo.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +31,8 @@ import io.swagger.annotations.ApiOperation;
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
 public class HotPlaceController {
-
+	private static final int pageNum = 4;
+	private static StringTokenizer st;
 	@Autowired
 	private HotPlaceService service;
 
@@ -91,7 +94,7 @@ public class HotPlaceController {
 	@GetMapping("/HotPlace/search/more/{btnCnt}")
 	public ResponseEntity<Map<String, Object>> searchMoreHotPlaceAll(MorePageBean pageBean, @PathVariable int btnCnt) {
 		MorePageMaker pageMaker = new MorePageMaker();
-		int change = 3 * btnCnt;
+		int change = pageNum * btnCnt;
 		pageBean.setPerPageNum(change);
 		pageMaker.setMorePageBean(pageBean);
 		List<Map<String, Object>> list = service.searchMoreHotPlaceAll(pageBean);
@@ -113,7 +116,7 @@ public class HotPlaceController {
 	public ResponseEntity<Map<String, Object>> searchMoreHotPlaceByCityName(MorePageBean pageBean,
 			@PathVariable int btnCnt, @PathVariable String keyword) {
 		MorePageMaker pageMaker = new MorePageMaker();
-		int change = 3 * btnCnt;
+		int change = pageNum * btnCnt;
 		pageBean.setKeyword(keyword);
 		pageBean.setPerPageNum(change);
 		pageMaker.setMorePageBean(pageBean);
@@ -138,7 +141,7 @@ public class HotPlaceController {
 	public ResponseEntity<Map<String, Object>> searchMoreHotPlaceByTag(MorePageBean pageBean, @PathVariable int btnCnt,
 			@PathVariable String keyword) {
 		MorePageMaker pageMaker = new MorePageMaker();
-		int change = 3 * btnCnt;
+		int change = pageNum * btnCnt;
 		pageBean.setKeyword(keyword);
 		pageBean.setPerPageNum(change);
 		pageMaker.setMorePageBean(pageBean);
@@ -163,7 +166,7 @@ public class HotPlaceController {
 	public ResponseEntity<Map<String, Object>> searchMoreHotPlaceByAddress(MorePageBean pageBean,
 			@PathVariable int btnCnt, @PathVariable String keyword) {
 		MorePageMaker pageMaker = new MorePageMaker();
-		int change = 3 * btnCnt;
+		int change = pageNum * btnCnt;
 		pageBean.setKeyword(keyword);
 		pageBean.setPerPageNum(change);
 		pageMaker.setMorePageBean(pageBean);
@@ -182,4 +185,22 @@ public class HotPlaceController {
 		List<Map<String, Object>> list = service.searchPageHotPlaceByAddress(pageBean);
 		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
 	}
+	@ApiOperation("더보기로 Hotplace 테마로 목록 조회")
+	@GetMapping("/HotPlace/search/more/theme/{btnCnt}/{keyword}")
+	public ResponseEntity<Map<String, Object>> searchMoreHotPlaceByTheme(MorePageBean pageBean, @PathVariable int btnCnt,
+			@PathVariable String keyword) {
+		MorePageMaker pageMaker = new MorePageMaker();
+		int change = pageNum * btnCnt;
+		List<String> selected_theme = new ArrayList<String>();
+		st = new StringTokenizer(keyword);
+		while(st.hasMoreTokens()) {selected_theme.add(st.nextToken());};
+		
+		pageBean.setPerPageNum(change);
+		pageBean.setFilters(selected_theme);
+		pageMaker.setMorePageBean(pageBean);
+		
+		List<Map<String, Object>> list = service.searchMoreHotPlaceByTheme(pageBean);
+		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+	}
+	
 }
