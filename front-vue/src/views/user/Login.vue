@@ -1,93 +1,91 @@
 <template>
   <div class="text-center">
-    <p class="text-h4 q-pt-lg q-mt-lg">로그인</p>
-    <div class="q-pa-md justify-center">
-      <div class="text-center">
-        <q-form>
-          <!-- email input -->
-          <q-input
-            filled
-            :rules="emailRules"
-            v-model="email"
-            type="text"
-            class="q-pa-md display: block"
-            placeholder="이메일을 입력하세요"
-          >
-            <template v-slot:prepend>
-              <q-icon name="perm_identity" />
-            </template>
-          </q-input>
-          <!-- password input-->
-          <q-input
-            filled
-            v-model="password"
-            :type="isPwd ? 'password' : 'text'"
-            hint="Password with toggle"
-            placeholder="패스워드를 입력하세요"
-            class="q-pa-md display: block"
-          >
-            <template v-slot:prepend>
-              <q-icon
-                :name="isPwd ? 'visibility_off' : 'visibility'"
-                class="cursor-pointer"
-                @click="isPwd = !isPwd"
-              />
-            </template>
-          </q-input>
-          <div class="col-2 text-center">
-            <div class="q-pt-lg">
-              <q-btn
-                color="primary"
-                size="large"
-                width="100%"
-                label="로그인"
-                class="inline-block q-mr-md"
-                v-on:click="DefaultLogin()"
-              />
-              <q-btn
-                size="large"
-                outline
-                color="primary"
-                width="100%"
-                label="회원가입"
-                class="display: inline q-ml-md"
-                to="/signup"
-              ></q-btn>
+    <div>
+      <p class="text-h4 q-pt-lg q-mt-lg">로그인</p>
+      <div class="row justify-center">
+        <!-- 폼 -->
+        <div class="col-4">
+          <q-form>
+            <!-- email input -->
+            <q-input
+              filled
+              :rules="emailRules"
+              v-model="email"
+              type="text"
+              class="q-pa-md display: block"
+              placeholder="이메일을 입력하세요"
+            >
+              <template v-slot:prepend>
+                <q-icon name="perm_identity" />
+              </template>
+            </q-input>
+            <!-- password input-->
+            <q-input
+              filled
+              v-model="password"
+              :type="isPwd ? 'password' : 'text'"
+              hint="Password with toggle"
+              placeholder="패스워드를 입력하세요"
+              class="q-pa-md display: block"
+            >
+              <template v-slot:prepend>
+                <q-icon
+                  :name="isPwd ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="isPwd = !isPwd"
+                />
+              </template>
+            </q-input>
+
+            <div class="text-center q-my-md">
+              <div class="q-pt-lg">
+                <q-btn
+                  width="100%"
+                  label="로그인"
+                  class="inline-block q-mr-md"
+                  v-on:click="DefaultLogin()"
+                />
+                <q-btn
+                  outline
+                  label="회원가입"
+                  class="display: inline q-ml-md"
+                  to="/signup"
+                ></q-btn>
+              </div>
             </div>
+          </q-form>
+          <div class="q-my-xl">
+            <p class="text-subtitle2">비밀번호가 기억나지 않는다면?</p>
+            <p class="text-h6">
+              <a href="/passwordfind">비밀번호 찾기</a> 를 이용하세요
+            </p>
           </div>
-          <div class="col-2 text-center">
+          <div class="text-center q-my-md">
             <q-btn
               dark
               v-on:click="NaverLogin()"
-              style="width:30%;     height: 60px; margin-top:10px;"
+              style="height: 60px; margin-top:10px;"
               label="네이버 아이디로 로그인 (초록색에 흰색)"
             />
           </div>
-          <div class="col-2 text-center">
+          <div class="text-center q-my-md">
             <q-btn
               dark
               v-on:click="GoogleLogin()"
-              style="width:30%;     height: 60px; margin-top:10px;"
+              style="height: 60px; margin-top:10px;"
               label="구글 아이디로 로그인(파란에 흰색)"
             />
           </div>
-          <div class="col-2 text-center">
+          <div class="text-cente q-my-md">
             <q-btn
               dark
               v-on:click="GithubLogin()"
-              style="width:30%;     height: 60px; margin-top:10px;"
+              style="height: 60px; margin-top:10px;"
               label="깃허브 아이디로 로그인(흑백 반전)"
             />
           </div>
-        </q-form>
+        </div>
       </div>
-    </div>
-    <div class="row q-pa-md justify-center">
-      <p>비밀번호가 기억나지 않는다면?</p>
-
-      <p class="q-ml-sm q-mr-none">
-        <a href="/passwordfind">비밀번호 찾기</a> 를 이용하세요
-      </p>
     </div>
   </div>
 </template>
