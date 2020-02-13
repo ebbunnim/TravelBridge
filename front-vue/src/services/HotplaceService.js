@@ -75,6 +75,7 @@ class HotPlaceService {
 
   // 테마(8개) 로 검색
   searchMoreHotPlaceByTheme(btnCnt, word) {
+    console.log(`/HotPlace/search/more/theme/${btnCnt}/${word}`);
     return Api.get(`/HotPlace/search/more/theme/${btnCnt}/${word}`)
       .then(res => {
         return res.data.data;

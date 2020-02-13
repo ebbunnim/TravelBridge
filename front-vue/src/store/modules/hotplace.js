@@ -38,6 +38,17 @@ const actions = {
       .catch(e => {
         console.log(e);
       });
+  },
+  searchMoreHotPlaceByTheme: ({ commit }, payload) => {
+    HotPlaceService.searchMoreHotPlaceByTheme(payload.btnCnt, payload.word)
+      .then(res => {
+        console.log("여긴vuex", res);
+        commit("saveHPs", res);
+        console.log("hp state: ", state.hps);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 };
 

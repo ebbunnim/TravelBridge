@@ -3,263 +3,230 @@
     <h4>마이 페이지</h4>
     <div class="q-pa-md">
       <div style="max-width: 70%; margin: 0 15% 0 15%">
-        <!-- card start -->
-        <q-card>
-          <q-tabs
-            v-model="tab"
-            class="text-grey"
-            active-color="primary"
-            indicator-color="primary"
-            align="justify"
-          >
-            <q-tab name="activity" label="내 활동" />
-            <q-tab name="info" label="내 정보" />
-            <q-tab name="etc" label="etc" />
-          </q-tabs>
+        <q-tabs
+          v-model="tab"
+          class="text-grey"
+          active-color="primary"
+          indicator-color="primary"
+          align="justify"
+        >
+          <q-tab name="activity" label="내 활동" />
+          <q-tab name="info" label="개인정보" />
+          <q-tab name="etc" label="etc" />
+        </q-tabs>
 
-          <q-tab-panels v-model="tab">
-            <q-tab-panel name="activity" style="height:900px">
-              <div class="text-h6">내 활동</div>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </q-tab-panel>
+        <q-tab-panels v-model="tab">
+          <!-- 첫번째 패널 -->
+          <q-tab-panel name="activity" style="height:900px">
+            <div class="text-h6">내 활동</div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </q-tab-panel>
 
-            <q-tab-panel name="info" style="font-size:20px">
-              <!-- 수정 불가능 -->
-              <div class="row">
-                <div class="col-3 self-center" style="text-align:right">
-                  <span>이메일 :</span>
-                </div>
-                <q-input
-                  v-model="user.mem_email"
-                  type="text"
-                  class="col-6"
-                  style="text-align:left; margin-left:10px"
-                  readonly
-                />
-              </div>
-              <!-- 수정 가능한 필드 -->
-              <div class="row">
-                <div class="col-3 self-center" style="text-align:right">
-                  <span>이메일 수신 여부 :</span>
-                </div>
-                <q-input
-                  v-model="user.mem_receive_email"
-                  type="text"
-                  class="col-6"
-                  style="text-align:left; margin-left:10px"
-                  readonly
-                  v-show="!onEditReceive"
-                />
-
-                <div
-                  v-show="onEditReceive"
-                  class="col-6 q-my-sm q-mr-xs q-ml-sm"
-                  align="left"
-                >
-                  <q-radio
-                    v-model="user.mem_receive_email"
-                    val="true"
-                    label="Email 수신에 동의합니다"
+          <!-- 두번째 패널 -->
+          <q-tab-panel name="info" style="font-size:20px">
+            <!-- 수정 불가능 -->
+            <div class="q-pa-md row justify-center q-gutter-md">
+              <q-card flat bordered class="my-card">
+                <q-card-section>
+                  <div class="text-h6">계정정보</div>
+                </q-card-section>
+                <q-separator inset />
+                <q-card-section>
+                  <div class="text-body2 text-left">이메일</div>
+                  <q-input
+                    v-model="user.mem_email"
+                    type="text"
+                    class="text-h6"
+                    readonly
+                    dense
+                    borderless
                   />
-                  <q-radio
+                </q-card-section>
+                <q-card-section>
+                  <div class="text-subtitle2 text-left">
+                    <span>이메일 수신 여부</span>
+                  </div>
+                  <q-input
                     v-model="user.mem_receive_email"
-                    val="false"
-                    label="Email 수신에 동의하지 않습니다 "
+                    type="text"
+                    readonly
+                    dense
+                    borderless
+                    v-show="!onEditReceive"
                   />
-                </div>
-              </div>
 
-              <div class="row">
-                <div class="col-3 self-center" style="text-align:right">
-                  <span>아이디 :</span>
-                </div>
-                <q-input
-                  v-model="user.mem_id"
-                  type="text"
-                  class="col-6"
-                  style="text-align:left; margin-left:10px"
-                  v-bind="{ readonly: readOnly }"
-                />
-              </div>
-              <div class="row">
-                <div class="col-3 self-center" style="text-align:right">
-                  <span>전화번호 :</span>
-                </div>
-                <q-input
-                  v-model="user.mem_phone"
-                  type="text"
-                  class="col-6"
-                  style="text-align:left; margin-left:10px"
-                  v-bind="{ readonly: readOnly }"
-                />
-              </div>
-
-              <div class="row">
-                <div class="col-3 self-center" style="text-align:right">
-                  <span>이름 :</span>
-                </div>
-                <q-input
-                  v-model="user.mem_name"
-                  type="text"
-                  class="col-6"
-                  style="text-align:left; margin-left:10px"
-                  v-bind="{ readonly: readOnly }"
-                />
-              </div>
-              <div class="row">
-                <div class="col-3 self-center" style="text-align:right">
-                  <span>생년월일 :</span>
-                </div>
-                <q-input
-                  v-model="user.mem_birth"
-                  type="date"
-                  class="col-6"
-                  style="text-align:left; margin-left:10px"
-                  v-bind="{ readonly: readOnly }"
-                />
-              </div>
-
-              <div class="row">
-                <div class="col-3 self-center" style="text-align:right">
-                  <span>주소 :</span>
-                </div>
-                <q-input
-                  v-model="user.mem_address"
-                  type="text"
-                  class="col-6"
-                  style="text-align:left; margin-left:10px"
-                  v-bind="{ readonly: readOnly }"
-                />
-              </div>
-              <div class="row">
-                <div class="col-3 self-center" style="text-align:right">
-                  <span>회원 등급 :</span>
-                </div>
-                <q-input
-                  v-model="user.mem_grant"
-                  type="text"
-                  class="col-6"
-                  style="text-align:left; margin-left:10px"
-                  readonly
-                />
-              </div>
-
-              <div class="row">
-                <div class="col-3 self-center" style="text-align:right">
-                  <span>최근 로그인 :</span>
-                </div>
-                <q-input
-                  v-model="user.mem_lastlogin"
-                  type="text"
-                  class="col-6"
-                  style="text-align:left; margin-left:10px"
-                  readonly
-                />
-              </div>
-
-              <div class="row">
-                <div class="col-3 self-center" style="text-align:right">
-                  <span>나의 관심사 :</span>
-                </div>
-
-                <q-input
-                  v-model="user.mem_interest"
-                  type="text"
-                  class="col-6"
-                  style="text-align:left; margin-left:10px"
-                  v-show="!onInterestEdit"
-                  readonly
-                />
-
-                <div
-                  v-show="onInterestEdit"
-                  class="row"
-                  style="display: inline"
-                  v-for="(item, idx) in thema"
-                  :key="idx"
-                >
-                  <q-btn
-                    color="grey"
-                    unelevated
-                    class="q-mb-sm q-mt-md q-px-xs"
-                    size="md"
-                    v-if="item.state"
-                    @click="
-                      item.state = !item.state;
-                      onThemaChoice();
-                    "
-                    >{{ item.name }}</q-btn
+                  <div
+                    v-show="onEditReceive"
+                    class="col-6 q-my-sm q-mr-xs q-ml-sm"
+                    align="left"
                   >
-                  <q-btn
-                    color="grey"
-                    size="md"
-                    class="q-mb-sm q-mt-md q-px-xs"
-                    v-if="!item.state"
-                    bordered
-                    flat
-                    @click="
-                      item.state = !item.state;
-                      onThemaChoice();
-                    "
-                    >{{ item.name }}</q-btn
+                    <q-radio
+                      v-model="user.mem_receive_email"
+                      val="true"
+                      label="Email 수신에 동의합니다"
+                    />
+                    <q-radio
+                      v-model="user.mem_receive_email"
+                      val="false"
+                      label="Email 수신에 동의하지 않습니다 "
+                    />
+                  </div>
+                </q-card-section>
+                <q-card-section class="row">
+                  <div class="col-6">
+                    <div class="text-subtitle2 text-left">최종 로그인</div>
+                    <q-input
+                      v-model="user.mem_lastlogin"
+                      type="text"
+                      class="text-subtitle1 col-6"
+                      readonly
+                      dense
+                      borderless
+                    />
+                  </div>
+                  <div class="col-6">
+                    <div class="text-subtitle2 text-left ">가입일시</div>
+                    <q-input
+                      v-model="user.mem_regtime"
+                      type="text"
+                      class="text-subtitle1 col-6"
+                      readonly
+                      dense
+                      borderless
+                    />
+                  </div>
+                </q-card-section>
+              </q-card>
+              <q-card flat bordered class="my-card">
+                <q-card-section>
+                  <div class="text-h6">회원정보</div>
+                </q-card-section>
+                <q-separator inset />
+                <q-card-section class="row">
+                  <div class="col-6">
+                    <div class="text-body2 text-left">이름</div>
+                    <q-input
+                      v-model="user.mem_name"
+                      type="text"
+                      class="text-h6"
+                      readonly
+                      dense
+                      borderless
+                    />
+                  </div>
+                  <div class="col-6">
+                    <div class="text-body2 text-left">닉네임</div>
+                    <q-input
+                      v-model="user.mem_id"
+                      type="text"
+                      class="text-h6"
+                      readonly
+                      dense
+                      borderless
+                    />
+                  </div>
+                </q-card-section>
+
+                <q-card-section>
+                  <div class="text-body2 text-left">연락처</div>
+                  <q-input
+                    v-model="user.mem_phone"
+                    type="text"
+                    class="text-h6"
+                    readonly
+                    dense
+                    borderless
+                  />
+                </q-card-section>
+                <q-card-section>
+                  <div class="text-body2 text-left">생년월일</div>
+
+                  <q-input
+                    dense
+                    borderless
+                    v-model="user.mem_birth"
+                    placeholder="YYYY/MM/DD"
+                    mask="date"
+                    class="text-h6"
+                    :rules="['date']"
+                    v-bind="{ readonly: readOnly }"
                   >
-                </div>
-              </div>
+                    <template v-slot:after>
+                      <q-icon name="event" class="cursor-pointer">
+                        <q-popup-proxy
+                          ref="qDateProxy"
+                          transition-show="scale"
+                          transition-hide="scale"
+                        >
+                          <q-date
+                            v-model="user.mem_birth"
+                            @input="() => $refs.qDateProxy.hide()"
+                          />
+                        </q-popup-proxy>
+                      </q-icon>
+                    </template>
+                  </q-input>
+                </q-card-section>
+              </q-card>
+              <q-card flat bordered class="my-card">
+                <q-card-section>
+                  <div class="text-h6">관심분야</div>
+                </q-card-section>
+                <q-separator inset />
+                <q-card-section>
+                  <q-input
+                    v-model="user.mem_interest"
+                    type="text"
+                    class="col-6"
+                    style="text-align:left; margin-left:10px"
+                    v-show="!onInterestEdit"
+                    readonly
+                  />
 
-              <div class="row">
-                <div class="col-3 self-center" style="text-align:right">
-                  <span>팔로잉 :</span>
-                </div>
-                <q-input
-                  v-model="user.mem_following"
-                  type="text"
-                  class="col-6"
-                  style="text-align:left; margin-left:10px"
-                  readonly
-                />
-              </div>
-              <div class="row">
-                <div class="col-3 self-center" style="text-align:right">
-                  <span>팔로워 :</span>
-                </div>
-                <q-input
-                  v-model="user.mem_followed"
-                  type="text"
-                  class="col-5"
-                  style="text-align:left; margin-left:10px"
-                  readonly
-                />
-              </div>
-
-              <q-btn
-                class="q-my-lg"
-                label="수정하기"
-                color="primary"
-                icon="edit"
-                v-if="!submitted"
-                @click="
-                  onEditReceive = !onEditReceive;
-                  readOnly = !readOnly;
-                  onInterestEdit = !onInterestEdit;
-                  submitted = !submitted
-                "
-              />
-              <q-btn
-                class="q-my-lg"
-                label="수정완료"
-                color="info"
-                icon="check"
-                v-if="submitted"
-                @click="updateUser()"
-              />
-            </q-tab-panel>
-
-            <q-tab-panel name="etc">
-              <div class="text-h6">etc</div>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </q-tab-panel>
-          </q-tab-panels>
-        </q-card>
+                  <div
+                    v-show="onInterestEdit"
+                    class="row"
+                    style="display: inline"
+                    v-for="(item, idx) in thema"
+                    :key="idx"
+                  >
+                    <q-btn
+                      color="grey"
+                      unelevated
+                      class="q-mb-sm q-mt-md q-px-xs"
+                      size="md"
+                      v-if="item.state"
+                      @click="
+                        item.state = !item.state;
+                        onThemaChoice();
+                      "
+                      >#{{ item.name }}</q-btn
+                    >
+                    <q-btn
+                      color="grey"
+                      size="md"
+                      class="q-mb-sm q-mt-md q-px-xs"
+                      v-if="!item.state"
+                      bordered
+                      flat
+                      @click="
+                        item.state = !item.state;
+                        onThemaChoice();
+                      "
+                      >#{{ item.name }}</q-btn
+                    >
+                  </div>
+                </q-card-section>
+              </q-card>
+              <q-card flat bordered class="my-card"> </q-card>
+            </div>
+          </q-tab-panel>
+          <!-- 세번재 패널 -->
+          <q-tab-panel name="etc">
+            <div class="text-h6">etc</div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </q-tab-panel>
+        </q-tab-panels>
         <!-- card end -->
       </div>
     </div>
@@ -274,24 +241,24 @@ export default {
     return {
       currentChoices: "",
       thema: {
-        food: { state: false, name: "#맛집 " },
-        family: { state: false, name: "#가족 " },
-        date: { state: false, name: "#데이트 " },
-        shopping: { state: false, name: "#쇼핑 " },
-        culture: { state: false, name: "#문화 " },
-        indoor: { state: false, name: "#실내 " },
-        healing: { state: false, name: "#힐링 " },
-        tradition: { state: false, name: "#전통 " }
+        food: { state: false, name: "맛집 " },
+        family: { state: false, name: "가족 " },
+        date: { state: false, name: "데이트 " },
+        shopping: { state: false, name: "쇼핑 " },
+        culture: { state: false, name: "문화 " },
+        indoor: { state: false, name: "실내 " },
+        healing: { state: false, name: "힐링 " },
+        tradition: { state: false, name: "전통 " }
       },
       themaKor: {
-        food: "#맛집 ",
-        family: "#가족 ",
-        date: "#데이트 ",
-        shopping: "#쇼핑 ",
-        culture: "#문화 ",
-        indoor: "#실내 ",
-        healing: "#힐링 ",
-        tradition: "#전통 "
+        food: "맛집 ",
+        family: "가족 ",
+        date: "데이트 ",
+        shopping: "쇼핑 ",
+        culture: "문화 ",
+        indoor: "실내 ",
+        healing: "힐링 ",
+        tradition: "전통 "
       },
 
       readOnly: true,
@@ -317,7 +284,7 @@ export default {
         }
       }
       console.log(this.currentChoices);
-      this.user.mem_interest = this.currentChoices
+      this.user.mem_interest = this.currentChoices;
     },
     updateUser() {
       UserService.updateUser(this.user).then(res => {
@@ -326,10 +293,10 @@ export default {
           console.log(response)
         );
       });
-      this.readOnly = true
-      this.onInterestEdit = false
-      this.onEditReceive = false
-      this.submitted = false
+      this.readOnly = true;
+      this.onInterestEdit = false;
+      this.onEditReceive = false;
+      this.submitted = false;
     }
   },
   created() {
@@ -338,4 +305,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="sass" scoped>
+.my-card
+  width: 100%
+  max-width: 450px
+</style>

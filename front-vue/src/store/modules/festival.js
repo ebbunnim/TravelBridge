@@ -24,20 +24,31 @@ const actions = {
         console.log(error);
       });
   },
-  searchMoreFestival: ({commit}, payload) => {
+  searchMoreFestival: ({ commit }, payload) => {
     FestivalService.searchMoreFestival(
       payload.btnCnt,
       payload.searchOption,
       payload.word
     )
       .then(res => {
-        console.log("여긴 vuex", res)
+        console.log("여긴 vuex", res);
         commit("saveFvals", res);
         console.log("fval state: ", state.fvals);
       })
       .catch(e => {
-        console.log(e)
+        console.log(e);
+      });
+  },
+  searchMoreFestivalByTheme: ({ commit }, payload) => {
+    FestivalService.searchMoreFestivalByTheme(payload.btnCnt, payload.word)
+      .then(res => {
+        console.log("여긴 vuex", res);
+        commit("saveFvals", res);
+        console.log("fval state: ", state.fvals);
       })
+      .catch(e => {
+        console.log(e);
+      });
   }
 };
 
