@@ -43,11 +43,12 @@
         >
           <q-list class="q-ma-sm">
             <div class="row">
-              <q-btn to="/page1" flat class="col-4">메인</q-btn>
-              <q-btn to="/page1/postdetail" flat class="col-4"
+              <q-btn to="/page1" flat class="col-3">메인</q-btn>
+              <q-btn to="/page1/write" flat class="col-3">글쓰기</q-btn>
+              <q-btn to="/page1/postdetail" flat class="col-3"
                 >포스트 디테일</q-btn
               >
-              <q-btn to="/page1/main1search" flat class="col-4" icon="search"
+              <q-btn to="/page1/main1search" flat class="col-3" icon="search"
                 >검색</q-btn
               >
             </div>
@@ -64,7 +65,9 @@
             <div class="row justify-center">
               <q-btn to="/page2" flat class="col-3" icon="map"></q-btn>
               <q-btn to="/page2/pick" flat class="col-3">여행지 추천받기</q-btn>
-              <q-btn to="/page2/list" flat class="col-3">도시별 축제, 핫플 검색</q-btn>
+              <q-btn to="/page2/list" flat class="col-3"
+                >도시별 축제, 핫플 검색</q-btn
+              >
               <q-btn to="/page2/main2search" flat class="col-3" icon="search"
                 >검색</q-btn
               >

@@ -22,6 +22,7 @@ import Main1 from "../views/one/Main1.vue";
 import Main1Search from "../views/one/Main1Search.vue";
 import PostDetail from "../views/one/PostDetail.vue";
 import Main1Main from "../views/one/Main1Main.vue";
+import Main1Write from "../views/one/Main1Write.vue";
 
 //main2
 import Main2Search from "@/components/two/Main2Search.vue";
@@ -44,17 +45,10 @@ const routes = [
     // name: "main1",
     component: Main1,
     children: [
-      // UserHome will be rendered inside User's <router-view>
-      // when /user/:id is matched
       { path: "", component: Main1Main },
-
-      // UserProfile will be rendered inside User's <router-view>
-      // when /user/:id/profile is matched
       { path: "main1search", component: Main1Search },
-
-      // UserPosts will be rendered inside User's <router-view>
-      // when /user/:id/posts is matched
-      { path: "postdetail", component: PostDetail }
+      { path: "postdetail", component: PostDetail },
+      { path: "write", component: Main1Write }
     ]
   },
   {
