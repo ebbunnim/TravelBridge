@@ -25,7 +25,7 @@ $s3: "";
     " " +
     random(50) *
     -0.01rem +
-    #f8f8ff;
+    #fffafa;
   $s2: $s2 +
     random(1000) *
     0.1vw +
@@ -37,7 +37,7 @@ $s3: "";
     " " +
     random(50) *
     -0.01rem +
-    #f8f8ff;
+    #fffafa;
   $s3: $s3 +
     random(1000) *
     0.1vw +
@@ -49,7 +49,7 @@ $s3: "";
     " " +
     random(50) *
     -0.01rem +
-    #f8f8ff;
+    #fffafa;
   @if $i < 400 {
     $s1: $s1 + ",";
     $s2: $s2 + ",";
