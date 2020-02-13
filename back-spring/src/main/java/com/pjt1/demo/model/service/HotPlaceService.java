@@ -24,4 +24,6 @@ public interface HotPlaceService {
 	public List<Map<String, Object>> searchMoreHotPlaceByAddress(MorePageBean pageBean);
 	public List<Map<String, Object>> searchMoreHotPlaceByTheme(MorePageBean pageBean);
 	public List<Map<String, Object>> searchMoreHotPlace(MorePageBean pageBean);
+	public List<Map<String, Object>> findChildLike(int no);
+	public void deleteChildLike(List<Integer> list);
 }

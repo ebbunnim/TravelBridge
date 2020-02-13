@@ -110,5 +110,18 @@ public class FestivalServiceImpl implements FestivalService {
 			e.printStackTrace();
 		}return null;
 	}
-	
+	public List<Map<String, Object>> findChildLike(int no){
+		try {
+			return repo.findChildLike(no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+	public void deleteChildLike(List<Integer> list){
+		try {
+			repo.deleteChildLike(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

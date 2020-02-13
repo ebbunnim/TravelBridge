@@ -29,4 +29,6 @@ public interface FestivalDao {
 	public List<Map<String, Object>> searchMoreFestivalByTag(MorePageBean pageBean);
 	public List<Map<String, Object>> searchMoreFestivalByTheme(MorePageBean pageBean);
 	public List<Map<String, Object>> searchMoreFestival(MorePageBean pageBean);
+	public List<Map<String, Object>> findChildLike(int no);
+	public void deleteChildLike(List<Integer> list);
 }

@@ -19,7 +19,13 @@ public interface PostDao {
 	public void update(Post Post);
 
 	public void delete(int post_no);
-
+	public List<Map<String, Object>> findChildLike(int no);
+	public void deleteChildLike(List<Integer> list);
+	public List<Map<String, Object>> findChildCmt(int no);
+	public void deleteChildCmt(List<Integer> list);
+	public List<Map<String, Object>> findChildFiles(int no);
+	public void deleteChildFiles(List<Integer> list);
+	
 	public Post searchByCategory(String category);
 	public void updatePostHits(int post_no);
 	public List<Map<String, Object>> searchMorePostAll(MorePageBean pageBean);
@@ -27,11 +33,3 @@ public interface PostDao {
 	public List<Map<String, Object>> searchMorePlan(MorePageBean pageBean);
 	public Post searchWithCmtAndFiles(int post_no);
 }
-/*
-public int getCountPostAll();
-public int getCountReport();
-public int getCountPlan();
-public List<Map<String, Object>> searchPagePostAll(PerPageBean pageBean);
-public List<Map<String, Object>> searchPageReport(PerPageBean pageBean);
-public List<Map<String, Object>> searchPagePlan(PerPageBean pageBean);
-*/

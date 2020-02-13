@@ -1,5 +1,6 @@
 package com.pjt1.demo.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pjt1.demo.model.dto.Comment;
+import com.pjt1.demo.model.dto.Files;
+import com.pjt1.demo.model.dto.Likes;
 import com.pjt1.demo.model.dto.Members;
 import com.pjt1.demo.model.dto.Post;
 import com.pjt1.demo.model.service.MembersService;
@@ -83,7 +87,19 @@ public class PostController {
     @ApiOperation("Post 정보 삭제")
     @DeleteMapping("/Post/delete/{post_no}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable int post_no) {
-        service.delete(post_no);
+        List<Map<String, Object>> delList_Likes = service.findChildLike(post_no);
+        List<Map<String, Object>> delList_Comment = service.findChildCmt(post_no);
+        List<Map<String, Object>> delList_Files = service.findChildFiles(post_no);
+    	List<Integer> del_Likes_IndexList = new ArrayList<Integer>(); 
+    	List<Integer> del_Comment_IndexList = new ArrayList<Integer>(); 
+    	List<Integer> del_Files_IndexList = new ArrayList<Integer>(); 
+    	for(Object o : delList_Likes) {  del_Likes_IndexList.add(((Likes) o).getLike_no());}
+    	for(Object o : delList_Comment) {  del_Comment_IndexList.add(((Comment) o).getCmt_no());}
+    	for(Object o : delList_Files) {  del_Files_IndexList.add(((Files) o).getFiles_no());}
+    	service.deleteChildLike(del_Likes_IndexList);
+    	service.deleteChildCmt(del_Comment_IndexList);
+    	service.deleteChildFiles(del_Files_IndexList);
+    	service.delete(post_no);
         return handleSuccess("삭제 완료");
     }
 

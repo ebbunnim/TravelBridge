@@ -1,6 +1,5 @@
 ##################################################
 # FAQ DML 
-
 INSERT INTO faq
 (faq_category, faq_question, faq_answer)
 VALUES (

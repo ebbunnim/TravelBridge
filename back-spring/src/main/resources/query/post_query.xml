@@ -65,7 +65,66 @@
    	<delete id="delete" 	parameterType="int">
 	   UPDATE post SET post_del_check = TRUE WHERE post_no = #{post_no:INTEGER} AND post_del_check = FALSE
 	</delete>
-	
+	<delete id="deleteChildLike" parameterType = "hashmap">
+		<choose>
+		<when test ="list.size!=0">
+			UPDATE likes 
+			SET like_del_check = TRUE 
+			WHERE like_no in 
+			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
+				#{item}
+			</foreach>
+		</when>
+		<otherwise>
+			SELECT 0 FROM DUAL;
+		</otherwise>
+		</choose>
+	</delete> 
+	<select id="findChildLike" parameterType = "int" resultType = "likes">
+		SELECT like_no
+		FROM likes
+		WHERE like_type = 1 AND post_no = #{post_no:INTEGER} AND like_del_check = FALSE
+	</select>
+	<delete id="deleteChildCmt" parameterType = "hashmap">
+		<choose>
+		<when test ="list.size!=0">
+			UPDATE comment 
+			SET cmt_del_check = TRUE 
+			WHERE cmt_no in 
+			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
+				#{item}
+			</foreach>
+		</when>
+		<otherwise>
+			SELECT 0 FROM DUAL;
+		</otherwise>
+		</choose>
+	</delete> 
+	<select id="findChildCmt" parameterType = "int" resultType = "Comment">
+		SELECT cmt_no
+		FROM comment
+		WHERE post_no = #{post_no:INTEGER} AND cmt_del_check = FALSE
+	</select>
+	<delete id="deleteChildFiles" parameterType = "hashmap">
+		<choose>
+		<when test ="list.size!=0">
+			UPDATE files 
+			SET files_del_check = TRUE 
+			WHERE files_no in 
+			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
+				#{item}
+			</foreach>
+		</when>
+		<otherwise>
+			SELECT 0 FROM DUAL;
+		</otherwise>
+		</choose>
+	</delete> 
+	<select id="findChildFiles" parameterType = "int" resultType = "Files">
+		SELECT files_no
+		FROM Files
+		WHERE post_no = #{post_no:INTEGER} AND files_del_check = FALSE
+	</select>
    	<update id="update"		parameterType="post">
 		UPDATE post 
 		SET
@@ -153,37 +212,3 @@
 		SELECT * FROM post WHERE post_del_check = false
 	</select>
 </mapper>
-<!-- 
- <select id="getCountPostAll" resultType="int">
-        select count(*) from post where post_del_check =false
-    </select>
-    <select id="searchPagePostAll" parameterType="hashmap" resultType="hashmap">
-        <![CDATA[
-        select * 
-        from post 
-        where post_del_check = FALSE
-        order by post_regtime
-        limit #{pageStart}, #{perPageNum}]]>
-    </select>
-    <select id="getCountReport" resultType="int">
-        select count(*) from post where post_type = 0 and post_del_check =false
-    </select>
-    <select id="searchPageReport" parameterType="hashmap" resultType="hashmap">
-        <![CDATA[
-        select * 
-        from post 
-        where post_del_check = FALSE and post_type = 0
-        order by post_regtime
-        limit #{pageStart}, #{perPageNum}]]>
-    </select>
-     <select id="getCountPlan" resultType="int">
-        select count(*) from post where post_type = 1 and post_del_check =false
-    </select>
-    <select id="searchPagePlan" parameterType="hashmap" resultType="hashmap">
-        <![CDATA[
-        select * 
-        from post 
-        where post_del_check = FALSE and post_type = 1
-        order by post_regtime
-        limit #{pageStart}, #{perPageNum}]]>
-    </select> -->

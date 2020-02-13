@@ -457,4 +457,35 @@
   - SPRING Batch 학습
 
   # 2020.02.13
+
+ ## 0. 현재상황
+  - back   
+    1) 완료
+     - 모든 테이블 기본 CRUD
+     - login
+     - faq / qna  
+     - comment / files / comment / board
+     - city, hotplace, festival
+     - likes
   
+    2) 수정중 
+     - member
+     - follow
+     - post
+
+  ## delete 연산
+  - default만으로는 안되고, 연관지어 삭제해야했고, 연속으로 update처리를 위해서 관련 있는 row를 찾기 위해 find를 우선적으로 진행함
+  - likes 삭제(취소) 시는 like만 삭제 o
+  - post 삭제 시 likes, comment, files 삭제 o
+  - hotplace 삭제 시 likes 삭제 o
+  - festival 삭제 시 likes 삭제 o
+  - member 삭제 시 board, qna, follow, likes, post, comment, files 삭제 o
+  - city는 실제로 삭제할 이유가 없으므로 남김o
+
+ ## 기타 기능
+  - 회원가입시 본인 board 생성 (추후 필요시 사용) o
+  - MyPage에서 board 하나 호출시 다 담아서 주려했으나 현재 필요한 기능인 팔로우한 사람들의 포스트 20개씩 반환만 수행
+  - 내가 팔로우한 사람, 나를 팔로우한 사람 목록 반환
+ 
+  - 쿼리는 다 짰음 o
+  - 내가 팔로우한 사람 목록 o

@@ -28,18 +28,26 @@
 		WHERE hp_no = #{hp_no:INTEGER} and hp_del_check = FALSE	
 	</delete>
 	<!-- 이렇게 UPDATE LIKES SET like_del_check = TRUE WHERE like_no in (0); -->
-<!-- 	<delete id="deleteChildLike" parameterType = "hashmap">
-		UPDATE likes 
-		SET like_del_check = TRUE 
-		WHERE 
-		<if></if>
-		like_no in 
-	</delete> -->
-	<!-- <select i d="findChildeLike" parameterType = "int" resultType = "hash">
+	<delete id="deleteChildLike" parameterType = "hashmap">
+		<choose>
+		<when test ="list.size!=0">
+			UPDATE likes 
+			SET like_del_check = TRUE 
+			WHERE like_no in 
+			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
+				#{item}
+			</foreach>
+		</when>
+		<otherwise>
+			SELECT 0 FROM DUAL;
+		</otherwise>
+		</choose>
+	</delete> 
+	<select id="findChildLike" parameterType = "int" resultType = "likes">
 		SELECT like_no
 		FROM likes
-		WHERE like_type = 2 AND hotplace_no = #{hotplace_no:Integer} AND like_del_check = FALSE;
-	</select> -->
+		WHERE like_type = 2 AND hotplace_no = #{hotplace_no:INTEGER} AND like_del_check = FALSE;
+	</select>
    	<update id="update"		parameterType="hotplace">
 		UPDATE hotplace
 		SET
@@ -84,7 +92,7 @@
         WHERE hp_del_check = FALSE 
         AND city_no = (SELECT city_no 
 						 FROM city 
-						 WHERE city_name = "${keyword}" 
+						 WHERE city_name = "${word}" 
 						 AND city_del_check = FALSE) 
         ORDER BY hp_no 
         LIMIT 0, #{perPageNum}]]>
@@ -94,7 +102,7 @@
 		<![CDATA[
     	SELECT *
 		FROM hotplace
-		WHERE hp_tag LIKE concat('%','${keyword}','%') 
+		WHERE hp_tag LIKE concat('%','${word}','%') 
 		AND hp_del_check = FALSE
 		ORDER BY hp_no
 		LIMIT 0, #{perPageNum}]]>
@@ -104,7 +112,7 @@
 		<![CDATA[
 		SELECT * 
 		FROM hotplace
-		WHERE hp_address = TRIM('${keyword}') 
+		WHERE hp_address = TRIM('${word}') 
 		AND hp_del_check = FALSE
 		ORDER BY hp_no
 		LIMIT 0,#{perPageNum}]]>
@@ -175,7 +183,7 @@
 		FROM hotplace 
 		WHERE city_no = (SELECT city_no 
 						 FROM city 
-						 WHERE city_name = "${keyword}" 
+						 WHERE city_name = "${word}" 
 						 AND city_del_check = FALSE) 
 		AND hp_del_check = FALSE
 		LIMIT #{pageStart}, #{perPageNum}]]>
@@ -183,14 +191,14 @@
 	<select id="getCountHotPlaceByTag" parameterType="string" resultType="int">
 		SELECT COUNT(*) 
 		FROM hotplace
-		WHERE hp_tag LIKE concat('%','${keyword}','%') 
+		WHERE hp_tag LIKE concat('%','${word}','%') 
 		AND hp_del_check = FALSE
 	</select> 
     <select id="searchPageHotPlaceByTag" parameterType="hashmap" resultType="hashmap">
    		<![CDATA[
     	SELECT *
 		FROM hotplace
-		WHERE hp_tag LIKE concat('%','${keyword}','%') 
+		WHERE hp_tag LIKE concat('%','${word}','%') 
 		AND hp_del_check = FALSE
 		ORDER BY hp_no
 		LIMIT #{pageStart}, #{perPageNum}]]>
@@ -198,14 +206,14 @@
 <select id="getCountHotPlaceByAddress" parameterType="string" resultType="int">
 		SELECT COUNT(*) 
 		FROM hotplace
-		WHERE hp_address = TRIM('${keyword}') 
+		WHERE hp_address = TRIM('${word}') 
 		AND hp_del_check = FALSE
 	</select> 
 	<select id="searchPageHotPlaceByAddress" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 		SELECT * 
 		FROM hotplace
-		WHERE hp_address = TRIM('${keyword}') 
+		WHERE hp_address = TRIM('${word}') 
 		AND hp_del_check = FALSE
 		ORDER BY hp_no
 		LIMIT #{pageStart}, #{perPageNum}]]>

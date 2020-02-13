@@ -1,5 +1,6 @@
 package com.pjt1.demo.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,8 +23,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pjt1.demo.model.dto.Board;
+import com.pjt1.demo.model.dto.Comment;
+import com.pjt1.demo.model.dto.Files;
 import com.pjt1.demo.model.dto.Follow;
+import com.pjt1.demo.model.dto.Likes;
 import com.pjt1.demo.model.dto.Members;
+import com.pjt1.demo.model.dto.Post;
+import com.pjt1.demo.model.dto.Qna;
+import com.pjt1.demo.model.service.BoardService;
 import com.pjt1.demo.model.service.FestivalService;
 import com.pjt1.demo.model.service.FollowService;
 import com.pjt1.demo.model.service.HotPlaceService;
@@ -43,7 +51,8 @@ public class MembersController {
     private MembersService service;
     @Autowired
     private FollowService f_service;
-    
+    @Autowired
+    private BoardService b_service;
     @Autowired
     private HotPlaceService hp_service;
     @Autowired
@@ -101,12 +110,18 @@ public class MembersController {
     	return handleSuccess(members);
     }
     
+//    @ApiOperation("no에 따른 Member의 FollowList를 조회하는 기능")
+//    @GetMapping("/Members/searchFollowMembers/{mem_no}")
+//    public ResponseEntity<Map<String, Object>> searchFollowMembers(int mem_no) {
+//    	Members members = service.search(mem_no);
+//    	List<Follow> fList = f_service.searchMemberList(mem_no);
+//        members.setMem_followList(fList);
+//        return handleSuccess(members);
+//    }
     @ApiOperation("no에 따른 Member의 FollowList를 조회하는 기능")
-    @GetMapping("/Members/searchFollowMembers/{mem_no}")
-    public ResponseEntity<Map<String, Object>> searchFollowMembers(int mem_no) {
-    	Members members = service.search(mem_no);
-    	List<Follow> fList = f_service.searchMemberList(mem_no);
-        members.setMem_followList(fList);
+    @GetMapping("/Members/searchMyFollowPeople/{mem_no}")
+    public ResponseEntity<Map<String, Object>> searchMyFollowPeople(int mem_no) {
+    	Members members = service.searchMyFollowPeople(mem_no);
         return handleSuccess(members);
     }
 
@@ -130,8 +145,14 @@ public class MembersController {
         if (checkMembers != null) {
             return handleFail("이미 존재하는 이메일입니다.", HttpStatus.BAD_REQUEST);
         }
+        
         // pw 컬럼 버림
         service.insert(members);
+        Members m = service.searchMemberByEmail(email);
+        Board b = new Board();
+        b.setMem_no(m.getMem_no());
+        b.setBoard_name(m.getMem_id()+"님의 소식");
+        b_service.insert(b);
         return handleSuccess("Member 등록 성공");
     }
 
@@ -147,7 +168,6 @@ public class MembersController {
         return err;
     }
 
-
     @ApiOperation("Member 정보 수정")
     @PutMapping("/Members/update")
     public ResponseEntity<Map<String, Object>> update(@RequestBody Members members) {
@@ -155,15 +175,51 @@ public class MembersController {
         return handleSuccess("User 정보 수정 완료");
     }
 
-    // email로 삭제로 바꿈
-    @ApiOperation("Member 삭제")
-    @DeleteMapping("/Members/delete/{mem_email}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable String mem_email) {
-        Members members  = service.searchMemberByEmail(mem_email);
-        service.delete(members.getMem_no());
-        return (members.isMem_del_check() == false) ? handleSuccess("Member 삭제 완료")
-                : handleFail("없는 회원입니다", HttpStatus.NOT_FOUND);
+    @ApiOperation("Member 삭제 ")
+    @DeleteMapping("/Members/delete/{mem_no}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable int mem_no) {
+    	List<Map<String, Object>> delList_Board = service.findChildBoard(mem_no);
+    	List<Map<String, Object>> delList_Qna = service.findChildQna(mem_no);
+    	List<Map<String, Object>> delList_Follow = service.findChildFollow(mem_no);
+    	List<Map<String, Object>> delList_Likes = service.findChildLikes(mem_no);
+    	List<Map<String, Object>> delList_Post = service.findChildPost(mem_no);
+    	List<Map<String, Object>> delList_Comment = service.findChildComment(mem_no);
+    	List<Map<String, Object>> delList_Files = service.findChildFiles(mem_no);
+    	List<Integer> del_Board_IndexList = new ArrayList<Integer>(); 
+    	List<Integer> del_Qna_IndexList = new ArrayList<Integer>(); 
+    	List<Integer> del_Follow_IndexList = new ArrayList<Integer>();
+    	List<Integer> del_Likes_IndexList = new ArrayList<Integer>();
+    	List<Integer> del_Post_IndexList = new ArrayList<Integer>();
+    	List<Integer> del_Comment_IndexList = new ArrayList<Integer>();
+    	List<Integer> del_Files_IndexList = new ArrayList<Integer>();
+    	for(Object o : delList_Board) {  del_Board_IndexList.add(((Board) o).getBoard_no());}
+    	for(Object o : delList_Qna) {  del_Qna_IndexList.add(((Qna) o).getQna_no());}
+    	for(Object o : delList_Follow) {  del_Follow_IndexList.add(((Follow) o).getFollow_no());}
+    	for(Object o : delList_Likes) {  del_Likes_IndexList.add(((Likes) o).getLike_no());}
+    	for(Object o : delList_Post) {  del_Post_IndexList.add(((Post) o).getPost_no());}
+    	for(Object o : delList_Comment) {  del_Comment_IndexList.add(((Comment) o).getCmt_no());}
+    	for(Object o : delList_Files) {  del_Files_IndexList.add(((Files) o).getFiles_no());}
+    	
+    	System.out.println(delList_Board);
+    	System.out.println(delList_Qna);
+    	System.out.println(delList_Follow);
+    	System.out.println(delList_Likes);
+    	System.out.println(delList_Post);
+    	System.out.println(delList_Comment);
+    	System.out.println(delList_Files);
+    	service.deleteChildComment(del_Comment_IndexList);
+    	service.deleteChildFiles(del_Files_IndexList);
+    	service.deleteChildLikes(del_Likes_IndexList);
+    	service.deleteChildQna(del_Qna_IndexList);
+    	service.deleteChildFollow(del_Follow_IndexList);
+    	service.deleteChildPost(del_Post_IndexList);
+    	service.deleteChildBoard(del_Board_IndexList);
+    	service.delete(mem_no);
+    	Members members = service.search(mem_no);
+    	return (members.isMem_del_check() == false) ? handleSuccess("탈퇴 완료")
+    			: handleFail("없는 회원입니다", HttpStatus.NOT_FOUND);
     }
+    
 
     @ApiOperation("로그인")
     @PostMapping("/Members/login") // /user/login에서 바꿈
