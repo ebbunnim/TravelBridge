@@ -192,6 +192,19 @@ create table FESTIVAL(
     FOREIGN KEY(city_no) REFERENCES CITY(city_no)
 ); 
 
-
+CREATE TABLE CALENDAR (
+    _id int NOT NULL KEY AUTO_INCREMENT,		# 캘린더 관리 번호
+	title varchar(200) NOT NULL,				# 일정 제목
+	description varchar(500) ,					# 일정 메모
+	start varchar(100),							# 일정 시작일
+	end varchar(100),							# 일정 마감일
+	type varchar(100), 							# 일정 카테고리
+	mem_no int , 								# 유저번호
+    backgroundColor varchar(100),				# 일정 배경색
+    textColor varchar(100),						# 폰트 색
+    allDay boolean,								# 선택사항
+    foreign key(mem_no) REFERENCES MEMBERS(mem_no)
+);
+SELECT * FROM CALENDAR;
 
 
