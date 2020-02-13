@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <div class="snow layer2"></div>
-    <div class="snow layer2 a"></div>
+  <div align="center">
+    <h3>타이틀</h3>
+    <span>도시</span> <span>작성일 작성자</span>
+    <p>해시태그</p>
+    <p>사진</p>
+    <p>콘텐트</p>
+    <p>댓글</p>
   </div>
 </template>
 
@@ -9,95 +13,4 @@
 export default {};
 </script>
 
-<style lang="scss">
-$s1: "";
-$s2: "";
-$s3: "";
-@for $i from 1 through 400 {
-  $s1: $s1 +
-    random(1000) *
-    0.1vw +
-    " " +
-    random(1000) *
-    0.1vh +
-    " " +
-    0 +
-    " " +
-    random(50) *
-    -0.01rem +
-    #fffafa;
-  $s2: $s2 +
-    random(1000) *
-    0.1vw +
-    " " +
-    random(1000) *
-    0.1vh +
-    " " +
-    0 +
-    " " +
-    random(50) *
-    -0.01rem +
-    #fffafa;
-  $s3: $s3 +
-    random(1000) *
-    0.1vw +
-    " " +
-    random(1000) *
-    0.1vh +
-    " " +
-    0 +
-    " " +
-    random(50) *
-    -0.01rem +
-    #fffafa;
-  @if $i < 400 {
-    $s1: $s1 + ",";
-    $s2: $s2 + ",";
-    $s3: $s3 + ",";
-  }
-}
-.snow {
-  border-radius: 50%;
-  opacity: 0.8;
-  position: absolute;
-  top: -100vh;
-  animation-name: fall;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-.layer1 {
-  width: 1.5rem;
-  height: 1.5rem;
-  filter: blur(1.5px);
-  box-shadow: #{$s1};
-  animation-duration: 6s;
-}
-.layer1.a {
-  animation-delay: -3s;
-}
-.layer2 {
-  width: 1.2rem;
-  height: 1.2rem;
-  filter: blur(3px);
-  box-shadow: #{$s2};
-  animation-duration: 8s;
-}
-.layer2.a {
-  animation-delay: -4s;
-}
-.layer3 {
-  width: 0.8rem;
-  height: 0.8rem;
-  filter: blur(6px);
-  box-shadow: #{$s3};
-  animation-duration: 10s;
-}
-.layer3.a {
-  animation-delay: -5s;
-}
-@keyframes fall {
-  100% {
-    transform: translateY(200vh);
-  }
-}
-</style>
+<style></style>

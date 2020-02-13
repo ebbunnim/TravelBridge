@@ -1,10 +1,14 @@
 <template>
   <div align="center">
-    <h1>main1. search</h1>
     <div class="row justify-center">
-      <q-input v-model="text" label="검색어" :dense="dense">
+      <q-input v-model="text" label="검색어" class="col-7">
         <template v-slot:append>
-          <q-icon v-if="text !== ''" name="close" @click="text = ''" class="cursor-pointer" />
+          <q-icon
+            v-if="text !== ''"
+            name="close"
+            @click="text = ''"
+            class="cursor-pointer"
+          />
           <q-icon name="search" />
         </template>
       </q-input>
@@ -21,39 +25,53 @@
     </div>
     <q-separator spaced inset vertical dark />
     <div
-      v-for="(tta,index) in this.titles"
+      v-for="(tta, index) in this.titles"
       :key="index"
       class="row justify-center"
       v-bind:class="{}"
     >
       <div
-        v-for="(tt,index) in tta"
+        v-for="(tt, index) in tta"
         :key="index"
         style="margin-bottom:12px; padding-left:12px;"
-        v-bind:class="{'col-4':fixPost(tta,index),'col-2':!fixPost(tta,index)}"
+        v-bind:class="{
+          'col-4': fixPost(tta, index),
+          'col-2': !fixPost(tta, index)
+        }"
         align="left"
       >
         <template v-if="tt == 1">
-          <q-card class="my-card" flat bordered>
+          <q-card class="my-card1" flat bordered style="width:100%;">
             <q-img src="https://cdn.quasar.dev/img/parallax2.jpg" />
             <q-card-section>
               <div class="text-overline text-orange-9">Overline</div>
               <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
-              <div
-                class="text-caption text-grey"
-              >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+              <div class="text-caption text-grey">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </div>
             </q-card-section>
           </q-card>
         </template>
         <template v-else-if="tt == 2">
-          <q-card class="my-card" flat bordered>
-            <q-card-section horizontal>
-              <q-card-section class="q-pt-xs">
+          <q-card class="my-card1" flat bordered>
+            <q-card-section horizontal style="width:100%;">
+              <q-card-section class="q-pt-xs col-7">
                 <div class="text-overline">Overline</div>
                 <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
-                <div
-                  class="text-caption text-grey text-body-2"
-                >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..</div>
+                <div class="text-caption text-grey text-body-2">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna
+                  aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing
+                  elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna aliqua.Lorem ipsum dolor sit amet, consectetur
+                  adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliquaLorem ipsum dolor sit amet, consectetur
+                  adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur
+                  adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua..
+                </div>
               </q-card-section>
 
               <q-card-section class="col-5 flex flex-center">
@@ -96,13 +114,17 @@
             <q-card-section class="q-pt-xs">
               <div class="text-overline">Overline</div>
               <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
-              <div
-                class="text-caption text-grey"
-              >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+              <div class="text-caption text-grey">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </div>
             </q-card-section>
 
             <q-card-section class="col-5 flex flex-center">
-              <q-img class="rounded-borders" src="https://cdn.quasar.dev/img/parallax2.jpg" />
+              <q-img
+                class="rounded-borders"
+                src="https://cdn.quasar.dev/img/parallax2.jpg"
+              />
             </q-card-section>
           </q-card-section>
         </template>
@@ -187,8 +209,8 @@ export default {
 };
 </script>
 
-<style >
-.my-card {
+<style>
+.my-card1 {
   width: 100%;
   height: 360px;
 }

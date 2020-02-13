@@ -1,30 +1,53 @@
 <template>
   <div>
-    <q-carousel arrows animated swipeable autoplay infinite v-model="slideOne" height="600px">
+    <q-carousel
+      arrows
+      animated
+      swipeable
+      autoplay
+      infinite
+      v-model="slideOne"
+      height="600px"
+    >
       <q-carousel-slide
-        v-for="(mainCard,index) in MainCard"
+        v-for="(mainCard, index) in MainCard"
         :key="index"
         :name="index"
         :img-src="mainCard.img"
       >
         <div class="absolute-bottom custom-caption">
-          <div class="text-h2">{{mainCard.title}}</div>
-          <div class="text-subtitle1">{{mainCard.sub}}</div>
+          <div class="text-h2">{{ mainCard.title }}</div>
+          <div class="text-subtitle1">{{ mainCard.sub }}</div>
         </div>
       </q-carousel-slide>
     </q-carousel>
     <h2>이달의 축제</h2>
-    <q-carousel arrows animated swipeable autoplay infinite v-model="slideThr" height="600px">
-      <q-carousel-slide v-for="(mainCard,index) in ThrCard" :key="index" :name="index">
+    <q-carousel
+      arrows
+      animated
+      swipeable
+      autoplay
+      infinite
+      v-model="slideThr"
+      height="600px"
+    >
+      <q-carousel-slide
+        v-for="(mainCard, index) in ThrCard"
+        :key="index"
+        :name="index"
+        style="background-color:#cecece"
+      >
+        <div class="snow layer2"></div>
+        <div class="snow layer2 a"></div>
         <div class="row justify-around">
           <div class="col-5" style="text-align:center;">
-            <div class="text-h2">{{mainCard.title}}</div>
+            <div class="text-h2">{{ mainCard.title }}</div>
             <q-separator spaced inset />
-            <div class="text-subtitle1">{{mainCard.sub}}</div>
+            <div class="text-subtitle1">{{ mainCard.sub }}</div>
           </div>
           <q-img
             :src="mainCard.img"
-            :ratio="16/9"
+            :ratio="16 / 9"
             spinner-color="primary"
             spinner-size="82px"
             class="col-5"
@@ -33,6 +56,7 @@
         </div>
       </q-carousel-slide>
     </q-carousel>
+    <h2>준목꺼</h2>
     <q-carousel
       v-model="slideTwo"
       transition-prev="slide-right"
@@ -49,22 +73,64 @@
       class="bg-white text-black shadow-1 rounded-borders no-shadow"
     >
       <q-carousel-slide
-        v-for="(subCard,index) in SubCard"
+        v-for="(subCard, index) in SubCard"
         :key="index"
         :name="index"
         class="column no-wrap"
       >
-        <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
+        <div
+          class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap"
+        >
           <q-img
-            v-for="(subContent,index) in subCard"
+            v-for="(subContent, index) in subCard"
             :key="index"
             class="col-4 full-height pic"
             :src="subContent.img"
           >
             <span class="pic-caption bottom-to-top">
-              <h1 class="pic-title">{{subContent.title}}</h1>
+              <h1 class="pic-title">{{ subContent.title }}</h1>
 
-              <p>{{subContent.sub}}</p>
+              <p>{{ subContent.sub }}</p>
+            </span>
+          </q-img>
+        </div>
+      </q-carousel-slide>
+    </q-carousel>
+    <h2>수민꺼</h2>
+    <q-carousel
+      v-model="slideTwo"
+      transition-prev="slide-right"
+      transition-next="slide-left"
+      swipeable
+      animated
+      control-color="primary"
+      navigation
+      padding
+      arrows
+      autoplay
+      infinite
+      height="400px"
+      class="bg-white text-black shadow-1 rounded-borders no-shadow"
+    >
+      <q-carousel-slide
+        v-for="(subCard, index) in SubCard"
+        :key="index"
+        :name="index"
+        class="column no-wrap"
+      >
+        <div
+          class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap"
+        >
+          <q-img
+            v-for="(subContent, index) in subCard"
+            :key="index"
+            class="col-4 full-height pic"
+            :src="subContent.img"
+          >
+            <span class="pic-caption bottom-to-top">
+              <h1 class="pic-title">{{ subContent.title }}</h1>
+
+              <p>{{ subContent.sub }}</p>
             </span>
           </q-img>
         </div>
@@ -173,7 +239,99 @@ export default {
   }
 };
 </script>
-<style >
+<style lang="scss">
+$s1: "";
+$s2: "";
+$s3: "";
+@for $i from 1 through 400 {
+  $s1: $s1 +
+    random(1000) *
+    0.1vw +
+    " " +
+    random(1000) *
+    0.1vh +
+    " " +
+    0 +
+    " " +
+    random(50) *
+    -0.01rem +
+    #fffafa;
+  $s2: $s2 +
+    random(1000) *
+    0.1vw +
+    " " +
+    random(1000) *
+    0.1vh +
+    " " +
+    0 +
+    " " +
+    random(50) *
+    -0.01rem +
+    #fffafa;
+  $s3: $s3 +
+    random(1000) *
+    0.1vw +
+    " " +
+    random(1000) *
+    0.1vh +
+    " " +
+    0 +
+    " " +
+    random(50) *
+    -0.01rem +
+    #fffafa;
+  @if $i < 400 {
+    $s1: $s1 + ",";
+    $s2: $s2 + ",";
+    $s3: $s3 + ",";
+  }
+}
+.snow {
+  border-radius: 50%;
+  opacity: 0.8;
+  position: absolute;
+  top: -100vh;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.layer1 {
+  width: 1.5rem;
+  height: 1.5rem;
+  filter: blur(1.5px);
+  box-shadow: #{$s1};
+  animation-duration: 6s;
+}
+.layer1.a {
+  animation-delay: -3s;
+}
+.layer2 {
+  width: 1.2rem;
+  height: 1.2rem;
+  filter: blur(3px);
+  box-shadow: #{$s2};
+  animation-duration: 8s;
+}
+.layer2.a {
+  animation-delay: -4s;
+}
+.layer3 {
+  width: 0.8rem;
+  height: 0.8rem;
+  filter: blur(6px);
+  box-shadow: #{$s3};
+  animation-duration: 10s;
+}
+.layer3.a {
+  animation-delay: -5s;
+}
+@keyframes fall {
+  100% {
+    transform: translateY(200vh);
+  }
+}
+
+/* 카드 */
 @keyframes anima {
   from {
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";

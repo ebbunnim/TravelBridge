@@ -70,12 +70,28 @@
         <q-input
           outlined
           hint
-          v-model="user.mem_address"
-          label="주소"
-          type="string"
-        />
+          v-model="user.mem_birth"
+          label="생년월일"
+          placeholder="YYYY/MM/DD"
+          mask="date"
+          :rules="['date']"
+        >
+          <template v-slot:after>
+            <q-icon name="event" class="cursor-pointer">
+              <q-popup-proxy
+                ref="qDateProxy"
+                transition-show="scale"
+                transition-hide="scale"
+              >
+                <q-date
+                  v-model="user.mem_birth"
+                  @input="() => $refs.qDateProxy.hide()"
+                />
+              </q-popup-proxy>
+            </q-icon>
+          </template>
+        </q-input>
 
-        <q-input outlined hint v-model="user.mem_birth" type="date" />
         <div align="center">
           <q-radio v-model="user.mem_sex" val="0" label="Male" />
           <q-radio v-model="user.mem_sex" val="1" label="Female" />
@@ -98,7 +114,7 @@
               item.state = !item.state;
               onThemaChoice();
             "
-            >{{ item.name }}</q-btn
+            >#{{ item.name }}</q-btn
           >
           <q-btn
             color="grey"
@@ -110,7 +126,7 @@
               item.state = !item.state;
               onThemaChoice();
             "
-            >{{ item.name }}</q-btn
+            >#{{ item.name }}</q-btn
           >
         </div>
       </q-card-section>
@@ -138,26 +154,27 @@ export default {
     }
   },
   data: () => ({
+    date: "2020/01/01",
     currentChoices: "",
     thema: {
-      food: { state: false, name: "#맛집 " },
-      family: { state: false, name: "#가족 " },
-      date: { state: false, name: "#데이트 " },
-      shopping: { state: false, name: "#쇼핑 " },
-      culture: { state: false, name: "#문화 " },
-      indoor: { state: false, name: "#실내 " },
-      healing: { state: false, name: "#힐링 " },
-      tradition: { state: false, name: "#전통 " }
+      food: { state: false, name: "맛집 " },
+      family: { state: false, name: "가족 " },
+      date: { state: false, name: "데이트 " },
+      shopping: { state: false, name: "쇼핑 " },
+      culture: { state: false, name: "문화 " },
+      indoor: { state: false, name: "실내 " },
+      healing: { state: false, name: "힐링 " },
+      tradition: { state: false, name: "전통 " }
     },
     themaKor: {
-      food: "#맛집 ",
-      family: "#가족 ",
-      date: "#데이트 ",
-      shopping: "#쇼핑 ",
-      culture: "#문화 ",
-      indoor: "#실내 ",
-      healing: "#힐링 ",
-      tradition: "#전통 "
+      food: "맛집 ",
+      family: "가족 ",
+      date: "데이트 ",
+      shopping: "쇼핑 ",
+      culture: "문화 ",
+      indoor: "실내 ",
+      healing: "힐링 ",
+      tradition: "전통 "
     },
     isPwd: true,
     user: {
@@ -189,6 +206,7 @@ export default {
   methods: {
     SignUp() {
       this.user.mem_interest = this.currentChoices;
+      console.log(this.user.mem_birth)
       this.$store.dispatch("user/postSignUp", this.user);
     },
     cancle() {
@@ -213,7 +231,7 @@ export default {
         mem_phone: "",
         mem_sex: null,
         mem_birth: null,
-        mem_address: null,
+        mem_address: "",
         mem_grant: 0,
         mem_receive_email: true,
         mem_interest: "",
@@ -223,14 +241,14 @@ export default {
     },
     clearChoice() {
       this.thema = {
-        food: { state: false, name: "#맛집 " },
-        family: { state: false, name: "#가족 " },
-        date: { state: false, name: "#데이트 " },
-        shopping: { state: false, name: "#쇼핑 " },
-        culture: { state: false, name: "#문화 " },
-        indoor: { state: false, name: "#실내 " },
-        healing: { state: false, name: "#힐링 " },
-        tradition: { state: false, name: "#전통 " }
+        food: { state: false, name: "맛집 " },
+        family: { state: false, name: "가족 " },
+        date: { state: false, name: "데이트 " },
+        shopping: { state: false, name: "쇼핑 " },
+        culture: { state: false, name: "문화 " },
+        indoor: { state: false, name: "실내 " },
+        healing: { state: false, name: "힐링 " },
+        tradition: { state: false, name: "전통 " }
       };
     }
   }
