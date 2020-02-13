@@ -389,7 +389,7 @@
    내일 할일
    검색 마무리 + paging 없애기 (더보기로) 
 
- # 2020.02.11
+ # 2020.02.12
 
   ## 0. 현재상황
   - back   
@@ -416,12 +416,45 @@
      
 
 ## 1. 검색 기능 및 반환리스트 구현
- - 페이징 제거
- - 검색 마무리
+ - 페이징 제거 o
+ - 검색 마무리 o
     - 제목 / 내용 / 태그를 if 동적쿼리로 필터링 처리 (핫플 / 축제) 
 
-## 2. DB 테스트
+## 2. 연관 삭제 연산
+ - POST 삭제시 COMMENT 삭제 FILES 삭제 LIKE 삭제
+ - CITY 삭제시 HOTPLACE 삭제 FESTIVAL 삭제 LIKE 삭제
+ - HOTPLACE 삭제 LIKE 삭제
+ - FESTIVAL 삭제 LIKE 삭제
+ - MEMBER 삭제 FOLLOW 삭제 LIKE 삭제 POST 삭제 COMMENT 삭제 QNA 삭제
+ - 단위가 달라지므로 DEFAULT 및 MULTIPLE DELETE QUERY가 있는게 나을듯
+ - DEFAULT DELETE o
+ - multiple update가 직접 값들을 번호만 매칭해서 지정해주는 것들이랑 WHERE 절에서 in으로 받는 것도 번호가 쭉 있는 상태가 되어야함
+   - SELECT 한 결과를 배열로 만들어서 FOREACH문으로 뿌려줘야함
+
+## 3. DB 테스트
  - 각 기능을 DB에 있는 데이터로 확인
  - 필요한 작업 수행
  
+## 4. 추가기능
+ 1) SPRING Batch
+ - 해당 모듈을 적용할 방법 학습 예정
+ - 적용범위는   
+    ex) 관리자페이지  
+    - 전 날의 데이터를 집계하여 통계자료로써 사용  
+    - members, post, comment, hotplace, festival 등 개수  
+    - 현재 이용가능 festival 개수
 
+ 2) ALARM
+ - 자신의 게시물에 댓글이 달린경우 알림을 보낼 수 있다
+ - 좋아요를 누른경우 알림을 보낼 수 있다
+
+ 3) 권한
+  - faq, qna 등
+
+  ## 5. 내일 할 일
+  - 연관 DELETE 쿼리문 마무리
+  - DB 테스팅
+  - SPRING Batch 학습
+
+  # 2020.02.13
+  

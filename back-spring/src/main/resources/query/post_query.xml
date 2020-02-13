@@ -63,7 +63,7 @@
 	</insert> 
 	
    	<delete id="delete" 	parameterType="int">
-	   
+	   UPDATE post SET post_del_check = TRUE WHERE post_no = #{post_no:INTEGER} AND post_del_check = FALSE
 	</delete>
 
    	<update id="update"		parameterType="post">

@@ -597,6 +597,8 @@ SELECT
     
     
 select * from follow;
+select * from post;
+select * from board;
 
 SELECT
 f.follow_no,
@@ -901,7 +903,7 @@ VALUES
     (2, 6, 2),
     (2, 6, 3),
     (2, 6, 4);
-    
+    DESC BOARD;
 INSERT INTO LIKES
 (like_type, festival_no, liker_mem_no)
 VALUES
@@ -1062,6 +1064,7 @@ LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.
 LEFT JOIN hotplace h ON l.hotplace_no = h.hp_no AND h.hp_del_check=FALSE
 WHERE m.mem_no = 1 AND m.mem_del_check = FALSE; 
 #searchMemberLikeFestival
+select * from board;
 SELECT 
 m.mem_id, 
 l.like_no, 
@@ -1083,3 +1086,73 @@ FROM members m
 LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 3
 LEFT JOIN festival f ON l.festival_no = f.fval_no AND f.fval_del_check=FALSE
 WHERE m.mem_no = 1 AND m.mem_del_check = FALSE; 
+
+
+select *
+from hotplace
+where hp_del_check = false 
+and hp_theme like concat('%','#자연','%')
+or hp_theme like concat('%','#힐링','%')
+;
+
+select * from hotplace;
+
+select * from festival;
+select * from members;
+#맛집 #가족 #데이트 #쇼핑 #문화 #실내 #힐링 #전통
+update festival set
+fval_theme = '#데이트 #힐링 #문화 #가족'
+where fval_no = 9;
+
+
+select * from festival
+where fval_del_check = FALSE
+AND
+(fval_name like concat('%','','%') OR
+fval_content like concat('%','','%') OR
+fval_tag like concat('%','','%'));
+DESC hotplace;
+update festival set fval_tag = '노꿀' where fval_no = 8; 
+update festival set fval_del_check = true where fval_no = 2; 
+SELECT *
+FROM festival
+WHERE fval_del_check = FALSE 
+ORDER BY fval_no
+LIMIT 0, 4;
+select * from hotplace;
+desc files;
+
+##########################
+# 연관 DELETE를 위한 추출 쿼리
+# post - like, hotplace - like, festival - like
+# UPDATE LIKES SET like_del_check = TRUE WHERE like_no in (,,,,,,,);
+
+SELECT like_no
+FROM likes
+WHERE like_type = 1 AND post_no = 4 AND like_del_check = FALSE;
+
+SELECT like_no
+FROM likes
+WHERE like_type = 2 AND hotplace_no = 4 AND like_del_check = FALSE;
+
+SELECT like_no
+FROM likes
+WHERE like_type = 3 AND festival_no = 4 AND like_del_check = FALSE;
+
+
+# post - comment, post - files
+#UPDATE COMMENT SET cmt_del_check = TRUE WHERE post_no in (,,,,,,);
+
+SELECT post_no
+FROM comment
+WHERE post_no = 3 AND cmt_del_check = FALSE;
+
+#UPDATE FILES SET files_del_check = TRUE WHERE post_no in (,,,,,,);
+
+SELECT post_no
+FROM files
+WHERE post_no = 2 AND files_del_check = FALSE;
+
+# city - hotplace, city - festival 
+
+# members - follow, members - likes, members - post, members - comment, members - qna

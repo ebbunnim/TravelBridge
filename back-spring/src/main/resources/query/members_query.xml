@@ -22,9 +22,8 @@
    	<delete id="delete" 	parameterType="int">
 	   UPDATE MEMBERS
 	   SET 
-	   mem_regtime = CURRENT_TIMESTAMP(), 
 	   mem_del_check = true
-	   WHERE mem_no = #{mem_no} AND mem_del_check = false
+	   WHERE mem_no = #{mem_no} AND mem_del_check = FALSE
 	</delete>
    	<update id="update"		parameterType="members">
 		UPDATE members SET
