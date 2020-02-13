@@ -8,7 +8,6 @@ DROP TABLE QNA;
 DROP TABLE FAQ;
 DROP TABLE LIKES;
 DROP TABLE COMMENT;
-DROP TABLE COURSE;
 DROP TABLE POST;
 DROP TABLE BOARD;
 DROP TABLE FOLLOW;
@@ -22,7 +21,6 @@ SELECT * FROM QNA;
 SELECT * FROM FAQ;
 SELECT * FROM LIKES;
 SELECT * FROM COMMENT;
-SELECT * FROM COURSE;
 SELECT * FROM POST;
 SELECT * FROM BOARD;
 SELECT * FROM FOLLOW;
@@ -156,7 +154,6 @@ create table city(
     city_img varchar(500),					 		# 도시 이미지
     city_del_check boolean DEFAULT FALSE	 		# 도시 삭제 여부
 );
-
 # 여행지 핫플레이스 테이블
 create table hotplace(
 	hp_no int NOT NULL KEY AUTO_INCREMENT,	# 핫플 관리번호
@@ -168,13 +165,12 @@ create table hotplace(
     hp_tag varchar(1000) 		,			# 핫플 태그
     hp_homepage varchar(500),				# 핫플 홈페이지
     hp_holiday varchar(200),				# 핫플 휴일
-    hp_fee varchar(2000),					# 핫플 요금
+    hp_fee varchar(1000),					# 핫플 요금
     hp_img varchar(500),					# 핫플 이미지
     hp_theme varchar(500),					# 핫플 테마
     hp_del_check boolean DEFAULT FALSE,		# 핫플 삭제 여부
 	FOREIGN KEY(city_no) REFERENCES CITY(city_no)
 );
-
 # 축제 테이블
 create table FESTIVAL(
     fval_no int NOT NULL KEY AUTO_INCREMENT,		# 축제 관리번호
@@ -187,7 +183,7 @@ create table FESTIVAL(
     fval_start_day date,							# 축제 시작일
     fval_end_day date,								# 축제 종료일
     fval_homepage varchar(300),						# 축제 홈페이지
-    fval_fee int DEFAULT 0,							# 축제 비용
+    fval_fee varchar(1000),							# 축제 비용
 	fval_img varchar(500),							# 축제 이미지
 	fval_host varchar(200),							# 축제 주최자
     fval_theme varchar(500),						# 축제 테마

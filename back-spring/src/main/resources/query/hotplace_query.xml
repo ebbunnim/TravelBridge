@@ -27,6 +27,19 @@
 		hp_del_check = TRUE
 		WHERE hp_no = #{hp_no:INTEGER} and hp_del_check = FALSE	
 	</delete>
+	<!-- 이렇게 UPDATE LIKES SET like_del_check = TRUE WHERE like_no in (0); -->
+<!-- 	<delete id="deleteChildLike" parameterType = "hashmap">
+		UPDATE likes 
+		SET like_del_check = TRUE 
+		WHERE 
+		<if></if>
+		like_no in 
+	</delete> -->
+	<!-- <select i d="findChildeLike" parameterType = "int" resultType = "hash">
+		SELECT like_no
+		FROM likes
+		WHERE like_type = 2 AND hotplace_no = #{hotplace_no:Integer} AND like_del_check = FALSE;
+	</select> -->
    	<update id="update"		parameterType="hotplace">
 		UPDATE hotplace
 		SET

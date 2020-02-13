@@ -1132,8 +1132,8 @@ desc files;
 ##########################
 # 연관 DELETE를 위한 추출 쿼리
 # post - like, hotplace - like, festival - like
-# UPDATE LIKES SET like_del_check = TRUE WHERE like_no in (,,,,,,,);
-
+UPDATE LIKES SET like_del_check = TRUE WHERE like_no in (0);
+select * from likes;
 SELECT like_no
 FROM likes
 WHERE like_type = 1 AND post_no = 4 AND like_del_check = FALSE;
@@ -1146,7 +1146,8 @@ SELECT like_no
 FROM likes
 WHERE like_type = 3 AND festival_no = 4 AND like_del_check = FALSE;
 
-
+select * from likes;
+select * from members;
 # post - comment, post - files
 #UPDATE COMMENT SET cmt_del_check = TRUE WHERE post_no in (,,,,,,);
 
@@ -1163,3 +1164,23 @@ WHERE post_no = 2 AND files_del_check = FALSE;
 # city - hotplace, city - festival 
 
 # members - follow, members - likes, members - post, members - comment, members - qna
+select * from likes;
+update likes set like_del_check = false where liker_mem_no = 2 and post_no = 2;
+update post set post_del_check = false where post_no = 2;
+select * from post;
+
+SELECT 
+m.mem_id, 
+l.like_no, 
+l.post_no, 
+p.post_title, 
+p.post_category, 
+p.post_regtime, 
+p.post_city, 
+p.post_hits
+FROM members m
+LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 1
+LEFT JOIN post p ON l.post_no = p.post_no AND p.post_del_check=FALSE
+		WHERE m.mem_no = 2 AND m.mem_del_check = FALSE; 
+        select * from post;
+select * from comment;

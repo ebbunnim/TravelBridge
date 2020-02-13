@@ -65,7 +65,7 @@
    	<delete id="delete" 	parameterType="int">
 	   UPDATE post SET post_del_check = TRUE WHERE post_no = #{post_no:INTEGER} AND post_del_check = FALSE
 	</delete>
-
+	
    	<update id="update"		parameterType="post">
 		UPDATE post 
 		SET
@@ -93,15 +93,18 @@
 		AND post_del_check=false   
 	</select>
 	<resultMap type="Comment" id="cmtMap">
+		<result property = "cmt_no" column="cmt_no"/>
 		<result property = "cmt_regtime" column="cmt_regtime"/>
 		<result property ="cmt_content" column="cmt_content"/>
 		<result property = "cmt_writer" column="cmt_writer"/>
 	</resultMap>
 	<resultMap type="Files" id="filesMap">
+		<result property ="files_no" column="files_no"/>
 		<result property ="files_url" column="files_url"/>
 	</resultMap>
 	<resultMap id="pcfMap" type ="Post">
 		<id property="post_no" column="post_no"/>
+		<result property="mem_no" column ="mem_no"/>
 		<result property="post_type" column ="post_type"/>
 		<result property="board_no" column ="board_no"/>
 		<result property="post_title" column ="post_title"/>
@@ -134,10 +137,12 @@
 	p.post_plan_end, 
 	p.post_plan_title,
 	p.post_writer, 
+	c.cmt_no,
 	c.mem_no,
 	c.cmt_regtime, 
 	c.cmt_content, 
 	c.cmt_writer, 
+	f.files_no,
 	f.files_url
 	FROM post p 
 	LEFT JOIN comment c ON p.post_no = c.post_no AND cmt_del_check = FALSE
