@@ -2,7 +2,7 @@
   <div class="q-pa-none">
     <div class="q-col-gutter-lg items-start">
       <div class="col-12">
-        <q-img :src="getImgUrl('global.gif')" :ratio="16 / 5">
+        <q-img :src="getImgUrl('global.jpg')" :ratio="16 / 5">
           <div class="absolute-center text-center" style="width: 100%">
             <p class="text-h4 q-pt-lg">
               <b>트래블 서치</b>
@@ -28,7 +28,7 @@ export default {
       cities: this.$store.state.city.cities // 모듈 접근해야 불러와진다.
     };
   },
-  
+
   methods: {
     getImgUrl(img) {
       return require("../../assets/" + img);
