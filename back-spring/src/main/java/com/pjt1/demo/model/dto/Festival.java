@@ -26,7 +26,7 @@ public class Festival implements Serializable {
 	@Getter @Setter private String fval_start_day;// date,
 	@Getter @Setter private String fval_end_day;// date,
 	@Getter @Setter private String fval_homepage;// varchar(300),
-	@Getter @Setter private int fval_fee;// int DEFAULT 0,
+	@Getter @Setter private String fval_fee;// int DEFAULT 0,
 	@Getter @Setter private String fval_img;// varchar(500),
 	@Getter @Setter private String fval_host;// varchar(200),
 	@Getter @Setter private String fval_theme; //varchar(500),						# 축제 테마

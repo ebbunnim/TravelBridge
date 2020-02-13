@@ -30,6 +30,9 @@
     <div>
       {{ currentChoices }}
     </div>
+
+
+
   </div>
 </template>
 
@@ -37,6 +40,8 @@
 export default {
   data() {
     return {
+      fvals: [],
+      hps: [],
       user: null,
       currentChoices: "",
       thema: {
