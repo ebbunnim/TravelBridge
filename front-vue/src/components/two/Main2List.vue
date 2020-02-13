@@ -1,5 +1,11 @@
 <template>
-  <div>Main2 기능의 여행지 정보 목록을 보여주는 컴퍼넌트다</div>
+  <div>
+    <p>City_no 참조하는 Fval과 HP 검색 기능</p>
+
+    
+
+
+  </div>
 </template>
 
 <script>

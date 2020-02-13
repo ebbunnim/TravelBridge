@@ -9,7 +9,12 @@ const actions = {
     HotPlaceService.searchAll(hps => {
       commit("saveHPs", hps);
     });
-  }
+  },
+  searchMoreHotPlaceByCityName: ({commit}, cityName) => {
+    HotPlaceService.searchMoreHotPlaceByCityName(res => {
+      console.log(res)
+    })
+  }  
 };
 
 // 동기
