@@ -12,7 +12,9 @@
 		#{files_url:VARCHAR}}
 		)
 	</insert> 
-   	<delete id="delete" 	parameterType="int"> </delete>
+   	<delete id="delete" 	parameterType="int">
+   		UPDATE files SET files_del_check = TRUE WHERE files_no = #{files_no:INTEGER} AND files_del_check = FALSE
+   	</delete>
 
    	<update id="update"		parameterType="files">
 		UPDATE files 

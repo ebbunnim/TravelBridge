@@ -9,11 +9,13 @@
 		comment
 		(post_no, 
 		mem_no, 
-		cmt_content) 
+		cmt_content,
+		cmt_writer) 
 		VALUES (
 		#{post_no:INTEGER},
 		#{mem_no:INTEGER},
-		#{cmt_content:VARCHAR}
+		#{cmt_content:VARCHAR},
+		#{cmt_writer:VARCHAR}
 		)
 	</insert> 
    	<delete id="delete" 	parameterType="int">
@@ -30,6 +32,7 @@
 		mem_no = #{mem_no:INTEGER},
 		cmt_regtime = CURRENT_TIMESTAMP(),
 		cmt_content = #{cmt_content:VARCHAR},
+		cmt_writer = #{cmt_writer:VARCHAR},
 		cmt_del_check = #{cmt_del_check:BOOLEAN}
 		WHERE cmt_no = #{cmt_no:INTEGER}      
 	</update>

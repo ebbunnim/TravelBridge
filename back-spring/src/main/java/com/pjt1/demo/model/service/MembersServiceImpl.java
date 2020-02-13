@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pjt1.demo.model.dao.MembersDao;
+import com.pjt1.demo.model.dto.Follow;
 import com.pjt1.demo.model.dto.Members;
 
 @Service
@@ -78,6 +79,27 @@ public class MembersServiceImpl implements MembersService {
 		try {
 			return repo.searchMemberLikePost(mem_no);
 		}catch(Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+	public List<Follow> searchFollowMembers(int mem_no) {
+		try {
+			return repo.searchFollowMembers(mem_no);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+	public Members searchMemberLikeHotPlace(int mem_no) {
+		try {
+			return repo.searchMemberLikeHotPlace(mem_no);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+	public Members searchMemberLikeFestival(int mem_no) {
+		try {
+			return repo.searchMemberLikeFestival(mem_no);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}return null;
 	}

@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.pjt1.demo.model.dto.Post;
 import com.pjt1.demo.utils.MorePageBean;
-import com.pjt1.demo.utils.PerPageBean;
 
 @Mapper
 public interface PostDao {
@@ -23,13 +22,16 @@ public interface PostDao {
 
 	public Post searchByCategory(String category);
 	public void updatePostHits(int post_no);
-	public int getCountPostAll();
-	public int getCountReport();
-	public int getCountPlan();
-	public List<Map<String, Object>> searchPagePostAll(PerPageBean pageBean);
-	public List<Map<String, Object>> searchPageReport(PerPageBean pageBean);
-	public List<Map<String, Object>> searchPagePlan(PerPageBean pageBean);
 	public List<Map<String, Object>> searchMorePostAll(MorePageBean pageBean);
 	public List<Map<String, Object>> searchMoreReport(MorePageBean pageBean);
 	public List<Map<String, Object>> searchMorePlan(MorePageBean pageBean);
+	public Post searchWithCmtAndFiles(int post_no);
 }
+/*
+public int getCountPostAll();
+public int getCountReport();
+public int getCountPlan();
+public List<Map<String, Object>> searchPagePostAll(PerPageBean pageBean);
+public List<Map<String, Object>> searchPageReport(PerPageBean pageBean);
+public List<Map<String, Object>> searchPagePlan(PerPageBean pageBean);
+*/

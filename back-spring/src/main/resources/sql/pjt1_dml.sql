@@ -108,29 +108,30 @@ false,
 "대한민국 전라북도",
 "/img/domestic/jeonbuk.jpg"
 );
-
+#맛집 #가족 #데이트 #쇼핑 #문화 #실내 #힐링 #전통
+#맛집 #실내 #
 ###########################
 #HOTPLACE DML
-
 INSERT INTO 
 hotplace
 (city_no, hp_name, hp_address,
 hp_detail_adr,hp_content,
-hp_tag , hp_homepage, 
+hp_tag , hp_homepage,
 hp_holiday, hp_fee,
-hp_etc) 
+hp_img, hp_theme) 
 VALUES (
 1,
-"남산서울타워", "서울 용산구",
+"남산서울타워", 
+"서울 용산구",
 "서울특별시 용산구 남산공원길 105", 
 "※ 19_20 한국관광 100선 ※ \n 남산서울타워는 한국 최초의 타워형태의 관광명소다. 높이 236.7m를 헤아리는 타워는 해발 243m인 남산의 높이까지 계산하면 실제 높이는 480m에 이르러 가히 동양최고의 타워라고 자랑할 만하다. 남산서울타워는 40년 만에 일반인에게 공개되는 서울타워플라자'와 2005년부터 CJ푸드빌이 임대하여 운영 중인 N서울타워로 구성되어 있다. 남산서울타워는 1969년 TV와 라디오 방송을 수도권에 송출하기 위해 한국 최초의 종합 전파탑으로 세워졌으며, 현재는 서울의 대표적인 복합문화공간이자 랜드마크로 자리잡았다.",
 "#15_16한국관광100선 #17_18한국관광100선 #19_20한국관광100선 #가족여행 #경복궁 #고궁 #관광지 #교과서속여행 #당일치기여행 #서울 #서울근교여행 #수도권 #아이와함께 #역사 #역사유적지 #연인과함께 #전통역사문화체험 #친구와함께 #한국관광100선",
 "http://www.seoultower.co.kr",
 "연중무휴",
 "* 전망대 - 대인 11,000원 / 소인 9,000원 \n* 헬로키티아일랜드 - 대인 8,000원 / 소인 7,000원 \n* 2종 패키지(전망대+헬로키티) - 대인 13,500원 / 소인 11,500원 \n※ 경로 요금의 경우, 전망대 및 전시관 요금에만 적용 \n※ 36개월 미만의 유아는 무료(보호자 1명당 1명에 한함, 유치원 단체의 경우 어린이 요금 적용) ※ 장애인 할인 : 1~3급의 경우 본인+동반자 1인 30% 할인, 4~6급의 경우 본인 30%할인 (패키지 및 단체 제외)\n※ 국가 유공상이자 1~3급의 경우 장애우 할인 혜택과 동일하게 적용(국가유공자 본인 경우 30% 할인)\n※ 엔그릴 이용고객은 사전 예약시 전망대를 무료로 관람하실 수 있습니다.\n * 남산 케이블카 \n운행시간 : 10:00 ~ 23:00 (단, 금~토 / 휴일 전날은 상황에 따라 연장 운행)\n운행요금 : 대인왕복 9,500원 / 대인편도 7,000원 / 소인왕복 6,500원 / 소인편도 4,000원\n※ 30명 이상 단체의 경우 단체 할인 적용\n※ 소인 (36개월 ~ 초등학생) / 65세 이상은 소인요금 적용", 
-""
-),
-(
+"",
+"#힐링 #데이트"
+),(
 1,
 "낙산공원",
 "서울 종로구",
@@ -140,7 +141,8 @@ VALUES (
 "http://parks.seoul.go.kr",
 "연중무휴",
 "무료", 
-""
+"",
+"#힐링 #데이트"
 ),
 (
 1,
@@ -152,7 +154,8 @@ VALUES (
 "http://hanok.seoul.go.kr/front/index.do",
 "연중무휴",
 "* 전망대 - 대인 11,000원 / 소인 9,000원  * 헬로키티아일랜드 - 대인 8,000원 / 소인 7,000원 * 2종 패키지(전망대+헬로키티) - 대인 13,500원 / 소인 11,500원  ※ 경로 요금의 경우, 전망대 및 전시관 요금에만 적용  ※ 36개월 미만의 유아는 무료(보호자 1명당 1명에 한함, 유치원 단체의 경우 어린이 요금 적용) ※ 장애인 할인 : 1~3급의 경우 본인+동반자 1인 30% 할인, 4~6급의 경우 본인 30%할인 (패키지 및 단체 제외) ※ 국가 유공상이자 1~3급의 경우 장애우 할인 혜택과 동일하게 적용(국가유공자 본인 경우 30% 할인) ※ 엔그릴 이용고객은 사전 예약시 전망대를 무료로 관람하실 수 있습니다. * 남산 케이블카 운행시간 : 10:00 ~ 23:00 (단, 금~토 / 휴일 전날은 상황에 따라 연장 운행) 운행요금 : 대인왕복 9,500원 / 대인편도 7,000원 / 소인왕복 6,500원 / 소인편도 4,000원  30명 이상 단체의 경우 단체 할인 적용 ※ 소인 (36개월 ~ 초등학생) / 65세 이상은 소인요금 적용", 
-""
+"",
+"#전통 #가족"
 ),
 (
 1,
@@ -164,7 +167,8 @@ VALUES (
 "http://www.sisul.or.kr/open_content/cheonggye/",
 "연중무휴",
 "무료", 
-""
+"",
+"#자연 #데이트"
 ),
 (
 1,
@@ -176,7 +180,8 @@ VALUES (
 "http://www.mapo.go.kr/CmsWeb/culture/main.req",
 "",
 "", 
-""
+"",
+"#문화 #데이트"
 ),
 (
 1,
@@ -188,7 +193,8 @@ VALUES (
 "http://seoulforest.or.kr",
 "연중무휴(일부시설 월요일휴관)",
 "무료", 
-""
+"",
+"#힐링 #가족"
 ),
 (
 2,
@@ -200,10 +206,11 @@ VALUES (
 "http://tour.jeonju.go.kr",
 "",
 "무료", 
-""
+"",
+"#전통 #가족 #데이트"
 );
 select * from city;
-select hp_tag from hotplace;
+select * from hotplace;
 select * from board;
 # 도시번호 찾기
 SELECT city_no 
@@ -396,7 +403,17 @@ where  p.post_no = 1;
 
 
 
-
+UPDATE comment set cmt_del_check = true where cmt_no = 4;
+select * from comment;
+#vistir
+insert into comment(post_no,mem_no,cmt_content,writer) values (2,3,'앙아가악ㅇㄴ막미나굽데수ㅐㅂㄷ','visitor');
+select * from post;  
+select * from members;
+select * from files;
+insert into files(post_no,mem_no,files_url) 
+values
+(2,2,'url1'),
+(2,2,'url2');
 
 select p.* , m.mem_id as cmt_person, c.cmt_no, cmt_title, cmt_content             
 from   comment c    
@@ -404,7 +421,7 @@ left join members m
 on c.mem_no = m.mem_no                                          
 right join  (select post_no, post_title, mem_id, post_content, post_category                     
 					, date_format(post_regtime, '%y-%m-%d') as post_regtime
-					, post_hits, ((post_end_day)-(post_start_day)) as days
+					, post_hits, ((post_plan_end)-(post_plan_start)) as days
 			 from   post, members                                        
 			 where  post_no = 1 and post.mem_no = members.mem_no) p                                   
 on   p.post_no = c.post_no;
@@ -521,3 +538,649 @@ values
 (1,"이름12","서울 종로구","서울 종로구 명동", "내용","#중");
 
 
+(SELECT p.post_no, p.mem_no,
+			post_type, board_no, post_title, post_content,
+			post_category, post_regtime, post_hits, post_city,
+			post_plan_start, post_plan_end, post_plan_title,
+			p.writer, post_del_check, c.mem_no as cmt_mem_no, cmt_regtime, cmt_content, c.writer as cmt_writer
+			FROM post p 
+			LEFT JOIN comment c 
+			ON p.post_no = c.post_no AND cmt_del_check = FALSE 
+			GROUP BY c.cmt_no );
+# post + comment + files
+SELECT 
+	p.post_no, 
+	p.mem_no,
+	p.post_type, 
+	p.board_no, 
+	p.post_title, 
+	p.post_content,
+	p.post_category, 
+	p.post_regtime, 
+	p.post_hits, 
+	p.post_city,
+	p.post_plan_start, 
+	p.post_plan_end, 
+	p.post_plan_title,
+	p.writer, 
+	c.mem_no,
+	c.cmt_regtime, 
+	c.cmt_content, 
+	c.writer, 
+	f.files_url
+	FROM post p 
+	LEFT JOIN comment c ON p.post_no = c.post_no AND c.cmt_del_check = FALSE
+	LEFT JOIN files f   ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND f.files_del_check = FALSE
+	WHERE p.post_no =2 AND p.post_del_check = FALSE;
+
+SELECT DISTINCT
+p.post_no,
+post_type, board_no, post_title, post_content,
+post_category, post_regtime, post_hits, post_city,
+post_plan_start, post_plan_end, post_plan_title,
+p.writer, cmt_regtime, cmt_content, c.writer, files_url
+FROM post p, comment c, files f
+WHERE p.post_no = c.post_no AND cmt_del_check = FALSE
+AND p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
+AND p.post_no = 2 AND p.post_del_check = FALSE;
+
+SELECT 
+	post_type, board_no, post_title, post_content,
+	post_category, post_regtime, post_hits, post_city,
+	post_plan_start, post_plan_end, post_plan_title,
+	p.writer, cmt_regtime, cmt_content, c.writer
+	FROM post p 
+	LEFT JOIN comment c 
+	ON p.post_no = c.post_no AND cmt_del_check = FALSE
+	WHERE p.post_no = 2 AND p.post_del_check = FALSE;
+    
+    
+    
+select * from follow;
+select * from post;
+select * from board;
+
+SELECT
+f.follow_no,
+f.follower_no,
+f.following_no,
+m.mem_id,
+m.mem_email,
+m.mem_name
+FROM follow f 
+LEFT JOIN members m ON f.following_no = m.mem_no AND m.mem_del_check = FALSE
+WHERE f.follower_no = 1
+AND f.follow_del_check = FALSE;
+select * from likes;
+
+SELECT 
+		a.mem_no, 
+		a.mem_id,
+		a.mem_email, 
+		a.mem_name,
+		b.following_no,
+		b.mem_id,
+		b.mem_email,
+		b.mem_name
+		FROM members a, (SELECT
+						f.follow_no,
+						f.follower_no,
+						f.following_no,
+						m.mem_id,
+						m.mem_email,
+						m.mem_name
+						FROM follow f 
+						LEFT JOIN members m ON f.following_no = m.mem_no AND m.mem_del_check = FALSE
+						WHERE f.follower_no = 1
+						AND f.follow_del_check = FALSE) b
+		WHERE a.mem_no = b.follower_no
+		AND a.mem_del_check = FALSE;
+        
+        
+SELECT
+		f.follow_no,
+		f.follower_no,
+		f.following_no,
+		m.mem_id,
+		m.mem_email,   
+		m.mem_name
+		FROM follow f
+		LEFT JOIN members m ON f.following_no = m.mem_no AND m.mem_del_check = FALSE
+		WHERE f.follower_no = 1
+		AND f.follow_del_check = FALSE;	
+        
+        
+        
+        select * from hotplace;
+        
+        select * from likes;
+        select * from festival;
+        
+		
+        select * from city;
+        # 테마에 대한 고려가 없어서 
+        select * from members;
+        
+        
+        select * from hotplace;
+        
+
+
+INSERT INTO MEMBERS 
+	(mem_id, mem_email, mem_phone, mem_name, mem_grant, mem_interest, mem_login_type)
+VALUES 
+	("merung","merung@hanmail.net","010-5434-3422","이주연",0,"#음식#쇼핑#체험","기본"),
+	("abcd","abcd@naver.com","010-2323-1441","김한식",1,"#역사#관광지#자연","네이버"),
+	("forcetome","forcetome@gmail.com","010-4442-2223","이준석",0,"#실내여행지","깃허브"),
+	("babe","babe@gmail.com","010-3422-3444","장준민",0,"#관광지#체험#레포츠","구글"),
+	("dksi","dksi@naver.com","010-4532-3333","선민수",1,"#음식#역사","네이버"),
+	("여행덕후","crazy@gmail.com","010-5567-3242","한경찰",1,"#역사#쇼핑","기본"),
+	("내가짱임","best@hanmail.net","010-2321-2135","인선민",0,"#관광지#체험","기본"),
+	("여행마스터","master@gmail.com","010-5632-2222","신민선",0,"#쇼핑#체험#문화시설","깃허브"),
+	("용이뿐님","ssss@gmail.com","010-2342-1111","이두나",1,"#쇼핑#자연#관광지","구글"),
+	("nullid","nurdy@naver.com","010-3226-6666","육설재",1,"#문화시설","네이버")
+;
+SELECT * FROM MEMBERS;
+
+select count(*) from likes where post_no = 1;
+select * from likes where liker_mem_no = 2;
+select * from likes;
+insert into likes(post_no, liker_mem_no) values (1,1);
+INSERT INTO FOLLOW
+(follower_no, following_no)
+VALUES
+	(1, 10),
+    (2,4),
+    (4,2),
+    (3,9),
+    (5,7),
+    (7,9),
+    (2,4),
+    (2,8),
+    (2,6),
+    (6,2)
+;
+SELECT * FROM FOLLOW;
+
+
+INSERT INTO BOARD
+(board_name)
+VALUES
+	("함께 쓰는 다이어리"),
+    ("플래너")
+;
+DESC board;
+
+SELECT * FROM BOARD;
+INSERT INTO BOARD
+(mem_no, board_name)
+VALUES
+(4,"merung"),
+(5,"abcd"),
+(6,"forcetoem"),
+(7,"babe"),
+(8,"dksi"),
+(9,"여행덕후"),
+(10,"내가짱임"),
+(11,"여행마스터"),
+(12,"용이뿐님"),
+(13,"nullid")
+;
+DESC POST;
+INSERT INTO POST
+(post_type, 
+ board_no, 
+ mem_no, 
+ post_title, 
+ post_content, 
+ post_category, 
+ post_city, 
+ post_hits, 
+ post_regtime,
+ post_writer)
+VALUES
+(0, 9,10,"2020 얼음나라 화천산천어축제 제대로 즐기는 TIP","
+겨울 축제는 아이들의 방학 문제로 보통 1월에 집중적으로 열립니다. 
+축제에 참여하는 사람들이 가족단위인 경우가 많다보니 주로 1월에 개최하는 것입니다. 
+1월에 열리는 축제의 주요 테마는 '물고기'입니다. 지방축제가 본격적으로 시작된 1990년대에는 
+겨울축제의 테마로 주로 눈(snow)과 등산을 선택했다면 2000년대 이후에는 단연 어류가 돋보이고 있습니다. 
+얼음나라 화천산천어축제는 세계 4대 겨울 축제의 하나로 이름을 올릴 정도로 큰 성공을 올리고 있는 겨울축제입니다. 
+토종물고기인 산천어 자체에 차별성이 있기도 하고 축제 내부적으로 주민들의 
+참여 및 협조가 잘 되고 있다는 점이 축제가 크게 성공할 수 있었던 길인 것 같습니다. ",
+"#취미#레저","#강원도",432,"2020-01-10 10:40:33", "내가짱임"),
+( 0, 9, 10, "인천 여행코스 송월동 동화마을 역대 최고 규모의 벽화마을",
+"수십 년 전로 담벼락에 색칠을 하여 동화마을로 변화하였다.가끔 형을 따라서 이곳저곳 몇몇 벽화마을 찾아가 봤지만 인천 송월동 동화마을 만큼 큰 규모를 보지 못했습니다.
+아니 그 반도 안되는 곳들이 대부분인데요 많은 사람들이 이곳을 인천 여행코스 라고 이야기하는 이유를 느낄 수 있었고
+애인이 있었다면 꼭 한 번 데리고 갔을 것 같은 장소로 연인들의 기념사진 촬영하기 딱 적당한 장소였답니다",
+"#인문#교양","#인천", 100, "2019-01-02 8:12:22", "내가짱임"),
+(0, 3, 4,"그렇게 가보고 싶던 담양, 죽녹원 & 메타세콰이어길에 가다!",
+"게스트하우스에서 나와 311번 버스를 타고 도착한 죽녹원. 
+네이버 지도가 알려준 시간보다 훨씬 빨리 도착했다. 
+어제 먹은 술 해장도 할겸 밥을 먹으려 돌아다니는데 담양하면 하도 
+떡갈비라고 들어서 주변 떡갈비집을 찾아봤다. 
+1인분만 되는 떡갈비집을 다행히도 찾았고 먹었다! 
+죽통밥을 다 먹고 나니 사장님께서 기념으로 가져갈 수 있다며 봉지 드릴까요? 
+하시기에 얼떨결에 받아왔다는 이야기ㅎㅎ 담양국수거리도 바로 앞이라 국수도 먹고 싶었지만 
+혼자 여행의 최대 단점. 여러 가지 다양하게 먹을 수가 없다. 다음에 날 따뜻해지면 다시 갈거니까 그 땐 국수 먹어야징!",
+"#미식#교양","#전라남도",87, "2019-12-24 12:00:11","merung"),
+(0, 3, 4,"춘천 애니메이션박물관 + 토이로봇관",
+"춘천갈까 말까 했었는데 춘천시는 미세먼지가 양호하다는 뉴스를 보고
+몇일 지겨웠던 미세먼지 심각에서 잠시나마 벗어나고자 피할려고 강원도로 방향을 틀었다.
+일단 강원도로 오니 공기부터가 일단 다르다. 너무 늦게 출발해서 너무 늦게 도착했더니
+여러군데 들릴 수가 없을 것 같았다.  
+1군데만 들린다면 ...이왕 아이들 때문에 나왔으니 아이 중심으로 가자고 했던 곳이 여기 애니메이션박물관이다.
+생각보다 넓은 규모에 시설이 잘 되어 있어서 좋았다. 
+무엇보다도 봄날씨에 파란하늘이 마음을 더 들 뜨게 한다.
+춘천...사실 그리 먼거리는 아니지만 2시간 정도 ...이래저래 쉬엄쉬엄 오면
+왕복 4~5시간....자주 오기에는 조금 부담스럽긴 하다.
+늦게 도착해서 그냥 애니메이션박물관만 구경만 하는게 더 좋을 법도 했는데 이왕 왔으니 토이로봇관이랑 애니메이션박물관
+두군데 볼 수 있는 티켓을 구매했다. 춘천시민은 절반 가격이니....
+춘천으로 이사와야 겠다. ㅋㅋ",
+"#인문#교양#미식","#강원도",2,"2019-01-19 9:10:01","merung"),
+(0, 3, 4,"광주 패밀리랜드 눈썰매장 ! 광주 놀거리",
+"2주전에 남친과 초등학교 이후로 안가본 눈썰매장을 갔어요!
+근데 정말 상당히 재밌더라구요! 사람 많은거 빼구.. 표는 티몬에서 구매했어요!
+놀이기구 5종 , 열차 , 눈썰매장! 까지 해서 한 사람당 16,000원이였던거같아요!
+놀이기구도 많이타고 썰매도 타고싶으신분들은
+그냥 매표소 가서 자유이용권,눈썰매장 이렇게 끊으셔도 될거같아요
+자유이용권,눈썰매장 이렇게 21,000원이세요!
+근데 자유이용권은 반드시 할인카드가 있어야해요!
+저도 자세한 할인카드는 잘 몰라서..ㅎㅎ
+추워서 놀이기구 별로 안탈줄알았는데 재밌더라구요~
+남친님과 후회했어요!
+한번 패밀리랜드 눈썰매장 가보세요~ 괜찮아요! 주차장도 넓구!
+물론 주차비가 별도로 나갑니다. 저희는 1,000원 들었어요! ㅎㅎ
+앞으로 가실 분들은 참고하세요!!! ㅎㅎ 끄읕~",
+"#레저","#광주",30,"2020-01-11 01:33:21","merung"),
+(0, 5, 6 ,"부산 먹거리 여행 명소, 부평깡통시장 야시장",
+"이곳이 깡통시장인 이유는 6.25 때 미군부대에서 나온 캔 같은 깡통 제품을 많이 팔았기 때문이라고 한다. 이곳은 밤에 운영하는 야시장이 유명하다. 
+야시장 운영 시간은 19:30 ~ 23:00이다. 
+시장 골목의 한 곳에 갖가지 먹거리 부스들이 한 줄로 늘어서 있다. 
+약 110m 거리에 30개 정도의 노점이 운영되고 있다고 한다. 음식들은 맛이 있다.
+비주얼도 좋아서 눈으로 보면 다 먹고 싶을 정도이다. 
+인기가 있는 몇 군데는 줄도 길게 서 있다. 구매하면 거의 서서 먹어야 한다. 
+군데군데 서서 먹을 수 있는 스탠딩 테이블이 놓여 있긴 한데 사람 수가 더 많다. 
+쓰레기통도 많이 비치되어 있기 때문에 다 먹고 쓰레기를 어떻게 해야 할지 걱정할 필요는 없다.
+아, 현지인에게 물어보니 유부주머니를 꼭 먹어보라고 하던데 경황이 없어서 먹어보지 못했다.",
+"#미식#취미","#부산",101,"2019-09-01 01:33:21","forcetoem"),
+(0, 6, 7,"강화석모도 미네랄 온천 ;족욕",
+"족욕하는 다른 곳이 공사중으로 문을 닫아 미네랄 온천 무료 족욕.
+오전 시간이었는데도 대기 번호 100번이 넘는... 오픈 했을때 배타고 들어 올때는 이렇게 밀리지 않았는데
+석모대교 개통이후에는 사람이 많아 입장하기가 쉽지 않다. 새벽에 와야 할 듯 하다^^~",
+"#레저#취미#교양","#인천",2,"2020-01-27 21:08:01" ,"babe"),
+(0, 3,4,"울산 자수정동굴나라 및 보트체험 후기!",
+"울산 여행의 마지막을 장식하는 곳으로 울산에 유명한 자수정동굴나라를 다녀왔습니다.
+마침 대구 가는길에 있는곳이기도 하지만 큰 기대는 하지 않았습니다. 전날 숙박업소에서 워낙 기분이 안좋은것도 있었지만...
+다만 울산 자수정동굴나라에서 공연한다는건 한번 보고 싶었죠.
+얼핏 다른 블로그에서 울산 자수정동굴나라 공연하는 모습을 잠시봤는데 재미있는것 같더라고요.
+그래서 공연은 꼭 한번 보고 싶었죠.
+울산 자수정동굴나라만 관람하는것은 7천원이고 보트까지 같이 체험하는것은 합쳐서 12000원이라
+동굴+보트 둘이 같이 해서 관람료를 냈습니다.
+전날 네이버에서 표를 예약하면 천원정도 할인되니 참고 하시길 바랍니다
+(당일은 안됩니다.) 자수정동굴나라 보기전에 먼저 보트를 타시면됩니다.
+보트를 타는 입구에 가면 구명조끼를 입고 보트를 타고 출발하게되는데
+안에 날씨가 밖에보다 훨씬 낮긴합니다.
+물은 진한 회색에 가까운편이고 보트를 타고 볼수 있는건 그냥 불빛에 비춰지는 동굴정도라고
+생각하시면될겁니다. 크게 확 와~ 하고 그러는건 없습니다.
+보트 관람자체는 솔직히 금방 끝나는편입니다.
+한 5분? 조금 넘는시간이였던것 같네요 보트로 슝슝~ 가다보니 금방 끝납니다.
+자수정 동굴나라 입구쪽에 원래 매표소가 있는데 보트를 타는곳에 나중에 보니 
+자수정동굴나라 공연시간과 결제하는기계가 있더군요.
+자수정동굴나라 공연은 오복학춤 정종수(그냥 장기자랑같은;;)
+필리핀판타스틱 아크로바트 공연단(이게 볼만합니다 ^^) 두가지의 공연을 같이 하는데
+1회부터 6회까지 합니다. 10시30분,12시,1시30분,3시,4시30분,6시 이렇게 하루에 6번의 공연을 합니다.
+공연은 정말 필수로 보시길 바랍니다.
+집에 돌아오니 정말 이 공연 다시 생각납니다. 여행이 짱이구너,,,,",
+"#교양#레저","#울산",11," 2019-11-11 18:45:22" ,"merung"),
+(0, 7, 8,"가평 아침고요수목원 오색별빌정원전",
+"크리스마스를 기념하여 여자친구와 떠난 가평의 오색별빛정원전. 
+사실 이런 곳이 있는지도 모르고 있었던 찰나에 강원도 여행을 취소하고
+서울 인근인 가평여행을 선택하게 되었다. 우연찮게 아침고요수목원의 
+오색별빛정원전의 빛축제 기간이 딱 맞아 떨어져서 이곳에 갈 수 있께 되었다. 
+주말인 토요일이라서 그런지 정말 많은 인파가 몰려 차에서 꽤나 오랫동안 기다리며 들어갈 수 있었다. 
+주차공간들이 꽤나 많이 준비되어 있어서 주차 문제는 크게 신경쓰지 않았던 것 같다. 
+이외에도 버스로 이곳에 갈 수 있다고 하니 위의 시간표를 참고하여
+차를 가지고 오지 않으신 분들은 버스를 이용하시면 좋을 것 같다.",
+"#인문#취미#레저","#경기도",301,"2018-12-24 07:10:02","dksi"),
+(0, 11,12,"5","서천 판교마을, -시간이 멈춘 마을","
+대학후배와 어찌어찌하다가 주말 여행을 가기로 했는데, 어디로 갈까 검색하다가 좀 색다른 곳으로 가보고 싶다는 생각을 하다가 찾은 서천 판교마을
+검색에는 영 재능이 없는 내가 찾은 레트로 감성이 가득한 레트로 마을, 시간이 멈춘 듯한 공간이라는 소개가 마음에 들었다.
+북적한 도시보다는 뭔가 여유롭게 옛스런 느낌이 더 반가울거같았기에 둘다 여기로 마음을 먹었다. 
+숙소 정보가 별로 없어서 서천 판교마을에서 놀고, 대천으로 넘어가는 일정으로 계획한 주말 여행이었다.",
+"#충청남도",109,"2019-11-30 11:26:23","용이뿐님")
+;
+SELECT * FROM POST;
+
+
+
+
+
+INSERT INTO COMMENT
+(post_no, mem_no, cmt_regtime,cmt_writer, cmt_content)
+VALUES
+	(1, 10, "2020-01-10 13:40:21","merung","화천 산천어 축제 세계 축제인지는 몰랐어요ㅎㅎ 좋은 정보 감사합니다!"),
+	(1, 10, "2020-01-11 08:12:33","abcd","ㅋㅋㅋㅋ얼음나라라니 너무 귀여워요"),
+	(2, 1, "2019-01-03 01:24:44","forcetome","송월동 동화마을에 해바라기 그려져 있는 벽화 보셨나요? 거기 인생 스팟이에요"),
+	(2, 1, "2019-01-03 18:22:23","abcd","남자친구랑 가봐야겠어요 ㅎㅎ"),
+	(2, 1, "2019-01-06 11:53:22","babe","오 사진으로 봤을땐 작아보이던데 규모가 크군요!"),
+	(3, 3, "2019-12-24 12:34:44","여행마스터","죽녹원 앞에 '어머니 손맛' 칼국수 맛집 가보셨나요? 존맛입니다"),
+	(3, 3, "2019-12-26 14:43:33","내가짱임","떡갈비집 주소좀 알려주세요"),
+	(3, 3, "2019-12-26 14:55:11","nullid","저도 취미가 혼자 여행하는건데 항상 먹을때 외롭긴 해요,,"),
+	(3, 3, "2019-12-28 12:22:44","메타세콰이어길 진짜 예뻐요","dksi"),
+	(4, 4, "2019-01-20 11:35:33","dksi","아이들이랑 애니메이션 박물관 갔는데 너무 재밌어했어요 ㅋㅋㅋ"),
+	(4, 4, "2019-01-21 01:35:33","여행덕후","티켓 값은 얼마인가요?"),
+	(4, 4, "2019-01-25 22:10:11","여행마스터","crazy님! 춘천 시민은 7000원 일반 시민은 14000원이에요!"),
+	(5, 2, "2020-01-11 12:35:25","merung","할인카드 혹시 어떤건가요?"),
+	(6, 6, "2019-09-02 11:44:23","내가짱임","할매곱창의 곱창 떡볶이 존맛..."),
+	(7, 7, "2020-01-27 22:10:44","babe","대기번호 100번은 양호합니다.. 저 저번에 227번이었어요"),
+	(8, 4, "2019-11-14 10:44:22","여행덕후","공연 특별할게 있어요? 전 재미없던데요"),
+	(9, 8, "2018-12-25 12:26:31","merung","솔직히 저는 여기 홍보빨이라고 생각"),
+	(9, 8, "2018-12-26 11:23:52","abcd","남친이랑 작년에도 가보고 이번에도 갔는데 진짜 좋더라구요. 데이트코스로 추천"),
+	(9, 8, "2018-12-30 17:34:54","babe","오 자동차 끌고 가야겠네요 ㅎㅎ 좋은 정보 감사횽ㅋㅋ"),
+	(10, 4, "2019-11-30 18:23:55","merung","letroo.......")
+;
+SELECT * FROM COMMENT;
+SELECT * FROM LIKES;
+INSERT INTO LIKES
+(like_type, post_no, liker_mem_no)
+VALUES
+	(1, 1, 2),
+    (1, 1, 3),
+    (1, 1, 5),
+    (1, 1, 7),
+    (1, 1, 9),
+    (1, 1, 8),
+    (1, 2, 3),
+    (1, 2, 2),
+    (1, 2, 5),
+    (1, 2, 6),
+    (1, 3, 1),
+    (1, 3, 2);
+INSERT INTO LIKES
+(like_type, hotplace_no, liker_mem_no)
+VALUES
+    (2, 3, 10),
+    (2, 4, 1),
+    (2, 4, 10),
+    (2, 5, 1),
+    (2, 5, 10),
+    (2, 5, 3),
+    (2, 5, 4),
+    (2, 6, 1),
+    (2, 6, 2),
+    (2, 6, 3),
+    (2, 6, 4);
+    DESC BOARD;
+INSERT INTO LIKES
+(like_type, festival_no, liker_mem_no)
+VALUES
+(3, 6, 5),
+(3, 7, 1),
+(3, 7, 8),
+(3, 8, 1),
+(3, 8, 2),
+(3, 8, 9),
+(3, 8, 10),
+(3, 9, 1),
+(3, 10, 2),
+(3, 10, 3)
+;
+select * from festival;
+
+select * from post;
+select * from members;
+
+SELECT * FROM LIKES;
+
+
+
+
+
+
+INSERT INTO LIKES
+(post_no, liker_mem_no)
+VALUES
+	(1, 2),
+    (1, 3),
+    (2, 3),
+    (2, 2),
+    (3, 1),
+    (3, 2),
+    (4, 1),
+    (5, 1),
+    (6, 1),
+    (6, 2),
+    (6, 3),
+    (7, 1)
+;
+
+select post_no from post order by post_no desc limit 0, 1;
+
+
+select * from likes;
+
+ 
+select *
+from post
+where post_no in (select post_no from likes l
+					right join members m
+					on m.mem_no = l.liker_mem_no
+					where m.mem_no = 1);
+select * from likes l
+					right join members m
+					on m.mem_no = l.liker_mem_no
+					where m.mem_no = 1;
+                   
+# 좋아하는 포스트들 체크하기     - members 에서 필요한 것 같은데      
+select mem_id, like_no, l.post_no, post_title, post_category, post_regtime, post_hits, post_city
+from members m
+left join likes l on m.mem_no = l.liker_mem_no
+left join post p on l.post_no = p.post_no
+where m.mem_no = 1;
+
+select *
+		from members m
+		left join likes l on m.mem_no = l.liker_mem_no
+		where m.mem_no = 1;
+DESC post;
+# post 별 likes 개수
+SELECT COUNT(*) 
+FROM likes
+WHERE post_no = 1;
+DESC likes;
+select * from post;
+UPDATE post SET post_hits = post_hits + 1 WHERE post_no = 4;
+
+
+select following_no from 
+members
+left join follow on members.mem_no = follow.follower_no
+where members.mem_no = 1;
+#member가 List로 followerList 있으면 되냐 되겠군a
+
+select * from members 
+	where mem_no in (select following_no 
+					from members m
+					left join follow f on m.mem_no = f.follower_no
+					where m.mem_no = 1);
+
+insert into follow(follower_no, following_no) values(1,3);
+select * from follow;
+
+
+
+
+SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'PJT1DB';
+SHOW DATABASES;
+SHOW TABLES FROM PJT1DB;
+SHOW TABLE STATUS FROM PJT1DB LIKE 'MEMBER'; 
+
+use pjt1db;
+
+show table status;
+
+show tables;
+
+SELECT 
+m.mem_id, 
+l.like_no, 
+l.post_no, 
+p.post_title, 
+p.post_category, 
+p.post_regtime, 
+p.post_city, 
+p.post_hits
+FROM members m
+LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE
+LEFT JOIN post p ON l.post_no = p.post_no AND p.post_del_check=FALSE
+WHERE m.mem_no = 1 AND m.mem_del_check = FALSE;
+
+#searchMemberLikePost
+SELECT 
+m.mem_id, 
+l.like_no, 
+l.post_no, 
+p.post_title, 
+p.post_category, 
+p.post_regtime, 
+p.post_city, 
+p.post_hits
+FROM members m
+LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 1
+LEFT JOIN post p ON l.post_no = p.post_no AND p.post_del_check=FALSE
+WHERE m.mem_no = 1 AND m.mem_del_check = FALSE; 
+
+#searchMemberLikeHotPlace
+Select * from likes;
+SELECT 
+m.mem_id, 
+l.like_no, 
+l.hotplace_no, 
+h.hp_name, 
+h.hp_theme, 
+h.hp_tag, 
+h.hp_address,
+h.hp_detail_adr, 
+h.hp_content,
+h.hp_homepage,
+h.hp_holiday,
+h.hp_fee,
+h.hp_img
+FROM members m
+LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 2
+LEFT JOIN hotplace h ON l.hotplace_no = h.hp_no AND h.hp_del_check=FALSE
+WHERE m.mem_no = 1 AND m.mem_del_check = FALSE; 
+#searchMemberLikeFestival
+select * from board;
+SELECT 
+m.mem_id, 
+l.like_no, 
+l.festival_no, 
+f.fval_name, 
+f.fval_theme, 
+f.fval_tag, 
+f.fval_address,
+f.fval_detail_adr, 
+f.fval_content,
+f.fval_homepage,
+f.fval_start_day,
+f.fval_end_day,
+f.fval_fee,
+f.fval_host,
+f.fval_img,
+f.fval_ended
+FROM members m
+LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 3
+LEFT JOIN festival f ON l.festival_no = f.fval_no AND f.fval_del_check=FALSE
+WHERE m.mem_no = 1 AND m.mem_del_check = FALSE; 
+
+
+select *
+from hotplace
+where hp_del_check = false 
+and hp_theme like concat('%','#자연','%')
+or hp_theme like concat('%','#힐링','%')
+;
+
+select * from hotplace;
+
+select * from festival;
+select * from members;
+#맛집 #가족 #데이트 #쇼핑 #문화 #실내 #힐링 #전통
+update festival set
+fval_theme = '#데이트 #힐링 #문화 #가족'
+where fval_no = 9;
+
+
+select * from festival
+where fval_del_check = FALSE
+AND
+(fval_name like concat('%','','%') OR
+fval_content like concat('%','','%') OR
+fval_tag like concat('%','','%'));
+DESC hotplace;
+update festival set fval_tag = '노꿀' where fval_no = 8; 
+update festival set fval_del_check = true where fval_no = 2; 
+SELECT *
+FROM festival
+WHERE fval_del_check = FALSE 
+ORDER BY fval_no
+LIMIT 0, 4;
+select * from hotplace;
+desc files;
+
+##########################
+# 연관 DELETE를 위한 추출 쿼리
+# post - like, hotplace - like, festival - like
+UPDATE LIKES SET like_del_check = TRUE WHERE like_no in (0);
+select * from likes;
+SELECT like_no
+FROM likes
+WHERE like_type = 1 AND post_no = 4 AND like_del_check = FALSE;
+
+SELECT like_no
+FROM likes
+WHERE like_type = 2 AND hotplace_no = 4 AND like_del_check = FALSE;
+
+SELECT like_no
+FROM likes
+WHERE like_type = 3 AND festival_no = 4 AND like_del_check = FALSE;
+
+select * from likes;
+select * from members;
+# post - comment, post - files
+#UPDATE COMMENT SET cmt_del_check = TRUE WHERE post_no in (,,,,,,);
+
+SELECT post_no
+FROM comment
+WHERE post_no = 3 AND cmt_del_check = FALSE;
+
+#UPDATE FILES SET files_del_check = TRUE WHERE post_no in (,,,,,,);
+
+SELECT post_no
+FROM files
+WHERE post_no = 2 AND files_del_check = FALSE;
+
+# city - hotplace, city - festival 
+
+# members - follow, members - likes, members - post, members - comment, members - qna
+select * from likes;
+update likes set like_del_check = false where liker_mem_no = 2 and post_no = 2;
+update post set post_del_check = false where post_no = 2;
+select * from post;
+
+SELECT 
+m.mem_id, 
+l.like_no, 
+l.post_no, 
+p.post_title, 
+p.post_category, 
+p.post_regtime, 
+p.post_city, 
+p.post_hits
+FROM members m
+LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 1
+LEFT JOIN post p ON l.post_no = p.post_no AND p.post_del_check=FALSE
+		WHERE m.mem_no = 2 AND m.mem_del_check = FALSE; 
+        select * from post;
+select * from comment;

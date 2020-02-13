@@ -2,6 +2,7 @@ package com.pjt1.demo.model.service;
 
 import java.util.List;
 
+import com.pjt1.demo.model.dto.Follow;
 import com.pjt1.demo.model.dto.Members;
 
 public interface MembersService {
@@ -17,4 +18,7 @@ public interface MembersService {
 
 	public Members searchMemberByEmail(String email);
 	public Members searchMemberLikePost(int mem_no);
+	public Members searchMemberLikeHotPlace(int mem_no);
+	public Members searchMemberLikeFestival(int mem_no);
+	public List<Follow> searchFollowMembers(int mem_no);
 }
