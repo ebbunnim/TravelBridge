@@ -49,7 +49,11 @@ import {
   QTooltip,
   QTimeline,
   QTimelineEntry,
-  QEditor
+  QEditor,
+  QPopupEdit,
+  QSelect,
+  QDate,
+  QPopupProxy
 } from "quasar";
 
 Vue.use(Quasar, {
@@ -98,7 +102,11 @@ Vue.use(Quasar, {
     QTooltip,
     QTimeline,
     QTimelineEntry,
-    QEditor
+    QEditor,
+    QPopupEdit,
+    QSelect,
+    QDate,
+    QPopupProxy
   },
   directives: {
     ClosePopup
