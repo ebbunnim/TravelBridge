@@ -60,7 +60,13 @@ const actions = {
   },
   changeDeafultPw: (store, payLoad) => {
     fireService.resetPw(payLoad.email);
+  },
+
+  updateMember: (store, payload) => {
+    
   }
+
+
 };
 
 const mutations = {

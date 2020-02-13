@@ -24,6 +24,9 @@ import PostDetail from "../views/one/PostDetail.vue";
 import Main1Main from "../views/one/Main1Main.vue";
 import Main1Write from "../views/one/Main1Write.vue";
 
+//main2
+import Main2Search from "@/components/two/Main2Search.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -39,7 +42,7 @@ const routes = [
   },
   {
     path: "/page1",
-
+    // name: "main1",
     component: Main1,
     children: [
       { path: "", component: Main1Main },
@@ -66,7 +69,7 @@ const routes = [
       },
       {
         path: "main2search",
-        component: () => import("@/components/two/Main2Search.vue")
+        component: Main2Search
       }
     ]
   },

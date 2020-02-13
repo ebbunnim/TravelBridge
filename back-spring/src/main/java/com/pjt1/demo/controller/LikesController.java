@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pjt1.demo.model.dto.Likes;
+import com.pjt1.demo.model.service.FestivalService;
+import com.pjt1.demo.model.service.HotPlaceService;
 import com.pjt1.demo.model.service.LikesService;
+import com.pjt1.demo.model.service.PostService;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -28,7 +31,13 @@ public class LikesController {
 
     @Autowired
     private LikesService service;
-
+    @Autowired
+    private PostService p_service;
+    @Autowired
+    private HotPlaceService h_service;
+    @Autowired
+    private FestivalService f_service;
+    
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
         return handleFail(e.getMessage(), HttpStatus.OK); // 전송에는 지장 없음
@@ -62,6 +71,7 @@ public class LikesController {
         return handleSuccess(Likes);
     }
 
+    private static final int POST = 1, HOTPLACE = 2, FESTIVAL = 3;
     @PostMapping("/Likes/insert")
     @ApiOperation("Likes 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Likes Likes) {

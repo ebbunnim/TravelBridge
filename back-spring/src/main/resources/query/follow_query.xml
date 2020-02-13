@@ -11,7 +11,9 @@
 			#{following_no:INTEGER}
 		)
 	</insert> 
-   	<delete id="delete" 	parameterType="int"> </delete>
+   	<delete id="delete" 	parameterType="int"> 
+   		UPDATE follow SET follow_del_check = TRUE WHERE follow_no = #{follow_no:INTEGER} AND follow_del_check = FALSE
+   	</delete>
    	<update id="update"		parameterType="follow">
 		UPDATE follow SET
 		follower_no=#{follower_no:INTEGER},
@@ -29,5 +31,30 @@
 		SELECT * FROM follow 
 		WHERE follow_del_check=false
 	</select>
+	<resultMap type="Members" id="memMap">
+		<result property ="mem_id" column="mem_id"/>
+		<result property ="mem_email" column="mem_email"/>
+		<result property ="mem_name" column="mem_name"/>
+	</resultMap>
+	<resultMap id = "followMap" type="Follow">
+		<result property="follow_no" column="follow_no"/>
+		<result property="follower_no" column="follower_no"/>
+		<result property="following_no" column="following_no"/>
+		<collection property="followList" ofType="Follow" resultMap="memMap"/>
+	</resultMap> 
+	<select id="searchMemberList" parameterType = "int" resultMap="followMap">
+		SELECT
+		f.follow_no,
+		f.follower_no,
+		f.following_no,
+		m.mem_id,
+		m.mem_email,
+		m.mem_name
+		FROM follow f 
+		LEFT JOIN members m ON f.following_no = m.mem_no AND m.mem_del_check = FALSE
+		WHERE f.follower_no = #{follower_no:INTEGER}
+		AND f.follow_del_check = FALSE
+	</select>
+	
 </mapper>
 
