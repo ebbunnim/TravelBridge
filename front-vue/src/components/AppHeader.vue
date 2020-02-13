@@ -64,7 +64,7 @@
             <div class="row justify-center">
               <q-btn to="/page2" flat class="col-3" icon="map"></q-btn>
               <q-btn to="/page2/pick" flat class="col-3">여행지 추천받기</q-btn>
-              <q-btn to="/page2/list" flat class="col-3">여행지 톺아보기</q-btn>
+              <q-btn to="/page2/list" flat class="col-3">도시별 축제, 핫플 검색</q-btn>
               <q-btn to="/page2/main2search" flat class="col-3" icon="search"
                 >검색</q-btn
               >

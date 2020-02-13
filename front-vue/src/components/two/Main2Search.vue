@@ -41,23 +41,17 @@ export default {
   },
   data() {
     return {
-      search: "",
+      search: null,
       hp_list: []
     };
   },
   methods: {
     onSearchBtn() {
       console.log(this.search);
-      HotPlaceService.searchMoreHotPlaceByCityName(1, this.search).then(res => {
-        console.log(res.data.data);
-        this.hp_list = res.data.data;
-        console.log("데이터이다");
-        console.log(this.hp_list);
-      });
+      HotPlaceService.searchMoreHotPlaceByCityName(1, this.search);
     }
   }
 };
 </script>
 
-<style>
-</style>
+<style></style>

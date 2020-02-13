@@ -12,9 +12,9 @@
 	</insert> 
    	<delete id="delete" 	parameterType="int">
 		UPDATE likes 
-		SET like_del_check = true 
+		SET like_del_check = TRUE 
 		WHERE like_no=#{like_no} 
-		AND like_del_check = false
+		AND like_del_check = FALSE
 	</delete>
    	<update id="update"		parameterType="likes">
 		UPDATE likes 

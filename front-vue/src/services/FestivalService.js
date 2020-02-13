@@ -61,15 +61,27 @@ class FestivalService {
         console.log(e);
       });
   }
-  // searchPageFestivalAll() {
-  //   return Api.get(`/Festival/search/pageAll`);
-  // }
-  // searchPageFestivalByCityName(keyword) {
-  //   return Api.get(`/Festival/search/page/cityname/${keyword}`);
-  // }
-  // searchPageFestivalByTag(keyword) {
-  //   return Api.get(`/Festival/search/page/tag/${keyword}`);
-  // }
+
+  searchMoreFestivalByTheme(btnCnt, keyword) {
+    return Api.get(`/Festival/search/more/theme/${btnCnt}/${keyword}`)
+      .then(res => {
+        return res.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  // 더보기로 Festival 검색하기 조회 - searchOption은 all/ title / content/ tag중 전달
+  searchMoreFestival(btnCnt, searchOption, word) {
+    return Api.get(`/Festival/search/more/${btnCnt}/${searchOption}/${word}`)
+      .then(res => {
+        return res.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
 }
 
 export default new FestivalService();

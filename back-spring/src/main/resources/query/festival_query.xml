@@ -25,7 +25,7 @@
 	</insert> 
 
    	<delete id="delete" 	parameterType="int">
-		
+		UPDATE festival SET fval_del_check = TRUE WHERE fval_no = #{fval_no:INTEGER} AND fval_del_check = FALSE
 	</delete>
    	<update id="update"		parameterType="festival">
 		UPDATE festival 
