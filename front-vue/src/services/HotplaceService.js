@@ -33,7 +33,6 @@ class HotplaceService {
   //
 
   // 더보기 버튼으로 처리
-  // 전체
   searchMoreHotPlaceAll(btnCnt) {
     return Api.get(`/HotPlace/search/more/${btnCnt}`)
       .then(res => {
@@ -47,12 +46,14 @@ class HotplaceService {
   searchMoreHotPlaceByCityName(btnCnt, cityName) {
     return Api.get(`/HotPlace/search/more/cityname/${btnCnt}/${cityName}`)
       .then(res => {
+        console.log('ㅎㅎ')
+        console.log(res)
         return res.data.data;
       })
       .catch(e => {
         console.log(e);
       });
-  }
+  } 
   // Tag 로 검색
   searchMoreHotPlaceByTag(btnCnt, tag) {
     return Api.get(`/HotPlace/search/more/tag/${btnCnt}/${tag}`)
@@ -73,18 +74,28 @@ class HotplaceService {
         console.log(e);
       });
   }
-  // searchPageHotPlaceAll() {
-  //   return Api.get(`/HotPlace/search/pageAll`);
-  // }
-  // searchPageHotPlaceByCityName(keyword) {
-  //   return Api.get(`/HotPlace/search/page/cityname/${keyword}`);
-  // }
-  // searchPageHotPlaceByTag(keyword) {
-  //   return Api.get(`/HotPlace/search/page/tag/${keyword}`);
-  // }
-  // searchPageHotPlaceByAddress(keyword) {
-  //   return Api.get(`/HotPlace/search/page/address/${keyword}`);
-  // }
+
+  // 테마(8개) 로 검색
+  searchMoreHotPlaceByTheme(btnCnt, word) {
+    return Api.get(`/HotPlace/search/more/theme/${btnCnt}/${word}`)
+      .then(res => {
+        return res.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  // 더보기로 HotPlace 검색하기 조회 - searchOption은 all/ title / content/ tag중 전달
+  searchMoreFestival(btnCnt, searchOption, word) {
+    return Api.get(`/HotPlace/search/more/${btnCnt}/${searchOption}/${word}`)
+      .then(res => {
+        return res.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
 }
 
 export default new HotplaceService();

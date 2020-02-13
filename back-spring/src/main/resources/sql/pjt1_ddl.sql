@@ -1,5 +1,15 @@
 use pjt1db;
 
+SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'pjt1db';
+SHOW DATABASES;
+SHOW TABLES FROM PJT1DB;
+
+show table status;
+
+show tables;
+
+
+
 DROP TABLE FESTIVAL;
 DROP TABLE HOTPLACE;
 DROP TABLE CITY;
@@ -8,11 +18,12 @@ DROP TABLE QNA;
 DROP TABLE FAQ;
 DROP TABLE LIKES;
 DROP TABLE COMMENT;
-DROP TABLE COURSE;
 DROP TABLE POST;
 DROP TABLE BOARD;
 DROP TABLE FOLLOW;
 DROP TABLE MEMBERS;
+
+
 SELECT * FROM FESTIVAL;
 SELECT * FROM HOTPLACE;
 SELECT * FROM CITY;
@@ -66,6 +77,7 @@ CREATE TABLE BOARD (
 	board_name			varchar(200) NOT NULL ,			# 게시판 이름(회원아이디로)
     board_del_check		boolean DEFAULT FALSE 			# 게시판 삭제여부
 );
+
 # 후기와 일정에 대한 게시물 테이블
 CREATE TABLE POST (
 	post_no				int PRIMARY KEY AUTO_INCREMENT,	# 게시글 관리번호	기본키, 자동증가
@@ -86,6 +98,7 @@ CREATE TABLE POST (
 	FOREIGN KEY(board_no) REFERENCES BOARD(board_no),
 	FOREIGN KEY(mem_no) REFERENCES MEMBERS(mem_no)
 );
+
 # 댓글 테이블
 CREATE TABLE COMMENT (
 	cmt_no			int PRIMARY KEY AUTO_INCREMENT,	# 댓글 관리번호	기본키, 자동증가
@@ -98,6 +111,7 @@ CREATE TABLE COMMENT (
 	FOREIGN KEY(post_no) REFERENCES POST(post_no),
     FOREIGN KEY(mem_no) REFERENCES MEMBERS(mem_no)
 );
+
 # 좋아요 테이블
 CREATE TABLE LIKES (
 	like_no				int PRIMARY KEY AUTO_INCREMENT,	# 좋아요 관리번호	기본키, 자동증가
@@ -145,7 +159,7 @@ create table FILES(
 );
 
 # 도시 테이블
-create table city(
+create table CITY(
 	city_no int NOT NULL KEY AUTO_INCREMENT, 		# 도시 관리번호
     city_name varchar(200) NOT NULL,		 		# 도시 이름
     city_is_overseas boolean NOT NULL,	 	 		# 국내/해외 여부
@@ -155,7 +169,7 @@ create table city(
 );
 
 # 여행지 핫플레이스 테이블
-create table hotplace(
+create table HOTPLACE(
 	hp_no int NOT NULL KEY AUTO_INCREMENT,	# 핫플 관리번호
     city_no int NOT NULL,					# 도시 번호
     hp_name varchar(200) NOT NULL,			# 핫플 이름
@@ -165,7 +179,7 @@ create table hotplace(
     hp_tag varchar(1000) 		,			# 핫플 태그
     hp_homepage varchar(500),				# 핫플 홈페이지
     hp_holiday varchar(200),				# 핫플 휴일
-    hp_fee varchar(2000),					# 핫플 요금
+    hp_fee varchar(1000),					# 핫플 요금
     hp_img varchar(500),					# 핫플 이미지
     hp_theme varchar(500),					# 핫플 테마
     hp_del_check boolean DEFAULT FALSE,		# 핫플 삭제 여부
@@ -184,7 +198,7 @@ create table FESTIVAL(
     fval_start_day date,							# 축제 시작일
     fval_end_day date,								# 축제 종료일
     fval_homepage varchar(300),						# 축제 홈페이지
-    fval_fee int DEFAULT 0,							# 축제 비용
+    fval_fee varchar(1000),							# 축제 비용
 	fval_img varchar(500),							# 축제 이미지
 	fval_host varchar(200),							# 축제 주최자
     fval_theme varchar(500),						# 축제 테마
@@ -192,6 +206,23 @@ create table FESTIVAL(
     fval_del_check boolean DEFAULT FALSE,			# 축제 삭제 여부
     FOREIGN KEY(city_no) REFERENCES CITY(city_no)
 ); 
+
+
+
+use pjt1db;
+SELECT * FROM POST;
+DESC MEMBERS;
+
+#(용도) hp, festival 테마, 회원이 가진 태그들, 포스토나 여행정보 보여줄 정형화된 기준 
+#맛집 #가족 #데이트 #쇼핑 #문화 #실내 #힐링 #전통      split할것임 
+
+DROP TABLE FOLLOW;
+DROP TABLE COMMENT;
+DROP TABLE FILES;
+DROP TABLE POST;
+DROP TABLE LIKES;
+DROP TABLE QNA;
+DROP TABLE MEMBERS;
 
 
 
