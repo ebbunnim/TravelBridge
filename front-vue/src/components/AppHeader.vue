@@ -62,8 +62,9 @@
           fit
         >
           <q-list class="q-ma-sm">
+            <!-- NavBar Hover 메뉴 부분 -->
             <div class="row justify-center">
-              <q-btn to="/page2" flat class="col-3" icon="map"></q-btn>
+              <q-btn to="/page2" flat class="col-3">Main 2 의 홈</q-btn>
               <q-btn to="/page2/pick" flat class="col-3">여행지 추천받기</q-btn>
               <q-btn to="/page2/list" flat class="col-3"
                 >도시별 축제, 핫플 검색</q-btn

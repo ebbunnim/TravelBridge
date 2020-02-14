@@ -55,6 +55,9 @@ const actions = {
 const mutations = {
   saveFvals(state, fvals) {
     state.fvals = fvals;
+  },
+  clearFvals(state) {
+    state.fvals = [];
   }
 };
 

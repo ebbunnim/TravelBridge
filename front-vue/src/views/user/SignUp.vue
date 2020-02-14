@@ -206,7 +206,7 @@ export default {
   methods: {
     SignUp() {
       this.user.mem_interest = this.currentChoices;
-      console.log(this.user.mem_birth)
+      // console.log(this.user.mem_birth)
       this.$store.dispatch("user/postSignUp", this.user);
     },
     cancle() {
@@ -221,7 +221,7 @@ export default {
           this.currentChoices += this.themaKor[key];
         }
       }
-      console.log(this.currentChoices);
+      console.log('signup에서 테마 선택: ', this.currentChoices);
     },
     clearUserForm() {
       this.user = {
