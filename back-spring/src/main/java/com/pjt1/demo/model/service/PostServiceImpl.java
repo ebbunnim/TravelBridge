@@ -123,9 +123,9 @@ public class PostServiceImpl implements PostService {
 		}
 		return null;
 	}
-	public List<Map<String, Object>> searchMorePostAll(MorePageBean pageBean){
+	public List<Map<String, Object>> searchMorePost(MorePageBean pageBean){
 		try {
-			return repo.searchMorePostAll(pageBean);
+			return repo.searchMorePost(pageBean);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -147,12 +147,12 @@ public class PostServiceImpl implements PostService {
 		}
 		return null;
 	}
-	public Post searchWithCmtAndFiles(int post_no) {
-		try {
-			Post pos = repo.searchWithCmtAndFiles(post_no);
-			return pos;
-		}catch(Exception e) {
-			e.printStackTrace();
-		}return null;
-	}
+//	public Post searchWithCmtAndFiles(int post_no) {
+//		try {
+//			Post pos = repo.searchWithCmtAndFiles(post_no);
+//			return pos;
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//		}return null;
+//	}
 }

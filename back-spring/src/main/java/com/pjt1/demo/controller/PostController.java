@@ -65,19 +65,7 @@ public class PostController {
         return handleSuccess(list);
     }
 
-    @ApiOperation("no에 따른 Post 정보 조회하는 기능")
-    @GetMapping("/Post/search/{post_no}")
-    public ResponseEntity<Map<String, Object>> search(@PathVariable int post_no) {
-        System.out.println(post_no);
-        Post Post = service.search(post_no);
-        System.out.println(Post);
-        service.updatePostHits(post_no);
-        // 그러면 여기서 포스트넘 기반으로 comment 호출하는거 하나 하고
-        // 멤버 호출하는거 하나한다음에
-        // postPagebean 하나 만들어서 그걸 넘겨주자.
-        return handleSuccess(Post);
-    }
-
+    
     @PostMapping("/Post/insert")
     @ApiOperation("Post 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Post Post) {
@@ -120,13 +108,13 @@ public class PostController {
     }
 
     @ApiOperation("더보기로 Post 전체 목록 조회")
-    @GetMapping("/Post/search/moreAll/{btnCnt}")
-    public ResponseEntity<Map<String, Object>> searchMorePostAll(MorePageBean pageBean, @PathVariable int btnCnt) {
+    @GetMapping("/Post/search/more/{btnCnt}")
+    public ResponseEntity<Map<String, Object>> searchMorePost(MorePageBean pageBean, @PathVariable int btnCnt) {
         MorePageMaker morePage = new MorePageMaker();
         int change = pageNum * btnCnt;
         pageBean.setPerPageNum(change);
         morePage.setPageBean(pageBean);
-        List<Map<String, Object>> list = service.searchMorePostAll(pageBean);
+        List<Map<String, Object>> list = service.searchMorePost(pageBean);
         return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
     }
 
@@ -153,9 +141,9 @@ public class PostController {
     }
 
     @ApiOperation("no에 따른 Post 정보 조회하는 기능")
-    @GetMapping("/Post/search/WithCmtAndFiles/{post_no}")
-    public ResponseEntity<Map<String, Object>> searchWithCmtAndFiles(@PathVariable int post_no) {
-        Post Post = service.searchWithCmtAndFiles(post_no);
+    @GetMapping("/Post/search/{post_no}")
+    public ResponseEntity<Map<String, Object>> search(int post_no) {
+        Post Post = service.search(post_no);
         service.updatePostHits(post_no);
         // 그러면 여기서 포스트넘 기반으로 comment 호출하는거 하나 하고
         // 멤버 호출하는거 하나한다음에
