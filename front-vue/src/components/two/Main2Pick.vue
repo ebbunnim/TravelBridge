@@ -99,6 +99,7 @@ export default {
       choiceAlert: false,
       loggedIn: false,
       notSelected: false,
+      // choice 관련
       currentChoices: "",
       thema: {
         food: { state: false, name: "맛집" },
@@ -126,7 +127,7 @@ export default {
       } else if (this.user.mem_interest === "") {
         this.choiceAlert = true;
       } else {
-        this.checkPastInterest()
+        this.checkPastInterest();
       }
     },
     useWithoutLogin() {
@@ -142,7 +143,6 @@ export default {
 
     checkPastInterest() {
       this.currentChoices = this.user.mem_interest;
-      // console.log('회원일 때', this.currentChoices)
       console.log("check Past Interest ==> ", this.currentChoices);
       if (this.currentChoices !== "undefined") {
         const tempInterest = this.currentChoices.split(" ");
@@ -163,7 +163,7 @@ export default {
           this.currentChoices += themaChoice[key].name + " ";
         }
       }
-      console.log("###### 1. onToggle 눌림 ######", this.currentChoices);
+      console.log("### TravelPick - onToggle 눌림 ###", this.currentChoices);
       this.getAllPicks();
     },
     getAllPicks() {

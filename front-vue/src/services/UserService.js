@@ -25,15 +25,15 @@ class UserService {
 
   updateUser(user) {
     console.log("수정시작");
+    console.log(user);
     return Api.put("/Members/update", user)
       .then(res => {
-        console.log('updateservice.js:', res.data.data)
-        return res.data.data;
+        console.log("updateservice.js:", res.data.data);
+        return res.data
       })
       .catch(e => {
         console.log(e);
       });
-    
   }
 }
 
