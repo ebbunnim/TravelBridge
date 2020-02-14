@@ -12,6 +12,7 @@ public interface PostService {
 	public void insert(Post Post);
 	public void update(Post Post);
 	public void delete(int post_no);
+	public List<Post> searchFollowingPeoplePost(int mem_no);
 	public List<Map<String, Object>> findChildLike(int no);
 	public void deleteChildLike(List<Integer> list);
 	public List<Map<String, Object>> findChildCmt(int no);

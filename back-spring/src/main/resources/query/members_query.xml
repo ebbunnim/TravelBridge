@@ -200,6 +200,7 @@
 		<result property="post_regtime" column="post_regtime"/>
 		<result property="post_city" column="post_city"/>
 		<result property="post_hits" column="post_hits"/>
+		<result property="post_writer" column="post_writer"/>
 	</resultMap>
 	<resultMap type="hotplace" id="hotplaceMap">
 		<result property="hp_no" column="hp_no"/>
@@ -303,32 +304,86 @@
 		WHERE m.mem_no = #{mem_no} AND m.mem_del_check = FALSE; 
 	</select>
 	<resultMap type="Members" id="followMem">
-		<result property="mem_no" column="I_FOLLOW"/>
-		<result property="mem_id" column="FOLLOWERS_ID"/>
-		<result property="mem_name" column="FOLLOWERS_NAME"/>
+		<result property="mem_no" column="FOLLOW_NO"/>
+		<result property="mem_id" column="FOLLOW_ID"/>
+		<result property="mem_name" column="FOLLOW_NAME"/>
 	</resultMap>
 	<resultMap type="Members" id="followingMap" >
-		<result property="mem_no" column="ME_NO"/>
+		<result property="mem_no" column="MY_NO"/>
 		<result property="mem_id" column="MY_ID"/>
 		<result property="mem_name" column="MY_NAME"/>
 		<collection property="mem_followList" ofType="Members" resultMap="followMem"/>
 	</resultMap>
 	<select id="searchMyFollowPeople" parameterType ="int" resultMap="followingMap">
 	SELECT 
-	m1.mem_no AS ME_NO, 
+	m1.mem_no AS MY_NO, 
 	m1.mem_id AS MY_ID, 
 	m1.mem_name AS MY_NAME,
-	f.follower_no,
-	m2.mem_no AS I_FOLLOW,
-	m2.mem_id AS FOLLOWERS_ID, 
-	m2.mem_name AS FOLLOWERS_NAME
+	m2.mem_no AS FOLLOW_NO,
+	m2.mem_id AS FOLLOW_ID, 
+	m2.mem_name AS FOLLOW_NAME
 	FROM MEMBERS m1
 	LEFT JOIN FOLLOW f
 	ON m1.mem_no = f.follower_no
 	LEFT JOIN MEMBERS m2
 	ON f.following_no = m2.mem_no
-	WHERE m1.mem_no = #{mem_no:INTEGER};
+	WHERE m1.mem_no = #{mem_no:INTEGER}
+	AND f.follow_del_check = FALSE
+	AND m2.mem_del_check = FALSE
+	AND m1.mem_del_check = FALSE;
 	</select>
 	
+	<resultMap type="Members" id="followMeMap" >
+		<result property="mem_no" column="MY_NO"/>
+		<result property="mem_id" column="MY_ID"/>
+		<result property="mem_name" column="MY_NAME"/>
+		<collection property="mem_followMe" ofType="Members" resultMap="followMem"/>
+	</resultMap>
+	<select id="searchFollowMePeople" parameterType="int" resultMap="followMeMap">
+	SELECT 
+	f.following_no, 
+	m2.mem_no AS MY_NO,
+	m2.mem_id AS MY_ID, 
+	m2.mem_name AS MY_NAME,
+	m1.mem_no AS FOLLOW_NO, 
+	m1.mem_id AS FOLLOW_ID, 
+	m1.mem_name AS FOLLOW_NAME
+	FROM MEMBERS m1
+	LEFT JOIN FOLLOW f
+	ON m1.mem_no = f.follower_no
+	LEFT JOIN MEMBERS m2
+	ON f.following_no = m2.mem_no
+	WHERE m2.mem_no = #{mem_no:INTEGER}
+	AND f.follow_del_check = FALSE
+	AND m2.mem_del_check = FALSE
+	AND m1.mem_del_check = FALSE;
+	</select>
+	
+	<!-- <resultMap type="Members" id="followPost">
+		<collection property="mem_followPost" ofType="Post" resultMap="postMap"/>
+	</resultMap>
+	<select id="searchFollowingPeoplePost" parameterType="int" resultType="Post">
+	SELECT 
+		p.post_no, 
+		p.post_title, 
+		p.post_category, 
+		p.post_regtime, 
+		p.post_city, 
+		p.post_hits
+	FROM post p
+	WHERE p.mem_no
+	IN
+		(SELECT f.following_no
+		FROM MEMBERS m1
+		LEFT JOIN FOLLOW f
+		ON m1.mem_no = f.follower_no
+		LEFT JOIN MEMBERS m2
+		ON f.following_no = m2.mem_no
+		WHERE m1.mem_no = #{mem_no:INTEGER}
+	    AND m1.mem_del_check = FALSE 
+	    AND m2.mem_del_check = FALSE 
+	    AND f.follow_del_check = FALSE)
+	ORDER BY p.post_regtime DESC;
+	</select> -->
 </mapper>
 

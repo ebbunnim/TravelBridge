@@ -33,6 +33,14 @@ public class PostServiceImpl implements PostService {
 		}
 		return null;
 	}
+
+	public List<Post> searchFollowingPeoplePost(int mem_no){
+		try {
+			return repo.searchFollowingPeoplePost(mem_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
 	@Override
 	public void insert(Post Post) {
 		try {

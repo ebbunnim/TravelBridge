@@ -37,6 +37,7 @@ import com.pjt1.demo.model.service.FollowService;
 import com.pjt1.demo.model.service.HotPlaceService;
 import com.pjt1.demo.model.service.JwtService;
 import com.pjt1.demo.model.service.MembersService;
+import com.pjt1.demo.model.service.PostService;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -53,6 +54,8 @@ public class MembersController {
     private FollowService f_service;
     @Autowired
     private BoardService b_service;
+    @Autowired
+    private PostService p_service;
     @Autowired
     private HotPlaceService hp_service;
     @Autowired
@@ -124,7 +127,21 @@ public class MembersController {
     	Members members = service.searchMyFollowPeople(mem_no);
         return handleSuccess(members);
     }
-
+    @ApiOperation("no에 따른 Member의 FollowMeList를 조회하는 기능")
+    @GetMapping("/Members/searchFollowMePeople/{mem_no}")
+    public ResponseEntity<Map<String, Object>> searchFollowMePeople(int mem_no) {
+    	Members members = service.searchFollowMePeople(mem_no);
+        return handleSuccess(members);
+    }
+    @ApiOperation("no에 따른 Member의 Following List의 Post를 조회하는 기능")
+    @GetMapping("/Members/searchFollowingPeoplePost/{mem_no}")
+    public ResponseEntity<Map<String, Object>> searchFollowingPeoplePost(int mem_no) {
+//    	Members members = service.searchFollowingPeoplePost(mem_no);
+    	List<Post> postList = p_service.searchFollowingPeoplePost(mem_no);
+    	Members getUser = service.search(mem_no);
+    	getUser.setMem_followPost(postList);
+    	return handleSuccess(getUser);
+    }
     @ApiOperation("Member 조회(email에 따른)")
     @GetMapping("/Members/search/email/{mem_email}")
     public ResponseEntity<Map<String, Object>> searchMemberByEmail(@PathVariable String mem_email) {

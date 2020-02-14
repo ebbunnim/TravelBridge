@@ -90,6 +90,21 @@ public class MembersServiceImpl implements MembersService {
 			e.printStackTrace();
 		}return null;
 	};
+
+	public Members searchFollowMePeople(int mem_no) {
+		try {
+			return repo.searchFollowMePeople(mem_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+//	public Members searchFollowingPeoplePost(int mem_no) {
+//		try {
+//			return repo.searchFollowingPeoplePost(mem_no);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}return null;
+//	}
 	
 	public Members searchMemberLikeHotPlace(int mem_no) {
 		try {

@@ -25,7 +25,8 @@ public interface MembersDao {
 	public Members searchMemberLikeHotPlace(int mem_no);
 	public Members searchMemberLikeFestival(int mem_no);
 	public Members searchMyFollowPeople(int mem_no);
-	
+	public Members searchFollowMePeople(int mem_no);
+//	public Members searchFollowingPeoplePost(int mem_no);
 	public List<Map<String, Object>> findChildBoard(int no);
 	public List<Map<String, Object>> findChildQna(int no);
 	public List<Map<String, Object>> findChildFollow(int no);
@@ -40,4 +41,5 @@ public interface MembersDao {
 	public void deleteChildPost(List<Integer> list);
 	public void deleteChildComment(List<Integer> list);
 	public void deleteChildFiles(List<Integer> list);
+
 }

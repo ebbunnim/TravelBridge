@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.pjt1.demo.model.dto.Members;
 import com.pjt1.demo.model.dto.Post;
 import com.pjt1.demo.utils.MorePageBean;
 
@@ -25,7 +26,8 @@ public interface PostDao {
 	public void deleteChildCmt(List<Integer> list);
 	public List<Map<String, Object>> findChildFiles(int no);
 	public void deleteChildFiles(List<Integer> list);
-	
+
+	public List<Post> searchFollowingPeoplePost(int mem_no);
 	public Post searchByCategory(String category);
 	public void updatePostHits(int post_no);
 	public List<Map<String, Object>> searchMorePostAll(MorePageBean pageBean);

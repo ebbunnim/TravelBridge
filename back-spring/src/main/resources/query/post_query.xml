@@ -211,4 +211,22 @@
    	<select id="searchAll"	resultType="post">
 		SELECT * FROM post WHERE post_del_check = false
 	</select>
+	<select id="searchFollowingPeoplePost" parameterType="int" resultType="Post">
+	SELECT 
+		p.*
+	FROM post p
+	WHERE p.mem_no
+	IN
+		(SELECT f.following_no
+		FROM MEMBERS m1
+		LEFT JOIN FOLLOW f
+		ON m1.mem_no = f.follower_no
+		LEFT JOIN MEMBERS m2
+		ON f.following_no = m2.mem_no
+		WHERE m1.mem_no = #{mem_no:INTEGER}
+	    AND m1.mem_del_check = FALSE 
+	    AND m2.mem_del_check = FALSE 
+	    AND f.follow_del_check = FALSE)
+	ORDER BY p.post_regtime DESC;
+	</select>
 </mapper>
