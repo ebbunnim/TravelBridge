@@ -1690,10 +1690,8 @@ VALUES
 "#맛집 #가족 #데이트 #쇼핑 #문화 #실내 #힐링 #전통")
 ;
 
-select *
-from festival;
-select *
-from members;
+select * from festival;
+select * from members;
 #맛집 #가족 #데이트 #쇼핑 #문화 #실내 #힐링 #전통
 update festival set
 fval_theme = '#데이트 #힐링 #문화 #가족'
@@ -1779,10 +1777,8 @@ SELECT
     p.post_city,
     p.post_hits
 FROM members m
-    LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 1
-    LEFT JOIN post p ON l.post_no = p.post_no AND p.post_del_check=FALSE
-WHERE m.mem_no = 2 AND m.mem_del_check = FALSE;
-select *
-from post;
-select *
-from comment;
+LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 1
+LEFT JOIN post p ON l.post_no = p.post_no AND p.post_del_check=FALSE
+		WHERE m.mem_no = 2 AND m.mem_del_check = FALSE; 
+        select * from post;
+select * from comment;
