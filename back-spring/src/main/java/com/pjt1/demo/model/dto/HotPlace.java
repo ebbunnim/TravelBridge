@@ -1,6 +1,7 @@
 package com.pjt1.demo.model.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -31,4 +32,6 @@ public class HotPlace implements Serializable  {
 	@Getter @Setter private String hp_img;// varchar(500),
 	@Getter @Setter private String hp_theme;// varchar(500),	# 핫플 테마# 핫플 이미지
 	@Getter @Setter private boolean hp_del_check;// boolean DEFAULT FALSE		# 핫플 삭제 여부
+//	@Getter @Setter private List<Integer> deleteLikeList;
+	
 }

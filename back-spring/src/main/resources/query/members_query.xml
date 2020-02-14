@@ -25,6 +25,147 @@
 	   mem_del_check = true
 	   WHERE mem_no = #{mem_no} AND mem_del_check = FALSE
 	</delete>
+	<select id="findChildBoard" parameterType = "int" resultType = "Board">
+	SELECT board_no
+	FROM board
+	WHERE mem_no = #{mem_no:INTEGER} AND board_del_check = FALSE
+	</select>
+	<select id="findChildQna" parameterType = "int" resultType = "Qna">
+	SELECT qna_no
+	FROM qna
+	WHERE mem_no = #{mem_no:INTEGER} AND qna_del_check = FALSE
+	</select>
+	<select id="findChildFollow" parameterType = "int" resultType = "Follow">
+	SELECT follow_no
+	FROM follow
+	WHERE follower_no = #{follwer_no:INTEGER} AND follow_del_check = FALSE;
+	</select>
+	<select id="findChildLikes" parameterType = "int" resultType = "Likes">
+	SELECT like_no
+	FROM likes
+	WHERE liker_mem_no = #{liker_mem_no:INTEGER} AND like_del_check = FALSE
+	</select>
+	<select id="findChildPost" parameterType = "int" resultType = "Post">
+	SELECT post_no
+	FROM post
+	WHERE mem_no = #{mem_no:INTEGER} AND post_del_check = FALSE
+	</select>
+	<select id="findChildComment" parameterType = "int" resultType = "Comment">
+	SELECT cmt_no
+	FROM comment
+	WHERE mem_no = #{mem_no:INTEGER} AND cmt_del_check = FALSE
+	</select>
+	<select id="findChildFiles" parameterType = "int" resultType = "Files">
+	SELECT files_no
+	FROM files
+	WHERE mem_no = #{mem_no:INTEGER} AND files_del_check = FALSE
+	</select>
+	
+	<delete id="deleteChildBoard" parameterType = "hashmap">
+		<choose>
+		<when test ="list.size!=0">
+			UPDATE board
+			SET board_del_check = TRUE 
+			WHERE board_no in 
+			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
+				#{item}
+			</foreach>
+		</when>
+		<otherwise>
+			SELECT 0 FROM DUAL;
+		</otherwise>
+		</choose>
+	</delete>
+	<delete id="deleteChildQna" parameterType = "hashmap">
+		<choose>
+		<when test ="list.size!=0">
+			UPDATE qna
+			SET qna_del_check = TRUE 
+			WHERE qna_no in 
+			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
+				#{item}
+			</foreach>
+		</when>
+		<otherwise>
+			SELECT 0 FROM DUAL;
+		</otherwise>
+		</choose>
+	</delete>
+	<delete id="deleteChildFollow" parameterType = "hashmap">
+		<choose>
+		<when test ="list.size!=0">
+			UPDATE follow
+			SET follow_del_check = TRUE 
+			WHERE follower_no in 
+			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
+				#{item}
+			</foreach>
+		</when>
+		<otherwise>
+			SELECT 0 FROM DUAL;
+		</otherwise>
+		</choose>
+	</delete>
+	<delete id="deleteChildLikes" parameterType = "hashmap">
+		<choose>
+		<when test ="list.size!=0">
+			UPDATE likes
+			SET like_del_check = TRUE 
+			WHERE like_no in 
+			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
+				#{item}
+			</foreach>
+		</when>
+		<otherwise>
+			SELECT 0 FROM DUAL;
+		</otherwise>
+		</choose>
+	</delete>
+	<delete id="deleteChildPost" parameterType = "hashmap">
+		<choose>
+		<when test ="list.size!=0">
+			UPDATE post
+			SET post_del_check = TRUE 
+			WHERE post_no in 
+			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
+				#{item}
+			</foreach>
+		</when>
+		<otherwise>
+			SELECT 0 FROM DUAL;
+		</otherwise>
+		</choose>
+	</delete>
+	<delete id="deleteChildComment" parameterType = "hashmap">
+		<choose>
+		<when test ="list.size!=0">
+			UPDATE comment
+			SET cmt_del_check = TRUE 
+			WHERE cmt_no in 
+			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
+				#{item}
+			</foreach>
+		</when>
+		<otherwise>
+			SELECT 0 FROM DUAL;
+		</otherwise>
+		</choose>
+	</delete>
+	<delete id="deleteChildFiles" parameterType = "hashmap">
+		<choose>
+		<when test ="list.size!=0">
+			UPDATE files 
+			SET files_del_check = TRUE 
+			WHERE files_no in 
+			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
+				#{item}
+			</foreach>
+		</when>
+		<otherwise>
+			SELECT 0 FROM DUAL;
+		</otherwise>
+		</choose>
+	</delete>
    	<update id="update"		parameterType="members">
 		UPDATE members SET
 		mem_id=#{mem_id:VARCHAR}, mem_email=#{mem_email:VARCHAR}, 
@@ -49,18 +190,20 @@
 		FROM members 
 		WHERE mem_del_check = false
 	</select> 
-
 	<select id="searchMemberByEmail" parameterType="String" resultType="Members">
 		SELECT * FROM members WHERE mem_email=#{mem_email:VARCHAR} and mem_del_check=false
 	</select>
 	<resultMap type="post" id="postMap">
+		<result property="post_no" column="post_no"/>
 		<result property="post_title" column="post_title"/>
 		<result property="post_category" column="post_category"/>
 		<result property="post_regtime" column="post_regtime"/>
 		<result property="post_city" column="post_city"/>
 		<result property="post_hits" column="post_hits"/>
+		<result property="post_writer" column="post_writer"/>
 	</resultMap>
 	<resultMap type="hotplace" id="hotplaceMap">
+		<result property="hp_no" column="hp_no"/>
 		<result property="hp_name" column="hp_name"/>
 		<result property="hp_theme" column="hp_theme"/>
 		<result property="hp_tag" column="hp_tag"/>
@@ -73,6 +216,7 @@
 		<result property="hp_img" column="hp_img"/>
 	</resultMap>
 	<resultMap type="festival" id="festivalMap">
+		<result property="fval_no" column="fval_no"/>
 		<result property="fval_name" column="fval_name"/>
 		<result property="fval_theme" column="fval_theme"/>
 		<result property="fval_tag" column="fval_tag"/>
@@ -120,7 +264,7 @@
 		SELECT 
 		m.mem_id, 
 		l.like_no, 
-		l.hotplace_no, 
+		h.hp_no, 
 		h.hp_name, 
 		h.hp_theme, 
 		h.hp_tag, 
@@ -140,7 +284,7 @@
 		SELECT 
 		m.mem_id, 
 		l.like_no, 
-		l.festival_no, 
+		f.fval_no, 
 		f.fval_name, 
 		f.fval_theme, 
 		f.fval_tag, 
@@ -159,5 +303,87 @@
 		LEFT JOIN festival f ON l.festival_no = f.fval_no AND f.fval_del_check=FALSE
 		WHERE m.mem_no = #{mem_no} AND m.mem_del_check = FALSE; 
 	</select>
+	<resultMap type="Members" id="followMem">
+		<result property="mem_no" column="FOLLOW_NO"/>
+		<result property="mem_id" column="FOLLOW_ID"/>
+		<result property="mem_name" column="FOLLOW_NAME"/>
+	</resultMap>
+	<resultMap type="Members" id="followingMap" >
+		<result property="mem_no" column="MY_NO"/>
+		<result property="mem_id" column="MY_ID"/>
+		<result property="mem_name" column="MY_NAME"/>
+		<collection property="mem_followList" ofType="Members" resultMap="followMem"/>
+	</resultMap>
+	<select id="searchMyFollowPeople" parameterType ="int" resultMap="followingMap">
+	SELECT 
+	m1.mem_no AS MY_NO, 
+	m1.mem_id AS MY_ID, 
+	m1.mem_name AS MY_NAME,
+	m2.mem_no AS FOLLOW_NO,
+	m2.mem_id AS FOLLOW_ID, 
+	m2.mem_name AS FOLLOW_NAME
+	FROM MEMBERS m1
+	LEFT JOIN FOLLOW f
+	ON m1.mem_no = f.follower_no
+	LEFT JOIN MEMBERS m2
+	ON f.following_no = m2.mem_no
+	WHERE m1.mem_no = #{mem_no:INTEGER}
+	AND f.follow_del_check = FALSE
+	AND m2.mem_del_check = FALSE
+	AND m1.mem_del_check = FALSE;
+	</select>
+	
+	<resultMap type="Members" id="followMeMap" >
+		<result property="mem_no" column="MY_NO"/>
+		<result property="mem_id" column="MY_ID"/>
+		<result property="mem_name" column="MY_NAME"/>
+		<collection property="mem_followMe" ofType="Members" resultMap="followMem"/>
+	</resultMap>
+	<select id="searchFollowMePeople" parameterType="int" resultMap="followMeMap">
+	SELECT 
+	f.following_no, 
+	m2.mem_no AS MY_NO,
+	m2.mem_id AS MY_ID, 
+	m2.mem_name AS MY_NAME,
+	m1.mem_no AS FOLLOW_NO, 
+	m1.mem_id AS FOLLOW_ID, 
+	m1.mem_name AS FOLLOW_NAME
+	FROM MEMBERS m1
+	LEFT JOIN FOLLOW f
+	ON m1.mem_no = f.follower_no
+	LEFT JOIN MEMBERS m2
+	ON f.following_no = m2.mem_no
+	WHERE m2.mem_no = #{mem_no:INTEGER}
+	AND f.follow_del_check = FALSE
+	AND m2.mem_del_check = FALSE
+	AND m1.mem_del_check = FALSE;
+	</select>
+	
+	<!-- <resultMap type="Members" id="followPost">
+		<collection property="mem_followPost" ofType="Post" resultMap="postMap"/>
+	</resultMap>
+	<select id="searchFollowingPeoplePost" parameterType="int" resultType="Post">
+	SELECT 
+		p.post_no, 
+		p.post_title, 
+		p.post_category, 
+		p.post_regtime, 
+		p.post_city, 
+		p.post_hits
+	FROM post p
+	WHERE p.mem_no
+	IN
+		(SELECT f.following_no
+		FROM MEMBERS m1
+		LEFT JOIN FOLLOW f
+		ON m1.mem_no = f.follower_no
+		LEFT JOIN MEMBERS m2
+		ON f.following_no = m2.mem_no
+		WHERE m1.mem_no = #{mem_no:INTEGER}
+	    AND m1.mem_del_check = FALSE 
+	    AND m2.mem_del_check = FALSE 
+	    AND f.follow_del_check = FALSE)
+	ORDER BY p.post_regtime DESC;
+	</select> -->
 </mapper>
 
