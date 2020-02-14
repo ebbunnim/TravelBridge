@@ -1,17 +1,25 @@
 <template>
   <div align="center">
-    <div class="row justify-center">
-      <q-input v-model="text" label="검색어" class="col-7">
+    <div class="row justify-center" style="margin:5% 0 0 0 ;">
+      <q-select value="asd" label="전체" filled class="col-1" />
+      <q-input label="검색" class="col-5" color="black" label-color="black" style="margin-left:15px;">
         <template v-slot:append>
           <q-icon
             v-if="text !== ''"
             name="close"
             @click="text = ''"
             class="cursor-pointer"
+            color="black"
           />
-          <q-icon name="search" />
+          <q-icon name="search" color="black" />
         </template>
       </q-input>
+      <div class="col-8 q-py-md row justify-center">
+        <p style="padding: 16px 0 0 0;">추천 태그 :</p>
+        <q-btn color="rgba(0,0,0,0.47)" flat label="#맛집" />
+        <q-btn color="rgba(0,0,0,0.47)" flat label="#너네집" />
+        <q-btn color="rgba(0,0,0,0.47)" flat label="#우리집" />
+      </div>
     </div>
 
     <div class="row justify-center" align="center">
@@ -79,30 +87,14 @@
                   <q-timeline color="secondary">
                     <q-timeline-entry body="November, 2017" />
 
-                    <q-timeline-entry
-                      title="Event Title"
-                      subtitle="February 22, 1986"
-                      :body="body"
-                    />
+                    <q-timeline-entry title="Event Title" subtitle="February 22, 1986" />
 
-                    <q-timeline-entry
-                      title="Event Title"
-                      subtitle="February 22, 1986"
-                      :body="body"
-                    />
+                    <q-timeline-entry title="Event Title" subtitle="February 22, 1986" />
 
                     <q-timeline-entry body="November, 2017" />
-                    <q-timeline-entry
-                      title="Event Title"
-                      subtitle="February 22, 1986"
-                      :body="body"
-                    />
+                    <q-timeline-entry title="Event Title" subtitle="February 22, 1986" />
 
-                    <q-timeline-entry
-                      title="Event Title"
-                      subtitle="February 22, 1986"
-                      :body="body"
-                    />
+                    <q-timeline-entry title="Event Title" subtitle="February 22, 1986" />
                   </q-timeline>
                 </q-scroll-area>
               </q-card-section>
@@ -121,10 +113,7 @@
             </q-card-section>
 
             <q-card-section class="col-5 flex flex-center">
-              <q-img
-                class="rounded-borders"
-                src="https://cdn.quasar.dev/img/parallax2.jpg"
-              />
+              <q-img class="rounded-borders" src="https://cdn.quasar.dev/img/parallax2.jpg" />
             </q-card-section>
           </q-card-section>
         </template>
