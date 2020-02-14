@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pjt1.demo.model.dto.HotPlace;
+import com.pjt1.demo.model.dto.Likes;
 import com.pjt1.demo.model.service.HotPlaceService;
 import com.pjt1.demo.utils.MorePageBean;
 import com.pjt1.demo.utils.MorePageMaker;
@@ -73,10 +74,15 @@ public class HotPlaceController {
 		service.insert(HotPlace);
 		return handleSuccess("");
 	}
-
 	@ApiOperation("HotPlace 정보 삭제")
 	@DeleteMapping("/HotPlace/{no}")
 	public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
+		List<Map<String, Object>> delList_Likes = service.findChildLike(no);
+		System.out.println(delList_Likes);
+		List<Integer> del_Likes_IndexList = new ArrayList<Integer>();
+		for(Object o : delList_Likes) {  del_Likes_IndexList.add(((Likes) o).getLike_no());}
+		System.out.println(del_Likes_IndexList);
+		service.deleteChildLike(del_Likes_IndexList);
 		service.delete(no);
 		return handleSuccess("삭제 완료");
 	}
@@ -177,47 +183,3 @@ public class HotPlaceController {
 		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
 	}
 }
-/*
-	@ApiOperation("페이징된 Hotplace 전체 목록 조회")
-	@GetMapping("/HotPlace/search/pageAll")
-	public ResponseEntity<Map<String, Object>> searchPageHotPlaceAll(PerPageBean pageBean) {
-		PerPageMaker pageMaker = new PerPageMaker();
-		pageMaker.setPageBean(pageBean);
-		pageMaker.setTotalCnt(service.getCountHotPlaceAll());
-		List<Map<String, Object>> list = service.searchPageHotPlaceAll(pageBean);
-		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
-	}
-	@ApiOperation("페이징된 Hotplace 도시이름으로 목록 조회")
-	@GetMapping("/HotPlace/search/page/cityname/{keyword}")
-	public ResponseEntity<Map<String, Object>> searchPageHotPlaceByCityName(PerPageBean pageBean,
-			@PathVariable String keyword) {
-		PerPageMaker pageMaker = new PerPageMaker();
-		pageBean.setKeyword(keyword);
-		pageMaker.setPageBean(pageBean);
-		pageMaker.setTotalCnt(service.getCountHotPlaceByCityName(keyword));
-		List<Map<String, Object>> list = service.searchPageHotPlaceByCityName(pageBean);
-		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
-	}
-	@ApiOperation("페이징된 Hotplace 태그로 목록 조회")
-	@GetMapping("/HotPlace/search/page/tag/{keyword}")
-	public ResponseEntity<Map<String, Object>> searchPageHotPlaceByTag(PerPageBean pageBean,
-			@PathVariable String keyword) {
-		PerPageMaker pageMaker = new PerPageMaker();
-		pageBean.setKeyword(keyword);
-		pageMaker.setPageBean(pageBean);
-		pageMaker.setTotalCnt(service.getCountHotPlaceByTag(keyword));
-		List<Map<String, Object>> list = service.searchPageHotPlaceByTag(pageBean);
-		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
-	}
-@ApiOperation("페이징된 Hotplace 주소로 목록 조회")
-	@GetMapping("/HotPlace/search/page/address/{keyword}")
-	public ResponseEntity<Map<String, Object>> searchPageHotPlaceByAddress(PerPageBean pageBean,
-			@PathVariable String keyword) {
-		PerPageMaker pageMaker = new PerPageMaker();
-		pageBean.setKeyword(keyword);
-		pageMaker.setPageBean(pageBean);
-		pageMaker.setTotalCnt(service.getCountHotPlaceByAddress(keyword));
-		List<Map<String, Object>> list = service.searchPageHotPlaceByAddress(pageBean);
-		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
-	}
-*/

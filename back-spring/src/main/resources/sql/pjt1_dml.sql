@@ -1,4 +1,92 @@
-use pjt1db;
+##################################################
+# FAQ DML 
+INSERT INTO faq
+(faq_category, faq_question, faq_answer)
+VALUES (
+'Login', 
+'회원가입은 어떻게 합니까?', 
+'TravelBridge는 우측 상단의 로그인 버튼을 통해 회원가입을 신청할 수 있으며, 네이버와 구글 아이디를 통해서도 로그인 할 수 있는 소셜로그인 서비스를 지원하고 있습니다.'
+),
+('Login', 
+'사용자 아이디 또는 이메일 주소가 일시 정지된 계정과 연결되어 있는 경우 어떻게 합니까?'
+,'일시 정지된 계정에 연결된 사용자 아이디와 이메일 주소는 어떤 경우에도 사용할 수 없습니다.'
+),(
+'Login',
+'회원정보 수정은  어떻게 합니까?',
+'로그인한 상태에서 My Page로 들어가 회원정보 수정을 할 수 있습니다.'
+),(
+'Login',
+'회원탈퇴는 어떻게 합니까?',
+'로그인한 상태에서 My Page로 들어가 회원 탈퇴를 신청할 수 있습니다. 이후에 동일한 아이디로 재가입은 불가능합니다.'
+);
+
+SELECT * FROM FAQ;
+##################################################
+# MEMBERS DML 
+DESC MEMBERS;
+
+INSERT INTO members
+(mem_id, mem_email, 
+mem_phone, 
+mem_name, mem_sex,
+mem_birth, mem_address, 
+mem_receive_email, mem_interest, 
+mem_token, mem_login_type) 
+VALUES (
+'admin', 'admin@gmail.com', 
+'010-1234-5432', 
+'관리인',0, 
+'2000-08-20', '서울시 강남구', 
+true, '맛집,혼술', '', 0
+),(
+'tester', 'tester@naver.com',
+'010-7777-6555',
+'테스터',1,
+'1999-01-02', '서울시 용산구',
+false, '없음','',1
+),(
+'vistior', 'visiter@daum.net',
+'010-3333-4444',
+'방문자테스터',0,
+'1958-05-07','경기도 수원시',
+true, '치킨', '',0
+);
+
+UPDATE MEMBERS SET mem_grant = 2 WHERE mem_no = 1;
+UPDATE MEMBERS SET mem_grant = 1 WHERE mem_no = 2;
+SELECT * FROM MEMBERS;
+
+##################################################
+# QNA DML 
+INSERT INTO qna
+(mem_no, qna_category, qna_title, qna_content, qna_answer) 
+VALUES (
+	2, 
+	'운영', 
+	'사이트 운영 관련된 질문이 있습니다.', 
+	'사이트의 수익구조가 어떻게 됩니까?',
+	''
+),(
+3, 
+'기타', 
+'가장 인기가 많은 나라는 어디인가요??', 
+'유럽여행 가고싶은데 나라가 너무 많아서 고르기 어려워요',
+''
+),
+(3,
+'기타',
+'당일치기 여행 추천해주세요',
+'당일치기 국내 여행지 추천해주세요. 여행지마다 갈만한 곳이랑 맛집도 알려주세요.',
+'');
+
+
+UPDATE qna SET
+qna_answer = '저희 사이트는 수익창출이 목적이 아닙니다.'
+WHERE qna_no = 1;
+
+UPDATE qna SET
+qna_answer = ' 당일치기 국내여행으로는 남이섬을 추천드리겠습니다. 볼거리로는 겨울연가 촬영지가 있고 맛집은 ...'
+WHERE qna_no = 3;
 
 
 
@@ -1552,3 +1640,83 @@ VALUES
 "#맛집 #가족 #데이트 #쇼핑 #문화 #실내 #힐링 #전통")
 ; 
 
+select * from festival;
+select * from members;
+#맛집 #가족 #데이트 #쇼핑 #문화 #실내 #힐링 #전통
+update festival set
+fval_theme = '#데이트 #힐링 #문화 #가족'
+where fval_no = 9;
+
+
+select * from festival
+where fval_del_check = FALSE
+AND
+(fval_name like concat('%','','%') OR
+fval_content like concat('%','','%') OR
+fval_tag like concat('%','','%'));
+DESC hotplace;
+update festival set fval_tag = '노꿀' where fval_no = 8; 
+update festival set fval_del_check = true where fval_no = 2; 
+SELECT *
+FROM festival
+WHERE fval_del_check = FALSE 
+ORDER BY fval_no
+LIMIT 0, 4;
+select * from hotplace;
+desc files;
+
+##########################
+# 연관 DELETE를 위한 추출 쿼리
+# post - like, hotplace - like, festival - like
+UPDATE LIKES SET like_del_check = TRUE WHERE like_no in (0);
+select * from likes;
+SELECT like_no
+FROM likes
+WHERE like_type = 1 AND post_no = 4 AND like_del_check = FALSE;
+
+SELECT like_no
+FROM likes
+WHERE like_type = 2 AND hotplace_no = 4 AND like_del_check = FALSE;
+
+SELECT like_no
+FROM likes
+WHERE like_type = 3 AND festival_no = 4 AND like_del_check = FALSE;
+
+select * from likes;
+select * from members;
+# post - comment, post - files
+#UPDATE COMMENT SET cmt_del_check = TRUE WHERE post_no in (,,,,,,);
+
+SELECT post_no
+FROM comment
+WHERE post_no = 3 AND cmt_del_check = FALSE;
+
+#UPDATE FILES SET files_del_check = TRUE WHERE post_no in (,,,,,,);
+
+SELECT post_no
+FROM files
+WHERE post_no = 2 AND files_del_check = FALSE;
+
+# city - hotplace, city - festival 
+
+# members - follow, members - likes, members - post, members - comment, members - qna
+select * from likes;
+update likes set like_del_check = false where liker_mem_no = 2 and post_no = 2;
+update post set post_del_check = false where post_no = 2;
+select * from post;
+
+SELECT 
+m.mem_id, 
+l.like_no, 
+l.post_no, 
+p.post_title, 
+p.post_category, 
+p.post_regtime, 
+p.post_city, 
+p.post_hits
+FROM members m
+LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 1
+LEFT JOIN post p ON l.post_no = p.post_no AND p.post_del_check=FALSE
+		WHERE m.mem_no = 2 AND m.mem_del_check = FALSE; 
+        select * from post;
+select * from comment;

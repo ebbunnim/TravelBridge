@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pjt1.demo.model.dto.Festival;
+import com.pjt1.demo.model.dto.Likes;
 import com.pjt1.demo.model.service.FestivalService;
 import com.pjt1.demo.utils.MorePageBean;
 import com.pjt1.demo.utils.MorePageMaker;
@@ -75,7 +76,12 @@ public class FestivalController{
 	@ApiOperation("Festival 정보 삭제")
     @DeleteMapping("/Festival/delete/{fval_no}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable int fval_no) {
-        service.delete(fval_no);
+		List<Map<String, Object>> delList_Likes = service.findChildLike(fval_no);
+		System.out.println(delList_Likes);
+		List<Integer> del_Likes_IndexList = new ArrayList<Integer>();
+		for(Object o : delList_Likes) {  del_Likes_IndexList.add(((Likes) o).getLike_no());}
+		service.deleteChildLike(del_Likes_IndexList);
+		service.delete(fval_no);
         return handleSuccess("삭제 완료");
     }
 	@ApiOperation("Festival 정보 수정")

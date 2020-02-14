@@ -12,6 +12,13 @@ public interface PostService {
 	public void insert(Post Post);
 	public void update(Post Post);
 	public void delete(int post_no);
+	public List<Post> searchFollowingPeoplePost(int mem_no);
+	public List<Map<String, Object>> findChildLike(int no);
+	public void deleteChildLike(List<Integer> list);
+	public List<Map<String, Object>> findChildCmt(int no);
+	public void deleteChildCmt(List<Integer> list);
+	public List<Map<String, Object>> findChildFiles(int no);
+	public void deleteChildFiles(List<Integer> list);
 	public Post searchByCategory(String category);
 	public void updatePostHits(int post_no);
 	public List<Map<String, Object>> searchMorePostAll(MorePageBean pageBean);

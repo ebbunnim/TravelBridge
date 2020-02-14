@@ -53,7 +53,9 @@ import {
   QPopupEdit,
   QSelect,
   QDate,
-  QPopupProxy
+  QPopupProxy,
+  QCardActions,
+  QDialog
 } from "quasar";
 
 Vue.use(Quasar, {
@@ -106,7 +108,9 @@ Vue.use(Quasar, {
     QPopupEdit,
     QSelect,
     QDate,
-    QPopupProxy
+    QPopupProxy,
+    QCardActions,
+    QDialog
   },
   directives: {
     ClosePopup

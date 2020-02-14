@@ -33,6 +33,14 @@ public class PostServiceImpl implements PostService {
 		}
 		return null;
 	}
+
+	public List<Post> searchFollowingPeoplePost(int mem_no){
+		try {
+			return repo.searchFollowingPeoplePost(mem_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
 	@Override
 	public void insert(Post Post) {
 		try {
@@ -53,6 +61,48 @@ public class PostServiceImpl implements PostService {
 	public void delete(int post_no) {
 		try {
 			repo.delete(post_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public List<Map<String, Object>> findChildLike(int no){
+		try {
+			return repo.findChildLike(no);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+	public void deleteChildLike(List<Integer> list) {
+		try {
+			repo.deleteChildLike(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	};
+	public List<Map<String, Object>> findChildCmt(int no){
+		try {
+			return repo.findChildCmt(no);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+	public void deleteChildCmt(List<Integer> list) {
+		try {
+			repo.deleteChildCmt(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public List<Map<String, Object>> findChildFiles(int no){
+		try {
+			return repo.findChildFiles(no);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+	public void deleteChildFiles(List<Integer> list) {
+		try {
+			repo.deleteChildFiles(list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

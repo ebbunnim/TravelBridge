@@ -32,7 +32,6 @@ SELECT * FROM QNA;
 SELECT * FROM FAQ;
 SELECT * FROM LIKES;
 SELECT * FROM COMMENT;
-SELECT * FROM COURSE;
 SELECT * FROM POST;
 SELECT * FROM BOARD;
 SELECT * FROM FOLLOW;
@@ -167,7 +166,6 @@ create table CITY(
     city_img varchar(500),					 		# 도시 이미지
     city_del_check boolean DEFAULT FALSE	 		# 도시 삭제 여부
 );
-
 # 여행지 핫플레이스 테이블
 create table HOTPLACE(
 	hp_no int NOT NULL KEY AUTO_INCREMENT,	# 핫플 관리번호
@@ -185,7 +183,6 @@ create table HOTPLACE(
     hp_del_check boolean DEFAULT FALSE,		# 핫플 삭제 여부
 	FOREIGN KEY(city_no) REFERENCES CITY(city_no)
 );
-
 # 축제 테이블
 create table FESTIVAL(
     fval_no int NOT NULL KEY AUTO_INCREMENT,		# 축제 관리번호
@@ -207,7 +204,20 @@ create table FESTIVAL(
     FOREIGN KEY(city_no) REFERENCES CITY(city_no)
 ); 
 
-
+CREATE TABLE CALENDAR (
+    _id int NOT NULL KEY AUTO_INCREMENT,		# 캘린더 관리 번호
+	title varchar(200) NOT NULL,				# 일정 제목
+	description varchar(500) ,					# 일정 메모
+	start varchar(100),							# 일정 시작일
+	end varchar(100),							# 일정 마감일
+	type varchar(100), 							# 일정 카테고리
+	mem_no int , 								# 유저번호
+    backgroundColor varchar(100),				# 일정 배경색
+    textColor varchar(100),						# 폰트 색
+    allDay boolean,								# 선택사항
+    foreign key(mem_no) REFERENCES MEMBERS(mem_no)
+);
+SELECT * FROM CALENDAR;
 
 use pjt1db;
 SELECT * FROM POST;

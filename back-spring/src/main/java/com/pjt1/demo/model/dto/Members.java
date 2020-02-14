@@ -40,6 +40,9 @@ public class Members implements Serializable {
 	@Getter@Setter private List<Post> mem_likePost;
 	@Getter@Setter private List<HotPlace> mem_likeHotPlace;
 	@Getter@Setter private List<Festival> mem_likeFestival;
-	@Getter@Setter private List<Follow> mem_followList;
+	@Getter@Setter private List<Members> mem_followMe;
+	@Getter@Setter private List<Members> mem_followList;
+	@Getter@Setter private List<Post> mem_followPost;
+	
 
 }
