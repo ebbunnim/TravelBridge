@@ -11,7 +11,7 @@ import com.pjt1.demo.utils.MorePageBean;
 
 @Mapper
 public interface PostDao {
-	public Post search(int post_no);
+//	public Post search(int post_no);
 
 	public List<Post> searchAll();
 
@@ -30,8 +30,8 @@ public interface PostDao {
 	public List<Post> searchFollowingPeoplePost(int mem_no);
 	public Post searchByCategory(String category);
 	public void updatePostHits(int post_no);
-	public List<Map<String, Object>> searchMorePostAll(MorePageBean pageBean);
+	public List<Map<String, Object>> searchMorePost(MorePageBean pageBean);
 	public List<Map<String, Object>> searchMoreReport(MorePageBean pageBean);
 	public List<Map<String, Object>> searchMorePlan(MorePageBean pageBean);
-	public Post searchWithCmtAndFiles(int post_no);
+	public Post search(int post_no);
 }
