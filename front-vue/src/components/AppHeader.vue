@@ -151,7 +151,7 @@
             >로그인</q-btn
           >
         </div>
-        <div class="col-4" align="right">
+        <div class="col-4" align="right" v-else>
           <q-btn size="md" class="text-grey q-py-md" flat to="/mypage"
             >내 정보</q-btn
           >

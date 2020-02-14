@@ -47,7 +47,7 @@ const routes = [
     children: [
       { path: "", component: Main1Main },
       { path: "main1search", component: Main1Search },
-      { path: "postdetail", component: PostDetail },
+      { path: "postdetail/:postNo", component: PostDetail, props: true },
       { path: "write", component: Main1Write }
     ]
   },

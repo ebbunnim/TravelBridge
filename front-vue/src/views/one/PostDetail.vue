@@ -2,15 +2,28 @@
   <div>
     <div style="max-width: 70%; margin: 5% 15% 0 15%">
       <q-btn color="primary" icon="check" label="목록으로" />
-      <h3>타이틀</h3>
+      <h4>{{ post.post_title }}</h4>
       <div class="justify-between row">
-        <p>도시</p>
-        <p>작성일 작성자</p>
+        <p>도시 : {{ post.post_city }}</p>
+        <p>
+          작성일 : {{ post.post_regtime }}
+          <span>작성자 : {{ post.post_writer }}</span>
+        </p>
       </div>
-
-      <p>해시태그</p>
-      <p>사진</p>
-      <q-carousel arrows animated swipeable autoplay infinite v-model="slideOne" height="600px">
+      <div class="justify-between row">
+        <p>해시태그 :{{ post.post_category }}</p>
+        <p>조회수 : {{ post.post_hits }}</p>
+      </div>
+      <p>사진 : {{ post.post_filesList }}</p>
+      <q-carousel
+        arrows
+        animated
+        swipeable
+        autoplay
+        infinite
+        v-model="slideOne"
+        height="600px"
+      >
         <q-carousel-slide
           v-for="(mainCard, index) in MainCard"
           :key="index"
@@ -18,9 +31,9 @@
           :img-src="mainCard.img"
         ></q-carousel-slide>
       </q-carousel>
-      <p>콘텐트</p>
-      <div>v-html</div>
-
+      <div><p v-html="post.post_content"></p></div>
+      {{ post }}
+      <template v-if="post.post_plan_start != null">플랜</template>
       <div>
         <p>댓글</p>
       </div>
@@ -51,6 +64,18 @@ export default {
         }
       ]
     };
+  },
+  mounted() {
+    if (this.$route.params != null) {
+      this.$store.dispatch("post/searchInfoPost", {
+        postNo: this.$route.params.postNo
+      });
+    }
+  },
+  computed: {
+    post() {
+      return this.$store.state.post.post;
+    }
   }
 };
 </script>

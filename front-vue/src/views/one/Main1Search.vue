@@ -2,7 +2,13 @@
   <div align="center">
     <div class="row justify-center" style="margin:5% 0 0 0 ;">
       <q-select value="asd" label="전체" filled class="col-1" />
-      <q-input label="검색" class="col-5" color="black" label-color="black" style="margin-left:15px;">
+      <q-input
+        label="검색"
+        class="col-5"
+        color="black"
+        label-color="black"
+        style="margin-left:15px;"
+      >
         <template v-slot:append>
           <q-icon
             v-if="text !== ''"
@@ -33,7 +39,7 @@
     </div>
     <q-separator spaced inset vertical dark />
     <div
-      v-for="(tta, index) in this.titles"
+      v-for="(tta, index) in postList"
       :key="index"
       class="row justify-center"
       v-bind:class="{}"
@@ -48,37 +54,30 @@
         }"
         align="left"
       >
-        <template v-if="tt == 1">
+        <template v-if="tt.post_type == 0">
           <q-card class="my-card1" flat bordered style="width:100%;">
             <q-img src="https://cdn.quasar.dev/img/parallax2.jpg" />
             <q-card-section>
-              <div class="text-overline text-orange-9">Overline</div>
-              <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
-              <div class="text-caption text-grey">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              <div class="text-overline text-orange-9 text-body-3">
+                {{ tt.post_category }}
+              </div>
+              <div class="text-b q-mt-sm q-mb-xs">{{ tt.post_title }}</div>
+              <div class="text-caption text-grey text-body-1">
+                {{ tt.post_content }}
               </div>
             </q-card-section>
           </q-card>
         </template>
-        <template v-else-if="tt == 2">
+        <template v-else-if="tt.post_type == 1">
           <q-card class="my-card1" flat bordered>
             <q-card-section horizontal style="width:100%;">
               <q-card-section class="q-pt-xs col-7">
-                <div class="text-overline">Overline</div>
-                <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
+                <div class="text-overline text-orange-9 text-body-3">
+                  {{ tt.post_category }}
+                </div>
+                <div class=" q-mt-sm q-mb-xs">{{ tt.post_title }}</div>
                 <div class="text-caption text-grey text-body-2">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna
-                  aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.Lorem ipsum dolor sit amet, consectetur
-                  adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliquaLorem ipsum dolor sit amet, consectetur
-                  adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur
-                  adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua..
+                  {{ tt.post_content }}
                 </div>
               </q-card-section>
 
@@ -87,14 +86,26 @@
                   <q-timeline color="secondary">
                     <q-timeline-entry body="November, 2017" />
 
-                    <q-timeline-entry title="Event Title" subtitle="February 22, 1986" />
+                    <q-timeline-entry
+                      title="Event Title"
+                      subtitle="February 22, 1986"
+                    />
 
-                    <q-timeline-entry title="Event Title" subtitle="February 22, 1986" />
+                    <q-timeline-entry
+                      title="Event Title"
+                      subtitle="February 22, 1986"
+                    />
 
                     <q-timeline-entry body="November, 2017" />
-                    <q-timeline-entry title="Event Title" subtitle="February 22, 1986" />
+                    <q-timeline-entry
+                      title="Event Title"
+                      subtitle="February 22, 1986"
+                    />
 
-                    <q-timeline-entry title="Event Title" subtitle="February 22, 1986" />
+                    <q-timeline-entry
+                      title="Event Title"
+                      subtitle="February 22, 1986"
+                    />
                   </q-timeline>
                 </q-scroll-area>
               </q-card-section>
@@ -104,7 +115,9 @@
         <template v-else>
           <q-card-section horizontal>
             <q-card-section class="q-pt-xs">
-              <div class="text-overline">Overline</div>
+              <div class="text-overline text-orange-9 text-body-3">
+                {{ tt.post_category }}
+              </div>
               <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
               <div class="text-caption text-grey">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -113,7 +126,10 @@
             </q-card-section>
 
             <q-card-section class="col-5 flex flex-center">
-              <q-img class="rounded-borders" src="https://cdn.quasar.dev/img/parallax2.jpg" />
+              <q-img
+                class="rounded-borders"
+                src="https://cdn.quasar.dev/img/parallax2.jpg"
+              />
             </q-card-section>
           </q-card-section>
         </template>
@@ -126,72 +142,24 @@
 export default {
   data() {
     return {
-      text: "",
-      postList: [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        2,
-        1,
-        1,
-        1,
-        2,
-        1,
-        2,
-        2,
-        2,
-        1,
-        1,
-        2,
-        1,
-        2,
-        2,
-        2,
-        1,
-        2,
-        1,
-        1,
-        1,
-        2,
-        1
-      ]
+      text: ""
     };
   },
+  mounted() {
+    if (this.$route.params.search != null) {
+      console.log("hello");
+    } else {
+      this.$store.dispatch("post/searchAllPost");
+    }
+  },
   computed: {
-    titles: function() {
-      var titles = [];
-      var cnt = 0;
-      var ti = [];
-
-      for (var i of this.postList) {
-        if (i == 1) cnt = cnt + 1;
-        else if (i == 2) cnt = cnt + 2;
-
-        if (cnt == 4) {
-          ti.push(i);
-          titles.push(ti);
-          ti = [];
-          cnt = 0;
-        } else if (cnt > 4) {
-          ti.push(3);
-          titles.push(ti);
-          ti = [];
-          cnt = 2;
-          ti.push(i);
-        } else if (cnt < 4) {
-          ti.push(i);
-        }
-      }
-
-      return titles;
+    postList() {
+      return this.$store.state.post.postList;
     }
   },
   methods: {
     fixPost: function(target, pos) {
-      if (target[pos] == 2) return true;
+      if (target[pos].post_type == 1) return true;
       else return false;
     }
   }
@@ -232,6 +200,18 @@ export default {
   word-break: break-all;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 12;
+}
+.text-body-3 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  margin-top: 1px;
+  max-height: 400px;
+  overflow: hidden;
+  vertical-align: top;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 @keyframes anima {
   from {

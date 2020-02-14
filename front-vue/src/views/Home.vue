@@ -26,7 +26,6 @@
       arrows
       animated
       swipeable
-      autoplay
       infinite
       v-model="slideThr"
       height="600px"
@@ -36,6 +35,7 @@
         :key="index"
         :name="index"
         style="background-color:#cecece"
+        class="column justify-center"
       >
         <div class="snow layer2"></div>
         <div class="snow layer2 a"></div>
@@ -76,7 +76,8 @@
         v-for="(subCard, index) in SubCard"
         :key="index"
         :name="index"
-        class="column no-wrap"
+        class="column no-wrap fit"
+        style="height:350px"
       >
         <div
           class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap"
