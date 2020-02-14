@@ -5,6 +5,37 @@
     <q-dialog v-model="alert">
       <q-card>
         <q-card-section>
+          <div class="text-subtitle1 text-center">선택한 테마가 없습니다!</div>
+          <div class="text-h6">
+            로그인하시거나 관심 테마를 직접 추가해보세요!
+          </div>
+        </q-card-section>
+
+        <q-card-actions align="center">
+          <q-btn
+            flat
+            label="지금 바로 선택하기"
+            color="primary"
+            @click="
+              useWithoutLogin();
+              alert = false;
+            "
+            v-close-popup
+          />
+          <q-btn
+            v-if="!loggedIn"
+            flat
+            label="로그인 후 이용하기"
+            color="primary"
+            to="/login"
+            @click="alert = false"
+          ></q-btn>
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+    <q-dialog v-model="choiceAlert">
+      <q-card>
+        <q-card-section>
           <div class="text-subtitle1 text-center">선택한 테마가 없습니다</div>
           <div class="text-h6">
             지금 관심 테마를 선택하고 여행지를 추천받아 보세요!
@@ -16,15 +47,9 @@
             flat
             label="지금 바로 선택하기"
             color="primary"
-            @click="useWithoutLogin()"
+            @click="choiceAlert = false"
             v-close-popup
           />
-          <q-btn
-            flat
-            label="로그인 후 이용하기"
-            color="primary"
-            to="/login"
-          ></q-btn>
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -56,11 +81,8 @@
     </div>
     <div>
       <h1>이건 페스티발</h1>
-      <div v-if="fval_list === '이 페이지에는 게시글이 존재하지 않습니다'">
-        암모것도 없음 ㅎㅠㅠ
-      </div>
-      <h1>이건 핫플</h1>
       {{ fval_list }}
+      <h1>이건 핫플</h1>
       {{ hp_list }}
     </div>
   </div>
@@ -74,6 +96,8 @@ export default {
     return {
       tempUser: {}, // 비로그인 유저 - 임시적인 검색 기능만 제공한다.
       alert: false, // dialog
+      choiceAlert: false,
+      loggedIn: false,
       notSelected: false,
       currentChoices: "",
       thema: {
@@ -97,22 +121,39 @@ export default {
   }),
   methods: {
     checkIfLoggedIn() {
-      if (this.user.length === undefined) {
-        this.alert = true; // 로그인 또는 테마 선택 유도
-        // 지금 바로 선택하기 하면 userWithoutLogin 함수 실행 
+      if (this.user.mem_interest === undefined) {
+        this.alert = true;
+      } else if (this.user.mem_interest === "") {
+        this.choiceAlert = true;
+      } else {
+        this.checkPastInterest()
       }
     },
     useWithoutLogin() {
+      // alert 에서 끄는 순간 바로 실행
       // 비회원일 때
       this.tempUser = {
         mem_id: "비회원",
         mem_interest: ""
       };
-      console.log("비회원유저", this.tempUser);
+      this.user = this.tempUser;
+      console.log("비회원유저", this.user);
     },
+
     checkPastInterest() {
-      // 회원일 때
       this.currentChoices = this.user.mem_interest;
+      // console.log('회원일 때', this.currentChoices)
+      console.log("check Past Interest ==> ", this.currentChoices);
+      if (this.currentChoices !== "undefined") {
+        const tempInterest = this.currentChoices.split(" ");
+        for (let key in tempInterest) {
+          for (let themaKey in this.thema) {
+            if (this.thema[themaKey].name === tempInterest[key]) {
+              this.thema[themaKey].state = true;
+            }
+          }
+        }
+      }
     },
     onToggle() {
       this.currentChoices = "";
@@ -122,11 +163,10 @@ export default {
           this.currentChoices += themaChoice[key].name + " ";
         }
       }
-      console.log("==========onToggle 선택됨:======== ", this.currentChoices);
+      console.log("###### 1. onToggle 눌림 ######", this.currentChoices);
       this.getAllPicks();
     },
     getAllPicks() {
-      console.log("getAllPicks의 parameter 체크: ", this.currentChoices);
       if (this.currentChoices !== "") {
         this.$store.dispatch("hotplace/searchMoreHotPlaceByTheme", {
           btnCnt: this.fvalBtnCnt,
@@ -136,13 +176,17 @@ export default {
           btnCnt: this.hpBtnCnt,
           word: this.currentChoices
         });
+      } else if (this.currentChoices === "") {
+        this.$store.commit("hotplace/clearHPs");
+        this.$store.commit("festival/clearFvals");
       }
     }
   },
   mounted() {
+    console.log("========= mounted =======");
     console.log(this.user);
+    console.log(this.user.mem_interest);
     this.checkIfLoggedIn();
-    this.checkPastInterest();
   }
 };
 </script>

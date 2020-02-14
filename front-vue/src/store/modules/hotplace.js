@@ -56,6 +56,9 @@ const actions = {
 const mutations = {
   saveHPs(state, hps) {
     state.hps = hps;
+  },
+  clearHPs(state) {
+    state.hps = [];
   }
 };
 
