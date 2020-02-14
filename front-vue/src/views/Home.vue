@@ -1,7 +1,36 @@
 <template>
   <div>
+    <q-carousel
+      arrows
+      animated
+      swipeable
+      autoplay
+      infinite
+      v-model="slideOne"
+      height="600px"
+    >
+      <q-carousel-slide
+        v-for="(mainCard, index) in MainCard"
+        :key="index"
+        :name="index"
+        :img-src="mainCard.img"
+      >
+        <div class="absolute-bottom custom-caption">
+          <div class="text-h2">{{ mainCard.title }}</div>
+          <div class="text-subtitle1">{{ mainCard.sub }}</div>
+        </div>
+      </q-carousel-slide>
+    </q-carousel>
     <h2>이달의 축제</h2>
-    <q-carousel arrows animated swipeable autoplay infinite v-model="slideThr" height="600px">
+    <q-carousel
+      arrows
+      animated
+      swipeable
+      autoplay
+      infinite
+      v-model="slideThr"
+      height="600px"
+    >
       <q-carousel-slide
         v-for="(mainCard, index) in ThrCard"
         :key="index"
@@ -49,7 +78,9 @@
         :name="index"
         class="column no-wrap"
       >
-        <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
+        <div
+          class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap"
+        >
           <q-img
             v-for="(subContent, index) in subCard"
             :key="index"
@@ -87,7 +118,9 @@
         :name="index"
         class="column no-wrap"
       >
-        <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
+        <div
+          class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap"
+        >
           <q-img
             v-for="(subContent, index) in subCard"
             :key="index"
