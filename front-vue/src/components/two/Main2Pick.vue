@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>픽</h1>
+    <h1>픽(테마)</h1>
     <div style="display: inline" v-for="(item, idx) in thema" :key="idx">
       <q-btn
         color="grey"
@@ -26,14 +26,16 @@
         >{{ item.name }}</q-btn
       >
     </div>
-    <!-- 보이는 부분 -->
     <div>
-      {{ currentChoices }}
+      {{ hp_list }}
+      {{ fval_list }}
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -61,23 +63,16 @@ export default {
       }
     };
   },
+  computed: mapState({
+    hp_list: state => state.hotplace.hps,
+    fval_list: state => state.festival.fvals
+  }),
   methods: {
-    onSubmit() {
-      this.currentChoices = "";
-      const themaChoice = this.thema;
-      for (let key in themaChoice) {
-        if (themaChoice[key].state === true) {
-          this.currentChoices += this.themaKor[key];
-        }
-      }
-      console.log(this.currentChoices);
-    },
     setPastInterest() {
       if (this.user !== null) {
         const interest = this.user.mem_interest;
         let temp = interest.split(" ");
         for (let key in temp) {
-          // console.log(temp[key])
           const themaKey = temp[key] + " ";
           // thema 를 돌면서 name 이 themaKey 와 일치하는 것의 state 를 true 로 고친다.
           for (let the in this.thema) {
@@ -87,12 +82,36 @@ export default {
           }
         }
       }
+    },
+    onSubmit() {
+      this.currentChoices = "";
+      const themaChoice = this.thema;
+      for (let key in themaChoice) {
+        if (themaChoice[key].state === true) {
+          this.currentChoices += this.themaKor[key];
+        }
+      }
+      console.log("온섭밋 실행", this.currentChoices);
+      this.getAllPicks();
+    },
+    getAllPicks() {
+      console.log("받니?", this.currentChoices)
+      const batni = this.currentChoices.replace("#","")
+      console.log("미친건가",batni)
+      this.$store.dispatch("hotplace/searchMoreHotPlaceByTheme", {
+        btnCnt: 1,
+        word: batni
+      });
+      // this.$store.dispatch("festival/searchMoreFestivalByTheme", {
+      //   btnCnt: this.hpBtnCnt,
+      //   word: keyword
+      // });
     }
   },
   created() {
     this.user = this.$store.state.user.user;
-    console.log("현재user:", this.user);
-    this.setPastInterest();
+    console.log("현재 user:", this.user);
+    // this.setPastInterest();
   }
 };
 </script>

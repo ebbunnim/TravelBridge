@@ -62,8 +62,8 @@ class FestivalService {
       });
   }
 
-  searchMoreFestivalByTheme(btnCnt, keyword) {
-    return Api.get(`/Festival/search/more/theme/${btnCnt}/${keyword}`)
+  searchMoreFestivalByTheme(btnCnt, word) {
+    return Api.get(`/Festival/search/more/theme/${btnCnt}/${word}`)
       .then(res => {
         return res.data.data;
       })

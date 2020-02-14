@@ -71,7 +71,7 @@
         WHERE hp_del_check = FALSE 
         AND city_no = (SELECT city_no 
 						 FROM city 
-						 WHERE city_name = "${keyword}" 
+						 WHERE city_name = "${word}" 
 						 AND city_del_check = FALSE) 
         ORDER BY hp_no 
         LIMIT 0, #{perPageNum}]]>
@@ -81,7 +81,7 @@
 		<![CDATA[
     	SELECT *
 		FROM hotplace
-		WHERE hp_tag LIKE concat('%','${keyword}','%') 
+		WHERE hp_tag LIKE concat('%','${word}','%') 
 		AND hp_del_check = FALSE
 		ORDER BY hp_no
 		LIMIT 0, #{perPageNum}]]>
@@ -91,7 +91,7 @@
 		<![CDATA[
 		SELECT * 
 		FROM hotplace
-		WHERE hp_address = TRIM('${keyword}') 
+		WHERE hp_address = TRIM('${word}') 
 		AND hp_del_check = FALSE
 		ORDER BY hp_no
 		LIMIT 0,#{perPageNum}]]>

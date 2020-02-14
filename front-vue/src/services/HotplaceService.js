@@ -1,6 +1,6 @@
 import Api from "./Api";
 
-class HotplaceService {
+class HotPlaceService {
   // 전체 찾아오기
   searchAll() {
     return Api.get("/HotPlace")
@@ -46,14 +46,12 @@ class HotplaceService {
   searchMoreHotPlaceByCityName(btnCnt, cityName) {
     return Api.get(`/HotPlace/search/more/cityname/${btnCnt}/${cityName}`)
       .then(res => {
-        console.log('ㅎㅎ')
-        console.log(res)
         return res.data.data;
       })
       .catch(e => {
         console.log(e);
       });
-  } 
+  }
   // Tag 로 검색
   searchMoreHotPlaceByTag(btnCnt, tag) {
     return Api.get(`/HotPlace/search/more/tag/${btnCnt}/${tag}`)
@@ -77,6 +75,7 @@ class HotplaceService {
 
   // 테마(8개) 로 검색
   searchMoreHotPlaceByTheme(btnCnt, word) {
+    console.log(`/HotPlace/search/more/theme/${btnCnt}/${word}`);
     return Api.get(`/HotPlace/search/more/theme/${btnCnt}/${word}`)
       .then(res => {
         return res.data.data;
@@ -87,7 +86,7 @@ class HotplaceService {
   }
 
   // 더보기로 HotPlace 검색하기 조회 - searchOption은 all/ title / content/ tag중 전달
-  searchMoreFestival(btnCnt, searchOption, word) {
+  searchMoreHotplace(btnCnt, searchOption, word) {
     return Api.get(`/HotPlace/search/more/${btnCnt}/${searchOption}/${word}`)
       .then(res => {
         return res.data.data;
@@ -98,4 +97,4 @@ class HotplaceService {
   }
 }
 
-export default new HotplaceService();
+export default new HotPlaceService();
