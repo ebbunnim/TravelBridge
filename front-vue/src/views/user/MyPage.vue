@@ -1,14 +1,16 @@
 <template>
   <div class="text-center">
     <h4>마이 페이지</h4>
-    <div class="q-pa-md">
+    <div class="q-pa-lg">
       <div style="max-width: 70%; margin: 0 15% 0 15%">
         <q-tabs
+          dense
           v-model="tab"
           class="text-grey"
           active-color="primary"
           indicator-color="primary"
-          align="justify"
+          narrow-indicator
+          align="center"
         >
           <q-tab name="activity" label="내 활동" />
           <q-tab name="info" label="개인정보" />
@@ -18,15 +20,29 @@
         <q-tab-panels v-model="tab">
           <!-- 첫번째 패널 -->
           <q-tab-panel name="activity" style="height:900px">
-            <div class="text-h6">내 활동</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <div class="q-pa-md row justify-center q-gutter-md">
+              <q-card flat bordered class="my-card col-xs-12 col-md-9">
+                <q-card-section>
+                  <div class="text-h6">나를 팔로우 하는 사람들</div>
+                  <div class="text-subtitle1">
+                    팔로워 수 {{ user.mem_followed }}
+                  </div>
+                </q-card-section>
+                <q-card-section>
+                  <div class="text-h6">내가 팔로우 하는 사람들</div>
+                  <div class="text-subtitle1">
+                    팔로잉 수 {{ user.mem_following }}
+                  </div>
+                </q-card-section>
+              </q-card>
+            </div>
           </q-tab-panel>
 
           <!-- 두번째 패널 -->
           <q-tab-panel name="info" style="font-size:20px">
-            <!-- 수정 불가능 -->
             <div class="q-pa-md row justify-center q-gutter-md">
-              <q-card flat bordered class="my-card">
+              <!-- 첫번째 카드 -->
+              <q-card flat bordered class="my-card col-xs-12 col-md-9">
                 <q-card-section>
                   <div class="text-h6">계정정보</div>
                 </q-card-section>
@@ -45,21 +61,40 @@
                 <q-card-section>
                   <div class="text-subtitle2 text-left">
                     <span>이메일 수신 여부</span>
+                    <q-btn
+                      class="q-ml-lg"
+                      round
+                      flat
+                      size="sm"
+                      color="primary"
+                      icon="edit"
+                      v-if="!onEditReceive"
+                      @click="onEditReceive = !onEditReceive"
+                    />
+                    <q-btn
+                      class="q-ml-lg"
+                      round
+                      flat
+                      size="sm"
+                      color="info"
+                      icon="edit"
+                      v-if="onEditReceive"
+                      @click="
+                        onEditReceive = !onEditReceive;
+                        updateUser();
+                      "
+                    />
                   </div>
                   <q-input
                     v-model="user.mem_receive_email"
                     type="text"
+                    class="text-h6"
                     readonly
                     dense
                     borderless
                     v-show="!onEditReceive"
                   />
-
-                  <div
-                    v-show="onEditReceive"
-                    class="col-6 q-my-sm q-mr-xs q-ml-sm"
-                    align="left"
-                  >
+                  <div v-show="onEditReceive" align="left ">
                     <q-radio
                       v-model="user.mem_receive_email"
                       val="true"
@@ -73,33 +108,61 @@
                   </div>
                 </q-card-section>
                 <q-card-section class="row">
-                  <div class="col-6">
-                    <div class="text-subtitle2 text-left">최종 로그인</div>
+                  <div class="col-md-6 col-xs-12">
+                    <div class="text-subtitle2 text-left ">최종 로그인</div>
                     <q-input
                       v-model="user.mem_lastlogin"
                       type="text"
-                      class="text-subtitle1 col-6"
+                      class="text-subtitle1 "
                       readonly
                       dense
                       borderless
                     />
                   </div>
-                  <div class="col-6">
-                    <div class="text-subtitle2 text-left ">가입일시</div>
+                  <div class="col-md-6 col-xs-12">
+                    <div class="text-subtitle2 text-left">가입일시</div>
                     <q-input
                       v-model="user.mem_regtime"
                       type="text"
-                      class="text-subtitle1 col-6"
+                      class="text-subtitle1"
                       readonly
                       dense
                       borderless
                     />
                   </div>
                 </q-card-section>
+                <q-card-section>
+                  <!-- 기능 아직 구현 안 됨 -->
+                  <div class="text-h4 text-left ">회원탈퇴</div>
+                </q-card-section>
               </q-card>
-              <q-card flat bordered class="my-card">
+              <!-- 두번째 카드 -->
+              <q-card flat bordered class="my-card col-xs-12 col-md-9">
                 <q-card-section>
                   <div class="text-h6">회원정보</div>
+                  <div class="text-right">
+                    <q-btn
+                      flat
+                      class="q-ml-lg"
+                      label="수정하기"
+                      color="primary"
+                      icon="edit"
+                      v-if="readOnly"
+                      @click="readOnly = !readOnly"
+                    />
+                    <q-btn
+                      outline
+                      class="q-ml-lg"
+                      label="수정완료"
+                      color="primary"
+                      icon="edit"
+                      v-if="!readOnly"
+                      @click="
+                        readOnly = !readOnly;
+                        updateUser();
+                      "
+                    />
+                  </div>
                 </q-card-section>
                 <q-separator inset />
                 <q-card-section class="row">
@@ -108,8 +171,8 @@
                     <q-input
                       v-model="user.mem_name"
                       type="text"
-                      class="text-h6"
-                      readonly
+                      class="text-h6 q-pr-lg"
+                      v-bind="{ readonly: readOnly, outlined: !readOnly }"
                       dense
                       borderless
                     />
@@ -119,46 +182,50 @@
                     <q-input
                       v-model="user.mem_id"
                       type="text"
-                      class="text-h6"
-                      readonly
+                      class="text-h6 q-pr-lg"
+                      v-bind="{ readonly: readOnly, outlined: !readOnly }"
                       dense
                       borderless
                     />
                   </div>
                 </q-card-section>
 
-                <q-card-section>
-                  <div class="text-body2 text-left">연락처</div>
+                <q-card-section class="row">
+                  <div class="text-body2 text-left col-12">연락처</div>
                   <q-input
                     v-model="user.mem_phone"
                     type="text"
-                    class="text-h6"
-                    readonly
+                    class="text-h6 col-xs-12 col-md-6 q-mr-md q-pr-lg"
+                    v-bind="{ readonly: readOnly, outlined: !readOnly }"
                     dense
                     borderless
                   />
                 </q-card-section>
-                <q-card-section>
-                  <div class="text-body2 text-left">생년월일</div>
-
+                <q-card-section class="row">
+                  <div class="text-body2 text-left col-12">생년월일</div>
                   <q-input
                     dense
                     borderless
                     v-model="user.mem_birth"
                     placeholder="YYYY/MM/DD"
                     mask="date"
-                    class="text-h6"
+                    class="text-h6 col-xs-12 col-md-6 q-pr-lg"
                     :rules="['date']"
-                    v-bind="{ readonly: readOnly }"
+                    v-bind="{ readonly: readOnly, outlined: !readOnly }"
                   >
-                    <template v-slot:after>
-                      <q-icon name="event" class="cursor-pointer">
+                    <template v-slot:append>
+                      <q-icon
+                        name="event"
+                        class="cursor-pointer"
+                        v-show="!readOnly"
+                      >
                         <q-popup-proxy
                           ref="qDateProxy"
                           transition-show="scale"
                           transition-hide="scale"
                         >
                           <q-date
+                            minimal
                             v-model="user.mem_birth"
                             @input="() => $refs.qDateProxy.hide()"
                           />
@@ -168,29 +235,52 @@
                   </q-input>
                 </q-card-section>
               </q-card>
-              <q-card flat bordered class="my-card">
+              <!-- 세번째 카드 -->
+              <q-card flat bordered class="my-card col-xs-12 col-md-9">
                 <q-card-section>
                   <div class="text-h6">관심분야</div>
+                  <div class="text-right">
+                    <q-btn
+                      flat
+                      class="q-ml-lg"
+                      label="수정하기"
+                      color="primary"
+                      icon="edit"
+                      v-if="!onInterestEdit"
+                      @click="onInterestEdit = !onInterestEdit"
+                    />
+                    <q-btn
+                      outline
+                      class="q-ml-lg"
+                      label="수정완료"
+                      color="primary"
+                      icon="edit"
+                      v-if="onInterestEdit"
+                      @click="
+                        onInterestEdit = !onInterestEdit;
+                        updateUser();
+                      "
+                    />
+                  </div>
                 </q-card-section>
                 <q-separator inset />
                 <q-card-section>
-                  <q-input
+                  <!-- <q-input
                     v-model="user.mem_interest"
                     type="text"
-                    class="col-6"
+                    class="col-"
                     style="text-align:left; margin-left:10px"
-                    v-show="!onInterestEdit"
                     readonly
-                  />
+                  /> -->
 
                   <div
-                    v-show="onInterestEdit"
                     class="row"
                     style="display: inline"
                     v-for="(item, idx) in thema"
                     :key="idx"
                   >
                     <q-btn
+                      v-bind="{ disabled: !onInterestEdit }"
                       color="grey"
                       unelevated
                       class="q-mb-sm q-mt-md q-px-xs"
@@ -198,11 +288,12 @@
                       v-if="item.state"
                       @click="
                         item.state = !item.state;
-                        onThemaChoice();
+                        onToggle();
                       "
                       >#{{ item.name }}</q-btn
                     >
                     <q-btn
+                      v-bind="{ disabled: !onInterestEdit }"
                       color="grey"
                       size="md"
                       class="q-mb-sm q-mt-md q-px-xs"
@@ -211,14 +302,13 @@
                       flat
                       @click="
                         item.state = !item.state;
-                        onThemaChoice();
+                        onToggle();
                       "
                       >#{{ item.name }}</q-btn
                     >
                   </div>
                 </q-card-section>
               </q-card>
-              <q-card flat bordered class="my-card"> </q-card>
             </div>
           </q-tab-panel>
           <!-- 세번재 패널 -->
@@ -234,6 +324,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import UserService from "@/services/UserService.js";
 
 export default {
@@ -241,66 +332,69 @@ export default {
     return {
       currentChoices: "",
       thema: {
-        food: { state: false, name: "맛집 " },
-        family: { state: false, name: "가족 " },
-        date: { state: false, name: "데이트 " },
-        shopping: { state: false, name: "쇼핑 " },
-        culture: { state: false, name: "문화 " },
-        indoor: { state: false, name: "실내 " },
-        healing: { state: false, name: "힐링 " },
-        tradition: { state: false, name: "전통 " }
+        food: { state: false, name: "맛집" },
+        family: { state: false, name: "가족" },
+        date: { state: false, name: "데이트" },
+        shopping: { state: false, name: "쇼핑" },
+        culture: { state: false, name: "문화" },
+        indoor: { state: false, name: "실내" },
+        healing: { state: false, name: "힐링" },
+        tradition: { state: false, name: "전통" }
       },
-      themaKor: {
-        food: "맛집 ",
-        family: "가족 ",
-        date: "데이트 ",
-        shopping: "쇼핑 ",
-        culture: "문화 ",
-        indoor: "실내 ",
-        healing: "힐링 ",
-        tradition: "전통 "
-      },
-
+      onEditReceive: false,
       readOnly: true,
       onInterestEdit: false,
-      onEditReceive: false,
       submitted: false,
-      user: {}, // created 하면서 받아옴
       tab: "info"
     };
   },
   computed: {
     emailForLoginAfterUpdate() {
       return this.user.mem_email;
-    }
+    },
+    ...mapState({
+      user: state => state.user.user // 현재 접속자
+    })
   },
   methods: {
-    onThemaChoice() {
+    onToggle() {
       this.currentChoices = "";
       const themaChoice = this.thema;
       for (let key in themaChoice) {
         if (themaChoice[key].state === true) {
-          this.currentChoices += this.themaKor[key];
+          this.currentChoices += themaChoice[key].name + " ";
         }
       }
-      console.log(this.currentChoices);
+      console.log("###### onToggle 눌림 ######", this.currentChoices);
       this.user.mem_interest = this.currentChoices;
+      console.log(this.user.mem_interest)
     },
     updateUser() {
-      UserService.updateUser(this.user).then(res => {
-        console.log(res);
-        UserService.LogIn(this.emailForLoginAfterUpdate).then(response =>
-          console.log(response)
-        );
+      UserService.updateUser(this.user).then(response => {
+        console.log("업데이트 유저 실행됨");
+        console.log(this.user.mem_interest)
       });
-      this.readOnly = true;
-      this.onInterestEdit = false;
-      this.onEditReceive = false;
-      this.submitted = false;
+    },
+    getPastInterest() {
+      const pastChoice = this.user.mem_interest;
+      console.log("과거 초이스", pastChoice)
+      if (pastChoice !== "undefined") {
+        const tempInterest = pastChoice.split(" ");
+        for (let key in tempInterest) {
+          for (let themaKey in this.thema) {
+            if (this.thema[themaKey].name === tempInterest[key]) {
+              this.thema[themaKey].state = true;
+            }
+          }
+        }
+      }
     }
   },
-  created() {
-    this.user = this.$store.state.user.user;
+  mounted() {
+    console.log("========= mypage mounted =======");
+    console.log(this.user);
+    console.log(this.user.mem_interest);
+    this.getPastInterest();
   }
 };
 </script>

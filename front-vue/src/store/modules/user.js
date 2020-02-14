@@ -62,10 +62,6 @@ const actions = {
     fireService.resetPw(payLoad.email);
   },
 
-  updateMember: (store, payload) => {
-    
-  }
-
 
 };
 
