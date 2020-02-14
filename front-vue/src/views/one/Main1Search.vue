@@ -28,15 +28,6 @@
       </div>
     </div>
 
-    <div class="row justify-center" align="center">
-      <q-btn color="primary" icon="check" label="OK" />
-      <q-btn color="primary" icon="check" label="OK" />
-      <q-btn color="primary" icon="check" label="OK" />
-      <q-btn color="primary" icon="check" label="OK" />
-      <q-btn color="primary" icon="check" label="OK" />
-      <q-btn color="primary" icon="check" label="OK" />
-      <q-btn color="primary" icon="check" label="OK" />
-    </div>
     <q-separator spaced inset vertical dark />
     <div
       v-for="(tta, index) in postList"
@@ -55,13 +46,29 @@
         align="left"
       >
         <template v-if="tt.post_type == 0">
-          <q-card class="my-card1" flat bordered style="width:100%;">
-            <q-img src="https://cdn.quasar.dev/img/parallax2.jpg" />
+          <q-card
+            class="my-card1"
+            flat
+            bordered
+            style="width:100%;"
+            @click="move(tt.post_no)"
+          >
+            {{ tt.post_filesList }}
+            <template v-if="tt.post_filesList != null">
+              {{ tt.post_filesList[0] }}
+              <!-- <q-img :src="tt.post_filesList[0].files_url" /> -->
+            </template>
+            <template v-else
+              ><q-img src="https://cdn.quasar.dev/img/parallax2.jpg" />
+            </template>
+
             <q-card-section>
               <div class="text-overline text-orange-9 text-body-3">
                 {{ tt.post_category }}
               </div>
-              <div class="text-b q-mt-sm q-mb-xs">{{ tt.post_title }}</div>
+              <div class="text-b q-mt-sm q-mb-xs">
+                <b>{{ tt.post_title }}</b>
+              </div>
               <div class="text-caption text-grey text-body-1">
                 {{ tt.post_content }}
               </div>
@@ -69,13 +76,15 @@
           </q-card>
         </template>
         <template v-else-if="tt.post_type == 1">
-          <q-card class="my-card1" flat bordered>
+          <q-card class="my-card1" flat bordered @click="move(tt.post_no)">
             <q-card-section horizontal style="width:100%;">
               <q-card-section class="q-pt-xs col-7">
                 <div class="text-overline text-orange-9 text-body-3">
                   {{ tt.post_category }}
                 </div>
-                <div class=" q-mt-sm q-mb-xs">{{ tt.post_title }}</div>
+                <div class=" q-mt-sm q-mb-xs">
+                  <b>{{ tt.post_title }}</b>
+                </div>
                 <div class="text-caption text-grey text-body-2">
                   {{ tt.post_content }}
                 </div>
@@ -161,6 +170,12 @@ export default {
     fixPost: function(target, pos) {
       if (target[pos].post_type == 1) return true;
       else return false;
+    },
+    move: function(postNo) {
+      this.$router.push("postdetail/" + postNo);
+    },
+    moveView: function(page) {
+      this.$router.push(page);
     }
   }
 };

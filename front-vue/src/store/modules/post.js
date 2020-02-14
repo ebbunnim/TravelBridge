@@ -13,7 +13,6 @@ const actions = {
   searchAllPost: store => {
     PostService.GetSearchAllPost().then(response => {
       store.commit("postListAll", { postList: response });
-      console.log(response);
     });
   },
   searchPartPost: (store, payload) => {
@@ -37,7 +36,7 @@ const mutations = {
     var titles = [];
     var cnt = 0;
     var ti = [];
-    console.log(payLoad.postList);
+
     for (var i of payLoad.postList) {
       if (i.post_type == 0) cnt = cnt + 1;
       else if (i.post_type == 1) cnt = cnt + 2;
@@ -57,8 +56,7 @@ const mutations = {
         ti.push(i);
       }
     }
-    console.log("asd");
-    console.log(titles);
+
     state.postList = titles;
   },
   postListPart(state, payLoad) {

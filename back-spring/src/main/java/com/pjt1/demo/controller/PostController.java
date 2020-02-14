@@ -93,16 +93,22 @@ public class PostController {
         List<Map<String, Object>> delList_Likes = service.findChildLike(post_no);
         List<Map<String, Object>> delList_Comment = service.findChildCmt(post_no);
         List<Map<String, Object>> delList_Files = service.findChildFiles(post_no);
-    	List<Integer> del_Likes_IndexList = new ArrayList<Integer>(); 
-    	List<Integer> del_Comment_IndexList = new ArrayList<Integer>(); 
-    	List<Integer> del_Files_IndexList = new ArrayList<Integer>(); 
-    	for(Object o : delList_Likes) {  del_Likes_IndexList.add(((Likes) o).getLike_no());}
-    	for(Object o : delList_Comment) {  del_Comment_IndexList.add(((Comment) o).getCmt_no());}
-    	for(Object o : delList_Files) {  del_Files_IndexList.add(((Files) o).getFiles_no());}
-    	service.deleteChildLike(del_Likes_IndexList);
-    	service.deleteChildCmt(del_Comment_IndexList);
-    	service.deleteChildFiles(del_Files_IndexList);
-    	service.delete(post_no);
+        List<Integer> del_Likes_IndexList = new ArrayList<Integer>();
+        List<Integer> del_Comment_IndexList = new ArrayList<Integer>();
+        List<Integer> del_Files_IndexList = new ArrayList<Integer>();
+        for (Object o : delList_Likes) {
+            del_Likes_IndexList.add(((Likes) o).getLike_no());
+        }
+        for (Object o : delList_Comment) {
+            del_Comment_IndexList.add(((Comment) o).getCmt_no());
+        }
+        for (Object o : delList_Files) {
+            del_Files_IndexList.add(((Files) o).getFiles_no());
+        }
+        service.deleteChildLike(del_Likes_IndexList);
+        service.deleteChildCmt(del_Comment_IndexList);
+        service.deleteChildFiles(del_Files_IndexList);
+        service.delete(post_no);
         return handleSuccess("삭제 완료");
     }
 
@@ -148,7 +154,7 @@ public class PostController {
 
     @ApiOperation("no에 따른 Post 정보 조회하는 기능")
     @GetMapping("/Post/search/WithCmtAndFiles/{post_no}")
-    public ResponseEntity<Map<String, Object>> searchWithCmtAndFiles(int post_no) {
+    public ResponseEntity<Map<String, Object>> searchWithCmtAndFiles(@PathVariable int post_no) {
         Post Post = service.searchWithCmtAndFiles(post_no);
         service.updatePostHits(post_no);
         // 그러면 여기서 포스트넘 기반으로 comment 호출하는거 하나 하고

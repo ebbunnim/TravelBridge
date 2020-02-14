@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="max-width: 70%; margin: 5% 15% 0 15%">
-      <q-btn color="primary" icon="check" label="목록으로" />
+      <q-btn color="primary" icon="check" label="목록으로" @click="goBack()" />
       <h4>{{ post.post_title }}</h4>
       <div class="justify-between row">
         <p>도시 : {{ post.post_city }}</p>
@@ -14,7 +14,6 @@
         <p>해시태그 :{{ post.post_category }}</p>
         <p>조회수 : {{ post.post_hits }}</p>
       </div>
-      <p>사진 : {{ post.post_filesList }}</p>
       <q-carousel
         arrows
         animated
@@ -25,10 +24,10 @@
         height="600px"
       >
         <q-carousel-slide
-          v-for="(mainCard, index) in MainCard"
+          v-for="(mainCard, index) in post.post_filesList"
           :key="index"
           :name="index"
-          :img-src="mainCard.img"
+          :img-src="mainCard.files_url"
         ></q-carousel-slide>
       </q-carousel>
       <div><p v-html="post.post_content"></p></div>
@@ -75,6 +74,12 @@ export default {
   computed: {
     post() {
       return this.$store.state.post.post;
+    }
+  },
+  methods: {
+    goBack: function() {
+      this.$router.go(-1);
+      return;
     }
   }
 };

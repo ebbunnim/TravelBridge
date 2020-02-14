@@ -16,7 +16,7 @@ class PostService {
       .catch(exp => console.log("Err post Search All " + exp));
   }
   GetSearchPost(postNo) {
-    return Api.get(`Post/search/${postNo}`)
+    return Api.get(`/Post/search/WithCmtAndFiles/${postNo}`)
       .then(Response => {
         return Response.data.data;
       })
