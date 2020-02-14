@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h1>글쓰기</h1>
-    <div style="max-width: 70%; margin: 0 15% 0 15%">
+    <div style="max-width: 70%; margin: 5% 15% 0 15%">
+      <q-btn color="primary" icon="check" label="목록으로" />
+      <p>기록하기</p>
       <q-card>
         <q-tabs
           v-model="tab"

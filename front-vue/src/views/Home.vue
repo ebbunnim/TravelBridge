@@ -1,36 +1,7 @@
 <template>
   <div>
-    <q-carousel
-      arrows
-      animated
-      swipeable
-      autoplay
-      infinite
-      v-model="slideOne"
-      height="600px"
-    >
-      <q-carousel-slide
-        v-for="(mainCard, index) in MainCard"
-        :key="index"
-        :name="index"
-        :img-src="mainCard.img"
-      >
-        <div class="absolute-bottom custom-caption">
-          <div class="text-h2">{{ mainCard.title }}</div>
-          <div class="text-subtitle1">{{ mainCard.sub }}</div>
-        </div>
-      </q-carousel-slide>
-    </q-carousel>
     <h2>이달의 축제</h2>
-    <q-carousel
-      arrows
-      animated
-      swipeable
-      autoplay
-      infinite
-      v-model="slideThr"
-      height="600px"
-    >
+    <q-carousel arrows animated swipeable autoplay infinite v-model="slideThr" height="600px">
       <q-carousel-slide
         v-for="(mainCard, index) in ThrCard"
         :key="index"
@@ -56,7 +27,7 @@
         </div>
       </q-carousel-slide>
     </q-carousel>
-    <h2>준목꺼</h2>
+    <h2>최신 여행 포스트</h2>
     <q-carousel
       v-model="slideTwo"
       transition-prev="slide-right"
@@ -78,9 +49,7 @@
         :name="index"
         class="column no-wrap"
       >
-        <div
-          class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap"
-        >
+        <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
           <q-img
             v-for="(subContent, index) in subCard"
             :key="index"
@@ -118,9 +87,7 @@
         :name="index"
         class="column no-wrap"
       >
-        <div
-          class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap"
-        >
+        <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
           <q-img
             v-for="(subContent, index) in subCard"
             :key="index"
@@ -146,18 +113,18 @@ export default {
       MainCard: [
         {
           img: require("../assets/bg.jpg"),
-          title: "First stop",
-          sub: "Mountains"
+          title: "이번엔 어디로 여행가지?",
+          sub: "국내 축제와 핫플은 다모아놨다!"
         },
         {
           img: require("../assets/main.gif"),
-          title: "second stop",
-          sub: "Mountains"
+          title: "다른 사람들은 여행을 어떻게 갈까?",
+          sub: "여행 정보 공유 라고 쓰고 자랑이라고 말하지"
         },
         {
           img: require("../assets/train.gif"),
-          title: "thrid stop",
-          sub: "Mountains"
+          title: "가자 내일로 그런데 어디로?",
+          sub: "내일로 추천의 신!"
         }
       ],
       SubCard: [
