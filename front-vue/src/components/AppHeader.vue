@@ -152,11 +152,7 @@
             >로그인</q-btn
           >
         </div>
-<<<<<<< HEAD
         <div class="col-4" align="right" v-else>
-=======
-        <div class="col-4" align="right">
->>>>>>> f9c114c0a98064343db2aec2e2e1bb2671a139a9
           <q-btn size="md" class="text-grey q-py-md" flat to="/mypage"
             >내 정보</q-btn
           >
