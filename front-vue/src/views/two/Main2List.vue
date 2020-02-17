@@ -54,7 +54,6 @@
 import { mapState } from "vuex";
 import HotPlaceCard from "@/views/two/HotPlaceCard.vue";
 import FestivalCard from "@/views/two/FestivalCard.vue";
-
 export default {
   components: {
     HotPlaceCard,

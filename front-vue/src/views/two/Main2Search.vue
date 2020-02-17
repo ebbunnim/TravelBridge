@@ -61,7 +61,6 @@
 <script>
 import HotPlaceCard from "@/views/two/HotPlaceCard.vue";
 import FestivalCard from "@/views/two/FestivalCard.vue";
-
 export default {
   components: {
     HotPlaceCard,
@@ -93,7 +92,6 @@ export default {
       console.log(this.searchOption);
       console.log(this.word);
       console.log(this.searchOptionValue[this.searchOption]);
-
       this.$store.dispatch("hotplace/searchMoreHotplace", {
         btnCnt: this.hpBtnCnt,
         searchOption: this.searchOptionValue[this.searchOption],
