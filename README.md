@@ -6,7 +6,7 @@
 
 1. [서비스 소개](#서비스-소개)
 1. [주요 기능](#주요-기능)
-1. [설계](#설계)
+1. [메타데이터](#TavelBridge-메타데이터)
 1. [서비스 예시](#서비스-예시)
 1. [팀 구성](#팀-구성)
 1. [사용 툴](#사용-툴)
@@ -26,15 +26,13 @@
 - 내일로 랜덤 여행 루트 서비스
 
 ---
-## **TravelBridge Meta Data**
+## **TravelBridge 메타데이터**
 
 ## **1. 시스템 구조도**
 
-- FRONT-END
+![시스템구조도](./metadata_description/system_architecture.png)
 
-- REST API
-
-- BACK-END
+- FRONT-END는 Vue.js의 모듈로 구성하고 Spring Boot를 통해 개발된 BACK-END와 REST API로 비동기 통신하며 서비스를 제공
 
 ## **2. 기술스택**
 
@@ -66,18 +64,19 @@
 
 ## [**3. 테이블 설계**](./metadata_description/TABLE.md)
 
-![ERD](./metadata_description/pjt1ERD.png)
+<img src="./metadata_description/pjt1ERD.png" width="100%">
 
 ## [**4. API 문서**](./metadata_description/APIDocumentaion.md)
 
-![Swagger API](./metadata_description/PJT1ApiDocument.png)
+<img src="metadata_description/PJT1ApiDocument.png" width="100%">
 
 ---
-## 설계
 
-## 서비스 예시
+## **서비스 예시**
 
-## 팀 구성
+
+
+## **팀 구성**
 
 프론트엔드
 
@@ -89,4 +88,11 @@
 - 정구헌
 - 신지영
 
-## 사용 툴
+## **사용 툴**
+
+- Visual Studio Code
+- Spring Tool Suite4
+- MySQL Workbench
+- git(git bash) / gitlab(lab.ssafy.com) / jira (jira.ssafy.com)
+
+
