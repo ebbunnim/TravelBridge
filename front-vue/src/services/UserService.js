@@ -29,7 +29,7 @@ class UserService {
     return Api.put("/Members/update", user)
       .then(res => {
         console.log("updateservice.js:", res.data.data);
-        return res.data
+        return res.data;
       })
       .catch(e => {
         console.log(e);

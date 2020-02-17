@@ -5,7 +5,7 @@
 <mapper namespace="com.pjt1.demo.model.dao.QnaDao" >
 
  	<insert id="insert"		parameterType="qna">
-		INSERT INTO qna
+		INSERT INTO QNA
 		(mem_no, qna_category, qna_title, qna_content, qna_answer) 
 		VALUES (
 			#{mem_no:INTEGER}, 
@@ -17,13 +17,13 @@
 	</insert> 
 	
    	<delete id="delete" 	parameterType="int">
-		UPDATE qna SET 
+		UPDATE QNA SET 
 		qna_del_check = TRUE 
 		WHERE qna_no=#{qna_no} and qna_del_check=FALSE
 	</delete>
 
    	<update id="update"		parameterType="qna">
-		UPDATE qna SET 
+		UPDATE QNA SET 
 		mem_no=#{mem_no:INTEGER},
 		qna_category=#{qna_category:VARCHAR},
 		qna_title=#{qna_title:VARCHAR}, 
@@ -35,26 +35,26 @@
 	</update>
 
 	<update id="answerTheQuestion" parameterType="qna">
-		UPDATE qna SET
+		UPDATE QNA SET
 		qna_answer = #{qna_answer:VARCHAR}
 		WHERE qna_no=#{qna_no}
 	</update>
 	 
    	<select id="search"		parameterType="int" resultType="qna">
 		SELECT * 
-		FROM qna 
+		FROM QNA 
 		WHERE qna_no=#{qna_no:INTEGER} 
 		AND qna_del_check=false   
 	</select>
 	<select id="searchForMember" parameterType = "int" resultType="qna">
 		SELECT * 
-		FROM qna 
+		FROM QNA 
 		WHERE mem_no=#{mem_no:INTEGER} 
 		AND qna_del_check=false
 	</select>
    	<select id="searchAll"	resultType="qna">
 		SELECT * 
-		FROM qna 
+		FROM QNA 
 		WHERE qna_del_check=false
 	</select>
 

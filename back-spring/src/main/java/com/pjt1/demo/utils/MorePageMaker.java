@@ -8,5 +8,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class MorePageMaker {
-	@Getter @Setter private MorePageBean pageBean;
+	@Getter
+	@Setter
+	private MorePageBean pageBean;
 }

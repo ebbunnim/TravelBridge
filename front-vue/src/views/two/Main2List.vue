@@ -1,21 +1,23 @@
 <template>
-  <div>
-    <h1>태그, 제목, 내용, all 검색</h1>
-    <!-- 검색 option 과 검색어를 입력받는 div -->
-    <div class="row justify-center">
+  <q-page class="page">
+    <div
+      class="row justify-center q-my-xl q-py-xl"
+      style="height: 550px; background: #f9f9f9"
+    >
       <q-select
         bordered
-        class="col-1 q-mx-xs"
+        class="col-1 q-mx-xs text-grey"
         v-model="searchOption"
         :options="searchOptions"
       />
-
       <q-input
         bordered
         class="col-3 text-h6"
         v-model="word"
         type="text"
-        placeholder="??????"
+        :placeholder="[
+          searchOption === null ? '' : searchOption + '을 검색하세요'
+        ]"
       >
         <template v-slot:append>
           <q-btn
@@ -23,13 +25,20 @@
             flat
             color="grey"
             icon="search"
-            @click="onSubmitBtn()"
+            @click="onSearchBtn()"
           />
         </template>
       </q-input>
     </div>
-    <!-- 입력받은 내용을 보여주는 div -->
-    <div class="row" style="height: 550px">
+    <div class>
+      <h4>이건 fval</h4>
+      {{ fval_list }}
+      <h4>이건 hp</h4>
+      {{ hp_list }}
+    </div>
+
+    <!-- <div class="row" style="height: 550px">
+      <div class="col text-h5"></div>
       <div
         class="col"
         v-for="i in hp_list.length > 4 * hpBtnCnt
@@ -45,6 +54,8 @@
       </div>
     </div>
     <div class="row" style="height: 550px; background: #f9f9f9">
+      <div class="col text-h5"></div>
+
       <div
         class="col"
         v-for="i in fval_list.length > 4 * hpBtnCnt
@@ -58,33 +69,36 @@
           :fval_tag="fval_list[i - 1].fval_tag"
         ></FestivalCard>
       </div>
-    </div>
-  </div>
+    </div>-->
+  </q-page>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import HotPlaceCard from "@/components/two/HotPlaceCard.vue";
-import FestivalCard from "@/components/two/FestivalCard.vue";
+// import HotPlaceCard from "@/views/two/HotPlaceCard.vue";
+// import FestivalCard from "@/views/two/FestivalCard.vue";
 
 export default {
-  components: {
-    HotPlaceCard,
-    FestivalCard
-  },
+  // components: {
+  // HotPlaceCard,
+  // FestivalCard
+  // },
   data() {
     return {
       hpBtnCnt: 1,
       fvalBtnCnt: 1,
-      // 더보기로 HotPlace 또는 Festival 검색하기 조회
-      // searchOption은 all / title / content/ tag 중 전달
+      //
+      hpLoadMore: false,
+      fvalLoadMore: false,
+      //
       searchOption: null,
-      searchOptions: ["전체", "제목", "내용", "태그"],
+      searchOptions: ["전체", "제목", "내용", "태그", "도시"],
       searchOptionValue: {
         전체: "all",
         제목: "title",
         내용: "content",
-        태그: "tag"
+        태그: "tag",
+        도시: "city"
       },
       word: ""
     };
@@ -94,21 +108,19 @@ export default {
     fval_list: state => state.festival.fvals
   }),
   methods: {
-    onSubmitBtn() {
-      console.log(this.searchOption);
-      console.log(this.word);
-      console.log(this.searchOptionValue[this.searchOption]);
-
-      this.$store.dispatch("hotplace/searchMoreHotplace", {
-        btnCnt: this.hpBtnCnt,
+    onSearchBtn() {
+      const payLoad = {
+        btnCnt: this.hpBtnCnt, // fval
         searchOption: this.searchOptionValue[this.searchOption],
         word: this.word
-      });
-      this.$store.dispatch("festival/searchMoreFestival", {
-        btnCnt: this.fvalBtnCnt,
-        searchOption: this.searchOptionValue[this.searchOption],
-        word: this.word
-      });
+      };
+      this.$store.dispatch("hotplace/searchMoreHotplace", payLoad);
+      payLoad.btnCnt = this.fvalBtnCnt;
+      this.$store.dispatch("festival/searchMoreFestival", payLoad);
+    },
+    checkLoadMoreBtn() {
+      if (this.hp_list.length < 4) this.hpLoadMore = false;
+      if (this.fval_list.length < 4) this.fvalLoadMore = false;
     }
   }
 };

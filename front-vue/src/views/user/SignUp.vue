@@ -221,7 +221,7 @@ export default {
           this.currentChoices += this.themaKor[key];
         }
       }
-      console.log('signup에서 테마 선택: ', this.currentChoices);
+      console.log("signup에서 테마 선택: ", this.currentChoices);
     },
     clearUserForm() {
       this.user = {

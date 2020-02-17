@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h1>픽(테마)</h1>
-
     <q-dialog v-model="alert">
       <q-card>
         <q-card-section>
@@ -54,36 +52,50 @@
       </q-card>
     </q-dialog>
 
-    <div style="display: inline" v-for="(item, idx) in thema" :key="idx">
-      <q-btn
-        color="grey"
-        class="q-ma-sm"
-        size="xl"
-        v-if="item.state"
-        @click="
-          item.state = !item.state;
-          onToggle();
-        "
-        >{{ item.name }}</q-btn
-      >
-      <q-btn
-        color="grey"
-        class="q-ma-sm"
-        size="xl"
-        v-if="!item.state"
-        outline
-        @click="
-          item.state = !item.state;
-          onToggle();
-        "
-        >{{ item.name }}</q-btn
-      >
+    <div
+      class="row justify-center q-my-xl q-py-xl"
+      style="height: 350px; background: #f9f9f9"
+    >
+      <div style="display: inline" v-for="(item, idx) in thema" :key="idx">
+        <q-btn
+          color="grey"
+          class="q-ma-sm"
+          size="lg"
+          rounded
+          v-if="item.state"
+          @click="
+            item.state = !item.state;
+            onToggle();
+          "
+          >#{{ item.name }}</q-btn
+        >
+        <q-btn
+          color="grey"
+          class="q-ma-sm"
+          rounded
+          size="lg"
+          v-if="!item.state"
+          outline
+          @click="
+            item.state = !item.state;
+            onToggle();
+          "
+          >#{{ item.name }}</q-btn
+        >
+      </div>
     </div>
-    <div>
-      <h1>이건 페스티발</h1>
-      {{ fval_list }}
-      <h1>이건 핫플</h1>
+
+    <div
+      style="margin: 100px 150px; height: 400px; text-align: center;"
+      class="q-pa-xl"
+    >
       {{ hp_list }}
+    </div>
+    <div
+      style="margin: 100px 150px; height: 400px; text-align: center;"
+      class="q-pa-xl"
+    >
+      {{ fval_list }}
     </div>
   </div>
 </template>
