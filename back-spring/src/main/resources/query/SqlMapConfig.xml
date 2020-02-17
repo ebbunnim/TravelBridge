@@ -3,25 +3,27 @@
       "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-		<typeAlias type="com.pjt1.demo.model.dto.Board"          	alias="board" />
-  		<typeAlias type="com.pjt1.demo.model.dto.Faq"            	alias="faq" />
-		<typeAlias type="com.pjt1.demo.model.dto.Comment"        	alias="comment" />
-		<typeAlias type="com.pjt1.demo.model.dto.City"        		alias="city" />
-		<typeAlias type="com.pjt1.demo.model.dto.Festival"          alias="festival" />
-		<typeAlias type="com.pjt1.demo.model.dto.Files"         	alias="files" />
-		<typeAlias type="com.pjt1.demo.model.dto.Follow"         	alias="follow" />
-		<typeAlias type="com.pjt1.demo.model.dto.HotPlace"        	alias="hotplace" />
-		<typeAlias type="com.pjt1.demo.model.dto.Likes"           	alias="likes" />
-		<typeAlias type="com.pjt1.demo.model.dto.Members"         	alias="members" />
-		<typeAlias type="com.pjt1.demo.model.dto.Post"           	alias="post" />
-		<typeAlias type="com.pjt1.demo.model.dto.Qna"           	alias="qna" /> 
-		<typeAlias type="com.pjt1.demo.model.dto.Calendar"          alias="calendar" /> 
+		<typeAlias type="com.pjt1.demo.model.dto.Board"          	alias="BOARD" />
+  		<typeAlias type="com.pjt1.demo.model.dto.Faq"            	alias="FAQ" />
+		<typeAlias type="com.pjt1.demo.model.dto.Comment"        	alias="COMMENT" />
+		<typeAlias type="com.pjt1.demo.model.dto.Course"        	alias="COURSE" />
+		<typeAlias type="com.pjt1.demo.model.dto.City"        		alias="CITY" />
+		<typeAlias type="com.pjt1.demo.model.dto.Festival"          	alias="FESTIVAL" />
+		<typeAlias type="com.pjt1.demo.model.dto.Files"         	alias="FILES" />
+		<typeAlias type="com.pjt1.demo.model.dto.Follow"         	alias="FOLLOW" />
+		<typeAlias type="com.pjt1.demo.model.dto.HotPlace"        	alias="HOTPLACE" />
+		<typeAlias type="com.pjt1.demo.model.dto.Likes"           	alias="LIKES" />
+		<typeAlias type="com.pjt1.demo.model.dto.Members"         	alias="MEMBERS" />
+		<typeAlias type="com.pjt1.demo.model.dto.Post"           	alias="POST" />
+		<typeAlias type="com.pjt1.demo.model.dto.Qna"           	alias="QNA" /> 
+		<typeAlias type="com.pjt1.demo.model.dto.Calendar"          alias="CALENDAR" /> 
   </typeAliases>
   
   <mappers>
   		<mapper resource="query/board_query.xml" />
   		<mapper resource="query/faq_query.xml" />
   		<mapper resource="query/comment_query.xml" />
+  		<mapper resource="query/course_query.xml" />
   		<mapper resource="query/city_query.xml" />
   		<mapper resource="query/festival_query.xml" />
   		<mapper resource="query/files_query.xml" />

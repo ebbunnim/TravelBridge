@@ -42,8 +42,4 @@ public class Comment implements Serializable {
 	// FOREIGN KEY(board_no) REFERENCES BOARD(board_no),
 	// FOREIGN KEY(mem_no) REFERENCES MEMBER(mem_no)
 
-	@Override
-	public String toString() {
-		return "hello";
-	}
 }

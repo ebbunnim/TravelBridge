@@ -4,7 +4,7 @@
 <mapper namespace="com.pjt1.demo.model.dao.FilesDao" >
 
   	<insert id="insert"		parameterType="files">
-		INSERT INTO files
+		INSERT INTO FILES
 		(post_no, mem_no,
 		files_url)
 		VALUES (
@@ -13,11 +13,11 @@
 		)
 	</insert> 
    	<delete id="delete" 	parameterType="int">
-   		UPDATE files SET files_del_check = TRUE WHERE files_no = #{files_no:INTEGER} AND files_del_check = FALSE
+   		UPDATE FILES SET files_del_check = TRUE WHERE files_no = #{files_no:INTEGER} AND files_del_check = FALSE
    	</delete>
 
    	<update id="update"		parameterType="files">
-		UPDATE files 
+		UPDATE FILES 
 		SET
 		post_no=#{post_no:INTEGER}, mem_no=#{mem_no:INTEGER},
 		files_url=#{files_url:VARCHAR}, files_del_check=#{files_del_check:BOOLEAN}
@@ -26,13 +26,13 @@
 	
    	<select id="search"		parameterType="int" resultType="files">
 		SELECT * 
-		FROM files 
+		FROM FILES 
 		WHERE files_no=#{files_no:INTEGER} 
 		AND files_del_check=false   
 	</select>
    	<select id="searchAll"	resultType="files">
 		SELECT * 
-		FROM files 
+		FROM FILES 
 		WHERE files_del_check=false
 	</select>
 </mapper>

@@ -35,7 +35,7 @@ public class Post implements Serializable {
 	private String post_title;// varchar(200), # 게시글 제목
 	@Getter
 	@Setter
-	private String post_content;// varchar(3000) NOT NULL, # 게시글 내용
+	private String post_content;// varchar(3000) NOT NULL, # 게시글 내용 플랜
 	@Getter
 	@Setter
 	private String post_category;// varchar(300), # 게시글 카테고리, 태그
@@ -50,25 +50,22 @@ public class Post implements Serializable {
 	private String post_city;// varchar(500),
 	@Getter
 	@Setter
-	private String post_plan_start;// date, # 일정 시작날짜
-	@Getter
-	@Setter
-	private String post_plan_end;// date, # 일정 끝 날짜
-	@Getter
-	@Setter
-	private String post_plan_title;// varchar(300), # 일정 간단한 메모내용
-	@Getter
-	@Setter
 	private String post_writer; // # 작성자
 	@Getter
 	@Setter
 	private boolean post_del_check;// boolean DEFAULT FALSE, # 삭제 여부
 	@Getter
 	@Setter
+	private String post_plan_date;// 일정 목표 날짜칸 추가
+	@Getter
+	@Setter
 	private List<Comment> post_cmtList;
 	@Getter
 	@Setter
 	private List<Files> post_filesList;
+	@Getter
+	@Setter
+	private List<Course> post_courseList;
 
 	// FOREIGN KEY(board_no) REFERENCES BOARD(board_no),
 	// FOREIGN KEY(mem_no) REFERENCES MEMBERS(mem_no)

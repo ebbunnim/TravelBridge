@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.pjt1.demo.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,22 +17,26 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.dto.Faq;
-import com.example.demo.model.service.FaqService;
+import com.pjt1.demo.model.dto.Comment;
+import com.pjt1.demo.model.dto.Course;
+import com.pjt1.demo.model.dto.Members;
+import com.pjt1.demo.model.service.CourseService;
+import com.pjt1.demo.model.service.PostService;
 
 import io.swagger.annotations.ApiOperation;
 
-
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
-public class FaqController{
-	
+public class CourseController {
+
     @Autowired
-    private FaqService service;
-    
+    private CourseService service;
+    @Autowired
+    private PostService p_service;
+
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
-        return handleFail(e.getMessage(), HttpStatus.OK); // ì „ì†¡ì—ëŠ” ì§€ì¥ ì—†ìŒ
+        return handleFail(e.getMessage(), HttpStatus.OK); // Àü¼Û¿¡´Â ÁöÀå ¾øÀ½
     }
 
     public ResponseEntity<Map<String, Object>> handleSuccess(Object data) {
@@ -48,35 +52,39 @@ public class FaqController{
         resultMap.put("data", data);
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
-    @ApiOperation("ì „ì²´ Faq ëª©ë¡ì„ ì¡°íšŒí•˜ëŠ” ê¸°ëŠ¥")
-    @GetMapping("/Faq/search/all")
+
+    @ApiOperation("ÀüÃ¼ Course ¸ñ·ÏÀ» Á¶È¸ÇÏ´Â ±â´É")
+    @GetMapping("/Course")
     public ResponseEntity<Map<String, Object>> searchAll() {
-        List<Faq> list = service.searchAll();
-        System.out.println("ASD");
+        List<Course> list = service.searchAll();
         return handleSuccess(list);
     }
-    @ApiOperation("noì— ë”°ë¥¸ Faq ì •ë³´ ì¡°íšŒí•˜ëŠ” ê¸°ëŠ¥")
-    @GetMapping("/Faq/search/{faq_no}")
-    public ResponseEntity<Map<String, Object>> search(@PathVariable int faq_no) {
-        Faq Faq = service.search(faq_no);
-        return handleSuccess(Faq);
+
+    @ApiOperation("no¿¡ µû¸¥ Course Á¤º¸ Á¶È¸ÇÏ´Â ±â´É")
+    @GetMapping("/Course/{no}")
+    public ResponseEntity<Map<String, Object>> search(int no) {
+        Course Course = service.search(no);
+        return handleSuccess(Course);
     }
-    @ApiOperation("Faq ì •ë³´ ë“±ë¡")
-    @PostMapping("/Faq/insert")
-    public ResponseEntity<Map<String, Object>> insert(@RequestBody Faq Faq) {
-        service.insert(Faq);
+
+    @PostMapping("/Course")
+    @ApiOperation("Course Á¤º¸ µî·Ï")
+    public ResponseEntity<Map<String, Object>> insert(@RequestBody Course Course) {
+        service.insert(Course);
         return handleSuccess("");
     }
-	 @ApiOperation("Faq ì •ë³´ ì‚­ì œ")
-    @DeleteMapping("/Faq/delete/{faq_no}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable int faq_no) {
-        service.delete(faq_no);
-        return handleSuccess("ì‚­ì œ ì™„ë£Œ");
+
+    @ApiOperation("Course Á¤º¸ »èÁ¦")
+    @DeleteMapping("/Course/{no}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
+        service.delete(no);
+        return handleSuccess("»èÁ¦ ¿Ï·á");
     }
-	@ApiOperation("Faq ì •ë³´ ìˆ˜ì •")
-    @PutMapping("/Faq/update")
-    public ResponseEntity<Map<String, Object>> update(@RequestBody Faq Faq) {
-        service.update(Faq);
-        return handleSuccess("ìˆ˜ì • ì™„ë£Œ");
+
+    @ApiOperation("Course Á¤º¸ ¼öÁ¤")
+    @PutMapping("/Course")
+    public ResponseEntity<Map<String, Object>> update(@RequestBody Course Course) {
+        service.update(Course);
+        return handleSuccess("¼öÁ¤ ¿Ï·á");
     }
 }
