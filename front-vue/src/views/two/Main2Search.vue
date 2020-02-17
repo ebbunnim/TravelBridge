@@ -2,26 +2,15 @@
   <div>
     <h1>태그, 제목, 내용, all 검색</h1>
     <!-- 검색 option 과 검색어를 입력받는 div -->
-    <div class="row justify-center" style="margin:5% 0 0 0 ; height: 550px;">
-      <q-select
-        bordered
-        class="col-1 q-mx-xs"
-        v-model="searchOption"
-        :options="searchOptions"
-      />
+    <!-- <div class="row justify-center" style="margin:5% 0 0 0 ; height: 550px;">
+      <q-select bordered class="col-1 q-mx-xs" v-model="searchOption" :options="searchOptions" />
 
       <q-input bordered class="col-3 text-h6" v-model="word" type="text">
         <template v-slot:append>
-          <q-btn
-            outline
-            flat
-            color="grey"
-            icon="search"
-            @click="onSubmitBtn()"
-          />
+          <q-btn outline flat color="grey" icon="search" @click="onSubmitBtn()" />
         </template>
       </q-input>
-    </div>
+    </div> -->
     <!-- 입력받은 내용을 보여주는 div -->
     <div class="row q-mx-xl q-px-xl">
       <div
@@ -61,6 +50,7 @@
 <script>
 import HotPlaceCard from "@/views/two/HotPlaceCard.vue";
 import FestivalCard from "@/views/two/FestivalCard.vue";
+
 export default {
   components: {
     HotPlaceCard,
@@ -75,33 +65,34 @@ export default {
       loadMoreHpCheck: true,
       loadMoreFvalCheck: true,
       // 더보기로 HotPlace 또는 Festival 검색하기 조회
-      // searchOption은 all / title / content/ tag 중 전달
+      // searchOption은 all / title / content/ tag / city 중 전달
       searchOption: null,
-      searchOptions: ["전체", "제목", "내용", "태그"],
+      searchOptions: ["전체", "제목", "내용", "태그", "도시"],
       searchOptionValue: {
         전체: "all",
         제목: "title",
         내용: "content",
-        태그: "tag"
+        태그: "tag",
+        도시: "city"
       },
       word: ""
     };
   },
   methods: {
     onSubmitBtn() {
-      console.log(this.searchOption);
-      console.log(this.word);
-      console.log(this.searchOptionValue[this.searchOption]);
-      this.$store.dispatch("hotplace/searchMoreHotplace", {
-        btnCnt: this.hpBtnCnt,
-        searchOption: this.searchOptionValue[this.searchOption],
-        word: this.word
-      });
-      this.$store.dispatch("festival/searchMoreFestival", {
-        btnCnt: this.fvalBtnCnt,
-        searchOption: this.searchOptionValue[this.searchOption],
-        word: this.word
-      });
+      // console.log(this.searchOption);
+      // console.log(this.word);
+      // console.log(this.searchOptionValue[this.searchOption]);
+      // this.$store.dispatch("hotplace/searchMoreHotplace", {
+      //   btnCnt: this.hpBtnCnt,
+      //   searchOption: this.searchOptionValue[this.searchOption],
+      //   word: this.word
+      // });
+      // this.$store.dispatch("festival/searchMoreFestival", {
+      //   btnCnt: this.fvalBtnCnt,
+      //   searchOption: this.searchOptionValue[this.searchOption],
+      //   word: this.word
+      // });
     },
     loadMoreBtnCheck() {
       if (this.hp_list.length < 4) this.loadMoreHpCheck = false;

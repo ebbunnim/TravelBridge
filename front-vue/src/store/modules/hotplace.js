@@ -1,28 +1,19 @@
 import HotPlaceService from "@/services/HotPlaceService.js";
 
 const state = {
-  hps: []
+  hps: [],
+  hp_list_length: 0
 };
+
+// const getters = {
+//   hp_list_length: state => state.hps.length
+// };
 
 const actions = {
   searchAllHPs: ({ commit }) => {
     HotPlaceService.searchAll(hps => {
       commit("saveHPs", hps);
     });
-  },
-  searchMoreHotPlaceByCityName: ({ commit }, payload) => {
-    HotPlaceService.searchMoreHotPlaceByCityName(
-      payload.btnCnt,
-      payload.cityName
-    )
-      .then(res => {
-        console.log("여긴 hotplace vuex");
-        commit("saveHPs", res);
-        console.log("hp state: ", state.hps);
-      })
-      .catch(error => {
-        console.log(error);
-      });
   },
   searchMoreHotplace: ({ commit }, payload) => {
     HotPlaceService.searchMoreHotplace(
@@ -31,9 +22,10 @@ const actions = {
       payload.word
     )
       .then(res => {
-        console.log("여긴vuex", res);
+        console.log("여긴 hotplace.js", res);
         commit("saveHPs", res);
-        console.log("hp state: ", state.hps);
+        console.log("state.hps 확인 ", state.hps);
+        console.log("길이 측정!!!!!: ", state.hp_list_length);
       })
       .catch(e => {
         console.log(e);
@@ -56,6 +48,7 @@ const actions = {
 const mutations = {
   saveHPs(state, hps) {
     state.hps = hps;
+    state.hp_list_length = hps.length;
   },
   clearHPs(state) {
     state.hps = [];
@@ -65,6 +58,7 @@ const mutations = {
 export default {
   namespaced: true,
   state,
+  // getters,
   mutations,
   actions
 };

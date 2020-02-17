@@ -4,25 +4,17 @@ const state = {
   fvals: []
 };
 
+const getters = {
+  getFvalsByTheme: (state) => (theme) => {
+    return state.fvals.find(fval => fval.fval_theme.includes(theme))
+  }
+};
+
 const actions = {
   searchAllFvals: ({ commit }) => {
     FestivalService.searchAll(fvals => {
       commit("saveFvals", fvals);
     });
-  },
-  searchMoreFestivalByCityName: ({ commit }, payload) => {
-    FestivalService.searchMoreFestivalByCityName(
-      payload.btnCnt,
-      payload.cityName
-    )
-      .then(res => {
-        console.log("여긴 festival vuex");
-        commit("saveFvals", res);
-        console.log("fval state: ", state.fvals);
-      })
-      .catch(error => {
-        console.log(error);
-      });
   },
   searchMoreFestival: ({ commit }, payload) => {
     FestivalService.searchMoreFestival(
@@ -31,9 +23,9 @@ const actions = {
       payload.word
     )
       .then(res => {
-        console.log("여긴 vuex", res);
+        console.log("여긴 festival.js", res);
         commit("saveFvals", res);
-        console.log("fval state: ", state.fvals);
+        console.log("state.fvals: ", state.fvals);
       })
       .catch(e => {
         console.log(e);
@@ -64,6 +56,7 @@ const mutations = {
 export default {
   namespaced: true,
   state,
+  getters,
   mutations,
   actions
 };

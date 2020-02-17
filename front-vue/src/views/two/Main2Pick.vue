@@ -89,7 +89,9 @@
       style="margin: 100px 150px; height: 400px; text-align: center;"
       class="q-pa-xl"
     >
-      {{ hp_list }}
+      {{ getFvalsByTheme }}
+
+      <!-- {{ hp_list }} -->
     </div>
     <div
       style="margin: 100px 150px; height: 400px; text-align: center;"
@@ -101,7 +103,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   data() {
@@ -127,11 +129,17 @@ export default {
       hpBtnCnt: 1
     };
   },
-  computed: mapState({
-    user: state => state.user.user, // 현재 접속자
-    hp_list: state => state.hotplace.hps,
-    fval_list: state => state.festival.fvals
-  }),
+  computed: {
+    ...mapState({
+      user: state => state.user.user, // 현재 접속자
+      hp_list: state => state.hotplace.hps,
+      fval_list: state => state.festival.fvals
+    }),
+    ...mapGetters({
+      getFvalsByTheme: "festival/getFvalsByTheme"
+    })
+  },
+
   methods: {
     checkIfLoggedIn() {
       if (this.user.mem_interest === undefined) {
@@ -181,11 +189,11 @@ export default {
     getAllPicks() {
       if (this.currentChoices !== "") {
         this.$store.dispatch("hotplace/searchMoreHotPlaceByTheme", {
-          btnCnt: this.fvalBtnCnt,
+          btnCnt: this.hpBtnCnt,
           word: this.currentChoices
         });
         this.$store.dispatch("festival/searchMoreFestivalByTheme", {
-          btnCnt: this.hpBtnCnt,
+          btnCnt: this.fvalBtnCnt,
           word: this.currentChoices
         });
       } else if (this.currentChoices === "") {
