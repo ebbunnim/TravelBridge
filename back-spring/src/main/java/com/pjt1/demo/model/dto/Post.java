@@ -14,6 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
+@ToString
 public class Post implements Serializable {
 	private static final long serialVersionUID = -3681429445670649187L;
 	@Getter
