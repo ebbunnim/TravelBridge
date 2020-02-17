@@ -28,7 +28,7 @@
 		board_name = #{board_name:VARCHAR},
 		board_del_check = #{board_del_check:BOOLEAN}
 		WHERE board_no = #{board_no:INTEGER}    -->
-        UPDATE board
+        UPDATE CALENDAR
         SET 
         title = #{title:VARCHAR}, description = #{description:VARCHAR},
         start = #{start:VARCHAR}, end = #{end:VARCHAR},
@@ -36,9 +36,10 @@
         backgroundColor = #{backgroundColor:VARCHAR}, 
         textColor = #{textColor:VARCHAR}, allDay = #{allDay:BOOLEAN}
 	</update>
+	<!-- 아래 두개 바꾸기 -->
    	<select id="searchCalendarByMem_no"		parameterType="int" resultType="calendar"> 
 		SELECT * 
-		FROM Calendar 
+		FROM CALENDAR 
 		WHERE mem_no = #{mem_no:INTEGER} 
 		<!-- AND board_del_check = false       -->
 	</select>

@@ -2,17 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 
 <mapper namespace="com.pjt1.demo.model.dao.PostDao" >
-	<resultMap type="Comment" id="cmtMap">
+	<resultMap type="comment" id="cmtMap">
 		<result property = "cmt_no" column="cmt_no"/>
 		<result property = "cmt_regtime" column="cmt_regtime"/>
 		<result property ="cmt_content" column="cmt_content"/>
 		<result property = "cmt_writer" column="cmt_writer"/>
 	</resultMap>
-	<resultMap type="Files" id="filesMap">
+	<resultMap type="files" id="filesMap">
 		<result property ="files_no" column="files_no"/>
 		<result property ="files_url" column="files_url"/>
 	</resultMap>
-	<resultMap id="pcfMap" type ="Post">
+	<resultMap type="course" id="courseMap">
+		<result property ="course_no" column="course_no"/>
+		<result property ="course_title" column="course_title"/>
+		<result property ="course_description" column="course_description"/>
+	</resultMap>
+	<resultMap id="pcfMap" type ="POST">
 		<id property="post_no" column="post_no"/>
 		<result property="mem_no" column ="mem_no"/>
 		<result property="post_type" column ="post_type"/>
@@ -22,219 +27,46 @@
 		<result property="post_category" column ="post_category"/>
 		<result property="post_regtime" column ="post_regtime"/>
 		<result property="post_hits" column ="post_hits"/>
-		<result property="post_city" column ="post_city"/>
+		<result property="post_city" column ="post_hits"/>
+		<result property="post_writer" column ="post_writer"/>
+		<result property="post_plan_date" column ="post_plan_date"/>
+		<collection property="post_cmtList" ofType="comment" resultMap="cmtMap"/>
+		<collection property="post_filesList" ofType="files" resultMap="filesMap"/>
+		<collection property="post_courseList" ofType="course" resultMap="courseMap"/>
+
+	</resultMap>
+	<resultMap id="pfMap" type ="post">
+		<id property="post_no" column="post_no"/>
+		<result property="mem_no" column ="mem_no"/>
+		<result property="post_type" column ="post_type"/>
+		<result property="board_no" column ="board_no"/>
+		<result property="post_title" column ="post_title"/>
+		<result property="post_content" column ="post_content"/>
+		<result property="post_category" column ="post_category"/>
+		<result property="post_regtime" column ="post_regtime"/>
+		<result property="post_hits" column ="post_hits"/>
+		<result property="post_city" column ="post_hits"/>
+		<result property="post_writer" column ="post_writer"/>
+		<result property="post_plan_date" column ="post_plan_date"/>
+		<collection property="post_filesList" ofType="files" resultMap="filesMap"/>
+	</resultMap>
+	<resultMap id="pcsMap" type ="POST">
+		<id property="post_no" column="post_no"/>
+		<result property="mem_no" column ="mem_no"/>
+		<result property="post_type" column ="post_type"/>
+		<result property="board_no" column ="board_no"/>
+		<result property="post_title" column ="post_title"/>
+		<result property="post_content" column ="post_content"/>
+		<result property="post_category" column ="post_category"/>
+		<result property="post_regtime" column ="post_regtime"/>
+		<result property="post_hits" column ="post_hits"/>
+		<result property="post_city" column ="post_hits"/>
 		<result property="post_plan_start" column ="post_plan_start"/>
 		<result property="post_plan_end" column ="post_plan_end"/>
 		<result property="post_plan_title" column ="post_plan_title"/>
 		<result property="post_writer" column ="post_writer"/>
-		<collection property="post_cmtList" ofType="Comment" resultMap="cmtMap"/>
-		<collection property="post_filesList" ofType="Files" resultMap="filesMap"/>
+		<collection property="post_courseList" ofType="course" resultMap="courseMap"/>
 	</resultMap>
-	
-    <select id="searchMoreReport" parameterType="int" resultType="post">
-        <![CDATA[
-        SELECT 
-		p.post_no, 
-		p.mem_no,
-		p.post_type, 
-		p.board_no, 
-		p.post_title, 
-		p.post_content,
-		p.post_category, 
-		p.post_regtime, 
-		p.post_hits, 
-		p.post_city,
-		p.post_plan_start, 
-		p.post_plan_end, 
-		p.post_plan_title,
-		p.post_writer, 
-		c.cmt_no,
-		c.mem_no,
-		c.cmt_regtime, 
-		c.cmt_content, 
-		c.cmt_writer, 
-		f.files_no,
-		f.files_url
-		FROM post p 
-		LEFT JOIN comment c ON p.post_no = c.post_no AND cmt_del_check = FALSE
-		LEFT JOIN files f   ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
-		WHERE p.post_del_check = FALSE AND post_type = 0
-        ORDER BY post_regtime DESC LIMIT 0, #{perPageNum}]]>
-    </select>
-    <select id="searchMorePlan" parameterType="int" resultMap="pcfMap">
-        <![CDATA[
-        SELECT 
-		p.post_no, 
-		p.mem_no,
-		p.post_type, 
-		p.board_no, 
-		p.post_title, 
-		p.post_content,
-		p.post_category, 
-		p.post_regtime, 
-		p.post_hits, 
-		p.post_city,
-		p.post_plan_start, 
-		p.post_plan_end, 
-		p.post_plan_title,
-		p.post_writer, 
-		c.cmt_no,
-		c.mem_no,
-		c.cmt_regtime, 
-		c.cmt_content, 
-		c.cmt_writer, 
-		f.files_no,
-		f.files_url
-		FROM post p 
-		LEFT JOIN comment c ON p.post_no = c.post_no AND cmt_del_check = FALSE
-		LEFT JOIN files f   ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
-		WHERE p.post_del_check = FALSE AND post_type = 1
-        ORDER BY post_regtime DESC LIMIT 0, #{perPageNum}]]>
-    </select>
-    <select id="searchMorePost" parameterType="int" resultMap="pcfMap">
-        <![CDATA[
-        SELECT 
-		p.post_no, 
-		p.mem_no,
-		p.post_type, 
-		p.board_no, 
-		p.post_title, 
-		p.post_content,
-		p.post_category, 
-		p.post_regtime, 
-		p.post_hits, 
-		p.post_city,
-		p.post_plan_start, 
-		p.post_plan_end, 
-		p.post_plan_title,
-		p.post_writer, 
-		c.cmt_no,
-		c.mem_no,
-		c.cmt_regtime, 
-		c.cmt_content, 
-		c.cmt_writer, 
-		f.files_no,
-		f.files_url
-		FROM post p 
-		LEFT JOIN comment c ON p.post_no = c.post_no AND cmt_del_check = FALSE
-		LEFT JOIN files f   ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
-		WHERE p.post_del_check = FALSE
-		ORDER BY post_regtime DESC LIMIT 0, #{perPageNum}]]>
-    </select>
-    
-    <select id="getPostLikes" parameterType="int" resultType="int">
-		SELECT COUNT(*) 
-		FROM likes
-		WHERE post_no = #{post_no};
-	</select>
-	<select id="updatePostHits" parameterType="int">
-		UPDATE post 
-		SET post_hits = post_hits + 1 
-		WHERE post_no = #{post_no};
-	</select>
-  	<insert id="insert"		parameterType="post">
-		INSERT INTO post
-		(post_type, 
-		board_no, 
-		mem_no, 
-		post_title, 
-		post_content, 
-		post_category, 
-		post_city
-		post_plan_start, 
-		post_plan_end,
-		post_plan_title,
-		post_writer)
-		VALUES(
-			#{post_type:INTEGER}, #{board_no:INTEGER}, #{mem_no:INTEGER},
-			#{post_title:VARCHAR}, #{post_content:VARCHAR}, #{post_category:VARCHAR}, #{post_city:VARCHAR},
-			#{post_plan_start:VARCHAR}, #{post_plan_end:VARCHAR}, #{post_plan_title:VARCHAR}
-			,#{post_writer:VARCHAR}
-		)
-	</insert> 
-	
-   	<delete id="delete" 	parameterType="int">
-	   UPDATE post SET post_del_check = TRUE WHERE post_no = #{post_no:INTEGER} AND post_del_check = FALSE
-	</delete>
-	<delete id="deleteChildLike" parameterType = "hashmap">
-		<choose>
-		<when test ="list.size!=0">
-			UPDATE likes 
-			SET like_del_check = TRUE 
-			WHERE like_no in 
-			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
-				#{item}
-			</foreach>
-		</when>
-		<otherwise>
-			SELECT 0 FROM DUAL;
-		</otherwise>
-		</choose>
-	</delete> 
-	<select id="findChildLike" parameterType = "int" resultType = "likes">
-		SELECT like_no
-		FROM likes
-		WHERE like_type = 1 AND post_no = #{post_no:INTEGER} AND like_del_check = FALSE
-	</select>
-	<delete id="deleteChildCmt" parameterType = "hashmap">
-		<choose>
-		<when test ="list.size!=0">
-			UPDATE comment 
-			SET cmt_del_check = TRUE 
-			WHERE cmt_no in 
-			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
-				#{item}
-			</foreach>
-		</when>
-		<otherwise>
-			SELECT 0 FROM DUAL;
-		</otherwise>
-		</choose>
-	</delete> 
-	<select id="findChildCmt" parameterType = "int" resultType = "Comment">
-		SELECT cmt_no
-		FROM comment
-		WHERE post_no = #{post_no:INTEGER} AND cmt_del_check = FALSE
-	</select>
-	<delete id="deleteChildFiles" parameterType = "hashmap">
-		<choose>
-		<when test ="list.size!=0">
-			UPDATE files 
-			SET files_del_check = TRUE 
-			WHERE files_no in 
-			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
-				#{item}
-			</foreach>
-		</when>
-		<otherwise>
-			SELECT 0 FROM DUAL;
-		</otherwise>
-		</choose>
-	</delete> 
-	<select id="findChildFiles" parameterType = "int" resultType = "Files">
-		SELECT files_no
-		FROM Files
-		WHERE post_no = #{post_no:INTEGER} AND files_del_check = FALSE
-	</select>
-   	<update id="update"		parameterType="post">
-		UPDATE post 
-		SET
-		post_type=#{post_type:INTEGER}, 
-		board_no=#{board_no:INTEGER}, 
-		mem_no=#{mem_no:INTEGER},
-		post_title=#{post_title:VARCHAR}, 
-		post_content= #{post_content:VARCHAR}, 
-		post_category=#{post_category:VARCHAR},
-		post_regtime=CURRENT_TIMESTAMP(),
-		post_city=#{post_city:VARCHAR},
-		post_plan_start=#{post_plan_start:VARCHAR}, 
-		post_plan_end=#{post_plan_end:VARCHAR}, 
-		post_plan_title=#{post_plan_title:VARCHAR},
-		post_writer=#{post_writer:VARCHAR},
-		post_del_check=#{post_del_check:BOOLEAN}
-		where post_no=#{post_no}
-	</update>
-	
 
 	<select id = "search" parameterType="int" resultMap="pcfMap">
 	SELECT 
@@ -248,24 +80,31 @@
 	p.post_regtime, 
 	p.post_hits, 
 	p.post_city,
-	p.post_plan_start, 
-	p.post_plan_end, 
-	p.post_plan_title,
 	p.post_writer, 
+	p.post_plan_date,
 	c.cmt_no,
 	c.mem_no,
 	c.cmt_regtime, 
 	c.cmt_content, 
 	c.cmt_writer, 
 	f.files_no,
-	f.files_url
-	FROM post p 
-	LEFT JOIN comment c ON p.post_no = c.post_no AND cmt_del_check = FALSE
-	LEFT JOIN files f   ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
-	WHERE p.post_no = #{post_no:INTEGER} AND p.post_del_check = FALSE
+	f.files_url,
+	cs.course_no,
+	cs.course_title,
+	cs.course_description,
+	cs.course_del_check
+	FROM POST p 
+	LEFT JOIN COMMENT c ON p.post_no = c.post_no AND cmt_del_check = FALSE
+	LEFT JOIN FILES f   ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
+	LEFT JOIN COURSE cs ON p.post_no = cs.post_no AND cs.course_del_check=FALSE
+	WHERE p.post_no = #{post_no:INTEGER} AND p.post_del_check = FALSE;
 	</select>
-   	<select id="searchAll"	resultMap="pcfMap">
-	   	SELECT 
+	<select id="searchAll"	resultType="post">
+		SELECT * FROM POST WHERE post_del_check = false
+	</select>
+	 <select id="searchPagePostAll" parameterType="hashmap" resultMap="pfMap">
+        <![CDATA[
+        SELECT 
 		p.post_no, 
 		p.mem_no,
 		p.post_type, 
@@ -276,26 +115,77 @@
 		p.post_regtime, 
 		p.post_hits, 
 		p.post_city,
-		p.post_plan_start, 
-		p.post_plan_end, 
-		p.post_plan_title,
 		p.post_writer, 
-		c.cmt_no,
-		c.mem_no,
-		c.cmt_regtime, 
-		c.cmt_content, 
-		c.cmt_writer, 
+		p.post_plan_date,
 		f.files_no,
 		f.files_url
-		FROM post p 
-		LEFT JOIN comment c ON p.post_no = c.post_no AND cmt_del_check = FALSE
-		LEFT JOIN files f   ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
-		WHERE p.post_del_check = FALSE
-	</select>
-	<select id="searchFollowingPeoplePost" parameterType="int" resultType="Post">
+		FROM POST p 
+		LEFT JOIN FILES f  ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
+		WHERE p.post_no> #{startPage} and p.post_no<=#{endPage} AND p.post_del_check = FALSE]]>
+    </select>
+	<select id="searchPagePlan" parameterType="hashmap" resultMap="pfMap">
+        <![CDATA[
+        SELECT 
+		p.post_no, 
+		p.mem_no,
+		p.post_type, 
+		p.board_no, 
+		p.post_title, 
+		p.post_content,
+		p.post_category, 
+		p.post_regtime, 
+		p.post_hits, 
+		p.post_city,
+		p.post_writer, 
+		p.post_plan_date,
+		f.files_no,
+		f.files_url
+		FROM POST p 
+		LEFT JOIN FILES f  ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
+		WHERE p.post_no> #{startPage} and p.post_no<=#{endPage} AND p.post_del_check = FALSE
+		AND p.post_type = 1]]>
+    </select>
+    <select id="searchPagePost" parameterType="hashmap" resultMap="pfMap">
+         <![CDATA[
+        SELECT 
+		p.post_no, 
+		p.mem_no,
+		p.post_type, 
+		p.board_no, 
+		p.post_title, 
+		p.post_content,
+		p.post_category, 
+		p.post_regtime, 
+		p.post_hits, 
+		p.post_city,
+		p.post_writer, 
+		p.post_plan_date,
+		f.files_no,
+		f.files_url
+		FROM POST p 
+		LEFT JOIN FILES f  ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
+		WHERE p.post_no> #{startPage} and p.post_no<=#{endPage} AND p.post_del_check = FALSE
+		AND p.post_type = 0]]>
+    </select>
+   
+   <select id="searchFollowingPeoplePost" parameterType="int" resultMap="pfMap">
 	SELECT 
-		p.*
-	FROM post p
+	p.post_no, 
+		p.mem_no,
+		p.post_type, 
+		p.board_no, 
+		p.post_title, 
+		p.post_content,
+		p.post_category, 
+		p.post_regtime, 
+		p.post_hits, 
+		p.post_city,
+		p.post_writer, 
+		p.post_plan_date,
+		f.files_no,
+		f.files_url
+		FROM POST p 
+		LEFT JOIN FILES f  ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
 	WHERE p.mem_no
 	IN
 		(SELECT f.following_no
@@ -309,5 +199,118 @@
 	    AND m2.mem_del_check = FALSE 
 	    AND f.follow_del_check = FALSE)
 	ORDER BY p.post_regtime DESC;
+	</select> 
+
+    <select id="getPostLikes" parameterType="int" resultType="int">
+		SELECT COUNT(*) 
+		FROM LIKES
+		WHERE post_no = #{post_no};
 	</select>
+	<select id="updatePostHits" parameterType="int">
+		UPDATE POST 
+		SET post_hits = post_hits + 1 
+		WHERE post_no = #{post_no};
+	</select>
+	<insert id="insert"		parameterType="post">
+		INSERT INTO POST
+		(post_type, 
+		board_no, 
+		mem_no, 
+		post_title, 
+		post_content, 
+		post_category, 
+		post_city
+		post_writer,
+		post_plan_date)
+		VALUES(
+			#{post_type:INTEGER}, #{board_no:INTEGER}, #{mem_no:INTEGER},
+			#{post_title:VARCHAR}, #{post_content:VARCHAR}, #{post_category:VARCHAR}, #{post_city:VARCHAR},
+			#{post_writer:VARCHAR}, #{post_plan_date:VARCHAR}
+		)
+	</insert>
+	<update id="update"		parameterType="post">
+		UPDATE POST 
+		SET
+		post_type=#{post_type:INTEGER}, 
+		board_no=#{board_no:INTEGER}, 
+		mem_no=#{mem_no:INTEGER},
+		post_title=#{post_title:VARCHAR}, 
+		post_content= #{post_content:VARCHAR}, 
+		post_category=#{post_category:VARCHAR},
+		post_regtime=CURRENT_TIMESTAMP(),
+		post_city=#{post_city:VARCHAR},
+		post_writer=#{post_writer:VARCHAR},
+		post_del_check=#{post_del_check:BOOLEAN},
+		post_plan_date=#{post_plan_date:VARCHAR}
+		where post_no=#{post_no}
+	</update>
+   	<delete id="delete" 	parameterType="int">
+	   UPDATE POST 
+	   SET post_del_check = TRUE 
+	   WHERE post_no = #{post_no:INTEGER} 
+	   AND post_del_check = FALSE
+	</delete>
+	<delete id="deleteChildLike" parameterType = "hashmap">
+		<choose>
+		<when test ="list.size!=0">
+			UPDATE LIKES 
+			SET like_del_check = TRUE 
+			WHERE like_no in 
+			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
+				#{item}
+			</foreach>
+		</when>
+		<otherwise>
+			SELECT 0 FROM DUAL;
+		</otherwise>
+		</choose>
+	</delete> 
+	<select id="findChildLike" parameterType = "int" resultType = "likes">
+		SELECT like_no
+		FROM LIKES
+		WHERE like_type = 1 AND post_no = #{post_no:INTEGER} AND like_del_check = FALSE
+	</select>
+	<delete id="deleteChildCmt" parameterType = "hashmap">
+		<choose>
+		<when test ="list.size!=0">
+			UPDATE COMMENT 
+			SET cmt_del_check = TRUE 
+			WHERE cmt_no in 
+			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
+				#{item}
+			</foreach>
+		</when>
+		<otherwise>
+			SELECT 0 FROM DUAL;
+		</otherwise>
+		</choose>
+	</delete> 
+	<select id="findChildCmt" parameterType = "int" resultType = "comment">
+		SELECT cmt_no
+		FROM COMMENT
+		WHERE post_no = #{post_no:INTEGER} 
+		AND cmt_del_check = FALSE
+	</select>
+	<delete id="deleteChildFiles" parameterType = "hashmap">
+		<choose>
+		<when test ="list.size!=0">
+			UPDATE FILES 
+			SET files_del_check = TRUE 
+			WHERE files_no in 
+			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
+				#{item}
+			</foreach>
+		</when>
+		<otherwise>
+			SELECT 0 FROM DUAL;
+		</otherwise>
+		</choose>
+	</delete> 
+	<select id="findChildFiles" parameterType = "int" resultType = "files">
+		SELECT files_no
+		FROM FILES
+		WHERE post_no = #{post_no:INTEGER} 
+		AND files_del_check = FALSE
+	</select>
+	
 </mapper>

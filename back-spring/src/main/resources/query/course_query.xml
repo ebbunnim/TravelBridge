@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	
+
+<mapper namespace="com.pjt1.demo.model.dao.CourseDao" >
+
+  	<insert id="insert"		parameterType="course">
+		INSERT INTO 
+		COURSE
+		(course_no, 
+		post_no, 
+		course_title,
+		course_description) 
+		VALUES (
+		#{course_no:INTEGER},
+		#{post_no:INTEGER},
+		#{course_title:VARCHAR},
+		#{course_description:VARCHAR}
+        )
+	</insert> 
+   	<delete id="delete" 	parameterType="int">
+		UPDATE COURSE
+		SET     
+		course_del_check = true
+		WHERE course_no = #{course_no:INTEGER} 
+		AND course_del_check = false	
+	</delete>
+   	<update id="update"		parameterType="course">
+		UPDATE COURSE
+		SET
+		course_no = #{course_no:INTEGER},
+		post_no = #{post_no:INTEGER},
+		course_title = #{course_title:VARCHAR},
+		course_description = #{course_description:VARCHAR},
+		cmt_del_check = #{cmt_del_check:BOOLEAN}
+		WHERE course_no = #{course_no:INTEGER}      
+	</update>
+   	<select id="search"		parameterType="int" resultType="course"> 
+		SELECT * 
+		FROM COURSE
+		WHERE course_no = #{course_no:INTEGER} 
+		AND course_del_check = false      	
+	</select>
+   	<select id="searchAll"	resultType="course"> 
+		SELECT * 
+		FROM COURSE
+		WHERE course_del_check = false     
+	</select>
+</mapper>
+
