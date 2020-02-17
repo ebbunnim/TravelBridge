@@ -36,7 +36,7 @@ public class CourseController {
 
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
-        return handleFail(e.getMessage(), HttpStatus.OK); // Àü¼Û¿¡´Â ÁöÀå ¾øÀ½
+        return handleFail(e.getMessage(), HttpStatus.OK); // ì „ì†¡ì—ëŠ” ì§€ì¥ ì—†ìŒ
     }
 
     public ResponseEntity<Map<String, Object>> handleSuccess(Object data) {
@@ -53,14 +53,14 @@ public class CourseController {
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
 
-    @ApiOperation("ÀüÃ¼ Course ¸ñ·ÏÀ» Á¶È¸ÇÏ´Â ±â´É")
+    @ApiOperation("ì „ì²´ Course ëª©ë¡ì„ ì¡°íšŒí•˜ëŠ” ê¸°ëŠ¥")
     @GetMapping("/Course")
     public ResponseEntity<Map<String, Object>> searchAll() {
         List<Course> list = service.searchAll();
         return handleSuccess(list);
     }
 
-    @ApiOperation("no¿¡ µû¸¥ Course Á¤º¸ Á¶È¸ÇÏ´Â ±â´É")
+    @ApiOperation("noì— ë”°ë¥¸ Course ì •ë³´ ì¡°íšŒí•˜ëŠ” ê¸°ëŠ¥")
     @GetMapping("/Course/{no}")
     public ResponseEntity<Map<String, Object>> search(int no) {
         Course Course = service.search(no);
@@ -68,23 +68,23 @@ public class CourseController {
     }
 
     @PostMapping("/Course")
-    @ApiOperation("Course Á¤º¸ µî·Ï")
+    @ApiOperation("Course ì •ë³´ ë“±ë¡")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Course Course) {
         service.insert(Course);
         return handleSuccess("");
     }
 
-    @ApiOperation("Course Á¤º¸ »èÁ¦")
+    @ApiOperation("Course ì •ë³´ ì‚­ì œ")
     @DeleteMapping("/Course/{no}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
         service.delete(no);
-        return handleSuccess("»èÁ¦ ¿Ï·á");
+        return handleSuccess("ì‚­ì œ ì™„ë£Œ");
     }
 
-    @ApiOperation("Course Á¤º¸ ¼öÁ¤")
+    @ApiOperation("Course ì •ë³´ ìˆ˜ì •")
     @PutMapping("/Course")
     public ResponseEntity<Map<String, Object>> update(@RequestBody Course Course) {
         service.update(Course);
-        return handleSuccess("¼öÁ¤ ¿Ï·á");
+        return handleSuccess("ìˆ˜ì • ì™„ë£Œ");
     }
 }
