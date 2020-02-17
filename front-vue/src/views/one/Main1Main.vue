@@ -2,7 +2,7 @@
   <div class="q-pa-none">
     <div class="q-col-gutter-lg items-start">
       <div class="col-12">
-        <q-img :src="getImgUrl('post.jpg')" :ratio="16 / 8">
+        <q-img :src="getImgUrl('post.jpg')" :ratio="16 / 7">
           <div
             class="absolute-center text-center row justify-center"
             style="width: 100%;"
@@ -50,6 +50,8 @@
         </q-img>
       </div>
     </div>
+    <h2>내맘대로 쓰는 공간</h2>
+    <div>뭔가가 있겠지</div>
     <h2>추천태그 포스트</h2>
     <q-carousel
       v-model="slideTwo"

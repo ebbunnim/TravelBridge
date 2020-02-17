@@ -7,7 +7,7 @@
       autoplay
       infinite
       v-model="slideOne"
-      height="900px"
+      height="750px"
     >
       <q-carousel-slide
         v-for="(mainCard, index) in MainCard"
@@ -21,122 +21,108 @@
         </div>
       </q-carousel-slide>
     </q-carousel>
-    <div style="text-align:center">
-      <h4>트래블 카드</h4>
-    </div>
     <q-separator />
-    <div class="column justify-center" style="height:400px; margin-top:1%;">
-      <div class="row justify-around">
-        <div class="col-5" style="text-align:center;">
-          <div class="text-h2" style="margin-top :10%;">서비스 제목</div>
-          <q-separator spaced inset />
-          <div class="text-subtitle1">
-            우리서비스는 이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고
+    <div class="row justify-center ">
+      <div class="col-10" style="margin-bottom:3%;">
+        <div style="text-align:center">
+          <h4>트래블 카드</h4>
+        </div>
+        <q-separator />
+        <div
+          class="column  justify-center"
+          style="height:270px; margin-top:1%;"
+        >
+          <div class="row justify-around">
+            <div class="col-5" style="text-align:center;">
+              <div class="text-h2">서비스 제목</div>
+              <q-separator spaced inset />
+              <div class="text-subtitle1">
+                우리서비스는 이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
+              </div>
+            </div>
+            <q-img
+              :src="this.getImgUrl('bg.jpg')"
+              style="height: 250px"
+              spinner-color="primary"
+              spinner-size="82px"
+              class="col-5"
+              align="left"
+            />
           </div>
         </div>
-        <q-img
-          :src="this.getImgUrl('bg.jpg')"
-          :ratio="16 / 9"
-          spinner-color="primary"
-          spinner-size="82px"
-          class="col-5"
-          align="left"
-        />
-      </div>
-    </div>
-    <div class="column justify-center" style="height:400px; margin-top:1%;">
-      <div class="row justify-around">
-        <q-img
-          :src="this.getImgUrl('bg.jpg')"
-          :ratio="16 / 9"
-          spinner-color="primary"
-          spinner-size="82px"
-          class="col-5"
-          align="left"
-        />
-        <div class="col-5" style="text-align:center;">
-          <div class="text-h2" style="margin-top :10%;">서비스 제목</div>
-          <q-separator spaced inset />
-          <div class="text-subtitle1">
-            우리서비스는 이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고
+        <div
+          class="column  justify-center"
+          style="height:270px; margin-top:1%;"
+        >
+          <div class="row justify-around">
+            <q-img
+              :src="this.getImgUrl('bg.jpg')"
+              style="height: 250px"
+              spinner-color="primary"
+              spinner-size="82px"
+              class="col-5"
+              align="left"
+            />
+            <div class="col-5" style="text-align:center;">
+              <div class="text-h2">서비스 제목</div>
+              <q-separator spaced inset />
+              <div class="text-subtitle1">
+                우리서비스는 이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div style="text-align:center">
-      <h4>트래블 서치</h4>
-    </div>
-    <q-separator />
-    <div class="column justify-center" style="height:400px; margin-top:1%;">
-      <div class="row justify-around">
-        <div class="col-5" style="text-align:center;">
-          <div class="text-h2" style="margin-top :10%;">서비스 제목</div>
-          <q-separator spaced inset />
-          <div class="text-subtitle1">
-            우리서비스는 이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고
+
+    <div class="row justify-center ">
+      <div class="col-10" style="margin-top:1%; margin-bottom:7%;">
+        <div style="text-align:center">
+          <h4>트래블 서치</h4>
+        </div>
+        <q-separator />
+        <div
+          class="column  justify-center"
+          style="height:270px; margin-top:1%;"
+        >
+          <div class="row justify-around">
+            <q-img
+              :src="this.getImgUrl('bg.jpg')"
+              style="height: 250px"
+              spinner-color="primary"
+              spinner-size="82px"
+              class="col-5"
+              align="left"
+            />
+            <div class="col-5" style="text-align:center;">
+              <div class="text-h2">서비스 제목</div>
+              <q-separator spaced inset />
+              <div class="text-subtitle1">
+                우리서비스는 이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
+              </div>
+            </div>
           </div>
         </div>
-        <q-img
-          :src="this.getImgUrl('bg.jpg')"
-          :ratio="16 / 9"
-          spinner-color="primary"
-          spinner-size="82px"
-          class="col-5"
-          align="left"
-        />
-      </div>
-    </div>
-    <div class="column justify-center" style="height:400px; margin-top:1%;">
-      <div class="row justify-around">
-        <q-img
-          :src="this.getImgUrl('bg.jpg')"
-          :ratio="16 / 9"
-          spinner-color="primary"
-          spinner-size="82px"
-          class="col-5"
-          align="left"
-        />
-        <div class="col-5" style="text-align:center;">
-          <div class="text-h2" style="margin-top :10%;">서비스 제목</div>
-          <q-separator spaced inset />
-          <div class="text-subtitle1">
-            우리서비스는 이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
-            이렇고저렇고우리서비스는 이렇고저렇고
+        <div
+          class="column  justify-center"
+          style="height:270px; margin-top:1%;"
+        >
+          <div class="row justify-around">
+            <div class="col-5" style="text-align:center;">
+              <div class="text-h2">서비스 제목</div>
+              <q-separator spaced inset />
+              <div class="text-subtitle1">
+                우리서비스는 이렇고저렇고우리서비스는 이렇고저렇고우리서비스는
+              </div>
+            </div>
+            <q-img
+              :src="this.getImgUrl('bg.jpg')"
+              style="height: 250px"
+              spinner-color="primary"
+              spinner-size="82px"
+              class="col-5"
+              align="left"
+            />
           </div>
         </div>
       </div>
