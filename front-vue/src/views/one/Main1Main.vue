@@ -3,7 +3,10 @@
     <div class="q-col-gutter-lg items-start">
       <div class="col-12">
         <q-img :src="getImgUrl('post.jpg')" :ratio="16 / 8">
-          <div class="absolute-center text-center row justify-center" style="width: 100%;">
+          <div
+            class="absolute-center text-center row justify-center"
+            style="width: 100%;"
+          >
             <p class="text-h4 q-pt-lg col-8">
               <b>어떤 여행이 궁금한가요?</b>
             </p>
@@ -69,7 +72,9 @@
         :name="index"
         class="column no-wrap"
       >
-        <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
+        <div
+          class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap"
+        >
           <q-img
             v-for="(subContent, index) in subCard"
             :key="index"
@@ -107,7 +112,9 @@
         :name="index"
         class="column no-wrap"
       >
-        <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
+        <div
+          class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap"
+        >
           <q-img
             v-for="(subContent, index) in subCard"
             :key="index"
