@@ -16,7 +16,7 @@
               class="text-black q-mx-sm"
               flat
               to="/page2"
-              label="트래블 서치"
+              label="트래블 픽"
               @mouseover="menuOn2 = true"
             ></q-btn>
             <q-btn
@@ -64,14 +64,16 @@
           <q-list class="q-ma-sm">
             <!-- NavBar Hover 메뉴 부분 -->
             <div class="row justify-center">
-              <q-btn to="/page2" flat class="col-3">Main 2 의 홈</q-btn>
-              <q-btn to="/page2/pick" flat class="col-3">여행지 추천받기</q-btn>
+              <q-btn to="/page2" flat class="col-3">트래블 픽</q-btn>
+              <q-btn to="/page2/pick" flat class="col-3"
+                >테마별 여행지 추천</q-btn
+              >
               <q-btn to="/page2/list" flat class="col-3"
-                >도시별 축제, 핫플 검색</q-btn
+                >여행지 정보 검색</q-btn
               >
               <q-btn to="/page2/main2search" flat class="col-3" icon="search"
-                >검색</q-btn
-              >
+                >삭제할 것
+              </q-btn>
             </div>
           </q-list>
         </q-menu>
