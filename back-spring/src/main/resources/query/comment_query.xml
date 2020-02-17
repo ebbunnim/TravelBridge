@@ -4,7 +4,7 @@
 
 <mapper namespace="com.pjt1.demo.model.dao.CommentDao" >
 
-  	<insert id="insert"		parameterType="comment">
+  	<insert id="insertPostCmt"		parameterType="comment">
 		INSERT INTO 
 		COMMENT
 		(post_no, 
@@ -13,6 +13,20 @@
 		cmt_writer) 
 		VALUES (
 		#{post_no:INTEGER},
+		#{mem_no:INTEGER},
+		#{cmt_content:VARCHAR},
+		#{cmt_writer:VARCHAR}
+		)
+	</insert> 
+	<insert id="insertPartyCmt"		parameterType="comment">
+		INSERT INTO 
+		COMMENT
+		(party_no, 
+		mem_no, 
+		cmt_content,
+		cmt_writer) 
+		VALUES (
+		#{party_no:INTEGER},
 		#{mem_no:INTEGER},
 		#{cmt_content:VARCHAR},
 		#{cmt_writer:VARCHAR}

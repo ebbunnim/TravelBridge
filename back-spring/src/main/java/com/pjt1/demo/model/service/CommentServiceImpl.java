@@ -33,15 +33,22 @@ public class CommentServiceImpl implements CommentService {
 		
 	}
 
-	public void insert(Comment Comment) {
+	public void insertPostCmt(Comment Comment){
 		try {
-			repo.insert(Comment);
+			repo.insertPostCmt(Comment);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
-
+	public void insertPartyCmt(Comment Comment){
+		try {
+			repo.insertPartyCmt(Comment);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 	public void update(Comment Comment) {
 		try {
 			repo.update(Comment);

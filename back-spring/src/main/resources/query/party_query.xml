@@ -39,23 +39,96 @@
 		party_del_check = #{party_del_check:BOOLEAN}
 		WHERE party_no = #{party_no:INTEGER}; 
 	</update>
-   	<select id="search"		parameterType="int" resultType="party"> 
+   <!-- 	<select id="search"		parameterType="int" resultType="party"> 
 		SELECT *
 		FROM PARTY
 		WHERE party_del_check = FALSE 
 		AND party_no = #{party_no:INTEGER}    
+	</select> -->
+   	<select id="searchAll"	resultMap="ptcMap">
+		SELECT 
+		p.party_no,
+		p.host_no,
+		p.host_name,
+		p.party_title,
+		p.party_contents,
+		p.party_regtime,
+		p.party_num,
+		c.cmt_no,
+		c.cmt_regtime,
+		c.cmt_content,
+		c.cmt_writer,
+		m.mem_no,
+		m.mem_id,
+		m.mem_email,
+		m.mem_name,
+		m.mem_phone,
+		m.mem_interest
+		FROM PARTY p
+		LEFT JOIN COMMENT c
+		ON p.party_no = c.party_no
+		LEFT JOIN MEMBERS m
+		ON c.mem_no = m.mem_no
+		WHERE p.party_del_check = FALSE
+		AND c.cmt_del_check = FALSE
+		AND m.mem_del_check = FALSE
+		ORDER BY cmt_no;
 	</select>
-   	<select id="searchAll"	resultType="party">
-		SELECT *
-		FROM PARTY
-		WHERE party_del_check = FALSE
-	</select>
+	
 	<resultMap type="comment" id="cmtMap">
 		<result property = "cmt_no" column="cmt_no"/>
 		<result property = "cmt_regtime" column="cmt_regtime"/>
-		<result property ="cmt_content" column="cmt_content"/>
+		<result property = "cmt_content" column="cmt_content"/>
 		<result property = "cmt_writer" column="cmt_writer"/>
 	</resultMap>
-	
+	<resultMap type="members" id="memMap">
+		<result property = "mem_no"			column="mem_no"/>
+		<result property = "mem_id"			column="mem_id"/>
+		<result property = "mem_email"		column="mem_email"/>
+		<result property = "mem_name"		column="mem_name"/>
+		<result property = "mem_phone"		column="mem_phone"/>
+		<result property = "mem_interest"	column="mem_interest"/>
+	</resultMap>
+	<resultMap id="ptcMap" type="party">
+		<id property="party_no" column="party_no"/>
+		<result property="host_no" column="host_no"/>
+		<result property="host_name" column="host_name"/>
+		<result property="party_title" column="party_title"/>
+		<result property="party_contents" column="party_contents"/>
+		<result property="party_regtime" column="party_regtime"/>
+		<result property="party_num" column="party_num"/>
+		<collection property="party_cmtList" ofType="comment" resultMap="cmtMap"/>
+		<collection property="party_inMemList" ofType="members" resultMap="memMap"/>
+	</resultMap>
+	<select id="search"		parameterType="int" resultMap="ptcMap">
+		SELECT 
+		p.party_no,
+		p.host_no,
+		p.host_name,
+		p.party_title,
+		p.party_contents,
+		p.party_regtime,
+		p.party_num,
+		c.cmt_no,
+		c.cmt_regtime,
+		c.cmt_content,
+		c.cmt_writer,
+		m.mem_no,
+		m.mem_id,
+		m.mem_email,
+		m.mem_name,
+		m.mem_phone,
+		m.mem_interest
+		FROM PARTY p
+		LEFT JOIN COMMENT c
+		ON p.party_no = c.party_no
+		LEFT JOIN MEMBERS m
+		ON c.mem_no = m.mem_no
+		WHERE p.party_del_check = FALSE
+		AND c.cmt_del_check = FALSE
+		AND m.mem_del_check = FALSE
+		AND p.party_no = #{party_no:INTEGER}
+		ORDER BY cmt_no;
+	</select>
 </mapper>
 

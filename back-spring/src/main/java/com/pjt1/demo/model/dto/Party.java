@@ -39,8 +39,8 @@ public class Party {
 	private boolean party_del_check;
 	@Getter
 	@Setter
-	private List<Comment> cmt_List;
+	private List<Comment> party_cmtList;
 	@Getter
 	@Setter
-	private List<Members> mem_List;
+	private List<Members> party_inMemList;
 }

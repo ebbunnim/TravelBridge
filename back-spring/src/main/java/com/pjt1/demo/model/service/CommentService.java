@@ -9,7 +9,8 @@ public interface CommentService {
 	
 	public Comment search(int cmt_no);
 	public List<Comment> searchAll();
-	public void insert(Comment Comment);
+	public void insertPostCmt(Comment Comment);
+	public void insertPartyCmt(Comment Comment);
 	public void update(Comment Comment);
 	public void delete(int cmt_no);
 }
