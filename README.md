@@ -64,12 +64,15 @@
 
 ## [**3. 테이블 설계**](./metadata_description/TABLE.md)
 
-<img src="./metadata_description/pjt1ERD.png" width="100%">
+<div style="text-align:center">
+    <img src="./metadata_description/pjt1ERD.png" alt = "테이블 설계도"/>
+</div>
 
 ## [**4. API 문서**](./metadata_description/APIDocumentaion.md)
 
-<img src="metadata_description/PJT1ApiDocument.png" width="100%">
-
+<div style="text-align:center">
+    <img src="metadata_description/PJT1ApiDocument.png">
+</div>
 ---
 
 ## **서비스 예시**
