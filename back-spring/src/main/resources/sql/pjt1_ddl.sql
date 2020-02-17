@@ -1,5 +1,15 @@
 use pjt1db;
 
+SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'pjt1db';
+SHOW DATABASES;
+SHOW TABLES FROM PJT1DB;
+
+show table status;
+
+show tables;
+
+
+
 DROP TABLE FESTIVAL;
 DROP TABLE HOTPLACE;
 DROP TABLE CITY;
@@ -12,6 +22,7 @@ DROP TABLE POST;
 DROP TABLE BOARD;
 DROP TABLE FOLLOW;
 DROP TABLE MEMBERS;
+
 
 SELECT * FROM FESTIVAL;
 SELECT * FROM HOTPLACE;
@@ -65,6 +76,7 @@ CREATE TABLE BOARD (
 	board_name			varchar(200) NOT NULL ,			# 게시판 이름(회원아이디로)
     board_del_check		boolean DEFAULT FALSE 			# 게시판 삭제여부
 );
+
 # 후기와 일정에 대한 게시물 테이블
 CREATE TABLE POST (
 	post_no				int PRIMARY KEY AUTO_INCREMENT,	# 게시글 관리번호	기본키, 자동증가
@@ -146,7 +158,7 @@ create table FILES(
 );
 
 # 도시 테이블
-create table city(
+create table CITY(
 	city_no int NOT NULL KEY AUTO_INCREMENT, 		# 도시 관리번호
     city_name varchar(200) NOT NULL,		 		# 도시 이름
     city_is_overseas boolean NOT NULL,	 	 		# 국내/해외 여부
@@ -155,7 +167,7 @@ create table city(
     city_del_check boolean DEFAULT FALSE	 		# 도시 삭제 여부
 );
 # 여행지 핫플레이스 테이블
-create table hotplace(
+create table HOTPLACE(
 	hp_no int NOT NULL KEY AUTO_INCREMENT,	# 핫플 관리번호
     city_no int NOT NULL,					# 도시 번호
     hp_name varchar(200) NOT NULL,			# 핫플 이름
@@ -206,5 +218,22 @@ CREATE TABLE CALENDAR (
     foreign key(mem_no) REFERENCES MEMBERS(mem_no)
 );
 SELECT * FROM CALENDAR;
+
+use pjt1db;
+SELECT * FROM POST;
+DESC MEMBERS;
+
+#(용도) hp, festival 테마, 회원이 가진 태그들, 포스토나 여행정보 보여줄 정형화된 기준 
+#맛집 #가족 #데이트 #쇼핑 #문화 #실내 #힐링 #전통      split할것임 
+
+DROP TABLE FOLLOW;
+DROP TABLE COMMENT;
+DROP TABLE FILES;
+DROP TABLE POST;
+DROP TABLE LIKES;
+DROP TABLE QNA;
+DROP TABLE MEMBERS;
+
+
 
 

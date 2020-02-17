@@ -4,7 +4,7 @@
 <mapper namespace="com.pjt1.demo.model.dao.FaqDao" >
 
   	<insert id="insert"		parameterType="faq">
-		INSERT INTO faq
+		INSERT INTO FAQ
 		(faq_category, faq_question, faq_answer)
 		VALUES (
 			#{faq_category:VARCHAR}, 
@@ -14,13 +14,13 @@
 	</insert> 
 
    	<delete id="delete" 	parameterType="int">
-	   UPDATE faq 
+	   UPDATE FAQ 
 	   SET  
 	   faq_del_check = true
 	   WHERE faq_no = #{faq_no} AND faq_del_check = false
 	</delete>
    	<update id="update"		parameterType="faq">
-		UPDATE faq 
+		UPDATE FAQ 
 		SET
 		faq_category = #{faq_category:VARCHAR},
 		faq_question = #{faq_question:VARCHAR}, 
@@ -31,18 +31,18 @@
 	</update>
    	<select id="search"		parameterType="int" resultType="faq">
 		SELECT * 
-		FROM faq 
+		FROM FAQ 
 		WHERE faq_no = #{faq_no:INTEGER} AND faq_del_check = false   
 	</select>
    	<select id="searchAll"	resultType="faq">
 		SELECT * 
-		FROM faq 
+		FROM FAQ 
 		WHERE faq_del_check = false
 	</select>
 	
 	<select id="getCount" resultType ="int">
 		SELECT COUNT(*)
-		FROM faq
+		FROM FAQ
 		WHERE faq_del_check = false
 	</select>
 </mapper>

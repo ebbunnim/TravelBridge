@@ -17,21 +17,22 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pjt1.demo.model.dto.Follow;
+import com.pjt1.demo.model.dto.Comment;
+import com.pjt1.demo.model.dto.Course;
 import com.pjt1.demo.model.dto.Members;
-import com.pjt1.demo.model.service.FollowService;
-import com.pjt1.demo.model.service.MembersService;
+import com.pjt1.demo.model.service.CourseService;
+import com.pjt1.demo.model.service.PostService;
 
 import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
-public class FollowController {
+public class CourseController {
 
     @Autowired
-    private FollowService service;
+    private CourseService service;
     @Autowired
-    private MembersService m_service;
+    private PostService p_service;
 
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
@@ -52,49 +53,38 @@ public class FollowController {
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
 
-    @ApiOperation("전체 Follow 목록을 조회하는 기능")
-    @GetMapping("/Follow/searchAll")
+    @ApiOperation("전체 Course 목록을 조회하는 기능")
+    @GetMapping("/Course")
     public ResponseEntity<Map<String, Object>> searchAll() {
-        List<Follow> list = service.searchAll();
+        List<Course> list = service.searchAll();
         return handleSuccess(list);
     }
 
-    @ApiOperation("no에 따른 Follow 정보 조회하는 기능")
-    @GetMapping("/Follow/search/{follow_no}")
-    public ResponseEntity<Map<String, Object>> search(int follow_no) {
-        Follow Follow = service.search(follow_no);
-        return handleSuccess(Follow);
+    @ApiOperation("no에 따른 Course 정보 조회하는 기능")
+    @GetMapping("/Course/{no}")
+    public ResponseEntity<Map<String, Object>> search(int no) {
+        Course Course = service.search(no);
+        return handleSuccess(Course);
     }
 
-    @PostMapping("/Follow/insert")
-    @ApiOperation("Follow 정보 등록")
-    public ResponseEntity<Map<String, Object>> insert(@RequestBody Follow Follow) {
-        service.insert(Follow);
+    @PostMapping("/Course")
+    @ApiOperation("Course 정보 등록")
+    public ResponseEntity<Map<String, Object>> insert(@RequestBody Course Course) {
+        service.insert(Course);
         return handleSuccess("");
     }
 
-    @ApiOperation("Follow 정보 삭제")
-    @DeleteMapping("/Follow/delete/{follow_no}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable int follow_no) {
-        service.delete(follow_no);
+    @ApiOperation("Course 정보 삭제")
+    @DeleteMapping("/Course/{no}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
+        service.delete(no);
         return handleSuccess("삭제 완료");
     }
 
-    @ApiOperation("Follow 정보 수정")
-    @PutMapping("/Follow/update")
-    public ResponseEntity<Map<String, Object>> update(@RequestBody Follow Follow) {
-        service.update(Follow);
+    @ApiOperation("Course 정보 수정")
+    @PutMapping("/Course")
+    public ResponseEntity<Map<String, Object>> update(@RequestBody Course Course) {
+        service.update(Course);
         return handleSuccess("수정 완료");
     }
-
-    @ApiOperation("no에 따른 Follow 정보 조회하는 기능")
-    @GetMapping("/Follow/search/members/{follow_no}")
-    public ResponseEntity<Map<String, Object>> followMembers(int follow_no) {
-        int memberNo = m_service.search(follow_no).getMem_no();
-        List<Follow> follow = null;
-        if (memberNo != 0) {
-            follow = service.searchMemberList(memberNo);
-        }
-        return handleSuccess(follow);
-    } // 이게 결국은 멤버한테 있어야하는건가
 }
