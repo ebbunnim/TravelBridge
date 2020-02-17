@@ -69,10 +69,6 @@ public class Post implements Serializable {
 	@Getter
 	@Setter
 	private List<Files> post_filesList;
-
-	public String toString() {
-		return "" + post_title + "," + post_no;
-	}
 	// FOREIGN KEY(board_no) REFERENCES BOARD(board_no),
 	// FOREIGN KEY(mem_no) REFERENCES MEMBERS(mem_no)
 	// FOREIGN KEY(writer) REFERENCES MEMBERS(mem_id)
