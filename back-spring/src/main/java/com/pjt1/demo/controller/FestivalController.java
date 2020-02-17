@@ -128,13 +128,13 @@ public class FestivalController{
 		}
 
 		@ApiOperation("더보기로 Festival 테마로 목록 조회")
-		@GetMapping("/Festival/search/more/theme/{btnCnt}/{keyword}")
+		@GetMapping("/Festival/search/more/theme/{btnCnt}/{word}")
 		public ResponseEntity<Map<String, Object>> searchMoreHotPlaceByTheme(MorePageBean pageBean, @PathVariable int btnCnt,
-				@PathVariable String keyword) {
+				@PathVariable String word) {
 			MorePageMaker pageMaker = new MorePageMaker();
 			int change = pageNum * btnCnt;
 			List<String> selected_theme = new ArrayList<String>();
-			st = new StringTokenizer(keyword);
+			st = new StringTokenizer(word);
 			while(st.hasMoreTokens()) {selected_theme.add(st.nextToken());};
 			
 			pageBean.setPerPageNum(change);
