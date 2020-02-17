@@ -1,9 +1,6 @@
 <template>
   <q-page class="page">
-    <div
-      class="row justify-center q-my-xl q-py-xl"
-      style="height: 600px; background: #f9f9f9"
-    >
+    <!-- <div class="row justify-center q-my-xl q-py-xl" style="height: 550px; background: #f9f9f9">
       <q-input
         align="center"
         class="col-4 text-h6"
@@ -12,16 +9,10 @@
         placeholder="도시 이름을 검색하세요(예: 서울, 전주)"
       >
         <template v-slot:append>
-          <q-btn
-            outline
-            flat
-            color="grey"
-            icon="search"
-            @click="onSearchBtn()"
-          />
+          <q-btn outline flat color="grey" icon="search" @click="onSearchBtn()" />
         </template>
       </q-input>
-    </div>
+    </div> -->
 
     <div class="row" style="height: 550px">
       <div class="col text-h5">{{ cityName }}의 핫플레이스 정보</div>
@@ -60,7 +51,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapState } from "vuex";
 import HotPlaceCard from "@/views/two/HotPlaceCard.vue";
 import FestivalCard from "@/views/two/FestivalCard.vue";
 
@@ -71,6 +62,8 @@ export default {
   },
   data() {
     return {
+      fval_list: [],
+      hp_list: [],
       cityName: null,
       hpBtnCnt: 1,
       fvalBtnCnt: 1,
@@ -78,10 +71,10 @@ export default {
       fvalLoadMore: false
     };
   },
-  computed: mapState({
-    hp_list: state => state.hotplace.hps,
-    fval_list: state => state.festival.fvals
-  }),
+  // computed: mapState({
+  // hp_list: state => state.hotplace.hps,
+  // fval_list: state => state.festival.fvals
+  // }),
   methods: {
     onSearchBtn() {
       console.log("현재검색어:", this.search);
@@ -94,6 +87,14 @@ export default {
         cityName: this.cityName
       });
     }
+  },
+  mounted() {
+    this.hp_list = this.$store.state.hotplace.hps;
+    this.fval_list = this.$store.state.festival.fvals;
+  },
+  created() {
+    this.hp_list = this.$store.state.hotplace.hps;
+    this.fval_list = this.$store.state.festival.fvals;
   }
 };
 </script>

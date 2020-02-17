@@ -222,13 +222,13 @@ export default {
           path: "/"
         },
         {
-          label: "메인기능 1번",
+          label: "트래블 카드",
           icon: "bookmark",
           separator: "true",
           path: "/page1"
         },
         {
-          label: "메인기능 2번",
+          label: "트래블 픽",
           icon: "card_travel",
           separator: "true",
           path: "/page2"
@@ -240,12 +240,17 @@ export default {
           path: "/page3"
         },
         {
+          label: "고객센터",
+          icon: "dashboard",
+          separator: "true",
+          path: "/faq"
+        },
+        {
           label: "검색",
           icon: "search",
           separator: "true",
           path: "/search"
-        },
-        { label: "고객센터", icon: "dashboard", separator: "true" }
+        }
       ],
       menuListSub: [
         [],
@@ -255,8 +260,8 @@ export default {
           { label: "main 1", path: "" }
         ],
         [
-          { label: "main 2", path: "" },
-          { label: "main 2", path: "" }
+          { label: "테마별 여행지 추천", path: "/page2/pick" },
+          { label: "여행지 정보 검색", path: "/page2/list" }
         ],
         [
           { label: "1 세부 항목", path: "" },

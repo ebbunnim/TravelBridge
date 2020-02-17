@@ -1,39 +1,48 @@
 <template>
-  <div class="bg-white text-grey footer border">
-    <!-- footer, border class -->
-    <div class="footer">
-      <div class="row">
-        <div class="col-4" style="text-align: center;">
-          <div class="q-pa-md" style="max-height: 150px">
-            <p class="text-subtitle1 text-uppercase">About Us</p>
-            <q-list dense padding>
-              <q-item v-for="(menu, index) in aboutUsMenus" :key="index" :to="menu.path">
-                <q-item-section>{{ menu.label }}</q-item-section>
-              </q-item>
-            </q-list>
-          </div>
+  <div class="text-grey q-py-xl q-mt-xl">
+    <div class="row" v-if="!footerHidden">
+      <div class="col-4 text-center">
+        <div class="q-pa-md">
+          <p class="text-subtitle1 text-uppercase">About Us</p>
+          <q-list dense padding>
+            <q-item
+              v-for="(menu, index) in aboutUsMenus"
+              :key="index"
+              :to="menu.path"
+            >
+              <q-item-section>{{ menu.label }}</q-item-section>
+            </q-item>
+          </q-list>
         </div>
-        <div class="col-4" style="text-align: center;">
-          <div class="q-pa-md" style="max-height: 150px">
-            <p class="text-subtitle1 text-uppercase">Customer Service</p>
-
-            <q-list dense padding>
-              <q-item v-for="(menu, index) in CSmenus" :key="index" clickable :to="menu.path">
-                <q-item-section>{{ menu.label }}</q-item-section>
-              </q-item>
-            </q-list>
-          </div>
+      </div>
+      <div class="col-4 text-center">
+        <div class="q-pa-md">
+          <p class="text-subtitle1 text-uppercase">Customer Service</p>
+          <q-list dense padding>
+            <q-item
+              v-for="(menu, index) in CSmenus"
+              :key="index"
+              clickable
+              :to="menu.path"
+            >
+              <q-item-section>{{ menu.label }}</q-item-section>
+            </q-item>
+          </q-list>
         </div>
-        <div class="col-4" style="text-align: center;">
-          <div class="q-pa-md" style="max-height: 150px;">
-            <p class="text-subtitle1 text-uppercase">Site Map</p>
-
-            <q-list dense padding>
-              <q-item v-for="(menu, index) in siteMapMenus" :key="index" clickable :to="menu.path">
-                <q-item-section>{{ menu.label }}</q-item-section>
-              </q-item>
-            </q-list>
-          </div>
+      </div>
+      <div class="col-4 text-center">
+        <div class="q-pa-md">
+          <p class="text-subtitle1 text-uppercase">Site Map</p>
+          <q-list dense padding>
+            <q-item
+              v-for="(menu, index) in siteMapMenus"
+              :key="index"
+              clickable
+              :to="menu.path"
+            >
+              <q-item-section>{{ menu.label }}</q-item-section>
+            </q-item>
+          </q-list>
         </div>
       </div>
     </div>
@@ -46,15 +55,15 @@ export default {
     return {
       leftDrawerOpen: false,
       aboutUsMenus: [
-        { label: "About Team", path: "/about/team" },
-        { label: "About Service", path: "/about/service" }
+        { label: "About Service", path: "/about/service" },
+        { label: "About Team", path: "/about/team" }
       ],
       CSmenus: [
         { label: "자주 묻는 질문", path: "/faq" }, // 자주 묻는 질문
         { label: "1:1 문의하기", path: "/qna" } // 1:1 문의하기
       ],
       siteMapMenus: [
-        { label: "HOME", path: "/" },
+        { label: "HOME", path: "/home" },
         { label: "메인기능 1", path: "/page1" }, // 이름 수정할 것
         { label: "메인기능 2", path: "/page2" }, // 이름 수정할 것
         { label: "서브기능", path: "/page3" } // 이름 수정할 것
@@ -64,6 +73,11 @@ export default {
         height: 0
       }
     };
+  },
+  computed: {
+    footerHidden() {
+      return this.window.width < 600;
+    }
   },
   methods: {
     handleResize() {
@@ -82,10 +96,6 @@ export default {
 </script>
 
 <style>
-.footer {
-  margin-left: 0;
-  margin-right: 0;
-}
 .border {
   border-block-color: black;
   border-top-style: solid;

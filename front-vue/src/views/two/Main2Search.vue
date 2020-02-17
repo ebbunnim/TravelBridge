@@ -2,7 +2,7 @@
   <div>
     <h1>태그, 제목, 내용, all 검색</h1>
     <!-- 검색 option 과 검색어를 입력받는 div -->
-    <div class="row justify-center" style="margin:5% 0 0 0 ;">
+    <div class="row justify-center" style="margin:5% 0 0 0 ; height: 550px;">
       <q-select
         bordered
         class="col-1 q-mx-xs"
@@ -42,7 +42,7 @@
     </div>
     <div class="row" style="height: 550px; background: #f9f9f9">
       <div
-        v-for="i in fval_list.length > 4 * hpBtnCnt
+        v-for="i in fval_list.length > 4 * fvalBtnCnt
           ? 4 * fvalBtnCnt
           : fval_list.length"
         :key="i"
@@ -59,7 +59,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import HotPlaceCard from "@/views/two/HotPlaceCard.vue";
 import FestivalCard from "@/views/two/FestivalCard.vue";
 
@@ -70,6 +69,8 @@ export default {
   },
   data() {
     return {
+      hp_list: [],
+      fval_list: [],
       hpBtnCnt: 1,
       fvalBtnCnt: 1,
       loadMoreHpCheck: true,
@@ -87,10 +88,6 @@ export default {
       word: ""
     };
   },
-  computed: mapState({
-    hp_list: state => state.hotplace.hps,
-    fval_list: state => state.festival.fvals
-  }),
   methods: {
     onSubmitBtn() {
       console.log(this.searchOption);
@@ -109,14 +106,22 @@ export default {
       });
     },
     loadMoreBtnCheck() {
-      if (this.hp_list.length < 4) loadMoreHpCheck = false;
-      if (this.fval_list.length < 4) loadMoreFvalCheck = false;
+      if (this.hp_list.length < 4) this.loadMoreHpCheck = false;
+      if (this.fval_list.length < 4) this.loadMoreFvalCheck = false;
     },
     loadMoreHp() {
       this.hpBtnCnt++;
       console.log("버튼 카운트", this.hpBtnCnt);
       this.onSubmitBtn();
     }
+  },
+  mounted() {
+    this.hp_list = this.$store.state.hotplace.hps;
+    this.fval_list = this.$store.state.festival.fvals;
+  },
+  created() {
+    this.hp_list = this.$store.state.hotplace.hps;
+    this.fval_list = this.$store.state.festival.fvals;
   }
 };
 </script>
