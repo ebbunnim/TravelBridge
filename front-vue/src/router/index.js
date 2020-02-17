@@ -5,27 +5,28 @@ import Login from "../views/user/Login.vue";
 import PasswordFind from "../views/user/PasswordFind.vue";
 import SignUp from "../views/user/SignUp.vue";
 import MyPage from "../views/user/MyPage.vue";
-//main
-import Home from "../views/Home.vue";
-import Main2 from "../views/Main2.vue";
-import Sub from "../views/Sub.vue";
-import Search from "../views/Search.vue";
 //about
 import AboutTeam from "../views/about/AboutTeam.vue";
 import AboutService from "../views/about/AboutService.vue";
 //faq&qna
 import Qna from "../views/Qna.vue";
 import Faq from "../views/Faq.vue";
-
 //main1
 import Main1 from "../views/one/Main1.vue";
 import Main1Search from "../views/one/Main1Search.vue";
 import PostDetail from "../views/one/PostDetail.vue";
 import Main1Main from "../views/one/Main1Main.vue";
 import Main1Write from "../views/one/Main1Write.vue";
-
 //main2
-import Main2Search from "@/components/two/Main2Search.vue";
+import Home from "../views/Home.vue";
+import Main2 from "../views/two/Main2.vue";
+import Main2Search from "../views/two/Main2Search.vue";
+import Main2Pick from "../views/two/Main2Pick.vue";
+import Main2Home from "../views/two/Main2Home.vue";
+import Main2List from "../views/two/Main2List.vue";
+// sub기능, 전체 통합검색 Search Page
+import Sub from "../views/Sub.vue";
+import Search from "../views/Search.vue";
 
 Vue.use(VueRouter);
 
@@ -57,15 +58,15 @@ const routes = [
     children: [
       {
         path: "",
-        component: () => import("@/components/two/Main2Home.vue")
+        component: Main2Home
       },
       {
         path: "pick",
-        component: () => import("@/components/two/Main2Pick.vue")
+        component: Main2Pick
       },
       {
         path: "list",
-        component: () => import("@/components/two/Main2List.vue")
+        component: Main2List
       },
       {
         path: "main2search",
