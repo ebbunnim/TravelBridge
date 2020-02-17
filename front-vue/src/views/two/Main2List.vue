@@ -30,7 +30,13 @@
         </template>
       </q-input>
     </div>
-    <div class="row justify-center q-mx-xl q-px-xl" style="height: 550px">
+    <div class="row justify-center q-mx-xl q-px-xl">
+      <div
+        v-if="searchTitle === null ? false : searchTitle"
+        class="col-12 text-center text-h5 q-mb-lg"
+      >
+        {{ searchTitle }} 검색결과
+      </div>
       <div
         class="col-lg-3 col-md-6 col-xm-12"
         v-for="i in hp_list_length"
@@ -39,6 +45,7 @@
         <!-- 카드가 들어가는 부분 -->
         <HotPlaceCard
           class="q-ma-lg"
+          :hp_img="hp_list[i - 1].hp_img"
           :hp_name="hp_list[i - 1].hp_name"
           :hp_detail_adr="hp_list[i - 1].hp_detail_adr"
           :hp_tag="hp_list[i - 1].hp_tag"
@@ -46,12 +53,29 @@
         ></HotPlaceCard>
         <!--  -->
       </div>
-      <q-btn
-        outline
-        square
-        class="col-xs-12 col-lg-10 q-ma-lg"
-        v-if="hpLoadMore"
-        @click="onSearchBtn()"
+      <q-btn outline square class="col-11 q-px-xl" @click="loadMoreHp()"
+        >더보기</q-btn
+      >
+
+      <div
+        class="col-lg-3 col-md-6 col-xm-12"
+        v-for="i in fval_list_length"
+        :key="i"
+      >
+        <!-- 카드가 들어가는 부분 -->
+        <FestivalCard
+          class="q-ma-lg"
+          :fval_img="fval_list[i - 1].fval_img"
+          :fval_name="fval_list[i - 1].fval_name"
+          :fval_start_day="fval_list[i - 1].fval_start_day"
+          :fval_end_day="fval_list[i - 1].fval_end_day"
+          :fval_detail_adr="fval_list[i - 1].fval_detail_adr"
+          :fval_tag="fval_list[i - 1].fval_tag"
+          :fval_no="fval_list[i - 1].fval_no"
+        ></FestivalCard>
+        <!--  -->
+      </div>
+      <q-btn outline square class="col-11 q-px-xl" @click="loadMoreFval()"
         >더보기</q-btn
       >
     </div>
@@ -70,6 +94,7 @@ export default {
   },
   data() {
     return {
+      searchTitle: null,
       hpBtnCnt: 1,
       fvalBtnCnt: 1,
       //
@@ -91,6 +116,7 @@ export default {
   computed: {
     ...mapState({
       hp_list_length: state => state.hotplace.hp_list_length, // vuex 에서 데려옴
+      fval_list_length: state => state.festival.fval_list_length,
       hp_list: state => state.hotplace.hps,
       fval_list: state => state.festival.fvals
     })
@@ -104,6 +130,9 @@ export default {
       };
       console.log("vue에서:", payLoad);
       this.$store.dispatch("hotplace/searchMoreHotplace", payLoad);
+      payLoad.btnCnt = this.fvalBtnCnt + 1;
+      this.$store.dispatch("festival/searchMoreFestival", payLoad);
+      this.searchTitle = this.word;
     }
     // checkLoadMoreBtn() {
     //   if (4 * this.hpBtnCnt < this.hp_list_length <= 4 * (this.hpBtnCnt + 1)) {

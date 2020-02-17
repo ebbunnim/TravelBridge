@@ -1,15 +1,22 @@
 <template>
-  <q-card flat bordered>
+  <q-card flat bordered class="my-card">
+    <q-img :src="getImgUrl(hp_img)" basic :ratio="16 / 9">
+      <div class="absolute-bottom text-h6 text-center">
+        {{ hp_name }}
+      </div>
+    </q-img>
+
     <q-card-section>
-      <div class="text-h5 text-center text-title">{{ hp_name }}</div>
-      <div class="text-subtitle2 text-center">{{ hp_detail_adr }}</div>
+      <div class="text-subtitle1 text-center">{{ hp_detail_adr }}</div>
     </q-card-section>
 
     <q-card-section class="q-pt-none">
-      <div class="text-subtitle1 text-body">{{ hp_tag }}</div>
+      <div class="text-subtitle2 text-body">{{ hp_tag }}</div>
     </q-card-section>
-    <q-card-section>
+    <q-card-section class="absolute-bottom">
       <q-btn
+        flat
+        color="primary"
         @click="
           $router.push({ name: 'hotplace-detail', params: { hp_no: hp_no } })
         "
@@ -19,18 +26,16 @@
   </q-card>
 </template>
 
-<v-btn @click="$router.push({ path: `${id}/edit` })">수정</v-btn>
-<v-btn>수정</v-btn>
-
 <script>
 export default {
   name: "HotPlaceCard",
   methods: {
-    // getImgUrl(img) {
-    //   return require("../../assets/" + img);
-    // }
+    getImgUrl(img) {
+      return require("../../../../back-spring/src/main/resources" + img);
+    }
   },
   props: {
+    hp_img: { type: String },
     hp_name: { type: String },
     hp_detail_adr: { type: String },
     hp_tag: { type: String },
@@ -59,5 +64,12 @@ export default {
   word-break: break-all;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
+}
+
+.my-card {
+  height: 400px;
+  width: 300px;
+  max-height: 550px;
+  margin: 10px;
 }
 </style>

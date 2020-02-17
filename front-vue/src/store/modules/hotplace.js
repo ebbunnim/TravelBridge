@@ -5,10 +5,6 @@ const state = {
   hp_list_length: 0
 };
 
-// const getters = {
-//   hp_list_length: state => state.hps.length
-// };
-
 const actions = {
   searchAllHPs: ({ commit }) => {
     HotPlaceService.searchAll(hps => {
@@ -58,7 +54,6 @@ const mutations = {
 export default {
   namespaced: true,
   state,
-  // getters,
   mutations,
   actions
 };

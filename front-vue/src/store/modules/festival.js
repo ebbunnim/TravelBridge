@@ -1,12 +1,13 @@
 import FestivalService from "@/services/FestivalService.js";
 
 const state = {
-  fvals: []
+  fvals: [],
+  fval_list_length: 0
 };
 
 const getters = {
-  getFvalsByTheme: (state) => (theme) => {
-    return state.fvals.find(fval => fval.fval_theme.includes(theme))
+  getFvalsByTheme: state => theme => {
+    return state.fvals.find(fval => fval.fval_theme.includes(theme));
   }
 };
 
@@ -56,7 +57,6 @@ const mutations = {
 export default {
   namespaced: true,
   state,
-  getters,
   mutations,
   actions
 };
