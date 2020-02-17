@@ -17,22 +17,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pjt1.demo.model.dto.Comment;
-import com.pjt1.demo.model.dto.Members;
-import com.pjt1.demo.model.service.CommentService;
-import com.pjt1.demo.model.service.MembersService;
+import com.pjt1.demo.model.dto.Party;
+import com.pjt1.demo.model.service.PartyService;
 
 import io.swagger.annotations.ApiOperation;
 
-
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
-public class CommentController{
-	
+public class PartyController {
+
     @Autowired
-    private CommentService service;
-    @Autowired
-    private MembersService m_service;
+    private PartyService service;
+
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
         return handleFail(e.getMessage(), HttpStatus.OK); // 전송에는 지장 없음
@@ -51,38 +47,39 @@ public class CommentController{
         resultMap.put("data", data);
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
-    @ApiOperation("전체 Comment 목록을 조회하는 기능")
-    @GetMapping("/Comment")
+
+    @ApiOperation("전체 Party 목록을 조회하는 기능")
+    @GetMapping("/Party")
     public ResponseEntity<Map<String, Object>> searchAll() {
-        List<Comment> list = service.searchAll();
+        List<Party> list = service.searchAll();
         return handleSuccess(list);
     }
-    @ApiOperation("no에 따른 Comment 정보 조회하는 기능")
-    @GetMapping("/Comment/{no}")
-    public ResponseEntity<Map<String, Object>> search(int no) {
-        Comment Comment = service.search(no);
-        return handleSuccess(Comment);
+
+    @ApiOperation("no에 따른 Party 정보 조회하는 기능")
+    @GetMapping("/Party/{party_no}")
+    public ResponseEntity<Map<String, Object>> search(int party_no) {
+        Party party = service.search(party_no);
+        return handleSuccess(party);
     }
-    @PostMapping("/Comment")
-    @ApiOperation("Comment 정보 등록")
-    public ResponseEntity<Map<String, Object>> insert(@RequestBody Comment Comment) {
-    	
-    	Members writer = m_service.search(Comment.getMem_no());
-    	if(Comment.getPost_no()>0) Comment.setCmt_writer(writer.getMem_id());
-    	else if(Comment.getParty_no()>0) Comment.setCmt_writer(writer.getMem_name());
-        service.insert(Comment);
+
+    @PostMapping("/Party")
+    @ApiOperation("Party 정보 등록")
+    public ResponseEntity<Map<String, Object>> insert(@RequestBody Party party) {
+        service.insert(party);
         return handleSuccess("");
     }
-	 @ApiOperation("Comment 정보 삭제")
-    @DeleteMapping("/Comment/{no}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
-        service.delete(no);
+
+    @ApiOperation("Party 정보 삭제")
+    @DeleteMapping("/Party/{party_no}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable int party_no) {
+        service.delete(party_no);
         return handleSuccess("삭제 완료");
     }
-	 @ApiOperation("Comment 정보 수정")
-    @PutMapping("/Comment")
-    public ResponseEntity<Map<String, Object>> update(@RequestBody Comment Comment) {
-        service.update(Comment);
+
+    @ApiOperation("Party 정보 수정")
+    @PutMapping("/Party")
+    public ResponseEntity<Map<String, Object>> update(@RequestBody Party party) {
+        service.update(party);
         return handleSuccess("수정 완료");
     }
 }

@@ -21,7 +21,10 @@ public class Comment implements Serializable {
 	@NonNull
 	@Getter
 	@Setter
-	private int post_no;// int NOT NULL, # 게시물 번호 외래키
+	private int post_no;// int NOT NULL, 
+	@Getter
+	@Setter
+	private int party_no;// int NOT NULL, 
 	@NonNull
 	@Getter
 	@Setter

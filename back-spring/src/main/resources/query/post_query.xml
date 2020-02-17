@@ -33,7 +33,6 @@
 		<collection property="post_cmtList" ofType="comment" resultMap="cmtMap"/>
 		<collection property="post_filesList" ofType="files" resultMap="filesMap"/>
 		<collection property="post_courseList" ofType="course" resultMap="courseMap"/>
-
 	</resultMap>
 	<resultMap id="pfMap" type ="post">
 		<id property="post_no" column="post_no"/>
