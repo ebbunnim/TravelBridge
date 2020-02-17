@@ -35,7 +35,7 @@
 		<collection property="post_courseList" ofType="course" resultMap="courseMap"/>
 
 	</resultMap>
-	<resultMap id="pfMap" type ="post">
+	<resultMap id="pfMap" type ="POST">
 		<id property="post_no" column="post_no"/>
 		<result property="mem_no" column ="mem_no"/>
 		<result property="post_type" column ="post_type"/>
@@ -99,7 +99,7 @@
 	LEFT JOIN COURSE cs ON p.post_no = cs.post_no AND cs.course_del_check=FALSE
 	WHERE p.post_no = #{post_no:INTEGER} AND p.post_del_check = FALSE;
 	</select>
-	<select id="searchAll"	resultType="post">
+		<select id="searchAll"	resultType="post">
 		SELECT * FROM POST WHERE post_del_check = false
 	</select>
 	 <select id="searchPagePostAll" parameterType="hashmap" resultMap="pfMap">
@@ -167,25 +167,10 @@
 		WHERE p.post_no> #{startPage} and p.post_no<=#{endPage} AND p.post_del_check = FALSE
 		AND p.post_type = 0]]>
     </select>
-   
-   <select id="searchFollowingPeoplePost" parameterType="int" resultMap="pfMap">
+    <select id="searchFollowingPeoplePost" parameterType="int" resultType="post">
 	SELECT 
-	p.post_no, 
-		p.mem_no,
-		p.post_type, 
-		p.board_no, 
-		p.post_title, 
-		p.post_content,
-		p.post_category, 
-		p.post_regtime, 
-		p.post_hits, 
-		p.post_city,
-		p.post_writer, 
-		p.post_plan_date,
-		f.files_no,
-		f.files_url
-		FROM POST p 
-		LEFT JOIN FILES f  ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
+		p.*
+	FROM POST p
 	WHERE p.mem_no
 	IN
 		(SELECT f.following_no
@@ -199,8 +184,7 @@
 	    AND m2.mem_del_check = FALSE 
 	    AND f.follow_del_check = FALSE)
 	ORDER BY p.post_regtime DESC;
-	</select> 
-
+	</select>
     <select id="getPostLikes" parameterType="int" resultType="int">
 		SELECT COUNT(*) 
 		FROM LIKES
@@ -211,7 +195,7 @@
 		SET post_hits = post_hits + 1 
 		WHERE post_no = #{post_no};
 	</select>
-	<insert id="insert"		parameterType="post">
+  	<insert id="insert"		parameterType="post">
 		INSERT INTO POST
 		(post_type, 
 		board_no, 
@@ -227,8 +211,8 @@
 			#{post_title:VARCHAR}, #{post_content:VARCHAR}, #{post_category:VARCHAR}, #{post_city:VARCHAR},
 			#{post_writer:VARCHAR}, #{post_plan_date:VARCHAR}
 		)
-	</insert>
-	<update id="update"		parameterType="post">
+	</insert> 
+		<update id="update"		parameterType="post">
 		UPDATE POST 
 		SET
 		post_type=#{post_type:INTEGER}, 
@@ -244,11 +228,36 @@
 		post_plan_date=#{post_plan_date:VARCHAR}
 		where post_no=#{post_no}
 	</update>
+	<select id ="searchMorePostByOption" parameterType="hashmap" resultType="hashmap">
+		SELECT *
+		FROM POST
+		WHERE post_del_check = FALSE AND
+		<choose>
+			<when test="searchOption == 'all'">
+				(post_title like concat('%',#{word},'%')
+				OR post_content like concat('%',#{word},'%')
+				OR post_category like concat('%',#{word},'%'))
+			</when> 
+			<when test="searchOption == 'title'">
+				post_title like concat('%',#{word},'%')
+			</when>
+			<when test="searchOption == 'content'">
+				post_content like concat('%',#{word},'%')
+			</when>
+			<when test="searchOption == 'tag'">
+				post_category like concat('%',#{word},'%')
+			</when>
+			<when test="searchOption == 'writer'">
+				post_writer like concat('%',#{word},'%')
+			</when>
+		</choose>
+		ORDER BY post_no
+		LIMIT 0, #{perPageNum}
+	</select> 
+
+
    	<delete id="delete" 	parameterType="int">
-	   UPDATE POST 
-	   SET post_del_check = TRUE 
-	   WHERE post_no = #{post_no:INTEGER} 
-	   AND post_del_check = FALSE
+	   UPDATE POST SET post_del_check = TRUE WHERE post_no = #{post_no:INTEGER} AND post_del_check = FALSE
 	</delete>
 	<delete id="deleteChildLike" parameterType = "hashmap">
 		<choose>
@@ -288,8 +297,7 @@
 	<select id="findChildCmt" parameterType = "int" resultType = "comment">
 		SELECT cmt_no
 		FROM COMMENT
-		WHERE post_no = #{post_no:INTEGER} 
-		AND cmt_del_check = FALSE
+		WHERE post_no = #{post_no:INTEGER} AND cmt_del_check = FALSE
 	</select>
 	<delete id="deleteChildFiles" parameterType = "hashmap">
 		<choose>
@@ -309,8 +317,7 @@
 	<select id="findChildFiles" parameterType = "int" resultType = "files">
 		SELECT files_no
 		FROM FILES
-		WHERE post_no = #{post_no:INTEGER} 
-		AND files_del_check = FALSE
+		WHERE post_no = #{post_no:INTEGER} AND files_del_check = FALSE
 	</select>
 	
 </mapper>

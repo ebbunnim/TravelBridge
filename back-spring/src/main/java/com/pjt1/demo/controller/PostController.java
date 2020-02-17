@@ -75,6 +75,26 @@ public class PostController {
         return handleSuccess(Post);
     }
 
+    @ApiOperation("더보기로 Post 검색하기 조회 - searchOption은 all/ title / content/ tag /city 중 전달")
+    @GetMapping("/Post/search/page/{btnCnt}/{searchOption}/{word}")
+    public ResponseEntity<Map<String, Object>> searchPostByOption(PageBean pageBean, @PathVariable int btnCnt,
+            @PathVariable String searchOption, @PathVariable String word) {
+        searchOption = (searchOption == null) ? "all" : searchOption;
+        word = (word == null || word == " ") ? "" : word;
+        PageBean PageBean = new PageBean();
+        PageBean.setSearchOption(searchOption);
+        PageBean.setWord(word);
+        System.out.println(PageBean);
+		PageMaker pageMaker = new PageMaker(); 
+		pageBean.setPage(btnCnt);
+		pageMaker.setPageBean(pageBean);
+		pageMaker.setStartPage(pageBean.getPage());
+        pageMaker.setEndPage(pageMaker.getStartPage());
+        System.out.println(pageMaker);
+		List<Map<String, Object>> list = service.searchMorePostByOption(pageBean); 
+        return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+    }
+
     @PostMapping("/Post/insert")
     @ApiOperation("Post 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Post Post) {
@@ -83,6 +103,7 @@ public class PostController {
         service.insert(Post);
         return handleSuccess("");
     }
+
 
     @ApiOperation("Post 정보 삭제")
     @DeleteMapping("/Post/delete/{post_no}")
@@ -121,17 +142,7 @@ public class PostController {
 		List<Map<String, Object>> list = service.searchPagePostAll(pageMaker); 
 		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로 
     }
-	@ApiOperation("페이징된 Post 중 후기(Post) 목록 조회")
-	@GetMapping("/Post/search/pagePost/{btnCnt}")
-	public ResponseEntity<Map<String, Object>> searchPagePost(PageBean pageBean, @PathVariable int btnCnt) {
-	    PageMaker pageMaker = new PageMaker();
-	    pageBean.setPage(btnCnt);
-	    pageMaker.setPageBean(pageBean);
-	    pageMaker.setStartPage(pageBean.getPage());
-	    pageMaker.setEndPage(pageMaker.getStartPage());
-	    List<Map<String, Object>> list = service.searchPagePost(pageMaker);
-	    return list.size() == 0 ? handleSuccess("이 페이지에는 후기가 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
-	}
+
 	@ApiOperation("페이징된 Post 중 일정(Plan) 목록 조회")
 	@GetMapping("/Post/search/pagePlan/{btnCnt}")
 	public ResponseEntity<Map<String, Object>> searchPagePlan(PageBean pageBean, @PathVariable int btnCnt) {
