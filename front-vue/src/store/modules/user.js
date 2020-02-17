@@ -31,7 +31,7 @@ const actions = {
       .then(check => {
         if (check) {
           UserService.LogIn(payLoad.user_email).then(result => {
-            console.log(result);
+            console.log("result", result);
             store.commit("postLogIn", { user: result });
           });
           router.push("/");

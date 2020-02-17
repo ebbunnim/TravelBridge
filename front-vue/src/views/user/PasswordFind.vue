@@ -1,43 +1,44 @@
 <template>
-  <div class="text-center">
-    <h3>비밀번호 찾기</h3>
-    <p>이메일을 통해 비밀번호을 재설정 하세요.</p>
+  <div class="row justify-center q-my-xl q-py-xl">
+    <q-card class="col-xs-12 col-md-4 my-card q-ma-md" flat bordered>
+      <q-card-section>
+        <div class="text-h6">비밀번호 찾기</div>
+      </q-card-section>
 
-    <div class="bg">
-      <div class="q-pa-md q-ma-md display: inline">
-        <div class="column">
-          <q-form>
-            <!-- email input -->
-            <q-input
-              filled
-              v-model="email"
-              type="text"
-              placeholder="이메일 주소를 입력하세요."
-              class="q-pa-md"
-              :rules="[
-                val => val.includes('@') || '이메일 형식에 맞게 입력하세요'
-              ]"
-              lazy-rules
-            >
-              <template v-slot:prepend>
-                <q-icon name="email" />
-              </template>
-            </q-input>
+      <q-card-section>
+        <div class="text-body2">이메일을 통해 비밀번호을 재설정 하세요</div>
+        <q-input
+          filled
+          v-model="email"
+          type="email"
+          placeholder="이메일 주소를 입력하세요"
+          class="q-my-sm"
+          :rules="[val => val.includes('@') || '이메일 형식에 맞게 입력하세요']"
+          lazy-rules
+        >
+          <template v-slot:prepend>
+            <q-icon name="email" />
+          </template>
+        </q-input>
+      </q-card-section>
 
-            <!-- submit btn -->
-            <div class="q-pt-lg">
-              <q-btn
-                label="SEND"
-                type="submit"
-                color="primary"
-                flat
-                v-on:click="reset"
-              />
-            </div>
-          </q-form>
-        </div>
-      </div>
-    </div>
+      <q-card-section>
+        <q-btn
+          class="full-width q-ma-sm"
+          size="md"
+          style="height: 50px"
+          color="primary"
+          outline
+          type="submit"
+          label="이메일 전송"
+          v-on:click="reset()"
+        ></q-btn>
+        <q-separator inset></q-separator>
+        <p class="text-body2 text text-center q-mt-md">
+          <a class="text" href="/login">로그인 페이지로 돌아가기</a>
+        </p>
+      </q-card-section>
+    </q-card>
   </div>
 </template>
 
@@ -61,5 +62,18 @@ export default {
   margin-left: 30%;
   margin-right: 30%;
   width: 40%;
+}
+
+.my-card {
+  width: 100%;
+  max-width: 450px;
+}
+
+a {
+  text-decoration: none;
+}
+
+p a {
+  text-decoration: none;
 }
 </style>

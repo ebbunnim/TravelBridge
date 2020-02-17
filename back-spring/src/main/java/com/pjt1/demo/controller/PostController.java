@@ -70,6 +70,7 @@ public class PostController {
     @GetMapping("/Post/search/{post_no}")
     public ResponseEntity<Map<String, Object>> search(@PathVariable int post_no) {
         Post Post = service.search(post_no);
+        System.out.println(Post);
         service.updatePostHits(post_no);
         return handleSuccess(Post);
     }

@@ -1,0 +1,349 @@
+<template>
+  <div align="center">
+    <div class="row justify-center" style="margin:5% 0 0 0 ;">
+      <q-select value="asd" label="전체" filled class="col-1" />
+      <q-input
+        label="검색"
+        class="col-5"
+        color="black"
+        label-color="black"
+        style="margin-left:15px;"
+      >
+        <template v-slot:append>
+          <q-icon
+            v-if="text !== ''"
+            name="close"
+            @click="text = ''"
+            class="cursor-pointer"
+            color="black"
+          />
+          <q-icon name="search" color="black" />
+        </template>
+      </q-input>
+      <div class="col-8 q-py-md row justify-center">
+        <p style="padding: 16px 0 0 0;">추천 태그 :</p>
+        <q-btn color="rgba(0,0,0,0.47)" flat label="#맛집" />
+        <q-btn color="rgba(0,0,0,0.47)" flat label="#너네집" />
+        <q-btn color="rgba(0,0,0,0.47)" flat label="#우리집" />
+      </div>
+    </div>
+
+    <q-separator spaced inset vertical dark />
+    <div
+      v-for="(tta, index) in postList"
+      :key="index"
+      class="row justify-center"
+      v-bind:class="{}"
+    >
+      <div
+        v-for="(tt, index) in tta"
+        :key="index"
+        style="margin-bottom:12px; padding-left:12px;"
+        v-bind:class="{
+          'col-4': fixPost(tta, index),
+          'col-2': !fixPost(tta, index)
+        }"
+        align="left"
+      >
+        <template v-if="tt.post_type == 0">
+          <q-card
+            class="my-card1"
+            flat
+            bordered
+            style="width:100%;"
+            @click="move(tt.post_no)"
+          >
+            {{ tt.post_filesList }}
+            <template v-if="tt.post_filesList != null">
+              {{ tt.post_filesList[0] }}
+              <!-- <q-img :src="tt.post_filesList[0].files_url" /> -->
+            </template>
+            <template v-else
+              ><q-img src="https://cdn.quasar.dev/img/parallax2.jpg" />
+            </template>
+
+            <q-card-section>
+              <div class="text-overline text-orange-9 text-body-3">
+                {{ tt.post_category }}
+              </div>
+              <div class="text-b q-mt-sm q-mb-xs">
+                <b>{{ tt.post_title }}</b>
+              </div>
+              <div class="text-caption text-grey text-body-1">
+                {{ tt.post_content }}
+              </div>
+            </q-card-section>
+          </q-card>
+        </template>
+        <template v-else-if="tt.post_type == 1">
+          <q-card class="my-card1" flat bordered @click="move(tt.post_no)">
+            <q-card-section horizontal style="width:100%;">
+              <q-card-section class="q-pt-xs col-7">
+                <div class="text-overline text-orange-9 text-body-3">
+                  {{ tt.post_category }}
+                </div>
+                <div class=" q-mt-sm q-mb-xs">
+                  <b>{{ tt.post_title }}</b>
+                </div>
+                <div class="text-caption text-grey text-body-2">
+                  {{ tt.post_content }}
+                </div>
+              </q-card-section>
+
+              <q-card-section class="col-5 flex flex-center">
+                <q-scroll-area style="width:100%;height:100%;">
+                  <q-timeline color="secondary">
+                    <q-timeline-entry body="November, 2017" />
+
+                    <q-timeline-entry
+                      title="Event Title"
+                      subtitle="February 22, 1986"
+                    />
+
+                    <q-timeline-entry
+                      title="Event Title"
+                      subtitle="February 22, 1986"
+                    />
+
+                    <q-timeline-entry body="November, 2017" />
+                    <q-timeline-entry
+                      title="Event Title"
+                      subtitle="February 22, 1986"
+                    />
+
+                    <q-timeline-entry
+                      title="Event Title"
+                      subtitle="February 22, 1986"
+                    />
+                  </q-timeline>
+                </q-scroll-area>
+              </q-card-section>
+            </q-card-section>
+          </q-card>
+        </template>
+        <template v-else>
+          <q-card-section horizontal>
+            <q-card-section class="q-pt-xs">
+              <div class="text-overline text-orange-9 text-body-3">
+                {{ tt.post_category }}
+              </div>
+              <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
+              <div class="text-caption text-grey">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </div>
+            </q-card-section>
+
+            <q-card-section class="col-5 flex flex-center">
+              <q-img
+                class="rounded-borders"
+                src="https://cdn.quasar.dev/img/parallax2.jpg"
+              />
+            </q-card-section>
+          </q-card-section>
+        </template>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      text: ""
+    };
+  },
+  mounted() {
+    if (this.$route.params.search != null) {
+      console.log("hello");
+    } else {
+      this.$store.dispatch("post/searchAllPost");
+    }
+  },
+  computed: {
+    postList() {
+      return this.$store.state.post.postList;
+    }
+  },
+  methods: {
+    fixPost: function(target, pos) {
+      if (target[pos].post_type == 1) return true;
+      else return false;
+    },
+    move: function(postNo) {
+      this.$router.push("postdetail/" + postNo);
+    },
+    moveView: function(page) {
+      this.$router.push(page);
+    }
+  }
+};
+</script>
+
+<style>
+.my-card1 {
+  width: 100%;
+  height: 360px;
+}
+.card-margin-1 {
+  margin-left: 12px;
+}
+.card-margin-2 {
+  margin-left: 12px;
+}
+.text-body-1 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  margin-top: 1px;
+  max-height: 400px;
+  overflow: hidden;
+  vertical-align: top;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+.text-body-2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  margin-top: 1px;
+  max-height: 400px;
+  overflow: hidden;
+  vertical-align: top;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 12;
+}
+.text-body-3 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  margin-top: 1px;
+  max-height: 400px;
+  overflow: hidden;
+  vertical-align: top;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+@keyframes anima {
+  from {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+    opacity: 0;
+  }
+  to {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";
+    filter: alpha(opacity=100);
+    -moz-opacity: 1;
+    -khtml-opacity: 1;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes anima {
+  from {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+    opacity: 0;
+  }
+  to {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";
+    filter: alpha(opacity=100);
+    -moz-opacity: 1;
+    -khtml-opacity: 1;
+    opacity: 1;
+  }
+}
+.custom-caption {
+  text-align: center;
+  padding: 12px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.pic {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  -webkit-animation: anima 2s;
+  -moz-animation: anima 2s;
+  -o-animation: anima 2s;
+  -ms-animation: anima 2s;
+  animation: anima 2s;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.pic-caption {
+  cursor: default;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(44, 62, 80, 0.66);
+  padding: 10px;
+  text-align: center;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  opacity: 0;
+}
+
+.pic-title {
+  font-size: 1.8em;
+}
+
+a,
+a:hover,
+.pic .pic-image,
+.pic-caption,
+.pic:hover .pic-caption,
+.pic:hover img {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.pic:hover .bottom-to-top {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";
+  filter: alpha(opacity=100);
+  -moz-opacity: 1;
+  -khtml-opacity: 1;
+  opacity: 1;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -moz-touch-callout: none;
+  -o-touch-callout: none;
+  -ms-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent;
+  -o-tap-highlight-color: transparent;
+  -ms-tap-highlight-color: transparent;
+}
+
+.bottom-to-top {
+  top: 50%;
+  left: 0;
+}
+
+.pic:hover .bottom-to-top {
+  top: 0;
+  left: 0;
+}
+</style>

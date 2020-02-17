@@ -6,9 +6,8 @@ const state = {
 
 const actions = {
   getAllFaqs({ commit }) {
-    console.log("뷰");
     FaqService.selectAllFaqs().then(response => {
-      console.log(response.data.data);
+      console.log("여긴 faq.js", response.data.data);
       commit("setAllFaqs", response.data.data);
     });
   }
