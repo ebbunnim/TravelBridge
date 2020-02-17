@@ -5,6 +5,9 @@ package com.pjt1.demo.utils;
 public class PageBean {
 	private int page; // 현재 페이지 번호( != 특정 페이지의 첫번째 게시글 번호(이건 getPageStart() 거쳐야 함) )
 	private int perPageNum; // 한 페이지당 보여줄 게시글 개수
+	private String searchOption;
+	private String word;
+
 	public PageBean() {
 		setPage(this.page);
 		this.perPageNum = 12;
@@ -27,6 +30,19 @@ public class PageBean {
 	}
 	@Override
 	public String toString() {
-		return "PageBean [page=" + page + ", perPageNum=" + perPageNum + "]";
+		return "PageBean [page=" + page + ", perPageNum=" + perPageNum + ", searchOption=" + searchOption + ", word=" + word + "]";
+	}
+	public void setSearchOption(String searchOption) {
+		this.searchOption = searchOption;
+	}
+
+	public String getSearchOption() {
+		return this.searchOption;
+	}
+	public void setWord(String word) {
+		this.word = word;
+	}
+	public String getWord() {
+		return this.word;
 	}
 }

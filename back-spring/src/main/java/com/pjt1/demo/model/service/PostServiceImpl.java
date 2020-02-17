@@ -17,55 +17,70 @@ public class PostServiceImpl implements PostService {
 
 	@Autowired
 	private PostDao repo;
+
 	public Post search(int post_no) {
 		try {
 			return repo.search(post_no);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}return null;
+		}
+		return null;
 	}
-	public List<Post> searchAll(){
+
+	public List<Post> searchAll() {
 		try {
 			return repo.searchAll();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}return null;
+		}
+		return null;
 	}
-	public List<Map<String, Object>> searchPagePostAll(PageMaker page){
+
+	public List<Map<String, Object>> searchPagePostAll(PageMaker page) {
 		try {
 			return repo.searchPagePostAll(page);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}return null;
+		}
+		return null;
 	}
-	public List<Map<String, Object>> searchPagePost(PageMaker page){
+
+	public List<Map<String, Object>> searchPageReport(PageMaker page) {
 		try {
-			return repo.searchPagePost(page);
+			return repo.searchPageReport(page);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}return null;
+		}
+		return null;
 	}
-	public List<Map<String, Object>> searchPagePlan(PageMaker page){
+
+	public List<Map<String, Object>> searchPagePlan(PageMaker page) {
 		try {
 			return repo.searchPagePlan(page);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}return null;
+		}
+		return null;
 	}
-	public List<Post> searchFollowingPeoplePost(int mem_no){
+
+	public List<Post> searchFollowingPeoplePost(int mem_no) {
 		try {
 			return repo.searchFollowingPeoplePost(mem_no);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}return null;
+		}
+		return null;
 	}
+
 	public int getPostLikes(int post_no) {
 		try {
 			return repo.getPostLikes(post_no);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}return 0;
+		}
+		return 0;
 	};
+
 	public void updatePostHits(int post_no) {
 		try {
 			repo.updatePostHits(post_no);
@@ -73,6 +88,7 @@ public class PostServiceImpl implements PostService {
 			e.printStackTrace();
 		}
 	}
+
 	public void insert(Post Post) {
 		try {
 			repo.insert(Post);
@@ -80,27 +96,41 @@ public class PostServiceImpl implements PostService {
 			e.printStackTrace();
 		}
 	}
+
 	public void update(Post Post) {
 		try {
 			repo.update(Post);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	public void delete(int post_no) {
 		try {
 			repo.delete(post_no);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	public List<Map<String, Object>> findChildLike(int no){
+
+	public List<Map<String, Object>> searchMorePostByOption( PageBean pageBean) {
+		try {
+			return repo.searchMorePostByOption(pageBean);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public List<Map<String, Object>> findChildLike(int no) {
 		try {
 			return repo.findChildLike(no);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}return null;
+		}
+		return null;
 	}
+
 	public void deleteChildLike(List<Integer> list) {
 		try {
 			repo.deleteChildLike(list);
@@ -108,13 +138,16 @@ public class PostServiceImpl implements PostService {
 			e.printStackTrace();
 		}
 	}
-	public List<Map<String, Object>> findChildCmt(int no){
+
+	public List<Map<String, Object>> findChildCmt(int no) {
 		try {
 			return repo.findChildCmt(no);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}return null;
+		}
+		return null;
 	}
+
 	public void deleteChildCmt(List<Integer> list) {
 		try {
 			repo.deleteChildCmt(list);
@@ -122,13 +155,16 @@ public class PostServiceImpl implements PostService {
 			e.printStackTrace();
 		}
 	}
-	public List<Map<String, Object>> findChildFiles(int no){
+
+	public List<Map<String, Object>> findChildFiles(int no) {
 		try {
 			return repo.findChildFiles(no);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}return null;
+		}
+		return null;
 	}
+
 	public void deleteChildFiles(List<Integer> list) {
 		try {
 			repo.deleteChildFiles(list);
