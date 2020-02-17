@@ -3,7 +3,7 @@
     <q-img :src="getImgUrl('global.jpg')" :ratio="16 / 4">
       <div class="absolute-top text-center" style="width: 100%">
         <p class="text-h4 q-pt-lg">
-          <b>트래블 서치</b>
+          <b>트래블 픽</b>
         </p>
         <p class="text-body1">트래블 브릿지와 함께 다음 여행지를 골라보세요.</p>
 
@@ -24,10 +24,6 @@
           </template>
         </q-input>
       </div>
-
-      <!-- <div class="row justify-center q-my-xl q-py-xl" style="height: 550px; background: #f9f9f9">
-        
-      </div>-->
     </q-img>
 
     <q-card
