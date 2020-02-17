@@ -3,7 +3,7 @@
 
 <mapper namespace="com.pjt1.demo.model.dao.MembersDao" >
     <insert id="insert"		parameterType="members">
-		INSERT INTO members
+		INSERT INTO MEMBERS
 		(mem_id, mem_email, 
 		mem_phone, 
 		mem_name, mem_sex,
@@ -25,46 +25,46 @@
 	   mem_del_check = true
 	   WHERE mem_no = #{mem_no} AND mem_del_check = FALSE
 	</delete>
-	<select id="findChildBoard" parameterType = "int" resultType = "Board">
+	<select id="findChildBoard" parameterType = "int" resultType = "board">
 	SELECT board_no
-	FROM board
+	FROM BOARD
 	WHERE mem_no = #{mem_no:INTEGER} AND board_del_check = FALSE
 	</select>
-	<select id="findChildQna" parameterType = "int" resultType = "Qna">
+	<select id="findChildQna" parameterType = "int" resultType = "qna">
 	SELECT qna_no
-	FROM qna
+	FROM QNA
 	WHERE mem_no = #{mem_no:INTEGER} AND qna_del_check = FALSE
 	</select>
-	<select id="findChildFollow" parameterType = "int" resultType = "Follow">
+	<select id="findChildFollow" parameterType = "int" resultType = "follow">
 	SELECT follow_no
-	FROM follow
+	FROM FOLLOW
 	WHERE follower_no = #{follwer_no:INTEGER} AND follow_del_check = FALSE;
 	</select>
-	<select id="findChildLikes" parameterType = "int" resultType = "Likes">
+	<select id="findChildLikes" parameterType = "int" resultType = "likes">
 	SELECT like_no
-	FROM likes
+	FROM LIKES
 	WHERE liker_mem_no = #{liker_mem_no:INTEGER} AND like_del_check = FALSE
 	</select>
-	<select id="findChildPost" parameterType = "int" resultType = "Post">
+	<select id="findChildPost" parameterType = "int" resultType = "post">
 	SELECT post_no
-	FROM post
+	FROM POST
 	WHERE mem_no = #{mem_no:INTEGER} AND post_del_check = FALSE
 	</select>
-	<select id="findChildComment" parameterType = "int" resultType = "Comment">
+	<select id="findChildComment" parameterType = "int" resultType = "comment">
 	SELECT cmt_no
-	FROM comment
+	FROM COMMENT
 	WHERE mem_no = #{mem_no:INTEGER} AND cmt_del_check = FALSE
 	</select>
-	<select id="findChildFiles" parameterType = "int" resultType = "Files">
+	<select id="findChildFiles" parameterType = "int" resultType = "files">
 	SELECT files_no
-	FROM files
+	FROM FILES
 	WHERE mem_no = #{mem_no:INTEGER} AND files_del_check = FALSE
 	</select>
 	
 	<delete id="deleteChildBoard" parameterType = "hashmap">
 		<choose>
 		<when test ="list.size!=0">
-			UPDATE board
+			UPDATE BOARD
 			SET board_del_check = TRUE 
 			WHERE board_no in 
 			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
@@ -79,7 +79,7 @@
 	<delete id="deleteChildQna" parameterType = "hashmap">
 		<choose>
 		<when test ="list.size!=0">
-			UPDATE qna
+			UPDATE QNA
 			SET qna_del_check = TRUE 
 			WHERE qna_no in 
 			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
@@ -94,7 +94,7 @@
 	<delete id="deleteChildFollow" parameterType = "hashmap">
 		<choose>
 		<when test ="list.size!=0">
-			UPDATE follow
+			UPDATE FOLLOW
 			SET follow_del_check = TRUE 
 			WHERE follower_no in 
 			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
@@ -109,7 +109,7 @@
 	<delete id="deleteChildLikes" parameterType = "hashmap">
 		<choose>
 		<when test ="list.size!=0">
-			UPDATE likes
+			UPDATE LIKES
 			SET like_del_check = TRUE 
 			WHERE like_no in 
 			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
@@ -124,7 +124,7 @@
 	<delete id="deleteChildPost" parameterType = "hashmap">
 		<choose>
 		<when test ="list.size!=0">
-			UPDATE post
+			UPDATE POST
 			SET post_del_check = TRUE 
 			WHERE post_no in 
 			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
@@ -139,7 +139,7 @@
 	<delete id="deleteChildComment" parameterType = "hashmap">
 		<choose>
 		<when test ="list.size!=0">
-			UPDATE comment
+			UPDATE COMMENT
 			SET cmt_del_check = TRUE 
 			WHERE cmt_no in 
 			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
@@ -154,7 +154,7 @@
 	<delete id="deleteChildFiles" parameterType = "hashmap">
 		<choose>
 		<when test ="list.size!=0">
-			UPDATE files 
+			UPDATE FILES 
 			SET files_del_check = TRUE 
 			WHERE files_no in 
 			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
@@ -167,7 +167,7 @@
 		</choose>
 	</delete>
    	<update id="update"		parameterType="members">
-		UPDATE members SET
+		UPDATE MEMBERS SET
 		mem_id=#{mem_id:VARCHAR}, mem_email=#{mem_email:VARCHAR}, 
 		mem_phone=#{mem_phone:VARCHAR},
 		mem_name=#{mem_name:VARCHAR}, mem_sex=#{mem_sex:INTEGER}, 
@@ -181,17 +181,17 @@
 	</update>
    	<select id="search"		parameterType="int" resultType="members">
 		SELECT * 
-		FROM members 
+		FROM MEMBERS 
 		WHERE mem_no=#{mem_no:INTEGER} 
 		AND mem_del_check=false   
 	</select>
    	<select id="searchAll"	resultType="members">
 		SELECT * 
-		FROM members 
+		FROM MEMBERS 
 		WHERE mem_del_check = false
 	</select> 
-	<select id="searchMemberByEmail" parameterType="String" resultType="Members">
-		SELECT * FROM members WHERE mem_email=#{mem_email:VARCHAR} and mem_del_check=false
+	<select id="searchMemberByEmail" parameterType="String" resultType="members">
+		SELECT * FROM MEMBERS WHERE mem_email=#{mem_email:VARCHAR} and mem_del_check=false
 	</select>
 	<resultMap type="post" id="postMap">
 		<result property="post_no" column="post_no"/>
@@ -201,6 +201,7 @@
 		<result property="post_city" column="post_city"/>
 		<result property="post_hits" column="post_hits"/>
 		<result property="post_writer" column="post_writer"/>
+		<result property="post_plan_date" column="post_plan_date"/>
 	</resultMap>
 	<resultMap type="hotplace" id="hotplaceMap">
 		<result property="hp_no" column="hp_no"/>
@@ -232,17 +233,17 @@
 		<result property="fval_ended" column="fval_ended"/>
 	</resultMap>
 	
-	<resultMap id="likePostMap" type="Members">
+	<resultMap id="likePostMap" type="members">
 		<id property="mem_id" column="mem_id"/>
-		<collection property="mem_likePost" ofType="Post" resultMap="postMap"/>
+		<collection property="mem_likePost" ofType="POST" resultMap="postMap"/>
 	</resultMap>
-	<resultMap id="likeHotPlaceMap" type="Members">
+	<resultMap id="likeHotPlaceMap" type="members">
 		<id property="mem_id" column="mem_id"/>
-		<collection property="mem_likeHotPlace" ofType="HotPlace" resultMap="hotplaceMap"/>
+		<collection property="mem_likeHotPlace" ofType="HOTPLACE" resultMap="hotplaceMap"/>
 	</resultMap>
-	<resultMap id="likeFestivalMap" type="Members">
+	<resultMap id="likeFestivalMap" type="members">
 		<id property="mem_id" column="mem_id"/>
-		<collection property="mem_likeFestival" ofType="Festival" resultMap="festivalMap"/>
+		<collection property="mem_likeFestival" ofType="FESTIVAL" resultMap="festivalMap"/>
 	</resultMap>
 	
 	<select id="searchMemberLikePost" parameterType="int" resultMap="likePostMap">
@@ -254,11 +255,13 @@
 		p.post_category, 
 		p.post_regtime, 
 		p.post_city, 
-		p.post_hits
-		FROM members m
-		LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 1
-		LEFT JOIN post p ON l.post_no = p.post_no AND p.post_del_check=FALSE
-		WHERE m.mem_no = #{mem_no} AND m.mem_del_check = FALSE; 
+		p.post_hits,
+		p.post_plan_date
+		FROM MEMBERS m
+		LEFT JOIN LIKES l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 1
+		LEFT JOIN POST p ON l.post_no = p.post_no AND p.post_del_check=FALSE
+		WHERE m.mem_no = #{mem_no} AND m.mem_del_check = FALSE
+		ORDER BY p.post_regtime DESC; 
 	</select>
 	<select id="searchMemberLikeHotPlace" parameterType="int" resultMap="likeHotPlaceMap">
 		SELECT 
@@ -275,10 +278,11 @@
 		h.hp_holiday,
 		h.hp_fee,
 		h.hp_img
-		FROM members m
-		LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 2
-		LEFT JOIN hotplace h ON l.hotplace_no = h.hp_no AND h.hp_del_check=FALSE
-		WHERE m.mem_no = #{mem_no} AND m.mem_del_check = FALSE;
+		FROM MEMBERS m
+		LEFT JOIN LIKES l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 2
+		LEFT JOIN HOTPLACE h ON l.hotplace_no = h.hp_no AND h.hp_del_check=FALSE
+		WHERE m.mem_no = #{mem_no} AND m.mem_del_check = FALSE
+		ORDER BY p.post_regtime DESC;
 	</select>
 	<select id="searchMemberLikeFestival" parameterType="int" resultMap="likeFestivalMap">
 		SELECT 
@@ -298,21 +302,22 @@
 		f.fval_host,
 		f.fval_img,
 		f.fval_ended
-		FROM members m
-		LEFT JOIN likes l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 3
-		LEFT JOIN festival f ON l.festival_no = f.fval_no AND f.fval_del_check=FALSE
-		WHERE m.mem_no = #{mem_no} AND m.mem_del_check = FALSE; 
+		FROM MEMBERS m
+		LEFT JOIN LIKES l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 3
+		LEFT JOIN FESTIVAL f ON l.festival_no = f.fval_no AND f.fval_del_check=FALSE
+		WHERE m.mem_no = #{mem_no} AND m.mem_del_check = FALSE
+		ORDER BY p.post_regtime DESC; 
 	</select>
-	<resultMap type="Members" id="followMem">
+	<resultMap type="members" id="followMem">
 		<result property="mem_no" column="FOLLOW_NO"/>
 		<result property="mem_id" column="FOLLOW_ID"/>
 		<result property="mem_name" column="FOLLOW_NAME"/>
 	</resultMap>
-	<resultMap type="Members" id="followingMap" >
+	<resultMap type="members" id="followingMap" >
 		<result property="mem_no" column="MY_NO"/>
 		<result property="mem_id" column="MY_ID"/>
 		<result property="mem_name" column="MY_NAME"/>
-		<collection property="mem_followList" ofType="Members" resultMap="followMem"/>
+		<collection property="mem_followList" ofType="members" resultMap="followMem"/>
 	</resultMap>
 	<select id="searchMyFollowPeople" parameterType ="int" resultMap="followingMap">
 	SELECT 

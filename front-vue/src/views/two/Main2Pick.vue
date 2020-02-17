@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h1>픽(테마)</h1>
-
     <q-dialog v-model="alert">
       <q-card>
         <q-card-section>
@@ -54,42 +52,58 @@
       </q-card>
     </q-dialog>
 
-    <div style="display: inline" v-for="(item, idx) in thema" :key="idx">
-      <q-btn
-        color="grey"
-        class="q-ma-sm"
-        size="xl"
-        v-if="item.state"
-        @click="
-          item.state = !item.state;
-          onToggle();
-        "
-        >{{ item.name }}</q-btn
-      >
-      <q-btn
-        color="grey"
-        class="q-ma-sm"
-        size="xl"
-        v-if="!item.state"
-        outline
-        @click="
-          item.state = !item.state;
-          onToggle();
-        "
-        >{{ item.name }}</q-btn
-      >
+    <div
+      class="row justify-center q-my-xl q-py-xl"
+      style="height: 350px; background: #f9f9f9"
+    >
+      <div style="display: inline" v-for="(item, idx) in thema" :key="idx">
+        <q-btn
+          color="grey"
+          class="q-ma-sm"
+          size="lg"
+          rounded
+          v-if="item.state"
+          @click="
+            item.state = !item.state;
+            onToggle();
+          "
+          >#{{ item.name }}</q-btn
+        >
+        <q-btn
+          color="grey"
+          class="q-ma-sm"
+          rounded
+          size="lg"
+          v-if="!item.state"
+          outline
+          @click="
+            item.state = !item.state;
+            onToggle();
+          "
+          >#{{ item.name }}</q-btn
+        >
+      </div>
     </div>
-    <div>
-      <h1>이건 페스티발</h1>
+
+    <div
+      style="margin: 100px 150px; height: 400px; text-align: center;"
+      class="q-pa-xl"
+    >
+      {{ getFvalsByTheme }}
+
+      <!-- {{ hp_list }} -->
+    </div>
+    <div
+      style="margin: 100px 150px; height: 400px; text-align: center;"
+      class="q-pa-xl"
+    >
       {{ fval_list }}
-      <h1>이건 핫플</h1>
-      {{ hp_list }}
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   data() {
@@ -115,11 +129,17 @@ export default {
       hpBtnCnt: 1
     };
   },
-  computed: mapState({
-    user: state => state.user.user, // 현재 접속자
-    hp_list: state => state.hotplace.hps,
-    fval_list: state => state.festival.fvals
-  }),
+  computed: {
+    ...mapState({
+      user: state => state.user.user, // 현재 접속자
+      hp_list: state => state.hotplace.hps,
+      fval_list: state => state.festival.fvals
+    }),
+    ...mapGetters({
+      getFvalsByTheme: "festival/getFvalsByTheme"
+    })
+  },
+
   methods: {
     checkIfLoggedIn() {
       if (this.user.mem_interest === undefined) {
@@ -169,11 +189,11 @@ export default {
     getAllPicks() {
       if (this.currentChoices !== "") {
         this.$store.dispatch("hotplace/searchMoreHotPlaceByTheme", {
-          btnCnt: this.fvalBtnCnt,
+          btnCnt: this.hpBtnCnt,
           word: this.currentChoices
         });
         this.$store.dispatch("festival/searchMoreFestivalByTheme", {
-          btnCnt: this.hpBtnCnt,
+          btnCnt: this.fvalBtnCnt,
           word: this.currentChoices
         });
       } else if (this.currentChoices === "") {

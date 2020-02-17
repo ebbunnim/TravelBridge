@@ -4,20 +4,20 @@
 <mapper namespace="com.pjt1.demo.model.dao.LikesDao" >
   
    	<insert id="insert"		parameterType="likes">
-		INSERT INTO likes
+		INSERT INTO LIKES
 		(like_type, post_no, hotplace_no, festival_no, liker_mem_no)
 		VALUES (
 		#{like_type:INTEGER}, #{post_no:INTEGER}, #{hotplace_no:INTEGER}, #{festival_no:INTEGER}, #{liker_mem_no:INTEGER}
 		)
 	</insert> 
    	<delete id="delete" 	parameterType="int">
-		UPDATE likes 
+		UPDATE LIKES 
 		SET like_del_check = TRUE 
 		WHERE like_no=#{like_no} 
 		AND like_del_check = FALSE
 	</delete>
    	<update id="update"		parameterType="likes">
-		UPDATE likes 
+		UPDATE LIKES 
 		SET
 		like_type=#{like_type:INTEGER},
 		post_no=#{post_no:INTEGER}, 
@@ -29,13 +29,13 @@
 	</update>
    	<select id="search"		parameterType="int" resultType="likes">
 		SELECT * 
-		FROM likes 
+		FROM LIKES 
 		WHERE like_no=#{like_no:INTEGER} 
 		AND like_del_check=false   
 	</select>
    	<select id="searchAll"	resultType="likes">
 		SELECT * 
-		FROM likes 
+		FROM LIKES 
 		WHERE like_del_check=false
 	</select>
 	

@@ -6,7 +6,7 @@
 
   	<insert id="insert"		parameterType="city">
 		INSERT INTO 
-		city
+		CITY
 		(city_name, city_is_overseas,
 		city_address, city_img) 
 		VALUES (
@@ -17,14 +17,14 @@
 		)
 	</insert> 
    	<delete id="delete" 	parameterType="int">
-		UPDATE city
+		UPDATE CITY
 		SET 
 		city_del_check = true
 		WHERE city_no = #{city_no:INTEGER} 
 		AND city_del_check = false	
 	</delete>
    	<update id="update"		parameterType="city">
-		UPDATE city
+		UPDATE CITY
 		SET
 		city_name = #{city_name:VARCHAR},
 		city_is_overseas = #{city_is_overseas:BOOLEAN},
@@ -35,13 +35,13 @@
 	</update>
    	<select id="search"		parameterType="int" resultType="city"> 
 		SELECT * 
-		FROM city
+		FROM CITY
 		WHERE city_no = #{city_no:INTEGER} 
 		AND city_del_check = false      	
 	</select>
    	<select id="searchAll"	resultType="city"> 
 		SELECT * 
-		FROM city
+		FROM CITY
 		WHERE city_del_check = false     
 	</select>
 </mapper>

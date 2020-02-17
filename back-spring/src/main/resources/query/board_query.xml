@@ -5,18 +5,18 @@
 
  	<insert id="insert"		parameterType="board">
 		INSERT INTO 
-		board (mem_no, board_name) 
+		BOARD (mem_no, board_name) 
 		VALUES (#{mem_no:INTEGER},#{board_name:VARCHAR}) 
 	</insert> 
  	<delete id="delete" 	parameterType="int"> 
-		UPDATE board
+		UPDATE BOARD
 		SET 
 		board_del_check = true
 		WHERE board_no = #{board_no:INTEGER} 
 		AND board_del_check = false 
 	</delete> 
    	<update id="update"		parameterType="board">
-		UPDATE board
+		UPDATE BOARD
 		SET
 		mem_no = #{mem_no:INTEGER},
 		board_name = #{board_name:VARCHAR},
@@ -25,13 +25,13 @@
 	</update>
    	<select id="search"		parameterType="int" resultType="board"> 
 		SELECT * 
-		FROM board 
+		FROM BOARD 
 		WHERE board_no = #{board_no:INTEGER} 
 		AND board_del_check = false      
 	</select>
    	<select id="searchAll"	resultType="board">
 		SELECT * 
-		FROM board
+		FROM BOARD
 		WHERE board_del_check = false      
 	</select>
 </mapper>

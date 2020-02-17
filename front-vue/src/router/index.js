@@ -24,6 +24,8 @@ import Main2Search from "../views/two/Main2Search.vue";
 import Main2Pick from "../views/two/Main2Pick.vue";
 import Main2Home from "../views/two/Main2Home.vue";
 import Main2List from "../views/two/Main2List.vue";
+import HotPlaceDetail from "../views/two/HotPlaceDetail.vue";
+import FestivalDetail from "../views/two/FestivalDetail.vue";
 // sub기능, 전체 통합검색 Search Page
 import Sub from "../views/Sub.vue";
 import Search from "../views/Search.vue";
@@ -36,6 +38,11 @@ const routes = [
     name: "home",
     component: Home
   },
+  // {
+  //   path: "/home", // footer 의 site map 에서 home 아닌 다른 페이지 눌러도 home 이 같이 눌리는 버그 수정하려고 만듦
+  //   name: "home",
+  //   component: Home
+  // },
   {
     path: "/search",
     name: "search",
@@ -43,7 +50,6 @@ const routes = [
   },
   {
     path: "/page1",
-    // name: "main1",
     component: Main1,
     children: [
       { path: "", component: Main1Main },
@@ -56,23 +62,21 @@ const routes = [
     path: "/page2",
     component: Main2,
     children: [
-      {
-        path: "",
-        component: Main2Home
-      },
-      {
-        path: "pick",
-        component: Main2Pick
-      },
-      {
-        path: "list",
-        component: Main2List
-      },
-      {
-        path: "main2search",
-        component: Main2Search
-      }
+      { path: "", component: Main2Home },
+      { path: "pick", component: Main2Pick },
+      { path: "list", component: Main2List },
+      { path: "main2search", component: Main2Search }
     ]
+  },
+  {
+    path: "/hotplace/:hp_no",
+    name: "hotplace-detail",
+    component: HotPlaceDetail
+  },
+  {
+    path: "/festival/:fval_no",
+    name: "festival-detail",
+    component: FestivalDetail
   },
   {
     path: "/page3",

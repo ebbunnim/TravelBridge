@@ -21,9 +21,7 @@ public class MorePageBean {
 	@Getter
 	@Setter
 	private List<String> filters;// 태그필터링
-	@Getter
-	@Setter
-	private int search_no; //조회하려는 번호
+
 	public MorePageBean() {
 		this.perPageNum = 4;
 	}

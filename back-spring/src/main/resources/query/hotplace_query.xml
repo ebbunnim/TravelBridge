@@ -6,7 +6,7 @@
 
   	<insert id="insert"		parameterType="hotplace">
 		INSERT INTO 
-		hotplace
+		HOTPLACE
 		(city_no, hp_name, hp_address,
 	    hp_detail_adr,hp_content,
 	    hp_tag , hp_homepage,
@@ -22,7 +22,7 @@
 		)
 	</insert> 
    	<delete id="delete" 	parameterType="int">
-		UPDATE hotplace
+		UPDATE HOTPLACE
 		SET 
 		hp_del_check = TRUE
 		WHERE hp_no = #{hp_no:INTEGER} and hp_del_check = FALSE	
@@ -31,7 +31,7 @@
 	<delete id="deleteChildLike" parameterType = "hashmap">
 		<choose>
 		<when test ="list.size!=0">
-			UPDATE likes 
+			UPDATE LIKES 
 			SET like_del_check = TRUE 
 			WHERE like_no in 
 			<foreach item = "item" index="index" collection="list" open="(" separator="," close =")">
@@ -45,11 +45,11 @@
 	</delete> 
 	<select id="findChildLike" parameterType = "int" resultType = "likes">
 		SELECT like_no
-		FROM likes
+		FROM LIKES
 		WHERE like_type = 2 AND hotplace_no = #{hotplace_no:INTEGER} AND like_del_check = FALSE;
 	</select>
    	<update id="update"		parameterType="hotplace">
-		UPDATE hotplace
+		UPDATE HOTPLACE
 		SET
 		city_no			= #{city_no:INTEGER},
 		hp_name			= #{hp_name:VARCHAR},
@@ -67,19 +67,19 @@
 	</update>
    	<select id="search"		parameterType="int" resultType="hotplace"> 
 		SELECT * 
-		FROM hotplace
+		FROM HOTPLACE
 		WHERE hp_no = #{hp_no:INTEGER} AND hp_del_check = false      	
 	</select>
    	<select id="searchAll"	resultType="hotplace"> 
 		SELECT * 
-		FROM hotplace
+		FROM HOTPLACE
 		WHERE hp_del_check = false     
 	</select>
 
 	<select id="searchMoreHotPlaceAll" parameterType="int" resultType="hotplace">
 	<![CDATA[
         SELECT * 
-        FROM hotplace 
+        FROM HOTPLACE 
         WHERE hp_del_check = FALSE 
         ORDER BY hp_no 
         LIMIT 0, #{perPageNum}]]>
@@ -88,10 +88,10 @@
 	<select id ="searchMoreHotPlaceByCityName" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
         SELECT * 
-        FROM hotplace 
+        FROM HOTPLACE 
         WHERE hp_del_check = FALSE 
         AND city_no = (SELECT city_no 
-						 FROM city 
+						 FROM CITY 
 						 WHERE city_name = "${word}" 
 						 AND city_del_check = FALSE) 
         ORDER BY hp_no 
@@ -101,7 +101,7 @@
 	<select id="searchMoreHotPlaceByTag" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
     	SELECT *
-		FROM hotplace
+		FROM HOTPLACE
 		WHERE hp_tag LIKE concat('%','${word}','%') 
 		AND hp_del_check = FALSE
 		ORDER BY hp_no
@@ -111,7 +111,7 @@
 	<select id="searchMoreHotPlaceByAddress" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 		SELECT * 
-		FROM hotplace
+		FROM HOTPLACE
 		WHERE hp_address = TRIM('${word}') 
 		AND hp_del_check = FALSE
 		ORDER BY hp_no
@@ -119,7 +119,7 @@
 	</select>
 	<select id ="searchMoreHotPlaceByTheme" parameterType="hashmap" resultType="hashmap">
 		SELECT *
-		FROM hotplace
+		FROM HOTPLACE
 		WHERE hp_del_check = FALSE 
 			<if test="filters.size()!=0">
 			AND
@@ -131,7 +131,7 @@
 	</select> 
 	<select id ="searchMoreHotPlace" parameterType="hashmap" resultType="hashmap">
 		SELECT *
-		FROM hotplace
+		FROM HOTPLACE
 		WHERE hp_del_check = FALSE AND
 		<choose>
 			<when test="searchOption == 'all'">
@@ -147,6 +147,9 @@
 			</when>
 			<when test="searchOption == 'tag'">
 				hp_tag like concat('%',#{word},'%')
+			</when>
+			<when test="searchOption == 'city'">
+				hp_address like concat('%',#{word},'%')
 			</when>
 		</choose>
 		ORDER BY hp_no
