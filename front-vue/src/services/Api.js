@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "http://i02a402.p.ssafy.io:8080",
+  baseURL: "http://52.78.219.249:8080/TravelBridge-0.0.1-SNAPSHOT/",
   withCredentials: false,
   headers: {
     Accept: "application/json",
