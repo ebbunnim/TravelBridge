@@ -230,12 +230,12 @@
 				) AS RESULT
 		WHERE RESULT.rnum > #{startPage} AND RESULT.rnum <= #{endPage}]]>
     </select>
-    <select id="searchFollowingPeoplePost" parameterType="int" resultType="post">
+    <select id="searchFollowingPeoplePost" parameterType="int" resultMap="pfMap">
 	SELECT 
 		p.post_no, 
 		p.mem_no,
 		p.post_type, 
-		p.board_no, z
+		p.board_no, 
 		p.post_title, 
 		p.post_content,
 		p.post_category, 

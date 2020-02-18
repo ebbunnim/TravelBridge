@@ -232,6 +232,10 @@
 		<result property="fval_img" column="fval_img"/>
 		<result property="fval_ended" column="fval_ended"/>
 	</resultMap>
+<!-- 	<resultMap type="likes" id="likeMap">
+		<result property = "like_no" column="like_no"/>
+		<result property = "like_regtime" column="like_regtime"/>	
+	</resultMap> -->
 	
 	<resultMap id="likePostMap" type="members">
 		<id property="mem_id" column="mem_id"/>
@@ -253,10 +257,12 @@
 		WHERE m.mem_no = 1
 		ORDER BY p.post_regtime DESC;
 	</select> -->
+	
 	<select id="searchMemberLikePost" parameterType="int" resultMap="likePostMap">
 		SELECT 
 		m.mem_id, 
-		l.like_no, 
+		l.like_no,
+		l.like_regtime,
 		l.post_no, 
 		p.post_title, 
 		p.post_category, 
@@ -268,12 +274,13 @@
 		LEFT JOIN LIKES l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 1
 		LEFT JOIN POST p ON l.post_no = p.post_no AND p.post_del_check=FALSE
 		WHERE m.mem_no = #{mem_no} AND m.mem_del_check = FALSE
-		ORDER BY p.post_regtime DESC; 
+		ORDER BY l.like_regtime DESC; 
 	</select>
 	<select id="searchMemberLikeHotPlace" parameterType="int" resultMap="likeHotPlaceMap">
 		SELECT 
 		m.mem_id, 
 		l.like_no, 
+		l.like_regtime,
 		h.hp_no, 
 		h.hp_name, 
 		h.hp_theme, 
@@ -289,12 +296,13 @@
 		LEFT JOIN LIKES l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 2
 		LEFT JOIN HOTPLACE h ON l.hotplace_no = h.hp_no AND h.hp_del_check=FALSE
 		WHERE m.mem_no = #{mem_no} AND m.mem_del_check = FALSE
-		ORDER BY p.post_regtime DESC;
+		ORDER BY l.like_regtime DESC;
 	</select>
 	<select id="searchMemberLikeFestival" parameterType="int" resultMap="likeFestivalMap">
 		SELECT 
 		m.mem_id, 
 		l.like_no, 
+		l.like_regtime,
 		f.fval_no, 
 		f.fval_name, 
 		f.fval_theme, 
@@ -313,7 +321,7 @@
 		LEFT JOIN LIKES l ON m.mem_no = l.liker_mem_no AND l.like_del_check=FALSE AND l.like_type = 3
 		LEFT JOIN FESTIVAL f ON l.festival_no = f.fval_no AND f.fval_del_check=FALSE
 		WHERE m.mem_no = #{mem_no} AND m.mem_del_check = FALSE
-		ORDER BY p.post_regtime DESC; 
+		ORDER BY l.like_regtime DESC; 
 	</select>
 	<resultMap type="members" id="followMem">
 		<result property="mem_no" column="FOLLOW_NO"/>
