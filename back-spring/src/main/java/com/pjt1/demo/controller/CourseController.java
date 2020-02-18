@@ -33,7 +33,6 @@ public class CourseController {
     private CourseService service;
     @Autowired
     private PostService p_service;
-
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
         return handleFail(e.getMessage(), HttpStatus.OK); // 전송에는 지장 없음

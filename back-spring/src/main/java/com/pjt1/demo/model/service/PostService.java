@@ -15,7 +15,7 @@ public interface PostService {
 
 	public List<Map<String, Object>> searchPagePostAll(PageMaker page);
 
-	public List<Map<String, Object>> searchPageReport(PageMaker page);
+	public List<Map<String, Object>> searchPagePost(PageMaker page);
 
 	public List<Map<String, Object>> searchPagePlan(PageMaker page);
 
@@ -32,7 +32,6 @@ public interface PostService {
 	public void update(Post Post);
 
 	public void delete(int post_no);
-
 	public List<Map<String, Object>> findChildLike(int no);
 
 	public void deleteChildLike(List<Integer> list);

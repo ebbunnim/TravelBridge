@@ -120,15 +120,9 @@ public class PostController {
         List<Integer> del_Likes_IndexList = new ArrayList<Integer>();
         List<Integer> del_Comment_IndexList = new ArrayList<Integer>();
         List<Integer> del_Files_IndexList = new ArrayList<Integer>();
-        for (Object o : delList_Likes) {
-            del_Likes_IndexList.add(((Likes) o).getLike_no());
-        }
-        for (Object o : delList_Comment) {
-            del_Comment_IndexList.add(((Comment) o).getCmt_no());
-        }
-        for (Object o : delList_Files) {
-            del_Files_IndexList.add(((Files) o).getFiles_no());
-        }
+        for (Object o : delList_Likes) 		{ del_Likes_IndexList.add(((Likes) o).getLike_no()); }
+        for (Object o : delList_Comment) 	{ del_Comment_IndexList.add(((Comment) o).getCmt_no()); }
+        for (Object o : delList_Files) 		{ del_Files_IndexList.add(((Files) o).getFiles_no()); }
         service.deleteChildLike(del_Likes_IndexList);
         service.deleteChildCmt(del_Comment_IndexList);
         service.deleteChildFiles(del_Files_IndexList);

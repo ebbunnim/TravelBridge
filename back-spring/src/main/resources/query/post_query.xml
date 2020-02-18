@@ -33,6 +33,7 @@
 		<collection property="post_cmtList" ofType="comment" resultMap="cmtMap"/>
 		<collection property="post_filesList" ofType="files" resultMap="filesMap"/>
 		<collection property="post_courseList" ofType="course" resultMap="courseMap"/>
+
 	</resultMap>
 	<resultMap id="pfMap" type ="POST">
 		<id property="post_no" column="post_no"/>
@@ -60,9 +61,7 @@
 		<result property="post_regtime" column ="post_regtime"/>
 		<result property="post_hits" column ="post_hits"/>
 		<result property="post_city" column ="post_hits"/>
-		<result property="post_plan_start" column ="post_plan_start"/>
-		<result property="post_plan_end" column ="post_plan_end"/>
-		<result property="post_plan_title" column ="post_plan_title"/>
+		<result property="post_plan_date" column ="post_plan_date"/>
 		<result property="post_writer" column ="post_writer"/>
 		<collection property="post_courseList" ofType="course" resultMap="courseMap"/>
 	</resultMap>
@@ -245,7 +244,7 @@
 		SET post_hits = post_hits + 1 
 		WHERE post_no = #{post_no};
 	</select>
-  	<insert id="insert"		parameterType="post">
+	<insert id="insert"		parameterType="post">
 		INSERT INTO POST
 		(post_type, 
 		board_no, 
@@ -261,8 +260,8 @@
 			#{post_title:VARCHAR}, #{post_content:VARCHAR}, #{post_category:VARCHAR}, #{post_city:VARCHAR},
 			#{post_writer:VARCHAR}, #{post_plan_date:VARCHAR}
 		)
-	</insert> 
-		<update id="update"		parameterType="post">
+	</insert>
+	<update id="update"		parameterType="post">
 		UPDATE POST 
 		SET
 		post_type=#{post_type:INTEGER}, 
@@ -345,7 +344,8 @@
 	<select id="findChildCmt" parameterType = "int" resultType = "comment">
 		SELECT cmt_no
 		FROM COMMENT
-		WHERE post_no = #{post_no:INTEGER} AND cmt_del_check = FALSE
+		WHERE post_no = #{post_no:INTEGER} 
+		AND cmt_del_check = FALSE
 	</select>
 	<delete id="deleteChildFiles" parameterType = "hashmap">
 		<choose>
@@ -378,10 +378,9 @@
 	</select>
 
 	
-<<<<<<< HEAD
+
 </mapper>
-=======
-</mapper>
+
    <!--       
    searchPagePost
    <![CDATA[
@@ -403,5 +402,5 @@
 		FROM POST p 
 		LEFT JOIN FILES f  ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
 		WHERE p.post_no> #{startPage} and p.post_no<=#{endPage} AND p.post_del_check = FALSE
+<<<<<<< HEAD
 		AND p.post_type = 0]]> -->
->>>>>>> 4ae17ceafda94b5637c62ffa3931501300812090
