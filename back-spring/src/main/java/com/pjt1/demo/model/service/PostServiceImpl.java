@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.pjt1.demo.model.dao.PostDao;
 import com.pjt1.demo.model.dto.Post;
+import com.pjt1.demo.utils.PageBean;
 import com.pjt1.demo.utils.PageMaker;
 
 @Service
@@ -52,34 +53,7 @@ public class PostServiceImpl implements PostService {
 			e.printStackTrace();
 		}return null;
 	}
-
-	public List<Map<String, Object>> searchPagePostAll(PageMaker page) {
-		try {
-			return repo.searchPagePostAll(page);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public List<Map<String, Object>> searchPageReport(PageMaker page) {
-		try {
-			return repo.searchPageReport(page);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public List<Map<String, Object>> searchPagePlan(PageMaker page) {
-		try {
-			return repo.searchPagePlan(page);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
+	
 	public List<Post> searchFollowingPeoplePost(int mem_no) {
 		try {
 			return repo.searchFollowingPeoplePost(mem_no);
@@ -198,5 +172,7 @@ public class PostServiceImpl implements PostService {
 		}
 		return null;
 	}
+
+	
 
 }

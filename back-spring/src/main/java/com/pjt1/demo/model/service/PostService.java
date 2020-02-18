@@ -15,7 +15,7 @@ public interface PostService {
 
 	public List<Map<String, Object>> searchPagePostAll(PageMaker page);
 
-	public List<Map<String, Object>> searchPageReport(PageMaker page);
+	public List<Map<String, Object>> searchPagePost(PageMaker page);
 
 	public List<Map<String, Object>> searchPagePlan(PageMaker page);
 
