@@ -63,13 +63,14 @@ public class FollowServiceImpl implements FollowService {
 		}
 
 	}
-	
 
-	public List<Follow> searchMemberList(int follower_no){
+	public List<Follow> searchMemberList(int follower_no) {
 		try {
 			return repo.searchMemberList(follower_no);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} return null;
+		}
+		return null;
 	}
+
 }

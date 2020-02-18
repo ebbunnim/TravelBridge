@@ -5,27 +5,30 @@ import Login from "../views/user/Login.vue";
 import PasswordFind from "../views/user/PasswordFind.vue";
 import SignUp from "../views/user/SignUp.vue";
 import MyPage from "../views/user/MyPage.vue";
-//main
-import Home from "../views/Home.vue";
-import Main2 from "../views/Main2.vue";
-import Sub from "../views/Sub.vue";
-import Search from "../views/Search.vue";
 //about
 import AboutTeam from "../views/about/AboutTeam.vue";
 import AboutService from "../views/about/AboutService.vue";
 //faq&qna
 import Qna from "../views/Qna.vue";
 import Faq from "../views/Faq.vue";
-
 //main1
 import Main1 from "../views/one/Main1.vue";
 import Main1Search from "../views/one/Main1Search.vue";
 import PostDetail from "../views/one/PostDetail.vue";
 import Main1Main from "../views/one/Main1Main.vue";
 import Main1Write from "../views/one/Main1Write.vue";
-
+import Main1follow from "../views/one/Main1follow.vue";
 //main2
-import Main2Search from "@/components/two/Main2Search.vue";
+import Home from "../views/Home.vue";
+import Main2 from "../views/two/Main2.vue";
+import Main2Pick from "../views/two/Main2Pick.vue";
+import Main2Home from "../views/two/Main2Home.vue";
+// import Main2List from "../views/two/Main2List.vue";
+import HotPlaceDetail from "../views/two/HotPlaceDetail.vue";
+import FestivalDetail from "../views/two/FestivalDetail.vue";
+// sub기능, 전체 통합검색 Search Page
+import Sub from "../views/Sub.vue";
+import Search from "../views/Search.vue";
 
 Vue.use(VueRouter);
 
@@ -35,6 +38,7 @@ const routes = [
     name: "home",
     component: Home
   },
+
   {
     path: "/search",
     name: "search",
@@ -42,36 +46,38 @@ const routes = [
   },
   {
     path: "/page1",
-    // name: "main1",
     component: Main1,
     children: [
       { path: "", component: Main1Main },
       { path: "main1search", component: Main1Search },
       { path: "postdetail/:postNo", component: PostDetail, props: true },
-      { path: "write", component: Main1Write }
+      { path: "write", component: Main1Write },
+      { path: "follower", component: Main1follow }
     ]
   },
   {
     path: "/page2",
     component: Main2,
     children: [
-      {
-        path: "",
-        component: () => import("@/components/two/Main2Home.vue")
-      },
-      {
-        path: "pick",
-        component: () => import("@/components/two/Main2Pick.vue")
-      },
+      { path: "", component: Main2Home },
+      { path: "pick", component: Main2Pick },
+      // { path: "list", component: Main2List },
       {
         path: "list",
-        component: () => import("@/components/two/Main2List.vue")
-      },
-      {
-        path: "main2search",
-        component: Main2Search
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/two/Main2List.vue")
       }
     ]
+  },
+  {
+    path: "/hotplace/:hp_no",
+    name: "hotplace-detail",
+    component: HotPlaceDetail
+  },
+  {
+    path: "/festival/:fval_no",
+    name: "festival-detail",
+    component: FestivalDetail
   },
   {
     path: "/page3",

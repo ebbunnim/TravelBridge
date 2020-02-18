@@ -1,7 +1,8 @@
 import FestivalService from "@/services/FestivalService.js";
 
 const state = {
-  fvals: []
+  fvals: [],
+  fval_list_length: 0
 };
 
 const actions = {
@@ -10,20 +11,6 @@ const actions = {
       commit("saveFvals", fvals);
     });
   },
-  searchMoreFestivalByCityName: ({ commit }, payload) => {
-    FestivalService.searchMoreFestivalByCityName(
-      payload.btnCnt,
-      payload.cityName
-    )
-      .then(res => {
-        console.log("여긴 festival vuex");
-        commit("saveFvals", res);
-        console.log("fval state: ", state.fvals);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  },
   searchMoreFestival: ({ commit }, payload) => {
     FestivalService.searchMoreFestival(
       payload.btnCnt,
@@ -31,9 +18,10 @@ const actions = {
       payload.word
     )
       .then(res => {
-        console.log("여긴 vuex", res);
+        console.log("여긴 festival.js", res);
         commit("saveFvals", res);
-        console.log("fval state: ", state.fvals);
+        console.log("state.fvals: ", state.fvals);
+        console.log("fval length 측정: ", state.fval_list_length);
       })
       .catch(e => {
         console.log(e);
@@ -55,6 +43,7 @@ const actions = {
 const mutations = {
   saveFvals(state, fvals) {
     state.fvals = fvals;
+    state.fval_list_length = fvals.length;
   },
   clearFvals(state) {
     state.fvals = [];

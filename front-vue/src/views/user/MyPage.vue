@@ -2,7 +2,8 @@
   <div class="text-center">
     <h4>마이 페이지</h4>
     <div class="q-pa-lg">
-      <div style="max-width: 70%; margin: 0 15% 0 15%">
+      <!-- <div style="max-width: 70%; margin: 0 15% 0 15%"> -->
+      <div>
         <q-tabs
           dense
           v-model="tab"
@@ -94,7 +95,11 @@
                     borderless
                     v-show="!onEditReceive"
                   />
-                  <div v-show="onEditReceive" align="left ">
+                  <div
+                    v-show="onEditReceive"
+                    align="left "
+                    class="row justify-center"
+                  >
                     <q-radio
                       v-model="user.mem_receive_email"
                       val="true"
@@ -109,11 +114,11 @@
                 </q-card-section>
                 <q-card-section class="row">
                   <div class="col-md-6 col-xs-12">
-                    <div class="text-subtitle2 text-left ">최종 로그인</div>
+                    <div class="text-subtitle2 text-left">최종 로그인</div>
                     <q-input
                       v-model="user.mem_lastlogin"
                       type="text"
-                      class="text-subtitle1 "
+                      class="text-subtitle1"
                       readonly
                       dense
                       borderless
@@ -133,7 +138,7 @@
                 </q-card-section>
                 <q-card-section>
                   <!-- 기능 아직 구현 안 됨 -->
-                  <div class="text-h4 text-left ">회원탈퇴</div>
+                  <div class="text-h4 text-left">회원탈퇴</div>
                 </q-card-section>
               </q-card>
               <!-- 두번째 카드 -->
@@ -191,48 +196,50 @@
                 </q-card-section>
 
                 <q-card-section class="row">
-                  <div class="text-body2 text-left col-12">연락처</div>
-                  <q-input
-                    v-model="user.mem_phone"
-                    type="text"
-                    class="text-h6 col-xs-12 col-md-6 q-mr-md q-pr-lg"
-                    v-bind="{ readonly: readOnly, outlined: !readOnly }"
-                    dense
-                    borderless
-                  />
-                </q-card-section>
-                <q-card-section class="row">
-                  <div class="text-body2 text-left col-12">생년월일</div>
-                  <q-input
-                    dense
-                    borderless
-                    v-model="user.mem_birth"
-                    placeholder="YYYY/MM/DD"
-                    mask="date"
-                    class="text-h6 col-xs-12 col-md-6 q-pr-lg"
-                    :rules="['date']"
-                    v-bind="{ readonly: readOnly, outlined: !readOnly }"
-                  >
-                    <template v-slot:append>
-                      <q-icon
-                        name="event"
-                        class="cursor-pointer"
-                        v-show="!readOnly"
-                      >
-                        <q-popup-proxy
-                          ref="qDateProxy"
-                          transition-show="scale"
-                          transition-hide="scale"
+                  <div class="col-6">
+                    <div class="text-body2 text-left">연락처</div>
+                    <q-input
+                      v-model="user.mem_phone"
+                      type="text"
+                      class="text-h6 q-mr-md q-pr-lg"
+                      v-bind="{ readonly: readOnly, outlined: !readOnly }"
+                      dense
+                      borderless
+                    />
+                  </div>
+                  <div class="col-6">
+                    <div class="text-body2 text-left">생년월일</div>
+                    <q-input
+                      dense
+                      borderless
+                      v-model="user.mem_birth"
+                      placeholder="YYYY/MM/DD"
+                      mask="date"
+                      class="text-h6 q-pr-lg"
+                      :rules="['date']"
+                      v-bind="{ readonly: readOnly, outlined: !readOnly }"
+                    >
+                      <template v-slot:append>
+                        <q-icon
+                          name="event"
+                          class="cursor-pointer"
+                          v-if="!readOnly"
                         >
-                          <q-date
-                            minimal
-                            v-model="user.mem_birth"
-                            @input="() => $refs.qDateProxy.hide()"
-                          />
-                        </q-popup-proxy>
-                      </q-icon>
-                    </template>
-                  </q-input>
+                          <q-popup-proxy
+                            ref="qDateProxy"
+                            transition-show="scale"
+                            transition-hide="scale"
+                          >
+                            <q-date
+                              minimal
+                              v-model="user.mem_birth"
+                              @input="() => $refs.qDateProxy.hide()"
+                            />
+                          </q-popup-proxy>
+                        </q-icon>
+                      </template>
+                    </q-input>
+                  </div>
                 </q-card-section>
               </q-card>
               <!-- 세번째 카드 -->
@@ -271,7 +278,7 @@
                     class="col-"
                     style="text-align:left; margin-left:10px"
                     readonly
-                  /> -->
+                  />-->
 
                   <div
                     class="row"
@@ -326,7 +333,6 @@
 <script>
 import { mapState } from "vuex";
 import UserService from "@/services/UserService.js";
-
 export default {
   data() {
     return {
@@ -367,17 +373,18 @@ export default {
       }
       console.log("###### onToggle 눌림 ######", this.currentChoices);
       this.user.mem_interest = this.currentChoices;
-      console.log(this.user.mem_interest)
+      console.log(this.user.mem_interest);
     },
     updateUser() {
-      UserService.updateUser(this.user).then(response => {
+      UserService.updateUser(this.user).then(res => {
         console.log("업데이트 유저 실행됨");
-        console.log(this.user.mem_interest)
+        console.log(res);
+        console.log(this.user.mem_interest);
       });
     },
     getPastInterest() {
       const pastChoice = this.user.mem_interest;
-      console.log("과거 초이스", pastChoice)
+      console.log("과거 초이스", pastChoice);
       if (pastChoice !== "undefined") {
         const tempInterest = pastChoice.split(" ");
         for (let key in tempInterest) {

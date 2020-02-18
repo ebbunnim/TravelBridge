@@ -3,7 +3,8 @@ import PostService from "../../services/PostService";
 
 const state = {
   post: {},
-  postList: []
+  postList: [],
+  gogo: false
 };
 // GetSearchAllPost
 //GetSearchPartPost
@@ -16,14 +17,26 @@ const actions = {
     });
   },
   searchPartPost: (store, payload) => {
-    PostService.GetSearchPartPost(payload.ListNo).then(response => {
-      store.commit("postListPart", { postList: response });
+    PostService.GetSearchAllPost(payload.pageNo).then(response => {
+      store.commit("postListAll", {
+        postList: response,
+        pageNo: payload.pageNo
+      });
+      console.log(state.postList);
     });
   },
   searchInfoPost: (store, payload) => {
     PostService.GetSearchPost(payload.postNo).then(response => {
       store.commit("postInfo", { post: response });
       console.log(response);
+    });
+  },
+  searchAllFollower: (store, payload) => {
+    console.log(payload.userno);
+    PostService.GetSearchFollow(payload.userno).then(Response => {
+      console.log(Response);
+      store.commit("postListAll", { postList: Response });
+      console.log(state.postList);
     });
   }
 };
@@ -36,7 +49,7 @@ const mutations = {
     var titles = [];
     var cnt = 0;
     var ti = [];
-
+    console.log(payLoad.postList);
     for (var i of payLoad.postList) {
       if (i.post_type == 0) cnt = cnt + 1;
       else if (i.post_type == 1) cnt = cnt + 2;
@@ -56,34 +69,12 @@ const mutations = {
         ti.push(i);
       }
     }
-
-    state.postList = titles;
-  },
-  postListPart(state, payLoad) {
-    var titles = [];
-    var cnt = 0;
-    var ti = [];
-
-    for (var i of payLoad.postList) {
-      if (i == 1) cnt = cnt + 1;
-      else if (i == 2) cnt = cnt + 2;
-
-      if (cnt == 4) {
-        ti.push(i);
-        titles.push(ti);
-        ti = [];
-        cnt = 0;
-      } else if (cnt > 4) {
-        ti.push(3);
-        titles.push(ti);
-        ti = [];
-        cnt = 2;
-        ti.push(i);
-      } else if (cnt < 4) {
-        ti.push(i);
-      }
+    if (payLoad.pageNo === 1) {
+      state.postList = titles;
+    } else {
+      state.postList.push(titles);
     }
-    state.postList.push(titles);
+    state.gogo = true;
   }
 };
 
