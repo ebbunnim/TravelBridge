@@ -307,35 +307,59 @@
 		where post_no=#{post_no}
 	</update>
 	<select id ="searchMorePostByOption" parameterType="hashmap" resultType="hashmap" resultMap="pcfMap">
-		SELECT 
-		p.post_no, 
-		p.mem_no,
-		p.post_type, 
-		p.board_no, 
-		p.post_title, 
-		p.post_content,
-		p.post_category, 
-		p.post_regtime, 
-		p.post_hits, 
-		p.post_city,
-		p.post_writer, 
-		p.post_plan_date,
-		c.cmt_no,
-		c.mem_no,
-		c.cmt_regtime, 
-		c.cmt_content, 
-		c.cmt_writer, 
-		f.files_no,
-		f.files_url,
-		cs.course_no,
-		cs.course_title,
-		cs.course_description,
-		cs.course_del_check
-		FROM POST p 
-		LEFT JOIN COMMENT c ON p.post_no = c.post_no AND cmt_del_check = FALSE
-		LEFT JOIN FILES f   ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
-		LEFT JOIN COURSE cs ON p.post_no = cs.post_no AND cs.course_del_check=FALSE
-		WHERE p.post_del_check = FALSE AND
+		<![CDATA[SELECT
+			RESULT.rnum,
+			RESULT.post_no,
+			RESULT.mem_no,
+			RESULT.post_type,
+			RESULT.board_no,
+			RESULT.post_title,
+			RESULT.post_content,
+			RESULT.post_category,
+			RESULT.post_regtime,
+			RESULT.post_hits,
+			RESULT.post_city,
+			RESULT.post_writer,
+			RESULT.post_plan_date,
+			RESULT.files_no,
+			RESULT.files_url,
+			RESULT.cmt_no,
+			RESULT.cmt_regtime, 
+			RESULT.cmt_content, 
+			RESULT.cmt_writer, 
+			RESULT.course_no,
+			RESULT.course_title,
+			RESULT.course_description
+		FROM (SELECT
+				(CASE
+					WHEN @vpost_no = a.post_no
+					THEN @rownum:=@rownum
+					ELSE @rownum:=@rownum+1
+				END) AS rnum,
+				(@vpost_no:=a.post_no) vpost_no,
+				a.*
+				FROM
+					(SELECT
+						p.*,
+						f.files_no,
+						f.files_url,
+						c.cmt_no,
+						c.cmt_regtime, 
+						c.cmt_content, 
+						c.cmt_writer, 
+						cs.course_no,
+						cs.course_title,
+						cs.course_description
+					FROM POST p
+					LEFT JOIN COMMENT c ON p.post_no = c.post_no AND c.cmt_del_check = FALSE
+					LEFT JOIN FILES f   ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND f.files_del_check = FALSE
+					LEFT JOIN COURSE cs ON p.post_no = cs.post_no AND cs.course_del_check=FALSE
+					WHERE p.post_del_check = FALSE
+					ORDER BY p.post_regtime DESC)
+					as a,
+					(SELECT @vpost_no:='', @rownum:=0 FROM DUAL) as b
+				) AS RESULT
+		WHERE RESULT.rnum >0 AND  RESULT.rnum <= 16 AND]]>
 		<choose>
 			<when test="searchOption == 'all'">
 				(post_title like concat('%',#{word},'%')
@@ -355,7 +379,7 @@
 				post_writer like concat('%',#{word},'%')
 			</when>
 		</choose>
-		ORDER BY p.post_regtime DESC
+		<!-- ORDER BY p.post_regtime DESC -->
 	</select> 
 
 
