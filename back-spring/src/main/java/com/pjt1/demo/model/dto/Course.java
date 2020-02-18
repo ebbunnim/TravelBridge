@@ -1,6 +1,7 @@
 package com.pjt1.demo.model.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -33,5 +34,8 @@ public class Course {
     @Getter
     @Setter
     private boolean course_del_check;// boolean DEFAULT FALSE,
+    @Getter
+    @Setter
+    private List<String> course_sub;
 
 }

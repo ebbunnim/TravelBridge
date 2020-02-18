@@ -19,22 +19,20 @@ public interface PostDao {
 
 	public List<Map<String, Object>> searchPagePostAll(PageMaker page);
 
-	public List<Map<String, Object>> searchPageReport(PageMaker page);
+	public List<Map<String, Object>> searchPagePost(PageMaker page);
 
 	public List<Map<String, Object>> searchPagePlan(PageMaker page);
 
 	public List<Post> searchFollowingPeoplePost(int mem_no);
 
-	public List<Map<String, Object>> searchMorePostByOption(PageBean pageBean);
+	public List<Map<String, Object>> searchMorePostByOption(PageMaker pageMaker);
 
 	public int getPostLikes(int post_no);
 
 	public void updatePostHits(int post_no);
 
 	public void insert(Post Post);
-
 	public void update(Post Post);
-
 	public void delete(int post_no);
 
 	public List<Map<String, Object>> findChildLike(int no);

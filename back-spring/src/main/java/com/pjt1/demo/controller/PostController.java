@@ -80,23 +80,28 @@ public class PostController {
         return handleSuccess(Post);
     }
 
-    @ApiOperation("더보기로 Post 검색하기 조회 - searchOption은 all/ title / content/ tag /city 중 전달")
+    @ApiOperation("더보기로 Post 검색하기 조회 - searchOption은 all/ title / content/ tag / writer 중 전달")
     @GetMapping("/Post/search/page/{btnCnt}/{searchOption}/{word}")
-    public ResponseEntity<Map<String, Object>> searchPostByOption(PageBean pageBean, @PathVariable int btnCnt,
+    public ResponseEntity<Map<String, Object>> searchPostByOption(@PathVariable int btnCnt,
             @PathVariable String searchOption, @PathVariable String word) {
-        searchOption = (searchOption == null) ? "all" : searchOption;
-        word = (word == null || word == " ") ? "" : word;
-        PageBean PageBean = new PageBean();
-        PageBean.setSearchOption(searchOption);
-        PageBean.setWord(word);
-        System.out.println(PageBean);
+        PageBean pageBean = new PageBean();
+        pageBean.setPerPageNum(16);
         PageMaker pageMaker = new PageMaker();
+        if (searchOption.equals("empty")) {
+            pageMaker.setSearchOption("all");
+        }
+        if (word.equals("empty")) {
+            pageMaker.setWord("");
+        };
+        // PageBean.setWord(word);
+        System.out.println(pageBean);
         pageBean.setPage(btnCnt);
         pageMaker.setPageBean(pageBean);
         pageMaker.setStartPage(pageBean.getPage());
         pageMaker.setEndPage(pageMaker.getStartPage());
         System.out.println(pageMaker);
-        List<Map<String, Object>> list = service.searchMorePostByOption(pageBean);
+        List<Map<String, Object>> list = service.searchMorePostByOption(pageMaker);
+        System.out.println(list);
         return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
     }
 
@@ -118,15 +123,9 @@ public class PostController {
         List<Integer> del_Likes_IndexList = new ArrayList<Integer>();
         List<Integer> del_Comment_IndexList = new ArrayList<Integer>();
         List<Integer> del_Files_IndexList = new ArrayList<Integer>();
-        for (Object o : delList_Likes) {
-            del_Likes_IndexList.add(((Likes) o).getLike_no());
-        }
-        for (Object o : delList_Comment) {
-            del_Comment_IndexList.add(((Comment) o).getCmt_no());
-        }
-        for (Object o : delList_Files) {
-            del_Files_IndexList.add(((Files) o).getFiles_no());
-        }
+        for (Object o : delList_Likes) 		{ del_Likes_IndexList.add(((Likes) o).getLike_no()); }
+        for (Object o : delList_Comment) 	{ del_Comment_IndexList.add(((Comment) o).getCmt_no()); }
+        for (Object o : delList_Files) 		{ del_Files_IndexList.add(((Files) o).getFiles_no()); }
         service.deleteChildLike(del_Likes_IndexList);
         service.deleteChildCmt(del_Comment_IndexList);
         service.deleteChildFiles(del_Files_IndexList);
@@ -169,6 +168,8 @@ public class PostController {
     @GetMapping("/Post/searchFollowingPost")
     public ResponseEntity<Map<String, Object>> searchFollowingPost(int following_no) {
         List<Post> list = service.searchFollowingPost(following_no);
+
+
         return handleSuccess(list);
     }
 

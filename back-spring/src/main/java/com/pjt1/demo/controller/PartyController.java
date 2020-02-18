@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.internal.compiler.env.IModule.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pjt1.demo.model.dto.Party;
+import com.pjt1.demo.model.dto.PartyIn;
+import com.pjt1.demo.model.service.PartyInService;
 import com.pjt1.demo.model.service.PartyService;
 
 import io.swagger.annotations.ApiOperation;
@@ -28,7 +31,9 @@ public class PartyController {
 
     @Autowired
     private PartyService service;
-
+    @Autowired
+    private PartyInService i_service;
+    
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
         return handleFail(e.getMessage(), HttpStatus.OK); // 전송에는 지장 없음
@@ -52,6 +57,9 @@ public class PartyController {
     @GetMapping("/Party")
     public ResponseEntity<Map<String, Object>> searchAll() {
         List<Party> list = service.searchAll();
+        for(Party p : list) {
+        	p.setParty_inMemList(i_service.searchPartyList(p.getParty_no()));
+        }
         return handleSuccess(list);
     }
 
@@ -59,6 +67,7 @@ public class PartyController {
     @GetMapping("/Party/{party_no}")
     public ResponseEntity<Map<String, Object>> search(@PathVariable int party_no) {
         Party party = service.search(party_no);
+        party.setParty_inMemList(i_service.searchPartyList(party_no));
         return handleSuccess(party);
     }
 
@@ -66,6 +75,10 @@ public class PartyController {
     @ApiOperation("Party 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Party party) {
         service.insert(party);
+        PartyIn partyIn = new PartyIn();
+        partyIn.setParty_no(party.getParty_no());
+        partyIn.setMem_no(party.getHost_no());
+        i_service.insert(partyIn);
         return handleSuccess("");
     }
 

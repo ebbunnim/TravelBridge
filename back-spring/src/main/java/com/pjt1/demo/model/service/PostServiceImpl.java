@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.pjt1.demo.model.dao.PostDao;
 import com.pjt1.demo.model.dto.Post;
-import com.pjt1.demo.utils.MorePageBean;
 import com.pjt1.demo.utils.PageBean;
 import com.pjt1.demo.utils.PageMaker;
 
@@ -17,14 +16,13 @@ public class PostServiceImpl implements PostService {
 
 	@Autowired
 	private PostDao repo;
-
+	
 	public Post search(int post_no) {
 		try {
 			return repo.search(post_no);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		return null;
+		}return null;
 	}
 
 	public List<Post> searchAll() {
@@ -32,37 +30,30 @@ public class PostServiceImpl implements PostService {
 			return repo.searchAll();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		return null;
+		}return null;
 	}
-
-	public List<Map<String, Object>> searchPagePostAll(PageMaker page) {
+	public List<Map<String, Object>> searchPagePostAll(PageMaker page){
 		try {
 			return repo.searchPagePostAll(page);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		return null;
+		}return null;
 	}
-
-	public List<Map<String, Object>> searchPageReport(PageMaker page) {
+	public List<Map<String, Object>> searchPagePost(PageMaker page){
 		try {
-			return repo.searchPageReport(page);
+			return repo.searchPagePost(page);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		return null;
+		}return null;
 	}
-
-	public List<Map<String, Object>> searchPagePlan(PageMaker page) {
+	public List<Map<String, Object>> searchPagePlan(PageMaker page){
 		try {
 			return repo.searchPagePlan(page);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		return null;
+		}return null;
 	}
-
+	
 	public List<Post> searchFollowingPeoplePost(int mem_no) {
 		try {
 			return repo.searchFollowingPeoplePost(mem_no);
@@ -113,9 +104,9 @@ public class PostServiceImpl implements PostService {
 		}
 	}
 
-	public List<Map<String, Object>> searchMorePostByOption(PageBean pageBean) {
+	public List<Map<String, Object>> searchMorePostByOption(PageMaker pageMaker) {
 		try {
-			return repo.searchMorePostByOption(pageBean);
+			return repo.searchMorePostByOption(pageMaker);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -181,5 +172,7 @@ public class PostServiceImpl implements PostService {
 		}
 		return null;
 	}
+
+	
 
 }
