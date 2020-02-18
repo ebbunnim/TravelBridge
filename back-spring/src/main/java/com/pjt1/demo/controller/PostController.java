@@ -85,7 +85,7 @@ public class PostController {
     public ResponseEntity<Map<String, Object>> searchPostByOption(PageBean pageBean, @PathVariable int btnCnt,
             @PathVariable String searchOption, @PathVariable String word) {
         searchOption = (searchOption == null) ? "all" : searchOption;
-        if (word.equals("mtmt")) {
+        if (word.equals("empty")) {
             pageBean.setWord("");
         };
         pageBean.setSearchOption(searchOption);
