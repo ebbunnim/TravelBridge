@@ -84,11 +84,12 @@ public class PostController {
     @GetMapping("/Post/search/page/{btnCnt}/{searchOption}/{word}")
     public ResponseEntity<Map<String, Object>> searchPostByOption(PageBean pageBean, @PathVariable int btnCnt,
             @PathVariable String searchOption, @PathVariable String word) {
-        searchOption = (searchOption == null) ? "all" : searchOption;
+        if (searchOption.equals("empty")) {
+            pageBean.setSearchOption("all");
+        }
         if (word.equals("empty")) {
             pageBean.setWord("");
         };
-        pageBean.setSearchOption(searchOption);
         // PageBean.setWord(word);
         System.out.println(pageBean);
         PageMaker pageMaker = new PageMaker();
