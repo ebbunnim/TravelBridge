@@ -51,6 +51,17 @@ const routes = [
     children: [
       { path: "", component: Main1Main },
       { path: "main1search", component: Main1Search },
+      { path: "main1search/:pageNo", component: Main1Search, props: true },
+      {
+        path: "main1search/:word/:pageNo",
+        component: Main1Search,
+        props: true
+      },
+      {
+        path: "main1search/:word/:option/:pageNo",
+        component: Main1Search,
+        props: true
+      },
       { path: "postdetail/:postNo", component: PostDetail, props: true },
       { path: "write", component: Main1Write },
       { path: "follower", component: Main1follow }
