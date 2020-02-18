@@ -245,7 +245,14 @@
 		<id property="mem_id" column="mem_id"/>
 		<collection property="mem_likeFestival" ofType="FESTIVAL" resultMap="festivalMap"/>
 	</resultMap>
-	
+<!-- 	<select id="searchMyPost" parameterType="int" resultMap="myPostMap">
+		SELECT p.*
+		FROM POST p
+		LEFT JOIN MEMBERS m
+		ON p.mem_no = m.mem_no
+		WHERE m.mem_no = 1
+		ORDER BY p.post_regtime DESC;
+	</select> -->
 	<select id="searchMemberLikePost" parameterType="int" resultMap="likePostMap">
 		SELECT 
 		m.mem_id, 

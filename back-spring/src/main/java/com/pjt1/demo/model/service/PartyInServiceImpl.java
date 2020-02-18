@@ -5,19 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pjt1.demo.model.dao.PartyDao;
-import com.pjt1.demo.model.dto.Party;
+import com.pjt1.demo.model.dao.PartyInDao;
+import com.pjt1.demo.model.dto.PartyIn;
 
  
 @Service
-public class PartyServiceImpl implements PartyService {
+public class PartyInServiceImpl implements PartyInService {
 
 	@Autowired
-	private PartyDao repo;
+	private PartyInDao repo;
 	
-	public Party search(int party_no) {
+	public PartyIn search(int partyin_no) {
 		try {
-			return repo.search(party_no);
+			return repo.search(partyin_no);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -25,7 +25,7 @@ public class PartyServiceImpl implements PartyService {
 		
 	}
 
-	public List<Party> searchAll() {
+	public List<PartyIn> searchAll() {
 		try {
 			return repo.searchAll();
 		} catch(Exception e) {
@@ -35,36 +35,37 @@ public class PartyServiceImpl implements PartyService {
 		
 	}
 
-	public void insert(Party party) {
+	public void insert(PartyIn partyin) {
 		try {
-			repo.insert(party);
+			repo.insert(partyin);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
 
-	public void update(Party party) {
+	public void update(PartyIn partyin) {
 		try {
-			repo.update(party);
+			repo.update(partyin);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}	
 	}
 
-	public void delete(int party_no) {
+	public void delete(int partyin_no) {
 		try {
-			repo.delete(party_no);
+			repo.delete(partyin_no);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}	
 		
 	}
-	public void addPeople(int party_no) {
+	public List<PartyIn> searchPartyList(int partyin_no){
 		try {
-			repo.addPeople(party_no);
+			return repo.searchPartyList(partyin_no);
 		}catch(Exception e) {
 			e.printStackTrace();
-		}
+		}return null;
 	}
+
 }

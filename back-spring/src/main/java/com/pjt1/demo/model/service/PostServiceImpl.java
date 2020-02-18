@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.pjt1.demo.model.dao.PostDao;
 import com.pjt1.demo.model.dto.Post;
-import com.pjt1.demo.utils.MorePageBean;
-import com.pjt1.demo.utils.PageBean;
 import com.pjt1.demo.utils.PageMaker;
 
 @Service

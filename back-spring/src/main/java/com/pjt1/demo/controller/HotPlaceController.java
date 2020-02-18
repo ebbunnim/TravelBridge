@@ -63,7 +63,7 @@ public class HotPlaceController {
 
 	@ApiOperation("no에 따른 HotPlace 정보 조회하는 기능")
 	@GetMapping("/HotPlace/{no}")
-	public ResponseEntity<Map<String, Object>> search(int no) {
+	public ResponseEntity<Map<String, Object>> search(@PathVariable int no) {
 		HotPlace HotPlace = service.search(no);
 		return handleSuccess(HotPlace);
 	}
@@ -167,7 +167,7 @@ public class HotPlaceController {
 		List<Map<String, Object>> list = service.searchMoreHotPlaceByTheme(pageBean);
 		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
 	}
-	@ApiOperation("더보기로 HotPlace 검색하기 조회 - searchOption은 all/ title / content/ tag중 전달")
+	@ApiOperation("더보기로 HotPlace 검색하기 조회 - searchOption은 all/ title / content/ tag city중 전달")
 	@GetMapping("/HotPlace/search/more/{btnCnt}/{searchOption}/{word}")
 	public ResponseEntity<Map<String, Object>> searchMoreFestival(MorePageBean pageBean, @PathVariable int btnCnt,
 			@PathVariable String searchOption, @PathVariable String word) {
