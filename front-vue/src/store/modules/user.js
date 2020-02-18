@@ -5,7 +5,12 @@ import UserService from "../../services/UserService";
 import router from "../../router";
 
 const state = {
-  user: {}
+  user: {},
+  following: [],
+  follower: [],
+  likePost: [],
+  likeFesta: [],
+  likeHot: []
 };
 
 const actions = {
@@ -53,13 +58,53 @@ const actions = {
     fireService
       .loginWithGitHub(payLoad.user_email, payLoad.user_pw)
       .then(response => {
-        store.commit("postLogIn"), { user: response.data.data };
+        store.commit("postLogIn", { user: response.data.data });
       })
       .catch(exp => alert("로그인 실패 " + exp));
     //뒤에 우리디비에서 로그인 요청
   },
   changeDeafultPw: (store, payLoad) => {
     fireService.resetPw(payLoad.email);
+  },
+  getFollower: (store, payLoad) => {
+    UserService.followerUser(payLoad.userNo)
+      .then(Response => {
+        console.log(Response);
+        store.commit("getFollowerUser", { a: Response });
+      })
+      .catch(exp => console.log(exp));
+  },
+  getFollowing: (store, payLoad) => {
+    UserService.followingUser(payLoad.userNo)
+      .then(Response => {
+        console.log(Response);
+        store.commit("getFollowingUser", { a: Response });
+      })
+      .catch(exp => console.log(exp));
+  },
+  getLikePost: (store, payLoad) => {
+    UserService.likePost(payLoad.userNo)
+      .then(Response => {
+        console.log(Response);
+        store.commit("getLikePostUser", { likePost: Response });
+      })
+      .catch(exp => console.log(exp));
+  },
+  getLikeHot: (store, payLoad) => {
+    UserService.likeHot(payLoad.userNo)
+      .then(Response => {
+        console.log(Response);
+        store.commit("getLikeHotUser", { likeHot: Response });
+      })
+      .catch(exp => console.log(exp));
+  },
+  getLikeFesta: (store, payLoad) => {
+    UserService.likeFesta(payLoad.userNo)
+      .then(Response => {
+        console.log(Response);
+        store.commit("getLikeFestaUser", { likeFesta: Response });
+      })
+      .catch(exp => console.log(exp));
   }
 };
 
@@ -69,6 +114,26 @@ const mutations = {
   },
   postGoogleLogIn: (state, payLoad) => {
     state.user = payLoad.user;
+  },
+  getFollowerUser: (state, payLoad) => {
+    console.log(payLoad);
+    state.follower = payLoad.a;
+  },
+  getFollowingUser: (state, payLoad) => {
+    console.log(payLoad);
+    state.following = payLoad.a;
+  },
+  getLikePostUser: (state, payLoad) => {
+    console.log(payLoad);
+    state.likePost = payLoad.likePost;
+  },
+  getLikeFestaUser: (state, payLoad) => {
+    console.log(payLoad);
+    state.likeFesta = payLoad.likeFesta;
+  },
+  getLikeHotUser: (state, payLoad) => {
+    console.log(payLoad);
+    state.likeHot = payLoad.likeHot;
   }
 };
 

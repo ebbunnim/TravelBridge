@@ -37,7 +37,7 @@ class PostService {
     console.log(userno);
     return Api.get(`/Members/searchFollowingPeoplePost/${userno}`)
       .then(Response => {
-        console.log(Response.data.data.mem_followPost);
+        console.log(Response.data.data);
         return Response.data.data.mem_followPost;
       })
       .catch(exp => console.log("Err get follower search" + exp));

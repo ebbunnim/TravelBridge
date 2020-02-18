@@ -35,6 +35,58 @@ class UserService {
         console.log(e);
       });
   }
+  followerUser(userNo) {
+    console.log("팔로워");
+    return Api.get(`/Members/searchFollowMePeople/${userNo}`)
+      .then(Response => {
+        console.log(Response.data.data);
+        return Response.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+  followingUser(userNo) {
+    console.log("팔로잉");
+    return Api.get(`/Members/searchMyFollowPeople/${userNo}`)
+      .then(Response => {
+        console.log(Response.data.data);
+        return Response.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+  likePost(userNo) {
+    return Api.get(`/Members/searchMemberLikePost/${userNo}`)
+      .then(Response => {
+        console.log(Response.data.data);
+        return Response.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+  likeHot(userNo) {
+    return Api.get(`/Members/searchMemberLikeHotPlace/${userNo}`)
+      .then(Response => {
+        console.log(Response.data.data);
+        return Response.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+  likeFesta(userNo) {
+    return Api.get(`/Members/searchMemberLikeFestival/${userNo}`)
+      .then(Response => {
+        console.log(Response.data.data);
+        return Response.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
 }
 
 export default new UserService();

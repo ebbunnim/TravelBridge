@@ -9,7 +9,7 @@
         <p class="text-h3 text-center">
           <q-icon name="calendar_today" />Planner
         </p>
-        <p class="text-h5 text-center">설레는 여행 일정을 저장해보세요.</p>
+        <p class="text-h5 text-center">너와나를 이어주는 공간.</p>
       </div>
     </q-img>
     <Calendar />

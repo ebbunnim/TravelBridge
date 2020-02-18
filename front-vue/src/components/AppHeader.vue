@@ -19,13 +19,7 @@
               label="트래블 픽"
               @mouseover="menuOn2 = true"
             ></q-btn>
-            <q-btn
-              class="text-black q-mx-sm"
-              flat
-              to="/page3"
-              label="SUB기능"
-              @mouseover="menuOn3 = true"
-            ></q-btn>
+            <q-btn class="text-black q-mx-sm" flat to="/page3" label="트래블 메이트"></q-btn>
           </div>
         </div>
 
@@ -49,25 +43,21 @@
             <!-- NavBar Hover 메뉴 부분 -->
             <div class="row justify-center">
               <q-btn to="/page2" flat class="col-4">트래블 픽</q-btn>
-              <q-btn to="/page2/pick" flat class="col-4"
-                >테마별 여행지 추천</q-btn
-              >
-              <q-btn to="/page2/list" flat class="col-4"
-                >여행지 정보 검색</q-btn
-              >
+              <q-btn to="/page2/pick" flat class="col-4">테마별 여행지 추천</q-btn>
+              <q-btn to="/page2/list" flat class="col-4">여행지 정보 검색</q-btn>
             </div>
           </q-list>
         </q-menu>
-        <q-menu square v-model="menuOn3" @mouseleave="menuOn3 = false" class="gt-sm" fit>
+        <!-- <q-menu square v-model="menuOn3" @mouseleave="menuOn3 = false" class="gt-sm" fit>
           <q-list class="q-ma-sm">
             <div class="row justify-center">
-              <q-btn to="/page3" flat class="col-3">서브기능의</q-btn>
+              <q-btn to="/page3" flat class="col-3">트래블 메이트</q-btn>
               <q-btn to="/page3" flat class="col-3">호버이다</q-btn>
               <q-btn to="/page3" flat class="col-3">router를</q-btn>
               <q-btn to="/page3" flat class="col-3">연결할것</q-btn>
             </div>
           </q-list>
-        </q-menu>
+        </q-menu>-->
 
         <q-toolbar-title class="col-4 text-black">
           <q-btn size="xl" unelevated flat to="/">트래블브릿지</q-btn>

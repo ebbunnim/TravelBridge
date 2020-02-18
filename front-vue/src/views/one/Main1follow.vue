@@ -18,7 +18,7 @@
       >
         <template v-if="tt.post_type == 0">
           <q-card class="my-card1" flat bordered style="width:100%;" @click="move(tt.post_no)">
-            <template v-if="tt.post_filesList != null">
+            <template v-if="tt.post_filesList.length != 0">
               <q-img :src="tt.post_filesList[0].files_url" style="max-height: 160px;" />
             </template>
             <template v-else>

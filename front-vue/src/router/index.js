@@ -27,7 +27,7 @@ import Main2Home from "../views/two/Main2Home.vue";
 import HotPlaceDetail from "../views/two/HotPlaceDetail.vue";
 import FestivalDetail from "../views/two/FestivalDetail.vue";
 // sub기능, 전체 통합검색 Search Page
-import Sub from "../views/Sub.vue";
+import Mate from "../views/Mate.vue";
 import Search from "../views/Search.vue";
 
 Vue.use(VueRouter);
@@ -91,9 +91,9 @@ const routes = [
     component: FestivalDetail
   },
   {
-    path: "/page3",
-    name: "sub",
-    component: Sub
+    path: "/mate",
+    name: "mate",
+    component: Mate
   },
   {
     path: "/faq",
