@@ -2,6 +2,7 @@ import HotPlaceService from "@/services/HotPlaceService.js";
 
 const state = {
   hps: [],
+  hp_list_length: 0,
   hp: null,
   searchTitle: ""
 };
@@ -12,13 +13,11 @@ const actions = {
       commit("saveHPs", hps);
     });
   },
-  searchByNo({ commit }, payload) {
-    console.log("뷰에서 넘겨온 페이로드를 받은 vuex다:", payload);
-    console.log(typeof(payload))
-    HotPlaceService.searchByNo(payload).then(res => {
-      console.log("결과 => ", res);
+  searchByNo({ commit }, no) {
+    HotPlaceService.searchByNo(no).then(res => {
+      console.log("searchByNo 결과 => ", res);
+      commit("saveHP", res);
     });
-    // commit("saveHP", result);
   },
   searchMoreHotplace: ({ commit }, payload) => {
     HotPlaceService.searchMoreHotplace(

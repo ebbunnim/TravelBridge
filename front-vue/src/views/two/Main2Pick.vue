@@ -87,29 +87,30 @@
 
     <div class="row justify-center q-mt-xl q-pt-xl q-mx-xl q-px-xl">
       <div
-        class="col-lg-3 col-md-6 col-xs-12"
+        class="col-lg-3 col-md-6 col-xs-12 col-ma-xl"
         v-for="i in hp_list_length"
         :key="i"
       >
+        {{ hp_list[i - 1] }}
         <!-- 카드가 들어가는 부분 -->
-        <HotPlaceCard
+        <!-- <HotPlaceCard
           class="q-ma-lg"
           :hp_img="hp_list[i - 1].hp_img"
           :hp_name="hp_list[i - 1].hp_name"
           :hp_detail_adr="hp_list[i - 1].hp_detail_adr"
           :hp_tag="hp_list[i - 1].hp_tag"
           :hp_no="hp_list[i - 1].hp_no"
-        ></HotPlaceCard>
+        ></HotPlaceCard> -->
       </div>
       <!-- <q-btn outline square class="col-11 q-px-xl" @click="loadMoreHp()">더보기</q-btn> -->
-
+      <!-- 
       <div
         class="col-lg-3 col-md-6 col-xs-12"
         v-for="j in fval_list_length"
         :key="j"
-      >
-        <!-- 카드가 들어가는 부분 -->
-        <FestivalCard
+      > -->
+      <!-- 카드가 들어가는 부분 -->
+      <!-- <FestivalCard
           class="q-ma-lg"
           :fval_img="fval_list[j - 1].fval_img"
           :fval_name="fval_list[j - 1].fval_name"
@@ -118,21 +119,21 @@
           :fval_detail_adr="fval_list[j - 1].fval_detail_adr"
           :fval_tag="fval_list[j - 1].fval_tag"
           :fval_no="fval_list[j - 1].fval_no"
-        ></FestivalCard>
-      </div>
+        ></FestivalCard> -->
+      <!-- </div> -->
     </div>
   </q-page>
 </template>
 
 <script>
 import { mapState, mapGetters } from "vuex";
-import HotPlaceCard from "@/views/two/HotPlaceCard.vue";
-import FestivalCard from "@/views/two/FestivalCard.vue";
+// import HotPlaceCard from "@/views/two/HotPlaceCard.vue";
+// import FestivalCard from "@/views/two/FestivalCard.vue";
 export default {
-  components: {
-    HotPlaceCard,
-    FestivalCard
-  },
+  // components: {
+  //   HotPlaceCard,
+  //   FestivalCard
+  // },
   data() {
     return {
       hp_food: [],
@@ -177,7 +178,7 @@ export default {
       } else if (this.user.mem_interest === "") {
         this.choiceAlert = true;
       } else {
-        this.checkPastInterest();
+        this.checkPastInterest(); ////////////////////////
       }
     },
     useWithoutLogin() {
@@ -191,7 +192,7 @@ export default {
     },
     checkPastInterest() {
       this.currentChoices = this.user.mem_interest;
-      console.log("check Past Interest ==> ", this.currentChoices);
+      console.log("check Past Interest method 실행 ==> ", this.currentChoices);
       if (this.currentChoices !== "undefined") {
         const tempInterest = this.currentChoices.split(" ");
         for (let key in tempInterest) {
@@ -202,6 +203,7 @@ export default {
           }
         }
       }
+      this.getAllPicks();
     },
     onToggle() {
       this.currentChoices = "";
@@ -215,8 +217,6 @@ export default {
       }
       console.log("### TravelPick - onToggle ###", this.currentChoices);
       this.getAllPicks();
-      this.dist1();
-      // this.dist2();
     },
     getAllPicks() {
       if (this.currentChoices !== "") {
@@ -228,30 +228,23 @@ export default {
           btnCnt: this.fvalBtnCnt,
           word: this.currentChoices
         });
+        this.distribute(); //////////////////////////////////////////////
       } else if (this.currentChoices === "") {
         this.$store.commit("hotplace/clearHPs");
         this.$store.commit("festival/clearFvals");
       }
     },
-    dist1() {
-      const thema = this.thema;
-      for (let key in thema) {
-        var temp = this.hp_list.filter(function(hp) {
-          return hp.hp_theme.includes(thema[key].name);
-        });
-        this.thema[key].arr1 = temp;
-        console.log("분류:", this.thema[key].arr1);
+    // 담아 놓은 fval_list 와 hp_list 를 thema 1개 별로 분류해서 list 에 넣는 함수
+    distribute() {
+      console.log("분류 대상:", this.hp_list);
+      console.log("분류 대상:", this.fval_list);
+      for (let key in this.hp_list) {
+        for (let the in this.thema) {
+          // this.hp_list[key].hp_theme.includes();
+          console.log(this.hp_list_length[key], this.thema[the]);
+        }
       }
     }
-    // dist2() {
-    //   const thema = this.thema;
-    //   for (let key in thema) {
-    //     var temp = this.fval_list.filter(function(fval) {
-    //       return fval.fval_theme.includes(thema[key].name);
-    //     });
-    //     this.thema[key].arr2 = temp;
-    //   }
-    // }
   },
   mounted() {
     console.log("========= Main2Pick.vue mounted =======");

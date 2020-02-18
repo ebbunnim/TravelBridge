@@ -11,8 +11,8 @@ class FestivalService {
       .catch(e => console.log(e));
   }
   // 번호로 찾아오기
-  searchByNo(fval_no) {
-    return Api.get(`/Festival/search/${fval_no}`)
+  searchByNo(no) {
+    return Api.get(`/Festival/search/${no}`)
       .then(res => {
         return res.data.data;
       })
@@ -76,7 +76,7 @@ class FestivalService {
   searchMoreFestival(btnCnt, searchOption, word) {
     return Api.get(`/Festival/search/more/${btnCnt}/${searchOption}/${word}`)
       .then(res => {
-        console.log("여그가 여그냐!!!!? ", res);
+        console.log("FestivalService에서...", res.data.data);
         return res.data.data;
       })
       .catch(e => {

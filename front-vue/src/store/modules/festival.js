@@ -2,13 +2,20 @@ import FestivalService from "@/services/FestivalService.js";
 
 const state = {
   fvals: [],
-  fval_list_length: 0
+  fval_list_length: 0,
+  fval: null
 };
 
 const actions = {
   searchAllFvals: ({ commit }) => {
     FestivalService.searchAll(fvals => {
       commit("saveFvals", fvals);
+    });
+  },
+  searchByNo({ commit }, no) {
+    FestivalService.searchByNo(no).then(res => {
+      console.log("결과 => ", res);
+      commit("saveFval", res);
     });
   },
   searchMoreFestival: ({ commit }, payload) => {
@@ -44,6 +51,9 @@ const mutations = {
   saveFvals(state, fvals) {
     state.fvals = fvals;
     state.fval_list_length = fvals.length;
+  },
+  saveFval(state, fval) {
+    state.fval = fval;
   },
   clearFvals(state) {
     state.fvals = [];
