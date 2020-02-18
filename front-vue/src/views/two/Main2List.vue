@@ -4,19 +4,26 @@
       class="row justify-center text-center q-my-xl q-py-xl"
       style="height: 400px; background: #f9f9f9"
     >
+      <!--  -->
+      <!-- <div>{{ hp_list }}</div>
+      <div class="text-h2">{{ hp_list_length }}</div>
+      <div>{{ fval_list }}</div>
+      <div class="text-h2">{{ fval_list_length }}</div> -->
+      <!--  -->
       <q-select
         no-wrap
-        class="col-md-2 col-xs-4 text-h6 q-mx-sm q-px-lg"
+        class="col-md-1 col-xs-4 text-h6 q-mx-sm q-px-lg"
         v-model="searchOption"
         :options="searchOptions"
       />
       <q-input
-        class="col-md-4 col-xs-6 text-h6"
+        class="col-md-3 col-xs-6 text-h6"
         v-model="word"
+        text-
         :placeholder="[
           (searchOption === null) | (searchOption === '전체')
             ? ''
-            : searchOption + '을 검색하세요'
+            : searchOption + '을(를) 검색하세요'
         ]"
       >
         <template v-slot:append>
@@ -29,6 +36,8 @@
           />
         </template>
       </q-input>
+      <!-- 버튼을 누른다.  -->
+      <!--  -->
     </div>
     <div class="row justify-center q-mx-xl q-px-xl">
       <div
@@ -37,9 +46,9 @@
       >
         <b>{{ searchTitle }}</b> 검색 결과
       </div>
+
       <div
-        v-show="searchTitle === null ? false : searchTitle"
-        v-if="(hp_list_length === undefined) | null | 0 ? false : true"
+        v-if="hp_list_length === 0 ? false : true"
         class="col-12 text-center text-h6"
       >
         #{{ searchTitle }} 핫플레이스
@@ -64,8 +73,7 @@
       </div>
       <!-- <q-btn outline square class="col-11 q-px-xl" @click="loadMoreHp()">더보기</q-btn> -->
       <div
-        v-show="searchTitle === null ? false : searchTitle"
-        v-if="(fval_list_length === undefined) | null | 0 ? false : true"
+        v-if="fval_list_length === 0 ? false : true"
         class="col-12 text-center text-h6"
       >
         #{{ searchTitle }} 페스티벌
@@ -146,11 +154,19 @@ export default {
         searchOption: this.searchOptionValue[this.searchOption],
         word: this.word
       };
+      console.log("Vue:", payLoad1);
+      console.log("Vue:", payLoad2);
       this.$store.dispatch("hotplace/searchMoreHotplace", payLoad1);
       this.$store.dispatch("festival/searchMoreFestival", payLoad2);
+
       this.$store.commit("hotplace/saveSearchTitle", this.word);
     }
-  }
+  },
+  created() {
+    this.$store.dispatch("hotplace/clearHPs");
+    this.$store.dispatch("festival/clearFvals");
+  },
+  beforeRouteUpdate() {}
 };
 </script>
 
