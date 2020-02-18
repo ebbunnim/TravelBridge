@@ -113,7 +113,7 @@ public class PostServiceImpl implements PostService {
 		}
 	}
 
-	public List<Map<String, Object>> searchMorePostByOption( PageBean pageBean) {
+	public List<Map<String, Object>> searchMorePostByOption(PageBean pageBean) {
 		try {
 			return repo.searchMorePostByOption(pageBean);
 		} catch (Exception e) {
@@ -172,4 +172,14 @@ public class PostServiceImpl implements PostService {
 			e.printStackTrace();
 		}
 	}
+
+	public List<Post> searchFollowingPost(int following_no) {
+		try {
+			return repo.searchFollowingPost(following_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }
