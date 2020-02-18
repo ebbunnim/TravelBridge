@@ -33,18 +33,18 @@
                 class="col-8"
                 type="text"
                 label="제목"
-                v-model="postTitle"
+                v-model="post.postTitle"
               />
               <div class="row justify-around col-5" style="margin-top:2%;">
                 <q-select
                   filled
-                  v-model="postArea"
+                  v-model="post.postArea"
                   use-input
                   hide-selected
                   fill-input
                   input-debounce="0"
                   @input="postInner"
-                  :options="postSpinArea"
+                  :options="post.postSpinArea"
                   class="col-5"
                   label="지역"
                 >
@@ -59,9 +59,9 @@
                 <template>
                   <q-select
                     filled
-                    v-model="postCity"
+                    v-model="post.postCity"
                     label="도시"
-                    :options="postSpinCity"
+                    :options="post.postSpinCity"
                     class="col-5"
                     behavior="menu"
                   />
@@ -70,7 +70,7 @@
               <div class="col-10 justify-center row" style="margin-top:1%;">
                 <div
                   style="display: inline"
-                  v-for="(item, idx) in postThema"
+                  v-for="(item, idx) in post.postThema"
                   :key="idx"
                 >
                   <q-btn
@@ -105,7 +105,7 @@
               style="margin-bottom:15px;margin-left:0px;"
             >
               <q-editor
-                v-model="postEditor"
+                v-model="post.postEditor"
                 min-height="20rem"
                 max-height="25rem"
                 class="col-8"
@@ -193,18 +193,18 @@
                 class="col-8"
                 type="text"
                 label="제목"
-                v-model="planTitle"
+                v-model="plan.planTitle"
               />
               <div class="row justify-around col-5" style="margin-top:2%;">
                 <q-select
                   filled
-                  v-model="planArea"
+                  v-model="plan.planArea"
                   use-input
                   hide-selected
                   fill-input
                   input-debounce="0"
                   @input="planInner"
-                  :options="planSpinArea"
+                  :options="plan.planSpinArea"
                   class="col-5"
                   label="지역"
                 >
@@ -219,9 +219,9 @@
                 <template>
                   <q-select
                     filled
-                    v-model="planCity"
+                    v-model="plan.planCity"
                     label="도시"
-                    :options="planSpinCity"
+                    :options="plan.planSpinCity"
                     class="col-5"
                     behavior="menu"
                   />
@@ -230,7 +230,7 @@
               <div class="col-10 justify-center row" style="margin-top:1%;">
                 <div
                   style="display: inline"
-                  v-for="(item, idx) in planThema"
+                  v-for="(item, idx) in plan.planThema"
                   :key="idx"
                 >
                   <q-btn
@@ -265,18 +265,18 @@
               style="margin-bottom:15px;margin-left:0px;"
             >
               <q-editor
-                v-model="planEditor"
+                v-model="plan.planEditor"
                 min-height="20rem"
                 max-height="25rem"
                 class="col-8"
               />
               <div class="col-3" style="margin-left:20px;">
-                <template v-if="planSelectedFile.lnegth > 0">
+                <template v-if="plan.planSelectedFile.length > 0">
                   asdasd
                   <q-uploader
                     ref="plans"
                     label="Custom header"
-                    :value="planSelectedFile"
+                    :value="plan.planSelectedFile"
                     extensions=".gif,.jpg,.jpeg,.png"
                     multiple
                     @added="planFileSelected"
@@ -343,7 +343,7 @@
                     flat
                     bordered
                   >
-                    <template v-if="planSelectedFile > 0"> </template>
+                    <template v-if="plan.planSelectedFile > 0"> </template>
                     <template v-slot:header="scope">
                       <div class="row no-wrap items-center q-pa-sm q-gutter-xs">
                         <q-btn
@@ -468,13 +468,13 @@
                           <q-btn unelevated color="amber" icon="add" />
                         </q-item-section>
                         <q-popup-edit
-                          v-model="plan"
+                          v-model="plan.plan"
                           content-class="bg-amber text-white"
                         >
                           <q-input
                             dark
                             color="white"
-                            v-model="plan"
+                            v-model="plan.plan"
                             dense
                             autofocus
                             counter
@@ -498,13 +498,13 @@
                         <p>카드 추가하기</p>
                         <q-icon name="add" size="md" style="margin-left:10px" />
                         <q-popup-edit
-                          v-model="card"
+                          v-model="plan.card"
                           content-class="bg-green-7 text-white"
                         >
                           <q-input
                             dark
                             color="white"
-                            v-model="card"
+                            v-model="plan.card"
                             dense
                             autofocus
                             counter
@@ -809,14 +809,17 @@ export default {
   data() {
     return {
       tab: "post",
-      postTitle: "",
-      postEditor: "",
-      postSpinArea: area,
-      postArea: "",
-      postCity: "",
-      postSpinCity: [],
-      postChoices: "",
-      postSelectedFile: [],
+      post: {
+        postTitle: "",
+        postEditor: "",
+        postSpinArea: area,
+        postArea: "",
+        postCity: "",
+        postSpinCity: [],
+        postChoices: "",
+        postSelectedFile: []
+      },
+
       postThema: {
         food: { state: false, name: "맛집" },
         family: { state: false, name: "가족" },
@@ -827,17 +830,19 @@ export default {
         healing: { state: false, name: "힐링" },
         tradition: { state: false, name: "전통" }
       },
-      planSelectedFile: [],
-      planTitle: "",
-      planEditor: "",
-      planSpinArea: area,
-      planArea: "",
-      planCity: "",
-      planSpinCity: [],
-      planChoices: "",
-      card: "",
-      plan: "",
-      planList: [],
+      plan: {
+        planSelectedFile: [],
+        planTitle: "",
+        planEditor: "",
+        planSpinArea: area,
+        planArea: "",
+        planCity: "",
+        planSpinCity: [],
+        planChoices: "",
+        card: "",
+        plan: "",
+        planList: []
+      },
       planThema: {
         food: { state: false, name: "맛집" },
         family: { state: false, name: "가족" },
@@ -855,7 +860,7 @@ export default {
     postFileSelected(file) {
       console.log(file);
       for (var x in file) {
-        this.postSelectedFile.push(file[x]);
+        this.post.postSelectedFile.push(file[x]);
       }
       console.log(this.postSelectedFile);
       //이 버튼 필요없고 글쓰기 버튼누르면 글쓰면서 이 친구들 대리고가야한다.
@@ -867,24 +872,24 @@ export default {
       if (idx > -1) this.postSelectedFile.splice(idx, 1);
     },
     postInner() {
-      this.postCity = "";
-      if (this.postArea === "서울") this.postSpinCity = seoul;
-      else if (this.postArea === "부산") this.postSpinCity = qntks;
-      else if (this.postArea === "대구") this.postSpinCity = eorn;
-      else if (this.postArea === "인천") this.postSpinCity = dlscjs;
-      else if (this.postArea === "광주") this.postSpinCity = rhkdwn;
-      else if (this.postArea === "대전") this.postSpinCity = eowjs;
-      else if (this.postArea === "울산") this.postSpinCity = dnftks;
-      else if (this.postArea === "세종") this.postSpinCity = tpwhd;
-      else if (this.postArea === "경기") this.postSpinCity = rudrl;
-      else if (this.postArea === "강원") this.postSpinCity = rkddnjs;
-      else if (this.postArea === "충북") this.postSpinCity = cndqnr;
-      else if (this.postArea === "충남") this.postSpinCity = cndska;
-      else if (this.postArea === "경북") this.postSpinCity = rudqnr;
-      else if (this.postArea === "경남") this.postSpinCity = rudska;
-      else if (this.postArea === "전북") this.postSpinCity = wjsqnr;
-      else if (this.postArea === "전남") this.postSpinCity = wjsska;
-      else if (this.postArea === "제주") this.postSpinCity = wpwn;
+      this.post.postCity = "";
+      if (this.post.postArea === "서울") this.post.postSpinCity = seoul;
+      else if (this.post.postArea === "부산") this.post.postSpinCity = qntks;
+      else if (this.post.postArea === "대구") this.post.postSpinCity = eorn;
+      else if (this.post.postArea === "인천") this.post.postSpinCity = dlscjs;
+      else if (this.post.postArea === "광주") this.post.postSpinCity = rhkdwn;
+      else if (this.post.postArea === "대전") this.post.postSpinCity = eowjs;
+      else if (this.post.postArea === "울산") this.post.postSpinCity = dnftks;
+      else if (this.post.postArea === "세종") this.post.postSpinCity = tpwhd;
+      else if (this.post.postArea === "경기") this.post.postSpinCity = rudrl;
+      else if (this.post.postArea === "강원") this.post.postSpinCity = rkddnjs;
+      else if (this.post.postArea === "충북") this.post.postSpinCity = cndqnr;
+      else if (this.post.postArea === "충남") this.post.postSpinCity = cndska;
+      else if (this.post.postArea === "경북") this.post.postSpinCity = rudqnr;
+      else if (this.post.postArea === "경남") this.post.postSpinCity = rudska;
+      else if (this.post.postArea === "전북") this.post.postSpinCity = wjsqnr;
+      else if (this.post.postArea === "전남") this.post.postSpinCity = wjsska;
+      else if (this.post.postArea === "제주") this.post.postSpinCity = wpwn;
       else {
         this.postSpinCity = [];
       }
@@ -892,7 +897,7 @@ export default {
     planFileSelected(file) {
       console.log(file);
       for (var x in file) {
-        this.planSelectedFile.push(file[x]);
+        this.plan.planSelectedFile.push(file[x]);
       }
       console.log(this.planSelectedFile);
 
@@ -905,24 +910,24 @@ export default {
       if (idx > -1) this.planSelectedFile.splice(idx, 1);
     },
     planInner() {
-      this.planCity = "";
-      if (this.planArea === "서울") this.planSpinCity = seoul;
-      else if (this.planArea === "부산") this.planSpinCity = qntks;
-      else if (this.planArea === "대구") this.planSpinCity = eorn;
-      else if (this.planArea === "인천") this.planSpinCity = dlscjs;
-      else if (this.planArea === "광주") this.planSpinCity = rhkdwn;
-      else if (this.planArea === "대전") this.planSpinCity = eowjs;
-      else if (this.planArea === "울산") this.planSpinCity = dnftks;
-      else if (this.planArea === "세종") this.planSpinCity = tpwhd;
-      else if (this.planArea === "경기") this.planSpinCity = rudrl;
-      else if (this.planArea === "강원") this.planSpinCity = rkddnjs;
-      else if (this.planArea === "충북") this.planSpinCity = cndqnr;
-      else if (this.planArea === "충남") this.planSpinCity = cndska;
-      else if (this.planArea === "경북") this.planSpinCity = rudqnr;
-      else if (this.planArea === "경남") this.planSpinCity = rudska;
-      else if (this.planArea === "전북") this.planSpinCity = wjsqnr;
-      else if (this.planArea === "전남") this.planSpinCity = wjsska;
-      else if (this.planArea === "제주") this.planSpinCity = wpwn;
+      this.plan.planCity = "";
+      if (this.plan.planArea === "서울") this.plan.planSpinCity = seoul;
+      else if (this.plan.planArea === "부산") this.plan.planSpinCity = qntks;
+      else if (this.plan.planArea === "대구") this.plan.planSpinCity = eorn;
+      else if (this.plan.planArea === "인천") this.plan.planSpinCity = dlscjs;
+      else if (this.plan.planArea === "광주") this.plan.planSpinCity = rhkdwn;
+      else if (this.plan.planArea === "대전") this.plan.planSpinCity = eowjs;
+      else if (this.plan.planArea === "울산") this.plan.planSpinCity = dnftks;
+      else if (this.plan.planArea === "세종") this.plan.planSpinCity = tpwhd;
+      else if (this.plan.planArea === "경기") this.plan.planSpinCity = rudrl;
+      else if (this.plan.planArea === "강원") this.plan.planSpinCity = rkddnjs;
+      else if (this.plan.planArea === "충북") this.plan.planSpinCity = cndqnr;
+      else if (this.plan.planArea === "충남") this.plan.planSpinCity = cndska;
+      else if (this.plan.planArea === "경북") this.plan.planSpinCity = rudqnr;
+      else if (this.plan.planArea === "경남") this.plan.planSpinCity = rudska;
+      else if (this.plan.planArea === "전북") this.plan.planSpinCity = wjsqnr;
+      else if (this.plan.planArea === "전남") this.plan.planSpinCity = wjsska;
+      else if (this.plan.planArea === "제주") this.plan.planSpinCity = wpwn;
       else {
         this.planSpinCity = [];
       }
@@ -949,33 +954,34 @@ export default {
     },
     postClear() {
       console.log("post clear");
-      (this.postTitle = ""),
-        (this.postEditor = ""),
-        (this.postArea = ""),
-        (this.postCity = ""),
-        (this.postSpinCity = []),
-        (this.postChoices = ""),
-        (this.postSelectedFile = []);
+      (this.post.postTitle = ""),
+        (this.post.postEditor = ""),
+        (this.post.postArea = ""),
+        (this.post.postCity = ""),
+        (this.post.postSpinCity = []),
+        (this.post.postChoices = ""),
+        (this.post.postSelectedFile = []);
     },
     planClear() {
       console.log("plan clear");
-      (this.planSelectedFile = []),
-        (this.planTitle = ""),
-        (this.planEditor = ""),
-        (this.planArea = ""),
-        (this.planCity = ""),
-        (this.planSpinCity = []),
-        (this.planChoices = ""),
-        (this.card = ""),
-        (this.plan = ""),
-        (this.planList = []);
+      (this.plan.planSelectedFile = []),
+        (this.plan.planTitle = ""),
+        (this.plan.planEditor = ""),
+        (this.plan.planArea = ""),
+        (this.plan.planCity = ""),
+        (this.plan.planSpinCity = []),
+        (this.plan.planChoices = ""),
+        (this.plan.card = ""),
+        (this.plan.plan = ""),
+        (this.plan.planList = []);
     },
     planSave() {
       console.log("plan save");
-      this.$store.dispatch
+      console.log(this.plan);
     },
     postSave() {
       console.log("post save");
+      console.log(this.post);
     },
     planu() {
       this.postClear();

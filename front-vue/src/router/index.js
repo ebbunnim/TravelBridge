@@ -17,6 +17,7 @@ import Main1Search from "../views/one/Main1Search.vue";
 import PostDetail from "../views/one/PostDetail.vue";
 import Main1Main from "../views/one/Main1Main.vue";
 import Main1Write from "../views/one/Main1Write.vue";
+import Main1follow from "../views/one/Main1follow.vue";
 //main2
 import Home from "../views/Home.vue";
 import Main2 from "../views/two/Main2.vue";
@@ -36,11 +37,7 @@ const routes = [
     name: "home",
     component: Home
   },
-  // {
-  //   path: "/home", // footer 의 site map 에서 home 아닌 다른 페이지 눌러도 home 이 같이 눌리는 버그 수정하려고 만듦
-  //   name: "home",
-  //   component: Home
-  // },
+
   {
     path: "/search",
     name: "search",
@@ -53,7 +50,8 @@ const routes = [
       { path: "", component: Main1Main },
       { path: "main1search", component: Main1Search },
       { path: "postdetail/:postNo", component: PostDetail, props: true },
-      { path: "write", component: Main1Write }
+      { path: "write", component: Main1Write },
+      { path: "follower", component: Main1follow }
     ]
   },
   {

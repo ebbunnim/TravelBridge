@@ -2,13 +2,7 @@
   <div align="center">
     <div class="row justify-center" style="margin:5% 0 0 0 ;">
       <q-select value="asd" label="전체" filled class="col-1" />
-      <q-input
-        label="검색"
-        class="col-5"
-        color="black"
-        label-color="black"
-        style="margin-left:15px;"
-      >
+      <q-input label="검색" class="col-5" color="black" label-color="black" style="margin-left:15px;">
         <template v-slot:append>
           <q-icon
             v-if="text !== ''"
@@ -29,120 +23,87 @@
     </div>
 
     <q-separator spaced inset vertical dark />
-    <div
-      v-for="(tta, index) in postList"
-      :key="index"
-      class="row justify-center"
-      v-bind:class="{}"
-    >
-      <div
-        v-for="(tt, index) in tta"
-        :key="index"
-        style="margin-bottom:12px; padding-left:12px;"
-        v-bind:class="{
-          'col-4': fixPost(tta, index),
-          'col-2': !fixPost(tta, index)
-        }"
-        align="left"
-      >
-        <template v-if="tt.post_type == 0">
-          <q-card
-            class="my-card1"
-            flat
-            bordered
-            style="width:100%;"
-            @click="move(tt.post_no)"
-          >
-            {{ tt.post_filesList }}
-            <template v-if="tt.post_filesList != null">
-              {{ tt.post_filesList[0] }}
-              <!-- <q-img :src="tt.post_filesList[0].files_url" /> -->
-            </template>
-            <template v-else
-              ><q-img src="https://cdn.quasar.dev/img/parallax2.jpg" />
-            </template>
+    <div v-if="gogo">
+      <div v-for="(tta, index) of postList" :key="index" class="row justify-center">
+        <div
+          v-for="(tt, index) of tta"
+          :key="index"
+          style="margin-bottom:12px; padding-left:12px;"
+          v-bind:class="{
+            'col-4': fixPost(tta, index),
+            'col-2': !fixPost(tta, index)
+          }"
+          align="left"
+        >
+          <template v-if="tt.post_type == 0">
+            <q-card class="my-card1" flat bordered style="width:100%;" @click="move(tt.post_no)">
+              <template v-if="tt.post_filesList != null">
+                <q-img :src="tt.post_filesList[0].files_url" style="max-height: 160px;" />
+              </template>
+              <template v-else>
+                <q-img src="https://cdn.quasar.dev/img/parallax2.jpg" />
+              </template>
 
-            <q-card-section>
-              <div class="text-overline text-orange-9 text-body-3">
-                {{ tt.post_category }}
-              </div>
-              <div class="text-b q-mt-sm q-mb-xs">
-                <b>{{ tt.post_title }}</b>
-              </div>
-              <div class="text-caption text-grey text-body-1">
-                {{ tt.post_content }}
-              </div>
-            </q-card-section>
-          </q-card>
-        </template>
-        <template v-else-if="tt.post_type == 1">
-          <q-card class="my-card1" flat bordered @click="move(tt.post_no)">
-            <q-card-section horizontal style="width:100%;">
-              <q-card-section class="q-pt-xs col-7">
-                <div class="text-overline text-orange-9 text-body-3">
-                  {{ tt.post_category }}
-                </div>
-                <div class=" q-mt-sm q-mb-xs">
+              <q-card-section>
+                <div class="text-overline text-orange-9 text-body-3">{{ tt.post_category }}</div>
+                <div class="text-b q-mt-sm q-mb-xs">
                   <b>{{ tt.post_title }}</b>
                 </div>
-                <div class="text-caption text-grey text-body-2">
-                  {{ tt.post_content }}
+                <div class="text-caption text-grey text-body-1">{{ tt.post_content }}</div>
+              </q-card-section>
+            </q-card>
+          </template>
+          <template v-else-if="tt.post_type == 1">
+            <q-card class="my-card1" flat bordered @click="move(tt.post_no)">
+              <q-card-section horizontal style="width:100%;">
+                <q-card-section class="q-pt-xs col-7">
+                  <div class="text-overline text-orange-9 text-body-3">{{ tt.post_category }}</div>
+                  <div class="q-mt-sm q-mb-xs">
+                    <b>{{ tt.post_title }}</b>
+                  </div>
+                  <div class="text-caption text-grey text-body-2">{{ tt.post_content }}</div>
+                </q-card-section>
+
+                <q-card-section class="col-5 flex flex-center">
+                  <q-scroll-area style="width:100%;height:100%;">
+                    <q-timeline color="secondary">
+                      <q-timeline-entry body="November, 2017" />
+
+                      <q-timeline-entry title="Event Title" subtitle="February 22, 1986" />
+
+                      <q-timeline-entry title="Event Title" subtitle="February 22, 1986" />
+
+                      <q-timeline-entry body="November, 2017" />
+                      <q-timeline-entry title="Event Title" subtitle="February 22, 1986" />
+
+                      <q-timeline-entry title="Event Title" subtitle="February 22, 1986" />
+                    </q-timeline>
+                  </q-scroll-area>
+                </q-card-section>
+              </q-card-section>
+            </q-card>
+          </template>
+          <template v-else>
+            <q-card-section horizontal>
+              <q-card-section class="q-pt-xs">
+                <div class="text-overline text-orange-9 text-body-3">{{ tt.post_category }}</div>
+                <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
+                <div class="text-caption text-grey">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </div>
               </q-card-section>
 
               <q-card-section class="col-5 flex flex-center">
-                <q-scroll-area style="width:100%;height:100%;">
-                  <q-timeline color="secondary">
-                    <q-timeline-entry body="November, 2017" />
-
-                    <q-timeline-entry
-                      title="Event Title"
-                      subtitle="February 22, 1986"
-                    />
-
-                    <q-timeline-entry
-                      title="Event Title"
-                      subtitle="February 22, 1986"
-                    />
-
-                    <q-timeline-entry body="November, 2017" />
-                    <q-timeline-entry
-                      title="Event Title"
-                      subtitle="February 22, 1986"
-                    />
-
-                    <q-timeline-entry
-                      title="Event Title"
-                      subtitle="February 22, 1986"
-                    />
-                  </q-timeline>
-                </q-scroll-area>
+                <q-img class="rounded-borders" src="https://cdn.quasar.dev/img/parallax2.jpg" />
               </q-card-section>
             </q-card-section>
-          </q-card>
-        </template>
-        <template v-else>
-          <q-card-section horizontal>
-            <q-card-section class="q-pt-xs">
-              <div class="text-overline text-orange-9 text-body-3">
-                {{ tt.post_category }}
-              </div>
-              <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
-              <div class="text-caption text-grey">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </div>
-            </q-card-section>
-
-            <q-card-section class="col-5 flex flex-center">
-              <q-img
-                class="rounded-borders"
-                src="https://cdn.quasar.dev/img/parallax2.jpg"
-              />
-            </q-card-section>
-          </q-card-section>
-        </template>
+          </template>
+        </div>
       </div>
+    </div>
+    <div class="row justify-center">
+      <q-btn color="primary" icon="expand_more" label="더보기" class="col-7" @click="more()" />
     </div>
   </div>
 </template>
@@ -151,14 +112,16 @@
 export default {
   data() {
     return {
-      text: ""
+      text: "",
+      page: 1
     };
   },
   mounted() {
     if (this.$route.params.search != null) {
-      console.log("hello");
+      this.page = this.$route.params.search;
+      this.$store.dispatch("post/searchPartPost", { pageNo: this.page });
     } else {
-      this.$store.dispatch("post/searchAllPost");
+      this.$store.dispatch("post/searchPartPost", { pageNo: this.page });
     }
   },
   computed: {
@@ -176,6 +139,10 @@ export default {
     },
     moveView: function(page) {
       this.$router.push(page);
+    },
+    more: function() {
+      this.page++;
+      this.$route.push(`/page1/main1search/${this.page}`);
     }
   }
 };
