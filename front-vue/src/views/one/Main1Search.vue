@@ -119,9 +119,9 @@ export default {
   mounted() {
     if (this.$route.params.search != null) {
       this.page = this.$route.params.search;
-      this.$store.dispatch("post/searchPartPost", { pageNo: this.page });
+      // this.$store.dispatch("post/searchPartPost", { pageNo: this.page });
     } else {
-      this.$store.dispatch("post/searchPartPost", { pageNo: this.page });
+      // this.$store.dispatch("post/searchPartPost", { pageNo: this.page });
     }
   },
   computed: {
@@ -140,9 +140,13 @@ export default {
     moveView: function(page) {
       this.$router.push(page);
     },
+    less: function() {
+      this.page--;
+      // this.$route.push()
+    },
     more: function() {
       this.page++;
-      this.$route.push(`/page1/main1search/${this.page}`);
+      // this.$route.push(`/page1/main1search/${this.page}`);
     }
   }
 };

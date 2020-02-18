@@ -21,7 +21,7 @@ public interface PostService {
 
 	public List<Post> searchFollowingPeoplePost(int mem_no);
 
-	public List<Map<String, Object>> searchMorePostByOption( PageBean pageBean);
+	public List<Map<String, Object>> searchMorePostByOption(PageBean pageBean);
 
 	public int getPostLikes(int post_no);
 
@@ -44,4 +44,6 @@ public interface PostService {
 	public List<Map<String, Object>> findChildFiles(int no);
 
 	public void deleteChildFiles(List<Integer> list);
+
+	public List<Post> searchFollowingPost(int following_no);
 }
