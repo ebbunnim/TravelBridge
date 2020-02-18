@@ -1,0 +1,59 @@
+# 멤버 개인에게 제공되는 도시 방문 후기 회수
+SELECT city_no,city_name, COUNT(a.post_city) AS city_visited
+FROM CITY
+LEFT JOIN (SELECT 
+			p.post_no, p.mem_no, p.post_city, m.mem_name
+			FROM POST p
+			LEFT JOIN MEMBERS m  
+			ON p.mem_no = m.mem_no
+            WHERE m.mem_no = 1) AS a
+ON a.post_city LIKE concat('%',city_name,'%')
+GROUP BY city_no;
+
+## 전국 지역별 후기 개수
+SELECT city_no,city_name, COUNT(a.post_city) AS city_visited
+FROM CITY
+LEFT JOIN (SELECT 
+			p.post_no, p.mem_no, p.post_city, m.mem_name
+			FROM POST p
+			LEFT JOIN MEMBERS m  
+			ON p.mem_no = m.mem_no
+			ORDER BY m.mem_no) AS a
+ON a.post_city LIKE concat('%',city_name,'%')
+GROUP BY city_no;
+
+## 개인별로 갔던 지역 후기 수랑 랭킹
+SELECT
+d.mem_no,
+d.mem_name,
+d.city_no,
+d.city_name,
+	(CASE 
+		WHEN @vcity_visited <= d.city_visited
+		THEN @curRank := @curRank
+		ELSE @curRank := @curRank + 1
+	END) 
+ AS ranking,
+ (@vcity_visited:=d.city_visited) city_visited 
+FROM 
+(SELECT @curRank := 1, @vcity_visited :=0) r, 
+(SELECT 
+a.mem_no, 
+a.mem_name, 
+c.city_no, 
+c.city_name, 
+COUNT(a.post_city) AS city_visited
+FROM
+CITY c
+RIGHT JOIN (SELECT 
+			p.post_no, p.mem_no, p.post_city, m.mem_name
+			FROM POST p
+			LEFT JOIN MEMBERS m  
+			ON p.mem_no = m.mem_no
+            WHERE m.mem_no = 4) AS a
+ON a.post_city LIKE concat('%',c.city_name,'%') 
+GROUP BY c.city_no
+ORDER BY city_visited DESC) d;
+
+## 지역별로 왔던 사람들 
+    개인별로 매겨진 랭킹들을 모아서 랭킹 매기기
