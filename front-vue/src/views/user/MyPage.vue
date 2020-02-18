@@ -333,7 +333,6 @@
 <script>
 import { mapState } from "vuex";
 import UserService from "@/services/UserService.js";
-
 export default {
   data() {
     return {

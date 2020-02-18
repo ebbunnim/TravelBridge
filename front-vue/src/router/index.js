@@ -21,10 +21,9 @@ import Main1follow from "../views/one/Main1follow.vue";
 //main2
 import Home from "../views/Home.vue";
 import Main2 from "../views/two/Main2.vue";
-import Main2Search from "../views/two/Main2Search.vue";
 import Main2Pick from "../views/two/Main2Pick.vue";
 import Main2Home from "../views/two/Main2Home.vue";
-import Main2List from "../views/two/Main2List.vue";
+// import Main2List from "../views/two/Main2List.vue";
 import HotPlaceDetail from "../views/two/HotPlaceDetail.vue";
 import FestivalDetail from "../views/two/FestivalDetail.vue";
 // sub기능, 전체 통합검색 Search Page
@@ -62,8 +61,12 @@ const routes = [
     children: [
       { path: "", component: Main2Home },
       { path: "pick", component: Main2Pick },
-      { path: "list", component: Main2List },
-      { path: "main2search", component: Main2Search }
+      // { path: "list", component: Main2List },
+      {
+        path: "list",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/two/Main2List.vue")
+      }
     ]
   },
   {

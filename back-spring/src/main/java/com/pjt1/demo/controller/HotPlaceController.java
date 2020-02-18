@@ -63,7 +63,7 @@ public class HotPlaceController {
 
 	@ApiOperation("no에 따른 HotPlace 정보 조회하는 기능")
 	@GetMapping("/HotPlace/{no}")
-	public ResponseEntity<Map<String, Object>> search(int no) {
+	public ResponseEntity<Map<String, Object>> search(@PathVariable int no) {
 		HotPlace HotPlace = service.search(no);
 		return handleSuccess(HotPlace);
 	}

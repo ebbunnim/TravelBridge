@@ -59,15 +59,17 @@ public class CommentController{
     }
     @ApiOperation("no에 따른 Comment 정보 조회하는 기능")
     @GetMapping("/Comment/{no}")
-    public ResponseEntity<Map<String, Object>> search(int no) {
+    public ResponseEntity<Map<String, Object>> search(@PathVariable int no) {
         Comment Comment = service.search(no);
         return handleSuccess(Comment);
     }
     @PostMapping("/Comment")
     @ApiOperation("Comment 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Comment Comment) {
+    	
     	Members writer = m_service.search(Comment.getMem_no());
-    	Comment.setCmt_writer(writer.getMem_id());
+    	if(Comment.getPost_no()>0) Comment.setCmt_writer(writer.getMem_id());
+    	else if(Comment.getParty_no()>0) Comment.setCmt_writer(writer.getMem_name());
         service.insert(Comment);
         return handleSuccess("");
     }

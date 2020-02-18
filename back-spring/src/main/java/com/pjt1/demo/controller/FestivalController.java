@@ -63,7 +63,7 @@ public class FestivalController{
     }
     @ApiOperation("no에 따른 Festival 정보 조회하는 기능")
     @GetMapping("/Festival/search/{fval_no}")
-    public ResponseEntity<Map<String, Object>> search(int fval_no) {
+    public ResponseEntity<Map<String, Object>> search(@PathVariable int fval_no) {
         Festival Festival = service.search(fval_no);
         return handleSuccess(Festival);
     }
@@ -160,7 +160,7 @@ public class FestivalController{
 			return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
 		}
 }
-/*
+/* 
 		@ApiOperation("페이징된 Festival 전체 목록 조회")
 		@GetMapping("/Festival/search/pageAll")
 		public ResponseEntity<Map<String, Object>> searchPageFestivalAll(PerPageBean pageBean) {

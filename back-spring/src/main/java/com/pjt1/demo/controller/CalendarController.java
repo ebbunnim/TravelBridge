@@ -71,7 +71,7 @@ public class CalendarController {
     }
     @ApiOperation("mem_no으로 해당 유저가 가진 모든 일정 가져오기")
     @GetMapping("/Calendar/{mem_no}")
-    public ResponseEntity<Map<String, Object>> searchCalendarByMem_no(int mem_no) {
+    public ResponseEntity<Map<String, Object>> searchCalendarByMem_no(@PathVariable int mem_no) {
         Calendar Calendar = service.searchCalendarByMem_no(mem_no);
         return handleSuccess(Calendar);
     }

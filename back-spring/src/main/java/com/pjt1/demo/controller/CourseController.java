@@ -62,7 +62,7 @@ public class CourseController {
 
     @ApiOperation("no에 따른 Course 정보 조회하는 기능")
     @GetMapping("/Course/{no}")
-    public ResponseEntity<Map<String, Object>> search(int no) {
+    public ResponseEntity<Map<String, Object>> search(@PathVariable int no) {
         Course Course = service.search(no);
         return handleSuccess(Course);
     }

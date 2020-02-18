@@ -17,17 +17,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pjt1.demo.model.dto.Board;
-import com.pjt1.demo.model.service.BoardService;
+import com.pjt1.demo.model.dto.Party;
+import com.pjt1.demo.model.service.PartyService;
 
 import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
-public class BoardController {
+public class PartyController {
 
     @Autowired
-    private BoardService service;
+    private PartyService service;
 
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
@@ -48,38 +48,38 @@ public class BoardController {
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
 
-    @ApiOperation("전체 Board 목록을 조회하는 기능")
-    @GetMapping("/Board")
+    @ApiOperation("전체 Party 목록을 조회하는 기능")
+    @GetMapping("/Party")
     public ResponseEntity<Map<String, Object>> searchAll() {
-        List<Board> list = service.searchAll();
+        List<Party> list = service.searchAll();
         return handleSuccess(list);
     }
 
-    @ApiOperation("no에 따른 Board 정보 조회하는 기능")
-    @GetMapping("/Board/{board_no}")
-    public ResponseEntity<Map<String, Object>> search(@PathVariable int board_no) {
-        Board Board = service.search(board_no);
-        return handleSuccess(Board);
+    @ApiOperation("no에 따른 Party 정보 조회하는 기능")
+    @GetMapping("/Party/{party_no}")
+    public ResponseEntity<Map<String, Object>> search(@PathVariable int party_no) {
+        Party party = service.search(party_no);
+        return handleSuccess(party);
     }
 
-    @PostMapping("/Board")
-    @ApiOperation("Board 정보 등록")
-    public ResponseEntity<Map<String, Object>> insert(@RequestBody Board Board) {
-        service.insert(Board);
+    @PostMapping("/Party")
+    @ApiOperation("Party 정보 등록")
+    public ResponseEntity<Map<String, Object>> insert(@RequestBody Party party) {
+        service.insert(party);
         return handleSuccess("");
     }
 
-    @ApiOperation("Board 정보 삭제")
-    @DeleteMapping("/Board/{board_no}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable int board_no) {
-        service.delete(board_no);
+    @ApiOperation("Party 정보 삭제")
+    @DeleteMapping("/Party/{party_no}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable int party_no) {
+        service.delete(party_no);
         return handleSuccess("삭제 완료");
     }
 
-    @ApiOperation("Board 정보 수정")
-    @PutMapping("/Board")
-    public ResponseEntity<Map<String, Object>> update(@RequestBody Board Board) {
-        service.update(Board);
+    @ApiOperation("Party 정보 수정")
+    @PutMapping("/Party")
+    public ResponseEntity<Map<String, Object>> update(@RequestBody Party party) {
+        service.update(party);
         return handleSuccess("수정 완료");
     }
 }
