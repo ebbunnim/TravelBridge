@@ -84,11 +84,12 @@ public class PostController {
     @GetMapping("/Post/search/page/{btnCnt}/{searchOption}/{word}")
     public ResponseEntity<Map<String, Object>> searchPostByOption(PageBean pageBean, @PathVariable int btnCnt,
             @PathVariable String searchOption, @PathVariable String word) {
-        searchOption = (searchOption == null) ? "all" : searchOption;
+        if (searchOption.equals("empty")) {
+            pageBean.setSearchOption("all");
+        }
         if (word.equals("empty")) {
             pageBean.setWord("");
         };
-        pageBean.setSearchOption(searchOption);
         // PageBean.setWord(word);
         System.out.println(pageBean);
         PageMaker pageMaker = new PageMaker();
@@ -119,15 +120,9 @@ public class PostController {
         List<Integer> del_Likes_IndexList = new ArrayList<Integer>();
         List<Integer> del_Comment_IndexList = new ArrayList<Integer>();
         List<Integer> del_Files_IndexList = new ArrayList<Integer>();
-        for (Object o : delList_Likes) {
-            del_Likes_IndexList.add(((Likes) o).getLike_no());
-        }
-        for (Object o : delList_Comment) {
-            del_Comment_IndexList.add(((Comment) o).getCmt_no());
-        }
-        for (Object o : delList_Files) {
-            del_Files_IndexList.add(((Files) o).getFiles_no());
-        }
+        for (Object o : delList_Likes) 		{ del_Likes_IndexList.add(((Likes) o).getLike_no()); }
+        for (Object o : delList_Comment) 	{ del_Comment_IndexList.add(((Comment) o).getCmt_no()); }
+        for (Object o : delList_Files) 		{ del_Files_IndexList.add(((Files) o).getFiles_no()); }
         service.deleteChildLike(del_Likes_IndexList);
         service.deleteChildCmt(del_Comment_IndexList);
         service.deleteChildFiles(del_Files_IndexList);

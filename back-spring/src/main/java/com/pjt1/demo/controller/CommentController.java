@@ -68,10 +68,17 @@ public class CommentController{
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Comment Comment) {
     	
     	Members writer = m_service.search(Comment.getMem_no());
-    	if(Comment.getPost_no()>0) Comment.setCmt_writer(writer.getMem_id());
-    	else if(Comment.getParty_no()>0) Comment.setCmt_writer(writer.getMem_name());
-        service.insert(Comment);
-        return handleSuccess("");
+    	//post no가 들어오면 post 댓글이고
+    	if(Comment.getPost_no()>0) {
+    		Comment.setCmt_writer(writer.getMem_id());
+    		service.insertPostCmt(Comment);
+    	}
+    	//party no로 들어오면 party 댓글이고
+    	else if(Comment.getParty_no()>0) {
+    		Comment.setCmt_writer(writer.getMem_name());
+    		service.insertPartyCmt(Comment);
+    	}
+        return handleSuccess("댓글 등록");
     }
 	 @ApiOperation("Comment 정보 삭제")
     @DeleteMapping("/Comment/{no}")

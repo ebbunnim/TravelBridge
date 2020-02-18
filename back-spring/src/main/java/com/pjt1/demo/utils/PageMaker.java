@@ -9,7 +9,7 @@ public class PageMaker {
 	private PageBean pageBean; // 여기서 1. 메서드 통해 2. 속성 통해 원하는 조건값을 추출해야
 	private int startPage;
 	private int endPage;
-
+	private int insert_no;
 	public PageBean getPageBean() {
 		return pageBean;
 	}
@@ -36,7 +36,16 @@ public class PageMaker {
 
 	@Override
 	public String toString() {
-		return "PageMaker [pageBean=" + pageBean + ", startPage=" + startPage + ", endPage=" + endPage + "]";
+		return "PageMaker [pageBean=" + pageBean + ", startPage=" + startPage + ", endPage=" + endPage + ", insert_no="
+				+ insert_no + "]";
+	}
+
+	public int getInsert_no() {
+		return insert_no;
+	}
+
+	public void setInsert_no(int insert_no) {
+		this.insert_no = insert_no;
 	}
 
 	

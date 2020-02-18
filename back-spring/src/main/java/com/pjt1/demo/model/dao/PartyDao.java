@@ -18,4 +18,6 @@ public interface PartyDao {
 	public void update(Party party);
 
 	public void delete(int party_no);
+
+	public void addPeople(int party_no);
 }
