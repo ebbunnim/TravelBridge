@@ -123,66 +123,117 @@
     </select>
 	<select id="searchPagePlan" parameterType="hashmap" resultMap="pfMap">
         <![CDATA[
-        SELECT 
-		p.post_no, 
-		p.mem_no,
-		p.post_type, 
-		p.board_no, 
-		p.post_title, 
-		p.post_content,
-		p.post_category, 
-		p.post_regtime, 
-		p.post_hits, 
-		p.post_city,
-		p.post_writer, 
-		p.post_plan_date,
-		f.files_no,
-		f.files_url
-		FROM POST p 
-		LEFT JOIN FILES f  ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
-		WHERE p.post_no> #{startPage} and p.post_no<=#{endPage} AND p.post_del_check = FALSE
-		AND p.post_type = 1]]>
+		SELECT
+			RESULT.rnum,
+			RESULT.post_no, 
+			RESULT.mem_no,
+			RESULT.post_type, 
+			RESULT.board_no, 
+			RESULT.post_title, 
+			RESULT.post_content,
+			RESULT.post_category, 
+			RESULT.post_regtime, 
+			RESULT.post_hits, 
+			RESULT.post_city,
+			RESULT.post_writer, 
+			RESULT.post_plan_date,
+			RESULT.files_no,
+			RESULT.files_url
+		FROM (SELECT 
+				(CASE 
+					WHEN @vpost_no = a.post_no
+					THEN @rownum:=@rownum
+					ELSE @rownum:=@rownum+1
+				END) AS rnum,
+				(@vpost_no:=a.post_no) vpost_no,
+				a.*
+				FROM
+					(SELECT 
+						p.*,
+		                f.files_no,
+						f.files_url
+					FROM POST p 
+					LEFT JOIN FILES f  ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
+					WHERE 
+					p.post_del_check = FALSE
+					AND p.post_type = 0) as a, 
+					(SELECT @vpost_no:='', @rownum:=0 FROM DUAL) as b
+				) AS RESULT
+		WHERE RESULT.rnum > #{startPage} AND RESULT.rnum <= #{endPage}]]>
     </select>
     <select id="searchPagePost" parameterType="hashmap" resultMap="pfMap">
-         <![CDATA[
-        SELECT 
-		p.post_no, 
-		p.mem_no,
-		p.post_type, 
-		p.board_no, 
-		p.post_title, 
-		p.post_content,
-		p.post_category, 
-		p.post_regtime, 
-		p.post_hits, 
-		p.post_city,
-		p.post_writer, 
-		p.post_plan_date,
-		f.files_no,
-		f.files_url
-		FROM POST p 
-		LEFT JOIN FILES f  ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
-		WHERE p.post_no> #{startPage} and p.post_no<=#{endPage} AND p.post_del_check = FALSE
-		AND p.post_type = 0]]>
+		 <![CDATA[
+		SELECT
+			RESULT.rnum,
+			RESULT.post_no, 
+			RESULT.mem_no,
+			RESULT.post_type, 
+			RESULT.board_no, 
+			RESULT.post_title, 
+			RESULT.post_content,
+			RESULT.post_category, 
+			RESULT.post_regtime, 
+			RESULT.post_hits, 
+			RESULT.post_city,
+			RESULT.post_writer, 
+			RESULT.post_plan_date,
+			RESULT.files_no,
+			RESULT.files_url
+		FROM (SELECT 
+				(CASE 
+					WHEN @vpost_no = a.post_no
+					THEN @rownum:=@rownum
+					ELSE @rownum:=@rownum+1
+				END) AS rnum,
+				(@vpost_no:=a.post_no) vpost_no,
+				a.*
+				FROM
+					(SELECT 
+						p.*,
+		                f.files_no,
+						f.files_url
+					FROM POST p 
+					LEFT JOIN FILES f  ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
+					WHERE 
+					p.post_del_check = FALSE
+					AND p.post_type = 0) as a, 
+					(SELECT @vpost_no:='', @rownum:=0 FROM DUAL) as b
+				) AS RESULT
+		WHERE RESULT.rnum > #{startPage} AND RESULT.rnum <= #{endPage}]]>
     </select>
     <select id="searchFollowingPeoplePost" parameterType="int" resultType="post">
 	SELECT 
-		p.*
-	FROM POST p
-	WHERE p.mem_no
-	IN
-		(SELECT f.following_no
-		FROM MEMBERS m1
-		LEFT JOIN FOLLOW f
-		ON m1.mem_no = f.follower_no
-		LEFT JOIN MEMBERS m2
-		ON f.following_no = m2.mem_no
-		WHERE m1.mem_no = #{mem_no:INTEGER}
-	    AND m1.mem_del_check = FALSE 
-	    AND m2.mem_del_check = FALSE 
-	    AND f.follow_del_check = FALSE)
-	ORDER BY p.post_regtime DESC;
-	</select>
+		p.post_no, 
+		p.mem_no,
+		p.post_type, 
+		p.board_no, 
+		p.post_title, 
+		p.post_content,
+		p.post_category, 
+		p.post_regtime, 
+		p.post_hits, 
+		p.post_city,
+		p.post_writer, 
+		p.post_plan_date,
+		f.files_no,
+		f.files_url
+		FROM POST p 
+		LEFT JOIN FILES f  ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
+		WHERE p.mem_no
+		IN
+			(SELECT f.following_no
+			FROM MEMBERS m1
+			LEFT JOIN FOLLOW f
+			ON m1.mem_no = f.follower_no
+			LEFT JOIN MEMBERS m2
+			ON f.following_no = m2.mem_no
+			WHERE m1.mem_no = #{mem_no:INTEGER}
+		    AND m1.mem_del_check = FALSE 
+		    AND m2.mem_del_check = FALSE 
+		    AND f.follow_del_check = FALSE)
+		ORDER BY p.post_regtime DESC;
+	</select> 
+
     <select id="getPostLikes" parameterType="int" resultType="int">
 		SELECT COUNT(*) 
 		FROM LIKES
@@ -328,3 +379,25 @@
 
 	
 </mapper>
+   <!--       
+   searchPagePost
+   <![CDATA[
+        SELECT 
+		p.post_no, 
+		p.mem_no,
+		p.post_type, 
+		p.board_no, 
+		p.post_title, 
+		p.post_content,
+		p.post_category, 
+		p.post_regtime, 
+		p.post_hits, 
+		p.post_city,
+		p.post_writer, 
+		p.post_plan_date,
+		f.files_no,
+		f.files_url
+		FROM POST p 
+		LEFT JOIN FILES f  ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
+		WHERE p.post_no> #{startPage} and p.post_no<=#{endPage} AND p.post_del_check = FALSE
+		AND p.post_type = 0]]> -->

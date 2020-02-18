@@ -69,9 +69,6 @@ public class PostController {
     @ApiOperation("no에 따른 Post 정보 조회하는 기능")
     @GetMapping("/Post/search/{post_no}")
     public ResponseEntity<Map<String, Object>> search(@PathVariable int post_no) {
-<<<<<<< HEAD
-        Post Post = service.search(post_no);
-=======
         System.out.println(post_no);
         Post Post = service.search(post_no);
         int memNo = Post.getMem_no();
@@ -79,13 +76,10 @@ public class PostController {
         String writer = Members.getMem_id();
         Post.setPost_writer(writer);
         System.out.println(Post);
->>>>>>> 6511ea245cbd2206eb958212e5fbf6cdd007d64c
         service.updatePostHits(post_no);
         return handleSuccess(Post);
     }
 
-<<<<<<< HEAD
-=======
     @ApiOperation("더보기로 Post 검색하기 조회 - searchOption은 all/ title / content/ tag / writer 중 전달")
     @GetMapping("/Post/search/page/{btnCnt}/{searchOption}/{word}")
     public ResponseEntity<Map<String, Object>> searchPostByOption(PageBean pageBean, @PathVariable int btnCnt,
@@ -107,7 +101,6 @@ public class PostController {
         return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
     }
 
->>>>>>> 6511ea245cbd2206eb958212e5fbf6cdd007d64c
     @PostMapping("/Post/insert")
     @ApiOperation("Post 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Post Post) {
@@ -143,88 +136,6 @@ public class PostController {
         return handleSuccess("수정 완료");
     }
 
-<<<<<<< HEAD
-	@ApiOperation("페이징된 Post 전체 목록 조회")
-    @GetMapping("/Post/search/pageAll/{btnCnt}") 
-	public ResponseEntity<Map<String,Object>> searchPagePostAll(PageBean pageBean, @PathVariable int btnCnt) { 
-		PageMaker pageMaker = new PageMaker(); 
-		pageBean.setPage(btnCnt);
-		pageMaker.setPageBean(pageBean);
-		pageMaker.setStartPage(pageBean.getPage());
-		pageMaker.setEndPage(pageMaker.getStartPage());
-		List<Map<String, Object>> list = service.searchPagePostAll(pageMaker); 
-		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로 
-    }
-	@ApiOperation("페이징된 Post 중 후기(Post) 목록 조회")
-	@GetMapping("/Post/search/pagePost/{btnCnt}")
-	public ResponseEntity<Map<String, Object>> searchPagePost(PageBean pageBean, @PathVariable int btnCnt) {
-	    PageMaker pageMaker = new PageMaker();
-	    pageBean.setPage(btnCnt);
-	    pageMaker.setPageBean(pageBean);
-	    pageMaker.setStartPage(pageBean.getPage());
-	    pageMaker.setEndPage(pageMaker.getStartPage());
-	    List<Map<String, Object>> list = service.searchPagePost(pageMaker);
-	    return list.size() == 0 ? handleSuccess("이 페이지에는 후기가 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
-	}
-	@ApiOperation("페이징된 Post 중 일정(Plan) 목록 조회")
-	@GetMapping("/Post/search/pagePlan/{btnCnt}")
-	public ResponseEntity<Map<String, Object>> searchPagePlan(PageBean pageBean, @PathVariable int btnCnt) {
-	    PageMaker pageMaker = new PageMaker();
-	    pageBean.setPage(btnCnt);
-	    pageMaker.setPageBean(pageBean);
-	    pageMaker.setStartPage(pageBean.getPage());
-	    pageMaker.setEndPage(pageMaker.getStartPage());
-	    List<Map<String, Object>> list = service.searchPagePlan(pageMaker);
-	    return list.size() == 0 ? handleSuccess("이 페이지에는 일정이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
-	}
-}
-//    @ApiOperation("더보기로 Post 전체 목록 조회")
-//    @GetMapping("/Post/search/moreAll/{btnCnt}")
-//    public ResponseEntity<Map<String, Object>> searchMorePostAll(PageBean pageBean, @PathVariable int btnCnt) {
-////        MorePageMaker morePage = new MorePageMaker();
-//        PageMaker page = new PageMaker();
-////        int change = pageNum * btnCnt;
-////        pageBean.setPerPageNum(change);
-//        pageBean.setPage(page.getStartPage());
-////        morePage.setPageBean(pageBean);
-//        List<Map<String, Object>> list = service.searchMorePostAll(pageBean);
-//        return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
-//    }
-
-//    @ApiOperation("더보기로 Post 중 후기(Report) 목록 조회")
-//    @GetMapping("/Post/search/moreReport/{btnCnt}")
-//    public ResponseEntity<Map<String, Object>> searchMoreReport(MorePageBean pageBean, @PathVariable int btnCnt) {
-//        MorePageMaker morePage = new MorePageMaker();
-//        int change = pageNum * btnCnt;
-//        pageBean.setPerPageNum(change);
-//        morePage.setPageBean(pageBean);
-//        List<Map<String, Object>> list = service.searchPageReport(pageBean);
-//        return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
-//    }
-//
-//    @ApiOperation("더보기로 Post 중 일정(Plan) 목록 조회")
-//    @GetMapping("/Post/search/morePlan/{btnCnt}")
-//    public ResponseEntity<Map<String, Object>> searchMorePlan(MorePageBean pageBean, @PathVariable int btnCnt) {
-//        MorePageMaker morePage = new MorePageMaker();
-//        int change = pageNum * btnCnt;
-//        pageBean.setPerPageNum(change);
-//        morePage.setPageBean(pageBean);
-//        List<Map<String, Object>> list = service.searchPagePlan(pageBean);
-//        return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
-//    }
-//
-//    @ApiOperation("no에 따른 Post 정보 조회하는 기능")
-//    @GetMapping("/Post/search/WithCmtAndFiles/{post_no}")
-//    public ResponseEntity<Map<String, Object>> searchWithCmtAndFiles(@PathVariable int post_no) {
-//        Post Post = service.searchWithCmtAndFiles(post_no);
-//        service.updatePostHits(post_no);
-//        // 그러면 여기서 포스트넘 기반으로 comment 호출하는거 하나 하고
-//        // 멤버 호출하는거 하나한다음에
-//        // postPagebean 하나 만들어서 그걸 넘겨주자.
-//        return handleSuccess(Post);
-//    }
-//}
-=======
     @ApiOperation("페이징된 Post 전체 목록 조회")
     @GetMapping("/Post/search/pageAll/{btnCnt}")
     public ResponseEntity<Map<String, Object>> searchPagePostAll(PageBean pageBean, @PathVariable int btnCnt) {
@@ -310,7 +221,6 @@ public class PostController {
 // return handleSuccess(Post);
 // }
 // }
->>>>>>> 6511ea245cbd2206eb958212e5fbf6cdd007d64c
 /*
  * @ApiOperation("페이징된 Post 전체 목록 조회")
  * 
