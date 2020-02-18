@@ -1,5 +1,6 @@
 package com.pjt1.demo.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +70,22 @@ public class CourseController {
     @PostMapping("/Course")
     @ApiOperation("Course 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Course Course) {
+        // Course가 들어오면 그 description은 내가 리스트로 만들어서 course_sub에 넣어야
+        String description = Course.getCourse_description();
+        System.out.println("====description===");
+        System.out.println(description);
+
+        String[] splitStr = description.split(" ");
+
+        List<String> list = new ArrayList<String>();
+        for (int i=0; i<splitStr.length; i++) {
+            list.add(splitStr[i]);
+        }
+        System.out.println("====list===");
+        System.out.println(list);
+
+        Course.setCourse_sub(list);
+        
         service.insert(Course);
         return handleSuccess("");
     }
@@ -86,4 +103,5 @@ public class CourseController {
         service.update(Course);
         return handleSuccess("수정 완료");
     }
+
 }
