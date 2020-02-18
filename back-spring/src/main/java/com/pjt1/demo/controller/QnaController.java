@@ -57,14 +57,14 @@ public class QnaController {
 
     @ApiOperation("no에 따른 Qna 정보 조회하는 기능")
     @GetMapping("/Qna/search/{qna_no}")
-    public ResponseEntity<Map<String, Object>> search(int qna_no) {
+    public ResponseEntity<Map<String, Object>> search(@PathVariable int qna_no) {
         Qna Qna = service.search(qna_no);
         return handleSuccess(Qna);
     }
 
     @ApiOperation("member no에 따른 Qna 정보 조회하는 기능")
     @GetMapping("/Qna/searchForMember/{mem_no}")
-    public ResponseEntity<Map<String, Object>> searchForMember(int mem_no) {
+    public ResponseEntity<Map<String, Object>> searchForMember(@PathVariable int mem_no) {
         List<Qna> list = service.searchForMember(mem_no);
         return handleSuccess(list);
     }

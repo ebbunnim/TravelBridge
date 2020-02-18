@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.pjt1.demo.model.dao.PartyDao" >
+
+ 	<insert id="insert"		parameterType="party">
+		INSERT INTO PARTY
+		(
+		    host_no,
+		    host_name,		
+			party_title,			
+			party_contents
+		) VALUES 
+		(
+			#{host_no:INTEGER},
+		    #{host_name:VARCHAR}, 
+		    #{party_title:VARCHAR}, 
+		    #{party_contents:VARCHAR}
+		)
+	</insert> 
+ 	<delete id="delete" 	parameterType="int"> 
+		UPDATE 
+		PARTY
+		SET
+		party_del_check = TRUE
+		WHERE party_no = #{party_no:INTEGER}
+		AND party_del_check = FALSE
+	</delete> 
+   	<update id="update"		parameterType="party">
+		UPDATE 
+		PARTY
+		SET
+		host_no = #{host_no:INTEGER},
+		host_name = #{host_name:VARCHAR},
+		party_title = #{party_title:VARCHAR},
+		party_contents = #{party_contents:VARCHAR},
+		party_regtime = CURRENT_TIMESTAMP(),
+		party_num = #{party_num:INTEGER},
+		party_del_check = #{party_del_check:BOOLEAN}
+		WHERE party_no = #{party_no:INTEGER}; 
+	</update>
+   	<select id="search"		parameterType="int" resultType="party"> 
+		SELECT *
+		FROM PARTY
+		WHERE party_del_check = FALSE 
+		AND party_no = #{party_no:INTEGER}    
+	</select>
+   	<select id="searchAll"	resultType="party">
+		SELECT *
+		FROM PARTY
+		WHERE party_del_check = FALSE
+	</select>
+	<resultMap type="comment" id="cmtMap">
+		<result property = "cmt_no" column="cmt_no"/>
+		<result property = "cmt_regtime" column="cmt_regtime"/>
+		<result property ="cmt_content" column="cmt_content"/>
+		<result property = "cmt_writer" column="cmt_writer"/>
+	</resultMap>
+	
+</mapper>
+

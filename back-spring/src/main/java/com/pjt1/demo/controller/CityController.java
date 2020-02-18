@@ -56,7 +56,7 @@ public class CityController{
     }
     @ApiOperation("no에 따른 City 정보 조회하는 기능")
     @GetMapping("/City/{no}")
-    public ResponseEntity<Map<String, Object>> search(int no) {
+    public ResponseEntity<Map<String, Object>> search(@PathVariable int no) {
         City City = service.search(no);
         return handleSuccess(City);
     }

@@ -76,6 +76,7 @@ class FestivalService {
   searchMoreFestival(btnCnt, searchOption, word) {
     return Api.get(`/Festival/search/more/${btnCnt}/${searchOption}/${word}`)
       .then(res => {
+        console.log("여그가 여그냐!!!!? ", res);
         return res.data.data;
       })
       .catch(e => {

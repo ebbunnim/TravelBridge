@@ -1,13 +1,8 @@
 import FestivalService from "@/services/FestivalService.js";
 
 const state = {
-  fvals: []
-};
-
-const getters = {
-  getFvalsByTheme: (state) => (theme) => {
-    return state.fvals.find(fval => fval.fval_theme.includes(theme))
-  }
+  fvals: [],
+  fval_list_length: 0
 };
 
 const actions = {
@@ -26,6 +21,7 @@ const actions = {
         console.log("여긴 festival.js", res);
         commit("saveFvals", res);
         console.log("state.fvals: ", state.fvals);
+        console.log("fval length 측정: ", state.fval_list_length);
       })
       .catch(e => {
         console.log(e);
@@ -47,6 +43,7 @@ const actions = {
 const mutations = {
   saveFvals(state, fvals) {
     state.fvals = fvals;
+    state.fval_list_length = fvals.length;
   },
   clearFvals(state) {
     state.fvals = [];
@@ -56,7 +53,6 @@ const mutations = {
 export default {
   namespaced: true,
   state,
-  getters,
   mutations,
   actions
 };

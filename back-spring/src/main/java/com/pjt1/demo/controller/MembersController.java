@@ -89,30 +89,30 @@ public class MembersController {
 
     @ApiOperation("no에 따른 Member 정보 조회하는 기능")
     @GetMapping("/Members/search/{mem_no}")
-    public ResponseEntity<Map<String, Object>> search(int mem_no) {
+    public ResponseEntity<Map<String, Object>> search(@PathVariable int mem_no) {
         Members members = service.search(mem_no);
         return handleSuccess(members);
     }
 
     @ApiOperation("no에 따른 Member가 좋아하는 포스트 List를 조회하는 기능")
     @GetMapping("/Members/searchMemberLikePost/{mem_no}")
-    public ResponseEntity<Map<String, Object>> searchMemberLikePost(int mem_no) {
+    public ResponseEntity<Map<String, Object>> searchMemberLikePost(@PathVariable int mem_no) {
         Members members = service.searchMemberLikePost(mem_no);
         return handleSuccess(members);
     }
 
     @ApiOperation("no에 따른 Member가 좋아하는 핫플레이스 List를 조회하는 기능")
     @GetMapping("/Members/searchMemberLikeHotPlace/{mem_no}")
-    public ResponseEntity<Map<String, Object>> searchMemberLikeHotPlace(int mem_no) {
-        Members members = service.searchMemberLikeHotPlace(mem_no);
-        return handleSuccess(members);
+    public ResponseEntity<Map<String, Object>> searchMemberLikeHotPlace(@PathVariable int mem_no) {
+    	Members members = service.searchMemberLikeHotPlace(mem_no);
+    	return handleSuccess(members);
     }
 
     @ApiOperation("no에 따른 Member가 좋아하는 축제 List를 조회하는 기능")
     @GetMapping("/Members/searchMemberLikeFestival/{mem_no}")
-    public ResponseEntity<Map<String, Object>> searchMemberLikeFestival(int mem_no) {
-        Members members = service.searchMemberLikeFestival(mem_no);
-        return handleSuccess(members);
+    public ResponseEntity<Map<String, Object>> searchMemberLikeFestival(@PathVariable int mem_no) {
+    	Members members = service.searchMemberLikeFestival(mem_no);
+    	return handleSuccess(members);
     }
 
     // @ApiOperation("no에 따른 Member의 FollowList를 조회하는 기능")
@@ -125,27 +125,26 @@ public class MembersController {
     // }
     @ApiOperation("no에 따른 Member의 FollowList를 조회하는 기능")
     @GetMapping("/Members/searchMyFollowPeople/{mem_no}")
-    public ResponseEntity<Map<String, Object>> searchMyFollowPeople(int mem_no) {
-        Members members = service.searchMyFollowPeople(mem_no);
+    public ResponseEntity<Map<String, Object>> searchMyFollowPeople(@PathVariable int mem_no) {
+    	Members members = service.searchMyFollowPeople(mem_no);
         return handleSuccess(members);
     }
 
     @ApiOperation("no에 따른 Member의 FollowMeList를 조회하는 기능")
     @GetMapping("/Members/searchFollowMePeople/{mem_no}")
     public ResponseEntity<Map<String, Object>> searchFollowMePeople(@PathVariable int mem_no) {
-        Members members = service.searchFollowMePeople(mem_no);
+    	Members members = service.searchFollowMePeople(mem_no);
         return handleSuccess(members);
     }
 
     @ApiOperation("no에 따른 Member의 Following List의 Post를 조회하는 기능")
     @GetMapping("/Members/searchFollowingPeoplePost/{mem_no}")
     public ResponseEntity<Map<String, Object>> searchFollowingPeoplePost(@PathVariable int mem_no) {
-        System.out.println(mem_no);
-        // Members members = service.searchFollowingPeoplePost(mem_no);
-        List<Post> postList = p_service.searchFollowingPeoplePost(mem_no);
-        Members getUser = service.search(mem_no);
-        getUser.setMem_followPost(postList);
-        return handleSuccess(getUser);
+//    	Members members = service.searchFollowingPeoplePost(mem_no);
+    	List<Post> postList = p_service.searchFollowingPeoplePost(mem_no);
+    	Members getUser = service.search(mem_no);
+    	getUser.setMem_followPost(postList);
+    	return handleSuccess(getUser);
     }
 
     @ApiOperation("Member 조회(email에 따른)")
