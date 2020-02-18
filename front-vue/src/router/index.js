@@ -25,6 +25,8 @@ import Main2Search from "../views/two/Main2Search.vue";
 import Main2Pick from "../views/two/Main2Pick.vue";
 import Main2Home from "../views/two/Main2Home.vue";
 import Main2List from "../views/two/Main2List.vue";
+import HotPlaceDetail from "../views/two/HotPlaceDetail.vue";
+import FestivalDetail from "../views/two/FestivalDetail.vue";
 // sub기능, 전체 통합검색 Search Page
 import Sub from "../views/Sub.vue";
 import Search from "../views/Search.vue";
@@ -63,6 +65,16 @@ const routes = [
       { path: "list", component: Main2List },
       { path: "main2search", component: Main2Search }
     ]
+  },
+  {
+    path: "/hotplace/:hp_no",
+    name: "hotplace-detail",
+    component: HotPlaceDetail
+  },
+  {
+    path: "/festival/:fval_no",
+    name: "festival-detail",
+    component: FestivalDetail
   },
   {
     path: "/page3",
