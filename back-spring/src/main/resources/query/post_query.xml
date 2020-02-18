@@ -97,8 +97,37 @@
 	LEFT JOIN COURSE cs ON p.post_no = cs.post_no AND cs.course_del_check=FALSE
 	WHERE p.post_no = #{post_no:INTEGER} AND p.post_del_check = FALSE;
 	</select>
-		<select id="searchAll"	resultType="post">
-		SELECT * FROM POST WHERE post_del_check = false
+	<select id="searchAll"	resultType="post" resultMap="pcfMap">
+		<!-- SELECT * FROM POST WHERE post_del_check = false -->
+		SELECT 
+		p.post_no, 
+		p.mem_no,
+		p.post_type, 
+		p.board_no, 
+		p.post_title, 
+		p.post_content,
+		p.post_category, 
+		p.post_regtime, 
+		p.post_hits, 
+		p.post_city,
+		p.post_writer, 
+		p.post_plan_date,
+		c.cmt_no,
+		c.mem_no,
+		c.cmt_regtime, 
+		c.cmt_content, 
+		c.cmt_writer, 
+		f.files_no,
+		f.files_url,
+		cs.course_no,
+		cs.course_title,
+		cs.course_description,
+		cs.course_del_check
+		FROM POST p 
+		LEFT JOIN COMMENT c ON p.post_no = c.post_no AND cmt_del_check = FALSE
+		LEFT JOIN FILES f   ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
+		LEFT JOIN COURSE cs ON p.post_no = cs.post_no AND cs.course_del_check=FALSE
+		WHERE p.post_del_check = FALSE;
 	</select>
 	 <select id="searchPagePostAll" parameterType="hashmap" resultMap="pfMap">
         <![CDATA[
@@ -277,10 +306,36 @@
 		post_plan_date=#{post_plan_date:VARCHAR}
 		where post_no=#{post_no}
 	</update>
-	<select id ="searchMorePostByOption" parameterType="hashmap" resultType="hashmap">
-		SELECT *
-		FROM POST
-		WHERE post_del_check = FALSE AND
+	<select id ="searchMorePostByOption" parameterType="hashmap" resultType="hashmap" resultMap="pcfMap">
+		SELECT 
+		p.post_no, 
+		p.mem_no,
+		p.post_type, 
+		p.board_no, 
+		p.post_title, 
+		p.post_content,
+		p.post_category, 
+		p.post_regtime, 
+		p.post_hits, 
+		p.post_city,
+		p.post_writer, 
+		p.post_plan_date,
+		c.cmt_no,
+		c.mem_no,
+		c.cmt_regtime, 
+		c.cmt_content, 
+		c.cmt_writer, 
+		f.files_no,
+		f.files_url,
+		cs.course_no,
+		cs.course_title,
+		cs.course_description,
+		cs.course_del_check
+		FROM POST p 
+		LEFT JOIN COMMENT c ON p.post_no = c.post_no AND cmt_del_check = FALSE
+		LEFT JOIN FILES f   ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
+		LEFT JOIN COURSE cs ON p.post_no = cs.post_no AND cs.course_del_check=FALSE
+		WHERE p.post_del_check = FALSE AND
 		<choose>
 			<when test="searchOption == 'all'">
 				(post_title like concat('%',#{word},'%')
@@ -300,6 +355,7 @@
 				post_writer like concat('%',#{word},'%')
 			</when>
 		</choose>
+		ORDER BY p.post_regtime DESC
 	</select> 
 
 
