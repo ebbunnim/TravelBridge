@@ -38,9 +38,7 @@ const actions = {
   searchMoreHotPlaceByTheme: ({ commit }, payload) => {
     HotPlaceService.searchMoreHotPlaceByTheme(payload.btnCnt, payload.word)
       .then(res => {
-        console.log("여긴vuex", res);
         commit("saveHPs", res);
-        console.log("hp state: ", state.hps);
       })
       .catch(e => {
         console.log(e);
@@ -54,9 +52,7 @@ const mutations = {
     state.hps = hps;
     state.hp_list_length = hps.length;
   },
-  saveHP(state, hp) {
-    state.hp = hp;
-  },
+
   clearHPs(state) {
     state.hps = [];
   },

@@ -63,6 +63,7 @@ class FestivalService {
   }
 
   searchMoreFestivalByTheme(btnCnt, word) {
+    console.log(`/Festival/search/more/theme/${btnCnt}/${word}`);
     return Api.get(`/Festival/search/more/theme/${btnCnt}/${word}`)
       .then(res => {
         return res.data.data;

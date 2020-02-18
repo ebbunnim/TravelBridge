@@ -37,9 +37,7 @@ const actions = {
   searchMoreFestivalByTheme: ({ commit }, payload) => {
     FestivalService.searchMoreFestivalByTheme(payload.btnCnt, payload.word)
       .then(res => {
-        console.log("여긴 vuex", res);
         commit("saveFvals", res);
-        console.log("fval state: ", state.fvals);
       })
       .catch(e => {
         console.log(e);
@@ -51,9 +49,6 @@ const mutations = {
   saveFvals(state, fvals) {
     state.fvals = fvals;
     state.fval_list_length = fvals.length;
-  },
-  saveFval(state, fval) {
-    state.fval = fval;
   },
   clearFvals(state) {
     state.fvals = [];

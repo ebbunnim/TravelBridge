@@ -163,8 +163,8 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("hotplace/clearHPs");
-    this.$store.dispatch("festival/clearFvals");
+    this.$store.commit("hotplace/clearHPs");
+    this.$store.commit("festival/clearFvals");
   },
   beforeRouteUpdate() {}
 };

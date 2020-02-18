@@ -29,6 +29,13 @@
         "
         >상세보기</q-btn
       >
+      <q-icon
+        class="col"
+        name="bookmark_border"
+        size="md"
+        @click="insertLike()"
+      ></q-icon>
+      <!-- <q-icon class="col" name="bookmark" size="md"></q-icon> -->
     </q-card-section>
   </q-card>
 </template>
