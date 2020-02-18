@@ -111,7 +111,7 @@ CREATE TABLE COMMENT (
     FOREIGN KEY(mem_no) REFERENCES MEMBERS(mem_no)
 );
 
-# 좋아요 테이블
+# 좋아요 테이블 
 CREATE TABLE LIKES (
 	like_no				int PRIMARY KEY AUTO_INCREMENT,	# 좋아요 관리번호	기본키, 자동증가
     like_type			int NOT NULL,					# 좋아요 위치(1:게시물,2:핫플,3:축제)
