@@ -3,7 +3,7 @@ import HotPlaceService from "@/services/HotplaceService.js";
 const state = {
   hps: [],
   hp_list_length: 0,
-  hp: null,
+  hp: {},
   searchTitle: ""
 };
 
@@ -55,6 +55,9 @@ const mutations = {
   saveHPs(state, hps) {
     state.hps = hps;
     state.hp_list_length = hps.length;
+  },
+  saveHP(state, hp) {
+    state.hp = hp;
   },
   clearHPs(state) {
     state.hps = [];
