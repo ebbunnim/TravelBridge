@@ -9,6 +9,7 @@
         label-color="black"
         style="margin-left:15px;"
         v-model="word"
+        v-on:keyup.enter="search(1)"
       >
         <template v-slot:append>
           <q-icon
@@ -18,7 +19,7 @@
             class="cursor-pointer"
             color="black"
           />
-          <q-icon name="search" class="cursor-pointer" color="black" @click="search" />
+          <q-icon name="search" class="cursor-pointer" color="black" @click="search(1)" />
         </template>
       </q-input>
       <div class="col-8 q-py-md row justify-center">
@@ -30,7 +31,7 @@
     </div>
 
     <q-separator spaced inset vertical dark />
-
+    <div v-if="this.postList.length == 0">이쉽게도 계시물이 없네요</div>
     <div v-for="(tta, index) of postList" :key="index" class="row justify-center">
       <div
         v-for="(tt, index) of tta"
@@ -62,7 +63,7 @@
         </template>
         <template v-else-if="tt.post_type == 1">
           <q-card class="my-card1" flat bordered @click="move(tt.post_no)">
-            <q-card-section horizontal style="width:100%;">
+            <q-card-section horizontal style="width:100%;height:100%;">
               <q-card-section class="q-pt-xs col-7">
                 <div class="text-overline text-orange-9 text-body-3">{{ tt.post_category }}</div>
                 <div class="q-mt-sm q-mb-xs">
@@ -110,14 +111,24 @@
     </div>
 
     <div class="row justify-around">
-      <div style="margin-left:15px;" class="col-2 justify-start row">
-        <q-btn color="primary" icon="keyboard_arrow_left" label="이전" @click="less()" />
-      </div>
-      <div class="col-2 justify-end row">
-        <q-btn color="primary" label="다음" @click="more()" style="margin-right:4px;">
-          <q-icon name="keyboard_arrow_right" style="margin-left:12px;" />
-        </q-btn>
-      </div>
+      <template v-if="this.page != 1">
+        <div style="margin-left:15px;" class="col-2 justify-start row">
+          <q-btn color="primary" icon="keyboard_arrow_left" label="이전" @click="less()" />
+        </div>
+      </template>
+      <template v-else>
+        <div class="col-2"></div>
+      </template>
+      <template v-if="this.postList.length != 0">
+        <div class="col-2 justify-end row">
+          <q-btn color="primary" label="다음" @click="more()" style="margin-right:4px;">
+            <q-icon name="keyboard_arrow_right" style="margin-left:12px;" />
+          </q-btn>
+        </div>
+      </template>
+      <template v-else>
+        <div class="col-2"></div>
+      </template>
     </div>
   </div>
 </template>
@@ -126,9 +137,9 @@
 export default {
   data() {
     return {
-      options: ["hello", "what"],
+      options: ["전체", "제목", "내용", "태그", "지역"],
       word: "",
-      option: "",
+      option: "전체",
       page: 1
     };
   },
@@ -153,41 +164,45 @@ export default {
     move: function(postNo) {
       this.$router.push("postdetail/" + postNo);
     },
-    search: function() {
+    search: function(pageNo) {
       if (this.word != "") {
         if (this.option != "") {
           this.$router.push(
-            "/page1/main1search/" + this.word + "/" + this.option + "/" + 1
+            "/page1/main1search/" + this.word + "/" + this.option + "/" + pageNo
           );
         } else {
-          this.$router.push("/page1/main1search/" + this.word + "/" + 1);
+          this.$router.push("/page1/main1search/" + this.word + "/" + pageNo);
         }
       } else {
-        let target = "/page1/main1search";
-        if (this.$router.currentRoute.path !== target)
-          this.$router.push("/page1/main1search");
+        if (pageNo !== 1) this.$router.push("/page1/main1search/" + pageNo);
+        else this.$router.push("/page1/main1search");
       }
     },
     less: function() {
       this.page--;
-      // this.$route.push()
+      this.search(this.page);
     },
     more: function() {
       this.page++;
-      // this.$route.push(`/page1/main1search/${this.page}`);
+      this.search(this.page);
     },
     income: function() {
-      console.log("asd");
-      console.log(this.$route.params);
-      this.page = this.$route.params.pageNo;
+      if (this.$route.params.pageNo != undefined)
+        this.page = this.$route.params.pageNo;
       if (this.$route.params.word != null) {
         this.word = this.$route.params.word;
         if (this.$route.params.option != null) {
           this.option = this.$route.params.option;
+          var x = "";
+          if (this.option === "전체") x = "all";
+          else if (this.option === "제목") x = "title";
+          else if (this.option === "내용") x = "content";
+          else if (this.option === "태그") x = "tag";
+          else if (this.option === "지역") x = "city";
           this.$store.dispatch("post/searchPartPost", {
             pageNo: this.page,
             keyword: this.word,
-            option: this.option
+            option: x
           });
         } else {
           this.$store.dispatch("post/searchPartPost", {

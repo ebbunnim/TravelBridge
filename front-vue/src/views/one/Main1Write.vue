@@ -29,12 +29,7 @@
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="post" style="height:800px">
             <div class="row justify-center" style="margin-bottom:15px;">
-              <q-input
-                class="col-8"
-                type="text"
-                label="제목"
-                v-model="post.postTitle"
-              />
+              <q-input class="col-8" type="text" label="제목" v-model="post.postTitle" />
               <div class="row justify-around col-5" style="margin-top:2%;">
                 <q-select
                   filled
@@ -50,9 +45,7 @@
                 >
                   <template v-slot:no-option>
                     <q-item>
-                      <q-item-section class="text-grey"
-                        >No results</q-item-section
-                      >
+                      <q-item-section class="text-grey">No results</q-item-section>
                     </q-item>
                   </template>
                 </q-select>
@@ -68,11 +61,7 @@
                 </template>
               </div>
               <div class="col-10 justify-center row" style="margin-top:1%;">
-                <div
-                  style="display: inline"
-                  v-for="(item, idx) in post.postThema"
-                  :key="idx"
-                >
+                <div style="display: inline" v-for="(item, idx) in post.postThema" :key="idx">
                   <q-btn
                     color="grey"
                     class="q-ma-sm"
@@ -82,8 +71,7 @@
                       item.state = !item.state;
                       planToggle();
                     "
-                    >{{ item.name }}</q-btn
-                  >
+                  >{{ item.name }}</q-btn>
                   <q-btn
                     color="grey"
                     class="q-ma-sm"
@@ -94,16 +82,12 @@
                       item.state = !item.state;
                       planToggle();
                     "
-                    >{{ item.name }}</q-btn
-                  >
+                  >{{ item.name }}</q-btn>
                 </div>
               </div>
             </div>
 
-            <div
-              class="row justify-center"
-              style="margin-bottom:15px;margin-left:0px;"
-            >
+            <div class="row" style="margin-bottom:15px;margin-left:0px;">
               <q-editor
                 v-model="post.postEditor"
                 min-height="20rem"
@@ -152,14 +136,7 @@
                           {{ scope.uploadProgressLabel }}
                         </div>
                       </div>
-                      <q-btn
-                        v-if="scope.canAddFiles"
-                        type="a"
-                        icon="add_box"
-                        round
-                        dense
-                        flat
-                      >
+                      <q-btn v-if="scope.canAddFiles" type="a" icon="add_box" round dense flat>
                         <q-uploader-add-trigger />
                         <q-tooltip>Pick Files</q-tooltip>
                       </q-btn>
@@ -168,14 +145,9 @@
                 </q-uploader>
               </div>
             </div>
-            <div class="row justify-center ">
+            <div class="row justify-center">
               <div class="col-12" align="center">
-                <q-btn
-                  color="primary"
-                  icon="clear"
-                  label="초기화"
-                  @click="postClear()"
-                />
+                <q-btn color="primary" icon="clear" label="초기화" @click="postClear()" />
                 <q-btn
                   color="primary"
                   icon="check"
@@ -189,12 +161,7 @@
 
           <q-tab-panel name="plan" style="height:1250px">
             <div class="row justify-center" style="margin-bottom:15px;">
-              <q-input
-                class="col-8"
-                type="text"
-                label="제목"
-                v-model="plan.planTitle"
-              />
+              <q-input class="col-8" type="text" label="제목" v-model="plan.planTitle" />
               <div class="row justify-around col-5" style="margin-top:2%;">
                 <q-select
                   filled
@@ -210,9 +177,7 @@
                 >
                   <template v-slot:no-option>
                     <q-item>
-                      <q-item-section class="text-grey"
-                        >No results</q-item-section
-                      >
+                      <q-item-section class="text-grey">No results</q-item-section>
                     </q-item>
                   </template>
                 </q-select>
@@ -228,11 +193,7 @@
                 </template>
               </div>
               <div class="col-10 justify-center row" style="margin-top:1%;">
-                <div
-                  style="display: inline"
-                  v-for="(item, idx) in plan.planThema"
-                  :key="idx"
-                >
+                <div style="display: inline" v-for="(item, idx) in plan.planThema" :key="idx">
                   <q-btn
                     color="grey"
                     class="q-ma-sm"
@@ -242,8 +203,7 @@
                       item.state = !item.state;
                       planToggle();
                     "
-                    >{{ item.name }}</q-btn
-                  >
+                  >{{ item.name }}</q-btn>
                   <q-btn
                     color="grey"
                     class="q-ma-sm"
@@ -254,16 +214,12 @@
                       item.state = !item.state;
                       planToggle();
                     "
-                    >{{ item.name }}</q-btn
-                  >
+                  >{{ item.name }}</q-btn>
                 </div>
               </div>
             </div>
 
-            <div
-              class="row justify-center"
-              style="margin-bottom:15px;margin-left:0px;"
-            >
+            <div class="row" style="margin-bottom:15px;margin-left:0px;">
               <q-editor
                 v-model="plan.planEditor"
                 min-height="20rem"
@@ -316,14 +272,7 @@
                             {{ scope.uploadProgressLabel }}
                           </div>
                         </div>
-                        <q-btn
-                          v-if="scope.canAddFiles"
-                          type="a"
-                          icon="add_box"
-                          round
-                          dense
-                          flat
-                        >
+                        <q-btn v-if="scope.canAddFiles" type="a" icon="add_box" round dense flat>
                           <q-uploader-add-trigger />
                           <q-tooltip>Pick Files</q-tooltip>
                         </q-btn>
@@ -343,7 +292,7 @@
                     flat
                     bordered
                   >
-                    <template v-if="plan.planSelectedFile > 0"> </template>
+                    <template v-if="plan.planSelectedFile > 0"></template>
                     <template v-slot:header="scope">
                       <div class="row no-wrap items-center q-pa-sm q-gutter-xs">
                         <q-btn
@@ -374,14 +323,7 @@
                             {{ scope.uploadProgressLabel }}
                           </div>
                         </div>
-                        <q-btn
-                          v-if="scope.canAddFiles"
-                          type="a"
-                          icon="add_box"
-                          round
-                          dense
-                          flat
-                        >
+                        <q-btn v-if="scope.canAddFiles" type="a" icon="add_box" round dense flat>
                           <q-uploader-add-trigger />
                           <q-tooltip>Pick Files</q-tooltip>
                         </q-btn>
@@ -417,11 +359,7 @@
                           <q-item-label>한복 대여</q-item-label>
                         </q-item-section>
                         <q-item-section avatar>
-                          <q-btn
-                            unelevated
-                            color="amber"
-                            icon="delete_forever"
-                          />
+                          <q-btn unelevated color="amber" icon="delete_forever" />
                         </q-item-section>
                       </q-item>
                       <q-item>
@@ -429,11 +367,7 @@
                           <q-item-label>맛집 탐방</q-item-label>
                         </q-item-section>
                         <q-item-section avatar>
-                          <q-btn
-                            unelevated
-                            color="amber"
-                            icon="delete_forever"
-                          />
+                          <q-btn unelevated color="amber" icon="delete_forever" />
                         </q-item-section>
                       </q-item>
                       <q-item>
@@ -441,11 +375,7 @@
                           <q-item-label>핫스팟에서 사진찍기</q-item-label>
                         </q-item-section>
                         <q-item-section avatar>
-                          <q-btn
-                            unelevated
-                            color="amber"
-                            icon="delete_forever"
-                          />
+                          <q-btn unelevated color="amber" icon="delete_forever" />
                         </q-item-section>
                       </q-item>
                       <q-item>
@@ -453,11 +383,7 @@
                           <q-item-label>행복</q-item-label>
                         </q-item-section>
                         <q-item-section avatar>
-                          <q-btn
-                            unelevated
-                            color="amber"
-                            icon="delete_forever"
-                          />
+                          <q-btn unelevated color="amber" icon="delete_forever" />
                         </q-item-section>
                       </q-item>
                       <q-item>
@@ -467,18 +393,8 @@
                         <q-item-section avatar>
                           <q-btn unelevated color="amber" icon="add" />
                         </q-item-section>
-                        <q-popup-edit
-                          v-model="plan.plan"
-                          content-class="bg-amber text-white"
-                        >
-                          <q-input
-                            dark
-                            color="white"
-                            v-model="plan.plan"
-                            dense
-                            autofocus
-                            counter
-                          >
+                        <q-popup-edit v-model="plan.plan" content-class="bg-amber text-white">
+                          <q-input dark color="white" v-model="plan.plan" dense autofocus counter>
                             <template v-slot:append>
                               <q-icon name="edit" />
                             </template>
@@ -488,27 +404,14 @@
                     </q-list>
                   </q-scroll-area>
                 </q-card>
-                <q-card
-                  class="my-card"
-                  style="width:25%; max-height:60px; margin-left:2%;"
-                >
+                <q-card class="my-card" style="width:25%; max-height:60px; margin-left:2%;">
                   <q-item clickable style="width:100%; height:100%;">
                     <q-card-section row style="padding:8px 0px 0px 20px;">
                       <div class="row text-h6 q-mb-xs">
                         <p>카드 추가하기</p>
                         <q-icon name="add" size="md" style="margin-left:10px" />
-                        <q-popup-edit
-                          v-model="plan.card"
-                          content-class="bg-green-7 text-white"
-                        >
-                          <q-input
-                            dark
-                            color="white"
-                            v-model="plan.card"
-                            dense
-                            autofocus
-                            counter
-                          >
+                        <q-popup-edit v-model="plan.card" content-class="bg-green-7 text-white">
+                          <q-input dark color="white" v-model="plan.card" dense autofocus counter>
                             <template v-slot:append>
                               <q-icon name="edit" />
                             </template>
@@ -520,14 +423,9 @@
                 </q-card>
               </div>
             </div>
-            <div class="row justify-center ">
+            <div class="row justify-center">
               <div class="col-12" align="center">
-                <q-btn
-                  color="primary"
-                  icon="clear"
-                  label="초기화"
-                  @click="planClear"
-                />
+                <q-btn color="primary" icon="clear" label="초기화" @click="planClear" />
                 <q-btn
                   color="primary"
                   icon="check"
@@ -863,7 +761,6 @@ export default {
         this.post.postSelectedFile.push(file[x]);
       }
       console.log(this.postSelectedFile);
-      //이 버튼 필요없고 글쓰기 버튼누르면 글쓰면서 이 친구들 대리고가야한다.
     },
     postFileRemoved(file) {
       const idx = this.postSelectedFile.findIndex(function(item) {

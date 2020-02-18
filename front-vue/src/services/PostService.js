@@ -1,7 +1,11 @@
 import Api from "./Api";
 class PostService {
-  GetSearchAllPost(PageNo) {
-    return Api.get(`Post/search/pageAll/${PageNo}`)
+  GetSearchAllPost(PageNo, option, word) {
+    // /Post/search / page / { btnCnt } / { searchOption } / { word }
+
+    if (option == undefined) option = "empty";
+    if (word == undefined) word = "empty";
+    return Api.get(`/Post/search/page/${PageNo}/${option}/${word}`)
       .then(Response => {
         console.log(Response.data.data);
         return Response.data.data;

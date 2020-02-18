@@ -17,7 +17,12 @@ const actions = {
     });
   },
   searchPartPost: (store, payload) => {
-    PostService.GetSearchAllPost(payload.pageNo).then(response => {
+    console.log(payload);
+    PostService.GetSearchAllPost(
+      payload.pageNo,
+      payload.option,
+      payload.keyword
+    ).then(response => {
       store.commit("postListAll", {
         postList: response,
         pageNo: payload.pageNo
@@ -72,7 +77,7 @@ const mutations = {
     if (payLoad.pageNo === 1) {
       state.postList = titles;
     } else {
-      state.postList.push(titles);
+      state.postList = titles;
     }
     state.gogo = true;
   }

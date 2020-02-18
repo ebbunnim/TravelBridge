@@ -14,7 +14,7 @@ const actions = {
   },
   searchByNo({ commit }, payload) {
     console.log("뷰에서 넘겨온 페이로드를 받은 vuex다:", payload);
-    console.log(typeof(payload))
+    console.log(typeof payload);
     HotPlaceService.searchByNo(payload).then(res => {
       console.log("결과 => ", res);
     });

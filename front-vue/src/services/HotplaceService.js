@@ -13,11 +13,11 @@ class HotPlaceService {
   }
   // 번호로 찾아오기
   searchByNo(payload) {
-    console.log("pay", payload)
-    let pay = payload
-  
+    console.log("pay", payload);
+    let pay = payload;
+
     // const no = pay.no
-    return Api.get(`/HotPlace/`+pay)
+    return Api.get(`/HotPlace/` + pay)
       .then(res => {
         console.log(typeof pay);
         console.log("서비스", res.data);
