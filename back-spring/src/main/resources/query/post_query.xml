@@ -250,8 +250,6 @@
 				post_writer like concat('%',#{word},'%')
 			</when>
 		</choose>
-		ORDER BY post_no
-		LIMIT 0, #{perPageNum}
 	</select> 
 
 

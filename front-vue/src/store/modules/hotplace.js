@@ -1,10 +1,13 @@
-import HotPlaceService from "@/services/HotPlaceService.js";
+import HotPlaceService from "@/services/HotplaceService.js";
 
 const state = {
   hps: [],
-  hp: null,
-  searchTitle: ""
+  hp_list_length: 0
 };
+
+// const getters = {
+//   hp_list_length: state => state.hps.length
+// };
 
 const actions = {
   searchAllHPs: ({ commit }) => {
@@ -30,7 +33,7 @@ const actions = {
         console.log("여긴 hotplace.js", res);
         commit("saveHPs", res);
         console.log("state.hps 확인 ", state.hps);
-        console.log("hp length 측정!!!!!: ", state.hp_list_length);
+        console.log("길이 측정!!!!!: ", state.hp_list_length);
       })
       .catch(e => {
         console.log(e);
@@ -55,20 +58,15 @@ const mutations = {
     state.hps = hps;
     state.hp_list_length = hps.length;
   },
-  saveHP(state, hp) {
-    state.hp = hp;
-  },
   clearHPs(state) {
     state.hps = [];
-  },
-  saveSearchTitle(state, value) {
-    state.searchTitle = value;
   }
 };
 
 export default {
   namespaced: true,
   state,
+  // getters,
   mutations,
   actions
 };
