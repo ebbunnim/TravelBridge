@@ -13,34 +13,28 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Party {
+public class PartyIn {
+	@Getter 
+	int partyin_no;
 	@Getter
+	@Setter
 	private int party_no;
 	@Getter
 	@Setter
-	private int host_no;
+	private int mem_no;
 	@Getter
 	@Setter
-	private String host_name;
+	private String mem_name;
 	@Getter
 	@Setter
-	private String party_title;
+	private String mem_email;
 	@Getter
 	@Setter
-	private String party_contents;
+	private String mem_phone;
 	@Getter
 	@Setter
-	private String party_regtime;
-	@Getter
-	@Setter
-	private int party_num;
+	private String mem_interest;
 	@Getter
 	@Setter
 	private boolean party_del_check;
-	@Getter
-	@Setter
-	private List<Comment> party_cmtList;
-	@Getter
-	@Setter
-	private List<PartyIn> party_inMemList;
 }

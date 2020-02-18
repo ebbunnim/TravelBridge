@@ -18,6 +18,7 @@
 		<typeAlias type="com.pjt1.demo.model.dto.Qna"           	alias="QNA" /> 
 		<typeAlias type="com.pjt1.demo.model.dto.Calendar"          alias="CALENDAR" /> 
 		<typeAlias type="com.pjt1.demo.model.dto.Party"          	alias="PARTY" /> 
+		<typeAlias type="com.pjt1.demo.model.dto.PartyIn"          	alias="PARTYIN" /> 
   </typeAliases>
   
   <mappers>
@@ -36,5 +37,6 @@
   		<mapper resource="query/qna_query.xml" />
   		<mapper resource="query/calendar_query.xml" />
   		<mapper resource="query/party_query.xml" />
+  		<mapper resource="query/partyin_query.xml" />
   </mappers>
 </configuration>
