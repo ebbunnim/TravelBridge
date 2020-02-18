@@ -2,7 +2,9 @@ import HotPlaceService from "@/services/HotplaceService.js";
 
 const state = {
   hps: [],
-  hp_list_length: 0
+  hp_list_length: 0,
+  hp: null,
+  searchTitle: ""
 };
 
 // const getters = {
@@ -13,6 +15,12 @@ const actions = {
   searchAllHPs: ({ commit }) => {
     HotPlaceService.searchAll(hps => {
       commit("saveHPs", hps);
+    });
+  },
+  searchByNo({ commit }, no) {
+    HotPlaceService.searchByNo(no).then(res => {
+      console.log("searchByNo 결과 => ", res);
+      commit("saveHP", res);
     });
   },
   searchMoreHotplace: ({ commit }, payload) => {
@@ -34,9 +42,7 @@ const actions = {
   searchMoreHotPlaceByTheme: ({ commit }, payload) => {
     HotPlaceService.searchMoreHotPlaceByTheme(payload.btnCnt, payload.word)
       .then(res => {
-        console.log("여긴vuex", res);
         commit("saveHPs", res);
-        console.log("hp state: ", state.hps);
       })
       .catch(e => {
         console.log(e);

@@ -5,7 +5,6 @@
         v-model="slide"
         animated
         swipeable
-        autoplay
         navigation
         infinite
         height="680px"
@@ -171,6 +170,20 @@ export default {
       this.$store.commit("hotplace/saveSearchTitle", this.word);
       this.$router.push("/page2/list");
     },
+    checkPastInterest() {
+      this.currentChoices = this.user.mem_interest;
+      console.log("check Past Interest ==> ", this.currentChoices);
+      if (this.currentChoices !== undefined) {
+        const tempInterest = this.currentChoices.split(" ");
+        for (let key in tempInterest) {
+          for (let themaKey in this.thema) {
+            if (this.thema[themaKey].name === tempInterest[key]) {
+              this.thema[themaKey].state = true;
+            }
+          }
+        }
+      }
+    },
     onToggle() {
       this.currentChoices = "";
       const themaChoice = this.thema;
@@ -186,6 +199,10 @@ export default {
     onPickBtn() {
       this.$router.push("/page2/pick");
     }
+  },
+  mounted() {
+    this.checkPastInterest();
+    // 만약 미로그인이라면? 
   }
 };
 </script>
