@@ -64,16 +64,13 @@
           <q-list class="q-ma-sm">
             <!-- NavBar Hover 메뉴 부분 -->
             <div class="row justify-center">
-              <q-btn to="/page2" flat class="col-3">트래블 픽</q-btn>
-              <q-btn to="/page2/pick" flat class="col-3"
+              <q-btn to="/page2" flat class="col-4">트래블 픽</q-btn>
+              <q-btn to="/page2/pick" flat class="col-4"
                 >테마별 여행지 추천</q-btn
               >
-              <q-btn to="/page2/list" flat class="col-3"
+              <q-btn to="/page2/list" flat class="col-4"
                 >여행지 정보 검색</q-btn
               >
-              <q-btn to="/page2/main2search" flat class="col-3" icon="search"
-                >삭제할 것
-              </q-btn>
             </div>
           </q-list>
         </q-menu>

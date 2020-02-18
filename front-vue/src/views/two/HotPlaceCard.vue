@@ -1,9 +1,7 @@
 <template>
   <q-card flat bordered class="my-card">
     <q-img :src="getImgUrl(hp_img)" basic :ratio="16 / 9">
-      <div class="absolute-bottom text-h6 text-center">
-        {{ hp_name }}
-      </div>
+      <div class="absolute-bottom text-h6 text-center">{{ hp_name }}</div>
     </q-img>
 
     <q-card-section>
@@ -65,7 +63,6 @@ export default {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
 }
-
 .my-card {
   height: 400px;
   width: 300px;

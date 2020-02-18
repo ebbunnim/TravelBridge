@@ -57,7 +57,7 @@ public class PartyController {
 
     @ApiOperation("no에 따른 Party 정보 조회하는 기능")
     @GetMapping("/Party/{party_no}")
-    public ResponseEntity<Map<String, Object>> search(int party_no) {
+    public ResponseEntity<Map<String, Object>> search(@PathVariable int party_no) {
         Party party = service.search(party_no);
         return handleSuccess(party);
     }

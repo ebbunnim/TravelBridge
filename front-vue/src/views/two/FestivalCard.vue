@@ -1,9 +1,7 @@
 <template>
   <q-card flat bordered class="my-card">
     <q-img :src="getImgUrl(fval_img)" basic :ratio="16 / 9">
-      <div class="absolute-bottom text-h6 text-center">
-        {{ fval_name }}
-      </div>
+      <div class="absolute-bottom text-h6 text-center">{{ fval_name }}</div>
     </q-img>
 
     <q-card-section>
@@ -11,8 +9,14 @@
     </q-card-section>
 
     <q-card-section class="q-pt-none">
-      <div class="text-subtitle2 text-body">{{ fval_tag }}</div>
+      <div class="text-subtitle2 text-body text-center">
+        {{ fval_start_day }} ~ {{ fval_end_day }}
+      </div>
     </q-card-section>
+    <q-card-section>
+      <div class="text-subtitle2 text-body2">{{ fval_tag }}</div>
+    </q-card-section>
+
     <q-card-section class="absolute-bottom">
       <q-btn
         flat
@@ -57,7 +61,7 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.text-body {
+.text-body2 {
   display: -webkit-box;
   display: -ms-flexbox;
   /* display: box;
@@ -68,9 +72,8 @@ export default {
   text-overflow: ellipsis;
   word-break: break-all;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 2;
 }
-
 .my-card {
   height: 400px;
   width: 300px;

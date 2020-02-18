@@ -57,7 +57,7 @@ public class BoardController {
 
     @ApiOperation("no에 따른 Board 정보 조회하는 기능")
     @GetMapping("/Board/{board_no}")
-    public ResponseEntity<Map<String, Object>> search(int board_no) {
+    public ResponseEntity<Map<String, Object>> search(@PathVariable int board_no) {
         Board Board = service.search(board_no);
         return handleSuccess(Board);
     }

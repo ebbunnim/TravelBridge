@@ -32,13 +32,23 @@
     </div>
     <div class="row justify-center q-mx-xl q-px-xl">
       <div
-        v-if="searchTitle === null ? false : searchTitle"
-        class="col-12 text-center text-h5 q-mb-lg"
+        v-show="searchTitle === null ? false : searchTitle"
+        class="col-12 text-center text-h4 q-mb-lg"
       >
-        {{ searchTitle }} 검색결과
+        <b>{{ searchTitle }}</b> 검색 결과
       </div>
       <div
-        class="col-lg-3 col-md-6 col-xm-12"
+        v-show="searchTitle === null ? false : searchTitle"
+        v-if="(hp_list_length === undefined) | null | 0 ? false : true"
+        class="col-12 text-center text-h6"
+      >
+        #{{ searchTitle }} 핫플레이스
+      </div>
+      <div v-else class="col-12 text-center text-h6">
+        {{ searchTitle }} 핫플레이스 검색 결과가 없습니다.
+      </div>
+      <div
+        class="col-lg-3 col-md-6 col-xs-12"
         v-for="i in hp_list_length"
         :key="i"
       >
@@ -51,33 +61,37 @@
           :hp_tag="hp_list[i - 1].hp_tag"
           :hp_no="hp_list[i - 1].hp_no"
         ></HotPlaceCard>
-        <!--  -->
       </div>
-      <q-btn outline square class="col-11 q-px-xl" @click="loadMoreHp()"
-        >더보기</q-btn
+      <!-- <q-btn outline square class="col-11 q-px-xl" @click="loadMoreHp()">더보기</q-btn> -->
+      <div
+        v-show="searchTitle === null ? false : searchTitle"
+        v-if="(fval_list_length === undefined) | null | 0 ? false : true"
+        class="col-12 text-center text-h6"
       >
+        #{{ searchTitle }} 페스티벌
+      </div>
+      <div v-else class="col-12 text-center text-h6">
+        {{ searchTitle }} 페스티벌 검색 결과가 없습니다.
+      </div>
 
       <div
-        class="col-lg-3 col-md-6 col-xm-12"
-        v-for="i in fval_list_length"
-        :key="i"
+        class="col-lg-3 col-md-6 col-xs-12"
+        v-for="j in fval_list_length"
+        :key="j"
       >
         <!-- 카드가 들어가는 부분 -->
         <FestivalCard
           class="q-ma-lg"
-          :fval_img="fval_list[i - 1].fval_img"
-          :fval_name="fval_list[i - 1].fval_name"
-          :fval_start_day="fval_list[i - 1].fval_start_day"
-          :fval_end_day="fval_list[i - 1].fval_end_day"
-          :fval_detail_adr="fval_list[i - 1].fval_detail_adr"
-          :fval_tag="fval_list[i - 1].fval_tag"
-          :fval_no="fval_list[i - 1].fval_no"
+          :fval_img="fval_list[j - 1].fval_img"
+          :fval_name="fval_list[j - 1].fval_name"
+          :fval_start_day="fval_list[j - 1].fval_start_day"
+          :fval_end_day="fval_list[j - 1].fval_end_day"
+          :fval_detail_adr="fval_list[j - 1].fval_detail_adr"
+          :fval_tag="fval_list[j - 1].fval_tag"
+          :fval_no="fval_list[j - 1].fval_no"
         ></FestivalCard>
-        <!--  -->
       </div>
-      <q-btn outline square class="col-11 q-px-xl" @click="loadMoreFval()"
-        >더보기</q-btn
-      >
+      <!-- <q-btn outline square class="col-11 q-px-xl" @click="loadMoreFval()">더보기</q-btn> -->
     </div>
   </q-page>
 </template>
@@ -86,7 +100,6 @@
 import { mapState } from "vuex";
 import HotPlaceCard from "@/views/two/HotPlaceCard.vue";
 import FestivalCard from "@/views/two/FestivalCard.vue";
-
 export default {
   components: {
     HotPlaceCard,
@@ -94,7 +107,6 @@ export default {
   },
   data() {
     return {
-      searchTitle: null,
       hpBtnCnt: 1,
       fvalBtnCnt: 1,
       //
@@ -115,6 +127,7 @@ export default {
   },
   computed: {
     ...mapState({
+      searchTitle: state => state.hotplace.searchTitle,
       hp_list_length: state => state.hotplace.hp_list_length, // vuex 에서 데려옴
       fval_list_length: state => state.festival.fval_list_length,
       hp_list: state => state.hotplace.hps,
@@ -123,22 +136,20 @@ export default {
   },
   methods: {
     onSearchBtn() {
-      const payLoad = {
-        btnCnt: this.hpBtnCnt + 1,
+      const payLoad1 = {
+        btnCnt: this.hpBtnCnt,
         searchOption: this.searchOptionValue[this.searchOption],
         word: this.word
       };
-      console.log("vue에서:", payLoad);
-      this.$store.dispatch("hotplace/searchMoreHotplace", payLoad);
-      payLoad.btnCnt = this.fvalBtnCnt + 1;
-      this.$store.dispatch("festival/searchMoreFestival", payLoad);
-      this.searchTitle = this.word;
+      const payLoad2 = {
+        btnCnt: this.fvalBtnCnt,
+        searchOption: this.searchOptionValue[this.searchOption],
+        word: this.word
+      };
+      this.$store.dispatch("hotplace/searchMoreHotplace", payLoad1);
+      this.$store.dispatch("festival/searchMoreFestival", payLoad2);
+      this.$store.commit("hotplace/saveSearchTitle", this.word);
     }
-    // checkLoadMoreBtn() {
-    //   if (4 * this.hpBtnCnt < this.hp_list_length <= 4 * (this.hpBtnCnt + 1)) {
-    //     this.hpLoadMore = true;
-    //   }
-    // }
   }
 };
 </script>

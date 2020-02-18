@@ -59,7 +59,7 @@ public class CommentController{
     }
     @ApiOperation("no에 따른 Comment 정보 조회하는 기능")
     @GetMapping("/Comment/{no}")
-    public ResponseEntity<Map<String, Object>> search(int no) {
+    public ResponseEntity<Map<String, Object>> search(@PathVariable int no) {
         Comment Comment = service.search(no);
         return handleSuccess(Comment);
     }
