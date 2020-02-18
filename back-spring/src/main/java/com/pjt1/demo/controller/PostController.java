@@ -80,16 +80,17 @@ public class PostController {
         return handleSuccess(Post);
     }
 
-    @ApiOperation("더보기로 Post 검색하기 조회 - searchOption은 all/ title / content/ tag /city 중 전달")
+    @ApiOperation("더보기로 Post 검색하기 조회 - searchOption은 all/ title / content/ tag / writer 중 전달")
     @GetMapping("/Post/search/page/{btnCnt}/{searchOption}/{word}")
     public ResponseEntity<Map<String, Object>> searchPostByOption(PageBean pageBean, @PathVariable int btnCnt,
             @PathVariable String searchOption, @PathVariable String word) {
         searchOption = (searchOption == null) ? "all" : searchOption;
-        word = (word == null || word == " ") ? "" : word;
-        PageBean PageBean = new PageBean();
-        PageBean.setSearchOption(searchOption);
-        PageBean.setWord(word);
-        System.out.println(PageBean);
+        if (word.equals("mtmt")) {
+            pageBean.setWord("");
+        };
+        pageBean.setSearchOption(searchOption);
+        // PageBean.setWord(word);
+        System.out.println(pageBean);
         PageMaker pageMaker = new PageMaker();
         pageBean.setPage(btnCnt);
         pageMaker.setPageBean(pageBean);
