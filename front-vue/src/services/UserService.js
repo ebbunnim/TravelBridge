@@ -35,6 +35,28 @@ class UserService {
         console.log(e);
       });
   }
+
+  // no에 따른 Member가 좋아하는 핫플레이스 List를 조회하는 기능
+  getLikedHotplaces(mem_no) {
+    return Api.get(`/Members/searchMemberLikeHotPlace/${mem_no}`)
+      .then(res => {
+        return res.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  // no에 따른 Member가 좋아하는 축제 List를 조회하는 기능
+  getLikedFestivals(mem_no) {
+    return Api.get(`/Members/searchMemberLikeFestival/${mem_no}`)
+      .then(res => {
+        return res.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
 }
 
 export default new UserService();

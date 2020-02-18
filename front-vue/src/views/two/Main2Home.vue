@@ -173,7 +173,7 @@ export default {
     checkPastInterest() {
       this.currentChoices = this.user.mem_interest;
       console.log("check Past Interest ==> ", this.currentChoices);
-      if (this.currentChoices !== "undefined") {
+      if (this.currentChoices !== undefined) {
         const tempInterest = this.currentChoices.split(" ");
         for (let key in tempInterest) {
           for (let themaKey in this.thema) {
@@ -202,6 +202,7 @@ export default {
   },
   mounted() {
     this.checkPastInterest();
+    // 만약 미로그인이라면? 
   }
 };
 </script>
