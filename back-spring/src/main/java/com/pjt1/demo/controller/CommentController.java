@@ -66,8 +66,10 @@ public class CommentController{
     @PostMapping("/Comment")
     @ApiOperation("Comment 정보 등록")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody Comment Comment) {
+    	
     	Members writer = m_service.search(Comment.getMem_no());
-    	Comment.setCmt_writer(writer.getMem_id());
+    	if(Comment.getPost_no()>0) Comment.setCmt_writer(writer.getMem_id());
+    	else if(Comment.getParty_no()>0) Comment.setCmt_writer(writer.getMem_name());
         service.insert(Comment);
         return handleSuccess("");
     }

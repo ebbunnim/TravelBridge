@@ -1,58 +1,64 @@
-package com.example.demo.model.service;
+package com.pjt1.demo.model.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.dao.FaqDao;
-import com.example.demo.model.dto.Faq;
+import com.pjt1.demo.model.dao.PartyDao;
+import com.pjt1.demo.model.dto.Party;
 
+ 
 @Service
-public class FaqServiceImpl implements FaqService {
+public class PartyServiceImpl implements PartyService {
 
 	@Autowired
-	private FaqDao repo;
-	public Faq search(int faq_no) {
+	private PartyDao repo;
+	
+	public Party search(int party_no) {
 		try {
-			return repo.search(faq_no);
+			return repo.search(party_no);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return null;
+		
 	}
 
-	public List<Faq> searchAll() {
+	public List<Party> searchAll() {
 		try {
-			System.out.println("??");
 			return repo.searchAll();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return null;
+		
 	}
 
-	public void insert(Faq Faq) {
+	public void insert(Party party) {
 		try {
-			repo.insert(Faq);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-	public void update(Faq Faq) {
-		try {
-			repo.update(Faq);
+			repo.insert(party);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
-	public void delete(int faq_no) {
+
+	public void update(Party party) {
 		try {
-			repo.delete(faq_no);
+			repo.update(party);
 		} catch(Exception e) {
 			e.printStackTrace();
-		}
+		}	
 	}
+
+	public void delete(int party_no) {
+		try {
+			repo.delete(party_no);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}	
+		
+	}
+
 }

@@ -93,5 +93,8 @@ public class Members implements Serializable {
 	@Getter
 	@Setter
 	private List<Post> mem_followPost;
+	@Getter
+	@Setter
+	private List<Party> mem_partyList;	// 멤버가 들어간 파티 글. 여기서 번호 꺼내다 쓸것
 
 }
