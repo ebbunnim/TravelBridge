@@ -59,7 +59,7 @@ public class FilesController {
 
     @ApiOperation("no에 따른 Files 정보 조회하는 기능")
     @GetMapping("/Files/search/{files_no}")
-    public ResponseEntity<Map<String, Object>> search(int files_no) {
+    public ResponseEntity<Map<String, Object>> search(@PathVariable int files_no) {
         Files Files = service.search(files_no);
         return handleSuccess(Files);
     }

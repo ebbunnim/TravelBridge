@@ -66,7 +66,7 @@ public class LikesController {
 
     @ApiOperation("no에 따른 Likes 정보 조회하는 기능")
     @GetMapping("/Likes/search/{like_no}")
-    public ResponseEntity<Map<String, Object>> search(int like_no) {
+    public ResponseEntity<Map<String, Object>> search(@PathVariable int like_no) {
         Likes Likes = service.search(like_no);
         return handleSuccess(Likes);
     }

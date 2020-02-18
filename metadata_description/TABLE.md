@@ -177,3 +177,11 @@
 |textColor	        |varchar(100)	|YES|	|||폰트 색|	
 |allDay	            |tinyint(1)	    |YES|	|||선택사항|	
 
+# **14. Course**
+|Field|Type|Null|Key|Default|Extra|Description|
+|-|-|-|-|-|-|-|
+|course_no	        |int(11)	    |NO	|PRI| |auto_increment|코스 관리번호|
+|post_no	        |int(11)	    |NO	|MUL| |	|참조하는 게시글 번호|
+|course_title	    |varchar(100)	|NO	|	| | |코스 제목(방문 장소 (ex) 송화마을)|
+|course_description	|varchar(300)	|NO	|	| | |간략한 첨부 내용|
+|course_del_check	|tinyint(1)	    |YES|	|0|	|코스 삭제여부|

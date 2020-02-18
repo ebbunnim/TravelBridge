@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.pjt1.demo.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,19 +17,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.dto.Faq;
-import com.example.demo.model.service.FaqService;
+import com.pjt1.demo.model.dto.Party;
+import com.pjt1.demo.model.service.PartyService;
 
 import io.swagger.annotations.ApiOperation;
 
-
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
-public class FaqController{
-	
+public class PartyController {
+
     @Autowired
-    private FaqService service;
-    
+    private PartyService service;
+
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
         return handleFail(e.getMessage(), HttpStatus.OK); // 전송에는 지장 없음
@@ -48,35 +47,39 @@ public class FaqController{
         resultMap.put("data", data);
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
-    @ApiOperation("전체 Faq 목록을 조회하는 기능")
-    @GetMapping("/Faq/search/all")
+
+    @ApiOperation("전체 Party 목록을 조회하는 기능")
+    @GetMapping("/Party")
     public ResponseEntity<Map<String, Object>> searchAll() {
-        List<Faq> list = service.searchAll();
-        System.out.println("ASD");
+        List<Party> list = service.searchAll();
         return handleSuccess(list);
     }
-    @ApiOperation("no에 따른 Faq 정보 조회하는 기능")
-    @GetMapping("/Faq/search/{faq_no}")
-    public ResponseEntity<Map<String, Object>> search(@PathVariable int faq_no) {
-        Faq Faq = service.search(faq_no);
-        return handleSuccess(Faq);
+
+    @ApiOperation("no에 따른 Party 정보 조회하는 기능")
+    @GetMapping("/Party/{party_no}")
+    public ResponseEntity<Map<String, Object>> search(@PathVariable int party_no) {
+        Party party = service.search(party_no);
+        return handleSuccess(party);
     }
-    @ApiOperation("Faq 정보 등록")
-    @PostMapping("/Faq/insert")
-    public ResponseEntity<Map<String, Object>> insert(@RequestBody Faq Faq) {
-        service.insert(Faq);
+
+    @PostMapping("/Party")
+    @ApiOperation("Party 정보 등록")
+    public ResponseEntity<Map<String, Object>> insert(@RequestBody Party party) {
+        service.insert(party);
         return handleSuccess("");
     }
-	 @ApiOperation("Faq 정보 삭제")
-    @DeleteMapping("/Faq/delete/{faq_no}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable int faq_no) {
-        service.delete(faq_no);
+
+    @ApiOperation("Party 정보 삭제")
+    @DeleteMapping("/Party/{party_no}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable int party_no) {
+        service.delete(party_no);
         return handleSuccess("삭제 완료");
     }
-	@ApiOperation("Faq 정보 수정")
-    @PutMapping("/Faq/update")
-    public ResponseEntity<Map<String, Object>> update(@RequestBody Faq Faq) {
-        service.update(Faq);
+
+    @ApiOperation("Party 정보 수정")
+    @PutMapping("/Party")
+    public ResponseEntity<Map<String, Object>> update(@RequestBody Party party) {
+        service.update(party);
         return handleSuccess("수정 완료");
     }
 }

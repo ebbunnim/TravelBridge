@@ -61,7 +61,7 @@ public class FollowController {
 
     @ApiOperation("no에 따른 Follow 정보 조회하는 기능")
     @GetMapping("/Follow/search/{follow_no}")
-    public ResponseEntity<Map<String, Object>> search(int follow_no) {
+    public ResponseEntity<Map<String, Object>> search(@PathVariable int follow_no) {
         Follow Follow = service.search(follow_no);
         return handleSuccess(Follow);
     }

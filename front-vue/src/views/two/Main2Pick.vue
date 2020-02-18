@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <q-page class="page">
     <q-dialog v-model="alert">
       <q-card>
         <q-card-section>
@@ -53,7 +53,7 @@
     </q-dialog>
 
     <div
-      class="row justify-center q-my-xl q-py-xl"
+      class="row justify-center items-center q-my-xl q-py-xl"
       style="height: 350px; background: #f9f9f9"
     >
       <div style="display: inline" v-for="(item, idx) in thema" :key="idx">
@@ -85,29 +85,57 @@
       </div>
     </div>
 
-    <div
-      style="margin: 100px 150px; height: 400px; text-align: center;"
-      class="q-pa-xl"
-    >
-      {{ getFvalsByTheme }}
+    <div class="row justify-center q-mt-xl q-pt-xl q-mx-xl q-px-xl">
+      <div
+        class="col-lg-3 col-md-6 col-xs-12"
+        v-for="i in hp_list_length"
+        :key="i"
+      >
+        <!-- 카드가 들어가는 부분 -->
+        <HotPlaceCard
+          class="q-ma-lg"
+          :hp_img="hp_list[i - 1].hp_img"
+          :hp_name="hp_list[i - 1].hp_name"
+          :hp_detail_adr="hp_list[i - 1].hp_detail_adr"
+          :hp_tag="hp_list[i - 1].hp_tag"
+          :hp_no="hp_list[i - 1].hp_no"
+        ></HotPlaceCard>
+      </div>
+      <!-- <q-btn outline square class="col-11 q-px-xl" @click="loadMoreHp()">더보기</q-btn> -->
 
-      <!-- {{ hp_list }} -->
+      <div
+        class="col-lg-3 col-md-6 col-xs-12"
+        v-for="j in fval_list_length"
+        :key="j"
+      >
+        <!-- 카드가 들어가는 부분 -->
+        <FestivalCard
+          class="q-ma-lg"
+          :fval_img="fval_list[j - 1].fval_img"
+          :fval_name="fval_list[j - 1].fval_name"
+          :fval_start_day="fval_list[j - 1].fval_start_day"
+          :fval_end_day="fval_list[j - 1].fval_end_day"
+          :fval_detail_adr="fval_list[j - 1].fval_detail_adr"
+          :fval_tag="fval_list[j - 1].fval_tag"
+          :fval_no="fval_list[j - 1].fval_no"
+        ></FestivalCard>
+      </div>
     </div>
-    <div
-      style="margin: 100px 150px; height: 400px; text-align: center;"
-      class="q-pa-xl"
-    >
-      {{ fval_list }}
-    </div>
-  </div>
+  </q-page>
 </template>
 
 <script>
 import { mapState, mapGetters } from "vuex";
-
+import HotPlaceCard from "@/views/two/HotPlaceCard.vue";
+import FestivalCard from "@/views/two/FestivalCard.vue";
 export default {
+  components: {
+    HotPlaceCard,
+    FestivalCard
+  },
   data() {
     return {
+      hp_food: [],
       tempUser: {}, // 비로그인 유저 - 임시적인 검색 기능만 제공한다.
       alert: false, // dialog
       choiceAlert: false,
@@ -115,15 +143,16 @@ export default {
       notSelected: false,
       // choice 관련
       currentChoices: "",
+      currentChoicesArray: [],
       thema: {
-        food: { state: false, name: "맛집" },
-        family: { state: false, name: "가족" },
-        date: { state: false, name: "데이트" },
-        shopping: { state: false, name: "쇼핑" },
-        culture: { state: false, name: "문화" },
-        indoor: { state: false, name: "실내" },
-        healing: { state: false, name: "힐링" },
-        tradition: { state: false, name: "전통" }
+        food: { state: false, name: "맛집", hp: [], fval: [] },
+        family: { state: false, name: "가족", hp: [], fval: [] },
+        date: { state: false, name: "데이트", hp: [], fval: [] },
+        shopping: { state: false, name: "쇼핑", hp: [], fval: [] },
+        culture: { state: false, name: "문화", hp: [], fval: [] },
+        indoor: { state: false, name: "실내", hp: [], fval: [] },
+        healing: { state: false, name: "힐링", hp: [], fval: [] },
+        tradition: { state: false, name: "전통", hp: [], fval: [] }
       },
       fvalBtnCnt: 1,
       hpBtnCnt: 1
@@ -131,7 +160,9 @@ export default {
   },
   computed: {
     ...mapState({
-      user: state => state.user.user, // 현재 접속자
+      user: state => state.user.user,
+      hp_list_length: state => state.hotplace.hp_list_length, // vuex 에서 데려옴
+      fval_list_length: state => state.festival.fval_list_length,
       hp_list: state => state.hotplace.hps,
       fval_list: state => state.festival.fvals
     }),
@@ -139,7 +170,6 @@ export default {
       getFvalsByTheme: "festival/getFvalsByTheme"
     })
   },
-
   methods: {
     checkIfLoggedIn() {
       if (this.user.mem_interest === undefined) {
@@ -151,8 +181,7 @@ export default {
       }
     },
     useWithoutLogin() {
-      // alert 에서 끄는 순간 바로 실행
-      // 비회원일 때
+      // alert 에서 끄는 순간 바로 실행, 비회원일 때
       this.tempUser = {
         mem_id: "비회원",
         mem_interest: ""
@@ -160,7 +189,6 @@ export default {
       this.user = this.tempUser;
       console.log("비회원유저", this.user);
     },
-
     checkPastInterest() {
       this.currentChoices = this.user.mem_interest;
       console.log("check Past Interest ==> ", this.currentChoices);
@@ -177,14 +205,18 @@ export default {
     },
     onToggle() {
       this.currentChoices = "";
+      this.currentChoicesArray = [];
       const themaChoice = this.thema;
       for (let key in themaChoice) {
         if (themaChoice[key].state === true) {
           this.currentChoices += themaChoice[key].name + " ";
+          this.currentChoicesArray.push(themaChoice[key].name);
         }
       }
-      console.log("### TravelPick - onToggle 눌림 ###", this.currentChoices);
+      console.log("### TravelPick - onToggle ###", this.currentChoices);
       this.getAllPicks();
+      this.dist1();
+      // this.dist2();
     },
     getAllPicks() {
       if (this.currentChoices !== "") {
@@ -200,12 +232,31 @@ export default {
         this.$store.commit("hotplace/clearHPs");
         this.$store.commit("festival/clearFvals");
       }
+    },
+    dist1() {
+      const thema = this.thema;
+      for (let key in thema) {
+        var temp = this.hp_list.filter(function(hp) {
+          return hp.hp_theme.includes(thema[key].name);
+        });
+        this.thema[key].arr1 = temp;
+        console.log("분류:", this.thema[key].arr1);
+      }
     }
+    // dist2() {
+    //   const thema = this.thema;
+    //   for (let key in thema) {
+    //     var temp = this.fval_list.filter(function(fval) {
+    //       return fval.fval_theme.includes(thema[key].name);
+    //     });
+    //     this.thema[key].arr2 = temp;
+    //   }
+    // }
   },
   mounted() {
-    console.log("========= mounted =======");
-    console.log(this.user);
-    console.log(this.user.mem_interest);
+    console.log("========= Main2Pick.vue mounted =======");
+    console.log("user: ", this.user);
+    console.log("interest: ", this.user.mem_interest);
     this.checkIfLoggedIn();
   }
 };
