@@ -10,7 +10,8 @@ const state = {
   follower: [],
   likePost: [],
   likeFesta: [],
-  likeHot: []
+  likeHot: [],
+  another: {}
 };
 
 const actions = {
@@ -105,6 +106,14 @@ const actions = {
         store.commit("getLikeFestaUser", { likeFesta: Response });
       })
       .catch(exp => console.log(exp));
+  },
+  getAnother: (store, payLoad) => {
+    UserService.anotherUser(payLoad.userNo)
+      .then(Response => {
+        console.log(Response);
+        store.commit("getAnotherUser", { another: Response });
+      })
+      .catch(exp => console.log(exp));
   }
 };
 
@@ -134,6 +143,10 @@ const mutations = {
   getLikeHotUser: (state, payLoad) => {
     console.log(payLoad);
     state.likeHot = payLoad.likeHot;
+  },
+  getAnotherUser: (state, payLoad) => {
+    console.log(payLoad);
+    state.another = payLoad.another;
   }
 };
 

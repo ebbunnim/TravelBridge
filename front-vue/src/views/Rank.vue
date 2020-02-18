@@ -3,7 +3,7 @@
     <h1>Sub페이지</h1>
   </div>-->
   <div>
-    <h3>Main3 - calendar</h3>
+    <!-- <h3>Main3 - calendar</h3> -->
     <q-img :src="getImgUrl('cutbg.jpg')" style="width: 100%">
       <div class="absolute-center text-center" style="width: 100%">
         <p class="text-h3 text-center">

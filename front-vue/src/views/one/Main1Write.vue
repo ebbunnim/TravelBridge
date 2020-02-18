@@ -61,7 +61,7 @@
                 </template>
               </div>
               <div class="col-10 justify-center row" style="margin-top:1%;">
-                <div style="display: inline" v-for="(item, idx) in post.postThema" :key="idx">
+                <div style="display: inline" v-for="(item, idx) in postThema" :key="idx">
                   <q-btn
                     color="grey"
                     class="q-ma-sm"
@@ -193,7 +193,7 @@
                 </template>
               </div>
               <div class="col-10 justify-center row" style="margin-top:1%;">
-                <div style="display: inline" v-for="(item, idx) in plan.planThema" :key="idx">
+                <div style="display: inline" v-for="(item, idx) in planThema" :key="idx">
                   <q-btn
                     color="grey"
                     class="q-ma-sm"

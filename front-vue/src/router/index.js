@@ -5,6 +5,7 @@ import Login from "../views/user/Login.vue";
 import PasswordFind from "../views/user/PasswordFind.vue";
 import SignUp from "../views/user/SignUp.vue";
 import MyPage from "../views/user/MyPage.vue";
+import UserPage from "../views/user/UserPage.vue";
 //about
 import AboutTeam from "../views/about/AboutTeam.vue";
 import AboutService from "../views/about/AboutService.vue";
@@ -28,7 +29,9 @@ import HotPlaceDetail from "../views/two/HotPlaceDetail.vue";
 import FestivalDetail from "../views/two/FestivalDetail.vue";
 // sub기능, 전체 통합검색 Search Page
 import Mate from "../views/Mate.vue";
+import Rank from "../views/Rank.vue";
 import Search from "../views/Search.vue";
+import Sub from "../views/Sub.vue";
 
 Vue.use(VueRouter);
 
@@ -91,9 +94,12 @@ const routes = [
     component: FestivalDetail
   },
   {
-    path: "/mate",
-    name: "mate",
-    component: Mate
+    path: "/page3",
+    component: Sub,
+    children: [
+      { path: "mate", component: Mate },
+      { path: "rank", component: Rank }
+    ]
   },
   {
     path: "/faq",
@@ -139,6 +145,11 @@ const routes = [
     path: "/mypage",
     name: "mypage",
     component: MyPage
+  },
+  {
+    path: "/userpage/:userNo",
+    name: "userpage",
+    component: UserPage
   }
 ];
 

@@ -36,10 +36,17 @@
 
             <q-tab-panels v-model="followTab" animated>
               <q-tab-panel name="follower">
-                <div v-for="(mem,index) in follower.mem_followMe" :key="index">{{mem.mem_id}}</div>
+                <div v-for="(mem,index) in follower.mem_followMe" :key="index">
+                  {{mem.mem_id}}{{mem.mem_no}}
+                  <q-btn color="primary" icon="check" label="OK" @click="moveUser(mem.mem_no)" />
+                </div>
+                <q-btn color="primary" icon="check" label="OK" @click="moveUser(16)" />
               </q-tab-panel>
               <q-tab-panel name="following">
-                <div v-for="(mem,index) in following.mem_followList" :key="index">{{mem.mem_id}}</div>
+                <div
+                  v-for="(mem,index) in following.mem_followList"
+                  :key="index"
+                >{{mem.mem_id}}{{mem.mem_no}}</div>
               </q-tab-panel>
             </q-tab-panels>
           </q-tab-panel>
@@ -322,10 +329,9 @@
 
             <q-tab-panels v-model="likeTab" animated>
               <q-tab-panel name="post">{{likePost.mem_likePost}}</q-tab-panel>
-              <q-tab-panel name="hot"></q-tab-panel>
-              <!-- {{likeHot.mem_likeHotPlace}} -->
-              <q-tab-panel name="festa"></q-tab-panel>
-              <!-- {{likeFesta.mem_likeFestival}} -->
+              <q-tab-panel name="hot">{{likeHot.mem_likeHotPlace}}</q-tab-panel>
+
+              <q-tab-panel name="festa">{{likeFesta.mem_likeFestival}}</q-tab-panel>
             </q-tab-panels>
           </q-tab-panel>
         </q-tab-panels>
@@ -417,6 +423,9 @@ export default {
           }
         }
       }
+    },
+    moveUser(no) {
+      this.$router.push(`/userpage/${no}`);
     }
   },
   mounted() {

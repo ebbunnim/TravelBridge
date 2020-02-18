@@ -146,6 +146,7 @@ public class MembersController {
     	List<Post> postList = p_service.searchFollowingPeoplePost(mem_no);
     	Members getUser = service.search(mem_no);
     	getUser.setMem_followPost(postList);
+    	System.out.println(postList);
     	return handleSuccess(getUser);
     }
 
@@ -173,6 +174,7 @@ public class MembersController {
         // pw 컬럼 버림
         service.insert(members);
         Members m = service.searchMemberByEmail(email);
+      
         Board b = new Board();
         b.setMem_no(m.getMem_no());
         b.setBoard_name(m.getMem_id() + "님의 소식");

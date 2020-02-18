@@ -87,6 +87,13 @@ class UserService {
         console.log(e);
       });
   }
+  anotherUser(userNo) {
+    return Api.get(`Members/search/${userNo}`)
+      .then(Response => {
+        return Response.data.data;
+      })
+      .catch(e => console.log(e));
+  }
 }
 
 export default new UserService();

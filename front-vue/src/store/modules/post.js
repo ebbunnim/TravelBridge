@@ -74,6 +74,7 @@ const mutations = {
         ti.push(i);
       }
     }
+    if (ti.length != 0) titles.push(ti);
     if (payLoad.pageNo === 1) {
       state.postList = titles;
     } else {
