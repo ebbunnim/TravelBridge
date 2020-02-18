@@ -306,7 +306,7 @@
 		post_plan_date=#{post_plan_date:VARCHAR}
 		where post_no=#{post_no}
 	</update>
-	<select id="searchMorePostByOption" parameterType="hashmap" resultType="hashmap" resultMap="pcfMap">
+	<select id="searchMorePostByOption" parameterType="hashmap" resultMap="pcfMap">
 		<![CDATA[SELECT
 			RESULT.rnum,
 			RESULT.post_no,
@@ -359,7 +359,7 @@
 					as a,
 					(SELECT @vpost_no:='', @rownum:=0 FROM DUAL) as b
 				) AS RESULT
-		WHERE RESULT.rnum >0 AND  RESULT.rnum <= 16 AND]]>
+		WHERE RESULT.rnum >#{startPage} AND  RESULT.rnum <= #{endPage} AND]]>
 		<choose>
 			<when test="searchOption == 'all'">
 				(post_title like concat('%',#{word},'%')

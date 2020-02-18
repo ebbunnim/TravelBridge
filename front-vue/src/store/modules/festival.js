@@ -2,13 +2,20 @@ import FestivalService from "@/services/FestivalService.js";
 
 const state = {
   fvals: [],
-  fval_list_length: 0
+  fval_list_length: 0,
+  fval: null
 };
 
 const actions = {
   searchAllFvals: ({ commit }) => {
     FestivalService.searchAll(fvals => {
       commit("saveFvals", fvals);
+    });
+  },
+  searchByNo({ commit }, no) {
+    FestivalService.searchByNo(no).then(res => {
+      console.log("결과 => ", res);
+      commit("saveFval", res);
     });
   },
   searchMoreFestival: ({ commit }, payload) => {
@@ -30,9 +37,7 @@ const actions = {
   searchMoreFestivalByTheme: ({ commit }, payload) => {
     FestivalService.searchMoreFestivalByTheme(payload.btnCnt, payload.word)
       .then(res => {
-        console.log("여긴 vuex", res);
         commit("saveFvals", res);
-        console.log("fval state: ", state.fvals);
       })
       .catch(e => {
         console.log(e);

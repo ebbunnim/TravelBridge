@@ -12,15 +12,9 @@ class HotPlaceService {
       .catch(e => console.log(e));
   }
   // 번호로 찾아오기
-  searchByNo(payload) {
-    console.log("pay", payload);
-    let pay = payload;
-
-    // const no = pay.no
-    return Api.get(`/HotPlace/` + pay)
+  searchByNo(no) {
+    return Api.get(`/HotPlace/${no}`)
       .then(res => {
-        console.log(typeof pay);
-        console.log("서비스", res.data);
         return res.data.data;
       })
       .catch(e => {
@@ -95,6 +89,7 @@ class HotPlaceService {
   searchMoreHotplace(btnCnt, searchOption, word) {
     return Api.get(`/HotPlace/search/more/${btnCnt}/${searchOption}/${word}`)
       .then(res => {
+        console.log("HotPlaceService에서...", res.data.data);
         return res.data.data;
       })
       .catch(e => {

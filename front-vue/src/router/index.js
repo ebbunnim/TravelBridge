@@ -22,7 +22,7 @@ import Main1follow from "../views/one/Main1follow.vue";
 //main2
 import Home from "../views/Home.vue";
 import Main2 from "../views/two/Main2.vue";
-import Main2Pick from "../views/two/Main2Pick.vue";
+// import Main2Pick from "../views/two/Main2Pick.vue";
 import Main2Home from "../views/two/Main2Home.vue";
 // import Main2List from "../views/two/Main2List.vue";
 import HotPlaceDetail from "../views/two/HotPlaceDetail.vue";
@@ -74,7 +74,11 @@ const routes = [
     component: Main2,
     children: [
       { path: "", component: Main2Home },
-      { path: "pick", component: Main2Pick },
+      {
+        path: "pick",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/two/Main2Pick.vue")
+      },
       // { path: "list", component: Main2List },
       {
         path: "list",

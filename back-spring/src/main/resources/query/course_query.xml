@@ -32,7 +32,7 @@
 		post_no = #{post_no:INTEGER},
 		course_title = #{course_title:VARCHAR},
 		course_description = #{course_description:VARCHAR},
-		cmt_del_check = #{cmt_del_check:BOOLEAN}
+		course_del_check = #{course_del_check:BOOLEAN}
 		WHERE course_no = #{course_no:INTEGER}      
 	</update>
    	<select id="search"		parameterType="int" resultType="course"> 

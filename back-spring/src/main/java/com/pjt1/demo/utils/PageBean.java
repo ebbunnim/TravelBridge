@@ -1,13 +1,12 @@
 package com.pjt1.demo.utils;
 
+import lombok.ToString;
+
 // 최종적으로는 getPageStart()가 반환한 값과 perPageNum을 전달해야 한다.
 
 public class PageBean {
 	private int page; // 현재 페이지 번호( != 특정 페이지의 첫번째 게시글 번호(이건 getPageStart() 거쳐야 함) )
 	private int perPageNum; // 한 페이지당 보여줄 게시글 개수
-	private String searchOption;
-	private String word;
-
 	public PageBean() {
 		setPage(this.page);
 		this.perPageNum = 12;
@@ -28,21 +27,7 @@ public class PageBean {
 	public void setPerPageNum(int perPageNum) {
 		this.perPageNum = perPageNum;
 	}
-	@Override
-	public String toString() {
-		return "PageBean [page=" + page + ", perPageNum=" + perPageNum + ", searchOption=" + searchOption + ", word=" + word + "]";
-	}
-	public void setSearchOption(String searchOption) {
-		this.searchOption = searchOption;
-	}
-
-	public String getSearchOption() {
-		return this.searchOption;
-	}
-	public void setWord(String word) {
-		this.word = word;
-	}
-	public String getWord() {
-		return this.word;
+	public String toString(){
+		return "pageBean:" + this.page + "," + this.perPageNum;
 	}
 }
