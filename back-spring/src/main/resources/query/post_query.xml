@@ -318,5 +318,15 @@
 		FROM FILES
 		WHERE post_no = #{post_no:INTEGER} AND files_del_check = FALSE
 	</select>
+
+	<select id="searchFollowingPost" parameterType = "int" resultType = "post">
+		SELECT p.*
+		FROM POST p
+		INNER JOIN FOLLOW f
+		ON p.mem_no = f.follower_no
+		WHERE f.following_no = #{following_no:INTEGER}
+		ORDER BY p.post_regtime desc
+	</select>
+
 	
 </mapper>

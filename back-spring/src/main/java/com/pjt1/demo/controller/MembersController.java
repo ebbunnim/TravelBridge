@@ -100,39 +100,43 @@ public class MembersController {
         Members members = service.searchMemberLikePost(mem_no);
         return handleSuccess(members);
     }
+
     @ApiOperation("no에 따른 Member가 좋아하는 핫플레이스 List를 조회하는 기능")
     @GetMapping("/Members/searchMemberLikeHotPlace/{mem_no}")
     public ResponseEntity<Map<String, Object>> searchMemberLikeHotPlace(@PathVariable int mem_no) {
     	Members members = service.searchMemberLikeHotPlace(mem_no);
     	return handleSuccess(members);
     }
+
     @ApiOperation("no에 따른 Member가 좋아하는 축제 List를 조회하는 기능")
     @GetMapping("/Members/searchMemberLikeFestival/{mem_no}")
     public ResponseEntity<Map<String, Object>> searchMemberLikeFestival(@PathVariable int mem_no) {
     	Members members = service.searchMemberLikeFestival(mem_no);
     	return handleSuccess(members);
     }
-    
-//    @ApiOperation("no에 따른 Member의 FollowList를 조회하는 기능")
-//    @GetMapping("/Members/searchFollowMembers/{mem_no}")
-//    public ResponseEntity<Map<String, Object>> searchFollowMembers(int mem_no) {
-//    	Members members = service.search(mem_no);
-//    	List<Follow> fList = f_service.searchMemberList(mem_no);
-//        members.setMem_followList(fList);
-//        return handleSuccess(members);
-//    }
+
+    // @ApiOperation("no에 따른 Member의 FollowList를 조회하는 기능")
+    // @GetMapping("/Members/searchFollowMembers/{mem_no}")
+    // public ResponseEntity<Map<String, Object>> searchFollowMembers(int mem_no) {
+    // Members members = service.search(mem_no);
+    // List<Follow> fList = f_service.searchMemberList(mem_no);
+    // members.setMem_followList(fList);
+    // return handleSuccess(members);
+    // }
     @ApiOperation("no에 따른 Member의 FollowList를 조회하는 기능")
     @GetMapping("/Members/searchMyFollowPeople/{mem_no}")
     public ResponseEntity<Map<String, Object>> searchMyFollowPeople(@PathVariable int mem_no) {
     	Members members = service.searchMyFollowPeople(mem_no);
         return handleSuccess(members);
     }
+
     @ApiOperation("no에 따른 Member의 FollowMeList를 조회하는 기능")
     @GetMapping("/Members/searchFollowMePeople/{mem_no}")
     public ResponseEntity<Map<String, Object>> searchFollowMePeople(@PathVariable int mem_no) {
     	Members members = service.searchFollowMePeople(mem_no);
         return handleSuccess(members);
     }
+
     @ApiOperation("no에 따른 Member의 Following List의 Post를 조회하는 기능")
     @GetMapping("/Members/searchFollowingPeoplePost/{mem_no}")
     public ResponseEntity<Map<String, Object>> searchFollowingPeoplePost(@PathVariable int mem_no) {
@@ -142,6 +146,7 @@ public class MembersController {
     	getUser.setMem_followPost(postList);
     	return handleSuccess(getUser);
     }
+
     @ApiOperation("Member 조회(email에 따른)")
     @GetMapping("/Members/search/email/{mem_email}")
     public ResponseEntity<Map<String, Object>> searchMemberByEmail(@PathVariable String mem_email) {
@@ -162,13 +167,13 @@ public class MembersController {
         if (checkMembers != null) {
             return handleFail("이미 존재하는 이메일입니다.", HttpStatus.BAD_REQUEST);
         }
-        
+
         // pw 컬럼 버림
         service.insert(members);
         Members m = service.searchMemberByEmail(email);
         Board b = new Board();
         b.setMem_no(m.getMem_no());
-        b.setBoard_name(m.getMem_id()+"님의 소식");
+        b.setBoard_name(m.getMem_id() + "님의 소식");
         b_service.insert(b);
         return handleSuccess("Member 등록 성공");
     }
@@ -195,48 +200,61 @@ public class MembersController {
     @ApiOperation("Member 삭제 ")
     @DeleteMapping("/Members/delete/{mem_no}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable int mem_no) {
-    	List<Map<String, Object>> delList_Board = service.findChildBoard(mem_no);
-    	List<Map<String, Object>> delList_Qna = service.findChildQna(mem_no);
-    	List<Map<String, Object>> delList_Follow = service.findChildFollow(mem_no);
-    	List<Map<String, Object>> delList_Likes = service.findChildLikes(mem_no);
-    	List<Map<String, Object>> delList_Post = service.findChildPost(mem_no);
-    	List<Map<String, Object>> delList_Comment = service.findChildComment(mem_no);
-    	List<Map<String, Object>> delList_Files = service.findChildFiles(mem_no);
-    	List<Integer> del_Board_IndexList = new ArrayList<Integer>(); 
-    	List<Integer> del_Qna_IndexList = new ArrayList<Integer>(); 
-    	List<Integer> del_Follow_IndexList = new ArrayList<Integer>();
-    	List<Integer> del_Likes_IndexList = new ArrayList<Integer>();
-    	List<Integer> del_Post_IndexList = new ArrayList<Integer>();
-    	List<Integer> del_Comment_IndexList = new ArrayList<Integer>();
-    	List<Integer> del_Files_IndexList = new ArrayList<Integer>();
-    	for(Object o : delList_Board) {  del_Board_IndexList.add(((Board) o).getBoard_no());}
-    	for(Object o : delList_Qna) {  del_Qna_IndexList.add(((Qna) o).getQna_no());}
-    	for(Object o : delList_Follow) {  del_Follow_IndexList.add(((Follow) o).getFollow_no());}
-    	for(Object o : delList_Likes) {  del_Likes_IndexList.add(((Likes) o).getLike_no());}
-    	for(Object o : delList_Post) {  del_Post_IndexList.add(((Post) o).getPost_no());}
-    	for(Object o : delList_Comment) {  del_Comment_IndexList.add(((Comment) o).getCmt_no());}
-    	for(Object o : delList_Files) {  del_Files_IndexList.add(((Files) o).getFiles_no());}
-    	
-    	System.out.println(delList_Board);
-    	System.out.println(delList_Qna);
-    	System.out.println(delList_Follow);
-    	System.out.println(delList_Likes);
-    	System.out.println(delList_Post);
-    	System.out.println(delList_Comment);
-    	System.out.println(delList_Files);
-    	service.deleteChildComment(del_Comment_IndexList);
-    	service.deleteChildFiles(del_Files_IndexList);
-    	service.deleteChildLikes(del_Likes_IndexList);
-    	service.deleteChildQna(del_Qna_IndexList);
-    	service.deleteChildFollow(del_Follow_IndexList);
-    	service.deleteChildPost(del_Post_IndexList);
-    	service.deleteChildBoard(del_Board_IndexList);
-    	service.delete(mem_no);
-    	Members members = service.search(mem_no);
-    	return (members.isMem_del_check() == false) ? handleSuccess("탈퇴 완료")
-    			: handleFail("없는 회원입니다", HttpStatus.NOT_FOUND);
+        List<Map<String, Object>> delList_Board = service.findChildBoard(mem_no);
+        List<Map<String, Object>> delList_Qna = service.findChildQna(mem_no);
+        List<Map<String, Object>> delList_Follow = service.findChildFollow(mem_no);
+        List<Map<String, Object>> delList_Likes = service.findChildLikes(mem_no);
+        List<Map<String, Object>> delList_Post = service.findChildPost(mem_no);
+        List<Map<String, Object>> delList_Comment = service.findChildComment(mem_no);
+        List<Map<String, Object>> delList_Files = service.findChildFiles(mem_no);
+        List<Integer> del_Board_IndexList = new ArrayList<Integer>();
+        List<Integer> del_Qna_IndexList = new ArrayList<Integer>();
+        List<Integer> del_Follow_IndexList = new ArrayList<Integer>();
+        List<Integer> del_Likes_IndexList = new ArrayList<Integer>();
+        List<Integer> del_Post_IndexList = new ArrayList<Integer>();
+        List<Integer> del_Comment_IndexList = new ArrayList<Integer>();
+        List<Integer> del_Files_IndexList = new ArrayList<Integer>();
+        for (Object o : delList_Board) {
+            del_Board_IndexList.add(((Board) o).getBoard_no());
+        }
+        for (Object o : delList_Qna) {
+            del_Qna_IndexList.add(((Qna) o).getQna_no());
+        }
+        for (Object o : delList_Follow) {
+            del_Follow_IndexList.add(((Follow) o).getFollow_no());
+        }
+        for (Object o : delList_Likes) {
+            del_Likes_IndexList.add(((Likes) o).getLike_no());
+        }
+        for (Object o : delList_Post) {
+            del_Post_IndexList.add(((Post) o).getPost_no());
+        }
+        for (Object o : delList_Comment) {
+            del_Comment_IndexList.add(((Comment) o).getCmt_no());
+        }
+        for (Object o : delList_Files) {
+            del_Files_IndexList.add(((Files) o).getFiles_no());
+        }
+
+        System.out.println(delList_Board);
+        System.out.println(delList_Qna);
+        System.out.println(delList_Follow);
+        System.out.println(delList_Likes);
+        System.out.println(delList_Post);
+        System.out.println(delList_Comment);
+        System.out.println(delList_Files);
+        service.deleteChildComment(del_Comment_IndexList);
+        service.deleteChildFiles(del_Files_IndexList);
+        service.deleteChildLikes(del_Likes_IndexList);
+        service.deleteChildQna(del_Qna_IndexList);
+        service.deleteChildFollow(del_Follow_IndexList);
+        service.deleteChildPost(del_Post_IndexList);
+        service.deleteChildBoard(del_Board_IndexList);
+        service.delete(mem_no);
+        Members members = service.search(mem_no);
+        return (members.isMem_del_check() == false) ? handleSuccess("탈퇴 완료")
+                : handleFail("없는 회원입니다", HttpStatus.NOT_FOUND);
     }
-    
 
     @ApiOperation("로그인")
     @PostMapping("/Members/login") // /user/login에서 바꿈
@@ -269,9 +287,9 @@ public class MembersController {
 
             return new ResponseEntity<Map<String, Object>>(resultMap, status);
 
-            } else {
-                return handleFail("존재하지 않는 회원입니다.", HttpStatus.NOT_FOUND);
-            } 
+        } else {
+            return handleFail("존재하지 않는 회원입니다.", HttpStatus.NOT_FOUND);
+        }
     }
 
     // 굳이 필요한가? 안필요하면 버리기
@@ -285,7 +303,7 @@ public class MembersController {
             resultMap.putAll(jwtService.get(req.getHeader("jwt-auth-token")));
             System.out.println(resultMap);
             resultMap.put("status", true);
-            //members안나오면 members 꺼내올까?
+            // members안나오면 members 꺼내올까?
             resultMap.put("request_body", members);
             status = HttpStatus.ACCEPTED;
         } catch (RuntimeException e) {

@@ -17,4 +17,5 @@ public interface FollowService {
 	public void delete(int follow_no);
 
 	public List<Follow> searchMemberList(int follower_no);
+
 }
