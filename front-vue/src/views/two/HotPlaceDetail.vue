@@ -60,7 +60,7 @@ export default {
       this.$store.dispatch("hotplace/searchByNo", this.hp_no);
     }
   },
-  mounted() {
+  created() {
     this.getHotplace();
   }
 };
