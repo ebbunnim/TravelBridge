@@ -1,13 +1,8 @@
 import FestivalService from "@/services/FestivalService.js";
 const state = {
   fvals: [],
-<<<<<<< HEAD
-  fval_list_length: 0, 
-  fval: {} // 번호로 찾아올 때 단일 fval  
-=======
   fval_list_length: 0,
   fval: {} // 번호로 찾아올 때 단일 fval
->>>>>>> 061045aff432373ef9c214620db5ba51b6207693
 };
 const actions = {
   searchAllFvals: ({ commit }) => {
@@ -30,13 +25,9 @@ const actions = {
     )
       .then(res => {
         console.log(res);
-<<<<<<< HEAD
 
         commit("saveFvals", res);
 
-=======
-        commit("saveFvals", res);
->>>>>>> 061045aff432373ef9c214620db5ba51b6207693
         console.log("state.fvals 확인 ", state.fvals);
         console.log("길이 측정!!!!!: ", state.fval_list_length);
       })

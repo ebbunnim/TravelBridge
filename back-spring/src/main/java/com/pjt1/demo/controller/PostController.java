@@ -39,7 +39,6 @@ public class PostController {
     private PostService service;
     @Autowired
     private MembersService m_service;
-	private static int postPageNum = 16;
 
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
@@ -124,9 +123,15 @@ public class PostController {
         List<Integer> del_Likes_IndexList = new ArrayList<Integer>();
         List<Integer> del_Comment_IndexList = new ArrayList<Integer>();
         List<Integer> del_Files_IndexList = new ArrayList<Integer>();
-        for (Object o : delList_Likes) 		{ del_Likes_IndexList.add(((Likes) o).getLike_no()); }
-        for (Object o : delList_Comment) 	{ del_Comment_IndexList.add(((Comment) o).getCmt_no()); }
-        for (Object o : delList_Files) 		{ del_Files_IndexList.add(((Files) o).getFiles_no()); }
+        for (Object o : delList_Likes) {
+            del_Likes_IndexList.add(((Likes) o).getLike_no());
+        }
+        for (Object o : delList_Comment) {
+            del_Comment_IndexList.add(((Comment) o).getCmt_no());
+        }
+        for (Object o : delList_Files) {
+            del_Files_IndexList.add(((Files) o).getFiles_no());
+        }
         service.deleteChildLike(del_Likes_IndexList);
         service.deleteChildCmt(del_Comment_IndexList);
         service.deleteChildFiles(del_Files_IndexList);
@@ -143,9 +148,9 @@ public class PostController {
 
     @ApiOperation("페이징된 Post 전체 목록 조회")
     @GetMapping("/Post/search/pageAll/{btnCnt}")
-    public ResponseEntity<Map<String, Object>> searchPagePostAll(@PathVariable int btnCnt) {
-    	PageBean pageBean = new PageBean(btnCnt, postPageNum);
+    public ResponseEntity<Map<String, Object>> searchPagePostAll(PageBean pageBean, @PathVariable int btnCnt) {
         PageMaker pageMaker = new PageMaker();
+        pageBean.setPage(btnCnt);
         pageMaker.setPageBean(pageBean);
         pageMaker.setStartPage(pageBean.getPage());
         pageMaker.setEndPage(pageMaker.getStartPage());
@@ -155,9 +160,9 @@ public class PostController {
 
     @ApiOperation("페이징된 Post 중 일정(Plan) 목록 조회")
     @GetMapping("/Post/search/pagePlan/{btnCnt}")
-    public ResponseEntity<Map<String, Object>> searchPagePlan( @PathVariable int btnCnt) {
+    public ResponseEntity<Map<String, Object>> searchPagePlan(PageBean pageBean, @PathVariable int btnCnt) {
         PageMaker pageMaker = new PageMaker();
-    	PageBean pageBean = new PageBean(btnCnt, postPageNum);
+        pageBean.setPage(btnCnt);
         pageMaker.setPageBean(pageBean);
         pageMaker.setStartPage(pageBean.getPage());
         pageMaker.setEndPage(pageMaker.getStartPage());
@@ -169,7 +174,6 @@ public class PostController {
     @GetMapping("/Post/searchFollowingPost")
     public ResponseEntity<Map<String, Object>> searchFollowingPost(int following_no) {
         List<Post> list = service.searchFollowingPost(following_no);
-
 
         return handleSuccess(list);
     }
