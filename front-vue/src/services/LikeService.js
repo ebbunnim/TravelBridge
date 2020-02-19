@@ -10,6 +10,16 @@ class LikeService {
         console.log(e);
       });
   }
+  deleteLike(like_no) {
+    return Api.delete(`/Likes/delete/${like_no}`)
+      .then(res => {
+        return res.data.data
+      })
+      .catch(e => {
+        console.log(e)
+      })
+  }
+  // 
 }
 
 export default new LikeService();

@@ -16,8 +16,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class SubCourse implements Serializable{
-
+public class SubCourse implements Serializable {
 
     /**
      *

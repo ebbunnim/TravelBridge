@@ -1,81 +1,64 @@
 <template>
   <q-page class="page">
-    <div
-      class="row justify-center text-center q-my-xl q-py-xl"
-      style="height: 400px; background: #f9f9f9"
-    >
-      <!--  -->
-      <!-- <div>{{ hp_list }}</div>
-      <div class="text-h2">{{ hp_list_length }}</div>
-      <div>{{ fval_list }}</div>
-      <div class="text-h2">{{ fval_list_length }}</div> -->
-      <!--  -->
+    <div class="row justify-center text-center q-my-xl q-py-xl bg-image" style="width: 100%">
       <q-select
-        no-wrap
-        class="col-md-1 col-xs-4 text-h6 q-mx-sm q-px-lg"
+        wrap
+        rounded
+        bg-color="grey"
+        standout="bg-glossy text-white"
+        class="col-md-2 col-xs-4 text-h6 q-mx-sm"
         v-model="searchOption"
         :options="searchOptions"
       />
       <template v-if="this.searchOption == '도시'">
-        <div class="row justify-around col-5" style="margin-top:2%;">
-                <q-select
-                  filled
-                  v-model="area"
-                  use-input
-                  hide-selected
-                  fill-input
-                  input-debounce="0"
-                  @input="postInner"
-                  :options="spinArea"
-                  class="col-5"
-                  label="지역"
-                >
-                  <template v-slot:no-option>
-                    <q-item>
-                      <q-item-section class="text-grey">No results</q-item-section>
-                    </q-item>
-                  </template>
-                </q-select>
-                <template>
-                  <q-select
-                    filled
-                    v-model="city"
-                    label="도시"
-                    :options="spinCity"
-                    class="col-5"
-                    behavior="menu"
-                  />
-                </template>
-               <q-btn
-            outline
-            flat
-            color="grey"
-            icon="search"
-            @click="onSearchSubBtn()"
-          />
-              </div>
+        <div class="row justify-around col-5">
+          <q-select
+            rounded
+            bg-color="grey"
+            standout="bg-glossy text-white"
+            v-model="area"
+            use-input
+            input-debounce="0"
+            @input="postInner"
+            :options="spinArea"
+            class="col-5 text-h6"
+            label="지역"
+          >
+            <template v-slot:no-option>
+              <q-item>
+                <q-item-section class="text-grey">No results</q-item-section>
+              </q-item>
+            </template>
+          </q-select>
+          <template>
+            <q-select
+              rounded
+              bg-color="grey"
+              standout="bg-glossy text-white"
+              v-model="city"
+              label="도시"
+              :options="spinCity"
+              class="col-5 text-h6"
+              behavior="menu"
+            />
+          </template>
+          <q-btn outline flat color="grey" icon="search" @click="onSearchSubBtn()" />
+        </div>
       </template>
       <template v-else>
         <q-input
-        class="col-md-3 col-xs-6 text-h6"
-        v-model="word"
-        text-
-        :placeholder="[
-          (searchOption === null) | (searchOption === '전체')
-            ? ''
-            : searchOption + '을(를) 검색하세요'
-        ]"
-      >
-        <template v-slot:append>
-          <q-btn
-            outline
-            flat
-            color="grey"
-            icon="search"
-            @click="onSearchBtn()"
-          />
-        </template>
-      </q-input>
+          rounded
+          bg-color="grey"
+          standout="bg-glossy text-white"
+          class="col-md-3 col-xs-6 text-h6"
+          v-model="word"
+          text-
+          placeholder="검색어를 입력하세요"
+        >
+          <template v-slot:append>
+            <q-btn outline flat color="white" icon="search" @click="onSearchBtn()" />
+          </template>
+        </q-input>
       </template>
       <!-- 버튼을 누른다.  -->
       <!--  -->
@@ -87,21 +70,12 @@
       >
         <b>{{ searchTitle }}</b> 검색 결과
       </div>
-
       <div
         v-if="hp_list_length === 0 ? false : true"
         class="col-12 text-center text-h6"
-      >
-        #{{ searchTitle }} 핫플레이스
-      </div>
-      <div v-else class="col-12 text-center text-h6">
-        {{ searchTitle }} 핫플레이스 검색 결과가 없습니다.
-      </div>
-      <div
-        class="col-lg-3 col-md-6 col-xs-12"
-        v-for="i in hp_list_length"
-        :key="i"
-      >
+      >#{{ searchTitle }} 핫플레이스</div>
+      <div v-else class="col-12 text-center text-h6">{{ searchTitle }} 핫플레이스 검색 결과가 없습니다.</div>
+      <div class="col-lg-3 col-md-6 col-xs-12" v-for="i in hp_list_length" :key="i">
         <!-- 카드가 들어가는 부분 -->
         <HotPlaceCard
           class="q-ma-lg"
@@ -116,18 +90,9 @@
       <div
         v-if="fval_list_length === 0 ? false : true"
         class="col-12 text-center text-h6"
-      >
-        #{{ searchTitle }} 페스티벌
-      </div>
-      <div v-else class="col-12 text-center text-h6">
-        {{ searchTitle }} 페스티벌 검색 결과가 없습니다.
-      </div>
-
-      <div
-        class="col-lg-3 col-md-6 col-xs-12"
-        v-for="j in fval_list_length"
-        :key="j"
-      >
+      >#{{ searchTitle }} 페스티벌</div>
+      <div v-else class="col-12 text-center text-h6">{{ searchTitle }} 페스티벌 검색 결과가 없습니다.</div>
+      <div class="col-lg-3 col-md-6 col-xs-12" v-for="j in fval_list_length" :key="j">
         <!-- 카드가 들어가는 부분 -->
         <FestivalCard
           class="q-ma-lg"
@@ -433,10 +398,10 @@ export default {
         도시: "city"
       },
       word: "",
-      city:"",
-      area:"",
-      spinArea :area,
-      spinCity :[]
+      city: "",
+      area: "",
+      spinArea: area,
+      spinCity: []
     };
   },
   computed: {
@@ -467,23 +432,26 @@ export default {
 
       this.$store.commit("hotplace/saveSearchTitle", this.word);
     },
-    onSearchSubBtn(){
+    onSearchSubBtn() {
       const payLoad1 = {
         btnCnt: this.hpBtnCnt,
         searchOption: this.searchOptionValue[this.searchOption],
-        word: this.area +" "+this.city
+        word: this.area + " " + this.city
       };
       const payLoad2 = {
         btnCnt: this.fvalBtnCnt,
         searchOption: this.searchOptionValue[this.searchOption],
-        word: this.area +" "+this.city
+        word: this.area + " " + this.city
       };
       console.log("Vue:", payLoad1);
       console.log("Vue:", payLoad2);
       this.$store.dispatch("hotplace/searchMoreHotplace", payLoad1);
       this.$store.dispatch("festival/searchMoreFestival", payLoad2);
 
-      this.$store.commit("hotplace/saveSearchTitle", this.area+" "+this.city);
+      this.$store.commit(
+        "hotplace/saveSearchTitle",
+        this.area + " " + this.city
+      );
     },
     postInner() {
       this.city = "";
@@ -517,4 +485,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.bg-image {
+  background-image: url("../../assets/global.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 450px;
+  min-height: 350px;
+}
+</style>

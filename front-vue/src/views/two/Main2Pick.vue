@@ -4,9 +4,7 @@
       <q-card>
         <q-card-section>
           <div class="text-subtitle1 text-center">선택한 테마가 없습니다!</div>
-          <div class="text-h6">
-            로그인하시거나 관심 테마를 직접 추가해보세요!
-          </div>
+          <div class="text-h6">로그인하시거나 관심 테마를 직접 추가해보세요!</div>
         </q-card-section>
 
         <q-card-actions align="center">
@@ -35,9 +33,7 @@
       <q-card>
         <q-card-section>
           <div class="text-subtitle1 text-center">선택한 테마가 없습니다</div>
-          <div class="text-h6">
-            지금 관심 테마를 선택하고 여행지를 추천받아 보세요!
-          </div>
+          <div class="text-h6">지금 관심 테마를 선택하고 여행지를 추천받아 보세요!</div>
         </q-card-section>
 
         <q-card-actions align="center">
@@ -52,10 +48,7 @@
       </q-card>
     </q-dialog>
 
-    <div
-      class="row justify-center items-center q-my-xl q-py-xl"
-      style="height: 350px; background: #f9f9f9"
-    >
+    <div class="row justify-center items-center q-my-xl q-py-xl bg-image">
       <div style="display: inline" v-for="(item, idx) in thema" :key="idx">
         <q-btn
           color="grey"
@@ -67,8 +60,7 @@
             item.state = !item.state;
             onToggle();
           "
-          >#{{ item.name }}</q-btn
-        >
+        >#{{ item.name }}</q-btn>
         <q-btn
           color="grey"
           class="q-ma-sm"
@@ -80,8 +72,7 @@
             item.state = !item.state;
             onToggle();
           "
-          >#{{ item.name }}</q-btn
-        >
+        >#{{ item.name }}</q-btn>
       </div>
     </div>
 
@@ -102,13 +93,7 @@
           :hp_no="hp_list[i - 1].hp_no"
         ></HotPlaceCard>
       </div>
-      <q-btn
-        class="q-my-lg full-width"
-        flat
-        v-if="hpBtnCheck"
-        @click="loadMoreHpBtn()"
-        >핫플레이스 더보기</q-btn
-      >
+      <q-btn class="q-my-lg full-width" flat v-if="hpBtnCheck" @click="loadMoreHpBtn()">핫플레이스 더보기</q-btn>
     </div>
 
     <div class="row justify-center q-mx-xl q-px-xl">
@@ -135,14 +120,13 @@
         flat
         v-if="fvalBtnCheck"
         @click="loadMoreFestivalBtn()"
-        >페스티벌 더보기</q-btn
-      >
+      >페스티벌 더보기</q-btn>
     </div>
   </q-page>
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState } from "vuex";
 import HotPlaceCard from "@/views/two/HotPlaceCard.vue";
 import FestivalCard from "@/views/two/FestivalCard.vue";
 export default {
@@ -269,4 +253,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.bg-image {
+  background-image: url("../../assets/global.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 450px;
+  min-height: 350px;
+}
+</style>
