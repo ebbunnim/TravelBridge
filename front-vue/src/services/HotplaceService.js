@@ -21,75 +21,25 @@ class HotPlaceService {
         console.log(e);
       });
   }
-  // insert(hp) {
-  //   return Api.post(`/HotPlace`, hp);
-  // }
-  // delete(no) {
-  //   return Api.delete(`/HotPlace/${no}`);
-  // }
-  // update(hp) {
-  //   return Api.update(`/HotPlace`, hp);
-  // }
-  //
 
-  // 더보기 버튼으로 처리
-  searchMoreHotPlaceAll(btnCnt) {
-    return Api.get(`/HotPlace/search/more/${btnCnt}`)
-      .then(res => {
-        return res.data.data;
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
-  // 도시 (city table) 로 검색
-  searchMoreHotPlaceByCityName(btnCnt, cityName) {
-    return Api.get(`/HotPlace/search/more/cityname/${btnCnt}/${cityName}`)
-      .then(res => {
-        return res.data.data;
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
-  // Tag 로 검색
-  searchMoreHotPlaceByTag(btnCnt, tag) {
-    return Api.get(`/HotPlace/search/more/tag/${btnCnt}/${tag}`)
-      .then(res => {
-        return res.data.data;
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
-  // 주소로 검색
-  searchMoreHotPlaceByAddress(btnCnt, address) {
-    return Api.get(`/HotPlace/search/more/address/${btnCnt}/${address}`)
-      .then(res => {
-        return res.data.data;
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
-
-  // 테마(8개) 로 검색
-  searchMoreHotPlaceByTheme(btnCnt, word) {
-    console.log(`/HotPlace/search/more/theme/${btnCnt}/${word}`);
-    return Api.get(`/HotPlace/search/more/theme/${btnCnt}/${word}`)
-      .then(res => {
-        return res.data.data;
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
-
-  // 더보기로 HotPlace 검색하기 조회 - searchOption은 all/ title / content/ tag중 전달
+  // 더보기로 HotPlace 검색하기 조회 - searchOption은 all/ title / content/ tag /city 중 전달
   searchMoreHotplace(btnCnt, searchOption, word) {
-    return Api.get(`/HotPlace/search/more/${btnCnt}/${searchOption}/${word}`)
+    console.log(`/HotPlace/search/page/${btnCnt}/${searchOption}/${word}`);
+    return Api.get(`/HotPlace/search/page/${btnCnt}/${searchOption}/${word}`)
       .then(res => {
         console.log("HotPlaceService에서...", res.data.data);
+        return res.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  // 테마(8개) 로 검색 - 테마 추천에 사용 
+  searchMoreHotPlaceByTheme(btnCnt, word) {
+    console.log(`/HotPlace/search/page/theme/${btnCnt}/${word}`);
+    return Api.get(`/HotPlace/search/page/theme/${btnCnt}/${word}`)
+      .then(res => {
         return res.data.data;
       })
       .catch(e => {
