@@ -99,7 +99,6 @@
       </div>
       <q-btn
         class="q-my-lg full-width"
-        flat
         v-if="hpBtnCheck"
         @click="loadMoreHotplace()"
         >핫플레이스 더보기</q-btn
@@ -125,7 +124,6 @@
       </div>
       <q-btn
         class="q-my-lg full-width"
-        flat
         v-if="fvalBtnCheck"
         @click="loadMoreFestival()"
         >페스티벌 더보기</q-btn
@@ -178,12 +176,18 @@ export default {
     })
   },
   methods: {
+    loadPreviousFestival() {
+
+    },
+    loadPreviousHotplace() {
+
+    },
     loadMoreFestival() {
-      this.fvalBtnCheck += 1;
+      this.fvalBtnCnt++;
       this.getAllPicks();
     },
     loadMoreHotplace() {
-      this.hpBtnCheck += 1;
+      this.hpBtnCnt++;
       this.getAllPicks();
     },
     checkIfLoggedIn() {
