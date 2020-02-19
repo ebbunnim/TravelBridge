@@ -97,13 +97,13 @@
                             <q-timeline-entry v-for="(a, index) of tt.post_courseList" :key="index">
                               <template v-slot:title>{{ a.course_title }}</template>
                               <div class="text-body-4">{{ a.course_description }}</div>
-                              {{a.course_subcourse_list}}
+                              <!-- {{a.course_subcourse_list}}
                               <q-timeline-entry
                                 v-for="(b, index) of a.course_subcourse_list"
                                 :key="index"
                               >
                                 <div>{{b}}</div>
-                              </q-timeline-entry>
+                              </q-timeline-entry>-->
                             </q-timeline-entry>
                           </div>
                         </template>

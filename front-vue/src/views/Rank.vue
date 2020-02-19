@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Main3 - Rank</h3>
+    <h3>Main3 - Rank{{}}</h3>
     <div class="dg-map dg-map-in">
       <svg x="0" y="0" width="1000" height="1000" viewBox="0 0 800 1200">
         <!-- Add the polygon element. -->
@@ -160,6 +160,9 @@
 
 <script>
 export default {
+  data() {
+    return {};
+  },
   methods: {
     go_branch(target) {
       console.log(target);

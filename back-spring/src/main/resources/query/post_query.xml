@@ -316,7 +316,7 @@
 		post_title, 
 		post_content, 
 		post_category, 
-		post_city
+		post_city,
 		post_writer,
 		post_plan_date)
 		VALUES(
