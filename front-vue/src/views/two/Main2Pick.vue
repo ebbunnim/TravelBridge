@@ -53,8 +53,12 @@
     </q-dialog>
 
     <div class="row justify-center items-center q-my-xl q-py-xl bg-image">
+      <div class="col-12 text-h4 text-center text-white">
+        <b>테마별 여행지 추천</b>
+      </div>
       <div style="display: inline" v-for="(item, idx) in thema" :key="idx">
         <q-btn
+          push
           color="grey"
           class="q-ma-sm"
           size="lg"
@@ -67,7 +71,8 @@
           >#{{ item.name }}</q-btn
         >
         <q-btn
-          color="grey"
+          push
+          color="white"
           class="q-ma-sm"
           rounded
           size="lg"
@@ -79,6 +84,31 @@
           "
           >#{{ item.name }}</q-btn
         >
+      </div>
+    </div>
+
+    <div class="row justify-between q-mx-xl q-px-xl" v-if="hp_list_length > 0">
+      <q-btn
+        flat
+        round
+        class="col-1 q-my-lg"
+        v-show="hpBtnCheck"
+        icon="arrow_back"
+        @click="loadPreviousHotplace()"
+      />
+      <div class="text-h6 text-center col-8"># 핫플 추천</div>
+      <q-btn
+        flat
+        round
+        class="col-1 q-my-lg"
+        v-show="hpBtnCheck"
+        icon="arrow_forward"
+        @click="loadMoreHotplace()"
+      />
+    </div>
+    <div v-else>
+      <div class="text-h6 text-center col-8">
+        핫플레이스 추천 결과가 없습니다.
       </div>
     </div>
 
@@ -97,37 +127,55 @@
           :hp_no="hp_list[i - 1].hp_no"
         ></HotPlaceCard>
       </div>
-      <q-btn
-        class="q-my-lg full-width"
-        v-if="hpBtnCheck"
-        @click="loadMoreHotplace()"
-        >핫플레이스 더보기</q-btn
-      >
     </div>
 
-    <div class="row justify-center q-mx-xl q-px-xl">
+    <div class="festival-bg q-my-xl q-py-lg">
       <div
-        class="col-xs-12 col-md-6 col-lg-3"
-        v-for="j in fval_list_length"
-        :key="j"
+        class="row justify-between q-mx-xl q-px-xl q-mt-xl"
+        v-if="fval_list_length > 0"
       >
-        <FestivalCard
-          class="q-ma-lg"
-          :fval_img="fval_list[j - 1].fval_img"
-          :fval_name="fval_list[j - 1].fval_name"
-          :fval_start_day="fval_list[j - 1].fval_start_day"
-          :fval_end_day="fval_list[j - 1].fval_end_day"
-          :fval_detail_adr="fval_list[j - 1].fval_detail_adr"
-          :fval_tag="fval_list[j - 1].fval_tag"
-          :fval_no="fval_list[j - 1].fval_no"
-        ></FestivalCard>
+        <q-btn
+          flat
+          round
+          class="col-1 q-my-lg"
+          v-show="fvalBtnCheck"
+          icon="arrow_back"
+          @click="loadPreviousHotplace()"
+        />
+        <div class="text-h6 text-center col-8"># 페스티벌 추천</div>
+        <q-btn
+          flat
+          round
+          class="col-1 q-my-lg"
+          v-show="fvalBtnCheck"
+          icon="arrow_forward"
+          @click="loadMoreHotplace()"
+        />
       </div>
-      <q-btn
-        class="q-my-lg full-width"
-        v-if="fvalBtnCheck"
-        @click="loadMoreFestival()"
-        >페스티벌 더보기</q-btn
-      >
+      <div v-else>
+        <div class="text-h6 text-center col-8">
+          페스티벌 추천 결과가 없습니다.
+        </div>
+      </div>
+
+      <div class="row justify-center q-mx-xl q-px-xl">
+        <div
+          class="col-xs-12 col-md-6 col-lg-3"
+          v-for="j in fval_list_length"
+          :key="j"
+        >
+          <FestivalCard
+            class="q-ma-lg"
+            :fval_img="fval_list[j - 1].fval_img"
+            :fval_name="fval_list[j - 1].fval_name"
+            :fval_start_day="fval_list[j - 1].fval_start_day"
+            :fval_end_day="fval_list[j - 1].fval_end_day"
+            :fval_detail_adr="fval_list[j - 1].fval_detail_adr"
+            :fval_tag="fval_list[j - 1].fval_tag"
+            :fval_no="fval_list[j - 1].fval_no"
+          ></FestivalCard>
+        </div>
+      </div>
     </div>
   </q-page>
 </template>
@@ -177,10 +225,12 @@ export default {
   },
   methods: {
     loadPreviousFestival() {
-
+      this.fvalBtnCnt--;
+      this.getAllPicks();
     },
     loadPreviousHotplace() {
-
+      this.hpBtnCnt--;
+      this.getAllPicks();
     },
     loadMoreFestival() {
       this.fvalBtnCnt++;
@@ -274,5 +324,8 @@ export default {
   background-size: 100% 100%;
   height: 450px;
   min-height: 350px;
+}
+.festival-bg {
+  background-color: #f9f9f9;
 }
 </style>

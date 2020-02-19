@@ -5,7 +5,7 @@
         v-model="slide"
         animated
         swipeable
-        :autoplay="6000"
+        :autoplay="7500"
         navigation
         infinite
         height="680px"
@@ -18,8 +18,11 @@
             <p class="col-12 text-h4 q-pt-lg">
               <b>테마별 여행지 추천</b>
             </p>
-            <p class="col-12 text-body1">
-              {{ user.mem_name }}님을 위한 맞춤 여행지를 추천해 드립니다.
+            <p
+              class="col-12 text-body1"
+              v-show="user.mem_name !== undefined ? true : false"
+            >
+              {{ user.mem_name }}님을 위한 맞춤 여행지를 추천해드립니다.
             </p>
 
             <div
@@ -69,6 +72,7 @@
             </q-input>-->
           </div>
         </q-carousel-slide>
+
         <q-carousel-slide :name="2" :img-src="getImgUrl('main2bg2.jpg')">
           <div
             class="row q-my-xl text-center justify-center absolute-center custom-caption"
@@ -78,7 +82,7 @@
               <b>여행지 정보 검색</b>
             </p>
             <p class="col-12 text-body1">
-              제목, 내용, 도시, 태그로 핫플레이스와 축제를 검색하세요.
+              제목, 내용, 태그, 지역별 핫플레이스와 축제를 검색하세요.
             </p>
             <q-select
               wrap
@@ -89,7 +93,7 @@
               v-model="searchOption"
               :options="searchOptions"
             />
-            <template v-if="this.searchOption == '도시'">
+            <template v-if="this.searchOption == '지역'">
               <div class="row justify-around col-5">
                 <q-select
                   rounded
@@ -101,7 +105,7 @@
                   @input="postInner"
                   :options="spinArea"
                   class="col-5 text-h6"
-                  label="지역"
+                  label="광역시·도"
                 >
                   <template v-slot:no-option>
                     <q-item>
@@ -117,7 +121,7 @@
                     bg-color="grey"
                     standout="bg-glossy text-white"
                     v-model="city"
-                    label="도시"
+                    label="시·군·구"
                     :options="spinCity"
                     class="col-5 text-h6"
                     behavior="menu"
@@ -426,24 +430,25 @@ const wpwn = ["서귀포시", "제주시"];
 export default {
   data() {
     return {
-      currentChoices: "",
       hpBtnCnt: 1,
       fvalBtnCnt: 1,
       word: "",
       slide: 1,
       searchOption: "전체",
-      searchOptions: ["전체", "제목", "내용", "태그", "도시"],
+      searchOptions: ["전체", "제목", "내용", "태그", "지역"],
       searchOptionValue: {
         전체: "all",
         제목: "title",
         내용: "content",
         태그: "tag",
-        도시: "city"
+        지역: "city"
       },
       city: "",
       area: "",
       spinArea: area,
       spinCity: [],
+      // Main2Pick 관련
+      currentChoices: "",
       thema: {
         food: { state: false, name: "맛집" },
         family: { state: false, name: "가족" },

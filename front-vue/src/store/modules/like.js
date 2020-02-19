@@ -21,8 +21,9 @@ const actions = {
     });
   },
   insertLike: ({ commit }, payload) => {
+    console.log("like.js", payload)
     LikeService.insertLike(payload).then(res => {
-      console.log(res)
+      console.log("서비스", res)
       commit("insertLike", payload)
     })
   },

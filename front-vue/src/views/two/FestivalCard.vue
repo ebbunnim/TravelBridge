@@ -29,7 +29,6 @@
         "
         >상세보기</q-btn
       >
-
       <q-btn
         v-if="!btnCheck"
         flat
@@ -69,6 +68,7 @@ export default {
       console.log("insert 실행");
       const payload = {
         festival_no: this.fval_no,
+        hotplace_no: 0,
         like_del_check: false,
         like_type: 3,
         liker_mem_no: this.user.mem_no
