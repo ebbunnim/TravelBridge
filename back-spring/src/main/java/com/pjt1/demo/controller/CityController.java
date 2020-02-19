@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pjt1.demo.model.dto.City;
+import com.pjt1.demo.model.dto.Ranking;
 import com.pjt1.demo.model.service.CityService;
+import com.pjt1.demo.model.service.RankingService;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -29,6 +31,8 @@ public class CityController{
 	
     @Autowired
     private CityService service;
+    @Autowired
+    private RankingService r_service;
     
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
@@ -60,22 +64,36 @@ public class CityController{
         City City = service.search(no);
         return handleSuccess(City);
     }
-    @PostMapping("/City")
     @ApiOperation("City 정보 등록")
+    @PostMapping("/City")
     public ResponseEntity<Map<String, Object>> insert(@RequestBody City City) {
         service.insert(City);
         return handleSuccess("");
     }
-	 @ApiOperation("City 정보 삭제")
+	@ApiOperation("City 정보 삭제")
     @DeleteMapping("/City/{no}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
         service.delete(no);
         return handleSuccess("삭제 완료");
     }
-	 @ApiOperation("City 정보 수정")
+	@ApiOperation("City 정보 수정")
     @PutMapping("/City")
     public ResponseEntity<Map<String, Object>> update(@RequestBody City City) {
         service.update(City);
         return handleSuccess("수정 완료");
     }
+	@ApiOperation("전국 지역별 후기 개수랑 랭킹")
+	@GetMapping("/Rank/national")
+	public ResponseEntity<Map<String, Object>> searchNationalReviewsRank(){
+		List<Ranking> list = r_service.searchNationalReviewsRank();
+		System.out.println(list);
+		return handleSuccess(list);
+	}
+	@ApiOperation("지역 후기 개수랑 랭킹")
+	@GetMapping("/Rank/national/{city_name}")
+	public ResponseEntity<Map<String, Object>> searchCityReviewsRank(@PathVariable String city_name){
+		List<Ranking> list = r_service.searchCityReviewsRank(city_name);
+		System.out.println(list);
+		return handleSuccess(list);
+	}
 }
