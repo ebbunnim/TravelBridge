@@ -18,9 +18,22 @@
         @click="
           $router.push({ name: 'hotplace-detail', params: { hp_no: hp_no } })
         "
-      >상세보기</q-btn>
-      <q-btn v-if="!btnCheck" flat round icon="favorite_border" @click="insertLike()"></q-btn>
-      <q-btn v-if="btnCheck" flat round icon="favorite" @click="deleteLike(hp_no)"></q-btn>
+        >상세보기</q-btn
+      >
+      <q-btn
+        v-if="!btnCheck"
+        flat
+        round
+        icon="favorite_border"
+        @click="insertLike()"
+      ></q-btn>
+      <q-btn
+        v-if="btnCheck"
+        flat
+        round
+        icon="favorite"
+        @click="deleteLike(hp_no)"
+      ></q-btn>
     </q-card-section>
   </q-card>
 </template>
@@ -31,7 +44,7 @@ export default {
   name: "HotPlaceCard",
   methods: {
     getImgUrl(img) {
-      return require("../../assets" + img);
+      return require("@/assets" + img);
     },
     insertLike() {
       console.log("insert 실행");
