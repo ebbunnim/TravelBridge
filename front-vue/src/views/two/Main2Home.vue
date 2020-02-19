@@ -10,7 +10,7 @@
         infinite
         height="680px"
       >
-        <q-carousel-slide :name="1" :img-src="getImgUrl('main2bg2.jpg')">
+        <q-carousel-slide :name="1" :img-src="getImgUrl('main2bg.jpg')">
           <div
             class="row q-my-xl text-center justify-center absolute-center custom-caption"
             style="width: 100%;"
@@ -18,9 +18,15 @@
             <p class="col-12 text-h4 q-pt-lg">
               <b>테마별 여행지 추천</b>
             </p>
-            <p class="col-12 text-body1">{{ user.mem_name }}님을 위한 맞춤 여행지를 추천해 드립니다.</p>
+            <p class="col-12 text-body1">
+              {{ user.mem_name }}님을 위한 맞춤 여행지를 추천해 드립니다.
+            </p>
 
-            <div style="display: inline" v-for="(item, idx) in thema" :key="idx">
+            <div
+              style="display: inline"
+              v-for="(item, idx) in thema"
+              :key="idx"
+            >
               <q-btn
                 color="info"
                 push
@@ -32,22 +38,30 @@
                   item.state = !item.state;
                   onToggle();
                 "
-              >#{{ item.name }}</q-btn>
+                >#{{ item.name }}</q-btn
+              >
               <q-btn
                 push
                 color="glossy"
                 class="q-ma-sm"
-                rounded
                 size="lg"
+                rounded
                 v-if="!item.state"
                 @click="
                   item.state = !item.state;
                   onToggle();
                 "
-              >#{{ item.name }}</q-btn>
+                >#{{ item.name }}</q-btn
+              >
             </div>
-            <q-btn outline flat color="white" icon="search" @click="onPickBtn()" />
-
+            <!-- 태그 후, 본 페이지로 라우팅 -->
+            <q-btn
+              outline
+              flat
+              color="white"
+              icon="search"
+              @click="onPickBtn()"
+            />
             <!-- <q-input class="col-7 text-h6" v-model="word" type="text" placeholder="검색어를 검색하세요">
               <template v-slot:append>
                 <q-btn outline flat color="grey" icon="search" @click="onSearchBtn()" />
@@ -55,7 +69,7 @@
             </q-input>-->
           </div>
         </q-carousel-slide>
-        <q-carousel-slide :name="2" :img-src="getImgUrl('main2bg.jpg')">
+        <q-carousel-slide :name="2" :img-src="getImgUrl('main2bg2.jpg')">
           <div
             class="row q-my-xl text-center justify-center absolute-center custom-caption"
             style="width: 100%;"
@@ -63,7 +77,9 @@
             <p class="col-12 text-h4 q-pt-lg">
               <b>여행지 정보 검색</b>
             </p>
-            <p class="col-12 text-body1">제목, 내용, 도시, 태그로 핫플레이스와 축제를 검색하세요.</p>
+            <p class="col-12 text-body1">
+              제목, 내용, 도시, 태그로 핫플레이스와 축제를 검색하세요.
+            </p>
             <q-select
               wrap
               rounded
@@ -89,7 +105,9 @@
                 >
                   <template v-slot:no-option>
                     <q-item>
-                      <q-item-section class="text-grey">No results</q-item-section>
+                      <q-item-section class="text-grey"
+                        >No results</q-item-section
+                      >
                     </q-item>
                   </template>
                 </q-select>
@@ -105,7 +123,13 @@
                     behavior="menu"
                   />
                 </template>
-                <q-btn outline flat color="grey" icon="search" @click="onSearchSubBtn()" />
+                <q-btn
+                  outline
+                  flat
+                  color="grey"
+                  icon="search"
+                  @click="onSearchSubBtn()"
+                />
               </div>
             </template>
             <template v-else>
@@ -119,7 +143,13 @@
                 placeholder="검색어를 입력하세요"
               >
                 <template v-slot:append>
-                  <q-btn outline flat color="white" icon="search" @click="onSearchBtn()" />
+                  <q-btn
+                    outline
+                    flat
+                    color="white"
+                    icon="search"
+                    @click="onSearchBtn()"
+                  />
                 </template>
               </q-input>
             </template>
@@ -437,6 +467,36 @@ export default {
     getImgUrl(img) {
       return require("../../assets/" + img);
     },
+    onToggle() {
+      this.currentChoices = "";
+      const themaChoice = this.thema;
+      for (let key in themaChoice) {
+        if (themaChoice[key].state === true) {
+          this.currentChoices += themaChoice[key].name + " ";
+        }
+      }
+      console.log("###### Home에서 onToggle 눌림 ######", this.currentChoices);
+      this.user.mem_interest = this.currentChoices;
+      console.log(this.user.mem_interest);
+    },
+    onPickBtn() {
+      this.$router.push("/page2/pick");
+    },
+    checkPastInterest() {
+      this.currentChoices = this.user.mem_interest;
+      console.log("check Past Interest ==> ", this.currentChoices);
+      if (this.currentChoices !== undefined) {
+        const tempInterest = this.currentChoices.split(" ");
+        for (let key in tempInterest) {
+          for (let themaKey in this.thema) {
+            if (this.thema[themaKey].name === tempInterest[key]) {
+              this.thema[themaKey].state = true;
+            }
+          }
+        }
+      }
+    },
+    ///////////////
     onSearchBtn() {
       const payLoad1 = {
         btnCnt: this.hpBtnCnt,
@@ -500,40 +560,11 @@ export default {
       else {
         this.spinCity = [];
       }
-    },
-    checkPastInterest() {
-      this.currentChoices = this.user.mem_interest;
-      console.log("check Past Interest ==> ", this.currentChoices);
-      if (this.currentChoices !== undefined) {
-        const tempInterest = this.currentChoices.split(" ");
-        for (let key in tempInterest) {
-          for (let themaKey in this.thema) {
-            if (this.thema[themaKey].name === tempInterest[key]) {
-              this.thema[themaKey].state = true;
-            }
-          }
-        }
-      }
-    },
-    onToggle() {
-      this.currentChoices = "";
-      const themaChoice = this.thema;
-      for (let key in themaChoice) {
-        if (themaChoice[key].state === true) {
-          this.currentChoices += themaChoice[key].name + " ";
-        }
-      }
-      console.log("###### Home에서 onToggle 눌림 ######", this.currentChoices);
-      this.user.mem_interest = this.currentChoices;
-      console.log(this.user.mem_interest);
-    },
-    onPickBtn() {
-      this.$router.push("/page2/pick");
     }
   },
   mounted() {
     this.checkPastInterest();
-    // 만약 미로그인이라면? 
+    // 만약 미로그인이라면?
   }
 };
 </script>

@@ -3,12 +3,10 @@
     <div class="q-ma-xl q-pa-xl">
       <q-card flat bordered>
         <q-card-section class="row justify-center">
-          <div class="text-h6 q-my-sm text-center col-12">
-            {{ fval.fval_start_day }} ~ {{ fval.fval_end_day }}
-          </div>
-          <div class="text-h4 q-my-sm text-center col-12">
-            {{ fval.fval_name }}
-          </div>
+          <div
+            class="text-h6 q-my-sm text-center col-12"
+          >{{ fval.fval_start_day }} ~ {{ fval.fval_end_day }}</div>
+          <div class="text-h4 q-my-sm text-center col-12">{{ fval.fval_name }}</div>
           <div class="text-h6 q-my-sm text-center col-12">
             <div>
               {{ fval.fval_detail_adr }}
@@ -21,13 +19,15 @@
           </div>
           <q-separator inset />
         </q-card-section>
-        <q-card-section class="q-ma-lg text-center tag-color col-6">{{
+        <q-card-section class="q-ma-lg text-center tag-color col-6">
+          {{
           fval.fval_tag
-        }}</q-card-section>
+          }}
+        </q-card-section>
         <div class="row justify-center">
           <q-card-section class="col-xs-12 col-md-6">
             <div class="q-ma-md">
-              <!-- <q-img :src="getImgUrl(fval.fval_img)" basic :ratio="16 / 9" /> -->
+              <q-img :src="getImgUrl(fval.fval_img)" basic :ratio="16 / 9" />
             </div>
           </q-card-section>
           <q-card-section class="col-xs-12 col-md-6">
@@ -44,7 +44,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import { mapState } from "vuex";
 export default {
@@ -57,9 +56,9 @@ export default {
     })
   },
   methods: {
-    // getImgUrl(img) {
-    //   return require("../../../../back-spring/src/main/resources" + img);
-    // },
+    getImgUrl(img) {
+      return require("../../assets" + img);
+    },
     getFestival() {
       this.$store.dispatch("festival/searchByNo", this.fval_no);
     }
@@ -69,7 +68,6 @@ export default {
   }
 };
 </script>
-
 <style>
 .tag-color {
   color: #4527a0;

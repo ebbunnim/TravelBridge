@@ -19,6 +19,7 @@
 		<typeAlias type="com.pjt1.demo.model.dto.Calendar" alias="CALENDAR" />
 		<typeAlias type="com.pjt1.demo.model.dto.Party" alias="PARTY" />
 		<typeAlias type="com.pjt1.demo.model.dto.PartyIn" alias="PARTYIN" />
+		<typeAlias type="com.pjt1.demo.model.dto.Ranking" alias="RANKING" />
 	</typeAliases>
 
 	<mappers>
@@ -39,5 +40,6 @@
 		<mapper resource="query/calendar_query.xml" />
 		<mapper resource="query/party_query.xml" />
 		<mapper resource="query/partyin_query.xml" />
+		<mapper resource="query/ranking_query.xml" />
 	</mappers>
 </configuration>
