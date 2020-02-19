@@ -174,7 +174,6 @@ public class PostController {
     @GetMapping("/Post/searchFollowingPost")
     public ResponseEntity<Map<String, Object>> searchFollowingPost(int following_no) {
         List<Post> list = service.searchFollowingPost(following_no);
-
         return handleSuccess(list);
     }
 
