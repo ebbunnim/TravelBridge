@@ -99,7 +99,7 @@ public class FestivalController {
 		@GetMapping("/Festival/search/more/{btnCnt}")
 		public ResponseEntity<Map<String, Object>> searchMoreFestivalAll(MorePageBean pageBean, @PathVariable int btnCnt) {
 			MorePageMaker pageMaker = new MorePageMaker();
-			int change = pageNum * btnCnt;
+			int change = fvalPageNum * btnCnt;
 			pageBean.setPerPageNum(change);
 			pageMaker.setPageBean(pageBean);
 			List<Map<String, Object>> list = service.searchMoreFestivalAll(pageBean);
