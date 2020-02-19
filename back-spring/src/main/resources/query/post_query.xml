@@ -41,7 +41,6 @@
 		<collection property="post_cmtList" ofType="comment" resultMap="cmtMap" />
 		<collection property="post_filesList" ofType="files" resultMap="filesMap" />
 		<collection property="post_courseList" ofType="course" resultMap="courseMap" />
-
 	</resultMap>
 	<resultMap id="pfMap" type="POST">
 		<id property="post_no" column="post_no" />
@@ -149,24 +148,42 @@
 	</select>
 	<select id="searchPagePostAll" parameterType="hashmap" resultMap="pfMap">
 		<![CDATA[
-        SELECT 
-		p.post_no, 
-		p.mem_no,
-		p.post_type, 
-		p.board_no, 
-		p.post_title, 
-		p.post_content,
-		p.post_category, 
-		p.post_regtime, 
-		p.post_hits, 
-		p.post_city,
-		p.post_writer, 
-		p.post_plan_date,
-		f.files_no,
-		f.files_url
-		FROM POST p 
-		LEFT JOIN FILES f  ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
-		WHERE p.post_no> #{startPage} and p.post_no<=#{endPage} AND p.post_del_check = FALSE]]>
+		SELECT
+			RESULT.rnum,
+			RESULT.post_no, 
+			RESULT.mem_no,
+			RESULT.post_type, 
+			RESULT.board_no, 
+			RESULT.post_title, 
+			RESULT.post_content,
+			RESULT.post_category, 
+			RESULT.post_regtime, 
+			RESULT.post_hits, 
+			RESULT.post_city,
+			RESULT.post_writer, 
+			RESULT.post_plan_date,
+			RESULT.files_no,
+			RESULT.files_url
+		FROM (SELECT 
+				(CASE 
+					WHEN @vpost_no = a.post_no
+					THEN @rownum:=@rownum
+					ELSE @rownum:=@rownum+1
+				END) AS rnum,
+				(@vpost_no:=a.post_no) vpost_no,
+				a.*
+				FROM
+					(SELECT 
+						p.*,
+		                f.files_no,
+						f.files_url
+					FROM POST p 
+					LEFT JOIN FILES f  ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
+					WHERE 
+					p.post_del_check = FALSE) as a, 
+					(SELECT @vpost_no:='', @rownum:=0 FROM DUAL) as b
+				) AS RESULT
+		WHERE RESULT.rnum > #{startPage} AND RESULT.rnum <= #{endPage}]]>
 	</select>
 	<select id="searchPagePlan" parameterType="hashmap" resultMap="pfMap">
 		<![CDATA[
@@ -203,7 +220,7 @@
 					LEFT JOIN FILES f  ON p.post_no = f.post_no AND p.mem_no = f.mem_no AND files_del_check = FALSE
 					WHERE 
 					p.post_del_check = FALSE
-					AND p.post_type = 0) as a, 
+					AND p.post_type = 1) as a, 
 					(SELECT @vpost_no:='', @rownum:=0 FROM DUAL) as b
 				) AS RESULT
 		WHERE RESULT.rnum > #{startPage} AND RESULT.rnum <= #{endPage}]]>
@@ -380,21 +397,21 @@
 		WHERE RESULT.rnum >#{startPage} AND  RESULT.rnum <= #{endPage} AND]]>
 		<choose>
 			<when test="searchOption == 'all'">
-				(post_title like concat('%',#{word},'%')
-				OR post_content like concat('%',#{word},'%')
-				OR post_category like concat('%',#{word},'%'))
+				(post_title like concat('%','${word}','%')
+				OR post_content like concat('%','${word}','%')
+				OR post_category like concat('%','${word}','%'))
 			</when>
 			<when test="searchOption == 'title'">
-				post_title like concat('%',#{word},'%')
+				post_title like concat('%','${word}','%')
 			</when>
 			<when test="searchOption == 'content'">
-				post_content like concat('%',#{word},'%')
+				post_content like concat('%','${word}','%')
 			</when>
 			<when test="searchOption == 'tag'">
-				post_category like concat('%',#{word},'%')
+				post_category like concat('%','${word}','%')
 			</when>
 			<when test="searchOption == 'writer'">
-				post_writer like concat('%',#{word},'%')
+				post_writer like concat('%','${word}','%')
 			</when>
 		</choose>
 		<!-- ORDER BY p.post_regtime DESC -->

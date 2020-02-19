@@ -9,8 +9,9 @@
     </q-card-section>
 
     <q-card-section class="q-pt-none">
-      <div class="text-subtitle2 text-body text-center">{{ fval_start_day }} ~ {{ fval_end_day }}</div>
-
+      <div class="text-subtitle2 text-body text-center">
+        {{ fval_start_day }} ~ {{ fval_end_day }}
+      </div>
     </q-card-section>
     <q-card-section>
       <div class="text-subtitle2 text-body2">{{ fval_tag }}</div>
@@ -26,10 +27,23 @@
             params: { fval_no: fval_no }
           })
         "
-      >상세보기</q-btn>
+        >상세보기</q-btn
+      >
 
-      <q-btn v-if="!btnCheck" flat round icon="favorite_border" @click="insertLike()"></q-btn>
-      <q-btn v-if="btnCheck" flat round icon="favorite" @click="deleteLike(fval_no)"></q-btn>
+      <q-btn
+        v-if="!btnCheck"
+        flat
+        round
+        icon="favorite_border"
+        @click="insertLike()"
+      ></q-btn>
+      <q-btn
+        v-if="btnCheck"
+        flat
+        round
+        icon="favorite"
+        @click="deleteLike(fval_no)"
+      ></q-btn>
     </q-card-section>
   </q-card>
 </template>

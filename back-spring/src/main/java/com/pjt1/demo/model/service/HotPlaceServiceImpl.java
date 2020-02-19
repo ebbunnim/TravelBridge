@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.pjt1.demo.model.dao.HotPlaceDao;
 import com.pjt1.demo.model.dto.HotPlace;
 import com.pjt1.demo.utils.MorePageBean;
+import com.pjt1.demo.utils.PageMaker;
 
 @Service
 public class HotPlaceServiceImpl implements HotPlaceService {
@@ -131,6 +132,48 @@ public class HotPlaceServiceImpl implements HotPlaceService {
 		try {
 			return repo.searchMoreHotPlace(pageBean);
 		}catch(Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+	public List<HotPlace> searchPageHotPlaceAll(PageMaker page){
+		try {
+			return repo.searchPageHotPlaceAll(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+	public List<HotPlace> searchPageHotPlaceByCityName(PageMaker page){
+		try {
+			return repo.searchPageHotPlaceByCityName(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+	public List<HotPlace> searchPageHotPlaceByTag(PageMaker page){
+		try {
+			return repo.searchPageHotPlaceByTag(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+	public List<HotPlace> searchPageHotPlaceByAddress(PageMaker page){
+		try {
+			return repo.searchPageHotPlaceByAddress(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+	public List<HotPlace> searchPageHotPlaceByTheme(PageMaker page){
+		try {
+			return repo.searchPageHotPlaceByTheme(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+	public List<HotPlace> searchPageHotPlace(PageMaker page){
+		try {
+			return repo.searchPageHotPlace(page);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}return null;
 	}

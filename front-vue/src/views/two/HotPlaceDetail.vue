@@ -22,7 +22,7 @@
         <div class="row justify-center">
           <q-card-section class="col-xs-12 col-md-6">
             <div class="q-ma-md ">
-              <q-img :src="getImgUrl(hp.hp_img)" basic :ratio="16 / 9" />
+              <!-- <q-img :src="getImgUrl(hp.hp_img)" basic :ratio="16 / 9" /> -->
             </div>
           </q-card-section>
           <q-card-section class="col-xs-12 col-md-6">
@@ -52,9 +52,9 @@ export default {
     })
   },
   methods: {
-    getImgUrl(img) {
-      return require("../../../../back-spring/src/main/resources" + img);
-    },
+    // getImgUrl(img) {
+    //   return require("../../../../back-spring/src/main/resources" + img);
+    // },
     getHotplace() {
       console.log("this.hp_no", this.hp_no);
       this.$store.dispatch("hotplace/searchByNo", this.hp_no);

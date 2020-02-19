@@ -16,8 +16,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class SubCourse {
+public class SubCourse implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -1626347136486674983L;
     @Getter
     private int subcourse_no;//
     @NonNull

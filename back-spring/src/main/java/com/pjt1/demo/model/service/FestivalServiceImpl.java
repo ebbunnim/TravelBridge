@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.pjt1.demo.model.dao.FestivalDao;
 import com.pjt1.demo.model.dto.Festival;
 import com.pjt1.demo.utils.MorePageBean;
+import com.pjt1.demo.utils.PageMaker;
 
 
 @Service
@@ -123,5 +124,40 @@ public class FestivalServiceImpl implements FestivalService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	public List<Festival> searchPageFestivalAll(PageMaker pageBean){
+		try {
+			return repo.searchPageFestivalAll(pageBean);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+	public List<Festival> searchPageFestivalByCityName(PageMaker pageBean){
+		try {
+			return repo.searchPageFestivalByCityName(pageBean);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+	public List<Festival> searchPageFestivalByTag(PageMaker pageBean){
+		try {
+			return repo.searchPageFestivalByTag(pageBean);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+	public List<Festival> searchPageFestivalByTheme(PageMaker pageBean){
+		try {
+			return repo.searchPageFestivalByTheme(pageBean);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}return null;
+	}
+	public List<Festival> searchPageFestival(PageMaker pageBean){
+		try {
+			return repo.searchPageFestival(pageBean);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}return null;
 	}
 }

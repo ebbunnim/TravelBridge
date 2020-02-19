@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.pjt1.demo.model.dto.Festival;
 import com.pjt1.demo.utils.MorePageBean;
+import com.pjt1.demo.utils.PageMaker;
 
 public interface FestivalService {
 	public Festival search(int fval_no);
@@ -21,6 +22,11 @@ public interface FestivalService {
 	public List<Map<String, Object>> searchMoreFestivalByTag(MorePageBean pageBean);
 	public List<Map<String, Object>> searchMoreFestivalByTheme(MorePageBean pageBean);
 	public List<Map<String, Object>> searchMoreFestival(MorePageBean pageBean);
+	public List<Festival> searchPageFestivalAll(PageMaker pageBean);
+	public List<Festival> searchPageFestivalByCityName(PageMaker pageBean);
+	public List<Festival> searchPageFestivalByTag(PageMaker pageBean);
+	public List<Festival> searchPageFestivalByTheme(PageMaker pageBean);
+	public List<Festival> searchPageFestival(PageMaker pageBean);
 	public List<Map<String, Object>> findChildLike(int no);
 	public void deleteChildLike(List<Integer> list);
 }

@@ -29,6 +29,7 @@ import HotPlaceDetail from "../views/two/HotPlaceDetail.vue";
 import FestivalDetail from "../views/two/FestivalDetail.vue";
 // sub기능, 전체 통합검색 Search Page
 import Mate from "../views/Mate.vue";
+import MateDetail from "../views/MateDetail.vue";
 import Rank from "../views/Rank.vue";
 import Search from "../views/Search.vue";
 import Sub from "../views/Sub.vue";
@@ -102,7 +103,8 @@ const routes = [
     component: Sub,
     children: [
       { path: "mate", component: Mate },
-      { path: "rank", component: Rank }
+      { path: "rank", component: Rank },
+      { path: "mate/:mateNo", component: MateDetail, props: true }
     ]
   },
   {
