@@ -19,19 +19,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pjt1.demo.model.dto.Comment;
-import com.pjt1.demo.model.dto.Course;
+import com.pjt1.demo.model.dto.SubCourse;
 import com.pjt1.demo.model.dto.Members;
-import com.pjt1.demo.model.service.CourseService;
+import com.pjt1.demo.model.service.SubCourseService;
 import com.pjt1.demo.model.service.PostService;
 
 import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
-public class CourseController {
+public class SubCourseController {
 
     @Autowired
-    private CourseService service;
+    private SubCourseService service;
+
     @Autowired
     private PostService p_service;
 
@@ -54,23 +55,23 @@ public class CourseController {
         return new ResponseEntity<Map<String, Object>>(resultMap, state);
     }
 
-    @ApiOperation("전체 Course 목록을 조회하는 기능")
-    @GetMapping("/Course")
+    @ApiOperation("전체 SubCourse 목록을 조회하는 기능")
+    @GetMapping("/SubCourse")
     public ResponseEntity<Map<String, Object>> searchAll() {
-        List<Course> list = service.searchAll();
+        List<SubCourse> list = service.searchAll();
         return handleSuccess(list);
     }
 
     @ApiOperation("no에 따른 Course 정보 조회하는 기능")
-    @GetMapping("/Course/{no}")
+    @GetMapping("/SubCourse/{no}")
     public ResponseEntity<Map<String, Object>> search(@PathVariable int no) {
-        Course Course = service.search(no);
-        return handleSuccess(Course);
+        SubCourse SubCourse = service.search(no);
+        return handleSuccess(SubCourse);
     }
 
-    @PostMapping("/Course")
-    @ApiOperation("Course 정보 등록")
-    public ResponseEntity<Map<String, Object>> insert(@RequestBody Course Course) {
+    @PostMapping("/SubCourse")
+    @ApiOperation("SubCourse 정보 등록")
+    public ResponseEntity<Map<String, Object>> insert(@RequestBody SubCourse SubCourse) {
         // Course가 들어오면 그 description은 내가 리스트로 만들어서 course_sub에 넣어야
         // String description = Course.getCourse_description();
         // System.out.println("====description===");
@@ -79,7 +80,7 @@ public class CourseController {
         // String[] splitStr = description.split(" ");
 
         // List<String> list = new ArrayList<String>();
-        // for (int i=0; i<splitStr.length; i++) {
+        // for (int i = 0; i < splitStr.length; i++) {
         // list.add(splitStr[i]);
         // }
         // System.out.println("====list===");
@@ -87,21 +88,21 @@ public class CourseController {
 
         // Course.setCourse_sub(list);
 
-        service.insert(Course);
+        service.insert(SubCourse);
         return handleSuccess("");
     }
 
-    @ApiOperation("Course 정보 삭제")
-    @DeleteMapping("/Course/{no}")
+    @ApiOperation("SubCourse 정보 삭제")
+    @DeleteMapping("/SubCourse/{no}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable int no) {
         service.delete(no);
         return handleSuccess("삭제 완료");
     }
 
-    @ApiOperation("Course 정보 수정")
-    @PutMapping("/Course")
-    public ResponseEntity<Map<String, Object>> update(@RequestBody Course Course) {
-        service.update(Course);
+    @ApiOperation("SubCourse 정보 수정")
+    @PutMapping("/SubCourse")
+    public ResponseEntity<Map<String, Object>> update(@RequestBody SubCourse SubCourse) {
+        service.update(SubCourse);
         return handleSuccess("수정 완료");
     }
 

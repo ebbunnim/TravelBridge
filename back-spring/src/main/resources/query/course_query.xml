@@ -3,6 +3,18 @@
 	
 
 <mapper namespace="com.pjt1.demo.model.dao.CourseDao" >
+	<resultMap type="subcourse" id="subcourseMap">
+		<result property="subcourse_no" column="subcourse_no" />
+		<result property="subcourse_title" column="subcourse_title" />
+	</resultMap>
+
+	<resultMap id="csMap" type="COURSE">
+		<id property="course_no" column="course_no" />
+		<result property="post_no" column="post_no" />
+		<result property="course_title" column="course_title" />
+		<result property="course_description" column="course_description" />
+		<collection property="course_subcourse_list" ofType="subcourse" resultMap="subcourseMap" />
+	</resultMap>
 
   	<insert id="insert"		parameterType="course">
 		INSERT INTO 
@@ -41,10 +53,21 @@
 		WHERE course_no = #{course_no:INTEGER} 
 		AND course_del_check = false      	
 	</select>
-   	<select id="searchAll"	resultType="course"> 
-		SELECT * 
-		FROM COURSE
-		WHERE course_del_check = false     
+   	<select id="searchAll"	resultType="course" resultMap="csMap"> 
+	   <!-- SELECT * FROM COURSE -->
+		SELECT
+		cs.course_no,
+		cs.post_no,
+		cs.course_title,
+		cs.course_description,
+		cs.course_del_check,
+		sub.course_no,
+		sub.subcourse_no,
+		sub.subcourse_title,
+		sub.subcourse_del_check
+		FROM COURSE cs
+		LEFT JOIN SUBCOURSE sub ON cs.course_no = sub.course_no AND sub.subcourse_del_check=FALSE
+		WHERE cs.course_del_check=FALSE ;
 	</select>
 </mapper>
 
