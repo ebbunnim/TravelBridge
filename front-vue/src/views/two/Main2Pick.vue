@@ -4,7 +4,9 @@
       <q-card>
         <q-card-section>
           <div class="text-subtitle1 text-center">선택한 테마가 없습니다!</div>
-          <div class="text-h6">로그인하시거나 관심 테마를 직접 추가해보세요!</div>
+          <div class="text-h6">
+            로그인하시거나 관심 테마를 직접 추가해보세요!
+          </div>
         </q-card-section>
 
         <q-card-actions align="center">
@@ -33,7 +35,9 @@
       <q-card>
         <q-card-section>
           <div class="text-subtitle1 text-center">선택한 테마가 없습니다</div>
-          <div class="text-h6">지금 관심 테마를 선택하고 여행지를 추천받아 보세요!</div>
+          <div class="text-h6">
+            지금 관심 테마를 선택하고 여행지를 추천받아 보세요!
+          </div>
         </q-card-section>
 
         <q-card-actions align="center">
@@ -60,7 +64,8 @@
             item.state = !item.state;
             onToggle();
           "
-        >#{{ item.name }}</q-btn>
+          >#{{ item.name }}</q-btn
+        >
         <q-btn
           color="grey"
           class="q-ma-sm"
@@ -72,16 +77,15 @@
             item.state = !item.state;
             onToggle();
           "
-        >#{{ item.name }}</q-btn>
+          >#{{ item.name }}</q-btn
+        >
       </div>
     </div>
 
     <div class="row justify-center q-mx-xl q-px-xl">
       <div
         class="col-lg-3 col-md-6 col-xs-12"
-        v-for="i in hp_list_length > 4 * hpPageCnt
-          ? 4 * hpPageCnt
-          : hp_list_length"
+        v-for="i in hp_list_length"
         :key="i"
       >
         <HotPlaceCard
@@ -93,15 +97,19 @@
           :hp_no="hp_list[i - 1].hp_no"
         ></HotPlaceCard>
       </div>
-      <q-btn class="q-my-lg full-width" flat v-if="hpBtnCheck" @click="loadMoreHpBtn()">핫플레이스 더보기</q-btn>
+      <q-btn
+        class="q-my-lg full-width"
+        flat
+        v-if="hpBtnCheck"
+        @click="loadMoreHotplace()"
+        >핫플레이스 더보기</q-btn
+      >
     </div>
 
     <div class="row justify-center q-mx-xl q-px-xl">
       <div
         class="col-xs-12 col-md-6 col-lg-3"
-        v-for="j in fval_list_length > 4 * fvalPageCnt
-          ? 4 * fvalPageCnt
-          : fval_list_length"
+        v-for="j in fval_list_length"
         :key="j"
       >
         <FestivalCard
@@ -119,8 +127,9 @@
         class="q-my-lg full-width"
         flat
         v-if="fvalBtnCheck"
-        @click="loadMoreFestivalBtn()"
-      >페스티벌 더보기</q-btn>
+        @click="loadMoreFestival()"
+        >페스티벌 더보기</q-btn
+      >
     </div>
   </q-page>
 </template>
@@ -153,12 +162,10 @@ export default {
         healing: { state: false, name: "힐링" },
         tradition: { state: false, name: "전통" }
       },
-      hpPageCnt: 1,
-      fvalPageCnt: 1,
       hpBtnCheck: true,
-      fvalBtnCnt: 10,
+      hpBtnCnt: 1,
       fvalBtnCheck: true,
-      hpBtnCnt: 10
+      fvalBtnCnt: 1
     };
   },
   computed: {
@@ -167,18 +174,25 @@ export default {
       hp_list_length: state => state.hotplace.hp_list_length, // vuex 에서 데려옴
       fval_list_length: state => state.festival.fval_list_length,
       hp_list: state => state.hotplace.hps,
-      fval_list: state => state.festival.fvals,
-      hpByTheme: state => state.hotplace.hpByTheme
+      fval_list: state => state.festival.fvals
     })
   },
   methods: {
+    loadMoreFestival() {
+      this.fvalBtnCheck += 1;
+      this.getAllPicks();
+    },
+    loadMoreHotplace() {
+      this.hpBtnCheck += 1;
+      this.getAllPicks();
+    },
     checkIfLoggedIn() {
       if (this.user.mem_interest === undefined) {
-        this.alert = true;
+        this.alert = true; // 아예 미로그인 시
       } else if (this.user.mem_interest === "") {
-        this.choiceAlert = true;
+        this.choiceAlert = true; // 로그인은 했으나 초이스 없을 경우
       } else {
-        this.checkPastInterest(); ////////////////////////
+        this.checkPastInterest(); // this.user.mem_interest 를 체크한다.
       }
     },
     useWithoutLogin() {
@@ -188,12 +202,13 @@ export default {
         mem_interest: ""
       };
       this.user = this.tempUser;
-      console.log("비회원유저", this.user);
+      console.log("======비회원유저로 설정됨========", this.user);
     },
     checkPastInterest() {
-      console.log("실행");
+      // 기존에 회원가입 혹은 MyPage 에서 설정한 THEMA state 를 true 로 설정 역할
+      console.log("1. checkPastInterest 실행");
       this.currentChoices = this.user.mem_interest;
-      console.log("check Past Interest ==> ", this.currentChoices);
+      console.log("1. 현재 선택 출력: ", this.currentChoices);
       if (this.currentChoices !== undefined) {
         const tempInterest = this.currentChoices.split(" ");
         for (let key in tempInterest) {
@@ -204,12 +219,14 @@ export default {
           }
         }
       }
+      // this.currentChoices = "";
       this.getAllPicks();
     },
     onToggle() {
+      console.log("2. 마운티드 이후 onToggle 추가 실행");
+      // state 가 true 인 값들만 String 으로 합친 후 this.currentchoices 에 저장한다.
       // this.$store.commit("hotplace/clearHPs");
       // this.$store.commit("festival/clearFvals");
-      // 토글할 때 마다 getAllPicks 도 실행한다.
       this.currentChoices = "";
       const themaChoice = this.thema;
       for (let key in themaChoice) {
@@ -217,38 +234,31 @@ export default {
           this.currentChoices += themaChoice[key].name + " ";
         }
       }
-      console.log("====== TravelPick - onToggle =======", this.currentChoices);
       this.getAllPicks();
     },
     getAllPicks() {
-      // 토글해서 getAllpicks
+      // 마운티드 직후 혹은 추가 토글해서 getAllpicks 실행
       console.log("====== getAllPicks 실행 ========== ", this.currentChoices);
       if (this.currentChoices !== undefined) {
+        console.log("핫플 Btn Cnt", this.hpBtnCnt);
         this.$store.dispatch("hotplace/searchMoreHotPlaceByTheme", {
           btnCnt: this.hpBtnCnt,
           word: this.currentChoices
         });
+        console.log("페스티벌 Btn Cnt", this.fvalBtnCnt);
         this.$store.dispatch("festival/searchMoreFestivalByTheme", {
           btnCnt: this.fvalBtnCnt,
           word: this.currentChoices
         });
       }
-    },
-    loadMoreHpBtn() {
-      this.hpPageCnt += 1;
-      if (this.hp_list_length < 4 * this.hpPageCnt) this.hpBtnCheck = false;
-    },
-    loadMoreFestivalBtn() {
-      this.fvalPageCnt += 1;
-      if (this.fval_list_length < 4 * this.fvalPageCnt)
-        this.fvalBtnCheck = false;
     }
   },
+  // LifeCycle Hooks
   created() {
-    console.log("========= Main2Pick.vue mounted =======");
+    console.log("======= Main2Pick.vue mounted =======");
     console.log("user: ", this.user);
     console.log("interest: ", this.user.mem_interest);
-    this.checkIfLoggedIn();
+    this.checkIfLoggedIn(); // 로그인과 선택을 다 한 유저라면 이어서 checkPastineterst --> getAllPicks도 실행됨
   }
 };
 </script>
