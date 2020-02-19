@@ -31,7 +31,7 @@ export default {
   name: "HotPlaceCard",
   methods: {
     getImgUrl(img) {
-      return require("../../assets" + img);
+      return require("@/assets" + img);
     },
     insertLike() {
       console.log("insert 실행");
