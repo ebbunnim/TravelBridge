@@ -18,9 +18,15 @@
             <p class="col-12 text-h4 q-pt-lg">
               <b>테마별 여행지 추천</b>
             </p>
-            <p class="col-12 text-body1">{{ user.mem_name }}님을 위한 맞춤 여행지를 추천해 드립니다.</p>
+            <p class="col-12 text-body1">
+              {{ user.mem_name }}님을 위한 맞춤 여행지를 추천해 드립니다.
+            </p>
 
-            <div style="display: inline" v-for="(item, idx) in thema" :key="idx">
+            <div
+              style="display: inline"
+              v-for="(item, idx) in thema"
+              :key="idx"
+            >
               <q-btn
                 color="info"
                 push
@@ -32,7 +38,8 @@
                   item.state = !item.state;
                   onToggle();
                 "
-              >#{{ item.name }}</q-btn>
+                >#{{ item.name }}</q-btn
+              >
               <q-btn
                 push
                 color="glossy"
@@ -44,9 +51,16 @@
                   item.state = !item.state;
                   onToggle();
                 "
-              >#{{ item.name }}</q-btn>
+                >#{{ item.name }}</q-btn
+              >
             </div>
-            <q-btn outline flat color="white" icon="search" @click="onPickBtn()" />
+            <q-btn
+              outline
+              flat
+              color="white"
+              icon="search"
+              @click="onPickBtn()"
+            />
 
             <!-- <q-input class="col-7 text-h6" v-model="word" type="text" placeholder="검색어를 검색하세요">
               <template v-slot:append>
@@ -63,7 +77,9 @@
             <p class="col-12 text-h4 q-pt-lg">
               <b>여행지 정보 검색</b>
             </p>
-            <p class="col-12 text-body1">제목, 내용, 도시, 태그로 핫플레이스와 축제를 검색하세요.</p>
+            <p class="col-12 text-body1">
+              제목, 내용, 도시, 태그로 핫플레이스와 축제를 검색하세요.
+            </p>
             <q-select
               wrap
               rounded
@@ -89,7 +105,9 @@
                 >
                   <template v-slot:no-option>
                     <q-item>
-                      <q-item-section class="text-grey">No results</q-item-section>
+                      <q-item-section class="text-grey"
+                        >No results</q-item-section
+                      >
                     </q-item>
                   </template>
                 </q-select>
@@ -105,7 +123,13 @@
                     behavior="menu"
                   />
                 </template>
-                <q-btn outline flat color="grey" icon="search" @click="onSearchSubBtn()" />
+                <q-btn
+                  outline
+                  flat
+                  color="grey"
+                  icon="search"
+                  @click="onSearchSubBtn()"
+                />
               </div>
             </template>
             <template v-else>
@@ -119,7 +143,13 @@
                 placeholder="검색어를 입력하세요"
               >
                 <template v-slot:append>
-                  <q-btn outline flat color="white" icon="search" @click="onSearchBtn()" />
+                  <q-btn
+                    outline
+                    flat
+                    color="white"
+                    icon="search"
+                    @click="onSearchBtn()"
+                  />
                 </template>
               </q-input>
             </template>
@@ -533,7 +563,7 @@ export default {
   },
   mounted() {
     this.checkPastInterest();
-    // 만약 미로그인이라면? 
+    // 만약 미로그인이라면?
   }
 };
 </script>
