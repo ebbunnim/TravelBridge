@@ -60,7 +60,7 @@
                       </q-item-label>
                     </q-item-section>
                     <q-item-section side>
-                      <q-icon name="chat_bubble" color="green" @click="moveUser(mem.mem_no)" />
+                      <q-icon name="chat_bubble" color="green" @click="movefollower(mem.mem_no)" />
                     </q-item-section>
                   </q-item>
                 </q-list>
@@ -82,7 +82,11 @@
                       </q-item-label>
                     </q-item-section>
                     <q-item-section side>
-                      <q-icon name="chat_bubble" color="green" @click="moveUser(mem.mem_no)" />
+                      <q-icon
+                        name="chat_bubble"
+                        color="green"
+                        @click="movefollowing(mem.mem_no,user.mem_no)"
+                      />
                     </q-item-section>
                   </q-item>
                 </q-list>
@@ -384,7 +388,7 @@
                       </q-item-label>
                     </q-item-section>
                     <q-item-section side>
-                      <q-icon name="chat_bubble" color="green" @click="moveUser(post.post_no)" />
+                      <q-icon name="chat_bubble" color="green" @click="movePost(post.post_no)" />
                     </q-item-section>
                   </q-item>
                 </q-list>
@@ -406,7 +410,7 @@
                       </q-item-label>
                     </q-item-section>
                     <q-item-section side>
-                      <q-icon name="chat_bubble" color="green" @click="moveUser(hot.hp_no)" />
+                      <q-icon name="chat_bubble" color="green" @click="moveHot(hot.hp_no)" />
                     </q-item-section>
                   </q-item>
                 </q-list>
@@ -429,7 +433,12 @@
                       </q-item-label>
                     </q-item-section>
                     <q-item-section side>
-                      <q-icon name="chat_bubble" color="green" @click="moveUser(festa.fval_no)" />
+                      <q-btn
+                        label="더보기"
+                        icon="chat_bubble"
+                        color="green"
+                        @click="moveFesta(festa.fval_no)"
+                      />
                     </q-item-section>
                   </q-item>
                 </q-list>
@@ -526,8 +535,20 @@ export default {
         }
       }
     },
-    moveUser(no) {
-      this.$router.push(`/userpage/${no}`);
+    movefollowing(target) {
+      this.$router.push(`/userpage/${target}`);
+    },
+    movefollower(target) {
+      this.$router.push(`/userpage/${target}`);
+    },
+    moveHot(no) {
+      this.$router.push(`/hotplace/${no}`);
+    },
+    movePost(no) {
+      this.$router.push(`/page1/postdetail/${no}`);
+    },
+    moveFesta(no) {
+      this.$router.push(`/festival/${no}`);
     }
   },
   mounted() {

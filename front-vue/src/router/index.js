@@ -152,10 +152,12 @@ const routes = [
     name: "mypage",
     component: MyPage
   },
+
   {
     path: "/userpage/:userNo",
     name: "userpage",
-    component: UserPage
+    component: UserPage,
+    props: true
   }
 ];
 
