@@ -3,40 +3,37 @@
     <div class="q-col-gutter-lg items-start">
       <div class="col-12">
         <q-img :src="getImgUrl('post.jpg')" :ratio="16 / 7">
-          <div
-            class="absolute-center text-center row justify-center"
-            style="width: 100%;"
-          >
+          <div class="absolute-center text-center row justify-center" style="width: 100%;">
             <p class="text-h4 q-pt-lg col-8">
               <b>어떤 여행이 궁금한가요?</b>
             </p>
             <div class="row col-12 justify-center">
               <q-select
-                value="hello"
-                label="전체"
-                filled
+                v-model="option"
+                :options="options"
                 class="col-1"
-                color="white"
-                label-color="white"
+                color="yellow"
+                label-color="orange"
               />
               <q-input
-                v-model="text"
+                v-model="word"
                 label="지금 구경하러 가기"
                 class="col-6"
                 color="white"
                 label-color="white"
                 standout
                 style="margin-left:15px;"
+                v-on:keyup.enter="search(1)"
               >
                 <template v-slot:append>
                   <q-icon
-                    v-if="text !== ''"
+                    v-if="word !== ''"
                     name="close"
-                    @click="text = ''"
+                    @click="word = ''"
                     class="cursor-pointer"
                     color="white"
                   />
-                  <q-icon name="search" color="white" />
+                  <q-icon name="search" class="cursor-pointer" color="white" @click="search(1)" />
                 </template>
               </q-input>
             </div>
@@ -74,9 +71,7 @@
         :name="index"
         class="column no-wrap"
       >
-        <div
-          class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap"
-        >
+        <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
           <q-img
             v-for="(subContent, index) in subCard"
             :key="index"
@@ -114,9 +109,7 @@
         :name="index"
         class="column no-wrap"
       >
-        <div
-          class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap"
-        >
+        <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
           <q-img
             v-for="(subContent, index) in subCard"
             :key="index"
@@ -140,10 +133,29 @@ export default {
   methods: {
     getImgUrl(img) {
       return require("../../assets/" + img);
+    },
+    search: function(pageNo) {
+      console.log(this.word);
+      console.log(this.option);
+      if (this.word != "") {
+        if (this.option != "") {
+          this.$router.push(
+            "/page1/main1search/" + this.word + "/" + this.option + "/" + pageNo
+          );
+        } else {
+          this.$router.push("/page1/main1search/" + this.word + "/" + pageNo);
+        }
+      } else {
+        if (pageNo !== 1) this.$router.push("/page1/main1search/" + pageNo);
+        else this.$router.push("/page1/main1search");
+      }
     }
   },
   data() {
     return {
+      options: ["전체", "제목", "내용", "태그", "지역"],
+      word: "",
+      option: "전체",
       text: "",
       slideTwo: 0,
       SubCard: [

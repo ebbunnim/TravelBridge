@@ -13,30 +13,42 @@
           narrow-indicator
           align="center"
         >
-          <q-tab name="activity" label="내 활동" />
+          <q-tab name="activity" label="팔로우" />
           <q-tab name="info" label="개인정보" />
-          <q-tab name="etc" label="etc" />
+          <q-tab name="etc" label="내 활동" />
         </q-tabs>
 
         <q-tab-panels v-model="tab">
           <!-- 첫번째 패널 -->
           <q-tab-panel name="activity" style="height:900px">
-            <div class="q-pa-md row justify-center q-gutter-md">
-              <q-card flat bordered class="my-card col-xs-12 col-md-9">
-                <q-card-section>
-                  <div class="text-h6">나를 팔로우 하는 사람들</div>
-                  <div class="text-subtitle1">
-                    팔로워 수 {{ user.mem_followed }}
-                  </div>
-                </q-card-section>
-                <q-card-section>
-                  <div class="text-h6">내가 팔로우 하는 사람들</div>
-                  <div class="text-subtitle1">
-                    팔로잉 수 {{ user.mem_following }}
-                  </div>
-                </q-card-section>
-              </q-card>
-            </div>
+            <q-tabs
+              dense
+              v-model="followTab"
+              class="text-black"
+              active-color="primary"
+              indicator-color="primary"
+              narrow-indicator
+              align="center"
+            >
+              <q-tab name="follower" label="팔로워">{{follower.mem_followMe.length}}</q-tab>
+              <q-tab name="following" label="팔로잉">{{following.mem_followList.length}}</q-tab>
+            </q-tabs>
+
+            <q-tab-panels v-model="followTab" animated>
+              <q-tab-panel name="follower">
+                <div v-for="(mem,index) in follower.mem_followMe" :key="index">
+                  {{mem.mem_id}}{{mem.mem_no}}
+                  <q-btn color="primary" icon="check" label="OK" @click="moveUser(mem.mem_no)" />
+                </div>
+                <q-btn color="primary" icon="check" label="OK" @click="moveUser(16)" />
+              </q-tab-panel>
+              <q-tab-panel name="following">
+                <div
+                  v-for="(mem,index) in following.mem_followList"
+                  :key="index"
+                >{{mem.mem_id}}{{mem.mem_no}}</div>
+              </q-tab-panel>
+            </q-tab-panels>
           </q-tab-panel>
 
           <!-- 두번째 패널 -->
@@ -95,16 +107,8 @@
                     borderless
                     v-show="!onEditReceive"
                   />
-                  <div
-                    v-show="onEditReceive"
-                    align="left "
-                    class="row justify-center"
-                  >
-                    <q-radio
-                      v-model="user.mem_receive_email"
-                      val="true"
-                      label="Email 수신에 동의합니다"
-                    />
+                  <div v-show="onEditReceive" align="left " class="row justify-center">
+                    <q-radio v-model="user.mem_receive_email" val="true" label="Email 수신에 동의합니다" />
                     <q-radio
                       v-model="user.mem_receive_email"
                       val="false"
@@ -220,11 +224,7 @@
                       v-bind="{ readonly: readOnly, outlined: !readOnly }"
                     >
                       <template v-slot:append>
-                        <q-icon
-                          name="event"
-                          class="cursor-pointer"
-                          v-if="!readOnly"
-                        >
+                        <q-icon name="event" class="cursor-pointer" v-if="!readOnly">
                           <q-popup-proxy
                             ref="qDateProxy"
                             transition-show="scale"
@@ -280,12 +280,7 @@
                     readonly
                   />-->
 
-                  <div
-                    class="row"
-                    style="display: inline"
-                    v-for="(item, idx) in thema"
-                    :key="idx"
-                  >
+                  <div class="row" style="display: inline" v-for="(item, idx) in thema" :key="idx">
                     <q-btn
                       v-bind="{ disabled: !onInterestEdit }"
                       color="grey"
@@ -297,8 +292,7 @@
                         item.state = !item.state;
                         onToggle();
                       "
-                      >#{{ item.name }}</q-btn
-                    >
+                    >#{{ item.name }}</q-btn>
                     <q-btn
                       v-bind="{ disabled: !onInterestEdit }"
                       color="grey"
@@ -311,17 +305,34 @@
                         item.state = !item.state;
                         onToggle();
                       "
-                      >#{{ item.name }}</q-btn
-                    >
+                    >#{{ item.name }}</q-btn>
                   </div>
                 </q-card-section>
               </q-card>
             </div>
           </q-tab-panel>
           <!-- 세번재 패널 -->
-          <q-tab-panel name="etc">
-            <div class="text-h6">etc</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          <q-tab-panel name="etc" style="height:900px">
+            <q-tabs
+              dense
+              v-model="likeTab"
+              class="text-black"
+              active-color="primary"
+              indicator-color="primary"
+              narrow-indicator
+              align="center"
+            >
+              <q-tab name="post" label="좋아요 포스트"></q-tab>
+              <q-tab name="hot" label="좋아요 핫플"></q-tab>
+              <q-tab name="festa" label="좋아요 축제"></q-tab>
+            </q-tabs>
+
+            <q-tab-panels v-model="likeTab" animated>
+              <q-tab-panel name="post">{{likePost.mem_likePost}}</q-tab-panel>
+              <q-tab-panel name="hot">{{likeHot.mem_likeHotPlace}}</q-tab-panel>
+
+              <q-tab-panel name="festa">{{likeFesta.mem_likeFestival}}</q-tab-panel>
+            </q-tab-panels>
           </q-tab-panel>
         </q-tab-panels>
         <!-- card end -->
@@ -351,7 +362,9 @@ export default {
       readOnly: true,
       onInterestEdit: false,
       submitted: false,
-      tab: "info"
+      tab: "info",
+      followTab: "follower",
+      likeTab: "post"
     };
   },
   computed: {
@@ -360,7 +373,22 @@ export default {
     },
     ...mapState({
       user: state => state.user.user // 현재 접속자
-    })
+    }),
+    follower() {
+      return this.$store.state.user.follower;
+    },
+    following() {
+      return this.$store.state.user.following;
+    },
+    likePost() {
+      return this.$store.state.user.likePost;
+    },
+    likeHot() {
+      return this.$store.state.user.likeHot;
+    },
+    likeFesta() {
+      return this.$store.state.user.likeFesta;
+    }
   },
   methods: {
     onToggle() {
@@ -395,6 +423,9 @@ export default {
           }
         }
       }
+    },
+    moveUser(no) {
+      this.$router.push(`/userpage/${no}`);
     }
   },
   mounted() {
@@ -402,6 +433,21 @@ export default {
     console.log(this.user);
     console.log(this.user.mem_interest);
     this.getPastInterest();
+    this.$store.dispatch("user/getFollower", {
+      userNo: this.$store.state.user.user.mem_no
+    });
+    this.$store.dispatch("user/getFollowing", {
+      userNo: this.$store.state.user.user.mem_no
+    });
+    this.$store.dispatch("user/getLikePost", {
+      userNo: this.$store.state.user.user.mem_no
+    });
+    this.$store.dispatch("user/getLikeHot", {
+      userNo: this.$store.state.user.user.mem_no
+    });
+    this.$store.dispatch("user/getLikeFesta", {
+      userNo: this.$store.state.user.user.mem_no
+    });
   }
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-carousel arrows animated swipeable autoplay infinite v-model="slideOne" height="750px">
+    <q-carousel arrows animated swipeable autoplay infinite v-model="slideOne" height="680px">
       <q-carousel-slide
         v-for="(mainCard, index) in MainCard"
         :key="index"

@@ -5,7 +5,7 @@
     </div>
 
     <q-separator spaced inset vertical dark />
-    <div v-for="(tta, index) in postList" :key="index" class="row justify-center" v-bind:class="{}">
+    <div v-for="(tta, index) in postList" :key="index" class="row justify-center">
       <div
         v-for="(tt, index) in tta"
         :key="index"
@@ -18,7 +18,7 @@
       >
         <template v-if="tt.post_type == 0">
           <q-card class="my-card1" flat bordered style="width:100%;" @click="move(tt.post_no)">
-            <template v-if="tt.post_filesList.length !=0">
+            <template v-if="tt.post_filesList.length != 0">
               <q-img :src="tt.post_filesList[0].files_url" style="max-height: 160px;" />
             </template>
             <template v-else>
@@ -36,7 +36,7 @@
         </template>
         <template v-else-if="tt.post_type == 1">
           <q-card class="my-card1" flat bordered @click="move(tt.post_no)">
-            <q-card-section horizontal style="width:100%;">
+            <q-card-section horizontal style="width:100%;height:100%;">
               <q-card-section class="q-pt-xs col-7">
                 <div class="text-overline text-orange-9 text-body-3">{{ tt.post_category }}</div>
                 <div class="q-mt-sm q-mb-xs">

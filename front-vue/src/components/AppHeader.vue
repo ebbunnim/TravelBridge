@@ -19,13 +19,7 @@
               label="트래블 픽"
               @mouseover="menuOn2 = true"
             ></q-btn>
-            <q-btn
-              class="text-black q-mx-sm"
-              flat
-              to="/page3"
-              label="SUB기능"
-              @mouseover="menuOn3 = true"
-            ></q-btn>
+            <q-btn class="text-black q-mx-sm" flat label="트래블 플러스" @mouseover="menuOn3=true"></q-btn>
           </div>
         </div>
 
@@ -36,10 +30,16 @@
 
         <q-menu square v-model="menuOn1" @mouseleave="menuOn1 = false" class="gt-sm" fit>
           <q-list class="q-ma-sm">
-            <div class="row">
+            <div class="row justify-center">
               <q-btn to="/page1" flat class="col-3">메인</q-btn>
-              <q-btn to="/page1/write" flat class="col-3">글쓰기</q-btn>
-              <q-btn to="/page1/follower" flat class="col-3">팔로워 피드</q-btn>
+              <template
+                v-if="this.$store.state.user.user.mem_id != null ||
+              this.$store.state.user.user.mem_id != undefined"
+              >
+                <q-btn to="/page1/write" flat class="col-3">글쓰기</q-btn>
+
+                <q-btn to="/page1/follower" flat class="col-3">팔로워 피드</q-btn>
+              </template>
               <q-btn to="/page1/main1search" flat class="col-3" icon="search">검색</q-btn>
             </div>
           </q-list>
@@ -49,22 +49,16 @@
             <!-- NavBar Hover 메뉴 부분 -->
             <div class="row justify-center">
               <q-btn to="/page2" flat class="col-4">트래블 픽</q-btn>
-              <q-btn to="/page2/pick" flat class="col-4"
-                >테마별 여행지 추천</q-btn
-              >
-              <q-btn to="/page2/list" flat class="col-4"
-                >여행지 정보 검색</q-btn
-              >
+              <q-btn to="/page2/pick" flat class="col-4">테마별 여행지 추천</q-btn>
+              <q-btn to="/page2/list" flat class="col-4">여행지 정보 검색</q-btn>
             </div>
           </q-list>
         </q-menu>
         <q-menu square v-model="menuOn3" @mouseleave="menuOn3 = false" class="gt-sm" fit>
           <q-list class="q-ma-sm">
             <div class="row justify-center">
-              <q-btn to="/page3" flat class="col-3">서브기능의</q-btn>
-              <q-btn to="/page3" flat class="col-3">호버이다</q-btn>
-              <q-btn to="/page3" flat class="col-3">router를</q-btn>
-              <q-btn to="/page3" flat class="col-3">연결할것</q-btn>
+              <q-btn to="/page3/mate" flat class="col-3">트래블 메이트</q-btn>
+              <q-btn to="/page3/rank" flat class="col-3">트래블 랭크</q-btn>
             </div>
           </q-list>
         </q-menu>
@@ -82,12 +76,12 @@
           align="right"
         >
           <q-btn size="md col-5" class="text-grey q-pa-md" flat to="/login">로그인</q-btn>
-          <q-btn size="md col-5" class="text-grey q-pa-md" flat to="/search">검색</q-btn>
+          <!-- <q-btn size="md col-5" class="text-grey q-pa-md" flat to="/search">검색</q-btn> -->
         </div>
         <div class="col-4" align="right" v-else>
           <q-btn size="md" class="text-grey q-py-md" flat to="/mypage">내 정보</q-btn>
           <q-btn size="md" class="text-grey q-py-md" flat v-on:click="logout">로그아웃</q-btn>
-          <q-btn size="md" class="text-grey q-py-md" flat to="/search">검색</q-btn>
+          <!-- <q-btn size="md" class="text-grey q-py-md" flat to="/search">검색</q-btn> -->
         </div>
       </q-toolbar>
       <!-- 햄버거버튼 누르면 drawer open -->
