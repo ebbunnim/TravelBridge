@@ -1,13 +1,7 @@
 <template>
   <div align="center">
     <div class="row justify-center" style="margin:5% 0 0 0 ;">
-      <q-select
-        v-model="option"
-        label="옵션"
-        filled
-        class="col-1"
-        :options="options"
-      />
+      <q-select v-model="option" label="옵션" filled class="col-1" :options="options" />
       <q-input
         label="검색"
         class="col-5"
@@ -25,12 +19,7 @@
             class="cursor-pointer"
             color="black"
           />
-          <q-icon
-            name="search"
-            class="cursor-pointer"
-            color="black"
-            @click="search(1)"
-          />
+          <q-icon name="search" class="cursor-pointer" color="black" @click="search(1)" />
         </template>
       </q-input>
       <div class="col-8 q-py-md row justify-center">
@@ -47,11 +36,7 @@
     </template>
     <template v-else>
       <template v-if="this.gogo">
-        <div
-          v-for="(tta, index) of postList"
-          :key="index"
-          class="row justify-center"
-        >
+        <div v-for="(tta, index) of postList" :key="index" class="row justify-center">
           <div
             v-for="(tt, index) of tta"
             :key="index"
@@ -63,44 +48,25 @@
             align="left"
           >
             <template v-if="tt.post_type == 0">
-              <q-card
-                class="my-card1"
-                flat
-                bordered
-                style="width:100%;"
-                @click="move(tt.post_no)"
-              >
+              <q-card class="my-card1" flat bordered style="width:100%;" @click="move(tt.post_no)">
                 <template v-if="tt.post_filesList.length !== 0">
-                  <q-img
-                    :src="tt.post_filesList[0].files_url"
-                    style="max-height: 160px;"
-                  />
+                  <q-img :src="tt.post_filesList[0].files_url" style="max-height: 160px;" />
                 </template>
                 <template v-else>
-                  <q-img src="https://cdn.quasar.dev/img/parallax2.jpg"  style="max-height: 160px;"/>
+                  <q-img src="https://cdn.quasar.dev/img/parallax2.jpg" style="max-height: 160px;" />
                 </template>
 
                 <q-card-section>
-                  <div class="text-overline text-orange-9 text-body-3">
-                    {{ tt.post_category }}
-                  </div>
+                  <div class="text-overline text-orange-9 text-body-3">{{ tt.post_category }}</div>
                   <div class="text-b q-mt-sm q-mb-xs text-body-4">
                     <b>{{ tt.post_title }}</b>
                   </div>
-                  <div class="text-caption text-grey text-body-1">
-                    {{ tt.post_content }}
-                  </div>
+                  <div class="text-caption text-grey text-body-1">{{ tt.post_content }}</div>
                 </q-card-section>
               </q-card>
             </template>
             <template v-else-if="tt.post_type == 1">
-              <q-card
-                class="my-card1"
-                flat
-                bordered
-                style="width:100%;"
-                @click="move(tt.post_no)"
-              >
+              <q-card class="my-card1" flat bordered style="width:100%;" @click="move(tt.post_no)">
                 <q-card-section horizontal style="width:100%;height:100%;">
                   <div class="col-7">
                     <template v-if="tt.post_filesList.length !== 0">
@@ -110,41 +76,42 @@
                       />
                     </template>
                     <template v-else>
-                      <q-img src="https://cdn.quasar.dev/img/parallax2.jpg"  style="max-height: 160px; border-radius:4px 0 0 0;"/>
+                      <q-img
+                        src="https://cdn.quasar.dev/img/parallax2.jpg"
+                        style="max-height: 160px; border-radius:4px 0 0 0;"
+                      />
                     </template>
-                  <q-card-section >
-                    <div class="text-overline text-orange-9 text-body-3">
-                      {{ tt.post_category }}
-                    </div>
-                    <div class="q-mt-sm q-mb-xs text-body-4">
-                      <b>{{ tt.post_title }}</b>
-                    </div>
-                    <div class="text-caption text-grey text-body-1">
-                      {{ tt.post_content }}
-                    </div>
-                  </q-card-section>
+                    <q-card-section>
+                      <div class="text-overline text-orange-9 text-body-3">{{ tt.post_category }}</div>
+                      <div class="q-mt-sm q-mb-xs text-body-4">
+                        <b>{{ tt.post_title }}</b>
+                      </div>
+                      <div class="text-caption text-grey text-body-1">{{ tt.post_content }}</div>
+                    </q-card-section>
                   </div>
                   <q-card-section class="col-5 flex flex-center">
                     <q-scroll-area style="width:100%;height:100%;">
                       <q-timeline color="secondary">
                         <template v-if="tt.post_courseList.length != 0">
-                          <q-timeline-entry
-                            v-for="(a, index) of tt.post_courseList"
-                            :key="index"
-                          >
-                            <template v-slot:title>
-                              {{ a.course_title }}
-                            </template>
-                            <div class="text-body-4">
-                              {{ a.course_description }}
-                            </div>
-                          </q-timeline-entry>
+                          <div>
+                            <q-timeline-entry v-for="(a, index) of tt.post_courseList" :key="index">
+                              <template v-slot:title>{{ a.course_title }}</template>
+                              <div class="text-body-4">{{ a.course_description }}</div>
+                              <!-- {{a.course_subcourse_list}}
+                              <q-timeline-entry
+                                v-for="(b, index) of a.course_subcourse_list"
+                                :key="index"
+                              >
+                                <div>{{b}}</div>
+                              </q-timeline-entry>-->
+                            </q-timeline-entry>
+                          </div>
                         </template>
                         <template v-else>
                           <q-timeline-entry>
                             <template v-slot:title>
-                              일정을 등록하지 <br />
-                              않았어요.
+                              일정을 등록하지
+                              <br />않았어요.
                             </template>
                           </q-timeline-entry>
                         </template>
@@ -157,22 +124,11 @@
             <template v-else>
               <q-card-section horizontal>
                 <q-card-section class="q-pt-xs">
-                  <div class="text-overline text-orange-9 text-body-3">
-                    {{ tt.post_category }}
-                  </div>
-                  <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
-                  <div class="text-caption text-grey">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
-                  </div>
+                  <div class="text-overline text-orange-9 text-body-3">우리의 다른 서비스를 이용해보시는건 어때요?</div>
                 </q-card-section>
 
                 <q-card-section class="col-5 flex flex-center">
-                  <q-img
-                    class="rounded-borders"
-                    src="https://cdn.quasar.dev/img/parallax2.jpg"
-                  />
+                  <q-img class="rounded-borders" src="https://cdn.quasar.dev/img/parallax2.jpg" />
                 </q-card-section>
               </q-card-section>
             </template>
@@ -183,12 +139,7 @@
     <div class="row justify-around">
       <template v-if="this.page != 1">
         <div style="margin-left:15px;" class="col-2 justify-start row">
-          <q-btn
-            color="primary"
-            icon="keyboard_arrow_left"
-            label="이전"
-            @click="less()"
-          />
+          <q-btn color="primary" icon="keyboard_arrow_left" label="이전" @click="less()" />
         </div>
       </template>
       <template v-else>
@@ -196,12 +147,7 @@
       </template>
       <template v-if="this.postList.length != 0">
         <div class="col-2 justify-end row">
-          <q-btn
-            color="primary"
-            label="다음"
-            @click="more()"
-            style="margin-right:4px;"
-          >
+          <q-btn color="primary" label="다음" @click="more()" style="margin-right:4px;">
             <q-icon name="keyboard_arrow_right" style="margin-left:12px;" />
           </q-btn>
         </div>

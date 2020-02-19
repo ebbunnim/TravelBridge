@@ -27,7 +27,7 @@
         <q-separator />
 
         <q-tab-panels v-model="tab" animated>
-          <q-tab-panel name="post" style="height:800px">
+          <q-tab-panel name="post" style="height:900px">
             <div class="row justify-center" style="margin-bottom:15px;">
               <q-input class="col-8" type="text" label="제목" v-model="post.postTitle" />
               <div class="row justify-around col-5" style="margin-top:2%;">
@@ -40,7 +40,7 @@
                   input-debounce="0"
                   @input="postInner"
                   :options="post.postSpinArea"
-                  class="col-5"
+                  class="col-3"
                   label="지역"
                 >
                   <template v-slot:no-option>
@@ -55,10 +55,31 @@
                     v-model="post.postCity"
                     label="도시"
                     :options="post.postSpinCity"
-                    class="col-5"
+                    class="col-3"
                     behavior="menu"
                   />
                 </template>
+                <q-input
+                  filled
+                  v-model="post.postDate"
+                  label="여행예정일"
+                  mask="date"
+                  :rules="['date']"
+                  class="col-4"
+                  style="    padding-top: 20px;"
+                >
+                  <template v-slot:append>
+                    <q-icon name="event" class="cursor-pointer">
+                      <q-popup-proxy
+                        ref="qDateProxy"
+                        transition-show="scale"
+                        transition-hide="scale"
+                      >
+                        <q-date v-model="post.postDate" @input="() => $refs.qDateProxy.hide()" />
+                      </q-popup-proxy>
+                    </q-icon>
+                  </template>
+                </q-input>
               </div>
               <div class="col-10 justify-center row" style="margin-top:1%;">
                 <div style="display: inline" v-for="(item, idx) in postThema" :key="idx">
@@ -69,7 +90,7 @@
                     v-if="item.state"
                     @click="
                       item.state = !item.state;
-                      planToggle();
+                      postToggle();
                     "
                   >{{ item.name }}</q-btn>
                   <q-btn
@@ -80,7 +101,7 @@
                     outline
                     @click="
                       item.state = !item.state;
-                      planToggle();
+                      postToggle();
                     "
                   >{{ item.name }}</q-btn>
                 </div>
@@ -172,7 +193,7 @@
                   input-debounce="0"
                   @input="planInner"
                   :options="plan.planSpinArea"
-                  class="col-5"
+                  class="col-3"
                   label="지역"
                 >
                   <template v-slot:no-option>
@@ -187,10 +208,31 @@
                     v-model="plan.planCity"
                     label="도시"
                     :options="plan.planSpinCity"
-                    class="col-5"
+                    class="col-3"
                     behavior="menu"
                   />
                 </template>
+                <q-input
+                  filled
+                  v-model="plan.planDate"
+                  label="여행예정일"
+                  mask="date"
+                  :rules="['date']"
+                  class="col-4"
+                  style="    padding-top: 20px;"
+                >
+                  <template v-slot:append>
+                    <q-icon name="event" class="cursor-pointer">
+                      <q-popup-proxy
+                        ref="qDateProxy"
+                        transition-show="scale"
+                        transition-hide="scale"
+                      >
+                        <q-date v-model="plan.planDate" @input="() => $refs.qDateProxy.hide()" />
+                      </q-popup-proxy>
+                    </q-icon>
+                  </template>
+                </q-input>
               </div>
               <div class="col-10 justify-center row" style="margin-top:1%;">
                 <div style="display: inline" v-for="(item, idx) in planThema" :key="idx">
@@ -715,7 +757,8 @@ export default {
         postCity: "",
         postSpinCity: [],
         postChoices: "",
-        postSelectedFile: []
+        postSelectedFile: [],
+        postDate: ""
       },
 
       postThema: {
@@ -788,7 +831,7 @@ export default {
       else if (this.post.postArea === "전남") this.post.postSpinCity = wjsska;
       else if (this.post.postArea === "제주") this.post.postSpinCity = wpwn;
       else {
-        this.postSpinCity = [];
+        this.post.postSpinCity = [];
       }
     },
     planFileSelected(file) {
@@ -826,25 +869,25 @@ export default {
       else if (this.plan.planArea === "전남") this.plan.planSpinCity = wjsska;
       else if (this.plan.planArea === "제주") this.plan.planSpinCity = wpwn;
       else {
-        this.planSpinCity = [];
+        this.plan.planSpinCity = [];
       }
     },
     postToggle() {
-      this.postChoices = "";
+      this.post.postChoices = "";
       const themaChoice = this.postThema;
       for (let key in themaChoice) {
         if (themaChoice[key].state === true) {
-          this.postChoices += themaChoice[key].name + " ";
+          this.post.postChoices += "#" + themaChoice[key].name + " ";
         }
       }
       console.log("### TravelPick - onToggle 눌림 ###", this.postChoices);
     },
     planToggle() {
-      this.planChoices = "";
+      this.plan.planChoices = "";
       const themaChoice = this.planThema;
       for (let key in themaChoice) {
         if (themaChoice[key].state === true) {
-          this.planChoices += themaChoice[key].name + " ";
+          this.plan.planChoices += "#" + themaChoice[key].name + " ";
         }
       }
       console.log("### TravelPick - onToggle 눌림 ###", this.planChoices);
@@ -873,12 +916,33 @@ export default {
         (this.plan.planList = []);
     },
     planSave() {
-      console.log("plan save");
-      console.log(this.plan);
+      let x = {
+        board_no: 2,
+        mem_no: this.$store.state.user.user.mem_no,
+        post_category: this.plan.planChoices,
+        post_city: this.plan.planArea + " " + this.plan.planCity,
+        post_content: this.plan.planEditor,
+        post_plan_date: this.plan.planDate,
+        post_title: this.plan.planTitle,
+        post_type: 1,
+        post_writer: this.$store.state.user.user.mem_id
+      };
+
+      console.log(x);
     },
     postSave() {
-      console.log("post save");
-      console.log(this.post);
+      let x = {
+        board_no: 1,
+        mem_no: this.$store.state.user.user.mem_no,
+        post_category: this.post.postChoices,
+        post_city: this.post.postArea + " " + this.post.postCity,
+        post_content: this.post.postEditor,
+        post_plan_date: this.post.postDate,
+        post_title: this.post.postTitle,
+        post_type: 0,
+        post_writer: this.$store.state.user.user.mem_id
+      };
+      console.log(x);
     },
     planu() {
       this.postClear();

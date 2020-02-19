@@ -30,6 +30,7 @@ import FestivalDetail from "../views/two/FestivalDetail.vue";
 // sub기능, 전체 통합검색 Search Page
 import Mate from "../views/Mate.vue";
 import MateDetail from "../views/MateDetail.vue";
+import CreateParty from "../views/CreateParty.vue";
 import Rank from "../views/Rank.vue";
 import Search from "../views/Search.vue";
 import Sub from "../views/Sub.vue";
@@ -105,6 +106,7 @@ const routes = [
     children: [
       { path: "mate", component: Mate },
       { path: "rank", component: Rank },
+      { path: "mate/create", component: CreateParty },
       { path: "mate/:mateNo", component: MateDetail, props: true }
     ]
   },
@@ -153,10 +155,12 @@ const routes = [
     name: "mypage",
     component: MyPage
   },
+
   {
     path: "/userpage/:userNo",
     name: "userpage",
-    component: UserPage
+    component: UserPage,
+    props: true
   }
 ];
 

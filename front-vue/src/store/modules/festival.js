@@ -1,11 +1,9 @@
 import FestivalService from "@/services/FestivalService.js";
-
 const state = {
   fvals: [],
-  fval_list_length: 0, 
-  fval: {} // 번호로 찾아올 때 단일 fval  
+  fval_list_length: 0,
+  fval: {} // 번호로 찾아올 때 단일 fval
 };
-
 const actions = {
   searchAllFvals: ({ commit }) => {
     FestivalService.searchAll(fvals => {
@@ -48,7 +46,6 @@ const actions = {
       });
   }
 };
-
 const mutations = {
   saveFvals(state, fvals) {
     state.fvals = fvals;
@@ -61,7 +58,6 @@ const mutations = {
     state.fvals = [];
   }
 };
-
 export default {
   namespaced: true,
   state,
