@@ -3,7 +3,7 @@ import FestivalService from "@/services/FestivalService.js";
 const state = {
   fvals: [],
   fval_list_length: 0,
-  fval: null
+  fval: {},
 };
 
 const actions = {
@@ -25,10 +25,19 @@ const actions = {
       payload.word
     )
       .then(res => {
-        console.log("여긴 festival.js", res);
-        commit("saveFvals", res);
-        console.log("state.fvals: ", state.fvals);
-        console.log("fval length 측정: ", state.fval_list_length);
+
+        console.log(res)
+
+
+        commit("saveFvals", res)
+
+        console.log("state.fvals 확인 ", state.fvals);
+        console.log("길이 측정!!!!!: ", state.fval_list_length);
+
+
+
+
+
       })
       .catch(e => {
         console.log(e);
@@ -37,7 +46,7 @@ const actions = {
   searchMoreFestivalByTheme: ({ commit }, payload) => {
     FestivalService.searchMoreFestivalByTheme(payload.btnCnt, payload.word)
       .then(res => {
-        commit("saveFvals", res);
+        commit("saveFvals", res)
       })
       .catch(e => {
         console.log(e);
