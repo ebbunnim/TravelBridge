@@ -10,7 +10,7 @@
         infinite
         height="680px"
       >
-        <q-carousel-slide :name="1" :img-src="getImgUrl('main2bg2.jpg')">
+        <q-carousel-slide :name="1" :img-src="getImgUrl('main2bg.jpg')">
           <div
             class="row q-my-xl text-center justify-center absolute-center custom-caption"
             style="width: 100%;"
@@ -44,8 +44,8 @@
                 push
                 color="glossy"
                 class="q-ma-sm"
-                rounded
                 size="lg"
+                rounded
                 v-if="!item.state"
                 @click="
                   item.state = !item.state;
@@ -54,6 +54,7 @@
                 >#{{ item.name }}</q-btn
               >
             </div>
+            <!-- 태그 후, 본 페이지로 라우팅 -->
             <q-btn
               outline
               flat
@@ -61,7 +62,6 @@
               icon="search"
               @click="onPickBtn()"
             />
-
             <!-- <q-input class="col-7 text-h6" v-model="word" type="text" placeholder="검색어를 검색하세요">
               <template v-slot:append>
                 <q-btn outline flat color="grey" icon="search" @click="onSearchBtn()" />
@@ -69,7 +69,7 @@
             </q-input>-->
           </div>
         </q-carousel-slide>
-        <q-carousel-slide :name="2" :img-src="getImgUrl('main2bg.jpg')">
+        <q-carousel-slide :name="2" :img-src="getImgUrl('main2bg2.jpg')">
           <div
             class="row q-my-xl text-center justify-center absolute-center custom-caption"
             style="width: 100%;"
@@ -467,6 +467,36 @@ export default {
     getImgUrl(img) {
       return require("../../assets/" + img);
     },
+    onToggle() {
+      this.currentChoices = "";
+      const themaChoice = this.thema;
+      for (let key in themaChoice) {
+        if (themaChoice[key].state === true) {
+          this.currentChoices += themaChoice[key].name + " ";
+        }
+      }
+      console.log("###### Home에서 onToggle 눌림 ######", this.currentChoices);
+      this.user.mem_interest = this.currentChoices;
+      console.log(this.user.mem_interest);
+    },
+    onPickBtn() {
+      this.$router.push("/page2/pick");
+    },
+    checkPastInterest() {
+      this.currentChoices = this.user.mem_interest;
+      console.log("check Past Interest ==> ", this.currentChoices);
+      if (this.currentChoices !== undefined) {
+        const tempInterest = this.currentChoices.split(" ");
+        for (let key in tempInterest) {
+          for (let themaKey in this.thema) {
+            if (this.thema[themaKey].name === tempInterest[key]) {
+              this.thema[themaKey].state = true;
+            }
+          }
+        }
+      }
+    },
+    ///////////////
     onSearchBtn() {
       const payLoad1 = {
         btnCnt: this.hpBtnCnt,
@@ -530,35 +560,6 @@ export default {
       else {
         this.spinCity = [];
       }
-    },
-    checkPastInterest() {
-      this.currentChoices = this.user.mem_interest;
-      console.log("check Past Interest ==> ", this.currentChoices);
-      if (this.currentChoices !== undefined) {
-        const tempInterest = this.currentChoices.split(" ");
-        for (let key in tempInterest) {
-          for (let themaKey in this.thema) {
-            if (this.thema[themaKey].name === tempInterest[key]) {
-              this.thema[themaKey].state = true;
-            }
-          }
-        }
-      }
-    },
-    onToggle() {
-      this.currentChoices = "";
-      const themaChoice = this.thema;
-      for (let key in themaChoice) {
-        if (themaChoice[key].state === true) {
-          this.currentChoices += themaChoice[key].name + " ";
-        }
-      }
-      console.log("###### Home에서 onToggle 눌림 ######", this.currentChoices);
-      this.user.mem_interest = this.currentChoices;
-      console.log(this.user.mem_interest);
-    },
-    onPickBtn() {
-      this.$router.push("/page2/pick");
     }
   },
   mounted() {

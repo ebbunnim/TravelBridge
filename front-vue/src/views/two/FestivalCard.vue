@@ -52,9 +52,18 @@
 import { mapState } from "vuex";
 export default {
   name: "FestivalCard",
+  props: {
+    fval_img: { type: String },
+    fval_name: { type: String },
+    fval_start_day: { type: String },
+    fval_end_day: { type: String },
+    fval_detail_adr: { type: String },
+    fval_tag: { type: String },
+    fval_no: { tyle: Number }
+  },
   methods: {
     getImgUrl(img) {
-      return require("../../assets" + img);
+      return require("@/assets" + img);
     },
     insertLike() {
       console.log("insert 실행");
@@ -82,15 +91,6 @@ export default {
       user: state => state.user.user,
       allLikedFvals: state => state.like.allLikedFvals
     })
-  },
-  props: {
-    fval_img: { type: String },
-    fval_name: { type: String },
-    fval_start_day: { type: String },
-    fval_end_day: { type: String },
-    fval_detail_adr: { type: String },
-    fval_tag: { type: String },
-    fval_no: { tyle: Number }
   }
 };
 </script>
