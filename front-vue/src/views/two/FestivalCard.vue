@@ -45,7 +45,7 @@ export default {
   name: "FestivalCard",
   methods: {
     getImgUrl(img) {
-      return require("../../../../back-spring/src/main/resources" + img);
+      return require("../../assets/festival/" + img);
     }
   },
   props: {
