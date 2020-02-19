@@ -94,6 +94,7 @@
         class="col-1 q-my-lg"
         v-show="hpBtnCheck"
         icon="arrow_back"
+        unelevated
         @click="loadPreviousHotplace()"
       />
       <div class="text-h6 text-center col-8"># 핫플 추천</div>
@@ -103,6 +104,7 @@
         class="col-1 q-my-lg"
         v-show="hpBtnCheck"
         icon="arrow_forward"
+        unelevated
         @click="loadMoreHotplace()"
       />
     </div>
@@ -140,7 +142,7 @@
           class="col-1 q-my-lg"
           v-show="fvalBtnCheck"
           icon="arrow_back"
-          @click="loadPreviousHotplace()"
+          @click="loadPreviousFestival()"
         />
         <div class="text-h6 text-center col-8"># 페스티벌 추천</div>
         <q-btn
@@ -149,7 +151,7 @@
           class="col-1 q-my-lg"
           v-show="fvalBtnCheck"
           icon="arrow_forward"
-          @click="loadMoreHotplace()"
+          @click="loadMoreFestival()"
         />
       </div>
       <div v-else>

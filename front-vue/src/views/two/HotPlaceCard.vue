@@ -9,11 +9,12 @@
     </q-card-section>
 
     <q-card-section class="q-pt-none">
-      <div class="text-subtitle2 text-body">{{ hp_tag }}</div>
+      <div class="text-subtitle2 text-body tag-color">{{ hp_tag }}</div>
     </q-card-section>
     <q-card-section class="absolute-bottom row justify-even">
       <q-btn
         flat
+        class="col-6 q-mr-xl"
         color="primary"
         @click="
           $router.push({ name: 'hotplace-detail', params: { hp_no: hp_no } })
@@ -23,6 +24,7 @@
       <q-btn
         v-if="!btnCheck"
         flat
+        class="col-3"
         round
         icon="favorite_border"
         @click="insertLike()"
@@ -30,6 +32,7 @@
       <q-btn
         v-if="btnCheck"
         flat
+        class="col-3"
         round
         icon="favorite"
         @click="deleteLike(hp_no)"
@@ -110,5 +113,9 @@ export default {
   width: 300px;
   max-height: 550px;
   margin: 10px;
+}
+
+.tag-color {
+  color: #4527a0;
 }
 </style>

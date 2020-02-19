@@ -517,6 +517,13 @@ export default {
   created() {
     this.$store.commit("hotplace/clearHPs");
     this.$store.commit("festival/clearFvals");
+  },
+  watch: {
+    $route(to, from) {
+      // react to route changes...
+      this.$store.commit("hotplace/clearHPs");
+      this.$store.commit("festival/clearFvals");
+    }
   }
 };
 </script>

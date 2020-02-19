@@ -77,14 +77,15 @@ const routes = [
       { path: "", component: Main2Home },
       {
         path: "pick",
-        component: () =>
-          import(/* webpackChunkName: "about" */ "../views/two/Main2Pick.vue")
+        component: () => import("../views/two/Main2Pick.vue")
       },
-      // { path: "list", component: Main2List },
       {
         path: "list",
-        component: () =>
-          import(/* webpackChunkName: "about" */ "../views/two/Main2List.vue")
+        component: () => import("../views/two/Main2List.vue")
+      },
+      {
+        path: "train",
+        component: () => import("../views/two/Main2Train.vue")
       }
     ]
   },
