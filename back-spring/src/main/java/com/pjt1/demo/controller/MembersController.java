@@ -31,6 +31,7 @@ import com.pjt1.demo.model.dto.Likes;
 import com.pjt1.demo.model.dto.Members;
 import com.pjt1.demo.model.dto.Post;
 import com.pjt1.demo.model.dto.Qna;
+import com.pjt1.demo.model.dto.Ranking;
 import com.pjt1.demo.model.service.BoardService;
 import com.pjt1.demo.model.service.FestivalService;
 import com.pjt1.demo.model.service.FollowService;
@@ -38,8 +39,7 @@ import com.pjt1.demo.model.service.HotPlaceService;
 import com.pjt1.demo.model.service.JwtService;
 import com.pjt1.demo.model.service.MembersService;
 import com.pjt1.demo.model.service.PostService;
-import com.pjt1.demo.utils.PageBean;
-import com.pjt1.demo.utils.PageMaker;
+import com.pjt1.demo.model.service.RankingService;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -62,6 +62,8 @@ public class MembersController {
     private HotPlaceService hp_service;
     @Autowired
     private FestivalService fval_service;
+    @Autowired
+    private RankingService r_service;
 
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
@@ -115,6 +117,13 @@ public class MembersController {
     public ResponseEntity<Map<String, Object>> searchMemberLikeFestival(@PathVariable int mem_no) {
     	Members members = service.searchMemberLikeFestival(mem_no);
     	return handleSuccess(members);
+    }
+    @ApiOperation("no에 따른 Member가 후기를 남긴 지역별로 랭킹을 조회하는 기능")
+    @GetMapping("/Members/searchMemberReviewsRank/{mem_no}")
+    public ResponseEntity<Map<String, Object>> searchMemberReviewsRank(@PathVariable int mem_no) {
+    	List<Ranking> list = r_service.searchMemberReviewsRank(mem_no);
+    	System.out.println(list);
+    	return handleSuccess(list);
     }
 
     // @ApiOperation("no에 따른 Member의 FollowList를 조회하는 기능")

@@ -39,6 +39,7 @@ public class PostController {
     private PostService service;
     @Autowired
     private MembersService m_service;
+	private static int postPageNum = 16;
 
     @ExceptionHandler
     public ResponseEntity<Map<String, Object>> handle(Exception e) {
@@ -84,8 +85,8 @@ public class PostController {
     @GetMapping("/Post/search/page/{btnCnt}/{searchOption}/{word}")
     public ResponseEntity<Map<String, Object>> searchPostByOption(@PathVariable int btnCnt,
             @PathVariable String searchOption, @PathVariable String word) {
-        PageBean pageBean = new PageBean();
-        pageBean.setPerPageNum(16);
+        PageBean pageBean = new PageBean(btnCnt, postPageNum);
+        
         PageMaker pageMaker = new PageMaker();
         if (searchOption.equals("empty")) {
             pageMaker.setSearchOption("all");
@@ -142,9 +143,9 @@ public class PostController {
 
     @ApiOperation("페이징된 Post 전체 목록 조회")
     @GetMapping("/Post/search/pageAll/{btnCnt}")
-    public ResponseEntity<Map<String, Object>> searchPagePostAll(PageBean pageBean, @PathVariable int btnCnt) {
+    public ResponseEntity<Map<String, Object>> searchPagePostAll(@PathVariable int btnCnt) {
+    	PageBean pageBean = new PageBean(btnCnt, postPageNum);
         PageMaker pageMaker = new PageMaker();
-        pageBean.setPage(btnCnt);
         pageMaker.setPageBean(pageBean);
         pageMaker.setStartPage(pageBean.getPage());
         pageMaker.setEndPage(pageMaker.getStartPage());
@@ -154,9 +155,9 @@ public class PostController {
 
     @ApiOperation("페이징된 Post 중 일정(Plan) 목록 조회")
     @GetMapping("/Post/search/pagePlan/{btnCnt}")
-    public ResponseEntity<Map<String, Object>> searchPagePlan(PageBean pageBean, @PathVariable int btnCnt) {
+    public ResponseEntity<Map<String, Object>> searchPagePlan( @PathVariable int btnCnt) {
         PageMaker pageMaker = new PageMaker();
-        pageBean.setPage(btnCnt);
+    	PageBean pageBean = new PageBean(btnCnt, postPageNum);
         pageMaker.setPageBean(pageBean);
         pageMaker.setStartPage(pageBean.getPage());
         pageMaker.setEndPage(pageMaker.getStartPage());

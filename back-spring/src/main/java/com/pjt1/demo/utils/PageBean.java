@@ -8,8 +8,11 @@ public class PageBean {
 	private int page; // 현재 페이지 번호( != 특정 페이지의 첫번째 게시글 번호(이건 getPageStart() 거쳐야 함) )
 	private int perPageNum; // 한 페이지당 보여줄 게시글 개수
 	public PageBean() {
-		setPage(this.page);
-		this.perPageNum = 12;
+		
+	}
+	public PageBean(int page, int perPageNum) {
+		this.page = page;
+		this.perPageNum = perPageNum;
 	}
 	public int getPage() {
 		return page;

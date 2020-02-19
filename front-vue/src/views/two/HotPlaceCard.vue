@@ -1,101 +1,75 @@
 <template>
-  <q-card flat bordered class="my-card">
-    <!-- <q-img :src="getImgUrl(hp_img)" basic :ratio="16 / 9">
-      <div class="absolute-bottom text-h6 text-center">{{ hp_name }}</div>
-    </q-img>-->
-
-    <q-card-section>
-      <div class="text-subtitle1 text-center">{{ hp_detail_adr }}</div>
-    </q-card-section>
-
-    <q-card-section class="q-pt-none">
-      <div class="text-subtitle2 text-body">{{ hp_tag }}</div>
-    </q-card-section>
-    <q-card-section class="absolute-bottom row justify-even">
-      <q-btn
-        flat
-        color="primary"
-        class="col"
-        @click="
-          $router.push({ name: 'hotplace-detail', params: { hp_no: hp_no } })
-        "
-      >상세보기</q-btn>
-      <q-btn v-if="!btnCheck" flat round icon="favorite_border" @click="insertLike()"></q-btn>
-      <q-btn v-if="btnCheck" flat round icon="favorite" @click="deleteLike(hp_no)"></q-btn>
-    </q-card-section>
-  </q-card>
+  <div>
+    <div class="q-ma-xl q-pa-xl">
+      <q-card flat bordered>
+        <q-card-section class="row">
+          <div class="text-h4 q-mt-xl text-center col-12">{{ hp.hp_name }}</div>
+          <div class="text-h6 q-my-md text-center col-12">
+            <div>
+              {{ hp.hp_detail_adr }}
+              <a :href="hp.hp_homepage">
+                <q-btn size="lg" flat>
+                  <q-icon name="home"></q-icon>
+                </q-btn>
+              </a>
+            </div>
+          </div>
+          <q-separator inset />
+        </q-card-section>
+        <q-card-section class="q-ma-lg text-center tag-color col-6">
+          {{
+          hp.hp_tag
+          }}
+        </q-card-section>
+        <div class="row justify-center">
+          <q-card-section class="col-xs-12 col-md-6">
+            <div class="q-ma-md">
+              <q-img :src="getImgUrl(hp.hp_img)" basic :ratio="16 / 9" />
+            </div>
+          </q-card-section>
+          <q-card-section class="col-xs-12 col-md-6">
+            <div class="q-ma-md">
+              <div class="text-subtitle1">{{ hp.hp_holiday }}</div>
+              <div class="text-subtitle1">{{ hp.hp_fee }}</div>
+            </div>
+            <div class="q-ma-lg">
+              <div class="text-body1">{{ hp.hp_content }}</div>
+            </div>
+          </q-card-section>
+        </div>
+      </q-card>
+    </div>
+  </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 export default {
-  name: "HotPlaceCard",
-  methods: {
-    getImgUrl(img) {
-      return require("../../assets" + img);
-    },
-    insertLike() {
-      console.log("insert 실행");
-      const payload = {
-        hotplace_no: this.hp_no,
-        like_del_check: false,
-        like_type: 2,
-        liker_mem_no: this.user.mem_no
-      };
-      console.log("payload확인", payload);
-      this.$store.dispatch("like/insertLike", payload);
-    },
-    deleteLike(no) {
-      console.log("del 실행");
-      console.log(no);
-      this.$store.dispatch("like/deleteHotplaceLike", no);
-    }
-  },
   computed: {
-    btnCheck() {
-      const have = element => element.hotplace_no === this.hp_no;
-      return this.allLikedHPs.some(have);
+    hp_no() {
+      return this.$route.params.hp_no;
     },
     ...mapState({
-      user: state => state.user.user,
-      allLikedHPs: state => state.like.allLikedHPs
+      hp: state => state.hotplace.hp
     })
   },
-  props: {
-    hp_img: { type: String },
-    hp_name: { type: String },
-    hp_detail_adr: { type: String },
-    hp_tag: { type: String },
-    hp_no: { type: Number }
+  methods: {
+    getImgUrl(img) {
+      return require("../../assets/hotplace/" + img);
+    },
+    getHotplace() {
+      console.log("this.hp_no", this.hp_no);
+      this.$store.dispatch("hotplace/searchByNo", this.hp_no);
+    }
+  },
+  created() {
+    this.getHotplace();
   }
 };
 </script>
 
 <style>
-.text-title {
-  width: 99%;
-  padding: 0 5px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.text-body {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  /* display: box;
-  margin-top: 1px;
-  max-height: 400px; */
-  overflow: hidden;
-  vertical-align: top;
-  text-overflow: ellipsis;
-  word-break: break-all;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
-}
-.my-card {
-  height: 400px;
-  width: 300px;
-  max-height: 550px;
-  margin: 10px;
+.tag-color {
+  color: #4527a0;
 }
 </style>

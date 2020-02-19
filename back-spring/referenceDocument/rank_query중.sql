@@ -645,3 +645,9 @@ ORDER BY mem_no;
 # 이거 멤버를 기준으로 묶어야하는데;
 # 오른쪽에는 멤버를 기준으로 도시 이름, 도시 방문 횟수가 있어야지?
 # 왼쪽에는 
+
+SELECT *
+FROM CITY c
+LEFT JOIN POST p
+ON p.post_city LIKE CONCAT('%', c.city_name, '%')
+ORDER BY c.city_no;
