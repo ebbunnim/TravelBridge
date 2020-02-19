@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
+import com.pjt1.demo.model.dto.SubCourse;
 
 //도시 테이블
 @AllArgsConstructor
@@ -36,6 +37,6 @@ public class Course {
     private boolean course_del_check;// boolean DEFAULT FALSE,
     @Getter
     @Setter
-    private List<String> course_sub;
+    private List<SubCourse> course_subcourse_list;
 
 }
