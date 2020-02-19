@@ -1,13 +1,16 @@
 <template>
   <q-page class="page">
-    <div class="row justify-center text-center q-my-xl q-py-xl bg-image" style="width: 100%">
+    <div
+      class="row justify-center text-center q-my-xl q-py-xl bg-image"
+      style="width: 100%"
+    >
       <q-select
         wrap
         rounded
         bg-color="grey"
         standout="bg-glossy text-white"
-        class="col-md-2 col-xs-4 text-h6 q-mx-sm"
         v-model="searchOption"
+        class="col-md-2 col-xs-4 text-h6 q-mx-sm"
         :options="searchOptions"
       />
       <template v-if="this.searchOption == '도시'">
@@ -42,7 +45,13 @@
               behavior="menu"
             />
           </template>
-          <q-btn outline flat color="grey" icon="search" @click="onSearchSubBtn()" />
+          <q-btn
+            outline
+            flat
+            color="grey"
+            icon="search"
+            @click="onSearchSubBtn()"
+          />
         </div>
       </template>
       <template v-else>
@@ -56,7 +65,13 @@
           placeholder="검색어를 입력하세요"
         >
           <template v-slot:append>
-            <q-btn outline flat color="white" icon="search" @click="onSearchBtn()" />
+            <q-btn
+              outline
+              flat
+              color="white"
+              icon="search"
+              @click="onSearchBtn()"
+            />
           </template>
         </q-input>
       </template>
@@ -73,9 +88,17 @@
       <div
         v-if="hp_list_length === 0 ? false : true"
         class="col-12 text-center text-h6"
-      >#{{ searchTitle }} 핫플레이스</div>
-      <div v-else class="col-12 text-center text-h6">{{ searchTitle }} 핫플레이스 검색 결과가 없습니다.</div>
-      <div class="col-lg-3 col-md-6 col-xs-12" v-for="i in hp_list_length" :key="i">
+      >
+        #{{ searchTitle }} 핫플레이스
+      </div>
+      <div v-else class="col-12 text-center text-h6">
+        {{ searchTitle }} 핫플레이스 검색 결과가 없습니다.
+      </div>
+      <div
+        class="col-lg-3 col-md-6 col-xs-12"
+        v-for="i in hp_list_length"
+        :key="i"
+      >
         <!-- 카드가 들어가는 부분 -->
         <HotPlaceCard
           class="q-ma-lg"
@@ -90,9 +113,17 @@
       <div
         v-if="fval_list_length === 0 ? false : true"
         class="col-12 text-center text-h6"
-      >#{{ searchTitle }} 페스티벌</div>
-      <div v-else class="col-12 text-center text-h6">{{ searchTitle }} 페스티벌 검색 결과가 없습니다.</div>
-      <div class="col-lg-3 col-md-6 col-xs-12" v-for="j in fval_list_length" :key="j">
+      >
+        #{{ searchTitle }} 페스티벌
+      </div>
+      <div v-else class="col-12 text-center text-h6">
+        {{ searchTitle }} 페스티벌 검색 결과가 없습니다.
+      </div>
+      <div
+        class="col-lg-3 col-md-6 col-xs-12"
+        v-for="j in fval_list_length"
+        :key="j"
+      >
         <!-- 카드가 들어가는 부분 -->
         <FestivalCard
           class="q-ma-lg"
@@ -398,6 +429,7 @@ export default {
         도시: "city"
       },
       word: "",
+      //
       city: "",
       area: "",
       spinArea: area,
@@ -407,7 +439,7 @@ export default {
   computed: {
     ...mapState({
       searchTitle: state => state.hotplace.searchTitle,
-      hp_list_length: state => state.hotplace.hp_list_length, // vuex 에서 데려옴
+      hp_list_length: state => state.hotplace.hp_list_length, // length 를 mounting 될 때 계산시 오류 떠서 vuex 에서 계산하고 불러옴
       fval_list_length: state => state.festival.fval_list_length,
       hp_list: state => state.hotplace.hps,
       fval_list: state => state.festival.fvals
@@ -427,9 +459,10 @@ export default {
       };
       console.log("Vue:", payLoad1);
       console.log("Vue:", payLoad2);
+      //
       this.$store.dispatch("hotplace/searchMoreHotplace", payLoad1);
       this.$store.dispatch("festival/searchMoreFestival", payLoad2);
-
+      //
       this.$store.commit("hotplace/saveSearchTitle", this.word);
     },
     onSearchSubBtn() {
@@ -445,9 +478,10 @@ export default {
       };
       console.log("Vue:", payLoad1);
       console.log("Vue:", payLoad2);
+      //
       this.$store.dispatch("hotplace/searchMoreHotplace", payLoad1);
       this.$store.dispatch("festival/searchMoreFestival", payLoad2);
-
+      //
       this.$store.commit(
         "hotplace/saveSearchTitle",
         this.area + " " + this.city
@@ -480,8 +514,7 @@ export default {
   created() {
     this.$store.commit("hotplace/clearHPs");
     this.$store.commit("festival/clearFvals");
-  },
-  beforeRouteUpdate() {}
+  }
 };
 </script>
 
