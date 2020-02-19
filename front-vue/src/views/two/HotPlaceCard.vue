@@ -1,8 +1,8 @@
 <template>
   <q-card flat bordered class="my-card">
-    <q-img :src="getImgUrl(hp_img)" basic :ratio="16 / 9">
+    <!-- <q-img :src="getImgUrl(hp_img)" basic :ratio="16 / 9">
       <div class="absolute-bottom text-h6 text-center">{{ hp_name }}</div>
-    </q-img>
+    </q-img> -->
 
     <q-card-section>
       <div class="text-subtitle1 text-center">{{ hp_detail_adr }}</div>
@@ -19,30 +19,47 @@
         @click="
           $router.push({ name: 'hotplace-detail', params: { hp_no: hp_no } })
         "
-        >상세보기</q-btn
-      >
-      <q-icon
-        class="col"
-        name="bookmark_border"
-        size="md"
-        @click="insertLike()"
-      ></q-icon>
-      <!-- <q-icon class="col" name="bookmark" size="md"></q-icon> -->
+      >상세보기</q-btn>
+      <q-btn v-if="!btnCheck" flat round icon="favorite_border" @click="insertLike()"></q-btn>
+      <q-btn v-if="btnCheck" flat round icon="favorite" @click="deleteLike(hp_no)"></q-btn>
     </q-card-section>
   </q-card>
 </template>
 
 <script>
-import LikeService from "@/services/LikeService";
+import { mapState } from "vuex";
 export default {
   name: "HotPlaceCard",
   methods: {
-    getImgUrl(img) {
-      return require("../../../../back-spring/src/main/resources" + img);
-    },
+    // getImgUrl(img) {
+    //   return require("../../../../back-spring/src/main/resources" + img);
+    // },
     insertLike() {
-      LikeService.insertLike();
+      console.log("insert 실행");
+      const payload = {
+        hotplace_no: this.hp_no,
+        like_del_check: false,
+        like_type: 2,
+        liker_mem_no: this.user.mem_no
+      };
+      console.log("payload확인", payload);
+      this.$store.dispatch("like/insertLike", payload);
+    },
+    deleteLike(no) {
+      console.log("del 실행");
+      console.log(no);
+      this.$store.dispatch("like/deleteHotplaceLike", no);
     }
+  },
+  computed: {
+    btnCheck() {
+      const have = element => element.hotplace_no === this.hp_no;
+      return this.allLikedHPs.some(have);
+    },
+    ...mapState({
+      user: state => state.user.user,
+      allLikedHPs: state => state.like.allLikedHPs
+    })
   },
   props: {
     hp_img: { type: String },

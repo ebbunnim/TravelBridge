@@ -17,7 +17,12 @@ const actions = {
     });
   },
   searchPartPost: (store, payload) => {
-    PostService.GetSearchAllPost(payload.pageNo).then(response => {
+    console.log(payload);
+    PostService.GetSearchAllPost(
+      payload.pageNo,
+      payload.option,
+      payload.keyword
+    ).then(response => {
       store.commit("postListAll", {
         postList: response,
         pageNo: payload.pageNo
@@ -69,10 +74,11 @@ const mutations = {
         ti.push(i);
       }
     }
+    if (ti.length != 0) titles.push(ti);
     if (payLoad.pageNo === 1) {
       state.postList = titles;
     } else {
-      state.postList.push(titles);
+      state.postList = titles;
     }
     state.gogo = true;
   }

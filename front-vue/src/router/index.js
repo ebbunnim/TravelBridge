@@ -5,6 +5,7 @@ import Login from "../views/user/Login.vue";
 import PasswordFind from "../views/user/PasswordFind.vue";
 import SignUp from "../views/user/SignUp.vue";
 import MyPage from "../views/user/MyPage.vue";
+import UserPage from "../views/user/UserPage.vue";
 //about
 import AboutTeam from "../views/about/AboutTeam.vue";
 import AboutService from "../views/about/AboutService.vue";
@@ -27,8 +28,11 @@ import Main2Home from "../views/two/Main2Home.vue";
 import HotPlaceDetail from "../views/two/HotPlaceDetail.vue";
 import FestivalDetail from "../views/two/FestivalDetail.vue";
 // sub기능, 전체 통합검색 Search Page
-import Sub from "../views/Sub.vue";
+import Mate from "../views/Mate.vue";
+import MateDetail from "../views/MateDetail.vue";
+import Rank from "../views/Rank.vue";
 import Search from "../views/Search.vue";
+import Sub from "../views/Sub.vue";
 
 Vue.use(VueRouter);
 
@@ -50,6 +54,17 @@ const routes = [
     children: [
       { path: "", component: Main1Main },
       { path: "main1search", component: Main1Search },
+      { path: "main1search/:pageNo", component: Main1Search, props: true },
+      {
+        path: "main1search/:word/:pageNo",
+        component: Main1Search,
+        props: true
+      },
+      {
+        path: "main1search/:word/:option/:pageNo",
+        component: Main1Search,
+        props: true
+      },
       { path: "postdetail/:postNo", component: PostDetail, props: true },
       { path: "write", component: Main1Write },
       { path: "follower", component: Main1follow }
@@ -85,8 +100,12 @@ const routes = [
   },
   {
     path: "/page3",
-    name: "sub",
-    component: Sub
+    component: Sub,
+    children: [
+      { path: "mate", component: Mate },
+      { path: "rank", component: Rank },
+      { path: "mate/:mateNo", component: MateDetail, props: true }
+    ]
   },
   {
     path: "/faq",
@@ -132,6 +151,11 @@ const routes = [
     path: "/mypage",
     name: "mypage",
     component: MyPage
+  },
+  {
+    path: "/userpage/:userNo",
+    name: "userpage",
+    component: UserPage
   }
 ];
 

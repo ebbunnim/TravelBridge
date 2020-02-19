@@ -35,6 +35,13 @@ class UserService {
         console.log(e);
       });
   }
+  followerUser(userNo) {
+    console.log("팔로워");
+    return Api.get(`/Members/searchFollowMePeople/${userNo}`).then(Response => {
+      console.log(Response.data.data);
+      return Response.data.data;
+    });
+  }
 
   // no에 따른 Member가 좋아하는 핫플레이스 List를 조회하는 기능
   getLikedHotplaces(mem_no) {
@@ -46,6 +53,13 @@ class UserService {
         console.log(e);
       });
   }
+  followingUser(userNo) {
+    console.log("팔로잉");
+    return Api.get(`/Members/searchMyFollowPeople/${userNo}`).then(Response => {
+      console.log(Response.data.data);
+      return Response.data.data;
+    });
+  }
 
   // no에 따른 Member가 좋아하는 축제 List를 조회하는 기능
   getLikedFestivals(mem_no) {
@@ -56,6 +70,43 @@ class UserService {
       .catch(e => {
         console.log(e);
       });
+  }
+  likePost(userNo) {
+    return Api.get(`/Members/searchMemberLikePost/${userNo}`)
+      .then(Response => {
+        console.log(Response.data.data);
+        return Response.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+  likeHot(userNo) {
+    return Api.get(`/Members/searchMemberLikeHotPlace/${userNo}`)
+      .then(Response => {
+        console.log(Response.data.data);
+        return Response.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+  likeFesta(userNo) {
+    return Api.get(`/Members/searchMemberLikeFestival/${userNo}`)
+      .then(Response => {
+        console.log(Response.data.data);
+        return Response.data.data;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+  anotherUser(userNo) {
+    return Api.get(`Members/search/${userNo}`)
+      .then(Response => {
+        return Response.data.data;
+      })
+      .catch(e => console.log(e));
   }
 }
 

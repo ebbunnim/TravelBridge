@@ -93,9 +93,8 @@ public class PostController {
         }else pageMaker.setSearchOption(searchOption);
         if (word.equals("empty")) {
             pageMaker.setWord("''");
-        }else pageMaker.setWord(word);
-        System.out.println(searchOption);
-        System.out.println(word);
+        }else  pageMaker.setWord(word);
+        // PageBean.setWord(word);
         System.out.println(pageBean);
         pageBean.setPage(btnCnt);
         pageMaker.setPageBean(pageBean);
@@ -104,7 +103,7 @@ public class PostController {
         System.out.println(pageMaker);
         List<Map<String, Object>> list = service.searchMorePostByOption(pageMaker);
         System.out.println(list);
-        return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+        return list.size() == 0 ? handleSuccess(list) : handleSuccess(list); // 일단 무조건 확인해야 하므로
     }
 
     @PostMapping("/Post/insert")

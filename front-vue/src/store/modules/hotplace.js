@@ -3,7 +3,7 @@ import HotPlaceService from "@/services/HotplaceService.js";
 const state = {
   hps: [],
   hp_list_length: 0,
-  hp: null,
+  hp: {},
   searchTitle: ""
 };
 
@@ -30,8 +30,12 @@ const actions = {
       payload.word
     )
       .then(res => {
-        console.log("여긴 hotplace.js", res);
-        commit("saveHPs", res);
+
+        console.log(res)
+
+        commit("saveHPs", res)
+
+
         console.log("state.hps 확인 ", state.hps);
         console.log("길이 측정!!!!!: ", state.hp_list_length);
       })
@@ -56,8 +60,14 @@ const mutations = {
     state.hps = hps;
     state.hp_list_length = hps.length;
   },
+  saveHP(state, hp) {
+    state.hp = hp;
+  },
   clearHPs(state) {
     state.hps = [];
+  },
+  saveSearchTitle(state, title) {
+    state.searchTitle = title
   }
 };
 
