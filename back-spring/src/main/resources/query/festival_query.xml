@@ -80,20 +80,130 @@
         ORDER BY fval_no 
         LIMIT 0, #{perPageNum}]]>
 	</select>
-
-	<select id ="searchMoreFestivalByCityName" parameterType="hashmap" resultType="hashmap">
+	<select id="searchPageFestivalAll" parameterType="int" resultType="festival">
+	<![CDATA[
+        SELECT
+			RESULT.rnum,
+			RESULT.fval_no, 
+			RESULT.city_no,
+			RESULT.fval_name, 
+			RESULT.fval_address, 
+			RESULT.fval_detail_adr, 
+			RESULT.fval_content,
+			RESULT.fval_tag, 
+			RESULT.fval_start_day, 
+			RESULT.fval_end_day, 
+			RESULT.fval_homepage, 
+			RESULT.fval_fee,
+			RESULT.fval_img, 
+			RESULT.fval_host, 
+			RESULT.fval_theme,
+		    RESULT.fval_ended
+		FROM (SELECT 
+				(CASE 
+					WHEN @vfval_no = f.fval_no
+					THEN @rownum:=@rownum
+					ELSE @rownum:=@rownum+1
+				END) AS rnum,
+				(@vfval_no:=f.fval_no) vfval_no,
+				f.*
+				FROM
+					(SELECT 
+						*
+					FROM FESTIVAL
+					WHERE 
+					fval_del_check = FALSE) as f, 
+					(SELECT @vfval_no:='', @rownum:=0 FROM DUAL) as b
+				) AS RESULT
+		WHERE RESULT.rnum > #{startPage} AND RESULT.rnum <=#{endPage}]]>
+	</select>
+	<select id ="searchPageFestivalByCityName" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+        SELECT
+			RESULT.rnum,
+			RESULT.fval_no, 
+			RESULT.city_no,
+			RESULT.fval_name, 
+			RESULT.fval_address, 
+			RESULT.fval_detail_adr, 
+			RESULT.fval_content,
+			RESULT.fval_tag, 
+			RESULT.fval_start_day, 
+			RESULT.fval_end_day, 
+			RESULT.fval_homepage, 
+			RESULT.fval_fee,
+			RESULT.fval_img, 
+			RESULT.fval_host, 
+			RESULT.fval_theme,
+		    RESULT.fval_ended
+		FROM (SELECT 
+				(CASE 
+					WHEN @vfval_no = f.fval_no
+					THEN @rownum:=@rownum
+					ELSE @rownum:=@rownum+1
+				END) AS rnum,
+				(@vfval_no:=f.fval_no) vfval_no,
+				f.*
+				FROM
+					(SELECT * 
+					FROM FESTIVAL 
+					WHERE fval_del_check = FALSE 
+					AND city_no = (SELECT city_no 
+									 FROM CITY 
+									 WHERE city_name = "${word}" 
+									 AND city_del_check = FALSE)) as f, 
+					(SELECT @vfval_no:='', @rownum:=0 FROM DUAL) as b
+				) AS RESULT
+		WHERE RESULT.rnum > #{startPage} AND RESULT.rnum <=#{endPage}]]>
+	</select>
+	<select id ="searchMoreFestivalByCityName" parameterType="hashmap" resultType="festival">
 		<![CDATA[
         SELECT * 
         FROM FESTIVAL 
         WHERE fval_del_check = FALSE 
         AND city_no = (SELECT city_no 
-						 FROM city 
+						 FROM CITY 
 						 WHERE city_name = "${word}" 
 						 AND city_del_check = FALSE) 
         ORDER BY fval_no 
         LIMIT 0, #{perPageNum}]]>
 	</select>
-
+	<select id="searchPageFestivalByTag" parameterType="hashmap" resultType="festival">
+		<![CDATA[
+		SELECT
+			RESULT.rnum,
+			RESULT.fval_no, 
+			RESULT.city_no,
+			RESULT.fval_name, 
+			RESULT.fval_address, 
+			RESULT.fval_detail_adr, 
+			RESULT.fval_content,
+			RESULT.fval_tag, 
+			RESULT.fval_start_day, 
+			RESULT.fval_end_day, 
+			RESULT.fval_homepage, 
+			RESULT.fval_fee,
+			RESULT.fval_img, 
+			RESULT.fval_host, 
+			RESULT.fval_theme,
+		    RESULT.fval_ended
+		FROM (SELECT 
+				(CASE 
+					WHEN @vfval_no = f.fval_no
+					THEN @rownum:=@rownum
+					ELSE @rownum:=@rownum+1
+				END) AS rnum,
+				(@vfval_no:=f.fval_no) vfval_no,
+				f.*
+				FROM
+					(SELECT * 
+					FROM FESTIVAL 
+					WHERE fval_del_check = FALSE 
+					AND fval_tag LIKE concat('%','${word}','%')) as f, 
+					(SELECT @vfval_no:='', @rownum:=0 FROM DUAL) as b
+				) AS RESULT
+		WHERE RESULT.rnum > #{startPage} AND RESULT.rnum <=#{endPage}]]>
+	</select>
 	<select id="searchMoreFestivalByTag" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
     	SELECT *
@@ -103,6 +213,48 @@
 		ORDER BY fval_no
 		LIMIT 0, #{perPageNum}]]>
 	</select>
+	<select id ="searchPageFestivalByTheme" parameterType="hashmap" resultType="festival">
+	<![CDATA[
+		SELECT
+			RESULT.rnum,
+			RESULT.fval_no, 
+			RESULT.city_no,
+			RESULT.fval_name, 
+			RESULT.fval_address, 
+			RESULT.fval_detail_adr, 
+			RESULT.fval_content,
+			RESULT.fval_tag, 
+			RESULT.fval_start_day, 
+			RESULT.fval_end_day, 
+			RESULT.fval_homepage, 
+			RESULT.fval_fee,
+			RESULT.fval_img, 
+			RESULT.fval_host, 
+			RESULT.fval_theme,
+		    RESULT.fval_ended
+		FROM (SELECT 
+				(CASE 
+					WHEN @vfval_no = f.fval_no
+					THEN @rownum:=@rownum
+					ELSE @rownum:=@rownum+1
+				END) AS rnum,
+				(@vfval_no:=f.fval_no) vfval_no,
+				f.*
+				FROM
+				(SELECT *
+				FROM FESTIVAL
+				WHERE fval_del_check = FALSE ]]>
+				<if test="filters.size()!=0">
+				AND
+				<foreach collection="filters" item ="item" index="index" open="(" close=")" separator="or">
+					fval_theme like concat('%',#{item},'%')
+				</foreach>
+				</if>
+				<![CDATA[) as f, 
+				(SELECT @vfval_no:='', @rownum:=0 FROM DUAL) as b
+				) AS RESULT
+		WHERE RESULT.rnum > #{startPage} AND RESULT.rnum <=#{endPage}]]>
+	</select> 
 	<select id ="searchMoreFestivalByTheme" parameterType="hashmap" resultType="hashmap">
 		SELECT *
 		FROM FESTIVAL
@@ -115,6 +267,66 @@
 			</if>
 		ORDER BY fval_no
 		LIMIT 0, #{perPageNum}
+	</select> 
+	<select id ="searchPageFestival" parameterType="hashmap" resultType="festival">
+		<![CDATA[
+		SELECT
+			RESULT.rnum,
+			RESULT.fval_no, 
+			RESULT.city_no,
+			RESULT.fval_name, 
+			RESULT.fval_address, 
+			RESULT.fval_detail_adr, 
+			RESULT.fval_content,
+			RESULT.fval_tag, 
+			RESULT.fval_start_day, 
+			RESULT.fval_end_day, 
+			RESULT.fval_homepage, 
+			RESULT.fval_fee,
+			RESULT.fval_img, 
+			RESULT.fval_host, 
+			RESULT.fval_theme,
+		    RESULT.fval_ended
+		FROM (SELECT 
+				(CASE 
+					WHEN @vfval_no = f.fval_no
+					THEN @rownum:=@rownum
+					ELSE @rownum:=@rownum+1
+				END) AS rnum,
+				(@vfval_no:=f.fval_no) vfval_no,
+				f.*
+				FROM
+				(SELECT *
+				FROM FESTIVAL
+				WHERE fval_del_check = FALSE]]>
+				<choose>
+					<when test="searchOption == 'all'">
+					 	AND
+						(fval_name like concat('%','${word}','%')
+						OR fval_content like concat('%','${word}','%')
+						OR fval_tag like concat('%','${word}','%'))
+					</when> 
+					<when test="searchOption == 'title'">
+					 	AND
+						fval_name like concat('%','${word}','%')
+					</when>
+					<when test="searchOption == 'content'">
+					 	AND	
+						fval_content like concat('%','${word}','%')
+					</when>
+					<when test="searchOption == 'tag'">
+					 	AND
+						fval_tag like concat('%','${word}','%')
+					</when>
+					<when test="searchOption == 'city'">
+					 	AND
+						fval_address like concat('%','${word}','%')
+					</when>
+				</choose>
+				<![CDATA[ ) as f, 
+						(SELECT @vfval_no:='', @rownum:=0 FROM DUAL) as b
+				) AS RESULT
+		WHERE RESULT.rnum > #{startPage} AND RESULT.rnum <=#{endPage}]]>
 	</select> 
 	<select id ="searchMoreFestival" parameterType="hashmap" resultType="hashmap">
 		SELECT *

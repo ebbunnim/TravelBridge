@@ -75,7 +75,41 @@
 		FROM HOTPLACE
 		WHERE hp_del_check = false     
 	</select>
-
+	<select id="searchPageHotPlaceAll" parameterType="hashmap" resultType="hotplace">
+	<![CDATA[
+		SELECT
+			RESULT.rnum,
+			RESULT.hp_no, 
+			RESULT.city_no,
+			RESULT.hp_name, 
+			RESULT.hp_address, 
+			RESULT.hp_detail_adr, 
+			RESULT.hp_content,
+			RESULT.hp_tag, 
+			RESULT.hp_homepage, 
+			RESULT.hp_holiday, 
+			RESULT.hp_fee,
+			RESULT.hp_img, 
+			RESULT.hp_theme
+		FROM (SELECT 
+				(CASE 
+					WHEN @vhp_no = h.hp_no
+					THEN @rownum:=@rownum
+					ELSE @rownum:=@rownum+1
+				END) AS rnum,
+				(@vhp_no:=h.hp_no) vhp_no,
+				h.*
+				FROM
+					(SELECT 
+						*
+					FROM HOTPLACE
+					WHERE 
+					hp_del_check = FALSE) as h, 
+					(SELECT @vhp_no:='', @rownum:=0 FROM DUAL) as b
+				) AS RESULT
+		WHERE RESULT.rnum > #{startPage} AND RESULT.rnum <=#{endPage}]]>
+	</select>
+	
 	<select id="searchMoreHotPlaceAll" parameterType="int" resultType="hotplace">
 	<![CDATA[
         SELECT * 
@@ -84,7 +118,44 @@
         ORDER BY hp_no 
         LIMIT 0, #{perPageNum}]]>
 	</select>
-
+	<select id ="searchPageHotPlaceByCityName" parameterType="hashmap" resultType="hotplace">
+	<![CDATA[
+	SELECT
+		RESULT.rnum,
+		RESULT.hp_no, 
+		RESULT.city_no,
+		RESULT.hp_name, 
+		RESULT.hp_address, 
+		RESULT.hp_detail_adr, 
+		RESULT.hp_content,
+		RESULT.hp_tag, 
+		RESULT.hp_homepage, 
+		RESULT.hp_holiday, 
+		RESULT.hp_fee,
+		RESULT.hp_img, 
+		RESULT.hp_theme
+	FROM (SELECT 
+			(CASE 
+				WHEN @vhp_no = h.hp_no
+				THEN @rownum:=@rownum
+				ELSE @rownum:=@rownum+1
+			END) AS rnum,
+			(@vhp_no:=h.hp_no) vhp_no,
+			h.*
+			FROM
+				(SELECT 
+					*
+				FROM HOTPLACE
+				WHERE 
+				hp_del_check = FALSE
+	            AND city_no = (SELECT city_no 
+							 FROM CITY 
+							 WHERE city_name = "${word}"
+							 AND city_del_check = FALSE) ) as h, 
+				(SELECT @vhp_no:='', @rownum:=0 FROM DUAL) as b
+			) AS RESULT
+	WHERE RESULT.rnum > #{startPage} AND RESULT.rnum <=#{endPage}]]>
+	</select>
 	<select id ="searchMoreHotPlaceByCityName" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
         SELECT * 
@@ -97,7 +168,40 @@
         ORDER BY hp_no 
         LIMIT 0, #{perPageNum}]]>
 	</select>
-
+	<select id="searchPageHotPlaceByTag" parameterType="hashmap" resultType="hotplace">
+		<![CDATA[
+    	SELECT
+			RESULT.rnum,
+			RESULT.hp_no, 
+			RESULT.city_no,
+			RESULT.hp_name, 
+			RESULT.hp_address, 
+			RESULT.hp_detail_adr, 
+			RESULT.hp_content,
+			RESULT.hp_tag, 
+			RESULT.hp_homepage, 
+			RESULT.hp_holiday, 
+			RESULT.hp_fee,
+			RESULT.hp_img, 
+			RESULT.hp_theme
+		FROM (SELECT 
+				(CASE 
+					WHEN @vhp_no = h.hp_no
+					THEN @rownum:=@rownum
+					ELSE @rownum:=@rownum+1
+				END) AS rnum,
+				(@vhp_no:=h.hp_no) vhp_no,
+				h.*
+				FROM
+					(SELECT 
+						*
+					FROM HOTPLACE
+					WHERE hp_tag LIKE concat('%','${word}','%') 
+		            AND hp_del_check = FALSE) as h, 
+					(SELECT @vhp_no:='', @rownum:=0 FROM DUAL) as b
+				) AS RESULT
+		WHERE RESULT.rnum > #{startPage} AND RESULT.rnum <=#{endPage}]]>
+	</select>
 	<select id="searchMoreHotPlaceByTag" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
     	SELECT *
@@ -107,7 +211,40 @@
 		ORDER BY hp_no
 		LIMIT 0, #{perPageNum}]]>
 	</select>
-	
+	<select id="searchPageHotPlaceByAddress" parameterType="hashmap" resultType="hotplace">
+		<![CDATA[
+		SELECT
+			RESULT.rnum,
+			RESULT.hp_no, 
+			RESULT.city_no,
+			RESULT.hp_name, 
+			RESULT.hp_address, 
+			RESULT.hp_detail_adr, 
+			RESULT.hp_content,
+			RESULT.hp_tag, 
+			RESULT.hp_homepage, 
+			RESULT.hp_holiday, 
+			RESULT.hp_fee,
+			RESULT.hp_img, 
+			RESULT.hp_theme
+		FROM (SELECT 
+				(CASE 
+					WHEN @vhp_no = h.hp_no
+					THEN @rownum:=@rownum
+					ELSE @rownum:=@rownum+1
+				END) AS rnum,
+				(@vhp_no:=h.hp_no) vhp_no,
+				h.*
+				FROM
+					(SELECT 
+						*
+					FROM HOTPLACE
+					WHERE hp_address = '${word}'
+		            AND hp_del_check = FALSE) as h, 
+					(SELECT @vhp_no:='', @rownum:=0 FROM DUAL) as b
+				) AS RESULT
+		WHERE RESULT.rnum > #{startPage} AND RESULT.rnum <= #{endPage} ]]>
+	</select>
 	<select id="searchMoreHotPlaceByAddress" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 		SELECT * 
@@ -117,6 +254,48 @@
 		ORDER BY hp_no
 		LIMIT 0,#{perPageNum}]]>
 	</select>
+	<select id ="searchPageHotPlaceByTheme" parameterType="hashmap" resultType="hotplace">
+		<![CDATA[
+		SELECT
+			RESULT.rnum,
+			RESULT.hp_no, 
+			RESULT.city_no,
+			RESULT.hp_name, 
+			RESULT.hp_address, 
+			RESULT.hp_detail_adr, 
+			RESULT.hp_content,
+			RESULT.hp_tag, 
+			RESULT.hp_homepage, 
+			RESULT.hp_holiday, 
+			RESULT.hp_fee,
+			RESULT.hp_img, 
+			RESULT.hp_theme
+		FROM (SELECT 
+				(CASE 
+					WHEN @vhp_no = h.hp_no
+					THEN @rownum:=@rownum
+					ELSE @rownum:=@rownum+1
+				END) AS rnum,
+				(@vhp_no:=h.hp_no) vhp_no,
+				h.*
+				FROM
+					(SELECT 
+						*
+					FROM HOTPLACE
+					WHERE hp_del_check = FALSE 
+					]]>
+					<if test="filters.size()!=0">
+					AND
+					<foreach collection="filters" item ="item" index="index" open="(" close=")" separator="or">
+						hp_theme like concat('%',#{item},'%')
+					</foreach>
+					</if>
+					<![CDATA[
+					) as h, 
+					(SELECT @vhp_no:='', @rownum:=0 FROM DUAL) as b
+				) AS RESULT
+		WHERE RESULT.rnum > #{startPage} AND RESULT.rnum <= #{endPage}]]>   
+	</select> 
 	<select id ="searchMoreHotPlaceByTheme" parameterType="hashmap" resultType="hashmap">
 		SELECT *
 		FROM HOTPLACE
@@ -129,27 +308,82 @@
 			</if>
 		ORDER BY hp_no
 	</select> 
+	<select id ="searchPageHotPlace" parameterType="hashmap" resultType="hotplace">
+	<![CDATA[
+	SELECT
+		RESULT.rnum,
+		RESULT.hp_no, 
+		RESULT.city_no,
+		RESULT.hp_name, 
+		RESULT.hp_address, 
+		RESULT.hp_detail_adr, 
+		RESULT.hp_content,
+		RESULT.hp_tag, 
+		RESULT.hp_homepage, 
+		RESULT.hp_holiday, 
+		RESULT.hp_fee,
+		RESULT.hp_img, 
+		RESULT.hp_theme
+	FROM (SELECT 
+			(CASE 
+				WHEN @vhp_no = h.hp_no
+				THEN @rownum:=@rownum
+				ELSE @rownum:=@rownum+1
+			END) AS rnum,
+			(@vhp_no:=h.hp_no) vhp_no,
+			h.*
+			FROM
+				(SELECT 
+					*
+				FROM HOTPLACE
+				WHERE hp_del_check = FALSE ]]>
+				<choose>
+				<when test="searchOption == 'all'">
+					AND
+					(hp_name like concat('%','${word}','%')
+					OR hp_content like concat('%','${word}','%')
+					OR hp_tag like concat('%','${word}','%'))
+				</when> 
+				<when test="searchOption == 'title'">
+					AND hp_name like concat('%','${word}','%')
+				</when>
+				<when test="searchOption == 'content'">
+					AND hp_content like concat('%','${word}','%')
+				</when>
+				<when test="searchOption == 'tag'">
+					AND hp_tag like concat('%','${word}','%')
+				</when>
+				<when test="searchOption == 'city'">
+					AND hp_address like concat('%','${word}','%')
+				</when>
+			</choose>
+			<![CDATA[
+				) as h, 
+				(SELECT @vhp_no:='', @rownum:=0 FROM DUAL) as b
+			) AS RESULT
+	WHERE RESULT.rnum > #{startPage} AND RESULT.rnum <= #{endPage}]]>    
+	</select> 
 	<select id ="searchMoreHotPlace" parameterType="hashmap" resultType="hashmap">
 		SELECT *
 		FROM HOTPLACE
 		WHERE hp_del_check = FALSE AND
 		<choose>
 			<when test="searchOption == 'all'">
-				(hp_name like concat('%',#{word},'%')
-				OR hp_content like concat('%',#{word},'%')
-				OR hp_tag like concat('%',#{word},'%'))
+				(hp_name like concat('%','${word}','%')
+				OR hp_content like concat('%','${word}','%')
+				OR hp_tag like concat('%','${word}','%'))
 			</when> 
 			<when test="searchOption == 'title'">
-				hp_name like concat('%',#{word},'%')
+				hp_name like concat('%','${word}','%')
 			</when>
 			<when test="searchOption == 'content'">
-				hp_content like concat('%',#{word},'%')
+				hp_content like concat('%','${word}','%')
 			</when>
 			<when test="searchOption == 'tag'">
-				hp_tag like concat('%',#{word},'%')
+				hp_tag like concat('%','${word}','%')
 			</when>
 			<when test="searchOption == 'city'">
-				hp_address like concat('%',#{word},'%')
+				hp_address like concat('%','${word}d','%')
 			</when>
 		</choose>
 		ORDER BY hp_no

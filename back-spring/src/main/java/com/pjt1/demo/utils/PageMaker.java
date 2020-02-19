@@ -1,5 +1,9 @@
 package com.pjt1.demo.utils;
 
+import java.util.List;
+
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 // 필요한 것 (특정 페이지의 첫번째 게시글 번호, 전체 게시글 수 )
@@ -14,6 +18,7 @@ public class PageMaker {
 	private String searchOption;
 	private String word;
 	private int insert_no;
+	private List<String> filters;// 태그필터링
 	public PageBean getPageBean() {
 		return pageBean;
 	}
@@ -59,7 +64,18 @@ public class PageMaker {
 		return this.word;
 	}
 
-	public String toString(){
-		return "pageMaker:" + this.startPage + "," + this.endPage +","+this.word +","+ this.searchOption;
+	public List<String> getFilters() {
+		return filters;
+	}
+
+	public void setFilters(List<String> filters) {
+		this.filters = filters;
+	}
+
+	@Override
+	public String toString() {
+		return "PageMaker [pageBean=" + pageBean + ", startPage=" + startPage + ", endPage=" + endPage
+				+ ", searchOption=" + searchOption + ", word=" + word + ", insert_no=" + insert_no + ", filters="
+				+ filters + "]";
 	}
 }

@@ -24,6 +24,8 @@ import com.pjt1.demo.model.dto.Likes;
 import com.pjt1.demo.model.service.HotPlaceService;
 import com.pjt1.demo.utils.MorePageBean;
 import com.pjt1.demo.utils.MorePageMaker;
+import com.pjt1.demo.utils.PageBean;
+import com.pjt1.demo.utils.PageMaker;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -34,6 +36,7 @@ public class HotPlaceController {
 	private static StringTokenizer st;
 	@Autowired
 	private HotPlaceService service;
+	private static int hotPageNum = 4;
 
 	@ExceptionHandler
 	public ResponseEntity<Map<String, Object>> handle(Exception e) {
@@ -105,7 +108,19 @@ public class HotPlaceController {
 		List<Map<String, Object>> list = service.searchMoreHotPlaceAll(pageBean);
 		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
 	}
-
+	@ApiOperation("페이지로 Hotplace 전체 목록 조회")
+	@GetMapping("/HotPlace/search/page/{btnCnt}")
+	public ResponseEntity<Map<String, Object>> searchPageHotPlaceAll(@PathVariable int btnCnt) {
+    	PageBean pageBean = new PageBean(btnCnt, hotPageNum);
+		PageMaker pageMaker = new PageMaker();
+        pageMaker.setPageBean(pageBean);
+        pageMaker.setStartPage(pageBean.getPage());
+        pageMaker.setEndPage(pageMaker.getStartPage());
+        System.out.println(pageBean);
+        System.out.println(pageMaker);
+		List<HotPlace> list = service.searchPageHotPlaceAll(pageMaker);
+		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+	}
 
 	@ApiOperation("더보기로 Hotplace 도시이름으로 목록 조회")
 	@GetMapping("/HotPlace/search/more/cityname/{btnCnt}/{word}")
@@ -119,7 +134,18 @@ public class HotPlaceController {
 		List<Map<String, Object>> list = service.searchMoreHotPlaceByCityName(pageBean);
 		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
 	}
-
+	@ApiOperation("페이지로 Hotplace 도시이름으로 목록 조회")
+	@GetMapping("/HotPlace/search/page/cityname/{btnCnt}/{word}")
+	public ResponseEntity<Map<String, Object>> searchPageHotPlaceByCityName(@PathVariable int btnCnt, @PathVariable String word) {
+		PageBean pageBean = new PageBean(btnCnt, hotPageNum);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setPageBean(pageBean);
+		pageMaker.setWord(word);
+		pageMaker.setStartPage(pageBean.getPage());
+		pageMaker.setEndPage(pageMaker.getStartPage());
+		List<HotPlace> list = service.searchPageHotPlaceByCityName(pageMaker);
+		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+	}
 
 
 	@ApiOperation("더보기로 Hotplace 태그로 목록 조회")
@@ -134,8 +160,18 @@ public class HotPlaceController {
 		List<Map<String, Object>> list = service.searchMoreHotPlaceByTag(pageBean);
 		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
 	}
-
-
+	@ApiOperation("페이지로 Hotplace 태그로 목록 조회")
+	@GetMapping("/HotPlace/search/page/tag/{btnCnt}/{word}")
+	public ResponseEntity<Map<String, Object>> searchPageHotPlaceByTag(@PathVariable int btnCnt, @PathVariable String word) {
+		PageBean pageBean = new PageBean(btnCnt, hotPageNum);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setPageBean(pageBean);
+		pageMaker.setWord(word);
+		pageMaker.setStartPage(pageBean.getPage());
+		pageMaker.setEndPage(pageMaker.getStartPage());
+		List<HotPlace> list = service.searchPageHotPlaceByTag(pageMaker);
+		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+	}
 
 	@ApiOperation("더보기로 Hotplace 주소로 목록 조회")
 	@GetMapping("/HotPlace/search/more/address/{btnCnt}/{word}")
@@ -147,6 +183,18 @@ public class HotPlaceController {
 		pageBean.setPerPageNum(change);
 		pageMaker.setPageBean(pageBean);
 		List<Map<String, Object>> list = service.searchMoreHotPlaceByAddress(pageBean);
+		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+	}
+	@ApiOperation("페이지로 Hotplace 주소로 목록 조회")
+	@GetMapping("/HotPlace/search/page/address/{btnCnt}/{word}")
+	public ResponseEntity<Map<String, Object>> searchPageHotPlaceByAddress(@PathVariable int btnCnt, @PathVariable String word) {
+		PageBean pageBean = new PageBean(btnCnt, hotPageNum);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setPageBean(pageBean);
+		pageMaker.setWord(word);
+		pageMaker.setStartPage(pageBean.getPage());
+		pageMaker.setEndPage(pageMaker.getStartPage());
+		List<HotPlace> list = service.searchPageHotPlaceByAddress(pageMaker);
 		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
 	}
 
@@ -168,9 +216,26 @@ public class HotPlaceController {
 		List<Map<String, Object>> list = service.searchMoreHotPlaceByTheme(pageBean);
 		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
 	}
+	@ApiOperation("페이지로 Hotplace 테마로 목록 조회")
+	@GetMapping("/HotPlace/search/page/theme/{btnCnt}/{word}")
+	public ResponseEntity<Map<String, Object>> searchPageHotPlaceByTheme(@PathVariable int btnCnt, @PathVariable String word) {
+		PageBean pageBean = new PageBean(btnCnt, hotPageNum);
+		PageMaker pageMaker = new PageMaker();
+		List<String> selected_theme = new ArrayList<String>();
+		st = new StringTokenizer(word);
+		while(st.hasMoreTokens()) {selected_theme.add(st.nextToken());};
+		
+		pageMaker.setPageBean(pageBean);
+		pageMaker.setFilters(selected_theme);
+		pageMaker.setStartPage(pageBean.getPage());
+		pageMaker.setEndPage(pageMaker.getStartPage());
+		
+		List<HotPlace> list = service.searchPageHotPlaceByTheme(pageMaker);
+		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+	}
 	@ApiOperation("더보기로 HotPlace 검색하기 조회 - searchOption은 all/ title / content/ tag city중 전달")
 	@GetMapping("/HotPlace/search/more/{btnCnt}/{searchOption}/{word}")
-	public ResponseEntity<Map<String, Object>> searchMoreFestival(MorePageBean pageBean, @PathVariable int btnCnt,
+	public ResponseEntity<Map<String, Object>> searchMoreHotPlace(MorePageBean pageBean, @PathVariable int btnCnt,
 			@PathVariable String searchOption, @PathVariable String word) {
 		MorePageMaker pageMaker = new MorePageMaker();
 		int change = pageNum * btnCnt;
@@ -181,6 +246,21 @@ public class HotPlaceController {
 		pageBean.setPerPageNum(change);
 		pageMaker.setPageBean(pageBean);
 		List<Map<String, Object>> list = service.searchMoreHotPlace(pageBean);
+		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
+	}
+	@ApiOperation("페이지로  HotPlace 검색하기 조회 - searchOption은 all/ title / content/ tag /city중 전달")
+	@GetMapping("/HotPlace/search/page/{btnCnt}/{searchOption}/{word}")
+	public ResponseEntity<Map<String, Object>> searchPageHotPlace(@PathVariable int btnCnt,	@PathVariable String searchOption, @PathVariable String word) {
+		PageBean pageBean = new PageBean(btnCnt, hotPageNum);
+		PageMaker pageMaker = new PageMaker();
+		searchOption = (searchOption == null || searchOption.equals("empty"))?"all":searchOption;
+		word = (word == null || word.equals(" ") || word.equals("empty")) ?"''":word;
+		pageMaker.setPageBean(pageBean);
+		pageMaker.setSearchOption(searchOption);
+		pageMaker.setWord(word);
+		pageMaker.setStartPage(pageBean.getPage());
+		pageMaker.setEndPage(pageMaker.getStartPage());
+		List<HotPlace> list = service.searchPageHotPlace(pageMaker);
 		return list.size() == 0 ? handleSuccess("이 페이지에는 게시글이 존재하지 않습니다") : handleSuccess(list); // 일단 무조건 확인해야 하므로
 	}
 }
