@@ -1,8 +1,8 @@
 <template>
   <q-card flat bordered class="my-card">
-    <q-img :src="getImgUrl(hp_img)" basic :ratio="16 / 9">
+    <!-- <q-img :src="getImgUrl(hp_img)" basic :ratio="16 / 9">
       <div class="absolute-bottom text-h6 text-center">{{ hp_name }}</div>
-    </q-img>
+    </q-img> -->
 
     <q-card-section>
       <div class="text-subtitle1 text-center">{{ hp_detail_adr }}</div>
@@ -37,9 +37,9 @@ import LikeService from "@/services/LikeService";
 export default {
   name: "HotPlaceCard",
   methods: {
-    getImgUrl(img) {
-      return require("../../../../back-spring/src/main/resources" + img);
-    },
+    // getImgUrl(img) {
+    //   return require("../../../../back-spring/src/main/resources" + img);
+    // },
     insertLike() {
       LikeService.insertLike();
     }

@@ -1,4 +1,4 @@
-import HotPlaceService from "@/services/HotPlaceService.js";
+import HotPlaceService from "@/services/HotplaceService.js";
 
 const state = {
   hps: [],

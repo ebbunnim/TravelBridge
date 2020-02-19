@@ -67,6 +67,12 @@ public class Post implements Serializable {
 	@Getter
 	@Setter
 	private List<Course> post_courseList;
+	// @Getter
+	// @Setter
+	// private List<SubCourse> course_subcourse_list;
+	// @Getter
+	// @Setter
+	// private List<Course> course_subcourse_list;
 
 	// FOREIGN KEY(board_no) REFERENCES BOARD(board_no),
 	// FOREIGN KEY(mem_no) REFERENCES MEMBERS(mem_no)

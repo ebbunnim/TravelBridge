@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	
+
+<mapper namespace="com.pjt1.demo.model.dao.SubCourseDao" >
+
+  	<insert id="insert"		parameterType="subcourse">
+		INSERT INTO 
+		SUBCOURSE
+		(course_no, 
+		subcourse_no, 
+		subcourse_title)
+		VALUES (
+		#{course_no:INTEGER},
+		#{subcourse_no:INTEGER},
+		#{subcourse_title:VARCHAR}
+        )
+	</insert> 
+   	<delete id="delete" 	parameterType="int">
+		UPDATE SUBCOURSE
+		SET     
+		subcourse_del_check = true
+		WHERE subcourse_no = #{subcourse_no:INTEGER} 
+		AND subcourse_del_check = false	
+	</delete>
+   	<update id="update"		parameterType="subcourse">
+		UPDATE SUBCOURSE
+		SET
+		course_no = #{course_no:INTEGER},
+		subcourse_no = #{subcourse_no:INTEGER},
+		subcourse_title = #{subcourse_title:VARCHAR},
+		subcourse_del_check = #{subcourse_del_check:BOOLEAN}
+		WHERE subcourse_no = #{subcourse_no:INTEGER}      
+	</update>
+   	<select id="search"		parameterType="int" resultType="SubCourse"> 
+		SELECT * 
+		FROM SUBCOURSE
+		WHERE subcourse_no = #{subcourse_no:INTEGER} 
+		AND subcourse_del_check = false      	
+	</select>
+   	<select id="searchAll"	resultType="subcourse"> 
+		SELECT * 
+		FROM SUBCOURSE
+		WHERE subcourse_del_check = false     
+	</select>
+</mapper>
+

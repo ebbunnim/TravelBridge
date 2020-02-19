@@ -89,10 +89,10 @@ public class PostController {
         PageMaker pageMaker = new PageMaker();
         if (searchOption.equals("empty")) {
             pageMaker.setSearchOption("all");
-        }
+        }else pageMaker.setSearchOption(searchOption);
         if (word.equals("empty")) {
-            pageMaker.setWord("");
-        };
+            pageMaker.setWord("''");
+        }else  pageMaker.setWord(word);
         // PageBean.setWord(word);
         System.out.println(pageBean);
         pageBean.setPage(btnCnt);

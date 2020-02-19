@@ -7,6 +7,7 @@
   		<typeAlias type="com.pjt1.demo.model.dto.Faq"            	alias="FAQ" />
 		<typeAlias type="com.pjt1.demo.model.dto.Comment"        	alias="COMMENT" />
 		<typeAlias type="com.pjt1.demo.model.dto.Course"        	alias="COURSE" />
+		<typeAlias type="com.pjt1.demo.model.dto.SubCourse"        	alias="SUBCOURSE" />
 		<typeAlias type="com.pjt1.demo.model.dto.City"        		alias="CITY" />
 		<typeAlias type="com.pjt1.demo.model.dto.Festival"          alias="FESTIVAL" />
 		<typeAlias type="com.pjt1.demo.model.dto.Files"         	alias="FILES" />
@@ -26,6 +27,7 @@
   		<mapper resource="query/faq_query.xml" />
   		<mapper resource="query/comment_query.xml" />
   		<mapper resource="query/course_query.xml" />
+  		<mapper resource="query/subcourse_query.xml" />
   		<mapper resource="query/city_query.xml" />
   		<mapper resource="query/festival_query.xml" />
   		<mapper resource="query/files_query.xml" />

@@ -1,8 +1,8 @@
 <template>
   <q-card flat bordered class="my-card">
-    <q-img :src="getImgUrl(fval_img)" basic :ratio="16 / 9">
+    <!-- <q-img :src="getImgUrl(fval_img)" basic :ratio="16 / 9">
       <div class="absolute-bottom text-h6 text-center">{{ fval_name }}</div>
-    </q-img>
+    </q-img> -->
 
     <q-card-section>
       <div class="text-subtitle1 text-center">{{ fval_detail_adr }}</div>
@@ -44,9 +44,9 @@
 export default {
   name: "FestivalCard",
   methods: {
-    getImgUrl(img) {
-      return require("../../../../back-spring/src/main/resources" + img);
-    }
+    // getImgUrl(img) {
+    //   return require("../../../../back-spring/src/main/resources" + img);
+    // }
   },
   props: {
     fval_img: { type: String },
