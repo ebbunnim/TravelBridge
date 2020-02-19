@@ -42,6 +42,13 @@
 import { mapState } from "vuex";
 export default {
   name: "HotPlaceCard",
+  props: {
+    hp_img: { type: String },
+    hp_name: { type: String },
+    hp_detail_adr: { type: String },
+    hp_tag: { type: String },
+    hp_no: { type: Number }
+  },
   methods: {
     getImgUrl(img) {
       return require("@/assets" + img);
@@ -49,6 +56,7 @@ export default {
     insertLike() {
       console.log("insert 실행");
       const payload = {
+        festival_no: 0,
         hotplace_no: this.hp_no,
         like_del_check: false,
         like_type: 2,
@@ -72,13 +80,6 @@ export default {
       user: state => state.user.user,
       allLikedHPs: state => state.like.allLikedHPs
     })
-  },
-  props: {
-    hp_img: { type: String },
-    hp_name: { type: String },
-    hp_detail_adr: { type: String },
-    hp_tag: { type: String },
-    hp_no: { type: Number }
   }
 };
 </script>
