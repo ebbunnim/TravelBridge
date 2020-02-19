@@ -30,23 +30,62 @@
               narrow-indicator
               align="center"
             >
-              <q-tab name="follower" label="팔로워">{{follower.mem_followMe.length}}</q-tab>
-              <q-tab name="following" label="팔로잉">{{following.mem_followList.length}}</q-tab>
+              <q-tab name="follower" label="팔로워">
+                {{
+                follower.mem_followMe.length
+                }}
+              </q-tab>
+              <q-tab name="following" label="팔로잉">
+                {{
+                following.mem_followList.length
+                }}
+              </q-tab>
             </q-tabs>
 
             <q-tab-panels v-model="followTab" animated>
-              <q-tab-panel name="follower">
-                <div v-for="(mem,index) in follower.mem_followMe" :key="index">
-                  {{mem.mem_id}}{{mem.mem_no}}
-                  <q-btn color="primary" icon="check" label="OK" @click="moveUser(mem.mem_no)" />
-                </div>
-                <q-btn color="primary" icon="check" label="OK" @click="moveUser(16)" />
+              <q-tab-panel name="follower" class="row justify-center">
+                <q-list bordered class="col-8">
+                  <q-item
+                    v-for="(mem, index) in follower.mem_followMe"
+                    :key="index"
+                    class="q-my-sm"
+                    clickable
+                  >
+                    <q-item-section>
+                      <q-item-label>{{ mem.mem_id }}</q-item-label>
+                      <q-item-label caption lines="1">
+                        {{
+                        mem.mem_email
+                        }}
+                      </q-item-label>
+                    </q-item-section>
+                    <q-item-section side>
+                      <q-icon name="chat_bubble" color="green" @click="moveUser(mem.mem_no)" />
+                    </q-item-section>
+                  </q-item>
+                </q-list>
               </q-tab-panel>
-              <q-tab-panel name="following">
-                <div
-                  v-for="(mem,index) in following.mem_followList"
-                  :key="index"
-                >{{mem.mem_id}}{{mem.mem_no}}</div>
+              <q-tab-panel name="following" class="row justify-center">
+                <q-list bordered class="col-8">
+                  <q-item
+                    v-for="(mem, index) in following.mem_followList"
+                    :key="index"
+                    class="q-my-sm"
+                    clickable
+                  >
+                    <q-item-section>
+                      <q-item-label>{{ mem.mem_id }}</q-item-label>
+                      <q-item-label caption lines="1">
+                        {{
+                        mem.mem_email
+                        }}
+                      </q-item-label>
+                    </q-item-section>
+                    <q-item-section side>
+                      <q-icon name="chat_bubble" color="green" @click="moveUser(mem.mem_no)" />
+                    </q-item-section>
+                  </q-item>
+                </q-list>
               </q-tab-panel>
             </q-tab-panels>
           </q-tab-panel>
@@ -328,10 +367,73 @@
             </q-tabs>
 
             <q-tab-panels v-model="likeTab" animated>
-              <q-tab-panel name="post">{{likePost.mem_likePost}}</q-tab-panel>
-              <q-tab-panel name="hot">{{likeHot.mem_likeHotPlace}}</q-tab-panel>
+              <q-tab-panel name="post" class="row justify-center">
+                <q-list bordered class="col-8">
+                  <q-item
+                    v-for="(post, index) in likePost.mem_likePost"
+                    :key="index"
+                    class="q-my-sm"
+                    clickable
+                  >
+                    <q-item-section>
+                      <q-item-label>{{ post.post_title }}</q-item-label>
+                      <q-item-label caption lines="1">
+                        {{
+                        post.post_category
+                        }}
+                      </q-item-label>
+                    </q-item-section>
+                    <q-item-section side>
+                      <q-icon name="chat_bubble" color="green" @click="moveUser(post.post_no)" />
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </q-tab-panel>
+              <q-tab-panel name="hot" class="row justify-center">
+                <q-list bordered class="col-8">
+                  <q-item
+                    v-for="(hot, index) in likeHot.mem_likeHotPlace"
+                    :key="index"
+                    class="q-my-sm"
+                    clickable
+                  >
+                    <q-item-section>
+                      <q-item-label>{{ hot.hp_name }}</q-item-label>
+                      <q-item-label caption lines="1">
+                        {{
+                        hot.hp_tag
+                        }}
+                      </q-item-label>
+                    </q-item-section>
+                    <q-item-section side>
+                      <q-icon name="chat_bubble" color="green" @click="moveUser(hot.hp_no)" />
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </q-tab-panel>
 
-              <q-tab-panel name="festa">{{likeFesta.mem_likeFestival}}</q-tab-panel>
+              <q-tab-panel name="festa" class="row justify-center">
+                <q-list bordered class="col-8">
+                  <q-item
+                    v-for="(festa, index) in likeFesta.mem_likeFestival"
+                    :key="index"
+                    class="q-my-sm"
+                    clickable
+                  >
+                    <q-item-section>
+                      <q-item-label>{{ festa.fval_name }}</q-item-label>
+                      <q-item-label caption lines="1">
+                        {{
+                        festa.fval_tag
+                        }}
+                      </q-item-label>
+                    </q-item-section>
+                    <q-item-section side>
+                      <q-icon name="chat_bubble" color="green" @click="moveUser(festa.fval_no)" />
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </q-tab-panel>
             </q-tab-panels>
           </q-tab-panel>
         </q-tab-panels>
