@@ -5,14 +5,15 @@
         v-model="slide"
         animated
         swipeable
-        :autoplay="7500"
+        :autoplay="3000"
         navigation
+        navigation-icon="radio_button_unchecked"
         infinite
-        height="680px"
+        height="725px"
       >
         <q-carousel-slide :name="1" :img-src="getImgUrl('main2bg.jpg')">
           <div
-            class="row q-my-xl text-center justify-center absolute-center custom-caption"
+            class="row q-py-xl text-center justify-center absolute-center custom-caption"
             style="width: 100%;"
           >
             <p class="col-12 text-h4 q-pt-lg">
@@ -75,7 +76,7 @@
 
         <q-carousel-slide :name="2" :img-src="getImgUrl('main2bg2.jpg')">
           <div
-            class="row q-my-xl text-center justify-center absolute-center custom-caption"
+            class="row q-py-xl text-center justify-center absolute-center custom-caption"
             style="width: 100%;"
           >
             <p class="col-12 text-h4 q-pt-lg">
@@ -430,6 +431,7 @@ const wpwn = ["서귀포시", "제주시"];
 export default {
   data() {
     return {
+      position: 300,
       hpBtnCnt: 1,
       fvalBtnCnt: 1,
       word: "",
@@ -469,6 +471,10 @@ export default {
     })
   },
   methods: {
+    animateScroll() {
+      this.$refs.scrollArea.setScrollPosition(this.position, 300);
+      this.position = Math.floor(Math.random() * 1001) * 20;
+    },
     getImgUrl(img) {
       return require("../../assets/" + img);
     },
