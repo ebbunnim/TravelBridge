@@ -156,12 +156,29 @@
           />
         </svg>
       </div>
-      <div class="col-5 justify-center row">
+      <div class="col-5 justify-center">
         <template v-if="target == ''">
-          전국 최빈 여행지 1 2 3 왕관
-          {{ totalRank }}
+          <h2 style="text-align:center;">전국 최빈 여행지</h2>
+          <q-list bordered class="col-10">
+            <q-item v-for="(rank, index) of totalRank" :key="index" >
+              <q-item-section avatar> {{ rank.ranking }}등 </q-item-section>
+              <q-item-section>{{ rank.city_name }}</q-item-section>
+              <q-item-section>{{ rank.city_visited }}개</q-item-section>
+            </q-item>
+          </q-list>
         </template>
-        <template v-else>{{ place }} 최고의 트래블러{{ areaRank }}</template>
+        <template v-else>
+          <h2 style="text-align:center;">{{ place }} 최고의 트래블러</h2>
+          <q-list bordered class="col-10">
+            <q-item v-for="(rank, index) of areaRank" :key="index" >
+              <q-item-section avatar> {{ rank.ranking }}등 </q-item-section>
+              <q-item-section>{{ rank.mem_name }}</q-item-section>
+              <q-item-section
+                >{{ rank.city_visited }}곳의 포스트</q-item-section
+              >
+            </q-item>
+          </q-list>
+        </template>
       </div>
     </div>
   </div>

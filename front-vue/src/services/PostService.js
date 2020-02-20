@@ -22,7 +22,8 @@ class PostService {
       .catch(exp => console.log("Err post search no ") + exp);
   }
   PostInsertPost(post) {
-    return Api.post("/Post/inser", { post })
+    console.log(post);
+    return Api.post("/Post/insert", post)
       .then(() => {
         alert("글쓰기 성공");
         return true;
