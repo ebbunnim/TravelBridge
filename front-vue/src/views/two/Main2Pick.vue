@@ -52,7 +52,7 @@
       </q-card>
     </q-dialog>
 
-    <div class="row justify-center items-center q-my-xl q-py-xl bg-image">
+    <div class="row justify-center items-center q-mb-xl q-pb-xl bg-image">
       <div class="col-12 text-h4 text-center text-white">
         <b>테마별 여행지 추천</b>
       </div>
@@ -324,7 +324,7 @@ export default {
   background-image: url("../../assets/global.jpg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  height: 450px;
+  height: 550px;
   min-height: 350px;
 }
 .festival-bg {
