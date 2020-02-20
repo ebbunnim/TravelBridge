@@ -47,7 +47,7 @@
             arrows
             animated
             swipeable
-            autoplay
+            :autoplay="2000"
             infinite
             v-model="slideOne"
             height="350px"
