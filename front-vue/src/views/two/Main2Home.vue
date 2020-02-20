@@ -5,7 +5,7 @@
         v-model="slide"
         animated
         swipeable
-        :autoplay="3000"
+        :autoplay="6500"
         navigation
         navigation-icon="radio_button_unchecked"
         infinite

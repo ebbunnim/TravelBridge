@@ -2,29 +2,30 @@
   <q-layout style="min-height: 0px;">
     <q-header class="bg-transparent">
       <q-toolbar class="gt-md" align="center">
-        <div class="col-4" align="left">
+        <div class="col-5" align="left">
           <q-btn
             no-caps
             @mouserover="menu1 = true"
-            class="text-h6 bg-transparent"
+            class="text-h5 bg-transparent"
             to="/"
             flat
             rounded
           >
-            <span class="travel text-weight-bold">Travel</span>
-            <span class="bridge text-weight-bold">Bridge</span>
+            <span class="bridge text-weight-bold">TravelBridge</span>
           </q-btn>
+          <!-- 첫번째 메인 기능 버튼 -->
           <q-btn
             no-caps
             flat
             rounded
+            size="lg"
             @mouseover="menuOn1 = true"
-            class="text-black text-weight-bold bg-transparent"
-            @click="$router.push('/page1')"
+            class="text-white bg-transparent"
+            to="/page1"
           >
             TravelCard
             <q-menu
-              content-class="bg-tranparent text-black"
+              content-class="bg-primary text-white"
               auto
               rounded
               v-model="menuOn1"
@@ -32,7 +33,7 @@
               class="gt-sm bg-transparent"
               fit
             >
-              <q-btn to="/page1" flat>메인</q-btn>
+              <!-- 하위 버튼 -->
               <template
                 v-if="
                   this.$store.state.user.user.mem_id != null ||
@@ -40,21 +41,24 @@
                 "
               >
                 <q-btn class="row" to="/page1/write" flat>글쓰기</q-btn>
-
                 <q-btn class="row" to="/page1/follower" flat>팔로워 피드</q-btn>
               </template>
-              <q-btn to="/page1/main1search" flat icon="search">검색</q-btn>
+              <q-btn class="row" to="/page1/main1search" flat icon="search"
+                >검색</q-btn
+              >
             </q-menu>
           </q-btn>
+          <!-- 두번째 메인기능 버튼 -->
           <q-btn
             no-caps
             flat
             rounded
+            size="lg"
             @mouseover="menuOn2 = true"
-            class="text-black text-weight-bold bg-transparent"
-            @click="$router.push('/page2')"
+            class="text-white bg-transparent"
+            to="/page2"
           >
-            TravelSearch
+            TravelPick
             <q-menu
               content-class="bg-primary text-white"
               auto
@@ -66,8 +70,8 @@
             >
               <q-list>
                 <q-btn class="row" to="/page2/pick" flat>테마별 추천</q-btn>
-                <q-btn class="row" to="/page2/list" flat
-                  >여행지 정보 검색</q-btn
+                <q-btn class="row" to="/page2/list" flat icon="search"
+                  >검색</q-btn
                 >
               </q-list>
             </q-menu>
@@ -76,13 +80,14 @@
             no-caps
             flat
             rounded
+            size="lg"
             @mouseover="menuOn3 = true"
-            class="text-black text-weight-bold bg-transparent"
+            class="text-white bg-transparent"
             @click="$router.push('/page3')"
           >
             TravelPlus+
             <q-menu
-              content-class="bg-tranparent text-black"
+              content-class="bg-primary text-white"
               auto
               rounded
               v-model="menuOn3"
@@ -96,76 +101,15 @@
               </q-list>
             </q-menu>
           </q-btn>
-          <!-- <div class="row justify-start">
-            <q-btn class="text-black q-mx-sm" flat to="/" label="HOME"></q-btn>
-            <q-btn
-              class="text-black q-mx-sm"
-              flat
-              to="/page1"
-              label="트래블 카드"
-              @mouseover="menuOn1 = true"
-          ></q-btn>-->
-          <!-- <q-btn
-              class="text-black q-mx-sm"
-              flat
-              to="/page2"
-              label="트래블 픽"
-              @mouseover="menuOn2 = true"
-            ></q-btn>
-            <q-btn class="text-black q-mx-sm" flat label="트래블 플러스" @mouseover="menuOn3=true"></q-btn>
-          </div>-->
         </div>
 
-        <!-- <q-menu square v-model="menuOn1" @mouseleave="menuOn1 = false" class="gt-sm" fit>
-          <q-list class="q-ma-sm">
-            <div class="row justify-center">
-              <q-btn to="/page1" flat class="col-3">메인</q-btn>
-              <template
-                v-if="this.$store.state.user.user.mem_id != null ||
-              this.$store.state.user.user.mem_id != undefined"
-              >
-                <q-btn to="/page1/write" flat class="col-3">글쓰기</q-btn>
-
-                <q-btn to="/page1/follower" flat class="col-3">팔로워 피드</q-btn>
-              </template>
-              <q-btn to="/page1/main1search" flat class="col-3" icon="search">검색</q-btn>
-            </div>
-          </q-list>
-        </q-menu>
-        <q-menu square v-model="menuOn2" @mouseleave="menuOn2 = false" class="gt-sm" fit>
-          <q-list class="q-ma-sm">
-            <div class="row justify-center">
-              <q-btn to="/page2" flat class="col-4">트래블 픽</q-btn>
-              <q-btn to="/page2/pick" flat class="col-4">테마별 여행지 추천</q-btn>
-              <q-btn to="/page2/list" flat class="col-4">여행지 정보 검색</q-btn>
-            </div>
-          </q-list>
-        </q-menu>
-        <q-menu square v-model="menuOn3" @mouseleave="menuOn3 = false" class="gt-sm" fit>
-          <q-list class="q-ma-sm">
-            <div class="row justify-center">
-              <q-btn to="/page3/mate" flat class="col-3">트래블 메이트</q-btn>
-              <q-btn to="/page3/rank" flat class="col-3">트래블 랭크</q-btn>
-            </div>
-          </q-list>
-        </q-menu>-->
-
-        <!-- <q-toolbar-title class="col-4 text-black"> -->
-        <!-- <q-btn size="xl" unelevated flat to="/">TravelBridge</q-btn> -->
-        <!-- </q-toolbar-title> -->
-        <div class="col-4">
-          <!-- <div class="text-h3 text-weight-bold cursor-pointer" @click="$router.push('/')">
-            <span class="travel">Travel</span>
-            <span class="bridge">Bridge</span>
-          </div>-->
-        </div>
-
+        <div class="col-4"></div>
         <div
           v-if="
             this.$store.state.user.user.mem_id == null ||
               this.$store.state.user.user.mem_id == undefined
           "
-          class="col-4"
+          class="col-3"
           align="right"
         >
           <q-btn size="md" filled rounded class="q-ma-md" to="/login"
@@ -173,7 +117,7 @@
           >
           <!-- <q-btn size="md col-5" class="text-grey q-pa-md" flat to="/search">검색</q-btn> -->
         </div>
-        <div class="col-4" align="right" v-else>
+        <div class="col-3" align="right" v-else>
           <q-btn size="md" filled rounded class="q-py-md" flat to="/mypage"
             >내 정보</q-btn
           >
@@ -209,7 +153,7 @@
             class="text-h6 bg-transparent"
             @click="$router.push('/')"
           >
-            <span class="travel text-weight-bold">Travel</span>
+            <span class="bridge text-weight-bold">Travel</span>
             <span class="bridge text-weight-bold">Bridge</span>
           </q-chip>
         </div>
@@ -241,9 +185,6 @@
       <q-scroll-area class="fit">
         <q-list v-for="(menuItem, index) in menuList" :key="index">
           <q-item v-if="menuItem.btn" clickable :to="menuItem.path">
-            <q-item-section avatar>
-              <q-icon :name="menuItem.icon" />
-            </q-item-section>
             <q-item-section>
               <q-item-label>{{ menuItem.label }}</q-item-label>
             </q-item-section>
@@ -252,7 +193,6 @@
           <q-expansion-item
             v-else
             expand-separator
-            :icon="menuItem.icon"
             :label="menuItem.label"
             :content-inset-level="0.5"
             :to="menuItem.path"

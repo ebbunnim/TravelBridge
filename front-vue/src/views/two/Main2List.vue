@@ -1,7 +1,7 @@
 <template>
   <q-page class="page">
     <div
-      class="row justify-center items-center q-my-xl q-py-xl bg-image"
+      class="row justify-center items-center q-mb-xl q-py-xl bg-image"
       style="width: 100%;"
     >
       <div class="col-12 text-h4 text-center text-white">
@@ -114,7 +114,7 @@
       </div>
     </div>
 
-    <div class="festival-bg q-my-xl q-py-xl">
+    <div class="q-mt-xl q-pt-xl">
       <div class="row justify-center q-mx-xl q-px-xl">
         <div v-if="fval_list_length > 0" class="col-12 text-center text-h6">
           #{{ searchTitle }} 페스티벌
