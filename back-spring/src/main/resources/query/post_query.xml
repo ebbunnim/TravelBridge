@@ -398,24 +398,25 @@
 					as a,
 					(SELECT @vpost_no:='', @rownum:=0 FROM DUAL) as b
 				) AS RESULT
-		WHERE RESULT.rnum >#{startPage} AND  RESULT.rnum <= #{endPage} AND]]>
+		WHERE RESULT.rnum >#{startPage} AND  RESULT.rnum <= #{endPage}]]>
 		<choose>
 			<when test="searchOption == 'all'">
+				AND
 				(post_title like concat('%','${word}','%')
 				OR post_content like concat('%','${word}','%')
 				OR post_category like concat('%','${word}','%'))
 			</when>
 			<when test="searchOption == 'title'">
-				post_title like concat('%','${word}','%')
+				AND	post_title like concat('%','${word}','%')
 			</when>
 			<when test="searchOption == 'content'">
-				post_content like concat('%','${word}','%')
+				AND post_content like concat('%','${word}','%')
 			</when>
 			<when test="searchOption == 'tag'">
-				post_category like concat('%','${word}','%')
+				AND post_category like concat('%','${word}','%')
 			</when>
 			<when test="searchOption == 'writer'">
-				post_writer like concat('%','${word}','%')
+				AND post_writer like concat('%','${word}','%')
 			</when>
 		</choose>
 		<!-- ORDER BY p.post_regtime DESC -->
