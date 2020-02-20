@@ -108,6 +108,11 @@ class UserService {
       })
       .catch(e => console.log(e));
   }
+  follow(target){
+    return Api.get(`/Follow/insert`,target).then(Response =>{
+      return Response.data.data;
+    })
+  }
 }
 
 export default new UserService();

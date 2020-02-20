@@ -5,7 +5,8 @@ const state = {
   post: {},
   postList: [],
   gogo: false,
-  postLast: 0
+  postLast: 0,
+  like : false
 };
 // GetSearchAllPost
 //GetSearchPartPost
@@ -62,10 +63,35 @@ const actions = {
   },
   insertPlan: (store, payLoad) => {
     PostService.insertPlan(payLoad.x);
+  },
+  getPostLike :(store,payLoad) =>{
+    PostService.isLikePost(payLoad.userNo).then(Response =>{
+      store.commit("postGetLike",{ likeList : Response ,PostNo : payLoad.postNo})
+    })
+  },
+  setPostLike :(store,payLoad) =>{
+    PostService.insertLikePost(payLoad.x).then(Response =>{
+      store.commit("postSetLike",{ like : true})
+    })
   }
+
 };
 
-const mutations = {
+const mutations = { 
+  postSetLike(state,payLoad){
+    state.like = payLoad.like
+  },
+  postUnLike(state,payLoad){
+  state.like = payLoad.like
+},
+  postGetLike(state,payLoad){
+    state.like = false;
+    for(w of payLoad.likeList.mem_likePost){
+        if(payLoad.PostNo = w.post_no){
+        state.like = true;
+        }
+    }
+  },
   postLastNo(state, payLoad) {
     state.postLast = payLoad.lastNo;
   },

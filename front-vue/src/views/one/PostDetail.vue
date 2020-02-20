@@ -24,12 +24,20 @@
               @click="goBack()"
             />
           </div>
-
-          <div class="col-md-4 offset-md-4 q-mt-sm" style="text-align: right">
+           <div class="col-md-4   q-mt-sm" style="text-align: center">
             작성일시
-            <b>{{ post.post_regtime }}</b> / 작성자
-            <b>{{ post.post_writer }}</b> / HIT
+            <b>{{ post.post_regtime }}</b>  / 작성자
+            <b @click="goUser(post.mem_no)">{{ post.post_writer }}</b> / 조회수
             <b>{{ post.post_hits }}</b>
+          </div>
+          <div class="col-md-4    q-mt-sm" style="text-align: right">
+           좋아요 
+           <template v-if="like">
+           <q-icon name="favorite" color="red" size="lg"></q-icon>
+           </template>
+           <template v-else>
+           <q-icon name="favorite"  size="lg"   @click="isLike"></q-icon>
+           </template>
           </div>
         </q-card-section>
 
@@ -83,6 +91,12 @@ export default {
         postNo: this.$route.params.postNo
       });
     }
+    // 좋아요 변수
+    this.$store.dispatch("post/getPostLike",{
+        postNo: this.$route.params.postNo,
+        userNo: this.$store.state.user.user.mem_no
+    })
+    
   },
   computed: {
     post() {
@@ -91,12 +105,22 @@ export default {
     tagToArray() {
       const arr = this.post.post_category.split(" ");
       return arr;
-    }
+    },
+    like(){
+      return this.$store.state.post.like;
+    },
   },
   methods: {
     goBack: function() {
       this.$router.go(-1);
       return;
+    },
+    goUser: function(no){
+      this.$router.push(`/userpage/${no}`);
+    },
+    isLike:function(){
+      this.$store.dispatch(`/post/setPostLike`,{like_type : 1, post_no: this.post.post_no, liker_mem_no: this.$store.state.user.user.mem_no});
+      this.like = true;
     }
   }
 };

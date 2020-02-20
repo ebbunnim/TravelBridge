@@ -114,6 +114,11 @@ const actions = {
         store.commit("getAnotherUser", { another: Response });
       })
       .catch(exp => console.log(exp));
+  },
+  follow:(store,payload) =>{
+    UserService.follow(payLoad.x).then(Response =>{
+      console.log("hello");
+    }).catch(exp => console.log(exp));
   }
 };
 

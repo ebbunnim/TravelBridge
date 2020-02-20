@@ -64,6 +64,22 @@ class PostService {
       .catch(exp => console.log(exp));
     console.log(x);
   }
+  getLikePost(no){
+    return Api.get(`/Members/searchMemberLikePost/${no}`).then(Response => {
+      return Response.data.data;
+    })
+  }
+  deleteLikePost(no){
+    return Api.delete(`/Likes/delete/${no}`).then(() =>{
+      return false;
+    })
+  }
+  setPostLike(x){
+    return Api.get("/Likes/insert",x).then(()=>{
+      return true;})
+  }
+
+
 }
 
 export default new PostService();
