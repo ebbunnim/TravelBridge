@@ -9,18 +9,34 @@
     </q-card-section>
 
     <q-card-section class="q-pt-none">
-      <div class="text-subtitle2 text-body">{{ hp_tag }}</div>
+      <div class="text-subtitle2 text-body tag-color">{{ hp_tag }}</div>
     </q-card-section>
     <q-card-section class="absolute-bottom row justify-even">
       <q-btn
         flat
+        class="col-6 q-mr-xl"
         color="primary"
         @click="
           $router.push({ name: 'hotplace-detail', params: { hp_no: hp_no } })
         "
-      >상세보기</q-btn>
-      <q-btn v-if="!btnCheck" flat round icon="favorite_border" @click="insertLike()"></q-btn>
-      <q-btn v-if="btnCheck" flat round icon="favorite" @click="deleteLike(hp_no)"></q-btn>
+        >상세보기</q-btn
+      >
+      <q-btn
+        v-if="!btnCheck"
+        flat
+        class="col-3"
+        round
+        icon="favorite_border"
+        @click="insertLike()"
+      ></q-btn>
+      <q-btn
+        v-if="btnCheck"
+        flat
+        class="col-3"
+        round
+        icon="favorite"
+        @click="deleteLike(hp_no)"
+      ></q-btn>
     </q-card-section>
   </q-card>
 </template>
@@ -29,6 +45,13 @@
 import { mapState } from "vuex";
 export default {
   name: "HotPlaceCard",
+  props: {
+    hp_img: { type: String },
+    hp_name: { type: String },
+    hp_detail_adr: { type: String },
+    hp_tag: { type: String },
+    hp_no: { type: Number }
+  },
   methods: {
     getImgUrl(img) {
       return require("@/assets" + img);
@@ -36,6 +59,7 @@ export default {
     insertLike() {
       console.log("insert 실행");
       const payload = {
+        festival_no: 0,
         hotplace_no: this.hp_no,
         like_del_check: false,
         like_type: 2,
@@ -59,13 +83,6 @@ export default {
       user: state => state.user.user,
       allLikedHPs: state => state.like.allLikedHPs
     })
-  },
-  props: {
-    hp_img: { type: String },
-    hp_name: { type: String },
-    hp_detail_adr: { type: String },
-    hp_tag: { type: String },
-    hp_no: { type: Number }
   }
 };
 </script>
@@ -96,5 +113,9 @@ export default {
   width: 300px;
   max-height: 550px;
   margin: 10px;
+}
+
+.tag-color {
+  color: #4527a0;
 }
 </style>

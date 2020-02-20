@@ -11,6 +11,10 @@ const state = {
 //GetSearchPost
 //PostInsertPost
 const actions = {
+  addPost: (store,payLoad) =>{
+    console.log(payLoad.x)
+    PostService.PostInsertPost(payLoad.x).then(response =>{ console.log(response)})
+  },  
   searchAllPost: store => {
     PostService.GetSearchAllPost().then(response => {
       store.commit("postListAll", { postList: response });

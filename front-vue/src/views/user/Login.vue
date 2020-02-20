@@ -57,7 +57,7 @@
       <q-separator inset></q-separator>
 
       <q-card-section>
-        <div class="text-center q-my-sm">
+        <!-- <div class="text-center q-my-sm">
           <q-btn
             size="md"
             style="height: 50px"
@@ -66,7 +66,7 @@
             v-on:click="NaverLogin()"
             label="네이버 아이디로 로그인 (초록색에 흰색)"
           />
-        </div>
+        </div>-->
         <div class="text-center q-my-sm">
           <q-btn
             size="md"

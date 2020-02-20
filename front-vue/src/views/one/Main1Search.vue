@@ -1,7 +1,13 @@
 <template>
   <div align="center">
     <div class="row justify-center" style="margin:5% 0 0 0 ;">
-      <q-select v-model="option" label="옵션" filled class="col-1" :options="options" />
+      <q-select
+        v-model="option"
+        label="옵션"
+        filled
+        class="col-1"
+        :options="options"
+      />
       <q-input
         label="검색"
         class="col-5"
@@ -19,7 +25,12 @@
             class="cursor-pointer"
             color="black"
           />
-          <q-icon name="search" class="cursor-pointer" color="black" @click="search(1)" />
+          <q-icon
+            name="search"
+            class="cursor-pointer"
+            color="black"
+            @click="search(1)"
+          />
         </template>
       </q-input>
       <div class="col-8 q-py-md row justify-center">
@@ -36,7 +47,11 @@
     </template>
     <template v-else>
       <template v-if="this.gogo">
-        <div v-for="(tta, index) of postList" :key="index" class="row justify-center">
+        <div
+          v-for="(tta, index) of postList"
+          :key="index"
+          class="row justify-center"
+        >
           <div
             v-for="(tt, index) of tta"
             :key="index"
@@ -48,25 +63,47 @@
             align="left"
           >
             <template v-if="tt.post_type == 0">
-              <q-card class="my-card1" flat bordered style="width:100%;" @click="move(tt.post_no)">
+              <q-card
+                class="my-card1"
+                flat
+                bordered
+                style="width:100%;"
+                @click="move(tt.post_no)"
+              >
                 <template v-if="tt.post_filesList.length !== 0">
-                  <q-img :src="tt.post_filesList[0].files_url" style="max-height: 160px;" />
+                  <q-img
+                    :src="tt.post_filesList[0].files_url"
+                    style="max-height: 160px;"
+                  />
                 </template>
                 <template v-else>
-                  <q-img src="https://cdn.quasar.dev/img/parallax2.jpg" style="max-height: 160px;" />
+                  <q-img
+                    src="https://cdn.quasar.dev/img/parallax2.jpg"
+                    style="max-height: 160px;"
+                  />
                 </template>
 
                 <q-card-section>
-                  <div class="text-overline text-orange-9 text-body-3">{{ tt.post_category }}</div>
+                  <div class="text-overline text-orange-9 text-body-3">
+                    {{ tt.post_category }}
+                  </div>
                   <div class="text-b q-mt-sm q-mb-xs text-body-4">
                     <b>{{ tt.post_title }}</b>
                   </div>
-                  <div class="text-caption text-grey text-body-1">{{ tt.post_content }}</div>
+                  <div class="text-caption text-grey text-body-1">
+                    <p v-html="tt.post_content"></p>
+                  </div>
                 </q-card-section>
               </q-card>
             </template>
             <template v-else-if="tt.post_type == 1">
-              <q-card class="my-card1" flat bordered style="width:100%;" @click="move(tt.post_no)">
+              <q-card
+                class="my-card1"
+                flat
+                bordered
+                style="width:100%;"
+                @click="move(tt.post_no)"
+              >
                 <q-card-section horizontal style="width:100%;height:100%;">
                   <div class="col-7">
                     <template v-if="tt.post_filesList.length !== 0">
@@ -82,11 +119,15 @@
                       />
                     </template>
                     <q-card-section>
-                      <div class="text-overline text-orange-9 text-body-3">{{ tt.post_category }}</div>
+                      <div class="text-overline text-orange-9 text-body-3">
+                        {{ tt.post_category }}
+                      </div>
                       <div class="q-mt-sm q-mb-xs text-body-4">
                         <b>{{ tt.post_title }}</b>
                       </div>
-                      <div class="text-caption text-grey text-body-1">{{ tt.post_content }}</div>
+                      <div class="text-caption text-grey text-body-1">
+                        <p v-html="tt.post_content"></p>
+                      </div>
                     </q-card-section>
                   </div>
                   <q-card-section class="col-5 flex flex-center">
@@ -94,16 +135,23 @@
                       <q-timeline color="secondary">
                         <template v-if="tt.post_courseList.length != 0">
                           <div>
-                            <q-timeline-entry v-for="(a, index) of tt.post_courseList" :key="index">
-                              <template v-slot:title>{{ a.course_title }}</template>
-                              <div class="text-body-4">{{ a.course_description }}</div>
-                              {{a.course_subcourse_list}}
+                            <q-timeline-entry
+                              v-for="(a, index) of tt.post_courseList"
+                              :key="index"
+                            >
+                              <template v-slot:title>{{
+                                a.course_title
+                              }}</template>
+                              <div class="text-body-4">
+                                {{ a.course_description }}
+                              </div>
+                              <!-- {{a.course_subcourse_list}}
                               <q-timeline-entry
                                 v-for="(b, index) of a.course_subcourse_list"
                                 :key="index"
                               >
                                 <div>{{b}}</div>
-                              </q-timeline-entry>
+                              </q-timeline-entry>-->
                             </q-timeline-entry>
                           </div>
                         </template>
@@ -122,14 +170,54 @@
               </q-card>
             </template>
             <template v-else>
-              <q-card-section horizontal>
-                <q-card-section class="q-pt-xs">
-                  <div class="text-overline text-orange-9 text-body-3">우리의 다른 서비스를 이용해보시는건 어때요?</div>
-                </q-card-section>
-
-                <q-card-section class="col-5 flex flex-center">
-                  <q-img class="rounded-borders" src="https://cdn.quasar.dev/img/parallax2.jpg" />
-                </q-card-section>
+              <q-card-section>
+                <div class="q-mt-sm q-mb-xs text-body-4">
+                  <b>다른 서비스를<br /></b>
+                  <b>이용해보시는건 어때요?</b>
+                </div>
+                <q-list>
+                  <q-item class="q-my-sm" clickable to="/page2/pick">
+                    <q-item-section avatar>
+                      <q-icon color="primary" name="train" />
+                    </q-item-section>
+                    <q-item-section>
+                      <div><b>내일로 코스</b></div>
+                      <div class="text-caption">
+                        내일로 코스 추천 받기!
+                      </div></q-item-section
+                    >
+                  </q-item>
+                  <q-item class="q-my-sm" clickable to="/page3/rank">
+                    <q-item-section avatar>
+                      <q-icon color="primary" name="bar_chart" />
+                    </q-item-section>
+                    <q-item-section>
+                      <div><b>트래블 랭킹</b></div>
+                      <div class="text-caption">이 지역의 여행 장인은?</div>
+                      <div class="text-caption">어떤지역을 많이갈까?</div>
+                    </q-item-section>
+                  </q-item>
+                  <q-item class="q-my-sm" clickable to="/page3/mate">
+                    <q-item-section avatar>
+                      <q-icon color="primary" name="emoji_people" />
+                    </q-item-section>
+                    <q-item-section>
+                      <div><b>트래블 메이트</b></div>
+                      <div class="text-caption">여기 가치갈 사람어디없나?</div>
+                    </q-item-section>
+                  </q-item>
+                  <q-item class="q-my-sm" clickable to="/page2">
+                    <q-item-section avatar>
+                      <q-icon color="primary" name="how_to_vote" />
+                    </q-item-section>
+                    <q-item-section>
+                      <div><b>트래블 픽</b></div>
+                      <div class="text-caption">
+                        어떤축제 어떤여행지가 있을까?
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
               </q-card-section>
             </template>
           </div>
@@ -139,7 +227,12 @@
     <div class="row justify-around">
       <template v-if="this.page != 1">
         <div style="margin-left:15px;" class="col-2 justify-start row">
-          <q-btn color="primary" icon="keyboard_arrow_left" label="이전" @click="less()" />
+          <q-btn
+            color="primary"
+            icon="keyboard_arrow_left"
+            label="이전"
+            @click="less()"
+          />
         </div>
       </template>
       <template v-else>
@@ -147,7 +240,12 @@
       </template>
       <template v-if="this.postList.length != 0">
         <div class="col-2 justify-end row">
-          <q-btn color="primary" label="다음" @click="more()" style="margin-right:4px;">
+          <q-btn
+            color="primary"
+            label="다음"
+            @click="more()"
+            style="margin-right:4px;"
+          >
             <q-icon name="keyboard_arrow_right" style="margin-left:12px;" />
           </q-btn>
         </div>
@@ -191,7 +289,7 @@ export default {
       else return false;
     },
     move: function(postNo) {
-      this.$router.push("postdetail/" + postNo);
+      this.$router.push("/page1/postdetail/" + postNo);
     },
     search: function(pageNo) {
       if (this.word != "") {

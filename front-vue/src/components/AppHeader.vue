@@ -63,9 +63,12 @@
           </q-list>
         </q-menu>
 
-        <q-toolbar-title class="col-4 text-black">
-          <q-btn size="xl" unelevated flat to="/">트래블브릿지</q-btn>
-        </q-toolbar-title>
+        <!-- <q-toolbar-title class="col-4 text-black"> -->
+          <!-- <q-btn size="xl" unelevated flat to="/">TravelBridge</q-btn> -->
+        <!-- </q-toolbar-title> -->
+        <div class="col-4">
+          <div class="text-h6 text-weight-bold text-black">TravelBridge</div>
+        </div>
 
         <div
           v-if="
@@ -90,9 +93,9 @@
           <q-btn class="q-py-sm" size="large" color="grey-7" flat icon="menu" @click="left = !left"></q-btn>
         </div>
 
-        <q-toolbar-title class="col-4 text-black">
-          <q-btn size="xl" unelevated flat to="/">트래블브릿지</q-btn>
-        </q-toolbar-title>
+        <div class="col-4">
+          <div class="text-h6 text-weight-bold text-black">TravelBridge</div>
+        </div>
 
         <div
           v-if="

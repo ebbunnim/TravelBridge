@@ -1,9 +1,12 @@
 <template>
   <q-page class="page">
     <div
-      class="row justify-center text-center q-my-xl q-py-xl bg-image"
-      style="width: 100%"
+      class="row justify-center items-center q-my-xl q-py-xl bg-image"
+      style="width: 100%;"
     >
+      <div class="col-12 text-h4 text-center text-white">
+        <b>여행지 정보 검색</b>
+      </div>
       <q-select
         wrap
         rounded
@@ -13,7 +16,7 @@
         class="col-md-2 col-xs-4 text-h6 q-mx-sm"
         :options="searchOptions"
       />
-      <template v-if="this.searchOption == '도시'">
+      <template v-if="this.searchOption == '지역'">
         <div class="row justify-around col-5">
           <q-select
             rounded
@@ -25,7 +28,7 @@
             @input="postInner"
             :options="spinArea"
             class="col-5 text-h6"
-            label="지역"
+            label="광역시·도"
           >
             <template v-slot:no-option>
               <q-item>
@@ -39,7 +42,7 @@
               bg-color="grey"
               standout="bg-glossy text-white"
               v-model="city"
-              label="도시"
+              label="시·군·구"
               :options="spinCity"
               class="col-5 text-h6"
               behavior="menu"
@@ -85,13 +88,13 @@
       >
         <b>{{ searchTitle }}</b> 검색 결과
       </div>
-      <div
-        v-if="hp_list_length === 0 ? false : true"
-        class="col-12 text-center text-h6"
-      >
+    </div>
+
+    <div class="row justify-center q-mx-xl q-px-xl">
+      <div v-if="hp_list_length > 0" class="col-12 text-center text-h6">
         #{{ searchTitle }} 핫플레이스
       </div>
-      <div v-else class="col-12 text-center text-h6">
+      <div v-if="hp_list_length === 0" class="col-12 text-center text-h6">
         {{ searchTitle }} 핫플레이스 검색 결과가 없습니다.
       </div>
       <div
@@ -109,34 +112,34 @@
           :hp_no="hp_list[i - 1].hp_no"
         ></HotPlaceCard>
       </div>
-      <!-- <q-btn outline square class="col-11 q-px-xl" @click="loadMoreHp()">더보기</q-btn> -->
-      <div
-        v-if="fval_list_length === 0 ? false : true"
-        class="col-12 text-center text-h6"
-      >
-        #{{ searchTitle }} 페스티벌
+    </div>
+
+    <div class="festival-bg q-my-xl q-py-xl">
+      <div class="row justify-center q-mx-xl q-px-xl">
+        <div v-if="fval_list_length > 0" class="col-12 text-center text-h6">
+          #{{ searchTitle }} 페스티벌
+        </div>
+        <div v-if="fval_list_length === 0" class="col-12 text-center text-h6">
+          {{ searchTitle }} 페스티벌 검색 결과가 없습니다.
+        </div>
+        <div
+          class="col-lg-3 col-md-6 col-xs-12"
+          v-for="j in fval_list_length"
+          :key="j"
+        >
+          <!-- 카드가 들어가는 부분 -->
+          <FestivalCard
+            class="q-ma-lg"
+            :fval_img="fval_list[j - 1].fval_img"
+            :fval_name="fval_list[j - 1].fval_name"
+            :fval_start_day="fval_list[j - 1].fval_start_day"
+            :fval_end_day="fval_list[j - 1].fval_end_day"
+            :fval_detail_adr="fval_list[j - 1].fval_detail_adr"
+            :fval_tag="fval_list[j - 1].fval_tag"
+            :fval_no="fval_list[j - 1].fval_no"
+          ></FestivalCard>
+        </div>
       </div>
-      <div v-else class="col-12 text-center text-h6">
-        {{ searchTitle }} 페스티벌 검색 결과가 없습니다.
-      </div>
-      <div
-        class="col-lg-3 col-md-6 col-xs-12"
-        v-for="j in fval_list_length"
-        :key="j"
-      >
-        <!-- 카드가 들어가는 부분 -->
-        <FestivalCard
-          class="q-ma-lg"
-          :fval_img="fval_list[j - 1].fval_img"
-          :fval_name="fval_list[j - 1].fval_name"
-          :fval_start_day="fval_list[j - 1].fval_start_day"
-          :fval_end_day="fval_list[j - 1].fval_end_day"
-          :fval_detail_adr="fval_list[j - 1].fval_detail_adr"
-          :fval_tag="fval_list[j - 1].fval_tag"
-          :fval_no="fval_list[j - 1].fval_no"
-        ></FestivalCard>
-      </div>
-      <!-- <q-btn outline square class="col-11 q-px-xl" @click="loadMoreFval()">더보기</q-btn> -->
     </div>
   </q-page>
 </template>
@@ -420,13 +423,13 @@ export default {
       fvalLoadMore: false,
       //
       searchOption: "전체",
-      searchOptions: ["전체", "제목", "내용", "태그", "도시"],
+      searchOptions: ["전체", "제목", "내용", "태그", "지역"],
       searchOptionValue: {
         전체: "all",
         제목: "title",
         내용: "content",
         태그: "tag",
-        도시: "city"
+        지역: "city"
       },
       word: "",
       //
@@ -514,6 +517,13 @@ export default {
   created() {
     this.$store.commit("hotplace/clearHPs");
     this.$store.commit("festival/clearFvals");
+  },
+  watch: {
+    $route(to, from) {
+      // react to route changes...
+      this.$store.commit("hotplace/clearHPs");
+      this.$store.commit("festival/clearFvals");
+    }
   }
 };
 </script>
@@ -525,5 +535,8 @@ export default {
   background-size: 100% 100%;
   height: 450px;
   min-height: 350px;
+}
+.festival-bg {
+  background-color: #f9f9f9;
 }
 </style>
