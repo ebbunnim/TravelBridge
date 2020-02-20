@@ -2,7 +2,6 @@ import Api from "./Api";
 class PostService {
   GetSearchAllPost(PageNo, option, word) {
     // /Post/search / page / { btnCnt } / { searchOption } / { word }
-
     if (option == undefined) option = "empty";
     if (word == undefined) word = "empty";
     return Api.get(`/Post/search/page/${PageNo}/${option}/${word}`)
@@ -16,6 +15,7 @@ class PostService {
   GetSearchPost(postNo) {
     return Api.get(`/Post/search/${postNo}`)
       .then(Response => {
+        console.log("옴뇸뇸2");
         console.log(Response.data.data);
         return Response.data.data;
       })

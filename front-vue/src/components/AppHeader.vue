@@ -1,9 +1,102 @@
 <template>
-  <q-layout style="min-height: 50px;">
-    <q-header class="bg-white">
+  <q-layout style="min-height: 0px;">
+    <q-header class="bg-transparent">
       <q-toolbar class="gt-md" align="center">
-        <div class="col-4">
-          <div class="row justify-start">
+        <div class="col-4" align="left">
+          <q-btn
+            no-caps
+            @mouserover="menu1 = true"
+            class="text-h6 bg-transparent"
+            to="/"
+            flat
+            rounded
+          >
+            <span class="travel text-weight-bold">Travel</span>
+            <span class="bridge text-weight-bold">Bridge</span>
+          </q-btn>
+          <q-btn
+            no-caps
+            flat
+            rounded
+            @mouseover="menuOn1 = true"
+            class="text-black text-weight-bold bg-transparent"
+            @click="$router.push('/page1')"
+          >
+            TravelCard
+            <q-menu
+              content-class="bg-tranparent text-black"
+              auto
+              rounded
+              v-model="menuOn1"
+              @mouseleave="menuOn1 = false"
+              class="gt-sm bg-transparent"
+              fit
+            >
+              <q-btn to="/page1" flat>메인</q-btn>
+              <template
+                v-if="
+                  this.$store.state.user.user.mem_id != null ||
+                    this.$store.state.user.user.mem_id != undefined
+                "
+              >
+                <q-btn class="row" to="/page1/write" flat>글쓰기</q-btn>
+
+                <q-btn class="row" to="/page1/follower" flat>팔로워 피드</q-btn>
+              </template>
+              <q-btn to="/page1/main1search" flat icon="search">검색</q-btn>
+            </q-menu>
+          </q-btn>
+          <q-btn
+            no-caps
+            flat
+            rounded
+            @mouseover="menuOn2 = true"
+            class="text-black text-weight-bold bg-transparent"
+            @click="$router.push('/page2')"
+          >
+            TravelSearch
+            <q-menu
+              content-class="bg-primary text-white"
+              auto
+              rounded
+              v-model="menuOn2"
+              @mouseleave="menuOn2 = false"
+              class="gt-sm bg-transparent"
+              fit
+            >
+              <q-list>
+                <q-btn class="row" to="/page2/pick" flat>테마별 추천</q-btn>
+                <q-btn class="row" to="/page2/list" flat
+                  >여행지 정보 검색</q-btn
+                >
+              </q-list>
+            </q-menu>
+          </q-btn>
+          <q-btn
+            no-caps
+            flat
+            rounded
+            @mouseover="menuOn3 = true"
+            class="text-black text-weight-bold bg-transparent"
+            @click="$router.push('/page3')"
+          >
+            TravelPlus+
+            <q-menu
+              content-class="bg-tranparent text-black"
+              auto
+              rounded
+              v-model="menuOn3"
+              @mouseleave="menuOn3 = false"
+              class="gt-sm bg-transparent"
+              fit
+            >
+              <q-list>
+                <q-btn class="row" to="/page3/mate" flat>트래블 메이트</q-btn>
+                <q-btn class="row" to="/page3/rank" flat>트래블 랭크</q-btn>
+              </q-list>
+            </q-menu>
+          </q-btn>
+          <!-- <div class="row justify-start">
             <q-btn class="text-black q-mx-sm" flat to="/" label="HOME"></q-btn>
             <q-btn
               class="text-black q-mx-sm"
@@ -11,8 +104,8 @@
               to="/page1"
               label="트래블 카드"
               @mouseover="menuOn1 = true"
-            ></q-btn>
-            <q-btn
+          ></q-btn>-->
+          <!-- <q-btn
               class="text-black q-mx-sm"
               flat
               to="/page2"
@@ -20,15 +113,10 @@
               @mouseover="menuOn2 = true"
             ></q-btn>
             <q-btn class="text-black q-mx-sm" flat label="트래블 플러스" @mouseover="menuOn3=true"></q-btn>
-          </div>
+          </div>-->
         </div>
 
-        <!-- hover 시 보이는 부분 -->
-        <!-- 메뉴 개수 많지 않으므로 
-        1) 단순 dropdown 형태로 수정하거나 
-        2) 메뉴 + 이미지 함께 보여주면 좋을 듯-->
-
-        <q-menu square v-model="menuOn1" @mouseleave="menuOn1 = false" class="gt-sm" fit>
+        <!-- <q-menu square v-model="menuOn1" @mouseleave="menuOn1 = false" class="gt-sm" fit>
           <q-list class="q-ma-sm">
             <div class="row justify-center">
               <q-btn to="/page1" flat class="col-3">메인</q-btn>
@@ -46,7 +134,6 @@
         </q-menu>
         <q-menu square v-model="menuOn2" @mouseleave="menuOn2 = false" class="gt-sm" fit>
           <q-list class="q-ma-sm">
-            <!-- NavBar Hover 메뉴 부분 -->
             <div class="row justify-center">
               <q-btn to="/page2" flat class="col-4">트래블 픽</q-btn>
               <q-btn to="/page2/pick" flat class="col-4">테마별 여행지 추천</q-btn>
@@ -61,13 +148,16 @@
               <q-btn to="/page3/rank" flat class="col-3">트래블 랭크</q-btn>
             </div>
           </q-list>
-        </q-menu>
+        </q-menu>-->
 
         <!-- <q-toolbar-title class="col-4 text-black"> -->
-          <!-- <q-btn size="xl" unelevated flat to="/">TravelBridge</q-btn> -->
+        <!-- <q-btn size="xl" unelevated flat to="/">TravelBridge</q-btn> -->
         <!-- </q-toolbar-title> -->
         <div class="col-4">
-          <div class="text-h6 text-weight-bold text-black">TravelBridge</div>
+          <!-- <div class="text-h3 text-weight-bold cursor-pointer" @click="$router.push('/')">
+            <span class="travel">Travel</span>
+            <span class="bridge">Bridge</span>
+          </div>-->
         </div>
 
         <div
@@ -78,23 +168,50 @@
           class="col-4"
           align="right"
         >
-          <q-btn size="md col-5" class="text-grey q-pa-md" flat to="/login">로그인</q-btn>
+          <q-btn size="md" filled rounded class="q-ma-md" to="/login"
+            >로그인</q-btn
+          >
           <!-- <q-btn size="md col-5" class="text-grey q-pa-md" flat to="/search">검색</q-btn> -->
         </div>
         <div class="col-4" align="right" v-else>
-          <q-btn size="md" class="text-grey q-py-md" flat to="/mypage">내 정보</q-btn>
-          <q-btn size="md" class="text-grey q-py-md" flat v-on:click="logout">로그아웃</q-btn>
+          <q-btn size="md" filled rounded class="q-py-md" flat to="/mypage"
+            >내 정보</q-btn
+          >
+          <q-btn
+            size="md"
+            filled
+            rounded
+            class="q-py-md"
+            flat
+            v-on:click="logout"
+            >로그아웃</q-btn
+          >
           <!-- <q-btn size="md" class="text-grey q-py-md" flat to="/search">검색</q-btn> -->
         </div>
       </q-toolbar>
       <!-- 햄버거버튼 누르면 drawer open -->
       <q-toolbar class="lt-lg" align="center">
         <div class="col-4" align="left">
-          <q-btn class="q-py-sm" size="large" color="grey-7" flat icon="menu" @click="left = !left"></q-btn>
+          <q-btn
+            class="q-py-sm"
+            size="large"
+            color="grey-7"
+            flat
+            icon="menu"
+            @click="left = !left"
+          ></q-btn>
         </div>
 
-        <div class="col-4">
-          <div class="text-h6 text-weight-bold text-black">TravelBridge</div>
+        <div class="col-4" @click="$router.push('/')">
+          <q-chip
+            clickable
+            dense
+            class="text-h6 bg-transparent"
+            @click="$router.push('/')"
+          >
+            <span class="travel text-weight-bold">Travel</span>
+            <span class="bridge text-weight-bold">Bridge</span>
+          </q-chip>
         </div>
 
         <div
@@ -105,11 +222,15 @@
           class="col-4"
           align="right"
         >
-          <q-btn size="md" class="text-grey darken--2 q-pa-md" flat to="/login">로그인</q-btn>
+          <q-btn size="md" class="darken--2 q-pa-md" flat to="/login"
+            >로그인</q-btn
+          >
         </div>
         <div class="col-4" align="right" v-else>
-          <q-btn size="md" class="text-grey q-py-md" flat to="/mypage">내 정보</q-btn>
-          <q-btn size="md" class="text-grey q-py-md" flat v-on:click="logout">로그아웃</q-btn>
+          <q-btn size="md" class="q-py-md" flat to="/mypage">내 정보</q-btn>
+          <q-btn size="md" class="q-py-md" flat v-on:click="logout"
+            >로그아웃</q-btn
+          >
         </div>
       </q-toolbar>
     </q-header>
@@ -136,7 +257,10 @@
             :content-inset-level="0.5"
             :to="menuItem.path"
           >
-            <q-list v-for="(menuListSub, index) in menuListSub[index]" :key="index">
+            <q-list
+              v-for="(menuListSub, index) in menuListSub[index]"
+              :key="index"
+            >
               <q-item clickable :to="menuListSub.path">
                 <q-item-section>
                   <q-item-label>{{ menuListSub.label }}</q-item-label>
@@ -228,6 +352,12 @@ export default {
     logout() {
       this.$store.state.user.user = {};
     }
+  },
+  created() {
+    console.log(this.$router.currentRoute.fullPath === "/");
+    if (this.$router.currentRoute.name === "home") {
+      console.log("넹글");
+    }
   }
 };
 </script>
@@ -236,5 +366,14 @@ export default {
 .hright {
   display: flex;
   justify-content: flex-end;
+}
+.travel {
+  color: #282e56;
+}
+.bridge2 {
+  color: #de6668;
+}
+.bridge {
+  color: #d63840;
 }
 </style>
