@@ -57,12 +57,17 @@
     - Amazon EC2
     - NGINX
 
-  - ## **관리**
-    - 코드
-    - git
-    - gitlab
-    - 이슈
-    - Jira SoftWare
+  - ## **Collecting DATA**
+    - Python
+    - Selenium
+    - BeautifulSoup
+
+  - ## **Management**
+    - Code
+        - git
+        - gitlab
+    - Issue
+        - Jira SoftWare
 
 ### [**3. 테이블 설계**](./metadata_description/TABLE.md)
 
@@ -119,6 +124,7 @@
     -   데이터 수집 및 정제
     -   로그인 관련 백엔드 담당
     -   개인 맞춤형 SNS 피드 백엔드 담당
+    
 
 ## **사용 툴**
 
