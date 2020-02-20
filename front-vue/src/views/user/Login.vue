@@ -1,6 +1,6 @@
 <template>
-  <div class="row justify-center q-my-xl q-py-xl">
-    <q-card class="col-xs-12 col-md-4 my-card q-ma-md" flat bordered>
+  <div class="row justify-center">
+    <q-card class="col-xs-12 col-md-4 my-card card-top-margin" flat bordered>
       <q-card-section>
         <div class="text-h6">로그인</div>
       </q-card-section>
@@ -165,5 +165,9 @@ a {
 
 p a {
   text-decoration: none;
+}
+
+.card-top-margin {
+  margin-top: 80px;
 }
 </style>

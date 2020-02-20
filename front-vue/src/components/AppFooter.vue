@@ -1,5 +1,5 @@
 <template>
-  <div class="text-grey q-py-xl q-mt-xl">
+  <div class="text-grey q-py-xl ">
     <div class="row" v-if="!footerHidden">
       <div class="col-4 text-center">
         <div class="q-pa-md">
@@ -80,7 +80,7 @@ export default {
     }
   },
   methods: {
-    handleResize() {
+    handleResize() { // 반응형 조절할 때 
       this.window.width = window.innerWidth;
       this.window.height = window.innerHeight;
     }

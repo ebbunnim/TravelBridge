@@ -67,7 +67,7 @@
                       <q-icon
                         name="chat_bubble"
                         color="green"
-                        @click="moveUser(mem.mem_no)"
+                        @click="movefollowing(mem.mem_no)"
                       />
                     </q-item-section>
                   </q-item>

@@ -1,8 +1,13 @@
 <template>
   <div class="q-pa-none">
-    <div class="q-col-gutter-lg items-start">
+    <!-- <div class="q-col-gutter-lg items-start"> -->
+    <div>
       <div class="col-12">
-        <q-img :src="getImgUrl('post.jpg')" :ratio="16 / 7">
+        <q-img
+          :src="getImgUrl('card.jpg')"
+          :ratio="16 / 7"
+          style="height: 760px"
+        >
           <div
             class="absolute-center text-center row justify-center"
             style="width: 100%;"
@@ -14,17 +19,19 @@
               <q-select
                 v-model="option"
                 :options="options"
+                bg-color="grey"
                 class="col-1"
-                color="yellow"
-                label-color="orange"
+                standout="bg-glossy text-white"
+                rounded
               />
               <q-input
                 v-model="word"
+                rounded
+                bg-color="grey"
                 label="지금 구경하러 가기"
                 class="col-6"
-                color="white"
                 label-color="white"
-                standout
+                standout="bg-glossy text-white"
                 style="margin-left:15px;"
                 v-on:keyup.enter="search(1)"
               >
