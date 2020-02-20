@@ -35,7 +35,7 @@
 		<result property="post_category" column="post_category" />
 		<result property="post_regtime" column="post_regtime" />
 		<result property="post_hits" column="post_hits" />
-		<result property="post_city" column="post_hits" />
+		<result property="post_city" column="post_city" />
 		<result property="post_writer" column="post_writer" />
 		<result property="post_plan_date" column="post_plan_date" />
 		<collection property="post_cmtList" ofType="comment" resultMap="cmtMap" />
@@ -52,7 +52,7 @@
 		<result property="post_category" column="post_category" />
 		<result property="post_regtime" column="post_regtime" />
 		<result property="post_hits" column="post_hits" />
-		<result property="post_city" column="post_hits" />
+		<result property="post_city" column="post_city" />
 		<result property="post_writer" column="post_writer" />
 		<result property="post_plan_date" column="post_plan_date" />
 		<collection property="post_filesList" ofType="files" resultMap="filesMap" />
@@ -67,7 +67,7 @@
 		<result property="post_category" column="post_category" />
 		<result property="post_regtime" column="post_regtime" />
 		<result property="post_hits" column="post_hits" />
-		<result property="post_city" column="post_hits" />
+		<result property="post_city" column="post_city" />
 		<result property="post_plan_date" column="post_plan_date" />
 		<result property="post_writer" column="post_writer" />
 		<collection property="post_courseList" ofType="course" resultMap="courseMap" />
