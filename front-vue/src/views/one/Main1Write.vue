@@ -1,5 +1,11 @@
 <template>
   <div>
+    <q-img :src="getImgUrl('cutbg.jpg')">
+      <div style="width: 100%; height: 100%" class="text-center">
+        <div class="text-h5 text-weight-bold" style="padding-top: 10%">글쓰기</div>
+      </div>
+    </q-img>
+
     <div class="pad">
       <div class="row">
         <div class="col-4" align="left">
@@ -857,6 +863,9 @@ export default {
     this.$store.dispatch("post/postLast");
   },
   methods: {
+    getImgUrl(img) {
+      return require("@/assets/" + img);
+    },
     goBack: function() {
       this.$router.go(-1);
       return;
@@ -1086,7 +1095,7 @@ export default {
 
 <style>
 .pad {
-  padding: 10%;
+  padding: 5% 10%;
 }
 
 .self-stretch {

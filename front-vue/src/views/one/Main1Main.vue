@@ -52,98 +52,11 @@
                 </template>
               </q-input>
             </div>
-            <div class="col-8 q-py-md row justify-center">
-              <p style="padding: 16px 0 0 0;">추천 태그 :</p>
-              <q-btn color="rgba(0,0,0,0.47)" flat label="#맛집" />
-              <q-btn color="rgba(0,0,0,0.47)" flat label="#너네집" />
-              <q-btn color="rgba(0,0,0,0.47)" flat label="#우리집" />
-            </div>
+            <div class="col-8 q-py-md row justify-center"></div>
           </div>
         </q-img>
       </div>
     </div>
-    <h2>내맘대로 쓰는 공간</h2>
-    <div>뭔가가 있겠지</div>
-    <h2>추천태그 포스트</h2>
-    <q-carousel
-      v-model="slideTwo"
-      transition-prev="slide-right"
-      transition-next="slide-left"
-      swipeable
-      animated
-      control-color="primary"
-      navigation
-      padding
-      arrows
-      autoplay
-      infinite
-      height="400px"
-      class="bg-white text-black shadow-1 rounded-borders no-shadow"
-    >
-      <q-carousel-slide
-        v-for="(subCard, index) in SubCard"
-        :key="index"
-        :name="index"
-        class="column no-wrap"
-      >
-        <div
-          class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap"
-        >
-          <q-img
-            v-for="(subContent, index) in subCard"
-            :key="index"
-            class="col-4 full-height pic"
-            :src="subContent.img"
-          >
-            <span class="pic-caption bottom-to-top">
-              <h1 class="pic-title">{{ subContent.title }}</h1>
-
-              <p>{{ subContent.sub }}</p>
-            </span>
-          </q-img>
-        </div>
-      </q-carousel-slide>
-    </q-carousel>
-    <h2>추천태그 플래너</h2>
-    <q-carousel
-      v-model="slideTwo"
-      transition-prev="slide-right"
-      transition-next="slide-left"
-      swipeable
-      animated
-      control-color="primary"
-      navigation
-      padding
-      arrows
-      autoplay
-      infinite
-      height="400px"
-      class="bg-white text-black shadow-1 rounded-borders no-shadow"
-    >
-      <q-carousel-slide
-        v-for="(subCard, index) in SubCard"
-        :key="index"
-        :name="index"
-        class="column no-wrap"
-      >
-        <div
-          class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap"
-        >
-          <q-img
-            v-for="(subContent, index) in subCard"
-            :key="index"
-            class="col-4 full-height pic"
-            :src="subContent.img"
-          >
-            <span class="pic-caption bottom-to-top">
-              <h1 class="pic-title">{{ subContent.title }}</h1>
-
-              <p>{{ subContent.sub }}</p>
-            </span>
-          </q-img>
-        </div>
-      </q-carousel-slide>
-    </q-carousel>
   </div>
 </template>
 
