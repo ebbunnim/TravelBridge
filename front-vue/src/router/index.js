@@ -7,8 +7,8 @@ import SignUp from "../views/user/SignUp.vue";
 import MyPage from "../views/user/MyPage.vue";
 import UserPage from "../views/user/UserPage.vue";
 //about
-import AboutTeam from "../views/about/AboutTeam.vue";
-import AboutService from "../views/about/AboutService.vue";
+import AboutUs from "../views/about/AboutUs.vue";
+// import AboutTeam from "../views/about/AboutTeam.vue";
 //faq&qna
 import Qna from "../views/Qna.vue";
 import Faq from "../views/Faq.vue";
@@ -120,15 +120,15 @@ const routes = [
     name: "qna",
     component: Qna
   },
+  // {
+  //   path: "/about/team",
+  //   name: "team",
+  //   component: AboutTeam
+  // },
   {
-    path: "/about/team",
-    name: "team",
-    component: AboutTeam
-  },
-  {
-    path: "/about/service",
-    name: "service",
-    component: AboutService
+    path: "/about/us",
+    name: "about-us",
+    component: AboutUs
   },
   // 로그인 페이지
   {

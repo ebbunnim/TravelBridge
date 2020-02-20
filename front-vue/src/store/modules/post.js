@@ -32,6 +32,7 @@ const actions = {
   },
   searchInfoPost: (store, payload) => {
     PostService.GetSearchPost(payload.postNo).then(response => {
+      console.log("옴뇸뇸1");
       store.commit("postInfo", { post: response });
       console.log(response);
     });
