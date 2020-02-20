@@ -87,8 +87,8 @@ public class CourseController {
 
         // Course.setCourse_sub(list);
 
-        service.insert(Course);
-        return handleSuccess("");
+        System.out.println(service.insert(Course));
+        return handleSuccess("완료");
     }
 
     @ApiOperation("Course 정보 삭제")

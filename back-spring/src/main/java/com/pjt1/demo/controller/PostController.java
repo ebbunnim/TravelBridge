@@ -91,10 +91,13 @@ public class PostController {
         pageMaker.setEndPage(pageMaker.getStartPage());
         if (searchOption.equals("empty")) {
             pageMaker.setSearchOption("all");
-        }else pageMaker.setSearchOption(searchOption);
+        } else
+            pageMaker.setSearchOption(searchOption);
         if (word.equals("empty")) {
-            pageMaker.setWord("''");
-        }else pageMaker.setWord(word);
+            // pageMaker.setWord("''");
+        } else
+            pageMaker.setWord(word);
+
         // PageBean.setWord(word);
         System.out.println(pageBean);
         System.out.println(pageMaker);
@@ -175,6 +178,12 @@ public class PostController {
         return handleSuccess(list);
     }
 
+    @ApiOperation("게시글 마지막번호")
+    @GetMapping("Post/LastNo")
+    public ResponseEntity<Map<String, Object>> searchLastNo() {
+        int last = service.searchLastNo();
+        return handleSuccess(last);
+    }
 }
 // @ApiOperation("더보기로 Post 전체 목록 조회")
 // @GetMapping("/Post/search/moreAll/{btnCnt}")

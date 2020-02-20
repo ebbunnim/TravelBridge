@@ -4,17 +4,20 @@ import PostService from "../../services/PostService";
 const state = {
   post: {},
   postList: [],
-  gogo: false
+  gogo: false,
+  postLast: 0
 };
 // GetSearchAllPost
 //GetSearchPartPost
 //GetSearchPost
 //PostInsertPost
 const actions = {
-  addPost: (store,payLoad) =>{
-    console.log(payLoad.x)
-    PostService.PostInsertPost(payLoad.x).then(response =>{ console.log(response)})
-  },  
+  addPost: (store, payLoad) => {
+    console.log(payLoad.x);
+    PostService.PostInsertPost(payLoad.x).then(response => {
+      console.log(response);
+    });
+  },
   searchAllPost: store => {
     PostService.GetSearchAllPost().then(response => {
       store.commit("postListAll", { postList: response });
@@ -47,10 +50,24 @@ const actions = {
       store.commit("postListAll", { postList: Response });
       console.log(state.postList);
     });
+  },
+  insertFile: (store, payLoad) => {
+    PostService.insertPostFile(payLoad.x);
+  },
+  postLast: store => {
+    PostService.LastNo().then(Response => {
+      store.commit("postLastNo", { lastNo: Response });
+    });
+  },
+  insertPlan: (store, payLoad) => {
+    PostService.insertPlan(payLoad.x);
   }
 };
 
 const mutations = {
+  postLastNo(state, payLoad) {
+    state.postLast = payLoad.lastNo;
+  },
   postInfo(state, payLoad) {
     state.post = payLoad.post;
   },

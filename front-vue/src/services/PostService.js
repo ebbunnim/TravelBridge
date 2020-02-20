@@ -43,6 +43,27 @@ class PostService {
       })
       .catch(exp => console.log("Err get follower search" + exp));
   }
+  insertPostFile(file) {
+    Api.post("/Files/insert", file)
+      .then(Response => {
+        console.log(Response);
+      })
+      .catch(exp => console.log(exp));
+  }
+  LastNo() {
+    return Api.get("/Post/LastNo").then(Response => {
+      return Response.data.data;
+    });
+  }
+  async insertPlan(file) {
+    let x = await Api.post("/Course", file)
+      .then(Response => {
+        console.log(Response);
+        return true;
+      })
+      .catch(exp => console.log(exp));
+    console.log(x);
+  }
 }
 
 export default new PostService();

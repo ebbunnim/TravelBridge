@@ -14,15 +14,7 @@
         <p>해시태그 :{{ post.post_category }}</p>
         <p>조회수 : {{ post.post_hits }}</p>
       </div>
-      <q-carousel
-        arrows
-        animated
-        swipeable
-        autoplay
-        infinite
-        v-model="slideOne"
-        height="600px"
-      >
+      <q-carousel arrows animated swipeable autoplay infinite v-model="slideOne" height="600px">
         <q-carousel-slide
           v-for="(mainCard, index) in post.post_filesList"
           :key="index"
@@ -30,7 +22,9 @@
           :img-src="mainCard.files_url"
         ></q-carousel-slide>
       </q-carousel>
-      <div><p v-html="post.post_content"></p></div>
+      <div>
+        <p v-html="post.post_content"></p>
+      </div>
       {{ post }}
       <template v-if="post.post_plan_start != null">플랜</template>
       <div>
