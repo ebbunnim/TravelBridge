@@ -39,7 +39,7 @@
           </div>
         </q-card-section>
         <q-separator inset />
-        
+
         <div class="row justify-center">
           <q-card-section class="col-xs-12 col-md-6">
             <div class="q-ma-md">
@@ -48,11 +48,11 @@
           </q-card-section>
           <q-card-section class="col-xs-12 col-md-6">
             <div class="q-ma-md">
-              <div class="text-subtitle1">{{ fval.fval_holiday }}</div>
-              <div class="text-subtitle1">{{ fval.fval_fee }}</div>
+              <p v-html="fval.fval_holiday"></p>
+              <p v-html="fval.fval_fee"></p>
             </div>
             <div class="q-ma-md">
-              <div class="text-body1">{{ fval.fval_content }}</div>
+              <p v-html="fval.fval_content"></p>
             </div>
           </q-card-section>
         </div>

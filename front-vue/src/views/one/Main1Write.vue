@@ -1,15 +1,20 @@
 <template>
   <div>
-    <div style="max-width: 70%; margin: 5% 15% 0 15%">
-      <div class="row" style="margin-bottom:3%;  ">
+    <div class="pad">
+      <div class="row">
         <div class="col-4" align="left">
-          <q-btn color="primary" icon="check" label="뒤로 가기" />
-        </div>
-        <div class="col-4" style=" text-align: center;">
-          <h3 style="margin-top:0px; margin-bottom:0px;">글쓰기</h3>
+          <q-btn
+            class="q-my-lg"
+            flat
+            no-wrap
+            color="primary"
+            icon="arrow_back"
+            label="뒤로가기"
+            @click="goBack()"
+          />
         </div>
       </div>
-      <q-card>
+      <q-card style="" flat bordered>
         <q-tabs
           v-model="tab"
           dense
@@ -29,7 +34,12 @@
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="post" style="height:900px">
             <div class="row justify-center" style="margin-bottom:15px;">
-              <q-input class="col-8" type="text" label="제목" v-model="post.postTitle" />
+              <q-input
+                class="col-8"
+                type="text"
+                label="제목"
+                v-model="post.postTitle"
+              />
               <div class="row justify-around col-5" style="margin-top:2%;">
                 <q-select
                   filled
@@ -45,7 +55,9 @@
                 >
                   <template v-slot:no-option>
                     <q-item>
-                      <q-item-section class="text-grey">No results</q-item-section>
+                      <q-item-section class="text-grey"
+                        >No results</q-item-section
+                      >
                     </q-item>
                   </template>
                 </q-select>
@@ -75,35 +87,46 @@
                         transition-show="scale"
                         transition-hide="scale"
                       >
-                        <q-date v-model="post.postDate" @input="() => $refs.qDateProxy.hide()" />
+                        <q-date
+                          v-model="post.postDate"
+                          @input="() => $refs.qDateProxy.hide()"
+                        />
                       </q-popup-proxy>
                     </q-icon>
                   </template>
                 </q-input>
               </div>
               <div class="col-10 justify-center row" style="margin-top:1%;">
-                <div style="display: inline" v-for="(item, idx) in postThema" :key="idx">
+                <div
+                  style="display: inline"
+                  v-for="(item, idx) in postThema"
+                  :key="idx"
+                >
                   <q-btn
                     color="grey"
                     class="q-ma-sm"
-                    size="xl"
+                    rounded
+                    size="lg"
                     v-if="item.state"
                     @click="
                       item.state = !item.state;
                       postToggle();
                     "
-                  >{{ item.name }}</q-btn>
+                    >#{{ item.name }}</q-btn
+                  >
                   <q-btn
                     color="grey"
                     class="q-ma-sm"
-                    size="xl"
+                    size="lg"
                     v-if="!item.state"
                     outline
+                    rounded
                     @click="
                       item.state = !item.state;
                       postToggle();
                     "
-                  >{{ item.name }}</q-btn>
+                    >#{{ item.name }}</q-btn
+                  >
                 </div>
               </div>
             </div>
@@ -157,7 +180,14 @@
                           {{ scope.uploadProgressLabel }}
                         </div>
                       </div>
-                      <q-btn v-if="scope.canAddFiles" type="a" icon="add_box" round dense flat>
+                      <q-btn
+                        v-if="scope.canAddFiles"
+                        type="a"
+                        icon="add_box"
+                        round
+                        dense
+                        flat
+                      >
                         <q-uploader-add-trigger />
                         <q-tooltip>Pick Files</q-tooltip>
                       </q-btn>
@@ -168,7 +198,12 @@
             </div>
             <div class="row justify-center">
               <div class="col-12" align="center">
-                <q-btn color="primary" icon="clear" label="초기화" @click="postClear()" />
+                <q-btn
+                  color="primary"
+                  icon="clear"
+                  label="초기화"
+                  @click="postClear()"
+                />
                 <q-btn
                   color="primary"
                   icon="check"
@@ -182,7 +217,12 @@
 
           <q-tab-panel name="plan" style="height:1250px">
             <div class="row justify-center" style="margin-bottom:15px;">
-              <q-input class="col-8" type="text" label="제목" v-model="plan.planTitle" />
+              <q-input
+                class="col-8"
+                type="text"
+                label="제목"
+                v-model="plan.planTitle"
+              />
               <div class="row justify-around col-5" style="margin-top:2%;">
                 <q-select
                   filled
@@ -198,7 +238,9 @@
                 >
                   <template v-slot:no-option>
                     <q-item>
-                      <q-item-section class="text-grey">No results</q-item-section>
+                      <q-item-section class="text-grey"
+                        >No results</q-item-section
+                      >
                     </q-item>
                   </template>
                 </q-select>
@@ -228,14 +270,21 @@
                         transition-show="scale"
                         transition-hide="scale"
                       >
-                        <q-date v-model="plan.planDate" @input="() => $refs.qDateProxy.hide()" />
+                        <q-date
+                          v-model="plan.planDate"
+                          @input="() => $refs.qDateProxy.hide()"
+                        />
                       </q-popup-proxy>
                     </q-icon>
                   </template>
                 </q-input>
               </div>
               <div class="col-10 justify-center row" style="margin-top:1%;">
-                <div style="display: inline" v-for="(item, idx) in planThema" :key="idx">
+                <div
+                  style="display: inline"
+                  v-for="(item, idx) in planThema"
+                  :key="idx"
+                >
                   <q-btn
                     color="grey"
                     class="q-ma-sm"
@@ -245,7 +294,8 @@
                       item.state = !item.state;
                       planToggle();
                     "
-                  >{{ item.name }}</q-btn>
+                    >{{ item.name }}</q-btn
+                  >
                   <q-btn
                     color="grey"
                     class="q-ma-sm"
@@ -256,7 +306,8 @@
                       item.state = !item.state;
                       planToggle();
                     "
-                  >{{ item.name }}</q-btn>
+                    >{{ item.name }}</q-btn
+                  >
                 </div>
               </div>
             </div>
@@ -314,7 +365,14 @@
                             {{ scope.uploadProgressLabel }}
                           </div>
                         </div>
-                        <q-btn v-if="scope.canAddFiles" type="a" icon="add_box" round dense flat>
+                        <q-btn
+                          v-if="scope.canAddFiles"
+                          type="a"
+                          icon="add_box"
+                          round
+                          dense
+                          flat
+                        >
                           <q-uploader-add-trigger />
                           <q-tooltip>Pick Files</q-tooltip>
                         </q-btn>
@@ -365,7 +423,14 @@
                             {{ scope.uploadProgressLabel }}
                           </div>
                         </div>
-                        <q-btn v-if="scope.canAddFiles" type="a" icon="add_box" round dense flat>
+                        <q-btn
+                          v-if="scope.canAddFiles"
+                          type="a"
+                          icon="add_box"
+                          round
+                          dense
+                          flat
+                        >
                           <q-uploader-add-trigger />
                           <q-tooltip>Pick Files</q-tooltip>
                         </q-btn>
@@ -380,13 +445,29 @@
             </div>
             <div class="row justify-center">
               <div class="col-12 row justify-center" style="margin-bottom:2%;">
-                <template v-if="c<4">
-                  <q-card flat bordered class="my-card" style="width:20%; height:240px;">
+                <template v-if="c < 4">
+                  <q-card
+                    flat
+                    bordered
+                    class="my-card"
+                    style="width:20%; height:240px;"
+                  >
                     <div class="row text-h6 justify-between">
-                      <q-input filled v-model="a" label="일정 제목" style="width:100%;" />
+                      <q-input
+                        filled
+                        v-model="a"
+                        label="일정 제목"
+                        style="width:100%;"
+                      />
                     </div>
                     <q-separator />
-                    <q-input v-model="b" filled type="textarea" style="width:100%;" label="일정 내용" />
+                    <q-input
+                      v-model="b"
+                      filled
+                      type="textarea"
+                      style="width:100%;"
+                      label="일정 내용"
+                    />
                     <q-btn
                       color="primary"
                       icon="post_add"
@@ -405,7 +486,13 @@
                   :key="index"
                 >
                   <div class="row text-h6 justify-between">
-                    <q-input filled :value="t.a" label="일정 제목" style="width:100%;" disable />
+                    <q-input
+                      filled
+                      :value="t.a"
+                      label="일정 제목"
+                      style="width:100%;"
+                      disable
+                    />
                   </div>
                   <q-separator />
                   <q-input
@@ -428,7 +515,12 @@
             </div>
             <div class="row justify-center">
               <div class="col-12" align="center">
-                <q-btn color="primary" icon="clear" label="초기화" @click="planClear" />
+                <q-btn
+                  color="primary"
+                  icon="clear"
+                  label="초기화"
+                  @click="planClear"
+                />
                 <q-btn
                   color="primary"
                   icon="check"
@@ -765,6 +857,10 @@ export default {
     this.$store.dispatch("post/postLast");
   },
   methods: {
+    goBack: function() {
+      this.$router.go(-1);
+      return;
+    },
     postFileSelected(file) {
       console.log(file);
       for (var x in file) {
@@ -989,6 +1085,10 @@ export default {
 </script>
 
 <style>
+.pad {
+  padding: 10%;
+}
+
 .self-stretch {
   align-self: start;
 }

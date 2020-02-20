@@ -4,13 +4,19 @@
       <q-card class="q-pa-xl q-ma-lg" flat bordered>
         <q-card-section align="center">
           <div class="text-h5 text-weight-bold">{{ post.post_title }}</div>
-          <q-chip size="md" rounded icon="directions" :label="post.post_city"></q-chip>
+          <q-chip
+            size="md"
+            rounded
+            icon="directions"
+            :label="post.post_city"
+          ></q-chip>
           <q-chip
             class="q-my-lg"
             size="md"
             v-for="(tag, index) in tagToArray"
             :key="index"
-          >{{ tag }}</q-chip>
+            >{{ tag }}</q-chip
+          >
         </q-card-section>
         <q-card-section class="row justify-between" style="text-align: left">
           <div class="col-md-4">
@@ -58,7 +64,9 @@
           </div>
         </q-card-section>
         <q-card-section class="row">
-          <template class="col-12" v-if="post.post_plan_start != null">플랜</template>
+          <template class="col-12" v-if="post.post_plan_start != null"
+            >플랜</template
+          >
           <div>
             <p>댓글</p>
           </div>

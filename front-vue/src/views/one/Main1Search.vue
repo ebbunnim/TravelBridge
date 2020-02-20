@@ -1,7 +1,13 @@
 <template>
   <div align="center">
-    <div class="row justify-center" style="margin:5% 0 0 0 ;">
-      <q-select v-model="option" label="옵션" filled class="col-1" :options="options" />
+    <div class="row justify-center pad">
+      <q-select
+        v-model="option"
+        label="옵션"
+        filled
+        class="col-1"
+        :options="options"
+      />
       <q-input
         label="검색"
         class="col-5"
@@ -302,6 +308,10 @@ export default {
 </script>
 
 <style>
+.pad {
+  padding-top: 150px; 
+}
+
 .my-card1 {
   width: 100%;
   height: 360px;

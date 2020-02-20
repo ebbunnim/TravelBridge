@@ -9,7 +9,7 @@
         navigation
         navigation-icon="radio_button_unchecked"
         infinite
-        height="725px"
+        height="755px"
       >
         <q-carousel-slide :name="1" :img-src="getImgUrl('main2bg.jpg')">
           <div
