@@ -1,47 +1,5 @@
 <template>
   <div>
-<<<<<<< HEAD
-    <div class="q-pa-xl">
-      <q-card class="q-pa-xl q-ma-lg" flat bordered>
-        <q-card-section align="center">
-          <div class="text-h5 text-weight-bold">{{ post.post_title }}</div>
-          <q-chip size="md" rounded icon="directions" :label="post.post_city"></q-chip>
-          <q-chip
-            class="q-my-lg"
-            size="md"
-            v-for="(tag, index) in tagToArray"
-            :key="index"
-          >{{ tag }}</q-chip>
-        </q-card-section>
-        <q-card-section class="row justify-between" style="text-align: left">
-          <div class="col-md-4">
-            <q-btn
-              class="col-md-4"
-              flat
-              no-wrap
-              color="primary"
-              icon="arrow_back"
-              label="목록으로"
-              @click="goBack()"
-            />
-          </div>
-           <div class="col-md-4   q-mt-sm" style="text-align: center">
-            작성일시
-            <b>{{ post.post_regtime }}</b>  / 작성자
-            <b @click="goUser(post.mem_no)">{{ post.post_writer }}</b> / 조회수
-            <b>{{ post.post_hits }}</b>
-          </div>
-          <div class="col-md-4    q-mt-sm" style="text-align: right">
-           좋아요 
-           <template v-if="like">
-           <q-icon name="favorite" color="red" size="lg"></q-icon>
-           </template>
-           <template v-else>
-           <q-icon name="favorite"  size="lg"   @click="isLike"></q-icon>
-           </template>
-          </div>
-        </q-card-section>
-=======
     <q-img :src="getImgUrl('cutbg.jpg')">
       <div style="width: 100%; height: 100%" class="text-center">
         <div class="text-h5 text-weight-bold"></div>
@@ -78,7 +36,6 @@
             @click="goBack()"
           />
         </div>
->>>>>>> 299245c0110b16b843bac0fdea62145de17e7d90
 
         <div class="col-md-4 offset-md-4 q-mt-sm" style="text-align: right">
           작성일시
