@@ -32,6 +32,7 @@ public interface PostService {
 	public void update(Post Post);
 
 	public void delete(int post_no);
+
 	public List<Map<String, Object>> findChildLike(int no);
 
 	public void deleteChildLike(List<Integer> list);
@@ -45,4 +46,6 @@ public interface PostService {
 	public void deleteChildFiles(List<Integer> list);
 
 	public List<Post> searchFollowingPost(int following_no);
+
+	public int searchLastNo();
 }

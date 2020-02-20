@@ -35,7 +35,7 @@
 		<result property="post_category" column="post_category" />
 		<result property="post_regtime" column="post_regtime" />
 		<result property="post_hits" column="post_hits" />
-		<result property="post_city" column="post_hits" />
+		<result property="post_city" column="post_city" />
 		<result property="post_writer" column="post_writer" />
 		<result property="post_plan_date" column="post_plan_date" />
 		<collection property="post_cmtList" ofType="comment" resultMap="cmtMap" />
@@ -52,7 +52,7 @@
 		<result property="post_category" column="post_category" />
 		<result property="post_regtime" column="post_regtime" />
 		<result property="post_hits" column="post_hits" />
-		<result property="post_city" column="post_hits" />
+		<result property="post_city" column="post_city" />
 		<result property="post_writer" column="post_writer" />
 		<result property="post_plan_date" column="post_plan_date" />
 		<collection property="post_filesList" ofType="files" resultMap="filesMap" />
@@ -67,7 +67,7 @@
 		<result property="post_category" column="post_category" />
 		<result property="post_regtime" column="post_regtime" />
 		<result property="post_hits" column="post_hits" />
-		<result property="post_city" column="post_hits" />
+		<result property="post_city" column="post_city" />
 		<result property="post_plan_date" column="post_plan_date" />
 		<result property="post_writer" column="post_writer" />
 		<collection property="post_courseList" ofType="course" resultMap="courseMap" />
@@ -315,6 +315,7 @@
 	<insert id="insert" parameterType="post">
 		INSERT INTO POST
 		(post_type, 
+		post_no,
 		board_no, 
 		mem_no, 
 		post_title, 
@@ -324,7 +325,7 @@
 		post_writer,
 		post_plan_date)
 		VALUES(
-			#{post_type:INTEGER}, #{board_no:INTEGER}, #{mem_no:INTEGER},
+			#{post_type:INTEGER},#{post_no:INTEGER}, #{board_no:INTEGER}, #{mem_no:INTEGER},
 			#{post_title:VARCHAR}, #{post_content:VARCHAR}, #{post_category:VARCHAR}, #{post_city:VARCHAR},
 			#{post_writer:VARCHAR}, #{post_plan_date:VARCHAR}
 		)
@@ -401,10 +402,13 @@
 		WHERE RESULT.rnum >#{startPage} AND  RESULT.rnum <= #{endPage}]]>
 		<choose>
 			<when test="searchOption == 'all'">
+				<if test="word != null">
 				AND
 				(post_title like concat('%','${word}','%')
 				OR post_content like concat('%','${word}','%')
-				OR post_category like concat('%','${word}','%'))
+				OR post_category like concat('%','${word}','%')
+				OR post_city like concat('%','${word}','%'))
+				</if>
 			</when>
 			<when test="searchOption == 'title'">
 				AND	post_title like concat('%','${word}','%')
@@ -415,8 +419,8 @@
 			<when test="searchOption == 'tag'">
 				AND post_category like concat('%','${word}','%')
 			</when>
-			<when test="searchOption == 'writer'">
-				AND post_writer like concat('%','${word}','%')
+			<when test="searchOption == 'city'">
+				AND post_city like concat('%','${word}','%')
 			</when>
 		</choose>
 		<!-- ORDER BY p.post_regtime DESC -->
@@ -496,6 +500,9 @@
 		LEFT JOIN COURSE cs ON p.post_no = cs.post_no
 		WHERE f.following_no = #{following_no:INTEGER}
 		ORDER BY p.post_regtime desc
+	</select>
+	<select id="searchLastNo" resultType="int">
+		SELECT max(post_no) from POST
 	</select>
 
 

@@ -32,7 +32,9 @@ public interface PostDao {
 	public void updatePostHits(int post_no);
 
 	public void insert(Post Post);
+
 	public void update(Post Post);
+
 	public void delete(int post_no);
 
 	public List<Map<String, Object>> findChildLike(int no);
@@ -48,5 +50,7 @@ public interface PostDao {
 	public void deleteChildFiles(List<Integer> list);
 
 	public List<Post> searchFollowingPost(int following_no);
+
+	public int searchLastNo();
 
 }

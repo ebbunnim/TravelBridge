@@ -10,7 +10,7 @@ public interface CourseService {
 
     public List<Course> searchAll();
 
-    public void insert(Course Course);
+    public boolean insert(Course Course);
 
     public void update(Course Course);
 

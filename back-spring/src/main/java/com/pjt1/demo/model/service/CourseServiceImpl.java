@@ -34,12 +34,14 @@ public class CourseServiceImpl implements CourseService {
 
     }
 
-    public void insert(Course Course) {
+    public boolean insert(Course Course) {
         try {
             repo.insert(Course);
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
 
     }
 

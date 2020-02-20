@@ -16,13 +16,14 @@ public class PostServiceImpl implements PostService {
 
 	@Autowired
 	private PostDao repo;
-	
+
 	public Post search(int post_no) {
 		try {
 			return repo.search(post_no);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}return null;
+		}
+		return null;
 	}
 
 	public List<Post> searchAll() {
@@ -30,30 +31,37 @@ public class PostServiceImpl implements PostService {
 			return repo.searchAll();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}return null;
+		}
+		return null;
 	}
-	public List<Map<String, Object>> searchPagePostAll(PageMaker page){
+
+	public List<Map<String, Object>> searchPagePostAll(PageMaker page) {
 		try {
 			return repo.searchPagePostAll(page);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}return null;
+		}
+		return null;
 	}
-	public List<Map<String, Object>> searchPagePost(PageMaker page){
+
+	public List<Map<String, Object>> searchPagePost(PageMaker page) {
 		try {
 			return repo.searchPagePost(page);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}return null;
+		}
+		return null;
 	}
-	public List<Map<String, Object>> searchPagePlan(PageMaker page){
+
+	public List<Map<String, Object>> searchPagePlan(PageMaker page) {
 		try {
 			return repo.searchPagePlan(page);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}return null;
+		}
+		return null;
 	}
-	
+
 	public List<Post> searchFollowingPeoplePost(int mem_no) {
 		try {
 			return repo.searchFollowingPeoplePost(mem_no);
@@ -173,6 +181,13 @@ public class PostServiceImpl implements PostService {
 		return null;
 	}
 
-	
+	public int searchLastNo() {
+		try {
+			return repo.searchLastNo();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 
 }
