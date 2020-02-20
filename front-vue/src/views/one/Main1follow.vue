@@ -1,7 +1,9 @@
 <template>
   <div align="center">
-    <div class="row justify-center" style="margin:5% 0 0 0 ;">
-      <h2>팔로워 피드</h2>
+    <div class="row justify-center">
+
+
+
     </div>
 
     <q-separator spaced inset vertical dark />

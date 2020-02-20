@@ -1,6 +1,6 @@
 <template>
   <div align="center">
-    <div class="row justify-center" style="margin:5% 0 0 0 ;">
+    <div class="row justify-center pad">
       <q-select
         v-model="option"
         label="옵션"
@@ -346,6 +346,10 @@ export default {
 </script>
 
 <style>
+.pad {
+  padding-top: 150px; 
+}
+
 .my-card1 {
   width: 100%;
   height: 360px;

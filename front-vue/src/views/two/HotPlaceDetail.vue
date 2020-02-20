@@ -42,16 +42,19 @@
         <div class="row justify-center">
           <q-card-section class="col-xs-12 col-md-6">
             <div class="q-ma-md ">
-              <q-img :src="getImgUrl(hp.hp_img)" basic :ratio="16 / 9" />
+              <q-img :src="hp.hp_img" basic :ratio="16 / 9" />
             </div>
           </q-card-section>
           <q-card-section class="col-xs-12 col-md-6">
             <div class="q-ma-md">
-              <div class="text-subtitle1">{{ hp.hp_holiday }}</div>
-              <div class="text-subtitle1">{{ hp.hp_fee }}</div>
+              <!-- <div class="text-subtitle1">{{ }}</div> -->
+              <!-- <div class="text-subtitle1">{{  }}</div> -->
+              <p v-html="hp.hp_holiday"></p>
+              <p v-html="hp.hp_fee"></p>
             </div>
             <div class="q-ma-lg">
-              <div class="text-body1">{{ hp.hp_content }}</div>
+              <!-- <div class="text-body1" v-html="hp.hp_content"></div> -->
+              <p v-html="hp.hp_content"></p>
             </div>
           </q-card-section>
         </div>
