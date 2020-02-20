@@ -1,8 +1,15 @@
 <template>
-  <div class="q-pa-none">
-    <div class="q-col-gutter-lg items-start">
+  <div>
+    <div class="">
       <div class="col-12">
-        <q-img :src="getImgUrl('bg.jpg')" style="width: 100%">
+        <q-img :src="getImgUrl('cutbg.jpg')">
+          <div style="width: 100%; height: 100%" class="text-center">
+            <div class="text-h5 text-weight-bold" style="padding-top: 10%">
+              About Us
+            </div>
+          </div>
+        </q-img>
+        <!-- <q-img :src="getImgUrl('bg.jpg')" style="width: 100%">
           <div class="absolute-center text-center" style="width: 100%">
             <p class="text-h4 q-pt-lg">
               <b>트래블브릿지</b>는 여행 관련 서비스를 제공하는 종합
@@ -13,10 +20,10 @@
               서비스까지
             </p>
           </div>
-        </q-img>
+        </q-img> -->
       </div>
       <!-- 주요 서비스 소개 -->
-      <div class="row" style="height: 350px; background: #f9f9f9">
+      <!-- <div class="row" style="height: 350px; background: #f9f9f9">
         <div class="col text-left q-ma-lg q-pl-lg">
           <div class="">
             <p class="text-h4 q-pt-lg">트래블 카드</p>
@@ -66,13 +73,13 @@
         </div>
       </div>
       <!-- 마지막 시연 화면 : 반응형 서비스 - 스마트폰과 데스크탑 사이즈로 각각 구현 -->
-      <div class="row" style="height: 700px; background: #f9f9f9">
+      <!-- <div class="row" style="height: 700px; background: #f9f9f9">
         <div class="col text-center q-ma-lg q-pl-lg">
           <div class="">
             <q-btn large color="primary" class="text-h6">둘러보기</q-btn>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

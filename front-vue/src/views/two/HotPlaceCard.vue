@@ -1,21 +1,21 @@
 <template>
   <q-card flat bordered class="my-card">
-    <q-img :src="getImgUrl(hp_img)" basic :ratio="16 / 9">
-      <div class="absolute-bottom text-h6 text-center">{{ hp_name }}</div>
+    <q-img :src="hp_img === undefined ? '' : hp_img" basic :ratio="16 / 9">
+      <div class="absolute-bottom text-h6 text-center ">{{ hp_name }}</div>
     </q-img>
 
     <q-card-section>
-      <div class="text-subtitle1 text-center">{{ hp_detail_adr }}</div>
+      <div class="text-subtitle1 text-center text-card-address">{{ hp_detail_adr }}</div>
     </q-card-section>
 
     <q-card-section class="q-pt-none">
       <div class="text-subtitle2 text-body tag-color">{{ hp_tag }}</div>
     </q-card-section>
-    <q-card-section class="absolute-bottom row justify-even">
+    <q-card-section class="absolute-bottom row justify-between">
       <q-btn
         flat
-        class="col-6 q-mr-xl"
-        color="primary"
+        class="col-4 q-mr-xl"
+        color="grey"
         @click="
           $router.push({ name: 'hotplace-detail', params: { hp_no: hp_no } })
         "
@@ -24,16 +24,20 @@
       <q-btn
         v-if="!btnCheck"
         flat
-        class="col-3"
+        unelevated
+        class="offset-3 col-2"
         round
+        color="red"
         icon="favorite_border"
         @click="insertLike()"
       ></q-btn>
       <q-btn
         v-if="btnCheck"
         flat
-        class="col-3"
+        unelevated
+        class="offset-3 col-2"
         round
+        color="red"
         icon="favorite"
         @click="deleteLike(hp_no)"
       ></q-btn>
@@ -108,6 +112,19 @@ export default {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
 }
+.text-card-address {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  /* display: box;
+  margin-top: 1px;
+  max-height: 400px; */
+  overflow: hidden;
+  vertical-align: top;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
 .my-card {
   height: 400px;
   width: 300px;
@@ -116,6 +133,6 @@ export default {
 }
 
 .tag-color {
-  color: #4527a0;
+  color: orange;
 }
 </style>

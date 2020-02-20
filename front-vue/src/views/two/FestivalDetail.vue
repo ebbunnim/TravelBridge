@@ -4,7 +4,7 @@
       <q-card class="q-pa-xl q-ma-lg" flat bordered>
         <q-card-section align="center">
           <div class="text-h5 text-weight-bold">
-            {{ fval.fval_name }}
+            {{ fval.fval_name === undefined ? '' : fval.fval_name }}
           </div>
           {{ fval.fval_start_day }} ~ {{ fval.fval_end_day }}
           <div class="q-mt-md">
@@ -43,7 +43,7 @@
         <div class="row justify-center">
           <q-card-section class="col-xs-12 col-md-6">
             <div class="q-ma-md">
-              <q-img :src="getImgUrl(fval.fval_img)" basic :ratio="16 / 9" />
+              <q-img :src="fval.fval_img" basic :ratio="16 / 9" />
             </div>
           </q-card-section>
           <q-card-section class="col-xs-12 col-md-6">

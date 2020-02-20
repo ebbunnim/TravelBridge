@@ -42,7 +42,11 @@
         <div class="row justify-center">
           <q-card-section class="col-xs-12 col-md-6">
             <div class="q-ma-md ">
-              <q-img :src="hp.hp_img" basic :ratio="16 / 9" />
+              <q-img
+                :src="[hp.hp_img === undefined ? '' : hp.hp_img]"
+                basic
+                :ratio="16 / 9"
+              />
             </div>
           </q-card-section>
           <q-card-section class="col-xs-12 col-md-6">

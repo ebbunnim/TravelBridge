@@ -1,11 +1,11 @@
 <template>
   <q-card flat bordered class="my-card">
-    <q-img :src="getImgUrl(fval_img)" basic :ratio="16 / 9">
+    <q-img :src="fval_img" basic :ratio="16 / 9">
       <div class="absolute-bottom text-h6 text-center">{{ fval_name }}</div>
     </q-img>
 
     <q-card-section>
-      <div class="text-subtitle1 text-center">{{ fval_detail_adr }}</div>
+      <div class="text-subtitle1 text-cente text-card-address">{{ fval_detail_adr }}</div>
     </q-card-section>
 
     <q-card-section class="q-pt-none">
@@ -13,15 +13,15 @@
         {{ fval_start_day }} ~ {{ fval_end_day }}
       </div>
     </q-card-section>
-    <q-card-section>
+    <q-card-section class="text-center">
       <div class="text-subtitle2 text-body2 tag-color">{{ fval_tag }}</div>
     </q-card-section>
 
     <q-card-section class="absolute-bottom row justify-between">
       <q-btn
         flat
-        class="col-6 q-mr-xl"
-        color="primary"
+        class="col-4 q-mr-xl"
+        color="grey"
         @click="
           $router.push({
             name: 'festival-detail',
@@ -33,7 +33,8 @@
       <q-btn
         v-if="!btnCheck"
         flat
-        class="col-3"
+        class="offset-3 col-2"
+        color="red"
         round
         icon="favorite_border"
         @click="insertLike()"
@@ -41,7 +42,8 @@
       <q-btn
         v-if="btnCheck"
         flat
-        class="col-3"
+        class="offset-3 col-2"
+        color="red"
         round
         icon="favorite"
         @click="deleteLike(fval_no)"
@@ -106,6 +108,21 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.text-card-address {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  /* display: box;
+  margin-top: 1px;
+  max-height: 400px; */
+  overflow: hidden;
+  vertical-align: top;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
 .text-body2 {
   display: -webkit-box;
   display: -ms-flexbox;

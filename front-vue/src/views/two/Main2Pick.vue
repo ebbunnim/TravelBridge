@@ -131,7 +131,7 @@
       </div>
     </div>
 
-    <div class="festival-bg q-my-xl q-py-lg">
+    <div class="q-my-xl q-py-lg">
       <div
         class="row justify-between q-mx-xl q-px-xl q-mt-xl"
         v-if="fval_list_length > 0"
