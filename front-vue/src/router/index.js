@@ -62,7 +62,7 @@ const routes = [
       },
       { path: "postdetail/:postNo", component: PostDetail, props: true },
       { path: "write", component: Main1Write },
-      { path: "follower", component: Main1follow }
+      { path: "feed", component: Main1follow }
     ]
   },
   {
