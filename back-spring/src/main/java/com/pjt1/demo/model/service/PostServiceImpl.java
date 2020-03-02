@@ -112,9 +112,9 @@ public class PostServiceImpl implements PostService {
 		}
 	}
 
-	public List<Map<String, Object>> searchMorePostByOption(PageMaker pageMaker) {
+	public List<Map<String, Object>> searchPagePostByOption(PageMaker pageMaker) {
 		try {
-			return repo.searchMorePostByOption(pageMaker);
+			return repo.searchPagePostByOption(pageMaker);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
