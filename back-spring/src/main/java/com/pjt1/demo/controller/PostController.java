@@ -108,7 +108,7 @@ public class PostController {
         // PageBean.setWord(word);
         System.out.println(pageBean);
         System.out.println(pageMaker);
-        List<Map<String, Object>> list = service.searchMorePostByOption(pageMaker);
+        List<Map<String, Object>> list = service.searchPagePostByOption(pageMaker);
         System.out.println(list);
         return list.size() == 0 ? handleSuccess(list) : handleSuccess(list); // 일단 무조건 확인해야 하므로
     }

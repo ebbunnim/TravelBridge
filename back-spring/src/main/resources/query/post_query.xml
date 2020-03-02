@@ -24,7 +24,6 @@
 		<collection property="course_subcourse_list" ofType="subcourse" resultMap="subcourseMap" />
 	</resultMap>
 
-
 	<resultMap id="pcfMap" type="POST">
 		<id property="post_no" column="post_no" />
 		<result property="mem_no" column="mem_no" />
@@ -388,7 +387,7 @@
 		post_plan_date=#{post_plan_date:VARCHAR}
 		where post_no=#{post_no}
 	</update>
-	<select id="searchMorePostByOption" parameterType="hashmap" resultMap="pcfMap">
+	<select id="searchPagePostByOption" parameterType="hashmap" resultMap="pcfMap">
 		<![CDATA[SELECT
 			RESULT.rnum,
 			RESULT.post_no,
