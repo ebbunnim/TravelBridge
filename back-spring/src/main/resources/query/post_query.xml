@@ -24,7 +24,6 @@
 		<collection property="course_subcourse_list" ofType="subcourse" resultMap="subcourseMap" />
 	</resultMap>
 
-
 	<resultMap id="pcfMap" type="POST">
 		<id property="post_no" column="post_no" />
 		<result property="mem_no" column="mem_no" />
