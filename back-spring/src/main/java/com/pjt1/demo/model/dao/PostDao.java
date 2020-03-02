@@ -25,7 +25,7 @@ public interface PostDao {
 
 	public List<Post> searchFollowingPeoplePost(int mem_no);
 
-	public List<Map<String, Object>> searchMorePostByOption(PageMaker pageMaker);
+	public List<Map<String, Object>> searchPagePostByOption(PageMaker pageMaker);
 
 	public int getPostLikes(int post_no);
 
