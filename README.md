@@ -7,7 +7,7 @@
 1. [서비스 소개](#서비스-소개)
 1. [주요 기능](#주요-기능)
 1. [메타데이터](#TavelBridge-메타데이터)
-1. [서비스 예시](#서비스-예시)
+1. [서비스](#서비스)
 1. [테스트](#테스트)
 1. [팀 구성](#팀-구성)
 1. [사용 툴](#사용-툴)
@@ -80,13 +80,62 @@
 <div style="text-align:center">
     <img src="metadata_description/PJT1ApiDocument.png">
 </div>
+
 ---
 
-## **서비스 예시**
+## **서비스**
 
+### 1. Home
 
+![start](./metadata_description/service/1.png)
 
+### 2. Travel Card
 
+![travel_card](./metadata_description/service/2.png)
+
+### 3. Travel Card Feed
+
+![travel_card](./metadata_description/service/3.png)
+
+### 4. Write Travel Card
+
+![travel_card](./metadata_description/service/4.png)
+
+### 5. Travel Pick 
+
+![travel_card](./metadata_description/service/5.png)
+
+### 6. Travel Pick List
+
+![travel_card](./metadata_description/service/6.png)
+
+### 7. Searched Travel Pick
+
+![travel_card](./metadata_description/service/7.png)
+
+### 8. TravelPlus - Party
+
+![travel_card](./metadata_description/service/8.png)
+
+### 9. TravelPlus - Create Party
+
+![travel_card](./metadata_description/service/9.png)
+
+### 10. TravelPlus - Take part in the party
+
+![travel_card](./metadata_description/service/10.png)
+
+### 11. TravelPlus - Ranking
+
+![travel_card](./metadata_description/service/11.png)
+
+### 12. MyPage - Follow, Information
+
+![travel_card](./metadata_description/service/12.png)
+
+### 13. MyPage - Activity i did
+
+![travel_card](./metadata_description/service/13.png)
 
 ## **테스트**
 
