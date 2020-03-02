@@ -5,8 +5,6 @@ class HotPlaceService {
   searchAll() {
     return Api.get("/HotPlace")
       .then(res => {
-        console.log("js다");
-        console.log(res.data.data);
         return res.data.data;
       })
       .catch(e => console.log(e));
@@ -24,10 +22,8 @@ class HotPlaceService {
 
   // 더보기로 HotPlace 검색하기 조회 - searchOption은 all/ title / content/ tag /city 중 전달
   searchMoreHotplace(btnCnt, searchOption, word) {
-    console.log(`/HotPlace/search/page/${btnCnt}/${searchOption}/${word}`);
     return Api.get(`/HotPlace/search/page/${btnCnt}/${searchOption}/${word}`)
       .then(res => {
-        console.log("HotPlaceService에서...", res.data.data);
         return res.data.data;
       })
       .catch(e => {
@@ -35,9 +31,8 @@ class HotPlaceService {
       });
   }
 
-  // 테마(8개) 로 검색 - 테마 추천에 사용 
+  // 테마(8개) 로 검색 - 테마 추천에 사용
   searchMoreHotPlaceByTheme(btnCnt, word) {
-    console.log(`/HotPlace/search/page/theme/${btnCnt}/${word}`);
     return Api.get(`/HotPlace/search/page/theme/${btnCnt}/${word}`)
       .then(res => {
         return res.data.data;

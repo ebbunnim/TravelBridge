@@ -35,7 +35,9 @@
                 >
                   <template v-slot:no-option>
                     <q-item>
-                      <q-item-section class="text-grey">No results</q-item-section>
+                      <q-item-section class="text-grey"
+                        >No results</q-item-section
+                      >
                     </q-item>
                   </template>
                 </q-select>
@@ -65,15 +67,27 @@
                         transition-show="scale"
                         transition-hide="scale"
                       >
-                        <q-date v-model="post.postDate" @input="() => $refs.qDateProxy.hide()" />
+                        <q-date
+                          v-model="post.postDate"
+                          @input="() => $refs.qDateProxy.hide()"
+                        />
                       </q-popup-proxy>
                     </q-icon>
                   </template>
                 </q-input>
               </div>
-              <q-input class="col-8 q-my-lg" type="text" label="제목" v-model="post.postTitle" />
+              <q-input
+                class="col-8 q-my-lg"
+                type="text"
+                label="제목"
+                v-model="post.postTitle"
+              />
               <div class="col-10 q-my-lg justify-center row">
-                <div style="display: inline" v-for="(item, idx) in postThema" :key="idx">
+                <div
+                  style="display: inline"
+                  v-for="(item, idx) in postThema"
+                  :key="idx"
+                >
                   <q-btn
                     color="grey"
                     class="q-ma-sm"
@@ -84,7 +98,8 @@
                       item.state = !item.state;
                       postToggle();
                     "
-                  >#{{ item.name }}</q-btn>
+                    >#{{ item.name }}</q-btn
+                  >
                   <q-btn
                     color="grey"
                     class="q-ma-sm"
@@ -96,7 +111,8 @@
                       item.state = !item.state;
                       postToggle();
                     "
-                  >#{{ item.name }}</q-btn>
+                    >#{{ item.name }}</q-btn
+                  >
                 </div>
               </div>
             </div>
@@ -150,7 +166,14 @@
                           {{ scope.uploadProgressLabel }}
                         </div>
                       </div>
-                      <q-btn v-if="scope.canAddFiles" type="a" icon="add_box" round dense flat>
+                      <q-btn
+                        v-if="scope.canAddFiles"
+                        type="a"
+                        icon="add_box"
+                        round
+                        dense
+                        flat
+                      >
                         <q-uploader-add-trigger />
                         <q-tooltip>Pick Files</q-tooltip>
                       </q-btn>
@@ -171,7 +194,14 @@
                   label="초기화"
                   @click="postClear()"
                 />
-                <q-btn outline rounded color="primary" icon="check" label="등록" @click="postSave()" />
+                <q-btn
+                  outline
+                  rounded
+                  color="primary"
+                  icon="check"
+                  label="등록"
+                  @click="postSave()"
+                />
               </div>
             </div>
           </q-tab-panel>
@@ -193,7 +223,9 @@
                 >
                   <template v-slot:no-option>
                     <q-item>
-                      <q-item-section class="text-grey">No results</q-item-section>
+                      <q-item-section class="text-grey"
+                        >No results</q-item-section
+                      >
                     </q-item>
                   </template>
                 </q-select>
@@ -223,15 +255,27 @@
                         transition-show="scale"
                         transition-hide="scale"
                       >
-                        <q-date v-model="plan.planDate" @input="() => $refs.qDateProxy.hide()" />
+                        <q-date
+                          v-model="plan.planDate"
+                          @input="() => $refs.qDateProxy.hide()"
+                        />
                       </q-popup-proxy>
                     </q-icon>
                   </template>
                 </q-input>
               </div>
-              <q-input class="col-8 q-my-lg" type="text" label="제목" v-model="plan.planTitle" />
+              <q-input
+                class="col-8 q-my-lg"
+                type="text"
+                label="제목"
+                v-model="plan.planTitle"
+              />
               <div class="col-10 q-my-lg justify-center row">
-                <div style="display: inline" v-for="(item, idx) in planThema" :key="idx">
+                <div
+                  style="display: inline"
+                  v-for="(item, idx) in planThema"
+                  :key="idx"
+                >
                   <q-btn
                     color="grey"
                     class="q-ma-sm"
@@ -242,7 +286,8 @@
                       item.state = !item.state;
                       planToggle();
                     "
-                  >#{{ item.name }}</q-btn>
+                    >#{{ item.name }}</q-btn
+                  >
                   <q-btn
                     color="grey"
                     class="q-ma-sm"
@@ -254,7 +299,8 @@
                       item.state = !item.state;
                       planToggle();
                     "
-                  >#{{ item.name }}</q-btn>
+                    >#{{ item.name }}</q-btn
+                  >
                 </div>
               </div>
             </div>
@@ -312,7 +358,14 @@
                             {{ scope.uploadProgressLabel }}
                           </div>
                         </div>
-                        <q-btn v-if="scope.canAddFiles" type="a" icon="add_box" round dense flat>
+                        <q-btn
+                          v-if="scope.canAddFiles"
+                          type="a"
+                          icon="add_box"
+                          round
+                          dense
+                          flat
+                        >
                           <q-uploader-add-trigger />
                           <q-tooltip>Pick Files</q-tooltip>
                         </q-btn>
@@ -363,7 +416,14 @@
                             {{ scope.uploadProgressLabel }}
                           </div>
                         </div>
-                        <q-btn v-if="scope.canAddFiles" type="a" icon="add_box" round dense flat>
+                        <q-btn
+                          v-if="scope.canAddFiles"
+                          type="a"
+                          icon="add_box"
+                          round
+                          dense
+                          flat
+                        >
                           <q-uploader-add-trigger />
                           <q-tooltip>Pick Files</q-tooltip>
                         </q-btn>
@@ -379,12 +439,28 @@
             <div class="row justify-center">
               <div class="col-12 row justify-center" style="margin-bottom:2%;">
                 <template v-if="c < 4">
-                  <q-card flat bordered class="my-card" style="width:20%; height:240px;">
+                  <q-card
+                    flat
+                    bordered
+                    class="my-card"
+                    style="width:20%; height:240px;"
+                  >
                     <div class="row text-h6 justify-between">
-                      <q-input filled v-model="a" label="일정 제목" style="width:100%;" />
+                      <q-input
+                        filled
+                        v-model="a"
+                        label="일정 제목"
+                        style="width:100%;"
+                      />
                     </div>
                     <q-separator />
-                    <q-input v-model="b" filled type="textarea" style="width:100%;" label="일정 내용" />
+                    <q-input
+                      v-model="b"
+                      filled
+                      type="textarea"
+                      style="width:100%;"
+                      label="일정 내용"
+                    />
                     <q-btn
                       color="primary"
                       icon="post_add"
@@ -403,7 +479,13 @@
                   :key="index"
                 >
                   <div class="row text-h6 justify-between">
-                    <q-input filled :value="t.a" label="일정 제목" style="width:100%;" disable />
+                    <q-input
+                      filled
+                      :value="t.a"
+                      label="일정 제목"
+                      style="width:100%;"
+                      disable
+                    />
                   </div>
                   <q-separator />
                   <q-input
@@ -435,7 +517,14 @@
                   label="초기화"
                   @click="planClear()"
                 />
-                <q-btn rounded outline color="primary" icon="check" label="등록" @click="planSave()" />
+                <q-btn
+                  rounded
+                  outline
+                  color="primary"
+                  icon="check"
+                  label="등록"
+                  @click="planSave()"
+                />
               </div>
             </div>
           </q-tab-panel>
@@ -772,11 +861,9 @@ export default {
       return;
     },
     postFileSelected(file) {
-      console.log(file);
       for (var x in file) {
         this.post.postSelectedFile.push(file[x]);
       }
-      console.log(this.post.postSelectedFile);
     },
     postFileRemoved(file) {
       const idx = this.post.postSelectedFile.findIndex(function(item) {
@@ -808,13 +895,9 @@ export default {
       }
     },
     planFileSelected(file) {
-      console.log(file);
       for (var x in file) {
         this.plan.planSelectedFile.push(file[x]);
       }
-      console.log(this.plan.planSelectedFile);
-
-      //이 버튼 필요없고 글쓰기 버튼누르면 글쓰면서 이 친구들 대리고가야한다.
     },
     planFileRemoved(file) {
       const idx = this.plan.planSelectedFile.findIndex(function(item) {
@@ -850,10 +933,14 @@ export default {
       const themaChoice = this.postThema;
       for (let key in themaChoice) {
         if (themaChoice[key].state === true) {
-          this.post.postChoices += "#" + themaChoice[key].name + " ";
+          if ((this.post.postChoices = "")) {
+            this.post.postChoices += "#" + themaChoice[key].name;
+          } else {
+            this.post.postChoices += " " + "#" + themaChoice[key].name;
+          }
         }
       }
-      console.log("### TravelPick - onToggle 눌림 ###", this.postChoices);
+      
     },
     planToggle() {
       this.plan.planChoices = "";
@@ -863,10 +950,8 @@ export default {
           this.plan.planChoices += "#" + themaChoice[key].name + " ";
         }
       }
-      console.log("### TravelPick - onToggle 눌림 ###", this.planChoices);
     },
     postClear() {
-      console.log("post clear");
       (this.post.postTitle = ""),
         (this.post.postEditor = ""),
         (this.post.postArea = ""),
@@ -876,7 +961,6 @@ export default {
         (this.post.postSelectedFile = []);
     },
     planClear() {
-      console.log("plan clear");
       (this.plan.planSelectedFile = []),
         (this.plan.planTitle = ""),
         (this.plan.planEditor = ""),
@@ -904,7 +988,7 @@ export default {
       this.$store.dispatch("post/addPost", { x });
       this.uploadImagesPlan();
       this.uploadPostPlan();
-      this.$router.push('/page1/')
+      this.$router.push("/page1/");
     },
     async postSave() {
       let x = {
@@ -919,7 +1003,6 @@ export default {
         post_type: 0,
         post_writer: this.$store.state.user.user.mem_id
       };
-      console.log(x);
       this.$store.dispatch("post/addPost", { x });
       this.uploadImagesPost();
     },
@@ -933,7 +1016,6 @@ export default {
         b: this.b
       };
       this.plan.planList.push(r);
-      console.log(this.plan.planList);
       this.a = "";
       this.b = "";
       this.c++;
@@ -943,8 +1025,6 @@ export default {
       this.c--;
     },
     async uploadImagesPost() {
-      console.log("*");
-      console.log(this.post.postSelectedFile);
       for (let a of this.post.postSelectedFile) {
         let x = {};
         x.files_url = await Axios.post(`https://api.imgur.com/3/image`, a, {
@@ -952,7 +1032,6 @@ export default {
             Authorization: "Client-ID 68f9bfe66c24bc5"
           }
         }).then(res => {
-          console.log(res.data.data.link);
           return res.data.data.link;
         });
         x.mem_no = this.$store.state.user.user.mem_no;
@@ -960,11 +1039,8 @@ export default {
 
         await this.$store.dispatch("post/insertFile", { x });
       }
-      alert("계시물 등록 성공");
     },
     async uploadImagesPlan() {
-      console.log("**");
-      console.log(this.plan.planSelectedFile);
       for (let a of this.plan.planSelectedFile) {
         let x = {};
         x.files_url = await Axios.post(`https://api.imgur.com/3/image`, a, {
@@ -979,10 +1055,8 @@ export default {
 
         await this.$store.dispatch("post/insertFile", { x });
       }
-      alert("계시물 등록 성공");
     },
     async uploadPostPlan() {
-      console.log(this.plan.planList);
       for (let a of this.plan.planList) {
         let x = {};
         x.course_title = a.a;

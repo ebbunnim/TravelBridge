@@ -5,7 +5,6 @@ class FestivalService {
   searchAll() {
     return Api.get("/Festival/searchAll")
       .then(res => {
-        console.log(res.data.data);
         return res.data.data;
       })
       .catch(e => console.log(e));
@@ -25,7 +24,6 @@ class FestivalService {
   searchMoreFestival(btnCnt, searchOption, word) {
     return Api.get(`/Festival/search/page/${btnCnt}/${searchOption}/${word}`)
       .then(res => {
-        console.log("FestivalService에서...", res.data.data);
         return res.data.data;
       })
       .catch(e => {
@@ -35,7 +33,6 @@ class FestivalService {
 
   // 페이지로 Festival 테마로 목록 조회 - 테마 추천에 사용
   searchMoreFestivalByTheme(btnCnt, word) {
-    console.log(`/Festival/search/page/theme/${btnCnt}/${word}`);
     return Api.get(`/Festival/search/page/theme/${btnCnt}/${word}`)
       .then(res => {
         return res.data.data;

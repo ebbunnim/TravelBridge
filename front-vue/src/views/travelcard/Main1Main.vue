@@ -67,8 +67,7 @@ export default {
       return require("../../assets/" + img);
     },
     search: function(pageNo) {
-      console.log(this.word);
-      console.log(this.option);
+      
       if (this.word != "") {
         if (this.option != "") {
           this.$router.push(

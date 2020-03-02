@@ -10,35 +10,29 @@ const state = {
 const actions = {
   getLikedHotplaces: ({ commit }, mem_no) => {
     UserService.getLikedHotplaces(mem_no).then(res => {
-      console.log(res);
       commit("getLikedHotplaces", res);
     });
   },
   getLikedFestivals: ({ commit }, mem_no) => {
     UserService.getLikedFestivals(mem_no).then(res => {
-      console.log(res);
       commit("getLikedFestivals", res);
     });
   },
   insertLike: ({ commit }, payload) => {
-    console.log("like.js", payload)
     LikeService.insertLike(payload).then(res => {
-      console.log("서비스", res)
-      commit("insertLike", payload)
-    })
+      commit("insertLike", payload);
+    });
   },
   deleteHotplaceLike: ({ commit }, no) => {
     LikeService.deleteLike(no).then(res => {
-      console.log(res)
-      commit("deleteHotplaceLike", no)
-    })
+      commit("deleteHotplaceLike", no);
+    });
   },
   deleteFestivalLike: ({ commit }, no) => {
     LikeService.deleteLike(no).then(res => {
-      console.log(res)
-      commit("deleteFestivalLike", no)
-    })
-  },
+      commit("deleteFestivalLike", no);
+    });
+  }
 };
 
 const mutations = {
@@ -46,24 +40,26 @@ const mutations = {
     state.allLikedHPs = res;
   },
   getLikedFestivals(state, res) {
-    state.allLikedFvals = res
+    state.allLikedFvals = res;
   },
   insertLike(state, payload) {
     if (payload.like_type === 2) {
-      state.allLikedHPs.push(payload)
+      state.allLikedHPs.push(payload);
     } else if (payload.like_type === 3) {
-      state.allLikedFvals.push(payload)
+      state.allLikedFvals.push(payload);
     }
   },
   deleteHotplaceLike(state, no) {
-    console.log("삭제")
-    const idx = state.allLikedHPs.findIndex(function (item) { return item.hotplace_no === no })
-    if (idx > -1) state.allLikedHPs.splice(idx, 1)
+    const idx = state.allLikedHPs.findIndex(function(item) {
+      return item.hotplace_no === no;
+    });
+    if (idx > -1) state.allLikedHPs.splice(idx, 1);
   },
   deleteFestivalLike(state, no) {
-    console.log("삭제")
-    const idx = state.allLikedFvals.findIndex(function (item) { return item.festival_no === no })
-    if (idx > -1) state.allLikedFvals.splice(idx, 1)
+    const idx = state.allLikedFvals.findIndex(function(item) {
+      return item.festival_no === no;
+    });
+    if (idx > -1) state.allLikedFvals.splice(idx, 1);
   }
 };
 

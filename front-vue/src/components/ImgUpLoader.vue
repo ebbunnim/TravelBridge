@@ -57,10 +57,9 @@ export default {
   },
   methods: {
     file_selected(file) {
-      console.log(file);
+    
       this.selected_file = file;
-      console.log(this.selected_file);
-      //이 버튼 필요없고 글쓰기 버튼누르면 글쓰면서 이 친구들 대리고가야한다.
+      
     }
   }
 };

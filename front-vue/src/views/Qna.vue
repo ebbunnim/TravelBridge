@@ -125,7 +125,6 @@ export default {
     },
     postQna(qna) {
       if (this.user.mem_no === undefined) {
-        console.log("로그인 필요");
         this.alert = true;
       } else {
         this.$store.dispatch("qna/insertQna", qna);
@@ -141,8 +140,6 @@ export default {
     }
   },
   created() {
-    console.log("====== QNA PAGE CREATED ======");
-    console.log("앗", this.user.mem_no);
     this.getUserQnas();
   }
 };

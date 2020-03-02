@@ -304,7 +304,6 @@ return{
       return this.$store.state.user.user;
     },
     Check() {
-      console.log("asdasdasdsa");
       if (this.user.mem_id != null || this.user.mem_id != undefined) {
         for (let x in this.$store.state.user.following.mem_followList) {
           if (

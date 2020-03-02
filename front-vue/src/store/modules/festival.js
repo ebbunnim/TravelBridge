@@ -24,12 +24,7 @@ const actions = {
       payload.word
     )
       .then(res => {
-        console.log(res);
-
         commit("saveFvals", res);
-
-        console.log("state.fvals 확인 ", state.fvals);
-        console.log("길이 측정!!!!!: ", state.fval_list_length);
       })
       .catch(e => {
         console.log(e);
@@ -39,7 +34,6 @@ const actions = {
     // 테마로 찾은 후 fvals 에 저장
     FestivalService.searchMoreFestivalByTheme(payload.btnCnt, payload.word)
       .then(res => {
-        console.log("festival.js", res)
         commit("saveFvals", res);
       })
       .catch(e => {
@@ -50,15 +44,15 @@ const actions = {
 const mutations = {
   saveFvals(state, fvals) {
     state.fvals = fvals;
-    state.fval_list_length = fvals.length
-    if (typeof (state.fvals) === 'string') state.fval_list_length = 0;
+    state.fval_list_length = fvals.length;
+    if (typeof state.fvals === "string") state.fval_list_length = 0;
   },
   saveOneFval(state, fval) {
     state.fval = fval;
   },
   clearFvals(state) {
     state.fvals = [];
-    state.fval_list_length = 0
+    state.fval_list_length = 0;
   }
 };
 export default {

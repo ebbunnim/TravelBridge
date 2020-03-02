@@ -7,7 +7,6 @@ const state = {
 const actions = {
   getAllFaqs({ commit }) {
     FaqService.selectAllFaqs().then(response => {
-      console.log("여긴 faq.js", response.data.data);
       commit("setAllFaqs", response.data.data);
     });
   }

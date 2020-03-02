@@ -1,6 +1,6 @@
 import PostService from "../../services/PostService";
 import UserService from "../../services/UserService";
-// import RouterService from "../../router";
+import router from "../../router";
 
 const state = {
   post: {},
@@ -11,11 +11,9 @@ const state = {
 };
 
 const actions = {
-  addPost: (store, payLoad) => {
-    console.log(payLoad.x);
-    PostService.PostInsertPost(payLoad.x).then(response => {
-      console.log(response);
-    });
+  addPost: async (store, payLoad) => {
+    await PostService.PostInsertPost(payLoad.x).then(response => {});
+    router.push("/page1/main1search");
   },
   searchAllPost: store => {
     PostService.GetSearchAllPost().then(response => {
@@ -23,7 +21,6 @@ const actions = {
     });
   },
   searchPartPost: (store, payload) => {
-    console.log(payload);
     PostService.GetSearchAllPost(
       payload.pageNo,
       payload.option,
@@ -33,21 +30,16 @@ const actions = {
         postList: response,
         pageNo: payload.pageNo
       });
-      console.log(state.postList);
     });
   },
   searchInfoPost: (store, payload) => {
     PostService.GetSearchPost(payload.postNo).then(response => {
       store.commit("postInfo", { post: response });
-      console.log(response);
     });
   },
   searchAllFollower: (store, payload) => {
-    console.log(payload.userno);
     PostService.GetSearchFollow(payload.userno).then(Response => {
-      console.log(Response);
       store.commit("postListAll", { postList: Response });
-      console.log(state.postList);
     });
   },
   insertFile: (store, payLoad) => {
@@ -62,51 +54,55 @@ const actions = {
     PostService.insertPlan(payLoad.x);
   },
   getPostLike: (store, payLoad) => {
-    PostService.getSearchLikePost(payLoad.mem_no, payLoad.post_no).then(Response => {
-      store.commit("postGetLike", { likePost: Response })
-    });
+    PostService.getSearchLikePost(payLoad.mem_no, payLoad.post_no).then(
+      Response => {
+        store.commit("postGetLike", { likePost: Response });
+      }
+    );
   },
   setPostLike: async (store, payLoad) => {
-    console.log(payLoad.x)
-    await PostService.setPostLike(payLoad.x).then(Response => {
-    })
-    console.log("222222222")
-    PostService.getSearchLikePost(payLoad.x.liker_mem_no, payLoad.x.post_no).then(Response => {
-      store.commit("postGetLike", { likePost: Response })
-    })
+    await PostService.setPostLike(payLoad.x).then(Response => {});
+
+    PostService.getSearchLikePost(
+      payLoad.x.liker_mem_no,
+      payLoad.x.post_no
+    ).then(Response => {
+      store.commit("postGetLike", { likePost: Response });
+    });
   },
   deleteLikePost: async (store, payLoad) => {
     await PostService.deleteLikePost(payLoad.no).then(() => {
-      store.commit("deletePostLike")
-    })
-    console.log("33333333")
-    PostService.getSearchLikePost(payLoad.mem_no, payLoad.post_no).then(Response => {
-      store.commit("postGetLike", { likePost: Response })
-    })
+      store.commit("deletePostLike");
+    });
+
+    PostService.getSearchLikePost(payLoad.mem_no, payLoad.post_no).then(
+      Response => {
+        store.commit("postGetLike", { likePost: Response });
+      }
+    );
   },
   addCmt: async (store, payLoad) => {
-    await UserService.addCmt(payLoad.x).then(Response => {
-    }).catch(exp => console.log(exp));
+    await UserService.addCmt(payLoad.x)
+      .then(Response => {})
+      .catch(exp => console.log(exp));
     PostService.GetSearchPost(payLoad.postNo).then(response => {
       store.commit("postInfo", { post: response });
-      console.log(response);
     });
   }
-
 };
 
 const mutations = {
   deletePostLike(state, payLoad) {
-    state.likePost = {}
+    state.likePost = {};
   },
   postSetLike(state, payLoad) {
-    state.like = payLoad.like
+    state.like = payLoad.like;
   },
   postUnLike(state, payLoad) {
-    state.like = payLoad.like
+    state.like = payLoad.like;
   },
   postGetLike(state, payLoad) {
-    state.likePost = payLoad.likePost
+    state.likePost = payLoad.likePost;
   },
   postLastNo(state, payLoad) {
     state.postLast = payLoad.lastNo;

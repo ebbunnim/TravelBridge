@@ -110,7 +110,7 @@ export default {
       return require("@/assets/" + img);
     },
     partyIn() {
-      console.log("참가");
+      
       this.$store.dispatch("party/partyIn", {
         mem_no: this.$store.state.user.user.mem_no,
         party_no: this.party.party_no

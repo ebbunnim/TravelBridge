@@ -486,16 +486,16 @@ export default {
           this.currentChoices += themaChoice[key].name + " ";
         }
       }
-      console.log("###### Home에서 onToggle 눌림 ######", this.currentChoices);
+      
       this.user.mem_interest = this.currentChoices;
-      console.log(this.user.mem_interest);
+      
     },
     onPickBtn() {
       this.$router.push("/page2/pick");
     },
     checkPastInterest() {
       this.currentChoices = this.user.mem_interest;
-      console.log("check Past Interest ==> ", this.currentChoices);
+      
       if (this.currentChoices !== undefined) {
         const tempInterest = this.currentChoices.split(" ");
         for (let key in tempInterest) {
@@ -507,7 +507,6 @@ export default {
         }
       }
     },
-    ///////////////
     onSearchBtn() {
       const payLoad1 = {
         btnCnt: this.hpBtnCnt,
@@ -519,8 +518,6 @@ export default {
         searchOption: this.searchOptionValue[this.searchOption],
         word: this.word
       };
-      console.log("Vue:", payLoad1);
-      console.log("Vue:", payLoad2);
       this.$store.dispatch("hotplace/searchMoreHotplace", payLoad1);
       this.$store.dispatch("festival/searchMoreFestival", payLoad2);
 
@@ -538,8 +535,7 @@ export default {
         searchOption: this.searchOptionValue[this.searchOption],
         word: this.area + " " + this.city
       };
-      console.log("Vue:", payLoad1);
-      console.log("Vue:", payLoad2);
+      
       this.$store.dispatch("hotplace/searchMoreHotplace", payLoad1);
       this.$store.dispatch("festival/searchMoreFestival", payLoad2);
 

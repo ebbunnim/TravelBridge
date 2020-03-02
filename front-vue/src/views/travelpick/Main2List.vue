@@ -440,12 +440,10 @@ export default {
         searchOption: this.searchOptionValue[this.searchOption],
         word: this.word
       };
-      console.log("Vue:", payLoad1);
-      console.log("Vue:", payLoad2);
-      //
+     
       this.$store.dispatch("hotplace/searchMoreHotplace", payLoad1);
       this.$store.dispatch("festival/searchMoreFestival", payLoad2);
-      //
+      
       this.$store.commit("hotplace/saveSearchTitle", this.word);
     },
     onSearchSubBtn() {
@@ -459,12 +457,10 @@ export default {
         searchOption: this.searchOptionValue[this.searchOption],
         word: this.area + " " + this.city
       };
-      console.log("Vue:", payLoad1);
-      console.log("Vue:", payLoad2);
-      //
+      
       this.$store.dispatch("hotplace/searchMoreHotplace", payLoad1);
       this.$store.dispatch("festival/searchMoreFestival", payLoad2);
-      //
+      
       this.$store.commit(
         "hotplace/saveSearchTitle",
         this.area + " " + this.city
@@ -499,11 +495,7 @@ export default {
     this.$store.commit("festival/clearFvals");
   },
   watch: {
-    $route(to, from) {
-      console.log(to, from);
-      // react to route changes...
-      // this.$store.commit("hotplace/clearHPs");
-      // this.$store.commit("festival/clearFvals");
+    $route(to, from) { 
       this.$store.commit("hotplace/clearSearchTitle");
     }
   }

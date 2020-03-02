@@ -163,7 +163,6 @@
 <script>
 export default {
   mounted() {
-    console.log(this.$store.state);
     this.$store.dispatch("post/searchAllFollower", {
       userno: this.$store.state.user.user.mem_no
     });

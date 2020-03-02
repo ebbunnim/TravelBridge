@@ -1,9 +1,13 @@
 <template>
   <div class="row justify-center div-margin">
     <div class="col-12" style="height: 65px; background: #f9f9f9;"></div>
-    <q-card class="col-xs-12 col-md-4 my-card card-top-margin" flat bordered>
+    <q-card class="col-xs-12 col-md-4 my-card card-top-margin" flat>
       <q-card-section>
-        <div class="text-h6">비밀번호 찾기</div>
+        <div class="text-h6 text-weight-bold text-center">
+          <span class="travel">Travel</span>
+          <span class="bridge">Bridge</span>
+          비밀번호 찾기
+        </div>
       </q-card-section>
 
       <q-card-section>

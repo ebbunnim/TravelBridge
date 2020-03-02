@@ -87,7 +87,6 @@ export default {
       return require("../../assets" + img);
     },
     getHotplace() {
-      console.log("this.hp_no", this.hp_no);
       this.$store.dispatch("hotplace/searchByNo", this.hp_no);
     }
   },

@@ -232,13 +232,11 @@ export default {
         mem_interest: ""
       };
       this.user = this.tempUser;
-      console.log("======비회원유저로 설정됨========", this.user);
+      
     },
     checkPastInterest() {
       // 기존에 회원가입 혹은 MyPage 에서 설정한 THEMA state 를 true 로 설정 역할
-      console.log("1. checkPastInterest 실행");
       this.currentChoices = this.user.mem_interest;
-      console.log("1. 현재 선택 출력: ", this.currentChoices);
       if (this.currentChoices !== undefined) {
         const tempInterest = this.currentChoices.split(" ");
         for (let key in tempInterest) {
@@ -253,7 +251,6 @@ export default {
       this.getAllPicks();
     },
     onToggle() {
-      console.log("2. 마운티드 이후 onToggle 추가 실행");
       // state 가 true 인 값들만 String 으로 합친 후 this.currentchoices 에 저장한다.
       // this.$store.commit("hotplace/clearHPs");
       // this.$store.commit("festival/clearFvals");
@@ -274,14 +271,14 @@ export default {
     },
     getAllPicks() {
       // 마운티드 직후 혹은 추가 토글해서 getAllpicks 실행
-      console.log("====== getAllPicks 실행 ========== ", this.currentChoices);
+      
       if (this.currentChoices !== undefined) {
-        console.log("핫플 Btn Cnt", this.hpBtnCnt);
+        
         this.$store.dispatch("hotplace/searchMoreHotPlaceByTheme", {
           btnCnt: this.hpBtnCnt,
           word: this.currentChoices
         });
-        console.log("페스티벌 Btn Cnt", this.fvalBtnCnt);
+        
         this.$store.dispatch("festival/searchMoreFestivalByTheme", {
           btnCnt: this.fvalBtnCnt,
           word: this.currentChoices
@@ -291,9 +288,6 @@ export default {
   },
   // LifeCycle Hooks
   created() {
-    console.log("======= Main2Pick.vue mounted =======");
-    console.log("user: ", this.user);
-    console.log("interest: ", this.user.mem_interest);
     this.checkIfLoggedIn(); // 로그인과 선택을 다 한 유저라면 이어서 checkPastineterst --> getAllPicks도 실행됨
   }
 };
