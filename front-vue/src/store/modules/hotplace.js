@@ -2,7 +2,7 @@ import HotPlaceService from "@/services/HotplaceService.js";
 
 const state = {
   hps: [],
-  hp_list_length: 0,
+  hp_list_length: null,
   hp: {}, // 번호로 찾아올 때 단일 hp 
   searchTitle: ""
 };
@@ -43,6 +43,7 @@ const actions = {
   searchMoreHotPlaceByTheme: ({ commit }, payload) => {
     HotPlaceService.searchMoreHotPlaceByTheme(payload.btnCnt, payload.word)
       .then(res => {
+        console.log("hotplace.js", res)
         commit("saveHPs", res);
       })
       .catch(e => {
@@ -55,16 +56,21 @@ const actions = {
 const mutations = {
   saveHPs(state, hps) {
     state.hps = hps;
-    state.hp_list_length = hps.length;
+    state.hp_list_length = hps.length
+    if (typeof (state.hps) === "string") state.hp_list_length = 0;
   },
   saveOneHP(state, hp) {
     state.hp = hp;
   },
   clearHPs(state) {
     state.hps = [];
+    state.hp_list_length = 0
   },
   saveSearchTitle(state, title) {
     state.searchTitle = title;
+  },
+  clearSearchTitle(state) {
+    state.searchTitle = ''
   }
 };
 

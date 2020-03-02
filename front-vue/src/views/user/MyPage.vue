@@ -1,13 +1,23 @@
 <template>
   <div class="text-center">
-    <h4>마이 페이지</h4>
+    <div>
+      <div style="height: 65px; background: #f9f9f9"></div>
+      <q-img :src="getImgUrl('cutbg.jpg')">
+        <div style="width: 100%; height: 100%" class="text-center">
+          <div class="text-h5 text-weight-bold absolute-center">My Page</div>
+          <!-- <div class="text-h5 text-weight-bold" style="padding-top: 10%">
+            My Page
+          </div>-->
+        </div>
+      </q-img>
+    </div>
+
     <div class="q-pa-lg">
-      <!-- <div style="max-width: 70%; margin: 0 15% 0 15%"> -->
       <div>
         <q-tabs
           dense
           v-model="tab"
-          class="text-grey"
+          class="text-grey q-ma-lg"
           active-color="primary"
           indicator-color="primary"
           narrow-indicator
@@ -16,85 +26,92 @@
           <q-tab name="activity" label="팔로우" />
           <q-tab name="info" label="개인정보" />
           <q-tab name="etc" label="내 활동" />
+          <q-tab name="post" label="내 포스트" />
         </q-tabs>
 
-        <q-tab-panels v-model="tab">
+        <q-tab-panels v-model="tab" animated>
           <!-- 첫번째 패널 -->
-          <q-tab-panel name="activity" style="height:900px">
+          <q-tab-panel name="activity">
+            <!-- 패널 내 다른 tabs -->
             <q-tabs
               dense
               v-model="followTab"
               class="text-black"
-              active-color="primary"
-              indicator-color="primary"
+              active-color="grey"
+              indicator-color="grey"
               narrow-indicator
-              align="center"
             >
               <q-tab name="follower" label="팔로워">
-                <template v-if="follower.mem_followMe.length !== null">
-                {{ follower.mem_followMe.length }}
+                
+                <template v-if="follower.length != 0">{{
+                  follower.mem_followMe.length
+                  }}
                 </template>
-                <template v-else>
-                  0
-                </template>
+                <template v-else>0</template>
               </q-tab>
               <q-tab name="following" label="팔로잉">
-                <template v-if="following.mem_followList.length !== null">
-                {{ following.mem_followList.length }}
+                
+                <template v-if="following.length != 0">{{
+                  following.mem_followList.length
+                  }}
                 </template>
-                <template v-else>
-                  0
-                </template>
+                <template v-else>0</template>
               </q-tab>
             </q-tabs>
 
             <q-tab-panels v-model="followTab" animated>
               <q-tab-panel name="follower" class="row justify-center">
-                <q-list bordered class="col-8">
+                <q-list class="col-md-2 col-xs-10">
+                  <template v-if="follower.length != 0">
                   <q-item
                     v-for="(mem, index) in follower.mem_followMe"
                     :key="index"
                     class="q-my-sm"
                     clickable
+                    @click="movefollowing(mem.mem_no)"
                   >
+                    <q-item-section side>
+                      <q-icon name="person"  />
+                    </q-item-section>
+
                     <q-item-section>
                       <q-item-label>{{ mem.mem_id }}</q-item-label>
                       <q-item-label caption lines="1">
-                        {{ mem.mem_email }}
+                        {{
+                        mem.mem_email
+                        }}
                       </q-item-label>
                     </q-item-section>
-                    <q-item-section side>
-                      <q-icon
-                        name="chat_bubble"
-                        color="green"
-                        @click="movefollowing(mem.mem_no)"
-                      />
-                    </q-item-section>
                   </q-item>
+                  </template>
                 </q-list>
               </q-tab-panel>
               <q-tab-panel name="following" class="row justify-center">
-                <q-list bordered class="col-8">
+                <q-list class="col-md-2 col-xs-10">
+                  <template v-if="following.length != 0">
                   <q-item
                     v-for="(mem, index) in following.mem_followList"
                     :key="index"
                     class="q-my-sm"
                     clickable
+                     @click="movefollowing(mem.mem_no, user.mem_no)"
                   >
+                    <q-item-section side>
+                      <q-icon
+                        name="person_outline"
+                       
+                      />
+                    </q-item-section>
                     <q-item-section>
                       <q-item-label>{{ mem.mem_id }}</q-item-label>
                       <q-item-label caption lines="1">
-                        {{ mem.mem_email }}
+                        {{
+                        mem.mem_email
+                        }}
                       </q-item-label>
                     </q-item-section>
-                    <q-item-section side>
-                      <q-icon
-                        name="chat_bubble"
-                        color="green"
-                        @click="movefollowing(mem.mem_no,user.mem_no)"
-                      />
-                    </q-item-section>
                   </q-item>
+                  </template>
                 </q-list>
               </q-tab-panel>
             </q-tab-panels>
@@ -156,16 +173,8 @@
                     borderless
                     v-show="!onEditReceive"
                   />
-                  <div
-                    v-show="onEditReceive"
-                    align="left "
-                    class="row justify-center"
-                  >
-                    <q-radio
-                      v-model="user.mem_receive_email"
-                      val="true"
-                      label="Email 수신에 동의합니다"
-                    />
+                  <div v-show="onEditReceive" align="left " class="row justify-center">
+                    <q-radio v-model="user.mem_receive_email" val="true" label="Email 수신에 동의합니다" />
                     <q-radio
                       v-model="user.mem_receive_email"
                       val="false"
@@ -281,11 +290,7 @@
                       v-bind="{ readonly: readOnly, outlined: !readOnly }"
                     >
                       <template v-slot:append>
-                        <q-icon
-                          name="event"
-                          class="cursor-pointer"
-                          v-if="!readOnly"
-                        >
+                        <q-icon name="event" class="cursor-pointer" v-if="!readOnly">
                           <q-popup-proxy
                             ref="qDateProxy"
                             transition-show="scale"
@@ -341,12 +346,7 @@
                     readonly
                   />-->
 
-                  <div
-                    class="row"
-                    style="display: inline"
-                    v-for="(item, idx) in thema"
-                    :key="idx"
-                  >
+                  <div class="row" style="display: inline" v-for="(item, idx) in thema" :key="idx">
                     <q-btn
                       v-bind="{ disabled: !onInterestEdit }"
                       color="grey"
@@ -358,8 +358,7 @@
                         item.state = !item.state;
                         onToggle();
                       "
-                      >#{{ item.name }}</q-btn
-                    >
+                    >#{{ item.name }}</q-btn>
                     <q-btn
                       v-bind="{ disabled: !onInterestEdit }"
                       color="grey"
@@ -372,21 +371,20 @@
                         item.state = !item.state;
                         onToggle();
                       "
-                      >#{{ item.name }}</q-btn
-                    >
+                    >#{{ item.name }}</q-btn>
                   </div>
                 </q-card-section>
               </q-card>
             </div>
           </q-tab-panel>
           <!-- 세번재 패널 -->
-          <q-tab-panel name="etc" style="height:900px"> 
+          <q-tab-panel name="etc">
             <q-tabs
               dense
               v-model="likeTab"
               class="text-black"
-              active-color="primary"
-              indicator-color="primary"
+              active-color="grey"
+              indicator-color="grey"
               narrow-indicator
               align="center"
             >
@@ -395,75 +393,249 @@
               <q-tab name="festa" label="좋아요 축제"></q-tab>
             </q-tabs>
 
-            <q-tab-panels v-model="likeTab" animated>
+            <q-tab-panels v-model="likeTab">
               <q-tab-panel name="post" class="row justify-center">
-                <q-list bordered class="col-8">
+                <q-list bordered class="col-md-8 col-xs-10 q-ma-lg q-pa-md">
                   <q-item
                     v-for="(post, index) in likePost.mem_likePost"
                     :key="index"
                     class="q-my-sm"
                     clickable
                   >
-                    <q-item-section>
+                    <q-item-section @click="movePost(post.post_no)">
                       <q-item-label>{{ post.post_title }}</q-item-label>
                       <q-item-label caption lines="1">
-                        {{ post.post_category }}
+                        {{
+                        post.post_category
+                        }}
                       </q-item-label>
-                    </q-item-section>
-                    <q-item-section side>
-                      <q-icon name="chat_bubble" color="green" @click="movePost(post.post_no)" />
                     </q-item-section>
                   </q-item>
                 </q-list>
               </q-tab-panel>
-              
+
               <q-tab-panel name="hot" class="row justify-center">
-                <q-list bordered class="col-8">
+                <q-list bordered class="col-md-8 col-xs-10 q-ma-lg q-pa-md">
                   <q-item
                     v-for="(hot, index) in likeHot.mem_likeHotPlace"
                     :key="index"
                     class="q-my-sm"
                     clickable
                   >
-                    <q-item-section>
+                    <q-item-section @click="moveHot(hot.hp_no)">
                       <q-item-label>{{ hot.hp_name }}</q-item-label>
                       <q-item-label caption lines="1">
-                        {{ hot.hp_tag }}
+                        {{
+                        hot.hp_tag
+                        }}
                       </q-item-label>
-                    </q-item-section>
-                    <q-item-section side>
-                      <q-icon name="chat_bubble" color="green" @click="moveHot(hot.hp_no)" />
                     </q-item-section>
                   </q-item>
                 </q-list>
               </q-tab-panel>
 
               <q-tab-panel name="festa" class="row justify-center">
-                <q-list bordered class="col-8">
+                <q-list bordered class="col-md-8 col-xs-10 q-ma-lg q-pa-md">
                   <q-item
                     v-for="(festa, index) in likeFesta.mem_likeFestival"
                     :key="index"
                     class="q-my-sm"
                     clickable
                   >
-                    <q-item-section>
+                    <q-item-section @click="moveFesta(festa.fval_no)">
                       <q-item-label>{{ festa.fval_name }}</q-item-label>
                       <q-item-label caption lines="1">
-                        {{ festa.fval_tag }}
+                        {{
+                        festa.fval_tag
+                        }}
                       </q-item-label>
-                    </q-item-section>
-                    <q-item-section side>
-                      <q-btn
-                        label="더보기"
-                        icon="chat_bubble"
-                        color="green"
-                        @click="moveFesta(festa.fval_no)"
-                      />
                     </q-item-section>
                   </q-item>
                 </q-list>
               </q-tab-panel>
             </q-tab-panels>
+          </q-tab-panel>
+          
+          <q-tab-panel name="post" style="height:900px">
+            <template v-if="this.postList.length == 0"></template>
+            <template v-else>
+              <template v-if="this.gogo">
+                <div v-for="(tta, index) of this.postList" :key="index" class="row justify-center">
+                  <div
+                    v-for="(tt, index) of tta"
+                    :key="index"
+                    style="margin-bottom:12px; padding-left:12px;"
+                    v-bind:class="{
+                    'col-4': fixPost(tta, index),
+                    'col-2': !fixPost(tta, index)
+                  }"
+                    align="left"
+                  >
+                    <template v-if="tt.post_type == 0">
+                      <q-card
+                        class="my-card1"
+                        flat
+                        bordered
+                        style="width:100%;"
+                        @click="move(tt.post_no)"
+                      >
+                        <template v-if="tt.post_filesList.length !== 0">
+                          <q-img :src="tt.post_filesList[0].files_url" style="max-height: 160px;" />
+                        </template>
+                        <template v-else>
+                          <q-img
+                            src="https://cdn.quasar.dev/img/parallax2.jpg"
+                            style="max-height: 160px;"
+                          />
+                        </template>
+
+                        <q-card-section>
+                          <div
+                            class="text-overline text-orange-9 text-body-3"
+                          >{{ tt.post_category }}</div>
+                          <div class="text-b q-mt-sm q-mb-xs text-body-4">
+                            <b>{{ tt.post_title }}</b>
+                          </div>
+                          <div class="text-caption text-grey text-body-1">
+                            <span v-html="tt.post_content"></span>
+                          </div>
+                        </q-card-section>
+                      </q-card>
+                    </template>
+                    <template v-else-if="tt.post_type == 1">
+                      <q-card
+                        class="my-card1"
+                        flat
+                        bordered
+                        style="width:100%;"
+                        @click="move(tt.post_no)"
+                      >
+                        <q-card-section horizontal style="width:100%;height:100%;">
+                          <div class="col-7">
+                            <template v-if="tt.post_filesList.length !== 0">
+                              <q-img
+                                :src="tt.post_filesList[0].files_url"
+                                style="max-height: 160px; border-radius:4px;"
+                              />
+                            </template>
+                            <template v-else>
+                              <q-img
+                                src="https://cdn.quasar.dev/img/parallax2.jpg"
+                                style="max-height: 160px; border-radius:4px 0 0 0;"
+                              />
+                            </template>
+                            <q-card-section>
+                              <div
+                                class="text-overline text-orange-9 text-body-3"
+                              >{{ tt.post_category }}</div>
+                              <div class="q-mt-sm q-mb-xs text-body-4">
+                                <b>{{ tt.post_title }}</b>
+                              </div>
+                              <div class="text-caption text-grey text-body-1">
+                                <span v-html="tt.post_content"></span>
+                              </div>
+                            </q-card-section>
+                          </div>
+                          <q-card-section class="col-5 flex flex-center">
+                            <q-scroll-area style="width:100%;height:100%;">
+                              <q-timeline color="secondary">
+                                <template v-if="tt.post_courseList.length != 0">
+                                  <div>
+                                    <q-timeline-entry
+                                      v-for="(a, index) of tt.post_courseList"
+                                      :key="index"
+                                    >
+                                      <template v-slot:title>
+                                        {{
+                                        a.course_title
+                                        }}
+                                      </template>
+                                      <div class="text-body-4">{{ a.course_description }}</div>
+                                      <!-- {{a.course_subcourse_list}}
+                              <q-timeline-entry
+                                v-for="(b, index) of a.course_subcourse_list"
+                                :key="index"
+                              >
+                                <div>{{b}}</div>
+                                      </q-timeline-entry>-->
+                                    </q-timeline-entry>
+                                  </div>
+                                </template>
+                                <template v-else>
+                                  <q-timeline-entry>
+                                    <template v-slot:title>
+                                      일정을 등록하지
+                                      <br />않았어요.
+                                    </template>
+                                  </q-timeline-entry>
+                                </template>
+                              </q-timeline>
+                            </q-scroll-area>
+                          </q-card-section>
+                        </q-card-section>
+                      </q-card>
+                    </template>
+                    <template v-else>
+                      <q-card-section>
+                        <div class="q-mt-sm q-mb-xs text-body-4">
+                          <b>
+                            다른 서비스를
+                            <br />
+                          </b>
+                          <b>이용해보시는건 어때요?</b>
+                        </div>
+                        <q-list>
+                          <q-item class="q-my-sm" clickable to="/page2/pick">
+                            <q-item-section avatar>
+                              <q-icon color="primary" name="train" />
+                            </q-item-section>
+                            <q-item-section>
+                              <div>
+                                <b>내일로 코스</b>
+                              </div>
+                              <div class="text-caption">코스 추천 받자!</div>
+                            </q-item-section>
+                          </q-item>
+                          <q-item class="q-my-sm" clickable to="/page3/rank">
+                            <q-item-section avatar>
+                              <q-icon color="primary" name="bar_chart" />
+                            </q-item-section>
+                            <q-item-section>
+                              <div>
+                                <b>트래블 랭킹</b>
+                              </div>
+                              <div class="text-caption">여행 장인들의 배틀!</div>
+                            </q-item-section>
+                          </q-item>
+                          <q-item class="q-my-sm" clickable to="/page3/mate">
+                            <q-item-section avatar>
+                              <q-icon color="primary" name="emoji_people" />
+                            </q-item-section>
+                            <q-item-section>
+                              <div>
+                                <b>트래블 메이트</b>
+                              </div>
+                              <div class="text-caption">가치 여행갈 사람!!</div>
+                            </q-item-section>
+                          </q-item>
+                          <q-item class="q-my-sm" clickable to="/page2">
+                            <q-item-section avatar>
+                              <q-icon color="primary" name="how_to_vote" />
+                            </q-item-section>
+                            <q-item-section>
+                              <div>
+                                <b>트래블 픽</b>
+                              </div>
+                              <div class="text-caption">어떤여행이 있을까?</div>
+                            </q-item-section>
+                          </q-item>
+                        </q-list>
+                      </q-card-section>
+                    </template>
+                  </div>
+                </div>
+              </template>
+            </template>
           </q-tab-panel>
         </q-tab-panels>
         <!-- card end -->
@@ -506,6 +678,7 @@ export default {
       user: state => state.user.user // 현재 접속자
     }),
     follower() {
+      console.log("111");
       return this.$store.state.user.follower;
     },
     following() {
@@ -519,9 +692,24 @@ export default {
     },
     likeFesta() {
       return this.$store.state.user.likeFesta;
+    },
+    postList() {
+      console.log("ASdasdasdasd");
+      console.log(this.$store.state.user.userPost);
+      return this.$store.state.user.userPost;
+    },
+    gogo() {
+      return this.$store.state.user.gogo;
     }
   },
   methods: {
+    fixPost: function(target, pos) {
+      if (target[pos].post_type == 1) return true;
+      else return false;
+    },
+    getImgUrl(img) {
+      return require("@/assets/" + img);
+    },
     onToggle() {
       this.currentChoices = "";
       const themaChoice = this.thema;
@@ -533,6 +721,9 @@ export default {
       console.log("###### onToggle 눌림 ######", this.currentChoices);
       this.user.mem_interest = this.currentChoices;
       console.log(this.user.mem_interest);
+    },
+    move: function(postNo) {
+      this.$router.push("/page1/postdetail/" + postNo);
     },
     updateUser() {
       UserService.updateUser(this.user).then(res => {
@@ -590,6 +781,9 @@ export default {
     });
     this.$store.dispatch("user/getLikeFesta", {
       userNo: this.$store.state.user.user.mem_no
+    });
+    this.$store.dispatch("user/getPostListMem", {
+      no: this.$store.state.user.user.mem_no
     });
   }
 };

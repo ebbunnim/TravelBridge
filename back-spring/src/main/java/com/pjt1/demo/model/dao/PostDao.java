@@ -53,4 +53,6 @@ public interface PostDao {
 
 	public int searchLastNo();
 
+	public List<Post> searchMyPost(int mem_no);
+
 }

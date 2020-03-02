@@ -1,17 +1,23 @@
 <template>
   <div>
-    <q-img :src="getImgUrl('bg7.jpg')" style="height: 760px">
-      <div
-        class="row q-mt-xl text-center justify-center absolute-center bg-transparent"
-      >
-        <div
-          class="col-12 text-h1 text-weight-bold cursor-pointer"
-          @click="$router.push('/')"
-        >
+    <q-img
+      :src="getImgUrl('home_bridge_bg.jpg')"
+      style="height: 760px; opactiy: 0.5;"
+      :img-style="{ opacity: 0.7 }"
+    >
+      <div class="row q-my-xl text-center absolute-center bg-transparent">
+        <div class="col-12 q-my-xl"></div>
+
+        <div class="gt-md col-12 text-h1 text-weight-bold cursor-pointer" @click="$router.push('/')">
           <span class="travel">Travel</span>
           <span class="bridge">Bridge</span>
         </div>
-        <div class="col-12 q-my-xl q-py-xl">
+        <div class="lt-lg col-12 text-h2 text-weight-bold cursor-pointer" @click="$router.push('/')">
+          <span class="travel">Travel</span>
+          <span class="bridge">Bridge</span>
+        </div>
+        <div class="col-12 q-mt-lg q-pa-xl"></div>
+        <div class="col-12 q-my-xl q-py-xl button-position">
           <q-chip
             clickable
             size="20px"
@@ -19,62 +25,20 @@
             @click="$router.push('/page1')"
             @mouseover="alert()"
           >
-            <q-avatar
-              icon="bookmark"
-              color="red"
-              text-color="white"
-            />TravelCard
+            <q-avatar icon="bookmark" color="red" text-color="white" />
+            <span class="text-weight-bold">TravelCard</span>
           </q-chip>
-          <q-chip
-            clickable
-            size="20px"
-            class="q-mx-lg"
-            @click="$router.push('/page2')"
-          >
-            <q-avatar
-              icon="directions"
-              color="red"
-              text-color="white"
-            />TravelSearch
+          <q-chip clickable size="20px" class="q-mx-lg" @click="$router.push('/page2')">
+            <q-avatar icon="directions" color="red" text-color="white" />
+            <span class="text-weight-bold">TravelPick</span>
           </q-chip>
-          <q-chip
-            clickable
-            size="20px"
-            class="q-mx-lg"
-            @click="$router.push('/page3')"
-          >
-            <q-avatar icon="add" color="red" text-color="white" />TravelPlus+
+          <q-chip clickable size="20px" class="q-mx-lg" @click="$router.push('/page3')">
+            <q-avatar icon="add" color="red" text-color="white" />
+            <span class="text-weight-bold">TravelPlus+</span>
           </q-chip>
         </div>
       </div>
     </q-img>
-    <!-- <q-carousel animated v-model="slide" navigation infinite height="725px">
-      <q-carousel-slide :name="1" :img-src="getImgUrl('bg7.jpg')" />
-
-      <h1 class="text-white">미ㅏㅇ러미;ㅏ얼</h1>
-    </q-carousel>-->
-    <!-- <q-carousel
-      arrows
-      animated
-      swipeable
-      autoplay
-      infinite
-      v-model="slideOne"
-      height="680px"
-    >
-      <q-carousel-slide
-        v-for="(mainCard, index) in MainCard"
-        :key="index"
-        :name="index"
-        :img-src="mainCard.img"
-      >
-        <div class="absolute-bottom custom-caption">
-          <div class="text-h2">{{ mainCard.title }}</div>
-          <div class="text-subtitle1">{{ mainCard.sub }}</div>
-        </div>
-      </q-carousel-slide>
-    </q-carousel>-->
-    <!-- <q-separator /> -->
   </div>
 </template>
 
@@ -89,17 +53,24 @@ export default {
     return {
       slide: 1
     };
+  },
+  computed: {
+    // textSize() {
+
+    // }
+  },
+  mounted() {
+    console.log("반응형")
   }
 };
 </script>
 
 <style>
-.chip-position {
-  position: relative;
-  top: 20px;
+.button-position {
+  padding-top: 100px;
 }
 .custom-bg {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(117, 69, 69, 0.3);
   width: 100%;
 }
 </style>

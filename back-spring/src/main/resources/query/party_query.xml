@@ -9,13 +9,16 @@
 		    host_no,
 		    host_name,		
 			party_title,			
-			party_contents
+			party_contents,
+			party_num
 		) VALUES 
 		(
 			#{host_no:INTEGER},
 		    #{host_name:VARCHAR}, 
 		    #{party_title:VARCHAR}, 
-		    #{party_contents:VARCHAR}
+		    #{party_contents:VARCHAR},
+			#{party_num:INTEGER}
+
 		)
 	</insert> 
  	<delete id="delete" 	parameterType="int"> 
@@ -69,8 +72,7 @@
 		LEFT JOIN COMMENT c
 		ON p.party_no = c.party_no
 		WHERE p.party_del_check = FALSE
-		AND c.cmt_del_check = FALSE
-		ORDER BY cmt_no;
+		ORDER BY party_no;
 	</select>
 	
 	<resultMap type="comment" id="cmtMap">
@@ -107,7 +109,6 @@
 		LEFT JOIN COMMENT c
 		ON p.party_no = c.party_no
 		WHERE p.party_del_check = FALSE
-		AND c.cmt_del_check = FALSE
 		AND p.party_no = #{party_no:INTEGER}
 		ORDER BY cmt_no;
 	</select>

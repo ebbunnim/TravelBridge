@@ -1,13 +1,28 @@
 <template>
-  <div class="row justify-center q-my-xl q-py-xl">
-    <q-card class="col-xs-12 col-md-4 my-card q-ma-md" flat bordered>
+  <div class="row justify-center">
+    <div class="col-12" style="height: 65px; background: #f9f9f9;"></div>
+    <q-card class="col-xs-12 col-md-4 my-card card-top-margin" flat bordered>
       <q-card-section>
         <div class="text-h6">회원가입</div>
       </q-card-section>
 
       <q-card-section align="center">
         <!-- 입력할 필드들 -->
+        <template v-if="email !=''">
         <q-input
+          outlined
+          flat
+          v-model="email"
+          type="email"
+          :rules="emailRules"
+          lazy-rules
+         readonly
+          label="이메일 주소"
+          
+        />
+        </template>
+        <template v-else>
+          <q-input
           outlined
           flat
           v-model="user.mem_email"
@@ -17,16 +32,9 @@
           v-bind:readonly="isReadOnly"
           label="이메일 주소"
         />
-        <q-radio
-          v-model="user.mem_receive_email"
-          val="true"
-          label="Email 수신에 동의합니다"
-        />
-        <q-radio
-          v-model="user.mem_receive_email"
-          val="false"
-          label="Email 수신에 동의하지 않습니다 "
-        />
+        </template>
+        <q-radio v-model="user.mem_receive_email" val="true" label="Email 수신에 동의합니다" />
+        <q-radio v-model="user.mem_receive_email" val="false" label="Email 수신에 동의하지 않습니다 " />
         <q-separator inset></q-separator>
       </q-card-section>
       <q-card-section>
@@ -39,6 +47,7 @@
           type="string"
           label="ID"
         />
+        <template v-if="email ==''">
         <q-input
           clearable
           clear-icon="close"
@@ -49,6 +58,7 @@
           hint
           v-bind:readonly="isReadOnly"
         />
+        </template>
         <q-input
           outlined
           hint
@@ -78,15 +88,8 @@
         >
           <template v-slot:after>
             <q-icon name="event" class="cursor-pointer">
-              <q-popup-proxy
-                ref="qDateProxy"
-                transition-show="scale"
-                transition-hide="scale"
-              >
-                <q-date
-                  v-model="user.mem_birth"
-                  @input="() => $refs.qDateProxy.hide()"
-                />
+              <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+                <q-date v-model="user.mem_birth" @input="() => $refs.qDateProxy.hide()" />
               </q-popup-proxy>
             </q-icon>
           </template>
@@ -99,12 +102,7 @@
       </q-card-section>
 
       <q-card-section align="center" class="col inline q-px-xl q-mx-lg">
-        <div
-          class="row"
-          style="display: inline"
-          v-for="(item, idx) in thema"
-          :key="idx"
-        >
+        <div class="row" style="display: inline" v-for="(item, idx) in thema" :key="idx">
           <q-btn
             color="grey"
             class="q-pa-xs q-ma-xs"
@@ -114,8 +112,7 @@
               item.state = !item.state;
               onThemaChoice();
             "
-            >#{{ item.name }}</q-btn
-          >
+          >#{{ item.name }}</q-btn>
           <q-btn
             color="grey"
             class="q-pa-xs q-ma-xs"
@@ -126,8 +123,7 @@
               item.state = !item.state;
               onThemaChoice();
             "
-            >#{{ item.name }}</q-btn
-          >
+          >#{{ item.name }}</q-btn>
         </div>
       </q-card-section>
       <q-card-section>
@@ -147,12 +143,6 @@
 
 <script>
 export default {
-  props: {
-    isSNS: {
-      type: String,
-      default: ""
-    }
-  },
   data: () => ({
     date: "2020/01/01",
     currentChoices: "",
@@ -202,12 +192,22 @@ export default {
       v => /.+@.+\..+/.test(v) || "E-mail must be valid"
     ]
   }),
+  computed:{
+    email(){
+      return this.$store.state.user.tempEmail;
+    }
+  },
 
   methods: {
     SignUp() {
       this.user.mem_interest = this.currentChoices;
       // console.log(this.user.mem_birth)
-      this.$store.dispatch("user/postSignUp", this.user);
+      let x = true;
+      if(this.email != ""){
+      this.user.mem_email = this.email;
+      x = false;
+      }
+      this.$store.dispatch("user/postSignUp", {user : this.user,status :x });
     },
     cancle() {
       alert("회원가입을 취소 하셨습니다.");
@@ -264,5 +264,10 @@ export default {
 .my-card {
   width: 100%;
   max-width: 350px;
+}
+
+.card-top-margin {
+  margin-top: 70px;
+  margin-bottom: 70px;
 }
 </style>

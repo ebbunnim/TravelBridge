@@ -55,9 +55,9 @@ public class FollowServiceImpl implements FollowService {
 	}
 
 	@Override
-	public void delete(int follow_no) {
+	public void delete(int follower_no,int following_no){
 		try {
-			repo.delete(follow_no);
+			repo.delete(follower_no,following_no);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

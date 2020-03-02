@@ -67,7 +67,12 @@ public class PartyController {
     @GetMapping("/Party/{party_no}")
     public ResponseEntity<Map<String, Object>> search(@PathVariable int party_no) {
         Party party = service.search(party_no);
-        party.setParty_inMemList(i_service.searchPartyList(party_no));
+        try {
+            party.setParty_inMemList(i_service.searchPartyList(party_no));
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+       
         return handleSuccess(party);
     }
 

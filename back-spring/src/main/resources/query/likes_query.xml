@@ -38,7 +38,18 @@
 		FROM LIKES 
 		WHERE like_del_check=false
 	</select>
+
+	<select id="searchPost" parameterType="int" resultType="likes">
+	SELECT *
+	FROM LIKES
+	WHERE like_type = 1 and liker_mem_no=#{mem_no:INTEGER} and post_no = #{post_no:INTEGER}
 	
+	</select>
+	
+	<delete id="deletePost" 	parameterType="int">
+		DELETE from LIKES 
+		WHERE like_no=#{like_no} 
+	</delete>
 	
 	
 	

@@ -190,4 +190,13 @@ public class PostServiceImpl implements PostService {
 		return 0;
 	}
 
+	public List<Post> searchMyPost(int mem_no) {
+		try {
+			return repo.searchMyPost(mem_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

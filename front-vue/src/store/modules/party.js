@@ -1,5 +1,5 @@
 import PartyService from "@/services/PartyService.js";
-
+import UserService from "@/services/UserService.js";
 const state = {
   partyList: [],
   party: {}
@@ -19,12 +19,24 @@ const actions = {
     });
   },
   makeParty: (store, payLoad) => {
-    let x = PartyService.PartyCreate();
-    return x;
+    console.log(payLoad.party)
+    let x = PartyService.PartyCreate(payLoad.party);
   },
-  partyIn: (store, payLoad) => {
-    let x = PartyService.Partyin();
-    return x;
+  partyIn: async (store, payLoad) => {
+    let x = await PartyService.Partyin(payLoad.mem_no, payLoad.party_no);
+    PartyService.Party(payLoad.party_no).then(Response => {
+      console.log(Response.data.data);
+      store.commit("setParty", { Party: Response.data.data });
+    });
+  },
+  addCmt: async (store, payLoad) => {
+    await UserService.addCmt(payLoad.x)
+      .then(Response => {})
+      .catch(exp => console.log(exp));
+    PartyService.Party(payLoad.partyNo).then(Response => {
+      console.log(Response.data.data);
+      store.commit("setParty", { Party: Response.data.data });
+    });
   }
 };
 

@@ -74,9 +74,9 @@ public class FollowController {
     }
 
     @ApiOperation("Follow 정보 삭제")
-    @DeleteMapping("/Follow/delete/{follow_no}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable int follow_no) {
-        service.delete(follow_no);
+    @DeleteMapping("/Follow/delete/{follower_no}/{following_no}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable int follower_no,@PathVariable int following_no ) {
+        service.delete(follower_no,following_no);
         return handleSuccess("삭제 완료");
     }
 

@@ -57,7 +57,9 @@ import {
   QCardActions,
   QDialog,
   QChip,
-  QAvatar
+  QAvatar,
+  QSlider,
+  QBadge
 } from "quasar";
 
 Vue.use(Quasar, {
@@ -114,7 +116,10 @@ Vue.use(Quasar, {
     QCardActions,
     QDialog,
     QChip,
-    QAvatar
+    QAvatar,
+    QSlider,
+    QBadge
+    
   },
   directives: {
     ClosePopup

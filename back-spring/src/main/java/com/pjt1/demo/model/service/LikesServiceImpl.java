@@ -62,5 +62,23 @@ public class LikesServiceImpl implements LikesService {
 		}
 
 	}
+	@Override
+	public void deletePost(int like_no){
+		try {
+			
+			repo.deletePost(like_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	@Override
+	public Likes searchPost(int mem_no, int post_no){
+		try {
+			return repo.searchPost(mem_no, post_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }

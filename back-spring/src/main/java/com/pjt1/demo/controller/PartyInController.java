@@ -78,7 +78,7 @@ public class PartyInController {
 	    partyin.setMem_phone(members.getMem_phone());
 	    partyin.setMem_interest(members.getMem_interest());
 	    service.insert(partyin);
-	    p_service.addPeople(partyin.getParty_no());
+	    // p_service.addPeople(partyin.getParty_no());
 	    return handleSuccess("");
     }
 

@@ -1,36 +1,53 @@
 import Api from "./Api";
 
 class QnaService {
-  // GET
-  searchAll() {
-    return Api.get("/Qna/searchAll");
-  }
-  // "member no에 따른 Qna 정보 조회하는 기능"
-  searchForMember(mem_no) {
-    return Api.get(`/Qna/searchForMember/${mem_no}`);
-  }
-
-  // POST
-  insert(qna) {
-    return Api.post("/Qna/insert", qna)
-      .then(Response => {
-        console.log("service이다", Response);
-        return Response.data.data;
+  // 사용자에게 필요
+  getUserQnas(mem_no) {
+    return Api.get(`/Qna/searchForMember/${mem_no}`)
+      .then(res => {
+        return res.data.data
       })
-      .catch(exp => console.log("error" + exp));
+      .catch(e => {
+        console.log(e)
+      })
   }
 
-  // Delete
+  insertQna(qna) {
+    return Api.post("/Qna/insert", qna)
+      .then(res => {
+        console.log(res);
+        return res.data.data;
+      })
+      .catch(e => console.log(e));
+  }
+
+
   delete(qna_no) {
-    return Api.delete(`/Qna/delete/${qna_no}`);
+    return Api.delete(`/Qna/delete/${qna_no}`)
+      .then(res => {
+        console.log(res);
+        return res.data.data;
+      })
+      .catch(e => console.log(e));
   }
 
-  // PUT
   update(qna) {
-    return Api.put("/Qna/update", qna).then(res => {
-      console.log("수정", res);
-      return res.data.data;
-    });
+    return Api.put("/Qna/update", qna)
+      .then(res => {
+        console.log(res);
+        return res.data.data;
+      })
+      .catch(e => console.log(e));
+  }
+
+  // 관리자에게 필요
+  getAllQnas() {
+    return Api.get("/Qna/searchAll")
+      .then(res => {
+        console.log(res);
+        return res.data.data;
+      })
+      .catch(e => console.log(e));
   }
 
   answerTheQuestion(qna) {

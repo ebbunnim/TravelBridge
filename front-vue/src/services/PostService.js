@@ -70,15 +70,27 @@ class PostService {
     })
   }
   deleteLikePost(no){
-    return Api.delete(`/Likes/delete/${no}`).then(() =>{
+    return Api.delete(`/Likes/deletepost/${no}`).then(() =>{
       return false;
     })
   }
   setPostLike(x){
-    return Api.get("/Likes/insert",x).then(()=>{
+    return Api.post("/Likes/insert",x).then(()=>{
       return true;})
   }
-
+  getSearchLikePost(mem_no,post_no){
+    console.log(mem_no)
+    return Api.get(`/Likes/postsearch/${mem_no}/${post_no}`).then(Response =>{
+      return Response.data.data;
+    })
+  }
+  getPostListMem(no){
+    return Api.get(`/Post/searchMyPost/${no}
+    `).then(Response =>{
+      return Response.data.data;
+    })
+    
+  }
 
 }
 

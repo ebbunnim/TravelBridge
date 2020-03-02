@@ -19,7 +19,12 @@ class UserService {
     return Api.post("/Members/login", {
       mem_email: email
     }).then(response => {
-      return response.data.data;
+      return response.data.data
+    }).catch(error =>{
+      if (error.response.status === 404) {
+        console.log("회원가입가자")
+        return {status:false,email:email}
+      } 
     });
   }
 
@@ -108,10 +113,17 @@ class UserService {
       })
       .catch(e => console.log(e));
   }
-  follow(target){
-    return Api.get(`/Follow/insert`,target).then(Response =>{
+  addF(target){
+    return Api.post(`/Follow/insert`,target).then(Response =>{
       return Response.data.data;
     })
+  }
+  delF(r,ing){
+    return Api.delete(`/Follow/delete/${r}/${ing}`)
+  }
+
+  addCmt(cmt){
+    return Api.post('/Comment',cmt)
   }
 }
 

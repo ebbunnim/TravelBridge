@@ -92,4 +92,18 @@ public class LikesController {
         service.update(Likes);
         return handleSuccess("수정 완료");
     }
+
+    @ApiOperation("Post like Search require mem_no and post_no")
+    @GetMapping("/Likes/postsearch/{mem_no}/{post_no}")
+    public ResponseEntity<Map<String, Object>> searchPost(@PathVariable int mem_no, @PathVariable int post_no){
+       Likes likes =  service.searchPost(mem_no,post_no);
+
+        return handleSuccess(likes);
+    }
+    @ApiOperation("Post Delete require like_no")
+    @DeleteMapping("/Likes/deletepost/{like_no}")
+    public ResponseEntity<Map<String ,Object>> deletePost(@PathVariable int like_no){
+        service.deletePost(like_no);
+        return handleSuccess("delete ok");
+    }
 }

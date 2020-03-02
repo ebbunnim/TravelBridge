@@ -14,7 +14,7 @@ public interface FollowService {
 
 	public void update(Follow Follow);
 
-	public void delete(int follow_no);
+	public void delete(int follower_no,int following_no);
 
 	public List<Follow> searchMemberList(int follower_no);
 

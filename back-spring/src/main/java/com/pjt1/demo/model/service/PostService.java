@@ -48,4 +48,6 @@ public interface PostService {
 	public List<Post> searchFollowingPost(int following_no);
 
 	public int searchLastNo();
+
+	public List<Post> searchMyPost(int mem_no);
 }

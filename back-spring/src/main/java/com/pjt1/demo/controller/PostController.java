@@ -80,6 +80,13 @@ public class PostController {
         return handleSuccess(Post);
     }
 
+    @ApiOperation("mem_no에 따른 내가 쓴 POST 조회하는 기능")
+    @GetMapping("/Post/searchMyPost/{mem_no}")
+    public ResponseEntity<Map<String, Object>> searchMyPost(@PathVariable int mem_no) {
+        List<Post> list = service.searchMyPost(mem_no);
+        return handleSuccess(list);
+    }
+
     @ApiOperation("더보기로 Post 검색하기 조회 - searchOption은 all/ title / content/ tag / writer 중 전달")
     @GetMapping("/Post/search/page/{btnCnt}/{searchOption}/{word}")
     public ResponseEntity<Map<String, Object>> searchPostByOption(@PathVariable int btnCnt,
@@ -184,6 +191,7 @@ public class PostController {
         int last = service.searchLastNo();
         return handleSuccess(last);
     }
+
 }
 // @ApiOperation("더보기로 Post 전체 목록 조회")
 // @GetMapping("/Post/search/moreAll/{btnCnt}")

@@ -1,6 +1,7 @@
 <template>
-  <div class="row justify-center q-my-xl q-py-xl">
-    <q-card class="col-xs-12 col-md-4 my-card q-ma-md" flat bordered>
+  <div class="row justify-center div-margin">
+    <div class="col-12" style="height: 65px; background: #f9f9f9;"></div>
+    <q-card class="col-xs-12 col-md-4 my-card card-top-margin" flat bordered>
       <q-card-section>
         <div class="text-h6">비밀번호 찾기</div>
       </q-card-section>
@@ -27,7 +28,7 @@
           class="full-width q-ma-sm"
           size="md"
           style="height: 50px"
-          color="primary"
+          color="grey"
           outline
           type="submit"
           label="이메일 전송"
@@ -75,5 +76,14 @@ a {
 
 p a {
   text-decoration: none;
+}
+
+.card-top-margin {
+  margin-top: 150px;
+  margin-bottom: 150px;
+}
+
+.div-margin {
+  margin-bottom: 120px;
 }
 </style>

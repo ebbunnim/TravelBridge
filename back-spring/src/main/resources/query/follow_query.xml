@@ -12,7 +12,7 @@
 		)
 	</insert> 
    	<delete id="delete" 	parameterType="int"> 
-   		UPDATE FOLLOW SET follow_del_check = TRUE WHERE follow_no = #{follow_no:INTEGER} AND follow_del_check = FALSE
+   		DELETE FROM FOLLOW WHERE follower_no=#{follower_no:INTEGER} AND following_no=#{following_no:INTEGER}
    	</delete>
    	<update id="update"		parameterType="follow">
 		UPDATE FOLLOW SET

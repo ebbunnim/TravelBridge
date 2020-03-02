@@ -1,4 +1,5 @@
 import PostService from "../../services/PostService";
+import UserService from "../../services/UserService";
 // import RouterService from "../../router";
 
 const state = {
@@ -6,12 +7,9 @@ const state = {
   postList: [],
   gogo: false,
   postLast: 0,
-  like : false
+  likePost: {}
 };
-// GetSearchAllPost
-//GetSearchPartPost
-//GetSearchPost
-//PostInsertPost
+
 const actions = {
   addPost: (store, payLoad) => {
     console.log(payLoad.x);
@@ -40,7 +38,6 @@ const actions = {
   },
   searchInfoPost: (store, payload) => {
     PostService.GetSearchPost(payload.postNo).then(response => {
-      console.log("옴뇸뇸1");
       store.commit("postInfo", { post: response });
       console.log(response);
     });
@@ -64,33 +61,52 @@ const actions = {
   insertPlan: (store, payLoad) => {
     PostService.insertPlan(payLoad.x);
   },
-  getPostLike :(store,payLoad) =>{
-    PostService.isLikePost(payLoad.userNo).then(Response =>{
-      store.commit("postGetLike",{ likeList : Response ,PostNo : payLoad.postNo})
+  getPostLike: (store, payLoad) => {
+    PostService.getSearchLikePost(payLoad.mem_no, payLoad.post_no).then(Response => {
+      store.commit("postGetLike", { likePost: Response })
+    });
+  },
+  setPostLike: async (store, payLoad) => {
+    console.log(payLoad.x)
+    await PostService.setPostLike(payLoad.x).then(Response => {
+    })
+    console.log("222222222")
+    PostService.getSearchLikePost(payLoad.x.liker_mem_no, payLoad.x.post_no).then(Response => {
+      store.commit("postGetLike", { likePost: Response })
     })
   },
-  setPostLike :(store,payLoad) =>{
-    PostService.insertLikePost(payLoad.x).then(Response =>{
-      store.commit("postSetLike",{ like : true})
+  deleteLikePost: async (store, payLoad) => {
+    await PostService.deleteLikePost(payLoad.no).then(() => {
+      store.commit("deletePostLike")
     })
+    console.log("33333333")
+    PostService.getSearchLikePost(payLoad.mem_no, payLoad.post_no).then(Response => {
+      store.commit("postGetLike", { likePost: Response })
+    })
+  },
+  addCmt: async (store, payLoad) => {
+    await UserService.addCmt(payLoad.x).then(Response => {
+    }).catch(exp => console.log(exp));
+    PostService.GetSearchPost(payLoad.postNo).then(response => {
+      store.commit("postInfo", { post: response });
+      console.log(response);
+    });
   }
 
 };
 
-const mutations = { 
-  postSetLike(state,payLoad){
+const mutations = {
+  deletePostLike(state, payLoad) {
+    state.likePost = {}
+  },
+  postSetLike(state, payLoad) {
     state.like = payLoad.like
   },
-  postUnLike(state,payLoad){
-  state.like = payLoad.like
-},
-  postGetLike(state,payLoad){
-    state.like = false;
-    for(w of payLoad.likeList.mem_likePost){
-        if(payLoad.PostNo = w.post_no){
-        state.like = true;
-        }
-    }
+  postUnLike(state, payLoad) {
+    state.like = payLoad.like
+  },
+  postGetLike(state, payLoad) {
+    state.likePost = payLoad.likePost
   },
   postLastNo(state, payLoad) {
     state.postLast = payLoad.lastNo;

@@ -11,14 +11,13 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
 @SpringBootApplication
 public class DemoApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
-	
+
 	@Autowired
 	private JwtInterceptor jwtInterceptor;
 
@@ -39,7 +38,5 @@ public class DemoApplication implements WebMvcConfigurer {
 				.exposedHeaders("jwt-auth-token");
 
 	}
-
-
 
 }

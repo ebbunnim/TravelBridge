@@ -1,5 +1,6 @@
 <template>
   <div class="row justify-center">
+    <div class="col-12" style="height: 65px; background: #f9f9f9;"></div>
     <q-card class="col-xs-12 col-md-4 my-card card-top-margin" flat bordered>
       <q-card-section>
         <div class="text-h6">로그인</div>
@@ -69,22 +70,24 @@
         </div>-->
         <div class="text-center q-my-sm">
           <q-btn
+            icon="img:https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
             size="md"
             style="height: 50px"
             class="full-width"
             outline
             v-on:click="GoogleLogin()"
-            label="구글 아이디로 로그인(파란에 흰색)"
+            label="구글 아이디로 로그인"
           />
         </div>
         <div class="text-cente q-my-sm">
           <q-btn
+            icon="img:https://image.flaticon.com/icons/svg/25/25231.svg"
             size="md"
             style="height: 50px"
             class="full-width"
             outline
             v-on:click="GithubLogin()"
-            label="깃허브 아이디로 로그인(흑백 반전)"
+            label="깃허브 아이디로 로그인"
           />
         </div>
       </q-card-section>
@@ -123,15 +126,19 @@ export default {
         user_pw: this.password
       });
     },
-    NaverLogin() {
-      this.$store.dispatch("user/check");
-      this.SNSLoginCheck(false);
-    },
     GoogleLogin() {
-      this.SNSLoginCheck(false);
+      this.$store.dispatch("user/postGoogleLogIn", {
+        user_email: this.email,
+        user_pw: this.password
+      })
+      this.$trouter.push('/')
+      
     },
     GithubLogin() {
-      this.SNSLoginCheck(false);
+       this.$store.dispatch("user/postGitHubLogIn", {
+        user_email: this.email,
+        user_pw: this.password
+      })
     },
     SNSLoginCheck(check) {
       if (check) {
@@ -168,6 +175,7 @@ p a {
 }
 
 .card-top-margin {
-  margin-top: 80px;
+  margin-top: 70px;
+  margin-bottom: 70px;
 }
 </style>
