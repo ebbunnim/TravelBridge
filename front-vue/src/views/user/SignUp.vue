@@ -1,37 +1,40 @@
 <template>
   <div class="row justify-center">
     <div class="col-12" style="height: 65px; background: #f9f9f9;"></div>
-    <q-card class="col-xs-12 col-md-4 my-card card-top-margin" flat bordered>
+    <q-card class="col-xs-12 col-md-4 my-card card-top-margin" flat>
       <q-card-section>
-        <div class="text-h6">회원가입</div>
+        <div class="text-h6 text-weight-bold text-center">
+          <span class="travel">Travel</span>
+          <span class="bridge">Bridge</span>
+          회원가입
+        </div>
       </q-card-section>
 
       <q-card-section align="center">
         <!-- 입력할 필드들 -->
         <template v-if="email !=''">
-        <q-input
-          outlined
-          flat
-          v-model="email"
-          type="email"
-          :rules="emailRules"
-          lazy-rules
-         readonly
-          label="이메일 주소"
-          
-        />
+          <q-input
+            outlined
+            flat
+            v-model="email"
+            type="email"
+            :rules="emailRules"
+            lazy-rules
+            readonly
+            label="이메일 주소"
+          />
         </template>
         <template v-else>
           <q-input
-          outlined
-          flat
-          v-model="user.mem_email"
-          type="email"
-          :rules="emailRules"
-          lazy-rules
-          v-bind:readonly="isReadOnly"
-          label="이메일 주소"
-        />
+            outlined
+            flat
+            v-model="user.mem_email"
+            type="email"
+            :rules="emailRules"
+            lazy-rules
+            v-bind:readonly="isReadOnly"
+            label="이메일 주소"
+          />
         </template>
         <q-radio v-model="user.mem_receive_email" val="true" label="Email 수신에 동의합니다" />
         <q-radio v-model="user.mem_receive_email" val="false" label="Email 수신에 동의하지 않습니다 " />
@@ -48,16 +51,16 @@
           label="ID"
         />
         <template v-if="email ==''">
-        <q-input
-          clearable
-          clear-icon="close"
-          outlined
-          v-model="user.mem_password"
-          label="비밀번호"
-          :type="isPwd ? 'password' : 'text'"
-          hint
-          v-bind:readonly="isReadOnly"
-        />
+          <q-input
+            clearable
+            clear-icon="close"
+            outlined
+            v-model="user.mem_password"
+            label="비밀번호"
+            :type="isPwd ? 'password' : 'text'"
+            hint
+            v-bind:readonly="isReadOnly"
+          />
         </template>
         <q-input
           outlined
@@ -105,6 +108,7 @@
         <div class="row" style="display: inline" v-for="(item, idx) in thema" :key="idx">
           <q-btn
             color="grey"
+            rounded
             class="q-pa-xs q-ma-xs"
             size="md"
             v-if="item.state"
@@ -115,6 +119,7 @@
           >#{{ item.name }}</q-btn>
           <q-btn
             color="grey"
+            rounded
             class="q-pa-xs q-ma-xs"
             size="md"
             v-if="!item.state"
@@ -192,8 +197,8 @@ export default {
       v => /.+@.+\..+/.test(v) || "E-mail must be valid"
     ]
   }),
-  computed:{
-    email(){
+  computed: {
+    email() {
       return this.$store.state.user.tempEmail;
     }
   },
@@ -203,11 +208,11 @@ export default {
       this.user.mem_interest = this.currentChoices;
       // console.log(this.user.mem_birth)
       let x = true;
-      if(this.email != ""){
-      this.user.mem_email = this.email;
-      x = false;
+      if (this.email != "") {
+        this.user.mem_email = this.email;
+        x = false;
       }
-      this.$store.dispatch("user/postSignUp", {user : this.user,status :x });
+      this.$store.dispatch("user/postSignUp", { user: this.user, status: x });
     },
     cancle() {
       alert("회원가입을 취소 하셨습니다.");

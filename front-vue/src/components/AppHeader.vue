@@ -132,7 +132,7 @@
       <!-- 햄버거버튼 누르면 drawer open -->
       <q-toolbar class="lt-lg" align="center">
         <div class="col-4" align="left">
-          <q-btn class="q-py-sm" size="large" color="grey-7" flat icon="menu" @click="left = !left"></q-btn>
+          <q-btn class="q-py-sm" size="large" color="grey-9" flat icon="menu" @click="left = !left"></q-btn>
         </div>
 
         <div class="col-4" @click="$router.push('/')">
@@ -150,18 +150,28 @@
           class="col-4"
           align="right"
         >
-          <q-btn class="col-12" no-caps filled rounded flat to="/login">
-            <span class="no-wrap travel flex text-weight-bold">Login</span>
+          <q-btn align="left" no-caps filled rounded flat to="/login">
+            <span class="no-wrap travel">Login</span>
           </q-btn>
         </div>
 
         <div class="col-4" align="right" v-else>
           <div class="row">
-            <q-btn class="col-6" no-caps filled rounded flat to="/mypage">
-              <span class="no-wrap travel flex text-weight-bold">Mypage</span>
+            <div class="col-4"></div>
+            <q-btn
+              class="col-4 q-pr-sm"
+              no-caps
+              filled
+              rounded
+              color="grey-9"
+              icon="account_circle"
+              flat
+              to="/mypage"
+            >
+              <!-- <span class="no-wrap travel">Mypage</span> -->
             </q-btn>
-            <q-btn class="col-6" no-caps filled no-wrap rounded flat v-on:click="logout">
-              <span class="no-wrap travel text-weight-bold">Logout</span>
+            <q-btn class="col-4" no-caps filled no-wrap rounded flat v-on:click="logout">
+              <span class="no-wrap travel">Logout</span>
             </q-btn>
           </div>
         </div>

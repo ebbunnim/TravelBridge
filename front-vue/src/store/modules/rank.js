@@ -7,13 +7,11 @@ const state = {
 const actions = {
   getTotalRanking: store => {
     RankService.TotalRank().then(Response => {
-      console.log(Response.data.data);
       store.commit("setTotalRanking", { TotalRank: Response.data.data });
     });
   },
   getAreaRanking: (store, payLoad) => {
     RankService.AreaRank(payLoad.area).then(Response => {
-      console.log(Response.data.data);
       store.commit("setAreaRanking", { AreaRanking: Response.data.data });
     });
   }

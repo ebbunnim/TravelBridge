@@ -231,7 +231,6 @@ export default {
   },
   computed: {
     totalRank() {
-      console.log(this.$store.state);
 
       return this.$store.state.rank.TotalRanking;
     },

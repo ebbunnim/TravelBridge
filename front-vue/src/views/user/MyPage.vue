@@ -678,7 +678,6 @@ export default {
       user: state => state.user.user // 현재 접속자
     }),
     follower() {
-      console.log("111");
       return this.$store.state.user.follower;
     },
     following() {
@@ -694,8 +693,6 @@ export default {
       return this.$store.state.user.likeFesta;
     },
     postList() {
-      console.log("ASdasdasdasd");
-      console.log(this.$store.state.user.userPost);
       return this.$store.state.user.userPost;
     },
     gogo() {
@@ -718,23 +715,19 @@ export default {
           this.currentChoices += themaChoice[key].name + " ";
         }
       }
-      console.log("###### onToggle 눌림 ######", this.currentChoices);
+      
       this.user.mem_interest = this.currentChoices;
-      console.log(this.user.mem_interest);
+      
     },
     move: function(postNo) {
       this.$router.push("/page1/postdetail/" + postNo);
     },
     updateUser() {
       UserService.updateUser(this.user).then(res => {
-        console.log("업데이트 유저 실행됨");
-        console.log(res);
-        console.log(this.user.mem_interest);
       });
     },
     getPastInterest() {
       const pastChoice = this.user.mem_interest;
-      console.log("과거 초이스", pastChoice);
       if (pastChoice !== "undefined") {
         const tempInterest = pastChoice.split(" ");
         for (let key in tempInterest) {
@@ -763,9 +756,6 @@ export default {
     }
   },
   mounted() {
-    console.log("========= mypage mounted =======");
-    console.log(this.user);
-    console.log(this.user.mem_interest);
     this.getPastInterest();
     this.$store.dispatch("user/getFollower", {
       userNo: this.$store.state.user.user.mem_no

@@ -5,11 +5,15 @@
     </q-img>
 
     <q-card-section>
-      <div class="text-subtitle1 text-cente text-card-address">{{ fval_detail_adr }}</div>
+      <div class="text-subtitle1 text-cente text-card-address">
+        {{ fval_detail_adr }}
+      </div>
     </q-card-section>
 
     <q-card-section class="q-pt-none">
-      <div class="text-subtitle2 text-body text-center">{{ fval_start_day }} ~ {{ fval_end_day }}</div>
+      <div class="text-subtitle2 text-body text-center">
+        {{ fval_start_day }} ~ {{ fval_end_day }}
+      </div>
     </q-card-section>
     <q-card-section class="text-center">
       <div class="text-subtitle2 text-body2 tag-color">{{ fval_tag }}</div>
@@ -26,9 +30,10 @@
             params: { fval_no: fval_no }
           })
         "
-      >상세보기</q-btn>
+        >상세보기</q-btn
+      >
       <q-btn
-        v-if="!btnCheck & user.mem_no !== undefined"
+        v-if="!btnCheck & (user.mem_no !== undefined)"
         flat
         class="offset-1 col-3"
         color="red"
@@ -67,7 +72,6 @@ export default {
       return require("@/assets" + img);
     },
     insertLike() {
-      console.log("insert 실행");
       const payload = {
         festival_no: this.fval_no,
         hotplace_no: 0,
@@ -75,12 +79,10 @@ export default {
         like_type: 3,
         liker_mem_no: this.user.mem_no
       };
-      console.log("payload확인", payload);
+
       this.$store.dispatch("like/insertLike", payload);
     },
     deleteLike(no) {
-      console.log("del 실행");
-      console.log(no);
       this.$store.dispatch("like/deleteFestivalLike", no);
     }
   },

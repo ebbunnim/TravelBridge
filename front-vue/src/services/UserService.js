@@ -2,7 +2,6 @@ import Api from "./Api";
 
 class UserService {
   async signUp(user) {
-    console.log("hello");
     return await Api.post("/Members/insert", user)
       .then(() => {
         alert("회원가입 성공");
@@ -15,25 +14,20 @@ class UserService {
   }
 
   LogIn(email) {
-    console.log(email);
     return Api.post("/Members/login", {
       mem_email: email
     }).then(response => {
       return response.data.data
     }).catch(error =>{
       if (error.response.status === 404) {
-        console.log("회원가입가자")
         return {status:false,email:email}
       } 
     });
   }
 
   updateUser(user) {
-    console.log("수정시작");
-    console.log(user);
     return Api.put("/Members/update", user)
       .then(res => {
-        console.log("updateservice.js:", res.data.data);
         return res.data;
       })
       .catch(e => {
@@ -41,9 +35,7 @@ class UserService {
       });
   }
   followerUser(userNo) {
-    console.log("팔로워");
     return Api.get(`/Members/searchFollowMePeople/${userNo}`).then(Response => {
-      console.log(Response.data.data);
       return Response.data.data;
     });
   }
@@ -59,9 +51,7 @@ class UserService {
       });
   }
   followingUser(userNo) {
-    console.log("팔로잉");
     return Api.get(`/Members/searchMyFollowPeople/${userNo}`).then(Response => {
-      console.log(Response.data.data);
       return Response.data.data;
     });
   }
@@ -79,7 +69,6 @@ class UserService {
   likePost(userNo) {
     return Api.get(`/Members/searchMemberLikePost/${userNo}`)
       .then(Response => {
-        console.log(Response.data.data);
         return Response.data.data;
       })
       .catch(e => {
@@ -89,7 +78,6 @@ class UserService {
   likeHot(userNo) {
     return Api.get(`/Members/searchMemberLikeHotPlace/${userNo}`)
       .then(Response => {
-        console.log(Response.data.data);
         return Response.data.data;
       })
       .catch(e => {
@@ -99,7 +87,6 @@ class UserService {
   likeFesta(userNo) {
     return Api.get(`/Members/searchMemberLikeFestival/${userNo}`)
       .then(Response => {
-        console.log(Response.data.data);
         return Response.data.data;
       })
       .catch(e => {

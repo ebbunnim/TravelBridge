@@ -76,15 +76,15 @@ export default {
         arg.dateStr + " 에 어떤 일정을 추가하시겠습니까?"
       );
       if (inputValue) {
-        console.log(inputValue);
+        
         // 1) DB에 넣는것
         this.calendarObject.title = inputValue;
         this.calendarObject.start = arg.date;
-        console.log(this.calendarObject);
+        
         // title, start 를 잡아야 -
         Axios.post(`http://localhost:8081/Calendar`, this.calendarObject).then(
           res => {
-            console.log(res);
+            
           }
         );
 
@@ -105,7 +105,7 @@ export default {
       this.calendarObject.mem_no
     ).then(res => {
       this.calendarEvents = res.data.data;
-      console.log(this.calendarEvents);
+      
     });
   }
 };

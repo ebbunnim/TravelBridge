@@ -27,12 +27,12 @@ import Main2Pick from "../views/travelpick/Main2Pick.vue";
 import Main2List from "../views/travelpick/Main2List.vue";
 import HotPlaceDetail from "../views/travelpick/HotPlaceDetail.vue";
 import FestivalDetail from "../views/travelpick/FestivalDetail.vue";
-// Travelplus+
-import Sub from "../views/travelplus/Sub.vue";
+// Travelplus
 import Mate from "../views/travelplus/Mate.vue";
 import MateDetail from "../views/travelplus/MateDetail.vue";
 import CreateParty from "../views/travelplus/CreateParty.vue";
 import Rank from "../views/travelplus/Rank.vue";
+import Sub from "../views/travelplus/Sub.vue";
 import temp from "../views/temp.vue";
 
 Vue.use(VueRouter);
@@ -93,7 +93,6 @@ const routes = [
     name: "festival-detail",
     component: FestivalDetail
   },
-  // main3 번
   {
     path: "/page3",
     component: Sub,
@@ -159,8 +158,8 @@ const routes = [
     props: true
   },
   {
-    path: "/temp",
-    name: "hello",
+    path:"/temp",
+    name :"hello",
     component: temp
   }
 ];

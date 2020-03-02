@@ -1,9 +1,13 @@
 <template>
   <div class="row justify-center">
     <div class="col-12" style="height: 65px; background: #f9f9f9;"></div>
-    <q-card class="col-xs-12 col-md-4 my-card card-top-margin" flat bordered>
+    <q-card class="col-xs-12 col-md-4 my-card card-top-margin" flat>
       <q-card-section>
-        <div class="text-h6">로그인</div>
+        <div class="text-h6 text-weight-bold text-center">
+          <span class="travel">Travel</span>
+          <span class="bridge">Bridge</span>
+          로그인
+        </div>
       </q-card-section>
 
       <q-card-section>
@@ -130,15 +134,14 @@ export default {
       this.$store.dispatch("user/postGoogleLogIn", {
         user_email: this.email,
         user_pw: this.password
-      })
-      this.$trouter.push('/')
-      
+      });
+      this.$trouter.push("/");
     },
     GithubLogin() {
-       this.$store.dispatch("user/postGitHubLogIn", {
+      this.$store.dispatch("user/postGitHubLogIn", {
         user_email: this.email,
         user_pw: this.password
-      })
+      });
     },
     SNSLoginCheck(check) {
       if (check) {

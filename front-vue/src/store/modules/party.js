@@ -1,5 +1,6 @@
 import PartyService from "@/services/PartyService.js";
 import UserService from "@/services/UserService.js";
+import router from "../../router";
 const state = {
   partyList: [],
   party: {}
@@ -8,24 +9,22 @@ const state = {
 const actions = {
   getPartyList: store => {
     PartyService.PartyList().then(Response => {
-      console.log(Response.data.data);
       store.commit("setPartyList", { PartyList: Response.data.data });
     });
   },
   getParty: (store, payLoad) => {
     PartyService.Party(payLoad.partyNo).then(Response => {
-      console.log(Response.data.data);
       store.commit("setParty", { Party: Response.data.data });
     });
   },
-  makeParty: (store, payLoad) => {
-    console.log(payLoad.party)
-    let x = PartyService.PartyCreate(payLoad.party);
+  makeParty: async (store, payLoad) => {
+    let x = await PartyService.PartyCreate(payLoad.party);
+
+    router.push("/page3/mate");
   },
   partyIn: async (store, payLoad) => {
     let x = await PartyService.Partyin(payLoad.mem_no, payLoad.party_no);
     PartyService.Party(payLoad.party_no).then(Response => {
-      console.log(Response.data.data);
       store.commit("setParty", { Party: Response.data.data });
     });
   },
@@ -34,7 +33,6 @@ const actions = {
       .then(Response => {})
       .catch(exp => console.log(exp));
     PartyService.Party(payLoad.partyNo).then(Response => {
-      console.log(Response.data.data);
       store.commit("setParty", { Party: Response.data.data });
     });
   }

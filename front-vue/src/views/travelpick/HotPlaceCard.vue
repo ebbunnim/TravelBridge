@@ -5,7 +5,9 @@
     </q-img>
 
     <q-card-section>
-      <div class="text-subtitle1 text-center text-card-address">{{ hp_detail_adr }}</div>
+      <div class="text-subtitle1 text-center text-card-address">
+        {{ hp_detail_adr }}
+      </div>
     </q-card-section>
 
     <q-card-section>
@@ -19,9 +21,10 @@
         @click="
           $router.push({ name: 'hotplace-detail', params: { hp_no: hp_no } })
         "
-      >상세보기</q-btn>
+        >상세보기</q-btn
+      >
       <q-btn
-        v-if="!btnCheck & user.mem_no !== undefined"
+        v-if="!btnCheck & (user.mem_no !== undefined)"
         flat
         unelevated
         class="offset-1 col-3"
@@ -60,7 +63,6 @@ export default {
       return require("@/assets" + img);
     },
     insertLike() {
-      console.log("insert 실행");
       const payload = {
         festival_no: 0,
         hotplace_no: this.hp_no,
@@ -68,12 +70,10 @@ export default {
         like_type: 2,
         liker_mem_no: this.user.mem_no
       };
-      console.log("payload확인", payload);
+
       this.$store.dispatch("like/insertLike", payload);
     },
     deleteLike(no) {
-      console.log("del 실행");
-      console.log(no);
       this.$store.dispatch("like/deleteHotplaceLike", no);
     }
   },

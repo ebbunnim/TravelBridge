@@ -16,12 +16,12 @@ firebase.initializeApp(firebaseConfig);
 
 export default {
   async signUpWithDefault(email, password) {
-    console.log(email + " " + password);
+    
     return await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(function(result) {
-        console.log(result);
+        
         return true;
       })
       .catch(function(error) {
@@ -30,12 +30,12 @@ export default {
       });
   },
   async loginWithDefault(email, password) {
-    console.log(email + " " + password);
+    
     return await firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(function(result) {
-        console.log(result.user);
+        
         return true;
       })
       .catch(function(error) {
@@ -49,8 +49,7 @@ export default {
       .auth()
       .signInWithPopup(provider)
       .then(function(result) {
-        // let accessToken = result.credential.accessToken;
-        //var user = result.user;
+        
         return result;
       })
       .catch(function(error) {
@@ -63,8 +62,7 @@ export default {
       .auth()
       .signInWithPopup(provider)
       .then(function(result) {
-        // let accessToken = result.credential.accessToken;
-        // var user = result.user;
+        
         return result;
       })
       .catch(function(error) {
@@ -89,7 +87,7 @@ export default {
         alert("가입한 이메일로 비밀번호 재설정 메일을 발송 하였습니다.");
       })
       .catch(function(error) {
-        // An error happened.
+        
         alert("등록되지 않은 회원입니다." + error);
       });
   }

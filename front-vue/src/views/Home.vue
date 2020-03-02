@@ -60,7 +60,6 @@ export default {
     // }
   },
   mounted() {
-    console.log("반응형")
   }
 };
 </script>
