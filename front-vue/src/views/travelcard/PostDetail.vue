@@ -39,7 +39,7 @@
         </div>
         <div class= "col-me-3" style="text-align:center">
           
-          <template v-if="typeof like !== 'object' || like === undefined ">
+          <template v-if="typeof like !== 'object' || like === undefined || like === null ">
             <q-icon name="favorite" class="text-black" style="font-size: 4rem;" @click="thislike()"/>
           </template>
           <template v-else>
@@ -61,7 +61,6 @@
       </q-card-section>
 
       <q-separator inset />
-      <!--  -->
       <q-card-section class="row">
         <q-carousel
           class="col-md-6 col-xs-12 q-pa-sm"
@@ -180,7 +179,9 @@ export default {
       return this.$store.state.post.post;
     },
     tagToArray() {
-      const arr = this.post.post_category.split(" ");
+      let arr = [];
+      if(this.post.post_category != undefined){
+       arr = this.post.post_category.split(" ");}
       return arr;
     },
     like() {

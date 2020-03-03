@@ -933,11 +933,10 @@ export default {
       const themaChoice = this.postThema;
       for (let key in themaChoice) {
         if (themaChoice[key].state === true) {
-          if ((this.post.postChoices = "")) {
+          if(this.post.postChoices === "")
             this.post.postChoices += "#" + themaChoice[key].name;
-          } else {
-            this.post.postChoices += " " + "#" + themaChoice[key].name;
-          }
+            else 
+            this.post.postChoices += " " +  "#" + themaChoice[key].name;
         }
       }
       
@@ -947,7 +946,9 @@ export default {
       const themaChoice = this.planThema;
       for (let key in themaChoice) {
         if (themaChoice[key].state === true) {
-          this.plan.planChoices += "#" + themaChoice[key].name + " ";
+          if(this.plan.planChoices === "")
+          this.plan.planChoices += "#" + themaChoice[key].name;
+          else this.plan.planChoices += " " + "#" +themaChoice[key].name;
         }
       }
     },
