@@ -22,6 +22,10 @@
    	<delete id="delete" 	parameterType="int">
 	   UPDATE MEMBERS
 	   SET 
+	   mem_phone = "deleted"
+	   mem_name = "deleted"
+	   mem_birth = "deleted"
+	   mem_address = "deleted"
 	   mem_del_check = true
 	   WHERE mem_no = #{mem_no} AND mem_del_check = FALSE
 	</delete>
