@@ -12,7 +12,7 @@
 	<groupId>com.pjt1</groupId>
 	<artifactId>TravelBridge</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>back-spring</name>
 	<description>back-spring for Spring Boot</description>
 
