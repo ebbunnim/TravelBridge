@@ -1,5 +1,5 @@
 pipeline { 
-    agent none 
+    agent any 
     
     stages {
         stage('docker-compose') {
@@ -15,4 +15,3 @@ pipeline {
         } 
     } 
 }
-
